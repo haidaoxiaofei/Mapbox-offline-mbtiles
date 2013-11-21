@@ -9,42 +9,42 @@ import android.graphics.drawable.Drawable;
  */
 public class ExpirableBitmapDrawable extends BitmapDrawable {
 
-	public static final int EXPIRED = -1;
+    public static final int EXPIRED = -1;
 
-	private int[] mState;
+    private int[] mState;
 
-	public ExpirableBitmapDrawable(final Bitmap pBitmap) {
-		super(pBitmap);
-		mState = new int[0];
-	}
+    public ExpirableBitmapDrawable(final Bitmap pBitmap) {
+        super(pBitmap);
+        mState = new int[0];
+    }
 
-	@Override
-	public int[] getState() {
-		return mState;
-	}
+    @Override
+    public int[] getState() {
+        return mState;
+    }
 
-	@Override
-	public boolean isStateful() {
-		return mState.length > 0;
-	}
+    @Override
+    public boolean isStateful() {
+        return mState.length > 0;
+    }
 
-	@Override
-	public boolean setState(final int[] pStateSet) {
-		mState = pStateSet;
-		return true;
-	}
+    @Override
+    public boolean setState(final int[] pStateSet) {
+        mState = pStateSet;
+        return true;
+    }
 
-	public static boolean isDrawableExpired(final Drawable pTile) {
-		if (!pTile.isStateful()) {
-			return false;
-		}
-		final int[] state = pTile.getState();
-		for(int i = 0; i < state.length; i++) {
-			if (state[i] == EXPIRED) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public static boolean isDrawableExpired(final Drawable pTile) {
+        if (!pTile.isStateful()) {
+            return false;
+        }
+        final int[] state = pTile.getState();
+        for (int i = 0; i < state.length; i++) {
+            if (state[i] == EXPIRED) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

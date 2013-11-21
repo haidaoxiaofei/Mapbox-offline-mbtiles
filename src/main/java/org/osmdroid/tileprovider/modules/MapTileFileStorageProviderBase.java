@@ -12,75 +12,76 @@ import android.os.Environment;
 
 public abstract class MapTileFileStorageProviderBase extends MapTileModuleProviderBase {
 
-	private static final Logger logger = LoggerFactory.getLogger(MapTileFileStorageProviderBase.class);
+    private static final Logger logger = LoggerFactory.getLogger(MapTileFileStorageProviderBase.class);
 
-	/** whether the sdcard is mounted read/write */
-	private boolean mSdCardAvailable = true;
+    /**
+     * whether the sdcard is mounted read/write
+     */
+    private boolean mSdCardAvailable = true;
 
-	private final IRegisterReceiver mRegisterReceiver;
-	private MyBroadcastReceiver mBroadcastReceiver;
+    private final IRegisterReceiver mRegisterReceiver;
+    private MyBroadcastReceiver mBroadcastReceiver;
 
-	public MapTileFileStorageProviderBase(final IRegisterReceiver pRegisterReceiver,
-			final int pThreadPoolSize, final int pPendingQueueSize) {
-		super(pThreadPoolSize, pPendingQueueSize);
+    public MapTileFileStorageProviderBase(final IRegisterReceiver pRegisterReceiver,
+                                          final int pThreadPoolSize, final int pPendingQueueSize) {
+        super(pThreadPoolSize, pPendingQueueSize);
 
-		checkSdCard();
+        checkSdCard();
 
-		mRegisterReceiver = pRegisterReceiver;
-		mBroadcastReceiver = new MyBroadcastReceiver();
+        mRegisterReceiver = pRegisterReceiver;
+        mBroadcastReceiver = new MyBroadcastReceiver();
 
-		final IntentFilter mediaFilter = new IntentFilter();
-		mediaFilter.addAction(Intent.ACTION_MEDIA_MOUNTED);
-		mediaFilter.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
-		mediaFilter.addDataScheme("file");
-		pRegisterReceiver.registerReceiver(mBroadcastReceiver, mediaFilter);
-	}
+        final IntentFilter mediaFilter = new IntentFilter();
+        mediaFilter.addAction(Intent.ACTION_MEDIA_MOUNTED);
+        mediaFilter.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
+        mediaFilter.addDataScheme("file");
+        pRegisterReceiver.registerReceiver(mBroadcastReceiver, mediaFilter);
+    }
 
-	private void checkSdCard() {
-		final String state = Environment.getExternalStorageState();
-		logger.info("sdcard state: " + state);
-		mSdCardAvailable = Environment.MEDIA_MOUNTED.equals(state);
-	}
+    private void checkSdCard() {
+        final String state = Environment.getExternalStorageState();
+        logger.info("sdcard state: " + state);
+        mSdCardAvailable = Environment.MEDIA_MOUNTED.equals(state);
+    }
 
-	protected boolean getSdCardAvailable() {
-		return mSdCardAvailable;
-	}
+    protected boolean getSdCardAvailable() {
+        return mSdCardAvailable;
+    }
 
-	@Override
-	public void detach() {
-		if (mBroadcastReceiver != null) {
-			mRegisterReceiver.unregisterReceiver(mBroadcastReceiver);
-			mBroadcastReceiver = null;
-		}
-		super.detach();
-	}
+    @Override
+    public void detach() {
+        if (mBroadcastReceiver != null) {
+            mRegisterReceiver.unregisterReceiver(mBroadcastReceiver);
+            mBroadcastReceiver = null;
+        }
+        super.detach();
+    }
 
-	protected void onMediaMounted() {
-		// Do nothing by default. Override to handle.
-	}
+    protected void onMediaMounted() {
+        // Do nothing by default. Override to handle.
+    }
 
-	protected void onMediaUnmounted() {
-		// Do nothing by default. Override to handle.
-	}
+    protected void onMediaUnmounted() {
+        // Do nothing by default. Override to handle.
+    }
 
-	/**
-	 * This broadcast receiver will recheck the sd card when the mount/unmount messages happen
-	 *
-	 */
-	private class MyBroadcastReceiver extends BroadcastReceiver {
+    /**
+     * This broadcast receiver will recheck the sd card when the mount/unmount messages happen
+     */
+    private class MyBroadcastReceiver extends BroadcastReceiver {
 
-		@Override
-		public void onReceive(final Context aContext, final Intent aIntent) {
+        @Override
+        public void onReceive(final Context aContext, final Intent aIntent) {
 
-			final String action = aIntent.getAction();
+            final String action = aIntent.getAction();
 
-			checkSdCard();
+            checkSdCard();
 
-			if (Intent.ACTION_MEDIA_MOUNTED.equals(action)) {
-				onMediaMounted();
-			} else if (Intent.ACTION_MEDIA_UNMOUNTED.equals(action)) {
-				onMediaUnmounted();
-			}
-		}
-	}
+            if (Intent.ACTION_MEDIA_MOUNTED.equals(action)) {
+                onMediaMounted();
+            } else if (Intent.ACTION_MEDIA_UNMOUNTED.equals(action)) {
+                onMediaUnmounted();
+            }
+        }
+    }
 }

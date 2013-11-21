@@ -9,20 +9,20 @@ import android.content.IntentFilter;
 
 public class SimpleRegisterReceiver implements IRegisterReceiver {
 
-	private final Context mContext;
+    private final Context mContext;
 
-	public SimpleRegisterReceiver(final Context pContext) {
-		super();
-		mContext = pContext;
-	}
+    public SimpleRegisterReceiver(final Context pContext) {
+        super();
+        mContext = pContext;
+    }
 
-	@Override
-	public Intent registerReceiver(final BroadcastReceiver aReceiver, final IntentFilter aFilter) {
-		return mContext.registerReceiver(aReceiver, aFilter);
-	}
+    @Override
+    public Intent registerReceiver(final BroadcastReceiver aReceiver, final IntentFilter aFilter) {
+        return mContext.registerReceiver(aReceiver, aFilter);
+    }
 
-	@Override
-	public void unregisterReceiver(final BroadcastReceiver aReceiver) {
-		mContext.unregisterReceiver(aReceiver);
-	}
+    @Override
+    public void unregisterReceiver(final BroadcastReceiver aReceiver) {
+        mContext.unregisterReceiver(aReceiver);
+    }
 }

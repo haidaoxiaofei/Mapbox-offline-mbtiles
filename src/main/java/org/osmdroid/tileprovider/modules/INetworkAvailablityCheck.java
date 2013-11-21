@@ -2,11 +2,11 @@ package org.osmdroid.tileprovider.modules;
 
 public interface INetworkAvailablityCheck {
 
-	boolean getNetworkAvailable();
+    boolean getNetworkAvailable();
 
-	boolean getWiFiNetworkAvailable();
+    boolean getWiFiNetworkAvailable();
 
-	boolean getCellularDataNetworkAvailable();
+    boolean getCellularDataNetworkAvailable();
 
-	boolean getRouteToPathExists(int hostAddress);
+    boolean getRouteToPathExists(int hostAddress);
 }

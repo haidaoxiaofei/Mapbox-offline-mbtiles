@@ -27,13 +27,10 @@ import android.view.Surface;
 import android.view.WindowManager;
 
 /**
- * 
  * @author Marc Kurtz
  * @author Manuel Stahl
- * 
  */
-public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvider, IOrientationConsumer
-{
+public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvider, IOrientationConsumer {
     protected final MapView mMapView;
     private final Display mDisplay;
 
@@ -67,18 +64,16 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
     // Constructors
     // ===========================================================
 
-	public CompassOverlay(Context context, MapView mapView) {
-		this(context, new InternalCompassOrientationProvider(context), mapView);
-	}
+    public CompassOverlay(Context context, MapView mapView) {
+        this(context, new InternalCompassOrientationProvider(context), mapView);
+    }
 
-	public CompassOverlay(Context context, IOrientationProvider orientationProvider, MapView mapView)
-    {
+    public CompassOverlay(Context context, IOrientationProvider orientationProvider, MapView mapView) {
         this(context, orientationProvider, mapView, new DefaultResourceProxyImpl(context));
     }
 
-	public CompassOverlay(Context context, IOrientationProvider orientationProvider,
-			MapView mapView, ResourceProxy pResourceProxy)
-    {
+    public CompassOverlay(Context context, IOrientationProvider orientationProvider,
+                          MapView mapView, ResourceProxy pResourceProxy) {
         super(pResourceProxy);
 
         mMapView = mapView;
@@ -93,7 +88,7 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
         mCompassRoseCenterX = mCompassRose.getWidth() / 2 - 0.5f;
         mCompassRoseCenterY = mCompassRose.getHeight() / 2 - 0.5f;
 
-		setOrientationProvider(orientationProvider);
+        setOrientationProvider(orientationProvider);
     }
 
     @Override
@@ -102,8 +97,7 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
         super.onDetach(mapView);
     }
 
-    private void invalidateCompass()
-    {
+    private void invalidateCompass() {
         Rect screenRect = mMapView.getProjection().getScreenRect();
         final int frameLeft = screenRect.left + (mMapView.getWidth() / 2)
                 + (int) FloatMath.ceil((mCompassCenterX - mCompassFrameCenterX) * mScale);
@@ -122,22 +116,19 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
     // Getter & Setter
     // ===========================================================
 
-    public void setCompassCenter(final float x, final float y)
-    {
+    public void setCompassCenter(final float x, final float y) {
         mCompassCenterX = x;
         mCompassCenterY = y;
     }
 
-    public IOrientationProvider getOrientationProvider()
-    {
+    public IOrientationProvider getOrientationProvider() {
         return mOrientationProvider;
     }
 
-    protected void setOrientationProvider(IOrientationProvider orientationProvider)
-    {
-		if (orientationProvider == null)
-			throw new RuntimeException(
-					"You must pass an IOrientationProvider to setOrientationProvider()");
+    protected void setOrientationProvider(IOrientationProvider orientationProvider) {
+        if (orientationProvider == null)
+            throw new RuntimeException(
+                    "You must pass an IOrientationProvider to setOrientationProvider()");
 
         if (mOrientationProvider != null)
             mOrientationProvider.stopOrientationProvider();
@@ -145,8 +136,7 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
         mOrientationProvider = orientationProvider;
     }
 
-    protected void drawCompass(final ISafeCanvas canvas, final float bearing, final Rect screenRect)
-    {
+    protected void drawCompass(final ISafeCanvas canvas, final float bearing, final Rect screenRect) {
         final float centerX = mCompassCenterX * mScale;
         final float centerY = mCompassCenterY * mScale + (canvas.getHeight() - mMapView.getHeight());
 
@@ -171,8 +161,7 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
     // ===========================================================
 
     @Override
-    protected void drawSafe(ISafeCanvas canvas, MapView mapView, boolean shadow)
-    {
+    protected void drawSafe(ISafeCanvas canvas, MapView mapView, boolean shadow) {
         if (shadow) {
             return;
         }
@@ -187,45 +176,40 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
     // ===========================================================
 
     @Override
-    public void setOptionsMenuEnabled(final boolean pOptionsMenuEnabled)
-    {
+    public void setOptionsMenuEnabled(final boolean pOptionsMenuEnabled) {
         this.mOptionsMenuEnabled = pOptionsMenuEnabled;
     }
 
     @Override
-    public boolean isOptionsMenuEnabled()
-    {
+    public boolean isOptionsMenuEnabled() {
         return this.mOptionsMenuEnabled;
     }
 
-	@Override
-	public boolean onCreateOptionsMenu(final Menu pMenu, final int pMenuIdOffset,
-			final MapView pMapView)
-	{
-		pMenu.add(0, MENU_COMPASS + pMenuIdOffset, Menu.NONE,
-				mResourceProxy.getString(ResourceProxy.string.compass))
-				.setIcon(mResourceProxy.getDrawable(ResourceProxy.bitmap.ic_menu_compass))
-				.setCheckable(true);
+    @Override
+    public boolean onCreateOptionsMenu(final Menu pMenu, final int pMenuIdOffset,
+                                       final MapView pMapView) {
+        pMenu.add(0, MENU_COMPASS + pMenuIdOffset, Menu.NONE,
+                mResourceProxy.getString(ResourceProxy.string.compass))
+                .setIcon(mResourceProxy.getDrawable(ResourceProxy.bitmap.ic_menu_compass))
+                .setCheckable(true);
 
-		return true;
-	}
+        return true;
+    }
 
     @Override
-    public boolean onPrepareOptionsMenu(final Menu pMenu, final int pMenuIdOffset, final MapView pMapView)
-    {
-		pMenu.findItem(MENU_COMPASS + pMenuIdOffset).setChecked(this.isCompassEnabled());
+    public boolean onPrepareOptionsMenu(final Menu pMenu, final int pMenuIdOffset, final MapView pMapView) {
+        pMenu.findItem(MENU_COMPASS + pMenuIdOffset).setChecked(this.isCompassEnabled());
         return false;
     }
 
     @Override
-    public boolean onOptionsItemSelected(final MenuItem pItem, final int pMenuIdOffset, final MapView pMapView)
-    {
+    public boolean onOptionsItemSelected(final MenuItem pItem, final int pMenuIdOffset, final MapView pMapView) {
         final int menuId = pItem.getItemId() - pMenuIdOffset;
         if (menuId == MENU_COMPASS) {
             if (this.isCompassEnabled()) {
                 this.disableCompass();
             } else {
-				this.enableCompass();
+                this.enableCompass();
             }
             return true;
         } else {
@@ -238,18 +222,16 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
     // ===========================================================
 
     @Override
-    public void onOrientationChanged(float orientation, IOrientationProvider source)
-    {
+    public void onOrientationChanged(float orientation, IOrientationProvider source) {
         mAzimuth = orientation;
         this.invalidateCompass();
     }
 
-	public boolean enableCompass(IOrientationProvider orientationProvider)
-	{
-		this.setOrientationProvider(orientationProvider);
-		mIsCompassEnabled = false;
-		return enableCompass();
-	}
+    public boolean enableCompass(IOrientationProvider orientationProvider) {
+        this.setOrientationProvider(orientationProvider);
+        mIsCompassEnabled = false;
+        return enableCompass();
+    }
 
     /**
      * Enable receiving orientation updates from the provided IOrientationProvider and show a compass on the
@@ -257,12 +239,11 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
      * enable the features of this overlay. Remember to call the corresponding disableCompass() in your
      * Activity's Activity.onPause() method to turn off updates when in the background.
      */
-    public boolean enableCompass()
-    {
+    public boolean enableCompass() {
         boolean result = true;
 
-		if (mIsCompassEnabled)
-			mOrientationProvider.stopOrientationProvider();
+        if (mIsCompassEnabled)
+            mOrientationProvider.stopOrientationProvider();
 
         result = mOrientationProvider.startOrientationProvider(this);
         mIsCompassEnabled = result;
@@ -278,8 +259,7 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
     /**
      * Disable orientation updates
      */
-    public void disableCompass()
-    {
+    public void disableCompass() {
         mIsCompassEnabled = false;
 
         if (mOrientationProvider != null) {
@@ -297,16 +277,14 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
 
     /**
      * If enabled, the map is receiving orientation updates and drawing your location on the map.
-     * 
+     *
      * @return true if enabled, false otherwise
      */
-    public boolean isCompassEnabled()
-    {
+    public boolean isCompassEnabled() {
         return mIsCompassEnabled;
     }
 
-    public float getOrientation()
-    {
+    public float getOrientation() {
         return mAzimuth;
     }
 
@@ -315,8 +293,7 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
     // ===========================================================
 
     private Point calculatePointOnCircle(final float centerX, final float centerY, final float radius,
-            final float degrees)
-    {
+                                         final float degrees) {
         // for trigonometry, 0 is pointing east, so subtract 90
         // compass degrees are the wrong way round
         final double dblRadians = Math.toRadians(-degrees + 90);
@@ -328,8 +305,7 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
     }
 
     private void drawTriangle(final Canvas canvas, final float x, final float y, final float radius,
-            final float degrees, final Paint paint)
-    {
+                              final float degrees, final Paint paint) {
         canvas.save();
         final Point point = this.calculatePointOnCircle(x, y, radius, degrees);
         canvas.rotate(degrees, point.x, point.y);
@@ -342,8 +318,7 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
         canvas.restore();
     }
 
-    private int getDisplayOrientation()
-    {
+    private int getDisplayOrientation() {
         switch (mDisplay.getOrientation()) {
             case Surface.ROTATION_90:
                 return 90;
@@ -356,8 +331,7 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
         }
     }
 
-    private void createCompassFramePicture()
-    {
+    private void createCompassFramePicture() {
         // The inside of the compass is white and transparent
         final Paint innerPaint = new Paint();
         innerPaint.setColor(Color.WHITE);
@@ -393,8 +367,7 @@ public class CompassOverlay extends SafeDrawOverlay implements IOverlayMenuProvi
         mCompassFrame.endRecording();
     }
 
-    private void createCompassRosePicture()
-    {
+    private void createCompassRosePicture() {
         // Paint design of north triangle (it's common to paint north in red color)
         final Paint northPaint = new Paint();
         northPaint.setColor(0xFFA00000);

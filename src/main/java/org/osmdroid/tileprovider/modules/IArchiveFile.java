@@ -7,10 +7,11 @@ import org.osmdroid.tileprovider.tilesource.ITileSource;
 
 public interface IArchiveFile {
 
-	/**
-	 * Get the input stream for the requested tile.
-	 * @return the input stream, or null if the archive doesn't contain an entry for the requested tile
-	 */
-	InputStream getInputStream(ITileSource tileSource, MapTile tile);
+    /**
+     * Get the input stream for the requested tile.
+     *
+     * @return the input stream, or null if the archive doesn't contain an entry for the requested tile
+     */
+    InputStream getInputStream(ITileSource tileSource, MapTile tile);
 
 }

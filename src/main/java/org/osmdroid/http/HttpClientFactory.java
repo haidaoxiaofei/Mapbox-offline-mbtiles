@@ -13,27 +13,27 @@ import org.apache.http.impl.client.DefaultHttpClient;
  * use the following code
  * <code>
  * HttpClientFactory.setFactoryInstance(new IHttpClientFactory() {
- *     public HttpClient createHttpClient() {
- *         return new OkApacheClient();
- *     }
+ * public HttpClient createHttpClient() {
+ * return new OkApacheClient();
+ * }
  * });
  * </code>
  */
 public class HttpClientFactory {
 
-	private static IHttpClientFactory mFactoryInstance = new IHttpClientFactory() {
-		@Override
-		public HttpClient createHttpClient() {
-			return new DefaultHttpClient();
-		}
-	};
+    private static IHttpClientFactory mFactoryInstance = new IHttpClientFactory() {
+        @Override
+        public HttpClient createHttpClient() {
+            return new DefaultHttpClient();
+        }
+    };
 
-	public static void setFactoryInstance(final IHttpClientFactory aHttpClientFactory) {
-		mFactoryInstance = aHttpClientFactory;
-	}
+    public static void setFactoryInstance(final IHttpClientFactory aHttpClientFactory) {
+        mFactoryInstance = aHttpClientFactory;
+    }
 
-	public static HttpClient createHttpClient() {
-		return mFactoryInstance.createHttpClient();
-	}
+    public static HttpClient createHttpClient() {
+        return mFactoryInstance.createHttpClient();
+    }
 
 }

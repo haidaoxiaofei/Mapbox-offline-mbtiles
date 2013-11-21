@@ -23,7 +23,7 @@ public class ManifestUtil {
         final PackageManager pm = aContext.getPackageManager();
         try {
             final ApplicationInfo info = pm.getApplicationInfo(aContext.getPackageName(),
-					PackageManager.GET_META_DATA);
+                    PackageManager.GET_META_DATA);
             if (info.metaData == null) {
                 logger.info("Key %s not found in manifest", aKey);
             } else {

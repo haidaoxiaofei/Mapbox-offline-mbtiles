@@ -11,24 +11,24 @@ import org.osmdroid.util.GEMFFile;
 
 public class GEMFFileArchive implements IArchiveFile {
 
-	private final GEMFFile mFile;
+    private final GEMFFile mFile;
 
-	private GEMFFileArchive(final File pFile) throws FileNotFoundException, IOException {
-		mFile = new GEMFFile(pFile);
-	}
+    private GEMFFileArchive(final File pFile) throws FileNotFoundException, IOException {
+        mFile = new GEMFFile(pFile);
+    }
 
-	public static GEMFFileArchive getGEMFFileArchive(final File pFile) throws FileNotFoundException, IOException {
-		return new GEMFFileArchive(pFile);
-	}
+    public static GEMFFileArchive getGEMFFileArchive(final File pFile) throws FileNotFoundException, IOException {
+        return new GEMFFileArchive(pFile);
+    }
 
-	@Override
-	public InputStream getInputStream(final ITileSource pTileSource, final MapTile pTile) {
-		return mFile.getInputStream(pTile.getX(), pTile.getY(), pTile.getZoomLevel());
-	}
+    @Override
+    public InputStream getInputStream(final ITileSource pTileSource, final MapTile pTile) {
+        return mFile.getInputStream(pTile.getX(), pTile.getY(), pTile.getZoomLevel());
+    }
 
-	@Override
-	public String toString() {
-		return "GEMFFileArchive [mGEMFFile=" + mFile.getName() + "]";
-	}
+    @Override
+    public String toString() {
+        return "GEMFFileArchive [mGEMFFile=" + mFile.getName() + "]";
+    }
 
 }

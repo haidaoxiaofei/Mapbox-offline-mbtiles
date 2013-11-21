@@ -6,83 +6,80 @@ import org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants;
 import android.graphics.drawable.Drawable;
 
 /**
- * 
  * @author Nicolas Gramlich
- * 
  */
 public class MapTileCache implements OpenStreetMapTileProviderConstants {
-	// ===========================================================
-	// Constants
-	// ===========================================================
+    // ===========================================================
+    // Constants
+    // ===========================================================
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
+    // ===========================================================
+    // Fields
+    // ===========================================================
 
-	protected final Object mCachedTilesLockObject = new Object();
-	protected LRUMapTileCache mCachedTiles;
+    protected final Object mCachedTilesLockObject = new Object();
+    protected LRUMapTileCache mCachedTiles;
 
-	// ===========================================================
-	// Constructors
-	// ===========================================================
+    // ===========================================================
+    // Constructors
+    // ===========================================================
 
-	public MapTileCache() {
-		this(CACHE_MAPTILECOUNT_DEFAULT);
-	}
+    public MapTileCache() {
+        this(CACHE_MAPTILECOUNT_DEFAULT);
+    }
 
-	/**
-	 * @param aMaximumCacheSize
-	 *            Maximum amount of MapTiles to be hold within.
-	 */
-	public MapTileCache(final int aMaximumCacheSize) {
-		this.mCachedTiles = new LRUMapTileCache(aMaximumCacheSize);
-	}
+    /**
+     * @param aMaximumCacheSize Maximum amount of MapTiles to be hold within.
+     */
+    public MapTileCache(final int aMaximumCacheSize) {
+        this.mCachedTiles = new LRUMapTileCache(aMaximumCacheSize);
+    }
 
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
+    // ===========================================================
+    // Getter & Setter
+    // ===========================================================
 
-	public void ensureCapacity(final int aCapacity) {
-		synchronized (mCachedTilesLockObject) {
-			mCachedTiles.ensureCapacity(aCapacity);
-		}
-	}
+    public void ensureCapacity(final int aCapacity) {
+        synchronized (mCachedTilesLockObject) {
+            mCachedTiles.ensureCapacity(aCapacity);
+        }
+    }
 
-	public Drawable getMapTile(final MapTile aTile) {
-		synchronized (mCachedTilesLockObject) {
-			return this.mCachedTiles.get(aTile);
-		}
-	}
+    public Drawable getMapTile(final MapTile aTile) {
+        synchronized (mCachedTilesLockObject) {
+            return this.mCachedTiles.get(aTile);
+        }
+    }
 
-	public void putTile(final MapTile aTile, final Drawable aDrawable) {
-		if (aDrawable != null) {
-			synchronized (mCachedTilesLockObject) {
-				this.mCachedTiles.put(aTile, aDrawable);
-			}
-		}
-	}
+    public void putTile(final MapTile aTile, final Drawable aDrawable) {
+        if (aDrawable != null) {
+            synchronized (mCachedTilesLockObject) {
+                this.mCachedTiles.put(aTile, aDrawable);
+            }
+        }
+    }
 
-	// ===========================================================
-	// Methods from SuperClass/Interfaces
-	// ===========================================================
+    // ===========================================================
+    // Methods from SuperClass/Interfaces
+    // ===========================================================
 
-	// ===========================================================
-	// Methods
-	// ===========================================================
+    // ===========================================================
+    // Methods
+    // ===========================================================
 
-	public boolean containsTile(final MapTile aTile) {
-		synchronized (mCachedTilesLockObject) {
-			return this.mCachedTiles.containsKey(aTile);
-		}
-	}
+    public boolean containsTile(final MapTile aTile) {
+        synchronized (mCachedTilesLockObject) {
+            return this.mCachedTiles.containsKey(aTile);
+        }
+    }
 
-	public void clear() {
-		synchronized (mCachedTilesLockObject) {
-			this.mCachedTiles.clear();
-		}
-	}
+    public void clear() {
+        synchronized (mCachedTilesLockObject) {
+            this.mCachedTiles.clear();
+        }
+    }
 
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
+    // ===========================================================
+    // Inner and Anonymous Classes
+    // ===========================================================
 }
