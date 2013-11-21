@@ -177,7 +177,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     /**
      * Constructor used by XML layout resource (uses default tile source).
      */
-    public MapView(final Context context) {
+    public MapView(final Context context, AttributeSet attrs) {
         this(context, 256, new DefaultResourceProxyImpl(context), null, null, attrs);
     }
 

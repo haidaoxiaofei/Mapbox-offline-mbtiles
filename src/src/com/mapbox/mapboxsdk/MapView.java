@@ -1,17 +1,24 @@
 package com.mapbox.mapboxsdk;
 
 import android.content.Context;
-import android.os.Handler;
 import android.util.AttributeSet;
 import org.osmdroid.ResourceProxy;
-import org.osmdroid.tileprovider.MapTileProviderBase;
+import org.osmdroid.tileprovider.MapTileProviderBasic;
+import org.osmdroid.tileprovider.tilesource.ITileSource;
+import org.osmdroid.tileprovider.tilesource.XYTileSource;
+import org.osmdroid.views.MapController;
 
+public class MapView extends org.osmdroid.views.MapView{
+    private MapTileProviderBasic tileProvider;
+    private ITileSource tileSource;
+    private MapController controller;
 
-public class MapView extends org.osmdroid.views.MapView {
-    public MapView(Context context){
-        super(context);
+    public MapView(Context context, AttributeSet attrs) {
+        super(context, attrs);
     }
-    private MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileProviderBase tileProvider, Handler tileRequestCompleteHandler, AttributeSet attrs) {
-        super(context, tileSizePixels, resourceProxy, tileProvider, tileRequestCompleteHandler, attrs);
+    public MapView(Context context, String URL){
+        super(context, null);
+        tileSource = new XYTileSource("Test", ResourceProxy.string.online_mode, 0, 24, 256, ".png", URL);
+        this.setTileSource(tileSource);
     }
 }
