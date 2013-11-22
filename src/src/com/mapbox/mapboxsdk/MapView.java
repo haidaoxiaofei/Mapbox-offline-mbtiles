@@ -19,6 +19,7 @@ public class MapView extends org.osmdroid.views.MapView{
     private ItemizedIconOverlay<OverlayItem> defaultMarkerOverlay;
     private ArrayList<OverlayItem> defaultMarkerList = new ArrayList<OverlayItem>();
     private Context context;
+    private boolean firstMarker = true;
 
     public MapView(Context context, AttributeSet attrs) {
         this(context, "");
@@ -39,10 +40,17 @@ public class MapView extends org.osmdroid.views.MapView{
      */
 
     public Marker addMarker(double lat, double lon, String title, String text){
-        defaultMarkerList.add(new Marker(title, text, new GeoPoint(lat, lon)));
-        setDefaultItemizedOverlay();
-        this.getOverlays().add(defaultMarkerOverlay);
+        Marker marker = new Marker(title, text, new GeoPoint(lat, lon));
+        marker.fromMaki("restaurant");
+        if(firstMarker){
+            defaultMarkerList.add(marker);
+            setDefaultItemizedOverlay();
+        }
+        else{
+            defaultMarkerOverlay.addItem(marker);
+        }
         this.invalidate();
+        firstMarker = false;
         return null;
     }
     private void setDefaultItemizedOverlay() {
@@ -59,6 +67,7 @@ public class MapView extends org.osmdroid.views.MapView{
                         return true;
                     }
                 }, new DefaultResourceProxyImpl(context.getApplicationContext()));
+        this.getOverlays().add(defaultMarkerOverlay);
     }
 
 

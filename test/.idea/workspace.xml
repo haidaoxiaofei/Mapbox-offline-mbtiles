@@ -32,7 +32,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" name="Default" comment="" />
+    <list default="true" id="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java" afterPath="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java" />
+    </list>
     <ignored path="OSMDroidTests.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385135275782" ignored="false" />
@@ -40,7 +42,7 @@
     <file path="$PROJECT_DIR$/../MapShot/google-play-services_lib/src/Dummy.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1384473496843" ignored="false" />
     <file path="$PROJECT_DIR$/../MapShot/src/uk/co/techfinity/mapshot/MapShotActivity.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1384524938123" ignored="false" />
     <file path="/MapShotActivity.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1384524934315" ignored="false" />
-    <file path="/MainActivity.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385149804209" ignored="false" />
+    <file path="/MainActivity.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385151514603" ignored="false" />
     <file path="/activity_main.xml" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1384477394252" ignored="false" />
     <file path="/Tooltip.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385074828225" ignored="false" />
     <file path="/strings.xml" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1384478006587" ignored="false" />
@@ -122,11 +124,11 @@
     <file path="$PROJECT_DIR$/../src/main/java/org/osmdroid/tileprovider/tilesource/MapBoxTileSource.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385042395634" ignored="false" />
     <file path="$PROJECT_DIR$/../src/main/java/org/osmdroid/tileprovider/tilesource/XYTileSource.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385042395634" ignored="false" />
     <file path="$PROJECT_DIR$/../src/main/java/org/osmdroid/tileprovider/tilesource/QuadTreeTileSource.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385042395634" ignored="false" />
-    <file path="/MapView.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385080358421" ignored="false" />
+    <file path="/MapView.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385153700893" ignored="false" />
     <file path="$PROJECT_DIR$/../src/gen/com/mapbox/mapboxsdk/Manifest.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385051364447" ignored="false" />
     <file path="$PROJECT_DIR$/../src/gen/com/mapbox/mapboxsdk/BuildConfig.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385051369462" ignored="false" />
     <file path="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Marker/java.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385075218911" ignored="false" />
-    <file path="/Marker.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385078888554" ignored="false" />
+    <file path="/Marker.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385153795557" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,10 +190,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Marker.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Marker.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Marker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="10" selection-start="281" selection-end="397" vertical-scroll-proportion="0.0">
+            <state line="29" column="37" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.4097222">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -199,22 +201,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapView.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
+      <file leaf-file-name="Tooltip.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Tooltip.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="42" selection-start="1058" selection-end="1058" vertical-scroll-proportion="0.0">
+            <state line="36" column="8" selection-start="1110" selection-end="1110" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MapView.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="51" selection-start="1470" selection-end="1470" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#767#780#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/osmdroidtests/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="82" column="100" selection-start="3193" selection-end="3193" vertical-scroll-proportion="0.15332198">
+            <state line="54" column="8" selection-start="1856" selection-end="2228" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2733#2746#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -224,15 +236,6 @@
         <entry file="file://$PROJECT_DIR$/../src/main/java/org/osmdroid/views/overlay/OverlayItem.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="56" column="60" selection-start="2086" selection-end="2086" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Tooltip.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Tooltip.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="64" selection-start="1340" selection-end="1340" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -285,12 +288,12 @@
         <option value="$PROJECT_DIR$/../trunk/osmdroid-android/src/main/java/org/osmdroid/DefaultResourceProxyImpl.java" />
         <option value="$PROJECT_DIR$/../src/main/java/org/osmdroid/views/MapView.java" />
         <option value="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Tooltip.java" />
-        <option value="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Marker.java" />
-        <option value="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java" />
         <option value="$PROJECT_DIR$/../src/main/java/org/osmdroid/overlays/MapEventsReceiver.java" />
         <option value="$PROJECT_DIR$/../src/main/java/org/bonuspack/overlays/MapEventsReceiver.java" />
         <option value="$PROJECT_DIR$/../src/main/java/org/osmdroid/bonuspack/overlays/MapEventsOverlay.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/osmdroidtests/MainActivity.java" />
+        <option value="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java" />
+        <option value="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Marker.java" />
       </list>
     </option>
   </component>
@@ -376,20 +379,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OSMDroidTests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapboxsdk" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -735,7 +724,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.6712095" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20440729" sideWeight="0.7471452" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25285482" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25285482" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -854,13 +843,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Tooltip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="64" selection-start="1340" selection-end="1340" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/main/java/org/osmdroid/DefaultResourceProxyImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="130" column="20" selection-start="4746" selection-end="4746" vertical-scroll-proportion="0.0">
@@ -885,15 +867,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Marker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="10" selection-start="281" selection-end="397" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/main/java/org/osmdroid/bonuspack/overlays/MapEventsReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="8" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0">
@@ -910,19 +883,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
+    <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Tooltip.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="42" selection-start="1058" selection-end="1058" vertical-scroll-proportion="0.0">
+        <state line="36" column="8" selection-start="1110" selection-end="1110" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mapbox/osmdroidtests/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="100" selection-start="3193" selection-end="3193" vertical-scroll-proportion="0.15332198">
+        <state line="54" column="8" selection-start="1856" selection-end="2228" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2733#2746#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="51" selection-start="1470" selection-end="1470" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#767#780#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Marker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="37" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.4097222">
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
