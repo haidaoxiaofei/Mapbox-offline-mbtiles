@@ -21,8 +21,7 @@ public class MapView extends org.osmdroid.views.MapView{
     private Context context;
 
     public MapView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        this.context = context;
+        this(context, "");
     }
     public MapView(Context context, String URL){
         super(context, null);
@@ -47,8 +46,6 @@ public class MapView extends org.osmdroid.views.MapView{
         return null;
     }
     private void setDefaultItemizedOverlay() {
-        System.out.println(defaultMarkerList);
-        System.out.println(context.getApplicationContext()==null);
         defaultMarkerOverlay = new ItemizedIconOverlay<OverlayItem>(
                 defaultMarkerList,
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {

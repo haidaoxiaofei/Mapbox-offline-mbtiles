@@ -32,7 +32,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" name="Default" comment="" />
+    <list default="true" id="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java" afterPath="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java" />
+    </list>
     <ignored path="OSMDroidTests.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385041482526" ignored="false" />
@@ -138,7 +140,7 @@
     <file path="$PROJECT_DIR$/../src/main/java/org/osmdroid/tileprovider/tilesource/MapBoxTileSource.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385042395634" ignored="false" />
     <file path="$PROJECT_DIR$/../src/main/java/org/osmdroid/tileprovider/tilesource/XYTileSource.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385042395634" ignored="false" />
     <file path="$PROJECT_DIR$/../src/main/java/org/osmdroid/tileprovider/tilesource/QuadTreeTileSource.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385042395634" ignored="false" />
-    <file path="/MapView.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385079852621" ignored="false" />
+    <file path="/MapView.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385080358421" ignored="false" />
     <file path="$PROJECT_DIR$/../src/gen/com/mapbox/mapboxsdk/Manifest.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385051364447" ignored="false" />
     <file path="$PROJECT_DIR$/../src/gen/com/mapbox/mapboxsdk/BuildConfig.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385051369462" ignored="false" />
     <file path="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Marker/java.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385075218911" ignored="false" />
@@ -218,7 +220,7 @@
       <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="31" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.65667576">
+            <state line="26" column="55" selection-start="983" selection-end="983" vertical-scroll-proportion="0.4250681">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#767#780#0" expanded="true" />
@@ -872,7 +874,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="31" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.65667576">
+        <state line="26" column="55" selection-start="983" selection-end="983" vertical-scroll-proportion="0.4250681">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#767#780#0" expanded="true" />
