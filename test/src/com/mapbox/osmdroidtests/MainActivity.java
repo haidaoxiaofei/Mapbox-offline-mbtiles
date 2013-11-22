@@ -3,23 +3,33 @@ package com.mapbox.osmdroidtests;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
-import com.mapbox.mapboxsdk.MapView;
 import com.testflightapp.lib.TestFlight;
+import org.osmdroid.ResourceProxy;
+import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.api.IMapController;
+import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
+import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
 import org.osmdroid.tileprovider.MapTileProviderBasic;
+import org.osmdroid.tileprovider.tilesource.ITileSource;
+import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
+import com.mapbox.mapboxsdk.MapView;
+import org.osmdroid.views.overlay.MyLocationOverlay;
+import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.PathOverlay;
 
-public class MainActivity extends Activity {
+import java.util.ArrayList;
+
+public class MainActivity extends Activity implements MapEventsReceiver{
 	private IMapController mapController;
 	private GeoPoint startingPoint = new GeoPoint(51.5, 0);
 	private MapTileProviderBasic tileProvider;
 	private MapView mv;
-	private MyLocationNewOverlay myLocationOverlay;
-    private Paint paint;
+	private MyLocationOverlay myLocationOverlay;
+    Paint paint;
 	
 	private final String mapURL = "http://a.tiles.mapbox.com/v3/czana.map-e6nd3na3/";
 	
@@ -27,10 +37,18 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		TestFlight.takeOff(getApplication(), "e4fe404b-2edc-4a2d-8083-3d708168e4c4");
+        setContentView(R.layout.activity_main);
+        tileProvider = new MapTileProviderBasic(this);
 
-        mv = new MapView(this, mapURL);
-        setContentView(mv);
+		// Defines source, indicating tag, resource id (if any), min zoom level, max zoom level,
+		// tile size in pixels, image format, and map url.
+		ITileSource tileSource = new XYTileSource("Test", ResourceProxy.string.online_mode, 3, 20, 256, ".png", mapURL);
+		tileProvider.setTileSource(tileSource);
 
+		// Initializes the view
+        mv = (MapView) findViewById(R.id.mapview);
+        mv.setTileSource(tileSource);
+		// Sets initial position of the map camera
 		mapController = mv.getController();
 		mapController.setCenter(startingPoint);
 		mapController.setZoom(7);
@@ -39,14 +57,22 @@ public class MainActivity extends Activity {
 		mv.setMultiTouchControls(true);
 
 
+
 		// Adds an icon that shows location
-		myLocationOverlay = new MyLocationNewOverlay(this, mv);
+		myLocationOverlay = new MyLocationOverlay(this, mv);
 		myLocationOverlay.enableMyLocation();
 		myLocationOverlay.setDrawAccuracyEnabled(true);
 
 		
 		// Configures a marker
-        mv.addMarker(52.5, 0f,"Hello", "Marker test");
+		OverlayItem myLocationOverlayItem = new OverlayItem("Hello", "Marker test", new GeoPoint(52f,0f));
+        Drawable markerDrawable = this.getResources().getDrawable(R.drawable.pin);
+        myLocationOverlayItem.setMarker(markerDrawable);
+        final ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
+        items.add(myLocationOverlayItem);
+
+        MapEventsOverlay overlay = new MapEventsOverlay(this, this);
+        mv.getOverlays().add(overlay);
         
         // Configures a line
         PathOverlay po = new PathOverlay(Color.RED, this);
@@ -62,7 +88,6 @@ public class MainActivity extends Activity {
 
         
         // Adds line and marker to the overlay
-
         mv.getOverlays().add(po);
         mv.getOverlays().add(myLocationOverlay);
 		
@@ -76,4 +101,14 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+    @Override
+    public boolean singleTapUpHelper(IGeoPoint p) {
+        mv.addMarker(p.getLatitude(),p.getLongitude(), "", "");
+        return true;
+    }
+
+    @Override
+    public boolean longPressHelper(IGeoPoint p) {
+        return false;
+    }
 }
