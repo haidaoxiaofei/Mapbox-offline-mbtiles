@@ -10,13 +10,6 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
-/**
- * Created with IntelliJ IDEA.
- * User: fdans
- * Date: 21/11/13
- * Time: 16:45
- * To change this template use File | Settings | File Templates.
- */
 public class Tooltip extends Overlay{
     private OverlayItem item;
     private Paint paint = new Paint();

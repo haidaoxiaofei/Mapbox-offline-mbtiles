@@ -3,22 +3,15 @@ package com.mapbox.osmdroidtests;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import com.mapbox.mapboxsdk.MapView;
-import com.mapbox.mapboxsdk.Tooltip;
 import com.testflightapp.lib.TestFlight;
-import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.MapTileProviderBasic;
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.MyLocationOverlay;
-import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.PathOverlay;
-
-import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 	private IMapController mapController;
@@ -53,25 +46,7 @@ public class MainActivity extends Activity {
 
 		
 		// Configures a marker
-		OverlayItem myLocationOverlayItem = new OverlayItem("Hello", "Marker test", new GeoPoint(52f,0f));
-        Drawable markerDrawable = this.getResources().getDrawable(R.drawable.pin);
-        myLocationOverlayItem.setMarker(markerDrawable);
-        final ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
-        items.add(myLocationOverlayItem);
-        
-        //Sets marker actions
-        ItemizedIconOverlay<OverlayItem> markerOverlay = new ItemizedIconOverlay<OverlayItem>(items,
-                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
-                    public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        mv.getOverlays().add(new Tooltip(MainActivity.this, item));
-                        mv.invalidate();
-
-                        return true;
-                    }
-                    public boolean onItemLongPress(final int index, final OverlayItem item) {
-                        return true;
-                    }
-                }, new DefaultResourceProxyImpl(getApplicationContext()));
+        mv.addMarker(52.5, 0f,"Hello", "Marker test");
         
         // Configures a line
         PathOverlay po = new PathOverlay(Color.RED, this);
@@ -87,7 +62,7 @@ public class MainActivity extends Activity {
         
         
         // Adds line and marker to the overlay
-        mv.getOverlays().add(markerOverlay);
+
         mv.getOverlays().add(po);
         mv.getOverlays().add(myLocationOverlay);
 		
