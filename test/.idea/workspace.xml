@@ -32,9 +32,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java" afterPath="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java" />
-    </list>
+    <list default="true" id="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" name="Default" comment="" />
     <ignored path="OSMDroidTests.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385041482526" ignored="false" />
@@ -42,7 +40,7 @@
     <file path="$PROJECT_DIR$/../MapShot/google-play-services_lib/src/Dummy.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1384473496843" ignored="false" />
     <file path="$PROJECT_DIR$/../MapShot/src/uk/co/techfinity/mapshot/MapShotActivity.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1384524938123" ignored="false" />
     <file path="/MapShotActivity.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1384524934315" ignored="false" />
-    <file path="/MainActivity.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385077565998" ignored="false" />
+    <file path="/MainActivity.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385084512089" ignored="false" />
     <file path="/activity_main.xml" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1384477394252" ignored="false" />
     <file path="/Tooltip.java" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1385074828225" ignored="false" />
     <file path="/strings.xml" changelist="cd7ac7ad-f3f4-452e-8095-44d4b8cc7e40" time="1384478006587" ignored="false" />
@@ -217,10 +215,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MapView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="55" selection-start="983" selection-end="983" vertical-scroll-proportion="0.4250681">
+            <state line="26" column="55" selection-start="983" selection-end="983" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#767#780#0" expanded="true" />
@@ -229,10 +227,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/osmdroidtests/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="54" selection-start="1552" selection-end="1552" vertical-scroll-proportion="0.0">
+            <state line="42" column="68" selection-start="1398" selection-end="1398" vertical-scroll-proportion="1.2019465">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -317,8 +315,8 @@
         <option value="$PROJECT_DIR$/../src/main/java/org/osmdroid/views/MapView.java" />
         <option value="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Tooltip.java" />
         <option value="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Marker.java" />
-        <option value="$PROJECT_DIR$/src/com/mapbox/osmdroidtests/MainActivity.java" />
         <option value="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java" />
+        <option value="$PROJECT_DIR$/src/com/mapbox/osmdroidtests/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -674,13 +672,13 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23860182" sideWeight="0.30323678" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32463294" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32463294" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32463294" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.6712095" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20440729" sideWeight="0.67536706" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25285482" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20440729" sideWeight="0.7471452" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25285482" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -842,15 +840,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/osmdroidtests/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="54" selection-start="1552" selection-end="1552" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files (x86)/Android/android-sdk/sources/android-17/android/os/Looper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="136" column="0" selection-start="4739" selection-end="4784" vertical-scroll-proportion="0.33229813">
@@ -874,10 +863,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="55" selection-start="983" selection-end="983" vertical-scroll-proportion="0.4250681">
+        <state line="26" column="55" selection-start="983" selection-end="983" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#767#780#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/osmdroidtests/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="68" selection-start="1398" selection-end="1398" vertical-scroll-proportion="1.2019465">
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

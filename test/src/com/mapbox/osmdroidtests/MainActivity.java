@@ -10,7 +10,7 @@ import com.testflightapp.lib.TestFlight;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.MapTileProviderBasic;
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.overlay.MyLocationOverlay;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 import org.osmdroid.views.overlay.PathOverlay;
 
 public class MainActivity extends Activity {
@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
 	private GeoPoint startingPoint = new GeoPoint(51.5, 0);
 	private MapTileProviderBasic tileProvider;
 	private MapView mv;
-	private MyLocationOverlay myLocationOverlay;
+	private MyLocationNewOverlay myLocationOverlay;
     private Paint paint;
 	
 	private final String mapURL = "http://a.tiles.mapbox.com/v3/czana.map-e6nd3na3/";
@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 
 
 		// Adds an icon that shows location
-		myLocationOverlay = new MyLocationOverlay(this, mv);
+		myLocationOverlay = new MyLocationNewOverlay(this, mv);
 		myLocationOverlay.enableMyLocation();
 		myLocationOverlay.setDrawAccuracyEnabled(true);
 
@@ -58,8 +58,8 @@ public class MainActivity extends Activity {
         po.addPoint(startingPoint);
         po.addPoint(new GeoPoint(51.7, 0.3));
         po.addPoint(new GeoPoint(51.2, 0));
-        
-        
+
+
         
         // Adds line and marker to the overlay
 
