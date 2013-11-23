@@ -1,10 +1,7 @@
 package com.mapbox.mapboxsdk;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Point;
+import android.graphics.*;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.Overlay;
@@ -28,7 +25,10 @@ public class Tooltip extends Overlay{
 
     @Override
     protected void draw(Canvas canvas, org.osmdroid.views.MapView mapView, boolean shadow) {
-        System.out.println("this is being called");
+        Rect bounds = new Rect();
+        String text = "Helloooo this is a tooltip!";
+        paint.getTextBounds(text, 0, text.length()-1, bounds);
+        int innerBoxHeight = bounds.height();
         GeoPoint markerCoords = item.getPoint();
         MapView.Projection projection = mapView.getProjection();
         Point point = new Point();
@@ -42,6 +42,6 @@ public class Tooltip extends Overlay{
         paint.setColor(Color.rgb(50, 50, 50));
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(40f);
-        canvas.drawText("Helloooo this is a tooltip!", point.x, point.y-140, paint);
+        canvas.drawText(text, point.x, point.y-140, paint);
     }
 }

@@ -1,5 +1,6 @@
 package com.mapbox.mapboxsdk;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,22 +14,28 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Marker extends OverlayItem{
-    public Marker(String aTitle, String aSnippet, GeoPoint aGeoPoint) {
-        super(aTitle, aSnippet, aGeoPoint);
-        //Drawable markerDrawable = ;
-        //this.setMarker(markerDrawable);
-    }
+    private Context context;
 
-    public Marker(String aUid, String aTitle, String aDescription, GeoPoint aGeoPoint) {
-        super(aUid, aTitle, aDescription, aGeoPoint);
+
+    public Marker(String aTitle, String aDescription, GeoPoint aGeoPoint) {
+        super(aTitle, aDescription, aGeoPoint);
+        fromMaki("markerstroked");
+    }
+    public Marker(MapView mv, String aTitle, String aDescription, GeoPoint aGeoPoint) {
+        super(aTitle, aDescription, aGeoPoint);
+        context = mv.getContext();
+        fromMaki("markerstroked");
     }
 
     public void fromMaki(String makiString){
-        String urlString = "https://raw.github.com/mapbox/maki/gh-pages/renders/"+makiString+"-18@2x.png";
-        this.setMarker(new BitmapDrawable());
-        new BitmapLoader().execute(urlString);
-
+        String urlString = makiString+"182x";
+        System.out.println(urlString);
+        int id = context.getResources().getIdentifier(urlString, "drawable", context.getPackageName());
+        System.out.println(""+id);
+        this.setMarker(context.getResources().getDrawable(id));
+        //this.setMarker(context.getResources().getDrawable(R.drawable.library182x));
     }
+
 
     class BitmapLoader extends AsyncTask<String, Void,Bitmap> {
 

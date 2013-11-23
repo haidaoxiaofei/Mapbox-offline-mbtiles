@@ -22,8 +22,8 @@ public class MainActivity extends Activity implements MapEventsReceiver{
 	private MapTileProviderBasic tileProvider;
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
-    Paint paint;
-
+    private Paint paint;
+    private MapEventsOverlay eventsOverlay;
     private final String mapURL = "http://a.tiles.mapbox.com/v3/czana.map-e6nd3na3/";
 
     @Override
@@ -62,7 +62,7 @@ public class MainActivity extends Activity implements MapEventsReceiver{
         po.addPoint(new GeoPoint(51.7, 0.3));
         po.addPoint(new GeoPoint(51.2, 0));
 
-        MapEventsOverlay eventsOverlay = new MapEventsOverlay(this, this);
+        eventsOverlay = new MapEventsOverlay(this, this);
 
 
         // Adds line and marker to the overlay
