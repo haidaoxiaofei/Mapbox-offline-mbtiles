@@ -234,7 +234,7 @@
       <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="44" selection-start="1532" selection-end="1532" vertical-scroll-proportion="-1.5429363">
+            <state line="81" column="72" selection-start="3242" selection-end="3242" vertical-scroll-proportion="3.1551247">
               <folding />
             </state>
           </provider>
@@ -790,7 +790,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="44" selection-start="1532" selection-end="1532" vertical-scroll-proportion="-1.5429363">
+        <state line="81" column="72" selection-start="3242" selection-end="3242" vertical-scroll-proportion="3.1551247">
           <folding />
         </state>
       </provider>
