@@ -63,7 +63,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
                 defaultMarkerList,
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        MapView.this.getOverlays().add(new Tooltip(context, item));
+                        MapView.this.getOverlays().add(new Tooltip(context, item , item.getTitle()));
                         MapView.this.invalidate();
                         return true;
                     }

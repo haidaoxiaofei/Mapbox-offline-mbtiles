@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 
 
         // Configures a marker
-        mv.addMarker(52.5, 0f,"Hello", "Marker test");
+        mv.addMarker(52.5, 0f, "Hello", "Marker test");
 
         // Configures a line
         PathOverlay po = new PathOverlay(Color.RED, this);

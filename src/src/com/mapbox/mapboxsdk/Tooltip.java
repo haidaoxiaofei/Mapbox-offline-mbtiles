@@ -13,9 +13,8 @@ public class Tooltip extends Overlay{
 
     private OverlayItem item;
     private Paint paint = new Paint();
-    private String text;
-
     private Point point = new Point();
+    private String text;
     private MapView mapView;
     private Canvas canvas;
 
