@@ -1,13 +1,16 @@
 package com.mapbox.mapboxsdk;
 
 import android.content.Context;
-import android.graphics.*;
-import org.osmdroid.ResourceProxy;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Point;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
 public class Tooltip extends Overlay{
+
     private OverlayItem item;
     private Paint paint = new Paint();
     private String text;
@@ -17,20 +20,21 @@ public class Tooltip extends Overlay{
     private Canvas canvas;
 
     public Tooltip(Context ctx) {
-        super(ctx);
+        this(ctx, null);
     }
     public Tooltip(Context ctx, OverlayItem ot){
+        this(ctx, ot, "");
+    }
+    public Tooltip(Context ctx, OverlayItem ot, String text) {
         super(ctx);
-        this.item = ot;
+        setItem(ot);
+        setText(text);
     }
-
-    private Tooltip(ResourceProxy pResourceProxy) {
-        super(pResourceProxy);
-    }
-
     public void setText(String text){
         this.text = text;
-
+    }
+    public void setItem(OverlayItem item) {
+        this.item = item;
     }
 
     @Override
@@ -40,12 +44,11 @@ public class Tooltip extends Overlay{
         this.canvas = canvas;
         paint.setColor(Color.WHITE);
         this.setTooltipShape();
-        this.setText("whatevs");
         paint.setColor(Color.rgb(50, 50, 50));
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(40f);
         System.out.println("Point: " + point.x);
-        canvas.drawText(text, point.x, point.y-140, paint);
+        canvas.drawText(text, point.x, point.y - 140, paint);
     }
     private void setTooltipShape(){
         canvas.drawRect(point.x - 240, point.y - 200, point.x + 240, point.y - 100, paint);
@@ -57,8 +60,6 @@ public class Tooltip extends Overlay{
     private void calculatePoint(){
         GeoPoint markerCoords = item.getPoint();
         MapView.Projection projection = mapView.getProjection();
-        Point pointy = new Point();
-        projection.toPixels(markerCoords, pointy);
-        this.point = pointy;
+        projection.toPixels(markerCoords, point);
     }
 }

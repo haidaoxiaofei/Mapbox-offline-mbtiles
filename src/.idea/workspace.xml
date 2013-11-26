@@ -134,7 +134,7 @@
     <file path="/MainActivity.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385052375717" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/Manifest.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385167951822" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/BuildConfig.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385051369462" ignored="false" />
-    <file path="/Tooltip.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385476998048" ignored="false" />
+    <file path="/Tooltip.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385477549989" ignored="false" />
     <file path="/Marker.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385169716384" ignored="false" />
     <file path="/Dummy.txt" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385167927046" ignored="false" />
     <file path="/fragment.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385261775254" ignored="false" />
@@ -225,7 +225,7 @@
       <file leaf-file-name="Tooltip.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Tooltip.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="29" selection-start="1109" selection-end="1109" vertical-scroll-proportion="-0.0880829">
+            <state line="47" column="74" selection-start="1343" selection-end="1343" vertical-scroll-proportion="0.20725389">
               <folding />
             </state>
           </provider>
@@ -790,7 +790,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Tooltip.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="29" selection-start="1109" selection-end="1109" vertical-scroll-proportion="-0.0880829">
+        <state line="47" column="74" selection-start="1343" selection-end="1343" vertical-scroll-proportion="0.20725389">
           <folding />
         </state>
       </provider>
