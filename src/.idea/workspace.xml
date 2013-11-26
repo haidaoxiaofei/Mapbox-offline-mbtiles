@@ -130,7 +130,7 @@
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/tilesource/XYTileSource.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/tilesource/TileSourceFactory.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/tilesource/QuadTreeTileSource.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="/MapView.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385477791778" ignored="false" />
+    <file path="/MapView.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385478420666" ignored="false" />
     <file path="/MainActivity.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385052375717" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/Manifest.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385167951822" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/BuildConfig.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385051369462" ignored="false" />
@@ -231,10 +231,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapView.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="68" selection-start="2420" selection-end="2420" vertical-scroll-proportion="0.0">
+            <state line="37" column="44" selection-start="1532" selection-end="1532" vertical-scroll-proportion="-1.5429363">
               <folding />
             </state>
           </provider>
@@ -258,10 +258,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="44" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.7046632">
+            <state line="67" column="70" selection-start="2196" selection-end="2196" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -279,8 +279,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Marker.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Tooltip.java" />
-        <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
         <option value="$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
       </list>
     </option>
   </component>
@@ -781,16 +781,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
+    <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="68" selection-start="2420" selection-end="2420" vertical-scroll-proportion="0.0">
+        <state line="67" column="70" selection-start="2196" selection-end="2196" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="44" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.7046632">
+        <state line="37" column="44" selection-start="1532" selection-end="1532" vertical-scroll-proportion="-1.5429363">
           <folding />
         </state>
       </provider>

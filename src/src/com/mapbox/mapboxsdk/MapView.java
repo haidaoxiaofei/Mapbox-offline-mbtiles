@@ -35,6 +35,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         tileSource = new XYTileSource("Test", ResourceProxy.string.online_mode, 0, 24, 256, ".png", URL);
         this.setTileSource(tileSource);
         eventsOverlay = new MapEventsOverlay(context, this);
+        this.getOverlays().add(eventsOverlay);
     }
     /**
      * Adds a marker to the default marker overlay
