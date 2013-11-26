@@ -33,7 +33,6 @@ public class Marker extends OverlayItem{
         int id = context.getResources().getIdentifier(urlString, "drawable", context.getPackageName());
         System.out.println(""+id);
         this.setMarker(context.getResources().getDrawable(id));
-        //this.setMarker(context.getResources().getDrawable(R.drawable.library182x));
     }
 
 

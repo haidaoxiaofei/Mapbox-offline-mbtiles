@@ -7,23 +7,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import com.mapbox.mapboxsdk.MapView;
 import com.testflightapp.lib.TestFlight;
-import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.api.IMapController;
-import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
-import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
 import org.osmdroid.tileprovider.MapTileProviderBasic;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.PathOverlay;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
-public class MainActivity extends Activity implements MapEventsReceiver{
+public class MainActivity extends Activity {
 	private IMapController mapController;
 	private GeoPoint startingPoint = new GeoPoint(51.5, 0);
 	private MapTileProviderBasic tileProvider;
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
     private Paint paint;
-    private MapEventsOverlay eventsOverlay;
     private final String mapURL = "http://a.tiles.mapbox.com/v3/czana.map-e6nd3na3/";
 
     @Override
@@ -62,14 +58,14 @@ public class MainActivity extends Activity implements MapEventsReceiver{
         po.addPoint(new GeoPoint(51.7, 0.3));
         po.addPoint(new GeoPoint(51.2, 0));
 
-        eventsOverlay = new MapEventsOverlay(this, this);
+
 
 
         // Adds line and marker to the overlay
 
         //mv.getOverlays().add(po);
         mv.getOverlays().add(myLocationOverlay);
-        mv.getOverlays().add(eventsOverlay);
+
 
     }
 
@@ -81,14 +77,5 @@ public class MainActivity extends Activity implements MapEventsReceiver{
 		return true;
 	}
 
-    @Override
-    public boolean singleTapUpHelper(IGeoPoint p) {
-        mv.addMarker(p.getLatitude(),p.getLongitude(), "", "");
-        return true;
-    }
 
-    @Override
-    public boolean longPressHelper(IGeoPoint p) {
-        return false;
-    }
 }

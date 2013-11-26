@@ -4,6 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
+import org.osmdroid.api.IGeoPoint;
+import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
+import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.util.GeoPoint;
@@ -13,11 +16,12 @@ import org.osmdroid.views.overlay.OverlayItem;
 
 import java.util.ArrayList;
 
-public class MapView extends org.osmdroid.views.MapView{
+public class MapView extends org.osmdroid.views.MapView implements MapEventsReceiver {
     private ITileSource tileSource;
     private MapController controller;
     private ItemizedIconOverlay<OverlayItem> defaultMarkerOverlay;
     private ArrayList<OverlayItem> defaultMarkerList = new ArrayList<OverlayItem>();
+    private MapEventsOverlay eventsOverlay;
 
     private Context context;
     private boolean firstMarker = true;
@@ -30,6 +34,7 @@ public class MapView extends org.osmdroid.views.MapView{
         this.context = context;
         tileSource = new XYTileSource("Test", ResourceProxy.string.online_mode, 0, 24, 256, ".png", URL);
         this.setTileSource(tileSource);
+        eventsOverlay = new MapEventsOverlay(context, this);
     }
     /**
      * Adds a marker to the default marker overlay
@@ -60,7 +65,6 @@ public class MapView extends org.osmdroid.views.MapView{
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
                         MapView.this.getOverlays().add(new Tooltip(context, item));
                         MapView.this.invalidate();
-
                         return true;
                     }
                     public boolean onItemLongPress(final int index, final OverlayItem item) {
@@ -69,7 +73,16 @@ public class MapView extends org.osmdroid.views.MapView{
                 }, new DefaultResourceProxyImpl(context.getApplicationContext()));
         this.getOverlays().add(defaultMarkerOverlay);
     }
+    @Override
+    public boolean singleTapUpHelper(IGeoPoint p) {
+        this.addMarker(p.getLatitude(), p.getLongitude(), "", "");
+        return true;
+    }
 
+    @Override
+    public boolean longPressHelper(IGeoPoint p) {
+        return false;
+    }
 
 
 }
