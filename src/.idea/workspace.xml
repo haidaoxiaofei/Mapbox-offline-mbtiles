@@ -258,10 +258,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="8" selection-start="2059" selection-end="2059" vertical-scroll-proportion="0.2642487">
+            <state line="63" column="63" selection-start="2192" selection-end="2192" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MarkerFactory.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MarkerFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="26" selection-start="209" selection-end="209" vertical-scroll-proportion="0.39637306">
               <folding />
             </state>
           </provider>
@@ -683,13 +692,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../test/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="39" selection-start="1075" selection-end="1075" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/bonuspack/overlays/MapEventsOverlay.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="17" selection-start="834" selection-end="834" vertical-scroll-proportion="0.0">
@@ -790,7 +792,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="8" selection-start="2059" selection-end="2059" vertical-scroll-proportion="0.2642487">
+        <state line="63" column="63" selection-start="2192" selection-end="2192" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MarkerFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="26" selection-start="209" selection-end="209" vertical-scroll-proportion="0.39637306">
           <folding />
         </state>
       </provider>
