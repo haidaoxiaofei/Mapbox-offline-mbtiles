@@ -58,9 +58,6 @@ public class MainActivity extends Activity {
         po.addPoint(new GeoPoint(51.7, 0.3));
         po.addPoint(new GeoPoint(51.2, 0));
 
-
-
-
         // Adds line and marker to the overlay
 
         //mv.getOverlays().add(po);

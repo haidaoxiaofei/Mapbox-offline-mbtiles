@@ -76,13 +76,19 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
     @Override
     public boolean singleTapUpHelper(IGeoPoint p) {
-        this.addMarker(p.getLatitude(), p.getLongitude(), "", "");
+        onTap(p);
         return true;
     }
 
     @Override
     public boolean longPressHelper(IGeoPoint p) {
+        onLongPress(p);
         return false;
+    }
+
+    public void onLongPress(IGeoPoint p){
+    }
+    public void onTap(IGeoPoint p){
     }
 
 
