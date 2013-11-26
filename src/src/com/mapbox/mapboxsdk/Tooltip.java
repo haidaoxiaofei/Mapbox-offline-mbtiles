@@ -18,6 +18,9 @@ public class Tooltip extends Overlay{
     private MapView mapView;
     private Canvas canvas;
 
+
+    private boolean visible;
+
     public Tooltip(Context ctx) {
         this(ctx, null);
     }
@@ -36,18 +39,28 @@ public class Tooltip extends Overlay{
         this.item = item;
     }
 
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
     @Override
     protected void draw(Canvas canvas, org.osmdroid.views.MapView mapView, boolean shadow) {
-        this.mapView = (MapView)mapView;
-        this.calculatePoint();
-        this.canvas = canvas;
-        paint.setColor(Color.WHITE);
-        this.setTooltipShape();
-        paint.setColor(Color.rgb(50, 50, 50));
-        paint.setTextAlign(Paint.Align.CENTER);
-        paint.setTextSize(40f);
-        System.out.println("Point: " + point.x);
-        canvas.drawText(text, point.x, point.y - 140, paint);
+        if(this.isVisible()){
+            this.mapView = (MapView)mapView;
+            this.calculatePoint();
+            this.canvas = canvas;
+            paint.setColor(Color.WHITE);
+            this.setTooltipShape();
+            paint.setColor(Color.rgb(50, 50, 50));
+            paint.setTextAlign(Paint.Align.CENTER);
+            paint.setTextSize(40f);
+            System.out.println("Point: " + point.x);
+            canvas.drawText(text, point.x, point.y - 140, paint);
+        }
     }
     private void setTooltipShape(){
         canvas.drawRect(point.x - 240, point.y - 200, point.x + 240, point.y - 100, paint);
@@ -61,4 +74,5 @@ public class Tooltip extends Overlay{
         MapView.Projection projection = mapView.getProjection();
         projection.toPixels(markerCoords, point);
     }
+
 }
