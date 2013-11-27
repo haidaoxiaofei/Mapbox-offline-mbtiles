@@ -32,20 +32,6 @@ public class Tooltip extends Overlay{
         setItem(ot);
         setText(text);
     }
-    public void setText(String text){
-        this.text = text;
-    }
-    public void setItem(OverlayItem item) {
-        this.item = item;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
 
     @Override
     protected void draw(Canvas canvas, org.osmdroid.views.MapView mapView, boolean shadow) {
@@ -74,5 +60,40 @@ public class Tooltip extends Overlay{
         MapView.Projection projection = mapView.getProjection();
         projection.toPixels(markerCoords, point);
     }
+
+
+    // Getters/setters
+
+    /**
+     * Sets text to be displayed in the tooltip
+     * @param text the text
+     */
+    public void setText(String text){
+        this.text = text;
+    }
+    /**
+     * Sets associated overlay of the tooltip
+     * @param item the overlay (normally a Marker object)
+     */
+    public void setItem(OverlayItem item) {
+        this.item = item;
+    }
+
+    /**
+     * Is the tooltip visible?
+     * @return true if it's visible, false otherwise
+     */
+    public boolean isVisible() {
+        return visible;
+    }
+
+    /**
+     * Sets visibility of the tooltip
+     * @param visible whether it's visible or not
+     */
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
 
 }

@@ -133,7 +133,7 @@
     <file path="/MainActivity.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385052375717" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/Manifest.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385479194873" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/BuildConfig.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385051369462" ignored="false" />
-    <file path="/Tooltip.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385479269920" ignored="false" />
+    <file path="/Tooltip.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385564870461" ignored="false" />
     <file path="/Marker.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385169716384" ignored="false" />
     <file path="/Dummy.txt" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385167927046" ignored="false" />
     <file path="/fragment.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385261775254" ignored="false" />
@@ -222,19 +222,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Tooltip.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Tooltip.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Tooltip.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="26" selection-start="1393" selection-end="1393" vertical-scroll-proportion="0.0">
+            <state line="91" column="49" selection-start="2637" selection-end="2637" vertical-scroll-proportion="0.58082193">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MapView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="12" selection-start="1863" selection-end="1863" vertical-scroll-proportion="0.6">
+            <state line="48" column="18" selection-start="1869" selection-end="1869" vertical-scroll-proportion="-8.16">
               <folding />
             </state>
           </provider>
@@ -287,10 +287,10 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Marker.java" />
-        <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Tooltip.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MarkerFactory.java" />
         <option value="$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
+        <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Tooltip.java" />
       </list>
     </option>
   </component>
@@ -764,13 +764,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Tooltip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="26" selection-start="1393" selection-end="1393" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/DefaultResourceProxyImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="11" selection-start="1241" selection-end="1241" vertical-scroll-proportion="0.0">
@@ -794,7 +787,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="12" selection-start="1863" selection-end="1863" vertical-scroll-proportion="0.6">
+        <state line="48" column="18" selection-start="1869" selection-end="1869" vertical-scroll-proportion="-8.16">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Tooltip.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="49" selection-start="2637" selection-end="2637" vertical-scroll-proportion="0.58082193">
           <folding />
         </state>
       </provider>
