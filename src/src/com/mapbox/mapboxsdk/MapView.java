@@ -12,6 +12,7 @@ import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
+import org.osmdroid.views.overlay.ItemizedOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
 import java.util.ArrayList;
@@ -58,6 +59,10 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         this.invalidate();
         firstMarker = false;
         return null;
+    }
+
+    public void return(ItemizedOverlay<Marker> itemizedOverlay){
+        this.getOverlays().add(itemizedOverlay);
     }
     private void setDefaultItemizedOverlay() {
         defaultMarkerOverlay = new ItemizedIconOverlay<OverlayItem>(

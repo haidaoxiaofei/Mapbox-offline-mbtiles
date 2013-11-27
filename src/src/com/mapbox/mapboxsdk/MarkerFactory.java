@@ -42,8 +42,8 @@ public class MarkerFactory {
         }
 
         @Override
-        protected void onPostExecute(JSONObject aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(JSONObject jsonObject) {
+
         }
     }
 }

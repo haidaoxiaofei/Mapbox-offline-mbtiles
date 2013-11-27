@@ -129,7 +129,7 @@
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/tilesource/XYTileSource.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/tilesource/TileSourceFactory.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/tilesource/QuadTreeTileSource.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="/MapView.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385479590258" ignored="false" />
+    <file path="/MapView.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385520214509" ignored="false" />
     <file path="/MainActivity.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385052375717" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/Manifest.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385479194873" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/BuildConfig.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385051369462" ignored="false" />
@@ -152,7 +152,7 @@
     <file path="$PROJECT_DIR$/../../HomeTrial/build.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385429061644" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385429396220" ignored="false" />
     <file path="/main.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385430828644" ignored="false" />
-    <file path="/MarkerFactory.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385519603085" ignored="false" />
+    <file path="/MarkerFactory.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385520087828" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +234,7 @@
       <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="39" selection-start="2978" selection-end="2978" vertical-scroll-proportion="0.8117647">
+            <state line="63" column="22" selection-start="2322" selection-end="2322" vertical-scroll-proportion="0.45">
               <folding />
             </state>
           </provider>
@@ -279,7 +279,7 @@
       <file leaf-file-name="MarkerFactory.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MarkerFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="39" selection-start="1687" selection-end="1687" vertical-scroll-proportion="0.0">
+            <state line="45" column="12" selection-start="1653" selection-end="1653" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -299,9 +299,9 @@
       <list>
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Marker.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Tooltip.java" />
-        <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
         <option value="$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MarkerFactory.java" />
+        <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
       </list>
     </option>
   </component>
@@ -789,15 +789,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MarkerFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="39" selection-start="1687" selection-end="1687" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/DefaultResourceProxyImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="11" selection-start="1241" selection-end="1241" vertical-scroll-proportion="0.0">
@@ -812,9 +803,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MarkerFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="12" selection-start="1653" selection-end="1653" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="39" selection-start="2978" selection-end="2978" vertical-scroll-proportion="0.8117647">
+        <state line="63" column="22" selection-start="2322" selection-end="2322" vertical-scroll-proportion="0.45">
           <folding />
         </state>
       </provider>
