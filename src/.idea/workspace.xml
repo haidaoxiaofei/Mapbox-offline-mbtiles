@@ -122,7 +122,6 @@
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/api/IProjection.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/http/HttpClientFactory.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/SensorEventListenerProxy.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/DefaultResourceProxyImpl.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/ResourceProxy.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/LocationListenerProxy.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/tilesource/IStyledTileSource.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
@@ -153,6 +152,7 @@
     <file path="$PROJECT_DIR$/../../HomeTrial/build.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385429061644" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385429396220" ignored="false" />
     <file path="/main.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385430828644" ignored="false" />
+    <file path="/MarkerFactory.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385519603085" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,7 +216,7 @@
       <file leaf-file-name="Marker.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Marker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="44" selection-start="902" selection-end="902" vertical-scroll-proportion="0.0">
+            <state line="53" column="27" selection-start="1351" selection-end="1856" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -231,10 +231,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapView.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="83" column="44" selection-start="3252" selection-end="3252" vertical-scroll-proportion="-7.64">
+            <state line="73" column="39" selection-start="2978" selection-end="2978" vertical-scroll-proportion="0.8117647">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultResourceProxyImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/DefaultResourceProxyImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="11" selection-start="1241" selection-end="1241" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -267,11 +276,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MarkerFactory.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MarkerFactory.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MarkerFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="26" selection-start="209" selection-end="209" vertical-scroll-proportion="0.39637306">
-              <folding />
+            <state line="45" column="39" selection-start="1687" selection-end="1687" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -290,6 +301,7 @@
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Tooltip.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
         <option value="$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MarkerFactory.java" />
       </list>
     </option>
   </component>
@@ -424,18 +436,19 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="restartRequiresConfirmation" value="true" />
+    <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../test" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="GoToClass.includeLibraries" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -692,13 +705,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/bonuspack/overlays/MapEventsOverlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="17" selection-start="834" selection-end="834" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Tooltip.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="44" column="28" selection-start="1592" selection-end="1592" vertical-scroll-proportion="0.0">
@@ -762,16 +768,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../test/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="39" selection-start="1075" selection-end="1075" vertical-scroll-proportion="0.0">
+        <state line="63" column="63" selection-start="2192" selection-end="2192" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Marker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="44" selection-start="902" selection-end="902" vertical-scroll-proportion="0.0">
+        <state line="53" column="27" selection-start="1351" selection-end="1856" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -783,23 +789,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="44" selection-start="3252" selection-end="3252" vertical-scroll-proportion="-7.64">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="63" selection-start="2192" selection-end="2192" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MarkerFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="26" selection-start="209" selection-end="209" vertical-scroll-proportion="0.39637306">
+        <state line="45" column="39" selection-start="1687" selection-end="1687" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/DefaultResourceProxyImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="11" selection-start="1241" selection-end="1241" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../test/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="39" selection-start="1075" selection-end="1075" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="39" selection-start="2978" selection-end="2978" vertical-scroll-proportion="0.8117647">
           <folding />
         </state>
       </provider>
