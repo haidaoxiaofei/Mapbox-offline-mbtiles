@@ -46,6 +46,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         this.setTileSource(tileSource);
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
+        this.setMultiTouchControls(true);
     }
     /**
      * Adds a marker to the default marker overlay

@@ -34,10 +34,6 @@ public class MainActivity extends Activity {
         mapController.setCenter(startingPoint);
         mapController.setZoom(7);
 
-        // Activates pan & zoom controls
-        mv.setMultiTouchControls(true);
-
-
         // Adds an icon that shows location
         myLocationOverlay = new MyLocationNewOverlay(this, mv);
         myLocationOverlay.enableMyLocation();
