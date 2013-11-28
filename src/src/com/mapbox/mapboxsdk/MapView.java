@@ -37,17 +37,29 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     private boolean firstMarker = true;
 
     public MapView(Context context, AttributeSet attrs) {
-        this(context, "");
-    }
-    public MapView(Context context, String URL){
-        super(context, null);
+        super(context, attrs);
         this.context = context;
-        tileSource = new XYTileSource("Test", ResourceProxy.string.online_mode, 0, 24, 256, ".png", URL);
-        this.setTileSource(tileSource);
+        setURL("");
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
     }
+    public MapView(Context context, String URL){
+        super(context, null);
+        this.context = context;
+        setURL(URL);
+        eventsOverlay = new MapEventsOverlay(context, this);
+        this.getOverlays().add(eventsOverlay);
+        this.setMultiTouchControls(true);
+    }
+    public void setURL(String URL){
+        if(!URL.equals("")){
+            tileSource = new XYTileSource("Test", ResourceProxy.string.online_mode, 0, 24, 256, ".png", URL);
+            this.setTileSource(tileSource);
+        }
+
+    }
+
     /**
      * Adds a marker to the default marker overlay
      * @param lat latitude of the marker
@@ -110,6 +122,10 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
             }
         }
+    }
+
+    protected void init(){
+
     }
     private void setDefaultItemizedOverlay() {
         defaultMarkerOverlay = new ItemizedIconOverlay<OverlayItem>(

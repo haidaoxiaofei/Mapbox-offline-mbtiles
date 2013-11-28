@@ -1,15 +1,7 @@
 package org.osmdroid.tileprovider.modules;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.UnknownHostException;
-import java.util.concurrent.atomic.AtomicReference;
-
+import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -27,8 +19,9 @@ import org.osmdroid.tileprovider.util.StreamUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
+import java.io.*;
+import java.net.UnknownHostException;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * The {@link MapTileDownloader} loads tiles from an HTTP server. It saves downloaded tiles to an

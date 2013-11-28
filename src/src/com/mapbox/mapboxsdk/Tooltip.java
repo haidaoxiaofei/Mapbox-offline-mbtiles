@@ -18,7 +18,6 @@ public class Tooltip extends Overlay{
     private MapView mapView;
     private Canvas canvas;
 
-
     private boolean visible;
 
     public Tooltip(Context ctx) {

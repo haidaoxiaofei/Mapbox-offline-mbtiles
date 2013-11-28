@@ -50,10 +50,10 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
         final MapTileFilesystemProvider fileSystemProvider = new MapTileFilesystemProvider(
                 pRegisterReceiver, pTileSource);
         mTileProviderList.add(fileSystemProvider);
-
-        final MapTileFileArchiveProvider archiveProvider = new MapTileFileArchiveProvider(
-                pRegisterReceiver, pTileSource);
-        mTileProviderList.add(archiveProvider);
+//
+//        final MapTileFileArchiveProvider archiveProvider = new MapTileFileArchiveProvider(
+//                pRegisterReceiver, pTileSource);
+//        mTileProviderList.add(archiveProvider);
 
         final MapTileDownloader downloaderProvider = new MapTileDownloader(pTileSource, tileWriter,
                 aNetworkAvailablityCheck);
