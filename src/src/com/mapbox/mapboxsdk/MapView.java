@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.util.AttributeSet;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +13,7 @@ import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
 import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
 import org.osmdroid.tileprovider.MapTileProviderArray;
+import org.osmdroid.tileprovider.MapTileProviderBase;
 import org.osmdroid.tileprovider.modules.IArchiveFile;
 import org.osmdroid.tileprovider.modules.MBTilesFileArchive;
 import org.osmdroid.tileprovider.modules.MapTileFileArchiveProvider;
@@ -56,15 +58,24 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
     }
+
+    protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileProviderBase aTileProvider) {
+        super(context, tileSizePixels, resourceProxy, aTileProvider);
+        init(context);
+    }
+
+    private void init(Context context) {
+        this.context = context;
+        setURL("");
+        eventsOverlay = new MapEventsOverlay(context, this);
+        this.getOverlays().add(eventsOverlay);
+        this.setMultiTouchControls(true);
+    }
+
     public void setURL(String URL){
         if(!URL.equals("")){
             if(URL.contains(".mbtiles")){
-
-                try {
                     initFromMBTiles(URL);
-                } catch (IOException e) {
-                    throw new IllegalArgumentException("MBTiles file not found in assets");
-                }
             }
             else{
                 tileSource = new XYTileSource("Test", ResourceProxy.string.online_mode, 0, 24, 256, ".png", URL);
@@ -74,7 +85,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     }
 
-    private void initFromMBTiles(String URL) throws IOException {
+    private void initFromMBTiles(String URL) {
         DefaultResourceProxyImpl mResourceProxy = new DefaultResourceProxyImpl(context);
         SimpleRegisterReceiver simpleReceiver = new SimpleRegisterReceiver(context);
         XYTileSource MBTILESRENDER = new XYTileSource(
@@ -83,8 +94,20 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
                 15, 16,  // zoom min/max <- should be taken from metadata if available
                 256, ".png", "http://i.dont.care.org/");
         AssetManager am = context.getAssets();
-        InputStream inputStream = am.open("file:///android_asset/mapbox/"+URL);
-        File file = createFileFromInputStream(inputStream, URL);
+        InputStream inputStream;
+        try{
+            inputStream = am.open(URL);
+        }
+        catch (IOException e) {
+            throw new IllegalArgumentException("MBTiles file not found in assets");
+        }
+        if(inputStream==null){
+            throw new IllegalArgumentException("IS is null");
+        }
+        File file = createFileFromInputStream(inputStream, Environment.getExternalStorageDirectory() + File.separator + URL);
+        if(file==null){
+            throw new IllegalArgumentException("File is null");
+        }
         IArchiveFile[] files = { MBTilesFileArchive.getDatabaseFileArchive(file) };
         MapTileModuleProviderBase moduleProvider = new MapTileFileArchiveProvider(simpleReceiver, MBTILESRENDER, files);
         MapTileProviderArray mProvider = new MapTileProviderArray(MBTILESRENDER, null,
