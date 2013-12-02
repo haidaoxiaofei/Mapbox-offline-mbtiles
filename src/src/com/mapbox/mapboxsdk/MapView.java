@@ -1,6 +1,7 @@
 package com.mapbox.mapboxsdk;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
 import org.json.JSONException;
@@ -10,18 +11,21 @@ import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
 import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
+import org.osmdroid.tileprovider.MapTileProviderArray;
+import org.osmdroid.tileprovider.modules.IArchiveFile;
+import org.osmdroid.tileprovider.modules.MBTilesFileArchive;
+import org.osmdroid.tileprovider.modules.MapTileFileArchiveProvider;
+import org.osmdroid.tileprovider.modules.MapTileModuleProviderBase;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.XYTileSource;
+import org.osmdroid.tileprovider.util.SimpleRegisterReceiver;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -54,10 +58,60 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
     public void setURL(String URL){
         if(!URL.equals("")){
-            tileSource = new XYTileSource("Test", ResourceProxy.string.online_mode, 0, 24, 256, ".png", URL);
-            this.setTileSource(tileSource);
+            if(URL.contains(".mbtiles")){
+
+                try {
+                    initFromMBTiles(URL);
+                } catch (IOException e) {
+                    throw new IllegalArgumentException("MBTiles file not found in assets");
+                }
+            }
+            else{
+                tileSource = new XYTileSource("Test", ResourceProxy.string.online_mode, 0, 24, 256, ".png", URL);
+                this.setTileSource(tileSource);
+            }
         }
 
+    }
+
+    private void initFromMBTiles(String URL) throws IOException {
+        DefaultResourceProxyImpl mResourceProxy = new DefaultResourceProxyImpl(context);
+        SimpleRegisterReceiver simpleReceiver = new SimpleRegisterReceiver(context);
+        XYTileSource MBTILESRENDER = new XYTileSource(
+                "mbtiles",
+                ResourceProxy.string.offline_mode,
+                15, 16,  // zoom min/max <- should be taken from metadata if available
+                256, ".png", "http://i.dont.care.org/");
+        AssetManager am = context.getAssets();
+        InputStream inputStream = am.open("file:///android_asset/mapbox/"+URL);
+        File file = createFileFromInputStream(inputStream, URL);
+        IArchiveFile[] files = { MBTilesFileArchive.getDatabaseFileArchive(file) };
+        MapTileModuleProviderBase moduleProvider = new MapTileFileArchiveProvider(simpleReceiver, MBTILESRENDER, files);
+        MapTileProviderArray mProvider = new MapTileProviderArray(MBTILESRENDER, null,
+                new MapTileModuleProviderBase[]{moduleProvider}
+        );
+        this.setTileSource(MBTILESRENDER);
+    }
+
+    private File createFileFromInputStream(InputStream inputStream, String URL) {
+        try{
+            File f = new File(URL);
+            OutputStream outputStream = new FileOutputStream(f);
+            byte buffer[] = new byte[1024];
+            int length = 0;
+
+            while((length=inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer,0,length);
+            }
+
+            outputStream.close();
+            inputStream.close();
+
+            return f;
+            }
+        catch (IOException e) {
+            }
+        return null;
     }
 
     /**
@@ -124,9 +178,6 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         }
     }
 
-    protected void init(){
-
-    }
     private void setDefaultItemizedOverlay() {
         defaultMarkerOverlay = new ItemizedIconOverlay<OverlayItem>(
                 defaultMarkerList,

@@ -16,6 +16,8 @@
     <orderEntry type="module" module-name="main" />
     <orderEntry type="module" module-name="src" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="main" />
+    <orderEntry type="module" module-name="mapbox-android-sdk" />
   </component>
 </module>
 
