@@ -1,17 +1,16 @@
 package org.osmdroid.tileprovider.modules;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
-
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import org.osmdroid.tileprovider.MapTile;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
 
 public class MBTilesFileArchive implements IArchiveFile {
 
@@ -69,6 +68,16 @@ public class MBTilesFileArchive implements IArchiveFile {
     @Override
     public String toString() {
         return "DatabaseFileArchive [mDatabase=" + mDatabase.getPath() + "]";
+    }
+    public int getMinZoomLevel(){
+        Cursor cursor = mDatabase.rawQuery("SELECT MIN(zoom_level) FROM tiles", null);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
+    }
+    public int getMaxZoomLevel(){
+        Cursor cursor = mDatabase.rawQuery("SELECT MAX(zoom_level) FROM tiles", null);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
     }
 
 }

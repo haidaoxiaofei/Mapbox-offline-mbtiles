@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="system.out" />
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
@@ -101,7 +101,8 @@
     <file path="$PROJECT_DIR$/../../MapHome/res/values/colors.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385608212745" ignored="false" />
     <file path="/colors.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385608212745" ignored="false" />
     <file path="$PROJECT_DIR$/../../MapHome/project.properties" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385690496179" ignored="false" />
-    <file path="/MBTilesFactory.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385998092630" ignored="false" />
+    <file path="/MBTilesFactory.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386001467437" ignored="false" />
+    <file path="/MBTilesFileArchive.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386001430150" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +222,18 @@
       <file leaf-file-name="MapViewFactory.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapViewFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="26" selection-start="895" selection-end="895" vertical-scroll-proportion="0.693299">
+            <state line="49" column="92" selection-start="2275" selection-end="2275" vertical-scroll-proportion="0.5476839">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MBTilesFileArchive.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MBTilesFileArchive.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="77" column="67" selection-start="2950" selection-end="2950" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -247,6 +259,7 @@
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MBTilesFactory.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
         <option value="$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java" />
+        <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MBTilesFileArchive.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapViewFactory.java" />
       </list>
     </option>
@@ -777,13 +790,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Tooltip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="33" selection-start="542" selection-end="542" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/DefaultResourceProxyImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="131" column="26" selection-start="4766" selection-end="4766" vertical-scroll-proportion="0.0">
@@ -850,13 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MBTilesFileArchive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1238" selection-end="1238" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/Overlay.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="59" column="0" selection-start="2145" selection-end="2145" vertical-scroll-proportion="0.0">
@@ -887,9 +886,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files (x86)/Android/android-sdk/platforms/android-17/android.jar!/android/database/sqlite/SQLiteDatabase.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="19" selection-start="172" selection-end="172" vertical-scroll-proportion="-3.6497176">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MBTilesFileArchive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="67" selection-start="2950" selection-end="2950" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapViewFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="26" selection-start="895" selection-end="895" vertical-scroll-proportion="0.693299">
+        <state line="49" column="92" selection-start="2275" selection-end="2275" vertical-scroll-proportion="0.5476839">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

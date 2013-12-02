@@ -25,11 +25,6 @@ public class MapViewFactory {
     public static MapView fromMBTiles(Activity context, String URL){
         DefaultResourceProxyImpl mResourceProxy = new DefaultResourceProxyImpl(context);
         SimpleRegisterReceiver simpleReceiver = new SimpleRegisterReceiver(context);
-        XYTileSource MBTILESRENDER = new XYTileSource(
-                "mbtiles",
-                ResourceProxy.string.offline_mode,
-                0, 20,  // zoom min/max <- should be taken from metadata if available
-                256, ".png", "http://i.dont.care.org/");
         AssetManager am = context.getAssets();
         InputStream inputStream;
         try{
@@ -45,7 +40,13 @@ public class MapViewFactory {
         if(file==null){
             throw new IllegalArgumentException("File is null");
         }
-        IArchiveFile[] files = { MBTilesFileArchive.getDatabaseFileArchive(file) };
+        MBTilesFileArchive mbTilesFileArchive = MBTilesFileArchive.getDatabaseFileArchive(file);
+        IArchiveFile[] files = {mbTilesFileArchive};
+        XYTileSource MBTILESRENDER = new XYTileSource(
+                "mbtiles",
+                ResourceProxy.string.offline_mode,
+                mbTilesFileArchive.getMinZoomLevel(),mbTilesFileArchive.getMaxZoomLevel(),
+                256, ".png", "http://i.dont.care.org/");
         MapTileModuleProviderBase moduleProvider = new MapTileFileArchiveProvider(simpleReceiver, MBTILESRENDER, files);
         MapTileProviderArray mProvider = new MapTileProviderArray(MBTILESRENDER, null,
                 new MapTileModuleProviderBase[]{moduleProvider}
