@@ -35,15 +35,18 @@ public class MainActivity extends Activity {
         mapController.setCenter(startingPoint);
         mapController.setZoom(4);
 
+        // Configures a marker
+        mv.addMarker(52.5, 0f, "Hello", "Marker test");
+
+    }
+    private void addLocationOverlay(){
         // Adds an icon that shows location
         myLocationOverlay = new MyLocationNewOverlay(this, mv);
         myLocationOverlay.enableMyLocation();
         myLocationOverlay.setDrawAccuracyEnabled(true);
-
-
-        // Configures a marker
-        mv.addMarker(52.5, 0f, "Hello", "Marker test");
-
+        mv.getOverlays().add(myLocationOverlay);
+    }
+    private void addLine(){
         // Configures a line
         PathOverlay po = new PathOverlay(Color.RED, this);
         Paint linePaint = new Paint();
@@ -58,9 +61,6 @@ public class MainActivity extends Activity {
         // Adds line and marker to the overlay
 
         //mv.getOverlays().add(po);
-        mv.getOverlays().add(myLocationOverlay);
-
-
     }
 
 	@Override

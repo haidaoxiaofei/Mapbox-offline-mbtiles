@@ -74,7 +74,7 @@
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/constants/GeoConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/constants/UtilConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="/MapView.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385965393094" ignored="false" />
-    <file path="/MainActivity.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385965128026" ignored="false" />
+    <file path="/MainActivity.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385966796637" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/Manifest.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385479194873" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/BuildConfig.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385051369462" ignored="false" />
     <file path="/Tooltip.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385564870461" ignored="false" />
@@ -212,7 +212,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="31" selection-start="1297" selection-end="1297" vertical-scroll-proportion="0.48195878">
+            <state line="37" column="27" selection-start="1328" selection-end="1328" vertical-scroll-proportion="-0.92783505">
               <folding />
             </state>
           </provider>
@@ -891,7 +891,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="31" selection-start="1297" selection-end="1297" vertical-scroll-proportion="0.48195878">
+        <state line="37" column="27" selection-start="1328" selection-end="1328" vertical-scroll-proportion="-0.92783505">
           <folding />
         </state>
       </provider>
