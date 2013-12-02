@@ -16,6 +16,12 @@ import org.osmdroid.tileprovider.util.SimpleRegisterReceiver;
 import java.io.*;
 
 public class MapViewFactory {
+    /**
+     * Generates a new MapView from the filename of an MBTiles file stored in assets.
+     * @param context the app context
+     * @param URL the file name within assets
+     * @return the MapView
+     */
     public static MapView fromMBTiles(Activity context, String URL){
         DefaultResourceProxyImpl mResourceProxy = new DefaultResourceProxyImpl(context);
         SimpleRegisterReceiver simpleReceiver = new SimpleRegisterReceiver(context);
@@ -33,7 +39,7 @@ public class MapViewFactory {
             throw new IllegalArgumentException("MBTiles file not found in assets");
         }
         if(inputStream==null){
-            throw new IllegalArgumentException("IS is null");
+            throw new IllegalArgumentException("InputStream is null");
         }
         File file = createFileFromInputStream(inputStream, Environment.getExternalStorageDirectory() + File.separator + URL);
         if(file==null){
