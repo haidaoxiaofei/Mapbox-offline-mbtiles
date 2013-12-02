@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Menu;
 import com.mapbox.mapboxsdk.MapView;
+import com.mapbox.mapboxsdk.MapViewFactory;
 import com.testflightapp.lib.TestFlight;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.MapTileProviderBasic;
@@ -15,24 +16,24 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 public class MainActivity extends Activity {
 	private IMapController mapController;
-	private GeoPoint startingPoint = new GeoPoint(51.5, 0);
+	private GeoPoint startingPoint = new GeoPoint(42.8, -73.933333);
 	private MapTileProviderBasic tileProvider;
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
     private Paint paint;
-    private final String mapURL = "http://a.tiles.mapbox.com/v3/czana.map-e6nd3na3/";
+    private final String mapURL = "maphome.mbtiles";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TestFlight.takeOff(getApplication(), "e4fe404b-2edc-4a2d-8083-3d708168e4c4");
 
-        mv = new MapView(this, mapURL);
+        mv = MapViewFactory.fromMBTiles(this, mapURL);
         setContentView(mv);
 
         mapController = mv.getController();
         mapController.setCenter(startingPoint);
-        mapController.setZoom(7);
+        mapController.setZoom(4);
 
         // Adds an icon that shows location
         myLocationOverlay = new MyLocationNewOverlay(this, mv);
