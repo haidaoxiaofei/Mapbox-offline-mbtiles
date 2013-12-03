@@ -75,8 +75,6 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     }
 
-
-
     /**
      * Adds a marker to the default marker overlay
      * @param lat latitude of the marker
@@ -106,8 +104,8 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     public class MarkerFactory {
         public ItemizedOverlay<Marker> fromGeoJSON(String URL){
-
-            return null;
+            GeoJSONElement geoJSONElement = new GeoJSONElement(URL);
+            return geoJSONElement.getMarkersOverlay();
         }
         private class JSONBodyGetter extends AsyncTask<String, Void, JSONObject> {
             @Override

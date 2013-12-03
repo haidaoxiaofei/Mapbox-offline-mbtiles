@@ -72,14 +72,14 @@
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/util/constants/MathConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/constants/GeoConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
     <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/constants/UtilConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="/MapView.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385965393094" ignored="false" />
+    <file path="/MapView.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386050026565" ignored="false" />
     <file path="/MainActivity.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385966796637" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/Manifest.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385479194873" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/BuildConfig.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385051369462" ignored="false" />
     <file path="/Tooltip.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385564870461" ignored="false" />
     <file path="/Marker.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385169716384" ignored="false" />
     <file path="/Dummy.txt" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385167927046" ignored="false" />
-    <file path="/fragment.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385690884794" ignored="false" />
+    <file path="/fragment.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386050033391" ignored="false" />
     <file path="$PROJECT_DIR$/../../MapHome/res/values/strings.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385693982752" ignored="false" />
     <file path="$PROJECT_DIR$/../../MapHome/AndroidManifest.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385431709964" ignored="false" />
     <file path="$PROJECT_DIR$/../../MapHome/build.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385257510404" ignored="false" />
@@ -102,6 +102,7 @@
     <file path="$PROJECT_DIR$/../../MapHome/project.properties" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385690496179" ignored="false" />
     <file path="/MBTilesFactory.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386001467437" ignored="false" />
     <file path="/MBTilesFileArchive.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386001430150" ignored="false" />
+    <file path="/GeoJSONElement.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386050075926" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,10 +172,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MapView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="43" selection-start="2729" selection-end="2729" vertical-scroll-proportion="0.36042404">
+            <state line="107" column="51" selection-start="3806" selection-end="3806" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GeoJSONElement.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/GeoJSONElement.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="20" selection-start="237" selection-end="237" vertical-scroll-proportion="0.27031803">
               <folding />
             </state>
           </provider>
@@ -264,6 +274,7 @@
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapViewFactory.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
+        <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/GeoJSONElement.java" />
       </list>
     </option>
   </component>
@@ -428,6 +439,9 @@
     <property name="GoToClass.includeLibraries" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.mapbox.mapboxsdk" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\fdans\repos\mapbox-android-sdk\test\assets" />
       <recent name="C:\Users\fdans\repos\mapbox-android-sdk\src\res\drawable-hdpi" />
@@ -683,11 +697,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileFilesystemProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="11" selection-start="1798" selection-end="1798" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/IFilesystemCache.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="17" selection-start="286" selection-end="286" vertical-scroll-proportion="0.0" />
@@ -782,7 +791,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="43" selection-start="2729" selection-end="2729" vertical-scroll-proportion="0.36042404">
+        <state line="107" column="51" selection-start="3806" selection-end="3806" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/GeoJSONElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="20" selection-start="237" selection-end="237" vertical-scroll-proportion="0.27031803">
           <folding />
         </state>
       </provider>
