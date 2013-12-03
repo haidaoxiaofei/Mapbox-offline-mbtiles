@@ -4,11 +4,11 @@ Our work-in-progress for a better MapBox experience on Android.
 
 ## Using the library
 
-The development of the SDK is on its very earliest stage, so many of its elements will be unstable and not fully tested. If you want to try it in your app project, the easiest option is to download the latest JAR build here. Otherwise you can build the library from source, and experiment with the latest additions to the project.
+The development of the SDK is on its very earliest stage, so many of its elements will be unstable and not fully tested. If you want to try it in your app project, the easiest option is to download the latest JAR build [here](https://github.com/mapbox/mapbox-android-sdk/blob/master/mapboxSDK.jar). Otherwise you can build the library from source, and experiment with the latest additions to the project.
 
 ### Installing from JAR
 
-To include the library in your project as a jar you just need to copy it somewhere in your app project (conventionally in Android that's the ```lib``` directory), and add the library to your classpath.
+To include the library in your project [as a jar](https://github.com/mapbox/mapbox-android-sdk/blob/master/mapboxSDK.jar) you just need to copy it somewhere in your app project (conventionally in Android that's the ```lib``` directory), and add the library to your classpath.
 
 * In Eclipse, find the library file in your project's file explorer and right click - Build Path - Add to Build Path...
 * In IntelliJ IDEA, right click the file in the project explorer and select "Add as library".
