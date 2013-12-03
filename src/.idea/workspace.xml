@@ -171,19 +171,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapView.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="113" selection-start="3046" selection-end="3143" vertical-scroll-proportion="0.0">
+            <state line="72" column="43" selection-start="2729" selection-end="2729" vertical-scroll-proportion="0.36042404">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapTileProviderBase.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MapTileProviderBase.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="49" selection-start="2223" selection-end="2223" vertical-scroll-proportion="-0.6307421">
+            <state line="86" column="53" selection-start="2753" selection-end="2753" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -259,11 +259,11 @@
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBasic.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MBTilesFactory.java" />
-        <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
         <option value="$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MBTilesFileArchive.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapViewFactory.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java" />
+        <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
       </list>
     </option>
   </component>
@@ -738,13 +738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapViewFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="92" selection-start="2275" selection-end="2275" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="27" selection-start="1328" selection-end="1328" vertical-scroll-proportion="0.0">
@@ -773,16 +766,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="113" selection-start="3046" selection-end="3143" vertical-scroll-proportion="0.0">
+        <state line="86" column="53" selection-start="2753" selection-end="2753" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBase.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapViewFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="49" selection-start="2223" selection-end="2223" vertical-scroll-proportion="-0.6307421">
+        <state line="49" column="92" selection-start="2275" selection-end="2275" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="43" selection-start="2729" selection-end="2729" vertical-scroll-proportion="0.36042404">
           <folding />
         </state>
       </provider>
