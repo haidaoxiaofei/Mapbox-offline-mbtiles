@@ -2,7 +2,7 @@
 
 Our work-in-progress for a better MapBox experience on Android.
 
-## Using the library
+## Including the library in your project
 
 The development of the SDK is on its very earliest stage, so many of its elements will be unstable and not fully tested. If you want to try it in your app project, the easiest option is to download the latest JAR build [here](https://github.com/mapbox/mapbox-android-sdk/blob/master/mapboxSDK.jar). Otherwise you can build the library from source, and experiment with the latest additions to the project.
 
@@ -29,7 +29,7 @@ The MapBox Android SDK has the following dependencies. All of them are included 
 
 **slf4j**
 
-OSMDroid needs slf4j to be added to the project when building from source.
+OSMDroid needs slf4j to be added to the project when building from source. It's a logging library that is located within the SDK in ```src/main/java/org/osmdroid```
 
 **The SDK**
 
@@ -48,7 +48,12 @@ Our library itself is located in ```path/to/sdk/src/src```
 OSMDroid is at the moment built as a Java library, not an explicit Android library, so there are references to resource static files that need to be referenced in your classpath. This will be corrected soon, but for now it needs to be done in IntelliJ IDEA. To do so:
 
 * Go to File-Project Structure-SDKs.
-* For each SDK, add the path to OSMDroid's resources - ```path/to/sdk/mapbox-android-sdk/src/main/resources/org/osmdroid```
+* For each SDK, add the path to OSMDroid's resources - ```path/to/mapboxsdk/mapbox-android-sdk/src/main/resources/org/osmdroid```
+
+## Basic usage
+
+The main object to show maps is the MapView.
 
 TO DO: instructions for Eclipse.
+
 TO DO: basic map init instructions and/or link to javadoc.
