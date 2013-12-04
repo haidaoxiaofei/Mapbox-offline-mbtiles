@@ -11,7 +11,7 @@ import android.os.Environment;
  */
 public interface OpenStreetMapTileProviderConstants {
 
-    public static final boolean DEBUGMODE = true;
+    public static final boolean DEBUGMODE = false;
     public static final boolean DEBUG_TILE_PROVIDERS = false;
 
     /**
