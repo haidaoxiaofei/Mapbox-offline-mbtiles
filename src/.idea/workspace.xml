@@ -104,7 +104,7 @@
     <file path="/GeoJSONElement.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386050075926" ignored="false" />
     <file path="/OpenStreetMapTileProviderConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386137190505" ignored="false" />
     <file path="/MapTileDownloader.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386135921166" ignored="false" />
-    <file path="/MapTileModuleProviderBase.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386173336325" ignored="false" />
+    <file path="/MapTileModuleProviderBase.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386181347126" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +204,7 @@
       <file leaf-file-name="MapTileModuleProviderBase.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="302" column="34" selection-start="11338" selection-end="11338" vertical-scroll-proportion="0.47040498">
+            <state line="282" column="28" selection-start="10568" selection-end="10568" vertical-scroll-proportion="0.5981308">
               <folding />
             </state>
           </provider>
@@ -961,7 +961,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="302" column="34" selection-start="11338" selection-end="11338" vertical-scroll-proportion="0.47040498">
+        <state line="282" column="28" selection-start="10568" selection-end="10568" vertical-scroll-proportion="0.5981308">
           <folding />
         </state>
       </provider>

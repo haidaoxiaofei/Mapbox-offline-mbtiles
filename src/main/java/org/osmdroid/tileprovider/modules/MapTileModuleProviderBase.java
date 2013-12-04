@@ -182,8 +182,10 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
      */
     protected abstract class TileLoader implements Runnable {
 
+        private int itemsConnecting = 0;
+
         /**
-         * Load the requested tile.
+       int  * Load the requested tile.
          *
          * @param pState
          * @return the tile if it was loaded successfully, or null if failed to
@@ -279,7 +281,7 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
 
             MapTileRequestState state;
 
-            while ((state = nextTile()) != null) {
+            while (itemsConnecting<8 && (state = nextTile()) != null) {
                 new AsyncTileLoader().execute(state);
                 if (DEBUG_TILE_PROVIDERS) {
                     logger.debug("TileLoader.run() processing next tile: " + state.getMapTile());
@@ -293,12 +295,10 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
             private Drawable result;
             @Override
             protected Drawable doInBackground(MapTileRequestState... states) {
+                itemsConnecting++;
                 result = null;
                 state = states[0];
                 try {
-
-
-                    result = null;
                     result = loadTile(state);
                     return result;
                 } catch (final CantContinueException e) {
@@ -319,6 +319,7 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
                 } else {
                     tileLoaded(state, result);
                 }
+                itemsConnecting--;
             }
         }
     }
