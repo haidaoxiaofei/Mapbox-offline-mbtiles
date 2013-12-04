@@ -192,10 +192,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapTileDownloader.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MapTileDownloader.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="237" column="59" selection-start="9328" selection-end="9328" vertical-scroll-proportion="0.08083832">
+            <state line="237" column="122" selection-start="9391" selection-end="9391" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -219,10 +219,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="58" selection-start="1118" selection-end="1118" vertical-scroll-proportion="0.0">
+            <state line="22" column="85" selection-start="875" selection-end="875" vertical-scroll-proportion="-0.0508982">
               <folding />
             </state>
           </provider>
@@ -248,9 +248,9 @@
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/GeoJSONElement.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java" />
-        <option value="$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java" />
+        <option value="$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -929,13 +929,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="58" selection-start="1118" selection-end="1118" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="138" column="45" selection-start="4589" selection-end="4589" vertical-scroll-proportion="0.0">
@@ -952,7 +945,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="237" column="59" selection-start="9328" selection-end="9328" vertical-scroll-proportion="0.08083832">
+        <state line="237" column="122" selection-start="9391" selection-end="9391" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="85" selection-start="875" selection-end="875" vertical-scroll-proportion="-0.0508982">
           <folding />
         </state>
       </provider>

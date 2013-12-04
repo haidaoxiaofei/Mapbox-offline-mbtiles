@@ -236,7 +236,6 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
         private String changeMapBoxSubdomain(String url, int attempts) {
             String tileURL = url.replace(url.substring(0, 8), "http://"+domainLetters[attempts%(domainLetters.length-1)]);
-            System.out.println(tileURL);
             return tileURL;
         }
 
