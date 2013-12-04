@@ -139,7 +139,8 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
     // ===========================================================
 
     protected class TileLoader extends MapTileModuleProviderBase.TileLoader {
-
+        private int attempts = 0;
+        protected String[] domainLetters = {"a", "b", "c", "d"};
         @Override
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {
 
@@ -153,16 +154,16 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             final MapTile tile = aState.getMapTile();
 
             try {
-
+                System.out.println("getting tile " + tile.getX() + ", " + tile.getY());
                 if (mNetworkAvailablityCheck != null
                         && !mNetworkAvailablityCheck.getNetworkAvailable()) {
                     if (DEBUGMODE) {
-                        logger.debug("Skipping " + getName() + " due to NetworkAvailabliltyCheck.");
+                        System.out.println("Skipping " + getName() + " due to NetworkAvailabliltyCheck.");
                     }
                     return null;
                 }
 
-                final String tileURLString = tileSource.getTileURLString(tile);
+                String tileURLString = tileSource.getTileURLString(tile);
 
                 if (DEBUGMODE) {
                     logger.debug("Downloading Maptile from url: " + tileURLString);
@@ -171,21 +172,25 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 if (TextUtils.isEmpty(tileURLString)) {
                     return null;
                 }
-
-                final HttpClient client = HttpClientFactory.createHttpClient();
-                final HttpUriRequest head = new HttpGet(tileURLString);
-                final HttpResponse response = client.execute(head);
+                HttpResponse response = this.makeRequest(tileURLString);
 
                 // Check to see if we got success
-                final org.apache.http.StatusLine line = response.getStatusLine();
-                if (line.getStatusCode() != 200) {
-                    logger.warn("Problem downloading MapTile: " + tile + " HTTP response: " + line);
-                    return null;
+                org.apache.http.StatusLine line = response.getStatusLine();
+
+                while (line.getStatusCode() != 200 && attempts<5) {
+                    System.out.println("Retrying MapTile: " + tile + " HTTP response: " + line);
+                    if(tileURLString.contains("mapbox.com")){
+                        tileURLString = tileURLString.replace("/a.","/b.");
+                    }
+                    response = this.makeRequest(tileURLString);
+                    line = response.getStatusLine();
+                    attempts++;
                 }
+                if(line.getStatusCode() != 200) return null;
 
                 final HttpEntity entity = response.getEntity();
                 if (entity == null) {
-                    logger.warn("No content downloading MapTile: " + tile);
+                    System.out.println("No content downloading MapTile: " + tile);
                     return null;
                 }
                 in = entity.getContent();
@@ -203,28 +208,33 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                     byteStream.reset();
                 }
                 final Drawable result = tileSource.getDrawable(byteStream);
-
                 return result;
             } catch (final UnknownHostException e) {
                 // no network connection so empty the queue
-                logger.warn("UnknownHostException downloading MapTile: " + tile + " : " + e);
+                System.out.println("UnknownHostException downloading MapTile: " + tile + " : " + e);
                 throw new CantContinueException(e);
             } catch (final LowMemoryException e) {
                 // low memory so empty the queue
-                logger.warn("LowMemoryException downloading MapTile: " + tile + " : " + e);
+                System.out.println("LowMemoryException downloading MapTile: " + tile + " : " + e);
                 throw new CantContinueException(e);
             } catch (final FileNotFoundException e) {
-                logger.warn("Tile not found: " + tile + " : " + e);
+                System.out.println("Tile not found: " + tile + " : " + e);
             } catch (final IOException e) {
-                logger.warn("IOException downloading MapTile: " + tile + " : " + e);
+                System.out.println("IOException downloading MapTile: " + tile + " : " + e);
             } catch (final Throwable e) {
-                logger.error("Error downloading MapTile: " + tile, e);
+                System.out.println("Error downloading MapTile: " + tile);
             } finally {
                 StreamUtils.closeStream(in);
                 StreamUtils.closeStream(out);
             }
 
             return null;
+        }
+
+        private HttpResponse makeRequest(String tileURLString) throws IOException {
+            final HttpClient client = HttpClientFactory.createHttpClient();
+            final HttpUriRequest head = new HttpGet(tileURLString);
+            return client.execute(head);
         }
 
         @Override

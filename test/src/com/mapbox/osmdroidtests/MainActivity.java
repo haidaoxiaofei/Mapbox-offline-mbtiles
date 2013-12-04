@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Menu;
 import com.mapbox.mapboxsdk.MapView;
-import com.mapbox.mapboxsdk.MapViewFactory;
 import com.testflightapp.lib.TestFlight;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.MapTileProviderBasic;
@@ -21,14 +20,14 @@ public class MainActivity extends Activity {
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
     private Paint paint;
-    private final String mapURL = "maphome.mbtiles";
+    private final String mapURL = "http://a.tiles.mapbox.com/v3/czana.map-e6nd3na3/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TestFlight.takeOff(getApplication(), "e4fe404b-2edc-4a2d-8083-3d708168e4c4");
 
-        mv = MapViewFactory.fromMBTiles(this, mapURL);
+        mv = new MapView(this, mapURL);
         setContentView(mv);
 
         mapController = mv.getController();
@@ -59,8 +58,7 @@ public class MainActivity extends Activity {
         po.addPoint(new GeoPoint(51.2, 0));
 
         // Adds line and marker to the overlay
-
-        //mv.getOverlays().add(po);
+        mv.getOverlays().add(po);
     }
 
 	@Override

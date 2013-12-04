@@ -1,13 +1,6 @@
 package org.osmdroid.tileprovider.modules;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
-
+import android.graphics.drawable.Drawable;
 import org.osmdroid.tileprovider.ExpirableBitmapDrawable;
 import org.osmdroid.tileprovider.MapTile;
 import org.osmdroid.tileprovider.MapTileRequestState;
@@ -16,7 +9,13 @@ import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import android.graphics.drawable.Drawable;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 
 /**
  * An abstract base class for modular tile providers
@@ -304,6 +303,7 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
 
             onTileLoaderShutdown();
         }
+
     }
 
     /**
