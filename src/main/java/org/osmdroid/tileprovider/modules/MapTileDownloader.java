@@ -179,9 +179,12 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
                 while (line.getStatusCode() != 200 && attempts<5) {
                     System.out.println("Retrying MapTile: " + tile + " HTTP response: " + line);
+
                     if(tileURLString.contains("mapbox.com")){
-                        tileURLString = tileURLString.replace("/a.","/b.");
+
+                        tileURLString = changeMapBoxSubdomain(tileURLString, attempts);
                     }
+
                     response = this.makeRequest(tileURLString);
                     line = response.getStatusLine();
                     attempts++;
@@ -229,6 +232,12 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             }
 
             return null;
+        }
+
+        private String changeMapBoxSubdomain(String url, int attempts) {
+            String tileURL = url.replace(url.substring(0, 8), "http://"+domainLetters[attempts%(domainLetters.length-1)]);
+            System.out.println(tileURL);
+            return tileURL;
         }
 
         private HttpResponse makeRequest(String tileURLString) throws IOException {

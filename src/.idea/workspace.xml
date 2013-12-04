@@ -103,7 +103,7 @@
     <file path="/MBTilesFileArchive.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386001430150" ignored="false" />
     <file path="/GeoJSONElement.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386050075926" ignored="false" />
     <file path="/OpenStreetMapTileProviderConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386129728779" ignored="false" />
-    <file path="/MapTileDownloader.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386133984753" ignored="false" />
+    <file path="/MapTileDownloader.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386135921166" ignored="false" />
     <file path="/MapTileModuleProviderBase.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386132775803" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -195,7 +195,7 @@
       <file leaf-file-name="MapTileDownloader.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="142" column="18" selection-start="5128" selection-end="5128" vertical-scroll-proportion="-0.75748503">
+            <state line="237" column="59" selection-start="9328" selection-end="9328" vertical-scroll-proportion="0.08083832">
               <folding />
             </state>
           </provider>
@@ -908,23 +908,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/GeoJSONElement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="43" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files (x86)/Android/android-sdk/sources/android-17/android/database/sqlite/SQLiteStatement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="68" column="89" selection-start="2455" selection-end="2455" vertical-scroll-proportion="0.5640327">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="302" column="32" selection-start="11497" selection-end="11497" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -936,9 +922,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBase.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/GeoJSONElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="45" selection-start="4589" selection-end="4589" vertical-scroll-proportion="0.0">
+        <state line="5" column="43" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -950,9 +936,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="138" column="45" selection-start="4589" selection-end="4589" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="302" column="32" selection-start="11497" selection-end="11497" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="18" selection-start="5128" selection-end="5128" vertical-scroll-proportion="-0.75748503">
+        <state line="237" column="59" selection-start="9328" selection-end="9328" vertical-scroll-proportion="0.08083832">
           <folding />
         </state>
       </provider>
