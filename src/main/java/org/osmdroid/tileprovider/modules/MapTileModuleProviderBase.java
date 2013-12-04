@@ -1,6 +1,7 @@
 package org.osmdroid.tileprovider.modules;
 
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import org.osmdroid.tileprovider.ExpirableBitmapDrawable;
 import org.osmdroid.tileprovider.MapTile;
 import org.osmdroid.tileprovider.MapTileRequestState;
@@ -277,21 +278,40 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
             onTileLoaderInit();
 
             MapTileRequestState state;
-            Drawable result = null;
+
             while ((state = nextTile()) != null) {
+                new AsyncTileLoader().execute(state);
                 if (DEBUG_TILE_PROVIDERS) {
                     logger.debug("TileLoader.run() processing next tile: " + state.getMapTile());
                 }
+            }
+            onTileLoaderShutdown();
+        }
+
+        private class AsyncTileLoader extends AsyncTask<MapTileRequestState, Drawable, Drawable>{
+            private MapTileRequestState state;
+            private Drawable result;
+            @Override
+            protected Drawable doInBackground(MapTileRequestState... states) {
+                result = null;
+                state = states[0];
                 try {
+
+
                     result = null;
                     result = loadTile(state);
+                    return result;
                 } catch (final CantContinueException e) {
                     logger.info("Tile loader can't continue: " + state.getMapTile(), e);
                     clearQueue();
                 } catch (final Throwable e) {
                     logger.error("Error downloading tile: " + state.getMapTile(), e);
                 }
+                return null;  //To change body of implemented methods use File | Settings | File Templates.
+            }
 
+            @Override
+            protected void onPostExecute(Drawable result) {
                 if (result == null) {
                     tileLoadedFailed(state);
                 } else if (ExpirableBitmapDrawable.isDrawableExpired(result)) {
@@ -300,10 +320,7 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
                     tileLoaded(state, result);
                 }
             }
-
-            onTileLoaderShutdown();
         }
-
     }
 
     /**
