@@ -1,8 +1,11 @@
 package com.mapbox.mapboxsdk;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.osmdroid.DefaultResourceProxyImpl;
@@ -69,10 +72,17 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     public void setURL(String URL){
         if(!URL.equals("")) {
-            tileSource = new XYTileSource("Test", ResourceProxy.string.online_mode, 0, 24, 256, ".png", URL);
+            tileSource = new XYTileSource("Test", ResourceProxy.string.online_mode, 0, 24, dpToPx(256), ".png", URL);
             this.setTileSource(tileSource);
         }
 
+    }
+
+    private int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        System.out.println("px"+px);
+        return px;
     }
 
     /**
@@ -107,6 +117,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
             GeoJSONElement geoJSONElement = new GeoJSONElement(URL);
             return geoJSONElement.getMarkersOverlay();
         }
+        @TargetApi(Build.VERSION_CODES.CUPCAKE)
         private class JSONBodyGetter extends AsyncTask<String, Void, JSONObject> {
             @Override
             protected JSONObject doInBackground(String... params) {
