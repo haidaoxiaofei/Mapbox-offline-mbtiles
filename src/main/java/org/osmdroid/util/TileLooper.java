@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 
+import java.util.Comparator;
+
 /**
  * A class that will loop around all the map tiles in the given viewport.
  */
@@ -36,6 +38,13 @@ public abstract class TileLooper {
         }
 
         finaliseLoop();
+    }
+    protected class ClosenessToCenterComparator implements Comparator<Integer>{
+
+        @Override
+        public int compare(Integer lhs, Integer rhs) {
+            return 0;
+        }
     }
 
     public abstract void initialiseLoop(int pZoomLevel, int pTileSizePx);

@@ -178,7 +178,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 org.apache.http.StatusLine line = response.getStatusLine();
 
                 while (line.getStatusCode() != 200 && attempts<5) {
-                    System.out.println("Retrying MapTile: " + tile + " HTTP response: " + line);
+                    logger.debug("Retrying MapTile: " + tile + " HTTP response: " + line);
 
                     if(tileURLString.contains("mapbox.com")){
 
@@ -193,7 +193,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
                 final HttpEntity entity = response.getEntity();
                 if (entity == null) {
-                    System.out.println("No content downloading MapTile: " + tile);
+                    logger.debug("No content downloading MapTile: " + tile);
                     return null;
                 }
                 in = entity.getContent();
@@ -214,18 +214,18 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 return result;
             } catch (final UnknownHostException e) {
                 // no network connection so empty the queue
-                System.out.println("UnknownHostException downloading MapTile: " + tile + " : " + e);
+                logger.debug("UnknownHostException downloading MapTile: " + tile + " : " + e);
                 throw new CantContinueException(e);
             } catch (final LowMemoryException e) {
                 // low memory so empty the queue
-                System.out.println("LowMemoryException downloading MapTile: " + tile + " : " + e);
+                logger.debug("LowMemoryException downloading MapTile: " + tile + " : " + e);
                 throw new CantContinueException(e);
             } catch (final FileNotFoundException e) {
-                System.out.println("Tile not found: " + tile + " : " + e);
+                logger.debug("Tile not found: " + tile + " : " + e);
             } catch (final IOException e) {
-                System.out.println("IOException downloading MapTile: " + tile + " : " + e);
+                logger.debug("IOException downloading MapTile: " + tile + " : " + e);
             } catch (final Throwable e) {
-                System.out.println("Error downloading MapTile: " + tile);
+                logger.debug("Error downloading MapTile: " + tile);
             } finally {
                 StreamUtils.closeStream(in);
                 StreamUtils.closeStream(out);

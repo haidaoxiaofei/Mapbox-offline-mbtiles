@@ -93,7 +93,7 @@
       <file leaf-file-name="MapTileDownloader.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="144" column="52" selection-start="5245" selection-end="5245" vertical-scroll-proportion="-4.32" vertical-offset="1983" max-vertical-offset="4182">
+            <state line="227" column="16" selection-start="8936" selection-end="8936" vertical-scroll-proportion="0.0" vertical-offset="2741" max-vertical-offset="4182">
               <folding />
             </state>
           </provider>
@@ -102,16 +102,25 @@
       <file leaf-file-name="MapTileModuleProviderBase.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="302" column="32" selection-start="11497" selection-end="11497" vertical-scroll-proportion="0.0" vertical-offset="5019" max-vertical-offset="5355">
+            <state line="302" column="32" selection-start="11497" selection-end="11497" vertical-scroll-proportion="0.0" vertical-offset="5134" max-vertical-offset="5610">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapTileProviderBase.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MapTileProviderBase.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="30" selection-start="1171" selection-end="1171" vertical-scroll-proportion="-0.8767908" vertical-offset="595" max-vertical-offset="6902">
+            <state line="63" column="61" selection-start="2223" selection-end="2223" vertical-scroll-proportion="0.0" vertical-offset="1768" max-vertical-offset="6902">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SafeDrawOverlay.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/SafeDrawOverlay.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="31" selection-start="1469" selection-end="1469" vertical-scroll-proportion="-5.0" vertical-offset="521" max-vertical-offset="1564">
               <folding />
             </state>
           </provider>
@@ -129,16 +138,16 @@
       <file leaf-file-name="OpenStreetMapTileProviderConstants.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="61" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1496">
+            <state line="23" column="61" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="1530">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TileLooper.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TileLooper.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/util/TileLooper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="22" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0" vertical-offset="3" max-vertical-offset="816">
+            <state line="41" column="47" selection-start="1550" selection-end="1577" vertical-scroll-proportion="0.56160456" vertical-offset="399" max-vertical-offset="935">
               <folding />
             </state>
           </provider>
@@ -147,7 +156,7 @@
       <file leaf-file-name="TilesOverlay.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/TilesOverlay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="173" column="67" selection-start="6246" selection-end="6246" vertical-scroll-proportion="0.0" vertical-offset="2383" max-vertical-offset="5865">
+            <state line="214" column="6" selection-start="8034" selection-end="8036" vertical-scroll-proportion="-39.0" vertical-offset="2204" max-vertical-offset="5865">
               <folding />
             </state>
           </provider>
@@ -173,9 +182,10 @@
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/GeoJSONElement.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java" />
-        <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java" />
         <option value="$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java" />
+        <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java" />
+        <option value="$PROJECT_DIR$/main/java/org/osmdroid/util/TileLooper.java" />
       </list>
     </option>
   </component>
@@ -211,7 +221,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -495,6 +504,7 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -513,6 +523,7 @@
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -558,19 +569,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -597,6 +595,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -690,45 +701,46 @@
       <created>1385042376007</created>
       <updated>1385042376007</updated>
       <workItem from="1386296706150" duration="389000" />
+      <workItem from="1386297545746" duration="451000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="389000" />
+    <option name="totallyTimeSpent" value="840000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32861635" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3773585" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3773585" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2489019" sideWeight="0.62153345" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32861635" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.67536706" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.67536706" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -752,6 +764,69 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/MapView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1166" column="27" selection-start="43612" selection-end="43612" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="29087">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/GeoJSONElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="43" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="306">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="144" column="52" selection-start="5245" selection-end="5245" vertical-scroll-proportion="0.0" vertical-offset="2448" max-vertical-offset="4539">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="302" column="32" selection-start="11497" selection-end="11497" vertical-scroll-proportion="0.0" vertical-offset="5134" max-vertical-offset="5610">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="30" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.0" vertical-offset="595" max-vertical-offset="6902">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="85" selection-start="875" selection-end="875" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="1343">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="61" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="1530">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/util/TileLooper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="22" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="884">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/TilesOverlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="173" column="67" selection-start="6246" selection-end="6246" vertical-scroll-proportion="0.0" vertical-offset="2941" max-vertical-offset="6528">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="66" column="30" selection-start="2491" selection-end="2491" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3077">
@@ -893,30 +968,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/util/TileLooper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="22" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0" vertical-offset="3" max-vertical-offset="816">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/TilesOverlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="173" column="67" selection-start="6246" selection-end="6246" vertical-scroll-proportion="0.0" vertical-offset="2383" max-vertical-offset="5865">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileRequestState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="13" selection-start="202" selection-end="202" vertical-scroll-proportion="-0.5358166" vertical-offset="255" max-vertical-offset="697">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="52" selection-start="5245" selection-end="5245" vertical-scroll-proportion="-4.32" vertical-offset="1983" max-vertical-offset="4182">
           <folding />
         </state>
       </provider>
@@ -930,7 +984,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="30" selection-start="1171" selection-end="1171" vertical-scroll-proportion="-0.8767908" vertical-offset="595" max-vertical-offset="6902">
+        <state line="63" column="61" selection-start="2223" selection-end="2223" vertical-scroll-proportion="0.0" vertical-offset="1768" max-vertical-offset="6902">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/SafeDrawOverlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="31" selection-start="1469" selection-end="1469" vertical-scroll-proportion="-5.0" vertical-offset="521" max-vertical-offset="1564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="227" column="16" selection-start="8936" selection-end="8936" vertical-scroll-proportion="0.0" vertical-offset="2741" max-vertical-offset="4182">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/TilesOverlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="214" column="6" selection-start="8034" selection-end="8036" vertical-scroll-proportion="-39.0" vertical-offset="2204" max-vertical-offset="5865">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/util/TileLooper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="47" selection-start="1550" selection-end="1577" vertical-scroll-proportion="0.56160456" vertical-offset="399" max-vertical-offset="935">
           <folding />
         </state>
       </provider>
