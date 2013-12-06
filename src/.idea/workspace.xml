@@ -12,99 +12,6 @@
     <list default="true" id="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" name="Default" comment="" />
     <ignored path="MapBox Android SDK.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="$PROJECT_DIR$/main/java/microsoft/mappoint/TileSystem.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396272" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/util/StreamUtils.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396272" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/util/CloudmadeUtil.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396272" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/util/SimpleInvalidationHandler.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396272" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/util/SimpleRegisterReceiver.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396272" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/util/ManifestUtil.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396272" ignored="false" />
-    <file path="$PROJECT_DIR$/res/layout/main.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396272" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/BoundingBoxE6.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396272" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/ResourceProxyImpl.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396272" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/GeoPoint.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396272" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/GeometryMath.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/NetworkLocationIgnorer.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/contributor/util/constants/OpenStreetMapContributorConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/contributor/util/RecordedRouteGPXFormatter.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/contributor/util/RecordedGeoPoint.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/contributor/util/Util.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/LocationUtils.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/TileSystem.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/TileLooper.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/GEMFFile.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/Position.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/safecanvas/SafePaint.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/MyMath.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/safecanvas/SafeTranslatedPath.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/safecanvas/SafeDashPathEffect.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/safecanvas/SafeBitmapShader.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/safecanvas/ISafeCanvas.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/mylocation/MyLocationNewOverlay.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/mylocation/GpsMyLocationProvider.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/mylocation/IMyLocationConsumer.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/compass/InternalCompassOrientationProvider.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/compass/CompassOverlay.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/mylocation/IMyLocationProvider.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/compass/IOrientationConsumer.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/compass/IOrientationProvider.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/ItemizedOverlay.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/safecanvas/SafeTranslatedCanvas.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/SafeDrawOverlay.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/IOverlayMenuProvider.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/ItemizedOverlayControlView.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/MinimapOverlay.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/TilesOverlay.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/ScaleBarOverlay.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/OverlayItem.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/DirectedLocationOverlay.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/SimpleLocationOverlay.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/ItemizedIconOverlay.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/PathOverlay.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/MyLocationOverlay.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/ItemizedOverlayWithFocus.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/OverlayManager.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/util/constants/MapViewConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/util/constants/OverlayConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/util/Mercator.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/util/PathProjection.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/util/MyMath.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/views/util/constants/MathConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/constants/GeoConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="$PROJECT_DIR$/main/java/org/osmdroid/util/constants/UtilConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385042396273" ignored="false" />
-    <file path="/MapView.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386050026565" ignored="false" />
-    <file path="/MainActivity.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386130760724" ignored="false" />
-    <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/Manifest.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385479194873" ignored="false" />
-    <file path="$PROJECT_DIR$/gen/com/mapbox/mapboxsdk/BuildConfig.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385051369462" ignored="false" />
-    <file path="/Tooltip.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385564870461" ignored="false" />
-    <file path="/Marker.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385169716384" ignored="false" />
-    <file path="/Dummy.txt" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385167927046" ignored="false" />
-    <file path="/fragment.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386050033391" ignored="false" />
-    <file path="$PROJECT_DIR$/../../MapHome/res/values/strings.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385693982752" ignored="false" />
-    <file path="$PROJECT_DIR$/../../MapHome/AndroidManifest.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385431709964" ignored="false" />
-    <file path="$PROJECT_DIR$/../../MapHome/build.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385257510404" ignored="false" />
-    <file path="$PROJECT_DIR$/../../MapHome/res/layout/main.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385693012079" ignored="false" />
-    <file path="$PROJECT_DIR$/../../MapHome/src/com/mapbox/MapHome/MyActivity.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385694140965" ignored="false" />
-    <file path="/MyActivity.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385694129662" ignored="false" />
-    <file path="$PROJECT_DIR$/../../MapHome/gen/com/mapbox/MapHome/Manifest.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385606013183" ignored="false" />
-    <file path="$PROJECT_DIR$/../../Home/AndroidManifest.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385428256281" ignored="false" />
-    <file path="$PROJECT_DIR$/../../HomeTrial/res/layout/main.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385429061644" ignored="false" />
-    <file path="$PROJECT_DIR$/../../HomeTrial/AndroidManifest.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385429291761" ignored="false" />
-    <file path="$PROJECT_DIR$/../../HomeTrial/src/com/dansd/HomeTrial/MyActivity.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385429061644" ignored="false" />
-    <file path="$PROJECT_DIR$/../../HomeTrial/res/values/strings.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385429061644" ignored="false" />
-    <file path="$PROJECT_DIR$/../../HomeTrial/build.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385429061644" ignored="false" />
-    <file path="/AndroidManifest.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385429396220" ignored="false" />
-    <file path="/main.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385691723873" ignored="false" />
-    <file path="/MarkerFactory.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385520087828" ignored="false" />
-    <file path="$PROJECT_DIR$/../../MapHome/gen/com/mapbox/MapHome/R.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385606013183" ignored="false" />
-    <file path="$PROJECT_DIR$/../../MapHome/res/values/colors.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385608212745" ignored="false" />
-    <file path="/colors.xml" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385608212745" ignored="false" />
-    <file path="$PROJECT_DIR$/../../MapHome/project.properties" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1385690496179" ignored="false" />
-    <file path="/MBTilesFactory.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386001467437" ignored="false" />
-    <file path="/MBTilesFileArchive.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386001430150" ignored="false" />
-    <file path="/GeoJSONElement.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386050075926" ignored="false" />
-    <file path="/OpenStreetMapTileProviderConstants.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386137190505" ignored="false" />
-    <file path="/MapTileDownloader.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386135921166" ignored="false" />
-    <file path="/MapTileModuleProviderBase.java" changelist="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" time="1386132775803" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,18 +73,9 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="MapView.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="30" selection-start="2491" selection-end="2491" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MapView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1166" column="27" selection-start="43612" selection-end="43612" vertical-scroll-proportion="0.0">
+            <state line="1166" column="27" selection-start="43612" selection-end="43612" vertical-scroll-proportion="0.0" vertical-offset="19822" max-vertical-offset="29087">
               <folding />
             </state>
           </provider>
@@ -186,7 +84,7 @@
       <file leaf-file-name="GeoJSONElement.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/GeoJSONElement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="43" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0">
+            <state line="5" column="43" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="306">
               <folding />
             </state>
           </provider>
@@ -195,7 +93,7 @@
       <file leaf-file-name="MapTileDownloader.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="237" column="122" selection-start="9391" selection-end="9391" vertical-scroll-proportion="0.0">
+            <state line="144" column="52" selection-start="5245" selection-end="5245" vertical-scroll-proportion="-4.32" vertical-offset="1983" max-vertical-offset="4182">
               <folding />
             </state>
           </provider>
@@ -204,16 +102,16 @@
       <file leaf-file-name="MapTileModuleProviderBase.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="302" column="32" selection-start="11497" selection-end="11497" vertical-scroll-proportion="0.0">
+            <state line="302" column="32" selection-start="11497" selection-end="11497" vertical-scroll-proportion="0.0" vertical-offset="5019" max-vertical-offset="5355">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapTileProviderBase.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MapTileProviderBase.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="30" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.0">
+            <state line="35" column="30" selection-start="1171" selection-end="1171" vertical-scroll-proportion="-0.8767908" vertical-offset="595" max-vertical-offset="6902">
               <folding />
             </state>
           </provider>
@@ -222,16 +120,34 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="85" selection-start="875" selection-end="875" vertical-scroll-proportion="0.0">
+            <state line="22" column="85" selection-start="875" selection-end="875" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="1343">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpenStreetMapTileProviderConstants.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="OpenStreetMapTileProviderConstants.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="69" selection-start="359" selection-end="359" vertical-scroll-proportion="0.48502994">
+            <state line="23" column="61" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1496">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TileLooper.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/util/TileLooper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="22" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0" vertical-offset="3" max-vertical-offset="816">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TilesOverlay.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/TilesOverlay.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="173" column="67" selection-start="6246" selection-end="6246" vertical-scroll-proportion="0.0" vertical-offset="2383" max-vertical-offset="5865">
               <folding />
             </state>
           </provider>
@@ -295,6 +211,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -497,7 +414,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="tileprovider" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="overlay" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -528,10 +449,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="tileprovider" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -577,7 +494,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -596,6 +512,7 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -607,7 +524,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Android Application.test">
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
       <option name="PROGRAM_PARAMETERS" />
@@ -621,6 +538,7 @@
       <option name="CLASS_NAME" value="" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
       <option name="USE_COMMAND_LINE" value="true" />
       <option name="COMMAND_LINE" value="" />
@@ -629,6 +547,7 @@
       <option name="NETWORK_SPEED" value="full" />
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -639,7 +558,21 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -666,20 +599,8 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
@@ -694,6 +615,7 @@
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -718,7 +640,9 @@
       <option name="ACTIVITY_CLASS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
       <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
       <option name="USE_COMMAND_LINE" value="true" />
       <option name="COMMAND_LINE" value="" />
@@ -727,6 +651,7 @@
       <option name="NETWORK_SPEED" value="full" />
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
     <configuration default="false" name="test" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -734,7 +659,9 @@
       <option name="ACTIVITY_CLASS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
       <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
       <option name="USE_COMMAND_LINE" value="true" />
       <option name="COMMAND_LINE" value="" />
@@ -743,6 +670,7 @@
       <option name="NETWORK_SPEED" value="full" />
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <RunnerSettings RunnerId="AndroidDebugRunner" />
       <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
       <method />
@@ -761,92 +689,60 @@
       <changelist id="fc1235f0-2c29-4d3b-b895-95c29a9d5a4f" name="Default" comment="" />
       <created>1385042376007</created>
       <updated>1385042376007</updated>
+      <workItem from="1386296706150" duration="389000" />
     </task>
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="389000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37846655" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32861635" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3773585" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24924242" sideWeight="0.62153345" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.67536706" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2489019" sideWeight="0.62153345" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32861635" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.67536706" order="2" side_tool="false" content_ui="combo" />
     </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USERS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="CHECK_NEW_TODO" value="true" />
     <option name="myTodoPanelSettings">
-      <value>
-        <are-packages-shown value="false" />
-        <are-modules-shown value="false" />
-        <flatten-packages value="false" />
-        <is-autoscroll-to-source value="false" />
-      </value>
+      <TodoPanelSettings />
     </option>
-    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
-    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
-    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
-    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
-    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
-    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
-    <option name="SHORT_DIFF_HORIZONTALLY" value="true" />
-    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
-    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
-    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
-    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
-    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
-    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
-    <option name="LIMIT_HISTORY" value="true" />
-    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
-    <option name="UPDATE_FILTER_SCOPE_NAME" />
-    <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
-    <option name="COMMIT_MESSAGE_MARGIN_SIZE" value="72" />
-    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
-    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" />
-    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
-    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
-    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
-    <option name="ACTIVE_VCS_NAME" />
-    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
-    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
-    <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
-    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
-    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -856,112 +752,185 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Marker.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="34" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/Android/android-sdk/platforms/android-17/android.jar!/android/database/sqlite/SQLiteDatabase.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="19" selection-start="172" selection-end="172" vertical-scroll-proportion="-3.6497176" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBasic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="59" selection-start="2371" selection-end="2371" vertical-scroll-proportion="0.39285713">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="41" selection-start="416" selection-end="416" vertical-scroll-proportion="0.23351648">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/metalev/multitouch/controller/MultiTouchController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="203" column="50" selection-start="7943" selection-end="7943" vertical-scroll-proportion="-5.471971">
+        <state line="66" column="30" selection-start="2491" selection-end="2491" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3077">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1166" column="27" selection-start="43612" selection-end="43612" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MBTilesFileArchive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="67" selection-start="2950" selection-end="2950" vertical-scroll-proportion="1.1374322">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapViewFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="92" selection-start="2275" selection-end="2275" vertical-scroll-proportion="1.0812721">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Android/android-sdk/sources/android-17/android/database/sqlite/SQLiteStatement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="89" selection-start="2455" selection-end="2455" vertical-scroll-proportion="0.5640327">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="30" selection-start="2491" selection-end="2491" vertical-scroll-proportion="0.0">
+        <state line="1166" column="27" selection-start="43612" selection-end="43612" vertical-scroll-proportion="0.0" vertical-offset="19822" max-vertical-offset="29087">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/GeoJSONElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="43" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="302" column="32" selection-start="11497" selection-end="11497" vertical-scroll-proportion="0.0">
+        <state line="5" column="43" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="306">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="237" column="122" selection-start="9391" selection-end="9391" vertical-scroll-proportion="0.0">
+        <state line="237" column="122" selection-start="9391" selection-end="9391" vertical-scroll-proportion="0.0" vertical-offset="4029" max-vertical-offset="4539">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="85" selection-start="875" selection-end="875" vertical-scroll-proportion="0.0">
+        <state line="302" column="32" selection-start="11497" selection-end="11497" vertical-scroll-proportion="0.0" vertical-offset="5134" max-vertical-offset="5610">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="30" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.0">
+        <state line="35" column="30" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.0" vertical-offset="595" max-vertical-offset="7310">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="85" selection-start="875" selection-end="875" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="1343">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="69" selection-start="359" selection-end="359" vertical-scroll-proportion="0.48502994">
+        <state line="14" column="69" selection-start="359" selection-end="359" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1496">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/Marker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="34" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Android/android-sdk/platforms/android-17/android.jar!/android/database/sqlite/SQLiteDatabase.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="19" selection-start="172" selection-end="172" vertical-scroll-proportion="-3.6497176" vertical-offset="0" max-vertical-offset="0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBasic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="59" selection-start="2371" selection-end="2371" vertical-scroll-proportion="0.39285713" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="41" selection-start="416" selection-end="416" vertical-scroll-proportion="0.23351648" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/metalev/multitouch/controller/MultiTouchController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="203" column="50" selection-start="7943" selection-end="7943" vertical-scroll-proportion="-5.471971" vertical-offset="0" max-vertical-offset="0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/MapView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1166" column="27" selection-start="43612" selection-end="43612" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MBTilesFileArchive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="67" selection-start="2950" selection-end="2950" vertical-scroll-proportion="1.1374322" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapViewFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="92" selection-start="2275" selection-end="2275" vertical-scroll-proportion="1.0812721" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files (x86)/Android/android-sdk/sources/android-17/android/database/sqlite/SQLiteStatement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="89" selection-start="2455" selection-end="2455" vertical-scroll-proportion="0.5640327" vertical-offset="0" max-vertical-offset="0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="30" selection-start="2491" selection-end="2491" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/GeoJSONElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="43" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="85" selection-start="875" selection-end="875" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="61" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1496">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/util/TileLooper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="22" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0" vertical-offset="3" max-vertical-offset="816">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/TilesOverlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="173" column="67" selection-start="6246" selection-end="6246" vertical-scroll-proportion="0.0" vertical-offset="2383" max-vertical-offset="5865">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileRequestState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="13" selection-start="202" selection-end="202" vertical-scroll-proportion="-0.5358166" vertical-offset="255" max-vertical-offset="697">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="144" column="52" selection-start="5245" selection-end="5245" vertical-scroll-proportion="-4.32" vertical-offset="1983" max-vertical-offset="4182">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="302" column="32" selection-start="11497" selection-end="11497" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="30" selection-start="1171" selection-end="1171" vertical-scroll-proportion="-0.8767908" vertical-offset="595" max-vertical-offset="6902">
           <folding />
         </state>
       </provider>
