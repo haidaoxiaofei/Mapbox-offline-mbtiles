@@ -15,13 +15,14 @@ public abstract class TileLooper {
 
     protected final Point mUpperLeft = new Point();
     protected final Point mLowerRight = new Point();
+    protected final Point center = new Point();
 
     public final void loop(final Canvas pCanvas, final int pZoomLevel, final int pTileSizePx, final Rect pViewPort) {
         // Calculate the amount of tiles needed for each side around the center one.
         TileSystem.PixelXYToTileXY(pViewPort.left, pViewPort.top, mUpperLeft);
         mUpperLeft.offset(-1, -1);
         TileSystem.PixelXYToTileXY(pViewPort.right, pViewPort.bottom, mLowerRight);
-
+        center.set((mUpperLeft.x + mLowerRight.x)/2, (mUpperLeft.y + mLowerRight.y)/2);
         final int mapTileUpperBound = 1 << pZoomLevel;
 
         initialiseLoop(pZoomLevel, pTileSizePx);
@@ -39,11 +40,16 @@ public abstract class TileLooper {
 
         finaliseLoop();
     }
-    protected class ClosenessToCenterComparator implements Comparator<Integer>{
-
+    protected class ClosenessToCenterComparator implements Comparator<Point>{
         @Override
-        public int compare(Integer lhs, Integer rhs) {
+        public int compare(Point one, Point two) {
+            if(length(one)>length(two)) return -1;
+            if(length(one)<length(two)) return 1;
             return 0;
+        }
+        private float length(Point point){
+            float length = (float) Math.sqrt(Math.pow(point.x - center.x, 2) + Math.pow(point.y-center.y,2));
+            return length;
         }
     }
 

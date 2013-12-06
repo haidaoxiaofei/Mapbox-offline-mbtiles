@@ -147,7 +147,7 @@
       <file leaf-file-name="TileLooper.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/util/TileLooper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="47" selection-start="1550" selection-end="1577" vertical-scroll-proportion="0.56160456" vertical-offset="399" max-vertical-offset="935">
+            <state line="36" column="70" selection-start="1609" selection-end="1609" vertical-scroll-proportion="0.41547278" vertical-offset="365" max-vertical-offset="1037">
               <folding />
             </state>
           </provider>
@@ -701,12 +701,12 @@
       <created>1385042376007</created>
       <updated>1385042376007</updated>
       <workItem from="1386296706150" duration="389000" />
-      <workItem from="1386297545746" duration="451000" />
+      <workItem from="1386297545746" duration="1152000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="840000" />
+    <option name="totallyTimeSpent" value="1541000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1012,7 +1012,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/util/TileLooper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="47" selection-start="1550" selection-end="1577" vertical-scroll-proportion="0.56160456" vertical-offset="399" max-vertical-offset="935">
+        <state line="36" column="70" selection-start="1609" selection-end="1609" vertical-scroll-proportion="0.41547278" vertical-offset="365" max-vertical-offset="1037">
           <folding />
         </state>
       </provider>
