@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -24,18 +26,23 @@ public abstract class TileLooper {
         TileSystem.PixelXYToTileXY(pViewPort.right, pViewPort.bottom, mLowerRight);
         center.set((mUpperLeft.x + mLowerRight.x)/2, (mUpperLeft.y + mLowerRight.y)/2);
         final int mapTileUpperBound = 1 << pZoomLevel;
-
+        ArrayList<Point> orderedList = new ArrayList<Point>();
         initialiseLoop(pZoomLevel, pTileSizePx);
 
-		/* Draw all the MapTiles (from the upper left to the lower right). */
+        /**
+         * TO DO - there is definitely a more efficient way of doing this
+         */
         for (int y = mUpperLeft.y; y <= mLowerRight.y; y++) {
             for (int x = mUpperLeft.x; x <= mLowerRight.x; x++) {
-                // Construct a MapTile to request from the tile provider.
-                final int tileY = MyMath.mod(y, mapTileUpperBound);
-                final int tileX = MyMath.mod(x, mapTileUpperBound);
-                final MapTile tile = new MapTile(pZoomLevel, tileX, tileY);
-                handleTile(pCanvas, pTileSizePx, tile, x, y);
+                orderedList.add(new Point(x,y));
             }
+        }
+        Collections.sort(orderedList, new ClosenessToCenterComparator());
+        for(Point point: orderedList){
+            final int tileY = MyMath.mod(point.y, mapTileUpperBound);
+            final int tileX = MyMath.mod(point.x, mapTileUpperBound);
+            final MapTile tile = new MapTile(pZoomLevel, tileX, tileY);
+            handleTile(pCanvas, pTileSizePx, tile, point.x, point.y);
         }
 
         finaliseLoop();
