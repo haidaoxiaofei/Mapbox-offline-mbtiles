@@ -88,12 +88,21 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         return getResources().getString(R.string.app_name);
     }
 
-    private String getCompleteURLFromMapBoxID(String mapBoxID){
+    private String getURLFromMapBoxID(String mapBoxID){
         if(mapBoxID.equals("") || !mapBoxID.contains(".")){
             throw new IllegalArgumentException("Invalid MapBox ID");
         }
         String completeURL = "http://a.tiles.mapbox.com/v3/"+mapBoxID+"/";
         return completeURL;
+    }
+    private String getURLFromTileJSON(String tileJSONURL){
+        return tileJSONURL.replace(".json", "/");
+    }
+    private String getURLFromTilemill(){
+        return null;
+    }
+    private String getTileFromImageTemplate(){
+        return null;
     }
 
     /**
