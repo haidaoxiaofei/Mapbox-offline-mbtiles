@@ -72,7 +72,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     public void setURL(String URL){
         if(!URL.equals("")) {
-            tileSource = new XYTileSource("Test", ResourceProxy.string.online_mode, 0, 24, dpToPx(256), ".png", URL);
+            tileSource = new XYTileSource(getApplicationName(), ResourceProxy.string.online_mode, 0, 24, dpToPx(256), ".png", URL);
             this.setTileSource(tileSource);
         }
 
@@ -80,9 +80,12 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     private int dpToPx(int dp) {
         DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
-        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-        System.out.println("px"+px);
+        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))-50;
         return px;
+    }
+
+    private String getApplicationName(){
+        return getResources().getString(R.string.app_name);
     }
 
     /**
@@ -129,7 +132,6 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
                     InputStream input = connection.getInputStream();
                     BufferedReader streamReader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
                     StringBuilder responseStrBuilder = new StringBuilder();
-
                     String inputStr;
                     while ((inputStr = streamReader.readLine()) != null)
                         responseStrBuilder.append(inputStr);

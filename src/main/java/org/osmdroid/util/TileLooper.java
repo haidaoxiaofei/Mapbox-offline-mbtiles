@@ -47,11 +47,15 @@ public abstract class TileLooper {
 
         finaliseLoop();
     }
+
+    /**
+     * Compares two points for which one is closer to the center
+     */
     protected class ClosenessToCenterComparator implements Comparator<Point>{
         @Override
         public int compare(Point one, Point two) {
-            if(length(one)>length(two)) return -1;
-            if(length(one)<length(two)) return 1;
+            if(length(one)>length(two)) return 1;
+            if(length(one)<length(two)) return -1;
             return 0;
         }
         private float length(Point point){
