@@ -88,6 +88,14 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         return getResources().getString(R.string.app_name);
     }
 
+    private String getCompleteURLFromMapBoxID(String mapBoxID){
+        if(mapBoxID.equals("") || !mapBoxID.contains(".")){
+            throw new IllegalArgumentException("Invalid MapBox ID");
+        }
+        String completeURL = "http://a.tiles.mapbox.com/v3/"+mapBoxID+"/";
+        return completeURL;
+    }
+
     /**
      * Adds a marker to the default marker overlay
      * @param lat latitude of the marker
