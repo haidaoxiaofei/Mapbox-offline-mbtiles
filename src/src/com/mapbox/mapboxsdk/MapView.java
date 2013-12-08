@@ -101,8 +101,8 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     private String getURLFromTilemill(){
         return null;
     }
-    private String getTileFromImageTemplate(){
-        return null;
+    private String getTileFromImageTemplate(String imageTemplateURL){
+        return imageTemplateURL.replace("/{z}/{x}/{y}.png", "/");
     }
 
     /**
