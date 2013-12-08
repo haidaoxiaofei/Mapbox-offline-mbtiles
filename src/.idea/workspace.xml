@@ -72,31 +72,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="103" column="43" selection-start="3723" selection-end="3747" vertical-scroll-proportion="0.4516129" vertical-offset="1009" max-vertical-offset="3111">
-              <folding>
-                <element signature="e#3165#3208#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DefaultResourceProxyImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/DefaultResourceProxyImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="13" selection-start="3760" selection-end="3760" vertical-scroll-proportion="0.0" vertical-offset="1417" max-vertical-offset="2805">
+            <state line="74" column="48" selection-start="2584" selection-end="2584" vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="2805">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapTileDownloader.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java">
+      <file leaf-file-name="MapTileProviderArray.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderArray.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="243" column="60" selection-start="9609" selection-end="9609" vertical-scroll-proportion="0.0" vertical-offset="3593" max-vertical-offset="4182">
-              <folding />
+            <state line="200" column="34" selection-start="8296" selection-end="8296" vertical-scroll-proportion="-136.0" vertical-offset="0" max-vertical-offset="4046">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -137,10 +128,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpenStreetMapTileProviderConstants.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="OpenStreetMapTileProviderConstants.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="61" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="1530">
+            <state line="53" column="63" selection-start="1647" selection-end="1647" vertical-scroll-proportion="0.8742857" vertical-offset="561" max-vertical-offset="1496">
               <folding />
             </state>
           </provider>
@@ -184,12 +175,13 @@
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/GeoJSONElement.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileModuleProviderBase.java" />
         <option value="$PROJECT_DIR$/../test/src/com/mapbox/osmdroidtests/MainActivity.java" />
-        <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/modules/MapTileDownloader.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/OverlayManager.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/util/TileLooper.java" />
         <option value="$PROJECT_DIR$/main/java/org/osmdroid/DefaultResourceProxyImpl.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java" />
+        <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/MapTileProviderConstants.java" />
+        <option value="$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java" />
       </list>
     </option>
   </component>
@@ -359,11 +351,101 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="org" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="osmdroid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MapBox Android SDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="org" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osmdroid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tileprovider" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MapBox Android SDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="org" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osmdroid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tileprovider" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constants" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MapBox Android SDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="org" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -410,6 +492,9 @@
     <property name="GoToClass.includeLibraries" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.osmdroid.tileprovider.constants" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\fdans\repos\mapbox-android-sdk\src\main\res\drawable-xhdpi" />
     </key>
@@ -608,12 +693,12 @@
       <updated>1385042376007</updated>
       <workItem from="1386296706150" duration="389000" />
       <workItem from="1386297545746" duration="4458000" />
-      <workItem from="1386390467861" duration="3423000" />
+      <workItem from="1386390467861" duration="6157000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8270000" />
+    <option name="totallyTimeSpent" value="11004000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -633,20 +718,20 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37723577" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32789558" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37578616" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24816984" sideWeight="0.6721044" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32789558" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32704404" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.67536706" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32789558" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -820,13 +905,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="61" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/views/overlay/TilesOverlay.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="214" column="19" selection-start="8049" selection-end="8049" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -876,19 +954,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="39" selection-start="2845" selection-end="2845" vertical-scroll-proportion="0.0" vertical-offset="499" max-vertical-offset="3111">
+          <folding>
+            <element signature="e#3165#3208#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/DefaultResourceProxyImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="13" selection-start="3760" selection-end="3760" vertical-scroll-proportion="0.0" vertical-offset="1417" max-vertical-offset="2805">
+        <state line="74" column="48" selection-start="2584" selection-end="2584" vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="2805">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/mapboxsdk/MapView.java">
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/MapTileProviderArray.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="43" selection-start="3723" selection-end="3747" vertical-scroll-proportion="0.4516129" vertical-offset="1009" max-vertical-offset="3111">
+        <state line="200" column="34" selection-start="8296" selection-end="8296" vertical-scroll-proportion="-136.0" vertical-offset="0" max-vertical-offset="4046">
           <folding>
-            <element signature="e#3165#3208#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/org/osmdroid/tileprovider/constants/OpenStreetMapTileProviderConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="63" selection-start="1647" selection-end="1647" vertical-scroll-proportion="0.8742857" vertical-offset="561" max-vertical-offset="1496">
+          <folding />
         </state>
       </provider>
     </entry>
