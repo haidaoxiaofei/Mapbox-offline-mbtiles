@@ -2,6 +2,8 @@ package com.mapbox.mapboxsdk;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -29,6 +31,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MapView extends org.osmdroid.views.MapView implements MapEventsReceiver {
     private ITileSource tileSource;
@@ -85,7 +88,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     private String getApplicationName(){
-        return getResources().getString(R.string.app_name);
+        return context.getPackageName();
     }
 
     private String getURLFromMapBoxID(String mapBoxID){
