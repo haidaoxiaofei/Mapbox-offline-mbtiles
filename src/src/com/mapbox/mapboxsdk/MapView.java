@@ -54,10 +54,20 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     public MapView(Context context, String URL){
         super(context, null);
         this.context = context;
-        setURL(URL);
+        setURL(parseURL(URL));
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
+    }
+
+    private String parseURL(String url) {
+        if(url.contains("json")) return getURLFromTileJSON(url);
+        if(!url.contains("http://")) return getURLFromMapBoxID(url);
+        if(url.contains(".png")) return getURLFromImageTemplate(url);
+        else{
+            throw new IllegalArgumentException("You need to enter either a valid URL, a MapBox id, or a tile URL template");
+        }
+        
     }
 
     protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileProviderBase aTileProvider) {
@@ -104,7 +114,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     private String getURLFromTilemill(){
         return null;
     }
-    private String getTileFromImageTemplate(String imageTemplateURL){
+    private String getURLFromImageTemplate(String imageTemplateURL){
         return imageTemplateURL.replace("/{z}/{x}/{y}.png", "/");
     }
 
