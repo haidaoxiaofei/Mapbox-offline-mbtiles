@@ -110,11 +110,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapView.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="11" selection-start="2301" selection-end="2301" vertical-scroll-proportion="0.0" vertical-offset="139" max-vertical-offset="3842">
-              <folding />
+            <state line="219" column="24" selection-start="7629" selection-end="7629" vertical-scroll-proportion="0.046321526" vertical-offset="3111" max-vertical-offset="4335">
+              <folding>
+                <element signature="e#2049#2062#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -128,14 +130,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mapbox/osmdroidtests/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="16" selection-start="1767" selection-end="1767" vertical-scroll-proportion="0.5831063" vertical-offset="585" max-vertical-offset="1581">
+            <state line="50" column="13" selection-start="1857" selection-end="1857" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="1581">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1606#1867#0" expanded="true" />
-                <element signature="e#1856#1857#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -184,8 +185,8 @@
         <option value="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/Marker.java" />
         <option value="$PROJECT_DIR$/../src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java" />
         <option value="$PROJECT_DIR$/src/com/mapbox/osmdroidtests/MainActivity.java" />
+        <option value="$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java" />
       </list>
     </option>
   </component>
@@ -629,12 +630,12 @@
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32358003" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.6712095" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7346939" sideWeight="0.67536706" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2512909" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -680,7 +681,9 @@
     <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="69" column="8" selection-start="2654" selection-end="2654" vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="3281">
-          <folding />
+          <folding>
+            <element signature="e#2049#2062#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -704,7 +707,6 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1606#1867#0" expanded="true" />
-            <element signature="e#1856#1857#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -747,7 +749,9 @@
     <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="50" column="48" selection-start="1892" selection-end="1892" vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="3587">
-          <folding />
+          <folding>
+            <element signature="e#2049#2062#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -757,7 +761,6 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1606#1867#0" expanded="true" />
-            <element signature="e#1856#1857#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -800,7 +803,9 @@
     <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="50" column="48" selection-start="1892" selection-end="1892" vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="3587">
-          <folding />
+          <folding>
+            <element signature="e#2049#2062#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -810,7 +815,6 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1606#1867#0" expanded="true" />
-            <element signature="e#1856#1857#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -853,7 +857,9 @@
     <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="50" column="48" selection-start="1892" selection-end="1892" vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="3587">
-          <folding />
+          <folding>
+            <element signature="e#2049#2062#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -863,7 +869,6 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1606#1867#0" expanded="true" />
-            <element signature="e#1856#1857#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -990,6 +995,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mapbox/osmdroidtests/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="13" selection-start="1857" selection-end="1857" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="1581">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1606#1867#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../src/main/java/org/osmdroid/views/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1088" column="24" selection-start="40726" selection-end="40726" vertical-scroll-proportion="0.0" vertical-offset="17136" max-vertical-offset="27540">
@@ -999,18 +1014,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="11" selection-start="2301" selection-end="2301" vertical-scroll-proportion="0.0" vertical-offset="139" max-vertical-offset="3842">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mapbox/osmdroidtests/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="16" selection-start="1767" selection-end="1767" vertical-scroll-proportion="0.5831063" vertical-offset="585" max-vertical-offset="1581">
+        <state line="219" column="24" selection-start="7629" selection-end="7629" vertical-scroll-proportion="0.046321526" vertical-offset="3111" max-vertical-offset="4335">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1606#1867#0" expanded="true" />
-            <element signature="e#1856#1857#0" expanded="true" />
+            <element signature="e#2049#2062#0" expanded="true" />
           </folding>
         </state>
       </provider>
