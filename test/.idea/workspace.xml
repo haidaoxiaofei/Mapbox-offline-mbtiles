@@ -113,7 +113,7 @@
       <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="219" column="24" selection-start="7629" selection-end="7629" vertical-scroll-proportion="0.046321526" vertical-offset="3111" max-vertical-offset="4335">
+            <state line="182" column="0" selection-start="6407" selection-end="6407" vertical-scroll-proportion="0.5831063" vertical-offset="2285" max-vertical-offset="4845">
               <folding>
                 <element signature="e#2049#2062#0" expanded="true" />
               </folding>
@@ -622,7 +622,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959612" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3980424" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270869" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32358003" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23860182" sideWeight="0.30323678" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1014,7 +1014,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="219" column="24" selection-start="7629" selection-end="7629" vertical-scroll-proportion="0.046321526" vertical-offset="3111" max-vertical-offset="4335">
+        <state line="182" column="0" selection-start="6407" selection-end="6407" vertical-scroll-proportion="0.5831063" vertical-offset="2285" max-vertical-offset="4845">
           <folding>
             <element signature="e#2049#2062#0" expanded="true" />
           </folding>
