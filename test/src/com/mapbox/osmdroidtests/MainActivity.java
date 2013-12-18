@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import com.mapbox.mapboxsdk.MapView;
 import com.testflightapp.lib.TestFlight;
 import org.osmdroid.api.IMapController;
@@ -15,27 +17,39 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 public class MainActivity extends Activity {
 	private IMapController mapController;
-	private GeoPoint startingPoint = new GeoPoint(42.8, -73.933333);
+	private GeoPoint startingPoint = new GeoPoint(37.7905, -122.4062);
 	private MapTileProviderBasic tileProvider;
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
     private Paint paint;
-    private final String mapURL = "http://a.tiles.mapbox.com/v3/examples.map-9ijuk24y/";
+    private final String mapURL = "examples.map-9ijuk24y";
+    private final String otherURL = "fdansv.maphome";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TestFlight.takeOff(getApplication(), "e4fe404b-2edc-4a2d-8083-3d708168e4c4");
-
-        mv = new MapView(this, mapURL);
-        setContentView(mv);
-
+        setContentView(R.layout.activity_main);
+        mv = (MapView) findViewById(R.id.mapview);
+        mv.setURL(otherURL);
         mapController = mv.getController();
         mapController.setCenter(startingPoint);
-        mapController.setZoom(4);
+        mapController.setZoom(3);
 
         // Configures a marker
         mv.addMarker(52.5, 0f, "Hello", "Marker test");
+        Button button = (Button) findViewById(R.id.layerbutton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Adding layer");
+                
+                mv.addLayer("sf", mapURL);
+                mv.invalidate();
+            }
+        });
 
     }
     private void addLocationOverlay(){
