@@ -87,6 +87,12 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         }
 
     }
+    public void removeLayer(String identifier){
+
+    }
+    public void switchToLayer(String identifier){
+
+    }
 
     public void addLayer(final String identifier, String URL){
         URL = parseURL(URL);

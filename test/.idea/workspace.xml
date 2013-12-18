@@ -116,7 +116,7 @@
       <file leaf-file-name="MapView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="134" column="58" selection-start="4952" selection-end="4952" vertical-scroll-proportion="1.9621621" vertical-offset="611" max-vertical-offset="3706">
+            <state line="92" column="49" selection-start="3477" selection-end="3477" vertical-scroll-proportion="0.6756757" vertical-offset="611" max-vertical-offset="3808">
               <folding />
             </state>
           </provider>
@@ -979,7 +979,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/src/com/mapbox/mapboxsdk/MapView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="58" selection-start="4952" selection-end="4952" vertical-scroll-proportion="1.9621621" vertical-offset="611" max-vertical-offset="3706">
+        <state line="92" column="49" selection-start="3477" selection-end="3477" vertical-scroll-proportion="0.6756757" vertical-offset="611" max-vertical-offset="3808">
           <folding />
         </state>
       </provider>
