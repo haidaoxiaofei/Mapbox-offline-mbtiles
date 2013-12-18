@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -16,6 +17,7 @@ import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
 import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
 import org.osmdroid.tileprovider.MapTileProviderBase;
+import org.osmdroid.tileprovider.MapTileProviderBasic;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.util.GeoPoint;
@@ -23,6 +25,7 @@ import org.osmdroid.views.MapController;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
+import org.osmdroid.views.overlay.TilesOverlay;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -51,6 +54,8 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
     }
+
+    // TO DO these constructors look terrible. The one below really needs to be simplified.
     public MapView(Context context, String URL){
         super(context, null);
         this.context = context;
@@ -75,20 +80,36 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         init(context);
     }
 
-    private void init(Context context) {
-        this.context = context;
-        setURL("");
-        eventsOverlay = new MapEventsOverlay(context, this);
-        this.getOverlays().add(eventsOverlay);
-        this.setMultiTouchControls(true);
-    }
-
     public void setURL(String URL){
         if(!URL.equals("")) {
             tileSource = new XYTileSource(getApplicationName(), ResourceProxy.string.online_mode, 0, 24, dpToPx(256), ".png", URL);
             this.setTileSource(tileSource);
         }
 
+    }
+
+    public void addLayer(final String identifier, String URL){
+        URL = parseURL(URL);
+        final MapTileProviderBasic tileProvider = new MapTileProviderBasic(context.getApplicationContext());
+        final ITileSource tileSource = new XYTileSource(identifier, null, 1, 16, 256, ".png", URL);
+        tileProvider.setTileSource(tileSource);
+        final TilesOverlay tilesOverlay = new TilesOverlay(tileProvider, context);
+        tilesOverlay.setLoadingBackgroundColor(Color.TRANSPARENT);
+        this.getOverlays().add(tilesOverlay);
+    }
+
+
+
+    /////////////////////
+    // PRIVATE METHODS //
+    /////////////////////
+
+    private void init(Context context) {
+        this.context = context;
+        setURL("");
+        eventsOverlay = new MapEventsOverlay(context, this);
+        this.getOverlays().add(eventsOverlay);
+        this.setMultiTouchControls(true);
     }
 
     private int dpToPx(int dp) {
@@ -108,6 +129,9 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         String completeURL = "http://a.tiles.mapbox.com/v3/"+mapBoxID+"/";
         return completeURL;
     }
+
+
+
     private String getURLFromTileJSON(String tileJSONURL){
         return tileJSONURL.replace(".json", "/");
     }
@@ -182,6 +206,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         }
     }
 
+
     private void setDefaultItemizedOverlay() {
         defaultMarkerOverlay = new ItemizedIconOverlay<OverlayItem>(
                 defaultMarkerList,
@@ -197,6 +222,8 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
                 }, new DefaultResourceProxyImpl(context.getApplicationContext()));
         this.getOverlays().add(defaultMarkerOverlay);
     }
+
+
     @Override
     public boolean singleTapUpHelper(IGeoPoint p) {
         onTap(p);
@@ -208,6 +235,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         onLongPress(p);
         return false;
     }
+
 
     public void onLongPress(IGeoPoint p){
     }
