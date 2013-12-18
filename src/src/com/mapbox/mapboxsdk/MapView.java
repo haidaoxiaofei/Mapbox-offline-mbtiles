@@ -81,7 +81,9 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     public void setURL(String URL){
+
         if(!URL.equals("")) {
+            URL = parseURL(URL);
             tileSource = new XYTileSource(getApplicationName(), ResourceProxy.string.online_mode, 0, 24, dpToPx(256), ".png", URL);
             this.setTileSource(tileSource);
         }
@@ -130,7 +132,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     private String getURLFromMapBoxID(String mapBoxID){
         if(mapBoxID.equals("") || !mapBoxID.contains(".")){
-            throw new IllegalArgumentException("Invalid MapBox ID");
+            throw new IllegalArgumentException("Invalid MapBox ID, entered "+mapBoxID);
         }
         String completeURL = "http://a.tiles.mapbox.com/v3/"+mapBoxID+"/";
         return completeURL;

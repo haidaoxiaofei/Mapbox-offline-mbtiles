@@ -3,10 +3,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" >
 
-    <org.osmdroid.views.MapView
+    <com.mapbox.mapboxsdk.MapView
             android:id="@+id/mapview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-    </org.osmdroid.views.MapView>
+
+    </com.mapbox.mapboxsdk.MapView>
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Change layer"
+            android:id="@+id/layerbutton"/>
 
 </RelativeLayout>
