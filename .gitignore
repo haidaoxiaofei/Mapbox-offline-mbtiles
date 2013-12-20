@@ -2,3 +2,5 @@ test/bin/
 
 test/classes/
 src/out
+test/gen
+test/out
