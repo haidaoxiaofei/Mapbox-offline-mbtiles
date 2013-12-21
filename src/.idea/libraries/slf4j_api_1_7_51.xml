@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="slf4j-api-1.7.51">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../test/classes/production/main/org/osmdroid/slf4j-api-1.7.5.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

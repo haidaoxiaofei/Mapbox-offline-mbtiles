@@ -1,0 +1,52 @@
+buildscript {
+
+    repositories {
+
+        mavenCentral()
+
+    }
+
+    dependencies {
+
+        classpath 'com.android.tools.build:gradle:0.6.1'
+
+    }
+
+}
+
+apply plugin: 'android'
+
+dependencies {
+
+    compile fileTree(dir: 'libs', include: '*.jar')
+
+}
+
+android {
+
+    compileSdkVersion 17
+
+    buildToolsVersion "17.0.0"
+
+
+
+
+    sourceSets {
+
+        main {
+
+            manifest.srcFile 'test/AndroidManifest.xml'
+
+            java.srcDirs = ['test/src', 'src/src', 'src/main/java']
+
+            resources.srcDirs = ['test/res', 'src/res', 'src/main/resources']
+
+            res.srcDirs = ['test/res', 'src/res', 'src/main/resources']
+
+            assets.srcDirs = ['test/assets']
+
+        }
+
+    }
+
+}

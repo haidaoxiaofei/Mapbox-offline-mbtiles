@@ -1,6 +1,11 @@
 test/bin/
 
 test/classes/
-src/out
-test/gen
-test/out
+src/out/
+test/gen/
+test/out/
+src/gen/
+build/
+.idea/
+src/.idea/
+.gradle/
