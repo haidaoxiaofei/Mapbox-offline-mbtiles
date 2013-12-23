@@ -55,14 +55,9 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         this.setMultiTouchControls(true);
     }
 
-    // TO DO these constructors look terrible. The one below really needs to be simplified.
     public MapView(Context context, String URL){
-        super(context, null);
-        this.context = context;
+        this(context, (AttributeSet) null);
         setURL(parseURL(URL));
-        eventsOverlay = new MapEventsOverlay(context, this);
-        this.getOverlays().add(eventsOverlay);
-        this.setMultiTouchControls(true);
     }
 
     private String parseURL(String url) {
@@ -121,7 +116,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     private int dpToPx(int dp) {
-        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))-50;
         return px;
     }
@@ -131,14 +126,12 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     private String getURLFromMapBoxID(String mapBoxID){
-        if(mapBoxID.equals("") || !mapBoxID.contains(".")){
+        if(!mapBoxID.contains(".")){
             throw new IllegalArgumentException("Invalid MapBox ID, entered "+mapBoxID);
         }
         String completeURL = "http://a.tiles.mapbox.com/v3/"+mapBoxID+"/";
         return completeURL;
     }
-
-
 
     private String getURLFromTileJSON(String tileJSONURL){
         return tileJSONURL.replace(".json", "/");
