@@ -6,6 +6,11 @@
         <option name="LIBRARY_PROJECT" value="true" />
       </configuration>
     </facet>
+    <facet type="android" name="Android2">
+      <configuration>
+        <option name="LIBRARY_PROJECT" value="true" />
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -16,6 +21,7 @@
     <orderEntry type="jdk" jdkName="Android API 17 Platform" jdkType="Android SDK" />
     <orderEntry type="module" module-name="main" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="main" />
   </component>
 </module>
 
