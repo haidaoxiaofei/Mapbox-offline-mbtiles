@@ -112,6 +112,7 @@ public class MultiTouchController<T> {
      * Fields extracted from mCurrPt
      */
     private float mCurrPtX, mCurrPtY, mCurrPtDiam, mCurrPtWidth, mCurrPtHeight, mCurrPtAng;
+    public boolean postZoom;
 
     /**
      * Extract fields from mCurrPt, respecting the update* fields of mCurrPt. This just avoids code duplication. I hate that Java doesn't support
@@ -327,13 +328,13 @@ public class MultiTouchController<T> {
                         && action != MotionEvent.ACTION_CANCEL, //
                         processingHist ? event.getHistoricalEventTime(histIdx) : event.getEventTime());
             }
-
             return true;
         } catch (Exception e) {
             // In case any of the introspection stuff fails (it shouldn't)
             Log.e("MultiTouchController", "onTouchEvent() failed", e);
             return false;
         }
+
     }
 
     private void decodeTouchEvent(int pointerCount, float[] x, float[] y, float[] pressure, int[] pointerIds, int action, boolean down, long eventTime) {
@@ -470,11 +471,14 @@ public class MultiTouchController<T> {
                     // Dropped one or both points, stop stretching
 
                     if (!mCurrPt.isDown()) {
+                        System.out.println("Pinch released");
                         // Dropped both points, go back to doing nothing
                         mMode = MODE_NOTHING;
                         objectCanvas.selectObject((selectedObject = null), mCurrPt);
+                        this.postZoom = true;
 
                     } else {
+                        System.out.println("One pointer released");
                         // Just dropped point 2, downgrade to a single-point drag
                         mMode = MODE_DRAG;
                         // Restart the pinch with the single-finger position
@@ -486,6 +490,7 @@ public class MultiTouchController<T> {
 
                 } else {
                     // Still pinching
+                    System.out.println("Pinch put");
                     if (Math.abs(mCurrPt.getX() - mPrevPt.getX()) > MAX_MULTITOUCH_POS_JUMP_SIZE
                             || Math.abs(mCurrPt.getY() - mPrevPt.getY()) > MAX_MULTITOUCH_POS_JUMP_SIZE
                             || Math.abs(mCurrPt.getMultiTouchWidth() - mPrevPt.getMultiTouchWidth()) * .5f > MAX_MULTITOUCH_DIM_JUMP_SIZE

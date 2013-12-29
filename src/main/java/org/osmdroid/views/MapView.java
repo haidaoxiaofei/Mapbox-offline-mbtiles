@@ -1491,6 +1491,10 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         @Override
         public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX,
                                final float velocityY) {
+            if(mMultiTouchController.postZoom){
+                mMultiTouchController.postZoom = false;
+                return false;
+            }
             if (MapView.this.getOverlayManager()
                     .onFling(e1, e2, velocityX, velocityY, MapView.this)) {
                 return true;
@@ -1514,6 +1518,10 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         @Override
         public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX,
                                 final float distanceY) {
+            if(mMultiTouchController.postZoom){
+                mMultiTouchController.postZoom = false;
+                return false;
+            }
             if (MapView.this.getOverlayManager().onScroll(e1, e2, distanceX, distanceY,
                     MapView.this)) {
                 return true;
