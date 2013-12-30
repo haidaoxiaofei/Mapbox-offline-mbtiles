@@ -66,6 +66,10 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      */
     private boolean firstMarker = true;
 
+    //////////////////
+    // CONSTRUCTORS //
+    //////////////////
+
     /**
      * Constructor for XML layout calls. Should not be used programmatically
      * @param context A copy of the app context
@@ -90,26 +94,21 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         setURL(parseURL(URL));
     }
 
-    /**
-     * Parses the passed ID string to use the relevant method
-     * @param url Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
-     * @return the standard URL to be used by the library
-     **/
-    private String parseURL(String url) {
-        if(url.contains("json")) return getURLFromTileJSON(url);
-        if(!url.contains("http://")) return getURLFromMapBoxID(url);
-        if(url.contains(".png")) return getURLFromImageTemplate(url);
-        else{
-            throw new IllegalArgumentException("You need to enter either a valid URL, a MapBox id, or a tile URL template");
-        }
-        
-    }
-
-
     protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileProviderBase aTileProvider) {
         super(context, tileSizePixels, resourceProxy, aTileProvider);
         init(context);
     }
+
+    ////////////////////
+    // PUBLIC METHODS //
+    ////////////////////
+
+
+
+    /**
+     * Sets the MapView to use the specified URL
+     * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
+     */
 
     public void setURL(String URL){
 
@@ -120,13 +119,28 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         }
 
     }
+
+    /**
+     * Removes a layer from the list in the MapView
+     * @param identifier layer name
+     */
     public void removeLayer(String identifier){
 
     }
+
+    /**
+     * Switches to an already added layer
+     * @param identifier layer name
+     */
     public void switchToLayer(String identifier){
 
     }
 
+    /**
+     * Adds a layer (tile overlay) to the MapView
+     * @param identifier layer name
+     * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
+     */
     public void addLayer(final String identifier, String URL){
         URL = parseURL(URL);
         final MapTileProviderBasic tileProvider = new MapTileProviderBasic(context.getApplicationContext());
@@ -142,6 +156,22 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     /////////////////////
     // PRIVATE METHODS //
     /////////////////////
+
+
+    /**
+     * Parses the passed ID string to use the relevant method
+     * @param url Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
+     * @return the standard URL to be used by the library
+     **/
+    private String parseURL(String url) {
+        if(url.contains("json")) return getURLFromTileJSON(url);
+        if(!url.contains("http://")) return getURLFromMapBoxID(url);
+        if(url.contains(".png")) return getURLFromImageTemplate(url);
+        else{
+            throw new IllegalArgumentException("You need to enter either a valid URL, a MapBox id, or a tile URL template");
+        }
+
+    }
 
     private void init(Context context) {
         this.context = context;
