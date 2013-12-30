@@ -173,6 +173,10 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     }
 
+    /**
+     * Method that constructs the view. used in lieu of a constructor
+     * @param context a copy of the app context
+     */
     private void init(Context context) {
         this.context = context;
         setURL("");
@@ -181,10 +185,19 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         this.setMultiTouchControls(true);
     }
 
+    /**
+     * Obtains the name of the application to identify the maps in the filesystem
+     * @return the name of the app
+     */
     private String getApplicationName(){
         return context.getPackageName();
     }
 
+    /**
+     * Turns a Mapbox ID into a standard URL
+     * @param mapBoxID the Mapbox ID
+     * @return a standard url that will be used by the MapView
+     */
     private String getURLFromMapBoxID(String mapBoxID){
         if(!mapBoxID.contains(".")){
             throw new IllegalArgumentException("Invalid MapBox ID, entered "+mapBoxID);
@@ -193,12 +206,28 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         return completeURL;
     }
 
+    /**
+     * Turns a URL TileJSON path to the standard URL format used by the MapView
+     * @param tileJSONURL the tileJSON URL
+     * @return a standard url that will be used by the MapView
+     */
     private String getURLFromTileJSON(String tileJSONURL){
         return tileJSONURL.replace(".json", "/");
     }
+
+    /**
+     * Gets a local TileMill address and turns it into a URL for the MapView (not yet implemented)
+     * @return a standard url that will be used by the MapView
+     */
     private String getURLFromTilemill(){
         return null;
     }
+
+    /**
+     * Gets a {xyz} image template URL and turns it into a standard URL for the MapView
+     * @param imageTemplateURL the template URL
+     * @return a standard url that will be used by the MapView
+     */
     private String getURLFromImageTemplate(String imageTemplateURL){
         return imageTemplateURL.replace("/{z}/{x}/{y}.png", "/");
     }
@@ -226,10 +255,18 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         return null;
     }
 
+    /**
+     * Adds a new ItemizedOverlay to the MapView
+     * @param itemizedOverlay the itemized overlay
+     */
+
     public void addItemizedOverlay(ItemizedOverlay<Marker> itemizedOverlay){
         this.getOverlays().add(itemizedOverlay);
     }
 
+    /**
+     * Class that generates markers from formats such as GeoJSON
+     */
     public class MarkerFactory {
         public ItemizedOverlay<Marker> fromGeoJSON(String URL){
             GeoJSONElement geoJSONElement = new GeoJSONElement(URL);
@@ -267,7 +304,9 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         }
     }
 
-
+    /**
+     * Sets the default itemized overlay
+     */
     private void setDefaultItemizedOverlay() {
         defaultMarkerOverlay = new ItemizedIconOverlay<OverlayItem>(
                 defaultMarkerList,
@@ -284,12 +323,26 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         this.getOverlays().add(defaultMarkerOverlay);
     }
 
+    /////////////////////////
+    // IMPLEMENTED METHODS //
+    /////////////////////////
 
+    /**
+     * Method coming from OSMDroid's tap handler
+     * @param p the position where the event occurred.
+     * @return whether the event action is triggered or not
+     */
     @Override
     public boolean singleTapUpHelper(IGeoPoint p) {
         onTap(p);
         return true;
     }
+
+    /**
+     * Method coming from OSMDroid's long tap handler
+     * @param p the position where the event occurred.
+     * @return whether the event action is triggered or not
+     */
 
     @Override
     public boolean longPressHelper(IGeoPoint p) {
