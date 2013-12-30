@@ -115,12 +115,6 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         this.setMultiTouchControls(true);
     }
 
-    private int dpToPx(int dp) {
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))-50;
-        return px;
-    }
-
     private String getApplicationName(){
         return context.getPackageName();
     }
