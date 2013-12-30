@@ -37,13 +37,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapView extends org.osmdroid.views.MapView implements MapEventsReceiver {
-    private ITileSource tileSource;
-    private MapController controller;
-    private ItemizedIconOverlay<OverlayItem> defaultMarkerOverlay;
-    private ArrayList<OverlayItem> defaultMarkerList = new ArrayList<OverlayItem>();
-    private MapEventsOverlay eventsOverlay;
+    ////////////
+    // FIELDS //
+    ////////////
 
+    /**
+     * The current tile source for the view (to be deprecated soon)
+     */
+    private ITileSource tileSource;
+    /**
+     * The default marker Overlay, automatically added to the view to add markers directly
+     */
+    private ItemizedIconOverlay<OverlayItem> defaultMarkerOverlay;
+    /**
+     * List linked to the default marker overlay
+     */
+    private ArrayList<OverlayItem> defaultMarkerList = new ArrayList<OverlayItem>();
+    /**
+     * Overlay for basic map touch events
+     */
+    private MapEventsOverlay eventsOverlay;
+    /**
+     * A copy of the app context
+     */
     private Context context;
+    /**
+     * Whether or not a marker has been placed already
+     */
     private boolean firstMarker = true;
 
     public MapView(Context context, AttributeSet attrs) {
