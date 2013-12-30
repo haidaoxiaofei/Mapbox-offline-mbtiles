@@ -80,4 +80,30 @@ public class MBTilesFileArchive implements IArchiveFile {
         return cursor.getInt(0);
     }
 
+    public String getName(){
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata ORDER BY ROWID ASC LIMIT 1", null);
+        cursor.moveToFirst();
+        return cursor.getString(0);
+    }
+    public String getType(){
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata ORDER BY ROWID ASC LIMIT 1", null);
+        cursor.moveToFirst();
+        return cursor.getString(1);
+    }
+    public String getVersion(){
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata ORDER BY ROWID ASC LIMIT 1", null);
+        cursor.moveToFirst();
+        return cursor.getString(2);
+    }
+    public String getDescription(){
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata ORDER BY ROWID ASC LIMIT 1", null);
+        cursor.moveToFirst();
+        return cursor.getString(3);
+    }
+    public String getFormat(){
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata ORDER BY ROWID ASC LIMIT 1", null);
+        cursor.moveToFirst();
+        return cursor.getString(4);
+    }
+
 }
