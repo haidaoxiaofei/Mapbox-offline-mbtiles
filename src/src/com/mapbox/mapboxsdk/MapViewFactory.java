@@ -43,10 +43,10 @@ public class MapViewFactory {
         MBTilesFileArchive mbTilesFileArchive = MBTilesFileArchive.getDatabaseFileArchive(file);
         IArchiveFile[] files = {mbTilesFileArchive};
         XYTileSource MBTILESRENDER = new XYTileSource(
-                "mbtiles",
+                URL,
                 ResourceProxy.string.offline_mode,
                 mbTilesFileArchive.getMinZoomLevel(),mbTilesFileArchive.getMaxZoomLevel(),
-                256, ".png", "http://i.dont.care.org/");
+                256, ".png", "");
         MapTileModuleProviderBase moduleProvider = new MapTileFileArchiveProvider(simpleReceiver, MBTILESRENDER, files);
         MapTileProviderArray mProvider = new MapTileProviderArray(MBTILESRENDER, null,
                 new MapTileModuleProviderBase[]{moduleProvider}
