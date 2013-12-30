@@ -3,6 +3,7 @@ package org.osmdroid.tileprovider.modules;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import com.mapbox.mapboxsdk.Bounds;
 import org.osmdroid.tileprovider.MapTile;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.slf4j.Logger;
@@ -81,29 +82,39 @@ public class MBTilesFileArchive implements IArchiveFile {
     }
 
     public String getName(){
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata ORDER BY ROWID ASC LIMIT 1", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = name", null);
         cursor.moveToFirst();
-        return cursor.getString(0);
+        return cursor.getString(1);
     }
     public String getType(){
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata ORDER BY ROWID ASC LIMIT 1", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = template", null);
         cursor.moveToFirst();
         return cursor.getString(1);
     }
     public String getVersion(){
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata ORDER BY ROWID ASC LIMIT 1", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = version", null);
         cursor.moveToFirst();
-        return cursor.getString(2);
+        return cursor.getString(1);
     }
     public String getDescription(){
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata ORDER BY ROWID ASC LIMIT 1", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = description", null);
         cursor.moveToFirst();
-        return cursor.getString(3);
+        return cursor.getString(1);
     }
-    public String getFormat(){
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata ORDER BY ROWID ASC LIMIT 1", null);
+    public String getAttribution(){
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = attribution", null);
         cursor.moveToFirst();
-        return cursor.getString(4);
+        return cursor.getString(1);
+    }
+    public Bounds getBounds(){
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = bounds", null);
+        cursor.moveToFirst();
+        String boundsString = cursor.getString(1);
+        String[] boundsArray = boundsString.split(",");
+        return new Bounds(Double.parseDouble(boundsArray[0]),
+                          Double.parseDouble(boundsArray[1]),
+                          Double.parseDouble(boundsArray[2]),
+                          Double.parseDouble(boundsArray[3]));
     }
 
 }
