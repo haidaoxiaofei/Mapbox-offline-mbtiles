@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
         mapController = mv.getController();
         mapController.setCenter(startingPoint);
         mapController.setZoom(3);
+        this.addLocationOverlay();
 
         // Configures a marker
         mv.addMarker(52.5, 0f, "Hello", "Marker test");
