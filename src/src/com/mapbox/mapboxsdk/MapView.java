@@ -66,6 +66,11 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      */
     private boolean firstMarker = true;
 
+    /**
+     * Constructor for XML layout calls. Should not be used programmatically
+     * @param context A copy of the app context
+     * @param attrs An AttributeSet object to get extra info from the XML, such as mapbox id or type of baselayer
+     */
     public MapView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
@@ -75,11 +80,21 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         this.setMultiTouchControls(true);
     }
 
+    /**
+     * Default constructor for the view
+     * @param context A copy of the app context
+     * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
+     */
     public MapView(Context context, String URL){
         this(context, (AttributeSet) null);
         setURL(parseURL(URL));
     }
 
+    /**
+     * Parses the passed ID string to use the relevant method
+     * @param url Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
+     * @return the standard URL to be used by the library
+     **/
     private String parseURL(String url) {
         if(url.contains("json")) return getURLFromTileJSON(url);
         if(!url.contains("http://")) return getURLFromMapBoxID(url);
@@ -89,6 +104,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         }
         
     }
+
 
     protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileProviderBase aTileProvider) {
         super(context, tileSizePixels, resourceProxy, aTileProvider);
