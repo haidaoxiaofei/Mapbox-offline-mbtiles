@@ -40,6 +40,7 @@ public class MBTilesFileArchive implements IArchiveFile {
 
     @Override
     public InputStream getInputStream(final ITileSource pTileSource, final MapTile pTile) {
+
         try {
             InputStream ret = null;
             final String[] tile = {COL_TILES_TILE_DATA};
@@ -52,6 +53,7 @@ public class MBTilesFileArchive implements IArchiveFile {
             final Cursor cur = mDatabase.query(TABLE_TILES, tile, "tile_column=? and tile_row=? and zoom_level=?", xyz, null, null, null);
 
             if (cur.getCount() != 0) {
+                System.out.println("Blob found at "+pTile.getZoomLevel()+", "+ pTile.getX()+", "+pTile.getY());
                 cur.moveToFirst();
                 ret = new ByteArrayInputStream(cur.getBlob(0));
             }

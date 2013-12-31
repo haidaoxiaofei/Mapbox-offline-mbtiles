@@ -18,7 +18,7 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 public class MainActivity extends Activity {
 	private IMapController mapController;
-	private GeoPoint startingPoint = new GeoPoint(4.5399, 38.7865);
+	private GeoPoint startingPoint = new GeoPoint(38.7865, 4.5399);
 	private MapTileProviderBasic tileProvider;
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
