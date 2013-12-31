@@ -82,32 +82,32 @@ public class MBTilesFileArchive implements IArchiveFile {
     }
 
     public String getName(){
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = name", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'name'", null);
         cursor.moveToFirst();
         return cursor.getString(1);
     }
     public String getType(){
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = template", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'template'", null);
         cursor.moveToFirst();
         return cursor.getString(1);
     }
     public String getVersion(){
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = version", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'version'", null);
         cursor.moveToFirst();
         return cursor.getString(1);
     }
     public String getDescription(){
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = description", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'description'", null);
         cursor.moveToFirst();
         return cursor.getString(1);
     }
     public String getAttribution(){
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = attribution", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'attribution'", null);
         cursor.moveToFirst();
         return cursor.getString(1);
     }
     public Bounds getBounds(){
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = bounds", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'bounds'", null);
         cursor.moveToFirst();
         String boundsString = cursor.getString(1);
         String[] boundsArray = boundsString.split(",");

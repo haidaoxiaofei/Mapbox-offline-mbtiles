@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import com.mapbox.mapboxsdk.MapView;
+import com.mapbox.mapboxsdk.MapViewFactory;
 import com.testflightapp.lib.TestFlight;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.MapTileProviderBasic;
@@ -17,7 +18,7 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 public class MainActivity extends Activity {
 	private IMapController mapController;
-	private GeoPoint startingPoint = new GeoPoint(37.7905, -122.4062);
+	private GeoPoint startingPoint = new GeoPoint(4.5399, 38.7865);
 	private MapTileProviderBasic tileProvider;
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
@@ -31,26 +32,15 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TestFlight.takeOff(getApplication(), "e4fe404b-2edc-4a2d-8083-3d708168e4c4");
-        setContentView(R.layout.activity_main);
-        mv = (MapView) findViewById(R.id.mapview);
-        mv.setURL(mapURL);
+        mv = MapViewFactory.fromMBTiles(this, "ons.mbtiles");
+        setContentView(mv);
         mapController = mv.getController();
         mapController.setCenter(startingPoint);
-        mapController.setZoom(3);
+        mapController.setZoom(14);
         this.addLocationOverlay();
 
         // Configures a marker
         mv.addMarker(52.5, 0f, "Hello", "Marker test");
-        Button button = (Button) findViewById(R.id.layerbutton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Adding layer");
-                
-                mv.addLayer("sf", mapURL);
-                mv.invalidate();
-            }
-        });
 
     }
     private void addLocationOverlay(){
