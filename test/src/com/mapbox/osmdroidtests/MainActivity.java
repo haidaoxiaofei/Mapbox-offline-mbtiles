@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
         this.addLocationOverlay();
 
         // Configures a marker
-        mv.addMarker(52.5, 0f, "Hello", "Marker test");
+        mv.addMarker(52.5, 0f, "I've seen many threads dealing with simular problems, but none of them works for me. In a canvas, I have a rectangle of the size, let's say", "Marker test");
 
     }
     private void addLocationOverlay(){

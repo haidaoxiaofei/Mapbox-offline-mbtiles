@@ -1,10 +1,10 @@
 package com.mapbox.mapboxsdk;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Point;
+import android.graphics.*;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
@@ -35,17 +35,21 @@ public class Tooltip extends Overlay{
     @Override
     protected void draw(Canvas canvas, org.osmdroid.views.MapView mapView, boolean shadow) {
         if(this.isVisible()){
-            System.out.println("Tooltip drawing");
+
             this.mapView = (MapView)mapView;
             this.calculatePoint();
             this.canvas = canvas;
             paint.setColor(Color.WHITE);
             this.setTooltipShape();
-            paint.setColor(Color.rgb(50, 50, 50));
-            paint.setTextAlign(Paint.Align.CENTER);
-            paint.setTextSize(40f);
-            System.out.println("Point: " + point.x);
-            canvas.drawText(text, point.x, point.y - 140, paint);
+            TextPaint tp = new TextPaint();
+            tp.setColor(Color.rgb(50, 50, 50));
+            tp.setTextAlign(Paint.Align.CENTER);
+            tp.setTextSize(40f);
+            StaticLayout sl = new StaticLayout(text, tp, 400, Layout.Alignment.ALIGN_NORMAL, 1, 1, false);
+            canvas.translate(0,-350);
+            sl.draw(canvas);
+            canvas.translate(0,350);
+
         }
     }
     private void setTooltipShape(){
