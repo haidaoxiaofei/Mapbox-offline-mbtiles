@@ -107,12 +107,18 @@ public class MapTileFileArchiveProvider extends MapTileFileStorageProviderBase {
 
     @Override
     public int getMinimumZoomLevel() {
+        if(mArchiveFiles.get(0).getClass().isInstance(MBTilesFileArchive.class)){
+            return ((MBTilesFileArchive)mArchiveFiles.get(0)).getMinZoomLevel();
+        }
         ITileSource tileSource = mTileSource.get();
         return tileSource != null ? tileSource.getMinimumZoomLevel() : MINIMUM_ZOOMLEVEL;
     }
 
     @Override
     public int getMaximumZoomLevel() {
+        if(mArchiveFiles.get(0).getClass().isInstance(MBTilesFileArchive.class)){
+            return ((MBTilesFileArchive)mArchiveFiles.get(0)).getMaxZoomLevel();
+        }
         ITileSource tileSource = mTileSource.get();
         return tileSource != null ? tileSource.getMaximumZoomLevel() : MAXIMUM_ZOOMLEVEL;
     }
