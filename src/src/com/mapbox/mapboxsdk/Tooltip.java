@@ -17,6 +17,7 @@ public class Tooltip extends Overlay{
     private String text;
     private MapView mapView;
     private Canvas canvas;
+    private int textHeight;
 
     private boolean visible;
 
@@ -40,20 +41,22 @@ public class Tooltip extends Overlay{
             this.calculatePoint();
             this.canvas = canvas;
             paint.setColor(Color.WHITE);
-            this.setTooltipShape();
             TextPaint tp = new TextPaint();
             tp.setColor(Color.rgb(50, 50, 50));
             tp.setTextAlign(Paint.Align.CENTER);
             tp.setTextSize(40f);
             StaticLayout sl = new StaticLayout(text, tp, 400, Layout.Alignment.ALIGN_NORMAL, 1, 1, false);
-            canvas.translate(0,-350);
+            textHeight = sl.getHeight();
+            this.setTooltipShape();
+
+            canvas.translate(0, -textHeight*2 +100);
             sl.draw(canvas);
-            canvas.translate(0,350);
+            canvas.translate(0, textHeight*2 -100);
 
         }
     }
     private void setTooltipShape(){
-        canvas.drawRect(point.x - 240, point.y - 200, point.x + 240, point.y - 100, paint);
+        canvas.drawRect(point.x - 240, point.y - 100 - textHeight, point.x + 240, point.y - 100, paint);
         canvas.save();
         canvas.rotate((float) 45, point.x, point.y - 100);
         canvas.drawRect(point.x - 20, point.y - 120, point.x + 20, point.y - 80, paint);
