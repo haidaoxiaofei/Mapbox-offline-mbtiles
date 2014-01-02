@@ -20,7 +20,7 @@ To include the library in your project [as a jar](https://github.com/mapbox/mapb
 
 We use Gradle to generate a built version of our latest code in a matter of seconds. To use it with your IDE, make sure that Gradle is installed on your machine and import the project by selecting build.gradle as the project file.
 
-If you don't have Gradle installed we also provide a small shell script that autoextracts Gradle and builds the project. Just run build.sh in a terminal, and you're set.
+If you don't have Gradle installed we also provide a small shell script that autoextracts Gradle and builds the project. Just run ```build.sh``` in a terminal, and you're set.
 
 **Manually**
 
