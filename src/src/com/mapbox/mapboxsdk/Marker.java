@@ -15,16 +15,24 @@ import java.net.URL;
 
 public class Marker extends OverlayItem{
     private Context context;
-
+    private Tooltip tooltip;
+    private MapView mapView;
 
     public Marker(String aTitle, String aDescription, GeoPoint aGeoPoint) {
-        super(aTitle, aDescription, aGeoPoint);
-        fromMaki("markerstroked");
+        this(null, aTitle, aDescription, aGeoPoint);
     }
     public Marker(MapView mv, String aTitle, String aDescription, GeoPoint aGeoPoint) {
         super(aTitle, aDescription, aGeoPoint);
         context = mv.getContext();
+        mapView = mv;
         fromMaki("markerstroked");
+        attachTooltip();
+    }
+
+    private void attachTooltip() {
+        tooltip = new Tooltip(context, this, this.getTitle());
+        mapView.getOverlays().add(tooltip);
+        mapView.invalidate();
     }
 
     public void fromMaki(String makiString){
@@ -33,6 +41,13 @@ public class Marker extends OverlayItem{
         int id = context.getResources().getIdentifier(urlString, "drawable", context.getPackageName());
         System.out.println(""+id);
         this.setMarker(context.getResources().getDrawable(id));
+    }
+    public void setTooltipVisible(){
+        tooltip.setVisible(true);
+        mapView.invalidate();
+    }
+    public void setTooltipInvisible(){
+        tooltip.setVisible(false);
     }
 
 

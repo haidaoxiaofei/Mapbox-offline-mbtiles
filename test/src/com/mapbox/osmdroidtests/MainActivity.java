@@ -18,7 +18,7 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 public class MainActivity extends Activity {
 	private IMapController mapController;
-	private GeoPoint startingPoint = new GeoPoint(38.7865, 4.5399);
+	private GeoPoint startingPoint = new GeoPoint(0, 0f);
 	private MapTileProviderBasic tileProvider;
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
@@ -32,11 +32,14 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TestFlight.takeOff(getApplication(), "e4fe404b-2edc-4a2d-8083-3d708168e4c4");
-        mv = MapViewFactory.fromMBTiles(this, "ons.mbtiles");
+//        setContentView(R.layout.activity_main);
+//        mv = (MapView)findViewById(R.id.mapview);
+//        mv.setURL(mapURL);
+        mv = MapViewFactory.fromMBTiles(this, "test.mbtiles");
         setContentView(mv);
         mapController = mv.getController();
         mapController.setCenter(startingPoint);
-        mapController.setZoom(14);
+        mapController.setZoom(2);
         this.addLocationOverlay();
 
         // Configures a marker

@@ -35,6 +35,7 @@ public class Tooltip extends Overlay{
     @Override
     protected void draw(Canvas canvas, org.osmdroid.views.MapView mapView, boolean shadow) {
         if(this.isVisible()){
+            System.out.println("Tooltip drawing");
             this.mapView = (MapView)mapView;
             this.calculatePoint();
             this.canvas = canvas;

@@ -262,6 +262,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     public void addItemizedOverlay(ItemizedOverlay<Marker> itemizedOverlay){
         this.getOverlays().add(itemizedOverlay);
+
     }
 
     /**
@@ -311,9 +312,11 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         defaultMarkerOverlay = new ItemizedIconOverlay<OverlayItem>(
                 defaultMarkerList,
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                    Marker currentMarker;
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        MapView.this.getOverlays().add(new Tooltip(context, item , item.getTitle()));
-                        MapView.this.invalidate();
+                        System.out.println("overlay touched");
+                        ((Marker)(item)).setTooltipVisible();
+
                         return true;
                     }
                     public boolean onItemLongPress(final int index, final OverlayItem item) {
@@ -334,6 +337,10 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      */
     @Override
     public boolean singleTapUpHelper(IGeoPoint p) {
+        int index = this.getOverlays().lastIndexOf(defaultMarkerOverlay);
+
+        this.getOverlays().set(index, defaultMarkerOverlay);
+        System.out.println("the index is "+ index);
         onTap(p);
         return true;
     }
