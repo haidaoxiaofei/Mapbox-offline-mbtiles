@@ -5,10 +5,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
+import android.view.Window;
 import com.mapbox.mapboxsdk.MapView;
-import com.mapbox.mapboxsdk.MapViewFactory;
 import com.testflightapp.lib.TestFlight;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.MapTileProviderBasic;
@@ -18,12 +16,12 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 public class MainActivity extends Activity {
 	private IMapController mapController;
-	private GeoPoint startingPoint = new GeoPoint(0, 0f);
+	private GeoPoint startingPoint = new GeoPoint(51f, 0f);
 	private MapTileProviderBasic tileProvider;
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
     private Paint paint;
-    private final String mapURL = "examples.map-9ijuk24y";
+    private final String mapURL = "brunosan.map-cyglrrfu";
     private final String otherURL = "fdansv.maphome";
 
 
@@ -31,19 +29,19 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         TestFlight.takeOff(getApplication(), "e4fe404b-2edc-4a2d-8083-3d708168e4c4");
-//        setContentView(R.layout.activity_main);
-//        mv = (MapView)findViewById(R.id.mapview);
-//        mv.setURL(mapURL);
-        mv = MapViewFactory.fromMBTiles(this, "test.mbtiles");
-        setContentView(mv);
+        setContentView(R.layout.activity_main);
+
+        mv = (MapView)findViewById(R.id.mapview);
+        mv.setURL(mapURL);
         mapController = mv.getController();
         mapController.setCenter(startingPoint);
-        mapController.setZoom(2);
-        this.addLocationOverlay();
+        mapController.setZoom(4);
+        //this.addLocationOverlay();
 
         // Configures a marker
-        mv.addMarker(52.5, 0f, "I've seen many threads dealing with simular problems, but none of them works for me. In a canvas, I have a rectangle of the size, let's say", "Marker test");
+        mv.addMarker(52.5, 0f, "Hello", "Marker test");
 
     }
     private void addLocationOverlay(){
