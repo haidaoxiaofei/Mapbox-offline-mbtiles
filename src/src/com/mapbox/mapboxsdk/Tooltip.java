@@ -19,6 +19,7 @@ public class Tooltip extends Overlay{
     private Canvas canvas;
 
     private boolean visible;
+    private TextPaint textPaint;
 
     public Tooltip(Context ctx) {
         this(ctx, null);
@@ -29,24 +30,27 @@ public class Tooltip extends Overlay{
     public Tooltip(Context ctx, OverlayItem ot, String text) {
         super(ctx);
         setItem(ot);
+        initTextPaint();
         setText(text);
+    }
+
+    private void initTextPaint() {
+        textPaint = new TextPaint();
+        textPaint.setColor(Color.rgb(50, 50, 50));
+        textPaint.setTextAlign(Paint.Align.CENTER);
+        textPaint.setTextSize(40f);
     }
 
     @Override
     protected void draw(Canvas canvas, org.osmdroid.views.MapView mapView, boolean shadow) {
         if(this.isVisible()){
-            TextPaint tp = new TextPaint();
-            tp.setColor(Color.rgb(50, 50, 50));
-            tp.setTextAlign(Paint.Align.CENTER);
-            tp.setTextSize(40f);
-            StaticLayout sl = new StaticLayout(text, tp, 400, Layout.Alignment.ALIGN_CENTER, 1, 1, false);
+            StaticLayout sl = new StaticLayout(text, textPaint, 400, Layout.Alignment.ALIGN_CENTER, 1, 1, false);
             sl.draw(canvas);
             this.mapView = (MapView)mapView;
             this.calculatePoint();
             this.canvas = canvas;
             paint.setColor(Color.WHITE);
             this.setTooltipShape();
-
         }
     }
     private void setTooltipShape(){
@@ -95,7 +99,6 @@ public class Tooltip extends Overlay{
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
-
 
     public Rect getRect() {
         return new Rect(point.x - TOOLTIP_WIDTH/2, point.y - 200, point.x + TOOLTIP_WIDTH/2, point.y - 100);
