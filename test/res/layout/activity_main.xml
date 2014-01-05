@@ -9,8 +9,31 @@
             android:layout_height="fill_parent">
 
     </com.mapbox.mapboxsdk.MapView>
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Change layer"
-            android:id="@+id/layerbutton"/>
+    <LinearLayout
+            android:id="@+id/buttonsrow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="1">
+        <Button
+                android:id="@+id/satbut"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Satellite"
+                android:layout_weight="0.3333" />
+        <Button
+                android:id="@+id/terbut"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Terrain"
+                android:layout_weight="0.33333" />
+        <Button
+                android:id="@+id/strbut"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Streets"
+                android:layout_weight="0.3333" />
+            </LinearLayout>
 
 </RelativeLayout>
