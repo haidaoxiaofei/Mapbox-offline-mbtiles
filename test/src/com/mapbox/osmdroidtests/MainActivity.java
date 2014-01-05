@@ -3,9 +3,13 @@ package com.mapbox.osmdroidtests;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import com.mapbox.mapboxsdk.MapView;
 import com.testflightapp.lib.TestFlight;
 import org.osmdroid.api.IMapController;
@@ -21,9 +25,10 @@ public class MainActivity extends Activity {
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
     private Paint paint;
-    private final String mapURL = "brunosan.map-cyglrrfu";
-    private final String otherURL = "fdansv.maphome";
-
+    private String satellite = "brunosan.map-cyglrrfu";
+    private String street = "examples.map-vyofok3q";
+    private String terrain = "examples.map-zgrqqx0w";
+    private String currentLayer = "terrain";
 
 
     @Override
@@ -34,16 +39,65 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         mv = (MapView)findViewById(R.id.mapview);
-        mv.setURL(mapURL);
+        mv.setURL(street);
         mapController = mv.getController();
         mapController.setCenter(startingPoint);
         mapController.setZoom(4);
+
+        setButtonListeners();
         //this.addLocationOverlay();
 
         // Configures a marker
-        mv.addMarker(52.5, 0f, "Hello", "Marker test");
+        //mv.addMarker(52.5, 0f, "Hello", "Marker test");
 
     }
+
+    private void setButtonListeners() {
+        Button satBut = changeButtonTypeface((Button)findViewById(R.id.satbut));
+        satBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchTo("satellite");
+            }
+        });
+        Button terBut = changeButtonTypeface((Button)findViewById(R.id.terbut));
+        terBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchTo("terrain");
+            }
+        });
+        Button strBut = changeButtonTypeface((Button)findViewById(R.id.strbut));
+        strBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchTo("street");
+            }
+        });
+    }
+
+    protected void switchTo(String toWhat){
+        if(!toWhat.equals(currentLayer)){
+            if(toWhat.equals("satellite")){
+                replaceMapView(satellite);
+            }
+            else if(toWhat.equals("terrain")){
+                replaceMapView(terrain);
+            }
+            else if(toWhat.equals("street")){
+                replaceMapView(street);
+            }
+        }
+    }
+    protected void replaceMapView(String layer){
+        View C = findViewById(R.id.mapview);
+        ViewGroup parent = (ViewGroup) C.getParent();
+        int index = parent.indexOfChild(C);
+        parent.removeView(C);
+        C = new MapView(this, layer);
+        parent.addView(C, index);
+    }
+
     private void addLocationOverlay(){
         // Adds an icon that shows location
         myLocationOverlay = new MyLocationNewOverlay(this, mv);
@@ -74,6 +128,11 @@ public class MainActivity extends Activity {
 		
 		return true;
 	}
+    private Button changeButtonTypeface(Button button){
+        Typeface tf = Typeface.createFromAsset(this.getAssets(), "semibold.ttf");
+        button.setTypeface(tf);
+        return button;
+    }
 
 
 }
