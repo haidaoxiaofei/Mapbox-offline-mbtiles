@@ -10,3 +10,7 @@ build/
 src/.idea/
 .gradle/
 test/assets/
+
+local.properties
+*.iml
+
