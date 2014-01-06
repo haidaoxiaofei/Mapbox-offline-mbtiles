@@ -148,6 +148,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         this.getOverlays().clear();
         this.getOverlays().add(tilesOverlay);
         this.invalidate();
+        this.getScroller().setFinalX(this.getScroller().getCurrX()+1);
     }
 
 
