@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         mv = (MapView)findViewById(R.id.mapview);
-        mv.setURL(street);
+        mv.setURL(terrain);
         mapController = mv.getController();
         mapController.setCenter(startingPoint);
         mapController.setZoom(4);
@@ -58,6 +58,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 switchTo("satellite");
+                currentLayer = "satellite";
             }
         });
         Button terBut = changeButtonTypeface((Button)findViewById(R.id.terbut));
@@ -65,6 +66,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 switchTo("terrain");
+                currentLayer = "terrain";
             }
         });
         Button strBut = changeButtonTypeface((Button)findViewById(R.id.strbut));
@@ -72,6 +74,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 switchTo("street");
+                currentLayer = "street";
             }
         });
     }
@@ -90,12 +93,8 @@ public class MainActivity extends Activity {
         }
     }
     protected void replaceMapView(String layer){
-        View C = findViewById(R.id.mapview);
-        ViewGroup parent = (ViewGroup) C.getParent();
-        int index = parent.indexOfChild(C);
-        parent.removeView(C);
-        C = new MapView(this, layer);
-        parent.addView(C, index);
+        mv.addLayer(layer);
+
     }
 
     private void addLocationOverlay(){
