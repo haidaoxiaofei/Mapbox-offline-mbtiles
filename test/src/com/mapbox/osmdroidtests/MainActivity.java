@@ -45,10 +45,6 @@ public class MainActivity extends Activity {
         mapController.setZoom(4);
 
         setButtonListeners();
-        //this.addLocationOverlay();
-
-        // Configures a marker
-        //mv.addMarker(52.5, 0f, "Hello", "Marker test");
 
     }
 
@@ -57,7 +53,7 @@ public class MainActivity extends Activity {
         satBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchTo("satellite");
+                replaceMapView(satellite);
                 currentLayer = "satellite";
             }
         });
@@ -65,7 +61,7 @@ public class MainActivity extends Activity {
         terBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchTo("terrain");
+                replaceMapView(terrain);
                 currentLayer = "terrain";
             }
         });
@@ -73,25 +69,12 @@ public class MainActivity extends Activity {
         strBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchTo("street");
+                replaceMapView(street);
                 currentLayer = "street";
             }
         });
     }
 
-    protected void switchTo(String toWhat){
-        if(!toWhat.equals(currentLayer)){
-            if(toWhat.equals("satellite")){
-                replaceMapView(satellite);
-            }
-            else if(toWhat.equals("terrain")){
-                replaceMapView(terrain);
-            }
-            else if(toWhat.equals("street")){
-                replaceMapView(street);
-            }
-        }
-    }
     protected void replaceMapView(String layer){
         mv.addLayer(layer);
 

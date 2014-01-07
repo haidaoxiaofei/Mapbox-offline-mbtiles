@@ -21,19 +21,19 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Satellite"
-                android:layout_weight="0.3333" />
+                android:layout_weight="0.3333" android:layout_margin="-5dp"/>
         <Button
                 android:id="@+id/terbut"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Terrain"
-                android:layout_weight="0.33333" />
+                android:layout_weight="0.33333" android:layout_margin="-5dp"/>
         <Button
                 android:id="@+id/strbut"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Streets"
-                android:layout_weight="0.3333" />
-            </LinearLayout>
+                android:layout_weight="0.3333" android:layout_margin="-5dp"/>
+    </LinearLayout>
 
 </RelativeLayout>
