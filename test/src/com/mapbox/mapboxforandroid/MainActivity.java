@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
     private Paint paint;
-    private String satellite = "brunosan.map-cyglrrfu";
+    private String satellite = "examples.map-zyt2v9k2";
     private String street = "examples.map-vyofok3q";
     private String terrain = "examples.map-zgrqqx0w";
     private String currentLayer = "terrain";
@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        TestFlight.takeOff(getApplication(), "e4fe404b-2edc-4a2d-8083-3d708168e4c4");
+        TestFlight.takeOff(getApplication(), "b1425515-299c-4aaf-b85e-b9a7c99b0fa5");
         setContentView(R.layout.activity_main);
 
         mv = (MapView)findViewById(R.id.mapview);
@@ -52,24 +52,31 @@ public class MainActivity extends Activity {
         satBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceMapView(satellite);
-                currentLayer = "satellite";
+                if(!currentLayer.equals("satellite")){
+                    replaceMapView(satellite);
+                    currentLayer = "satellite";
+                }
             }
         });
         Button terBut = changeButtonTypeface((Button)findViewById(R.id.terbut));
         terBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceMapView(terrain);
-                currentLayer = "terrain";
+                if(!currentLayer.equals("terrain"))
+                {
+                    replaceMapView(terrain);
+                    currentLayer = "terrain";
+                }
             }
         });
         Button strBut = changeButtonTypeface((Button)findViewById(R.id.strbut));
         strBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceMapView(street);
-                currentLayer = "street";
+                if(!currentLayer.equals("street")){
+                    replaceMapView(street);
+                    currentLayer = "street";
+                }
             }
         });
     }
