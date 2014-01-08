@@ -140,7 +140,6 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      */
     public void addLayer(String name){
         String URL = parseURL(name);
-        int savedPostion = this.getScroller().getCurrX();
         final MapTileProviderBasic tileProvider = new MapTileProviderBasic(context.getApplicationContext());
         final ITileSource tileSource = new XYTileSource(name, null, 1, 16, 256, ".png", URL);
         tileProvider.setTileSource(tileSource);
@@ -148,8 +147,8 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         tilesOverlay.setLoadingBackgroundColor(Color.TRANSPARENT);
         this.getOverlays().clear();
         this.getOverlays().add(tilesOverlay);
+        this.getController().animateTo(this.getMapCenter()); // This clears tiles (for some reason)
         this.invalidate();
-        this.getScroller().setFinalX(savedPostion);
     }
 
 
