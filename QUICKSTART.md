@@ -1,3 +1,5 @@
+##Getting started with the Mapbox Android SDK
+
 This guide will take you through the process of adding a map to your Android app. It assumes you have a Java IDE (like Eclipse or IntelliJ IDEA) with the [Android SDK](http://developer.android.com/sdk/index.html) installed, and an app project open.
 
 ###Adding the SDK to your project
