@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
     private Paint paint;
-    private String satellite = "examples.map-zyt2v9k2";
+    private String satellite = "brunosan.map-cyglrrfu";
     private String street = "examples.map-vyofok3q";
     private String terrain = "examples.map-zgrqqx0w";
     private String currentLayer = "terrain";
