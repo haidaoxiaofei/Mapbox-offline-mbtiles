@@ -1,11 +1,11 @@
-This guide will take you through the process of adding a map to your Android app. It assumes you have a Java IDE with the Android SDK installed, and an app project open.
+This guide will take you through the process of adding a map to your Android app. It assumes you have a Java IDE (like Eclipse or IntelliJ IDEA) with the [Android SDK](http://developer.android.com/sdk/index.html) installed, and an app project open.
 
 ###Adding the SDK to your project
 
-The quickest way is just to download the JAR from our the GitHub repository. If you want to build from source to use experimental features and the latest fixes, read the README file in the repo. Once you've got the JAR, add it to the build path of your IDE.
+The quickest way is just to download the [JAR from our the GitHub repository](https://github.com/mapbox/mapbox-android-sdk/blob/master/mapbox-android-sdk.jar). If you want to build from source to use experimental features and the latest fixes, read the [README](https://github.com/mapbox/mapbox-android-sdk/blob/master/README.md) file in the repo. Once you've got the JAR, add it to the build path of your IDE.
 
 ###The MapView
-The ```MapView``` class is the key component of our library. It behaves like any other ```ViewGroup``` and its behavior can be changed statically with an XML layout file, or programmatically during runtime.
+The ```MapView``` class is the key component of our library. It behaves like any other ```ViewGroup``` and its behavior can be changed statically with an [XML layout](http://developer.android.com/guide/topics/ui/declaring-layout.html) file, or programmatically during runtime.
 
 #### XML layout
 To add the ```MapView``` as a layout element, add the following to your xml file:
@@ -25,7 +25,7 @@ this.findViewById(R.id.mapview);
 
 #### On runtime
 
-On runtime you can create a new MapView by specifying the context of the application and a valid MapBox ID, a TileJSON file or a zxy image template.
+On runtime you can create a new MapView by specifying the context of the application and a valid [MapBox ID](https://www.mapbox.com/developers/api-overview/), a TileJSON file or a zxy image template.
 
 ```java
 MapView mapView = new MapView(this, "examples.map-vyofok3q");
