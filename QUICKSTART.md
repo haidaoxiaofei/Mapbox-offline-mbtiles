@@ -44,6 +44,7 @@ Anything visual that is displayed over the map, maintaining its geographical pos
 
 ```java
 mapView.getOverlays();
+```
 
 #### Markers
 
