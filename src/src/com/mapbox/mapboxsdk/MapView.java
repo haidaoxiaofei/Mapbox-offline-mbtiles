@@ -127,18 +127,10 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     /**
-     * Switches to an already added layer
-     * @param identifier layer name
-     */
-    public void switchToLayer(String identifier){
-
-    }
-
-    /**
-     * Adds a layer (tile overlay) to the MapView
+     * Switches the MapView to a layer (tile overlay)
      * @param name Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
      */
-    public void addLayer(String name){
+    public void switchToLayer(String name){
         String URL = parseURL(name);
         final MapTileProviderBasic tileProvider = new MapTileProviderBasic(context.getApplicationContext());
         final ITileSource tileSource = new XYTileSource(name, null, 1, 16, 256, ".png", URL);
@@ -146,6 +138,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         final TilesOverlay tilesOverlay = new TilesOverlay(tileProvider, context);
         tilesOverlay.setLoadingBackgroundColor(Color.TRANSPARENT);
         this.getOverlays().clear();
+
         this.getOverlays().add(tilesOverlay);
         this.getController().animateTo(this.getMapCenter()); // This clears tiles (for some reason)
         this.invalidate();

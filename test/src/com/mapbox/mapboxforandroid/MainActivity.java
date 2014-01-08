@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
     }
 
     protected void replaceMapView(String layer){
-        mv.addLayer(layer);
+        mv.switchToLayer(layer);
 
     }
 
