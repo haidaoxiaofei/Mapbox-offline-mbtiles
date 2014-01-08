@@ -91,7 +91,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      */
     public MapView(Context context, String URL){
         this(context, (AttributeSet) null);
-        setURL(parseURL(URL));
+        setURL(URL);
     }
 
     protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileProviderBase aTileProvider) {
@@ -104,14 +104,12 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     ////////////////////
 
 
-
     /**
      * Sets the MapView to use the specified URL
      * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
      */
 
     public void setURL(String URL){
-
         if(!URL.equals("")) {
             URL = parseURL(URL);
             tileSource = new XYTileSource(getApplicationName(), ResourceProxy.string.online_mode, 0, 24, 256, ".png", URL);
@@ -138,17 +136,19 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     /**
      * Adds a layer (tile overlay) to the MapView
-     * @param identifier layer name
-     * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
+     * @param name Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
      */
-    public void addLayer(final String identifier, String URL){
-        URL = parseURL(URL);
+    public void addLayer(String name){
+        String URL = parseURL(name);
         final MapTileProviderBasic tileProvider = new MapTileProviderBasic(context.getApplicationContext());
-        final ITileSource tileSource = new XYTileSource(identifier, null, 1, 16, 256, ".png", URL);
+        final ITileSource tileSource = new XYTileSource(name, null, 1, 16, 256, ".png", URL);
         tileProvider.setTileSource(tileSource);
         final TilesOverlay tilesOverlay = new TilesOverlay(tileProvider, context);
         tilesOverlay.setLoadingBackgroundColor(Color.TRANSPARENT);
+        this.getOverlays().clear();
         this.getOverlays().add(tilesOverlay);
+        this.getController().animateTo(this.getMapCenter()); // This clears tiles (for some reason)
+        this.invalidate();
     }
 
 
@@ -164,6 +164,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      * @return the standard URL to be used by the library
      **/
     private String parseURL(String url) {
+        System.out.println("the url is"+url);
         if(url.contains("json")) return getURLFromTileJSON(url);
         if(!url.contains("http://")) return getURLFromMapBoxID(url);
         if(url.contains(".png")) return getURLFromImageTemplate(url);
@@ -337,10 +338,6 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      */
     @Override
     public boolean singleTapUpHelper(IGeoPoint p) {
-        int index = this.getOverlays().lastIndexOf(defaultMarkerOverlay);
-
-        this.getOverlays().set(index, defaultMarkerOverlay);
-        System.out.println("the index is "+ index);
         onTap(p);
         return true;
     }

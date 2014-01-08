@@ -138,6 +138,8 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     // Constructors
     // ===========================================================
 
+
+
     protected MapView(final Context context, final int tileSizePixels,
                       final ResourceProxy resourceProxy, MapTileProviderBase tileProvider,
                       final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
@@ -214,6 +216,9 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         return this.mController;
     }
 
+    public TilesOverlay getMapOverlay() {
+        return mMapOverlay;
+    }
     /**
      * You can add/remove/reorder your Overlays using the List of {@link Overlay}. The first (index
      * 0) Overlay gets drawn first, the one with the highest as the last one.

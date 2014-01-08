@@ -1,4 +1,4 @@
-package com.mapbox.osmdroidtests;
+package com.mapbox.mapboxforandroid;
 
 import android.content.Context;
 import android.util.AttributeSet;
