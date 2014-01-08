@@ -38,7 +38,10 @@ this.setContentView(mapView);
 
 ### Overlays
 
-Anything visual that is displayed over the map, maintaining its geographical position, we call it an ```Overlay```.
+Anything visual that is displayed over the map, maintaining its geographical position, we call it an ```Overlay```. To access a MapView's overlays at any point during runtime, use:
+
+```java
+mapView.getOverlays();
 
 #### Markers
 
@@ -52,10 +55,10 @@ mapView.addMarker(latitude, longitude, title, text);
 
 The location of the user can be displayed on the view using ```MyLocationNewOverlay```
 ```java
-MyLocationNewOverlay myLocationOverlay = new MyLocationNewOverlay(this, mv);
+MyLocationNewOverlay myLocationOverlay = new MyLocationNewOverlay(this, mapView);
 myLocationOverlay.enableMyLocation();
 myLocationOverlay.setDrawAccuracyEnabled(true);
-mv.getOverlays().add(myLocationOverlay);
+mapView.getOverlays().add(myLocationOverlay);
 ```
 
 ####Paths
