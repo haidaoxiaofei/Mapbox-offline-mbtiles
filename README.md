@@ -59,10 +59,6 @@ OSMDroid is at the moment built as a Java library, not an explicit Android libra
 * Go to File-Project Structure-SDKs.
 * For each SDK, add the path to OSMDroid's resources - ```path/to/mapboxsdk/mapbox-android-sdk/src/main/resources/org/osmdroid```
 
-## Basic usage
+## Using the library
 
-The main object to show maps is the MapView.
-
-TO DO: instructions for Eclipse.
-
-TO DO: basic map init instructions and/or link to javadoc.
+Read the [quick start guide](https://github.com/mapbox/mapbox-android-sdk/blob/master/README.md)
