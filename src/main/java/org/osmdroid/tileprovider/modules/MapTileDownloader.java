@@ -154,11 +154,11 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             final MapTile tile = aState.getMapTile();
 
             try {
-                System.out.println("getting tile " + tile.getX() + ", " + tile.getY());
+                logger.debug("getting tile " + tile.getX() + ", " + tile.getY());
                 if (mNetworkAvailablityCheck != null
                         && !mNetworkAvailablityCheck.getNetworkAvailable()) {
                     if (DEBUGMODE) {
-                        System.out.println("Skipping " + getName() + " due to NetworkAvailabliltyCheck.");
+                        logger.debug("Skipping " + getName() + " due to NetworkAvailabliltyCheck.");
                     }
                     return null;
                 }

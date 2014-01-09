@@ -111,7 +111,6 @@ public class DefaultResourceProxyImpl implements ResourceProxy, MapViewConstants
         InputStream is = null;
         try {
             final String resName = pResId.name() + ".png";
-            System.out.println(resName);
             is = ResourceProxy.class.getResourceAsStream(resName);
             if (is == null) {
                 throw new IllegalArgumentException("Resource not found: " + resName

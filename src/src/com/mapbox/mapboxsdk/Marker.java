@@ -37,9 +37,7 @@ public class Marker extends OverlayItem{
 
     public void fromMaki(String makiString){
         String urlString = makiString+"182x";
-        System.out.println(urlString);
         int id = context.getResources().getIdentifier(urlString, "drawable", context.getPackageName());
-        System.out.println(""+id);
         this.setMarker(context.getResources().getDrawable(id));
     }
     public void setTooltipVisible(){

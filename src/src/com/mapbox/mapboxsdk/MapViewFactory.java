@@ -51,7 +51,6 @@ public class MapViewFactory {
         MapTileProviderArray mProvider = new MapTileProviderArray(MBTILESRENDER, null,
                 new MapTileModuleProviderBase[]{moduleProvider}
         );
-        System.out.println("Name of mbtiles is "+ mbTilesFileArchive.getName());
         return new MapView(context, 256, mResourceProxy, mProvider);
     }
     private static File createFileFromInputStream(InputStream inputStream, String URL) {
