@@ -1,6 +1,6 @@
-# MapBox Android SDK
+# Mapbox Android SDK
 
-Our work-in-progress for a better MapBox experience on Android.
+Open source alternative for native Mapbox maps on Android. 
 
 ## Including the library in your project
 
