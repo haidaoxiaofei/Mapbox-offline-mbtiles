@@ -61,4 +61,4 @@ OSMDroid is at the moment built as a Java library, not an explicit Android libra
 
 ## Using the library
 
-Read the [quick start guide](https://github.com/mapbox/mapbox-android-sdk/blob/master/README.md)
+Read the [quick start guide](https://github.com/mapbox/mapbox-android-sdk/blob/master/QUICKSTART.md)
