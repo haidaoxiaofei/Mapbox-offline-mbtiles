@@ -157,7 +157,6 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      * @return the standard URL to be used by the library
      **/
     private String parseURL(String url) {
-        System.out.println("the url is"+url);
         if(url.contains("json")) return getURLFromTileJSON(url);
         if(!url.contains("http://")) return getURLFromMapBoxID(url);
         if(url.contains(".png")) return getURLFromImageTemplate(url);
@@ -308,7 +307,6 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                     Marker currentMarker;
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        System.out.println("overlay touched");
                         ((Marker)(item)).setTooltipVisible();
 
                         return true;
