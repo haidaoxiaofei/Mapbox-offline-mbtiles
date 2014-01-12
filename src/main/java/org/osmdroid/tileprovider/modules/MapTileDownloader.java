@@ -8,10 +8,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.osmdroid.http.HttpClientFactory;
-import org.osmdroid.tileprovider.BitmapPool;
-import org.osmdroid.tileprovider.MapTile;
-import org.osmdroid.tileprovider.MapTileRequestState;
-import org.osmdroid.tileprovider.ReusableBitmapDrawable;
+import org.osmdroid.tileprovider.*;
 import org.osmdroid.tileprovider.tilesource.BitmapTileSourceBase.LowMemoryException;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
@@ -141,6 +138,13 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
     protected class TileLoader extends MapTileModuleProviderBase.TileLoader {
         private int attempts = 0;
         protected String[] domainLetters = {"a", "b", "c", "d"};
+
+        private String origin;
+
+        public TileLoader(){
+            origin = MapTileDownloader.this.getTileSource().name();
+        }
+
         @Override
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {
 
@@ -231,6 +235,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 StreamUtils.closeStream(out);
             }
 
+
             return null;
         }
 
@@ -255,6 +260,40 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             // We want to return the Bitmap to the BitmapPool if applicable
             if (pDrawable instanceof ReusableBitmapDrawable)
                 BitmapPool.getInstance().returnDrawableToPool((ReusableBitmapDrawable) pDrawable);
+        }
+        @Override
+        public void run() {
+
+            onTileLoaderInit();
+
+            MapTileRequestState state;
+            Drawable result = null;
+            if(origin.equals(MapTileDownloader.this.getTileSource().name())){
+            while ((state = nextTile()) != null) {
+                if (DEBUG_TILE_PROVIDERS) {
+                    logger.debug("TileLoader.run() processing next tile: " + state.getMapTile());
+                }
+                try {
+                    result = null;
+                    result = loadTile(state);
+                } catch (final CantContinueException e) {
+                    logger.info("Tile loader can't continue: " + state.getMapTile(), e);
+                    clearQueue();
+                } catch (final Throwable e) {
+                    logger.error("Error downloading tile: " + state.getMapTile(), e);
+                }
+
+                if (result == null) {
+                    tileLoadedFailed(state);
+                } else if (ExpirableBitmapDrawable.isDrawableExpired(result)) {
+                    tileLoadedExpired(state, result);
+                } else {
+                    tileLoaded(state, result);
+                }
+            }
+            }
+
+            onTileLoaderShutdown();
         }
 
     }

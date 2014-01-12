@@ -148,7 +148,7 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
         }
     }
 
-    private void clearQueue() {
+    protected void clearQueue() {
         synchronized (mQueueLockObject) {
             mPending.clear();
             mWorking.clear();
@@ -180,6 +180,8 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
      * as they become available. The key unimplemented method is 'loadTile'.
      */
     protected abstract class TileLoader implements Runnable {
+
+
 
         /**
          * Load the requested tile.
@@ -267,12 +269,15 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
             removeTileFromQueues(pState.getMapTile());
             pState.getCallback().mapTileRequestFailed(pState);
         }
+        protected void processNext(){
+
+        }
 
         /**
          * This is a functor class of type Runnable. The run method is the encapsulated function.
          */
         @Override
-        final public void run() {
+        public void run() {
 
             onTileLoaderInit();
 
