@@ -117,7 +117,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
     private Button changeButtonTypeface(Button button){
-        Typeface tf = Typeface.createFromAsset(this.getAssets(), "semibold.ttf");
+        Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/semibold.ttf");
         button.setTypeface(tf);
         return button;
     }
