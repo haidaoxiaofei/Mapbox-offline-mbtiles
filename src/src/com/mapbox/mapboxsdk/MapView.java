@@ -125,6 +125,10 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     public void removeLayer(String identifier){
 
     }
+    @Deprecated
+    public void addLayer(String name){
+        this.switchToLayer(name);
+    }
 
     /**
      * Switches the MapView to a layer (tile overlay)
