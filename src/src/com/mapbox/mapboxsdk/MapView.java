@@ -161,7 +161,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      * @return the standard URL to be used by the library
      **/
     private String parseURL(String url) {
-        if(url.contains("json")) return getURLFromTileJSON(url);
+        if(url.contains(".json")) return getURLFromTileJSON(url);
         if(!url.contains("http://")) return getURLFromMapBoxID(url);
         if(url.contains(".png")) return getURLFromImageTemplate(url);
         else{
