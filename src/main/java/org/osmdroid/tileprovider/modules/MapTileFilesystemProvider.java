@@ -180,40 +180,6 @@ public class MapTileFilesystemProvider extends MapTileFileStorageProviderBase {
             return null;
         }
 
-        @Override
-        public void run() {
 
-            onTileLoaderInit();
-
-            MapTileRequestState state;
-            Drawable result = null;
-            if(origin.equals(MapTileFilesystemProvider.this.getTileSource().name())){
-            while ((state = nextTile()) != null) {
-                System.out.println();
-                if (DEBUG_TILE_PROVIDERS) {
-                    logger.debug("TileLoader.run() processing next tile: " + state.getMapTile());
-                }
-                try {
-                    result = null;
-                    result = loadTile(state);
-                } catch (final CantContinueException e) {
-                    logger.info("Tile loader can't continue: " + state.getMapTile(), e);
-                    clearQueue();
-                } catch (final Throwable e) {
-                    logger.error("Error downloading tile: " + state.getMapTile(), e);
-                }
-
-                if (result == null) {
-                    tileLoadedFailed(state);
-                } else if (ExpirableBitmapDrawable.isDrawableExpired(result)) {
-                    tileLoadedExpired(state, result);
-                } else {
-                    tileLoaded(state, result);
-                }
-            }
-            }
-
-            onTileLoaderShutdown();
-        }
     }
 }

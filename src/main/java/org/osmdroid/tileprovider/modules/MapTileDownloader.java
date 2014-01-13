@@ -74,6 +74,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         mFilesystemCache = pFilesystemCache;
         mNetworkAvailablityCheck = pNetworkAvailablityCheck;
         setTileSource(pTileSource);
+        System.out.println("Map downloader created");
     }
 
     // ===========================================================
@@ -261,40 +262,5 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             if (pDrawable instanceof ReusableBitmapDrawable)
                 BitmapPool.getInstance().returnDrawableToPool((ReusableBitmapDrawable) pDrawable);
         }
-        @Override
-        public void run() {
-
-            onTileLoaderInit();
-
-            MapTileRequestState state;
-            Drawable result = null;
-            if(origin.equals(MapTileDownloader.this.getTileSource().name())){
-            while ((state = nextTile()) != null) {
-                if (DEBUG_TILE_PROVIDERS) {
-                    logger.debug("TileLoader.run() processing next tile: " + state.getMapTile());
-                }
-                try {
-                    result = null;
-                    result = loadTile(state);
-                } catch (final CantContinueException e) {
-                    logger.info("Tile loader can't continue: " + state.getMapTile(), e);
-                    clearQueue();
-                } catch (final Throwable e) {
-                    logger.error("Error downloading tile: " + state.getMapTile(), e);
-                }
-
-                if (result == null) {
-                    tileLoadedFailed(state);
-                } else if (ExpirableBitmapDrawable.isDrawableExpired(result)) {
-                    tileLoadedExpired(state, result);
-                } else {
-                    tileLoaded(state, result);
-                }
-            }
-            }
-
-            onTileLoaderShutdown();
-        }
-
     }
 }
