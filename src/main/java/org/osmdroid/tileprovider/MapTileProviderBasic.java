@@ -1,11 +1,6 @@
 package org.osmdroid.tileprovider;
 
-import org.osmdroid.tileprovider.modules.INetworkAvailablityCheck;
-import org.osmdroid.tileprovider.modules.MapTileDownloader;
-import org.osmdroid.tileprovider.modules.MapTileFileArchiveProvider;
-import org.osmdroid.tileprovider.modules.MapTileFilesystemProvider;
-import org.osmdroid.tileprovider.modules.NetworkAvailabliltyCheck;
-import org.osmdroid.tileprovider.modules.TileWriter;
+import org.osmdroid.tileprovider.modules.*;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.tileprovider.util.SimpleRegisterReceiver;
@@ -57,6 +52,11 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
 
         final MapTileDownloader downloaderProvider = new MapTileDownloader(pTileSource, tileWriter,
                 aNetworkAvailablityCheck);
+        for(MapTileModuleProviderBase provider: mTileProviderList){
+            if(provider.getClass().isInstance(MapTileDownloader.class)){
+                mTileProviderList.remove(provider);
+            }
+        }
         mTileProviderList.add(downloaderProvider);
     }
 }
