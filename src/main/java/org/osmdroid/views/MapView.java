@@ -128,7 +128,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     protected Rect mScrollableAreaLimit;
 
     // for speed (avoiding allocations)
-    private MapTileProviderBase mTileProvider;
+    private final MapTileProviderBase mTileProvider;
 
     private final Handler mTileRequestCompleteHandler;
 
@@ -326,7 +326,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     }
 
     public void setTileSource(final ITileSource aTileSource) {
-        mTileProvider = new MapTileProviderBasic(getContext(), aTileSource);
+        mTileProvider.setTileSource(aTileSource);
         TileSystem.setTileSize(aTileSource.getTileSizePixels());
         this.checkZoomButtons();
         this.setZoomLevel(mZoomLevel); // revalidate zoom level
