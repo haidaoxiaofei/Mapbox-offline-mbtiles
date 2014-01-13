@@ -75,7 +75,9 @@ public class MapTileFilesystemProvider extends MapTileFileStorageProviderBase {
     // ===========================================================
     // Getter & Setter
     // ===========================================================
-
+    public ITileSource getTileSource() {
+        return mTileSource.get();
+    }
     // ===========================================================
     // Methods from SuperClass/Interfaces
     // ===========================================================
@@ -122,7 +124,7 @@ public class MapTileFilesystemProvider extends MapTileFileStorageProviderBase {
     // ===========================================================
 
     protected class TileLoader extends MapTileModuleProviderBase.TileLoader {
-
+        
         @Override
         public Drawable loadTile(final MapTileRequestState pState) throws CantContinueException {
 
@@ -173,5 +175,7 @@ public class MapTileFilesystemProvider extends MapTileFileStorageProviderBase {
             // If we get here then there is no file in the file cache
             return null;
         }
+
+
     }
 }

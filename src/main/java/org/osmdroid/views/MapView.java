@@ -3,6 +3,7 @@ package org.osmdroid.views;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -133,6 +134,8 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 
     /* a point that will be reused to design added views */
     private final Point mPoint = new Point();
+
+    private HashSet<String> activeLayers = new HashSet<String>();
 
     // ===========================================================
     // Constructors

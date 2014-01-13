@@ -125,6 +125,10 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     public void removeLayer(String identifier){
 
     }
+    @Deprecated
+    public void addLayer(String name){
+        this.switchToLayer(name);
+    }
 
     /**
      * Switches the MapView to a layer (tile overlay)
@@ -132,13 +136,12 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      */
     public void switchToLayer(String name){
         String URL = parseURL(name);
-        final MapTileProviderBasic tileProvider = new MapTileProviderBasic(context.getApplicationContext());
+        final MapTileProviderBasic tileProvider = (MapTileProviderBasic) this.getTileProvider();
         final ITileSource tileSource = new XYTileSource(name, null, 1, 16, 256, ".png", URL);
         tileProvider.setTileSource(tileSource);
         final TilesOverlay tilesOverlay = new TilesOverlay(tileProvider, context);
         tilesOverlay.setLoadingBackgroundColor(Color.TRANSPARENT);
         this.getOverlays().clear();
-
         this.getOverlays().add(tilesOverlay);
         this.getController().animateTo(this.getMapCenter()); // This clears tiles (for some reason)
         this.invalidate();
@@ -157,7 +160,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      * @return the standard URL to be used by the library
      **/
     private String parseURL(String url) {
-        if(url.contains("json")) return getURLFromTileJSON(url);
+        if(url.contains(".json")) return getURLFromTileJSON(url);
         if(!url.contains("http://")) return getURLFromMapBoxID(url);
         if(url.contains(".png")) return getURLFromImageTemplate(url);
         else{

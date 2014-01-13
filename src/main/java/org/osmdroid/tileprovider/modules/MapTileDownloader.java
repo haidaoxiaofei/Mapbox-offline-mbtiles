@@ -8,10 +8,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.osmdroid.http.HttpClientFactory;
-import org.osmdroid.tileprovider.BitmapPool;
-import org.osmdroid.tileprovider.MapTile;
-import org.osmdroid.tileprovider.MapTileRequestState;
-import org.osmdroid.tileprovider.ReusableBitmapDrawable;
+import org.osmdroid.tileprovider.*;
 import org.osmdroid.tileprovider.tilesource.BitmapTileSourceBase.LowMemoryException;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
@@ -77,6 +74,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         mFilesystemCache = pFilesystemCache;
         mNetworkAvailablityCheck = pNetworkAvailablityCheck;
         setTileSource(pTileSource);
+        System.out.println("Map downloader created");
     }
 
     // ===========================================================
@@ -141,6 +139,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
     protected class TileLoader extends MapTileModuleProviderBase.TileLoader {
         private int attempts = 0;
         protected String[] domainLetters = {"a", "b", "c", "d"};
+
         @Override
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {
 
@@ -231,6 +230,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 StreamUtils.closeStream(out);
             }
 
+
             return null;
         }
 
@@ -256,6 +256,5 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             if (pDrawable instanceof ReusableBitmapDrawable)
                 BitmapPool.getInstance().returnDrawableToPool((ReusableBitmapDrawable) pDrawable);
         }
-
     }
 }
