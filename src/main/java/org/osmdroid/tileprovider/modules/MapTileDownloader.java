@@ -140,12 +140,6 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         private int attempts = 0;
         protected String[] domainLetters = {"a", "b", "c", "d"};
 
-        private String origin;
-
-        public TileLoader(){
-            origin = MapTileDownloader.this.getTileSource().name();
-        }
-
         @Override
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {
 

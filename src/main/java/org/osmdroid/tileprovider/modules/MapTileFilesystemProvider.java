@@ -124,11 +124,7 @@ public class MapTileFilesystemProvider extends MapTileFileStorageProviderBase {
     // ===========================================================
 
     protected class TileLoader extends MapTileModuleProviderBase.TileLoader {
-        private String origin;
-
-        public TileLoader(){
-            origin = MapTileFilesystemProvider.this.getTileSource().name();
-        }
+        
         @Override
         public Drawable loadTile(final MapTileRequestState pState) throws CantContinueException {
 
