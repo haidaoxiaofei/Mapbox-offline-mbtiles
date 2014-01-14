@@ -172,9 +172,8 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 }
 
                 String tileURLString = tileSource.getTileURLString(tile);
-                if(MapTileDownloader.this.isHighDensity()){
+                if(MapTileDownloader.this.isHighDensity() && isMapBox(tileURLString)){
                     tileURLString = tileURLString.replace(".png","@2x.png");
-                    System.out.println(tileURLString);
                 }
                 if (DEBUGMODE) {
                     logger.debug("Downloading Maptile from url: " + tileURLString);
@@ -244,6 +243,10 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
 
             return null;
+        }
+
+        private boolean isMapBox(String URL) {
+            return URL.contains("mapbox.com");
         }
 
         private String changeMapBoxSubdomain(String url, int attempts) {
