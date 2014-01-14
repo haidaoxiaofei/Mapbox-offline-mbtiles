@@ -1,5 +1,6 @@
 package org.osmdroid.tileprovider;
 
+import android.util.DisplayMetrics;
 import org.osmdroid.tileprovider.modules.*;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -15,7 +16,7 @@ import android.content.Context;
  * @author Marc Kurtz
  */
 public class MapTileProviderBasic extends MapTileProviderArray implements IMapTileProviderCallback {
-
+    Context context;
     // private static final Logger logger = LoggerFactory.getLogger(MapTileProviderBasic.class);
 
     /**
@@ -30,16 +31,16 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
      */
     public MapTileProviderBasic(final Context pContext, final ITileSource pTileSource) {
         this(new SimpleRegisterReceiver(pContext), new NetworkAvailabliltyCheck(pContext),
-                pTileSource);
+                pTileSource, pContext);
     }
 
     /**
      * Creates a {@link MapTileProviderBasic}.
      */
     public MapTileProviderBasic(final IRegisterReceiver pRegisterReceiver,
-                                final INetworkAvailablityCheck aNetworkAvailablityCheck, final ITileSource pTileSource) {
+                                final INetworkAvailablityCheck aNetworkAvailablityCheck, final ITileSource pTileSource, Context context) {
         super(pTileSource, pRegisterReceiver);
-
+        this.context = context;
         final TileWriter tileWriter = new TileWriter();
 
         final MapTileFilesystemProvider fileSystemProvider = new MapTileFilesystemProvider(
@@ -52,11 +53,22 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
 
         final MapTileDownloader downloaderProvider = new MapTileDownloader(pTileSource, tileWriter,
                 aNetworkAvailablityCheck);
+        if(isHighDensity()){
+
+            downloaderProvider.setHighDensity(true);
+        }
         for(MapTileModuleProviderBase provider: mTileProviderList){
             if(provider.getClass().isInstance(MapTileDownloader.class)){
                 mTileProviderList.remove(provider);
             }
         }
         mTileProviderList.add(downloaderProvider);
+    }
+    public boolean isHighDensity(){
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        if (metrics.densityDpi>300){
+            return true;
+        }
+        return false;
     }
 }
