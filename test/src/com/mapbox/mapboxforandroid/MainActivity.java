@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         TestFlight.takeOff(getApplication(), "b1425515-299c-4aaf-b85e-b9a7c99b0fa5");
         setContentView(R.layout.activity_main);
-
         mv = (MapView)findViewById(R.id.mapview);
         mv.setURL(terrain);
         mapController = mv.getController();
