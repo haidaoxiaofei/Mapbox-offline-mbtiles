@@ -31,6 +31,7 @@ import org.osmdroid.tileprovider.modules.MapTileModuleProviderBase;
 import org.osmdroid.tileprovider.tilesource.IStyledTileSource;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.tileprovider.util.SimpleInvalidationHandler;
 import org.osmdroid.util.BoundingBoxE6;
 import org.osmdroid.util.GeoPoint;
@@ -1179,6 +1180,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 
         if (aAttributeSet != null) {
             final String tileSourceAttr = aAttributeSet.getAttributeValue(null, "tilesource");
+
             if (tileSourceAttr != null) {
                 try {
                     final ITileSource r = TileSourceFactory.getTileSource(tileSourceAttr);

@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
         TestFlight.takeOff(getApplication(), "b1425515-299c-4aaf-b85e-b9a7c99b0fa5");
         setContentView(R.layout.activity_main);
         mv = (MapView)findViewById(R.id.mapview);
-        mv.setURL(terrain);
+        //mv.setURL(terrain);
         mapController = mv.getController();
         mapController.setCenter(startingPoint);
         mapController.setZoom(4);
