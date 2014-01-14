@@ -45,6 +45,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
     private final AtomicReference<OnlineTileSourceBase> mTileSource = new AtomicReference<OnlineTileSourceBase>();
 
     private final INetworkAvailablityCheck mNetworkAvailablityCheck;
+    private boolean highDensity = false;
 
     // ===========================================================
     // Constructors
@@ -132,6 +133,14 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         }
     }
 
+    public void setHighDensity(boolean highDensity) {
+        this.highDensity = highDensity;
+    }
+
+    public boolean isHighDensity() {
+        return highDensity;
+    }
+
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================
@@ -163,7 +172,10 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 }
 
                 String tileURLString = tileSource.getTileURLString(tile);
-
+                if(MapTileDownloader.this.isHighDensity()){
+                    tileURLString = tileURLString.replace(".png","@2x.png");
+                    System.out.println(tileURLString);
+                }
                 if (DEBUGMODE) {
                     logger.debug("Downloading Maptile from url: " + tileURLString);
                 }

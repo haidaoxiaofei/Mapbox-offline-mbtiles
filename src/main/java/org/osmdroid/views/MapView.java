@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import android.util.DisplayMetrics;
+import android.view.*;
 import org.metalev.multitouch.controller.MultiTouchController;
 import org.metalev.multitouch.controller.MultiTouchController.MultiTouchObjectCanvas;
 import org.metalev.multitouch.controller.MultiTouchController.PointInfo;
@@ -51,12 +53,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Scroller;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
@@ -297,6 +294,8 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
                 + getWidth() / 2, getScrollY() + getHeight() / 2);
         return out;
     }
+
+
 
     /**
      * Get a projection for converting between screen-pixel coordinates and latitude/longitude
