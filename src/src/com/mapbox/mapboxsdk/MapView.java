@@ -66,6 +66,8 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      */
     private boolean firstMarker = true;
 
+    public final static String EXAMPLE_MAP_ID = "examples.map-z2effxa8";
+
     //////////////////
     // CONSTRUCTORS //
     //////////////////
@@ -85,6 +87,9 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         final String mapboxID = attrs.getAttributeValue(null, "mapboxID");
         if(mapboxID!=null){
             setURL(mapboxID);
+        }
+        else{
+            setURL(EXAMPLE_MAP_ID);
         }
     }
 
