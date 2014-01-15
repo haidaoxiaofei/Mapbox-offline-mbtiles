@@ -6,6 +6,15 @@ This guide will take you through the process of adding a map to your Android app
 
 The quickest way is just to download the [JAR from our the GitHub repository](https://github.com/mapbox/mapbox-android-sdk/blob/master/mapbox-android-sdk.jar). If you want to build from source to use experimental features and the latest fixes, read the [README](https://github.com/mapbox/mapbox-android-sdk/blob/master/README.md) file in the repo. Once you've got the JAR, add it to the build path of your IDE.
 
+### Required Permissions
+
+Ensure the following permissions are requested in your `AndroidManifest.xml` file:
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```
+
 ###The MapView
 The ```MapView``` class is the key component of our library. It behaves like any other ```ViewGroup``` and its behavior can be changed statically with an [XML layout](http://developer.android.com/guide/topics/ui/declaring-layout.html) file, or programmatically during runtime.
 
