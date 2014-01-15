@@ -80,16 +80,13 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     public MapView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
-        setURL("");
+        setURL(EXAMPLE_MAP_ID);
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
         final String mapboxID = attrs.getAttributeValue(null, "mapboxID");
         if(mapboxID!=null){
             setURL(mapboxID);
-        }
-        else{
-            setURL(EXAMPLE_MAP_ID);
         }
     }
 
