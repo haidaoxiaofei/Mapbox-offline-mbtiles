@@ -24,7 +24,8 @@ To add the ```MapView``` as a layout element, add the following to your xml file
 <com.mapbox.mapboxsdk.MapView
 android:id="@+id/mapview"
 android:layout_width="fill_parent"
-android:layout_height="fill_parent">
+android:layout_height="fill_parent"
+mapboxID="Your MapBox ID">
 ```
 
 
