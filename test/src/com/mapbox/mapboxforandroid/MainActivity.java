@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
         mapController = mv.getController();
         mapController.setCenter(startingPoint);
         mapController.setZoom(4);
-
+        mv.parseFromJSON("https://www.mapbox.com/mapbox.js/example/assets/data/example.geojson");
         setButtonListeners();
 
     }

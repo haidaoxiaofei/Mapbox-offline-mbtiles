@@ -267,11 +267,15 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     }
 
+    public void parseFromJSON(String URL) {
+        new JSONBodyGetter().execute(URL);
+    }
+
     /**
      * Class that generates markers from formats such as GeoJSON
      */
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
-    private class JSONBodyGetter extends AsyncTask<String, Void, JSONObject> {
+    public class JSONBodyGetter extends AsyncTask<String, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(String... params) {
             try {
