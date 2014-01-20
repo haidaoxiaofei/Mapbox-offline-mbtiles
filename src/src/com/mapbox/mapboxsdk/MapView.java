@@ -27,12 +27,10 @@ import org.osmdroid.views.overlay.ItemizedOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.TilesOverlay;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -267,7 +265,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     }
 
-    public void parseFromJSON(String URL) {
+    public void parseFromGeoJSON(String URL) {
         new JSONBodyGetter().execute(URL);
     }
 
@@ -275,33 +273,45 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      * Class that generates markers from formats such as GeoJSON
      */
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
-    public class JSONBodyGetter extends AsyncTask<String, Void, JSONObject> {
+    public class JSONBodyGetter extends AsyncTask<String, Void, String> {
         @Override
-        protected JSONObject doInBackground(String... params) {
+        protected String doInBackground(String... params) {
+            InputStream is = null;
+            String jsonText = null;
             try {
-                URL url = new URL(params[0]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                BufferedReader streamReader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
-                StringBuilder responseStrBuilder = new StringBuilder();
-                String inputStr;
-                while ((inputStr = streamReader.readLine()) != null)
-                    responseStrBuilder.append(inputStr);
-                return new JSONObject(responseStrBuilder.toString());
+                is = new URL(params[0]).openStream();
+                BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+
+                jsonText = readAll(rd);
+
             } catch (IOException e) {
                 e.printStackTrace();
-                return null;
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-            return null;
+            return jsonText;
         }
 
         @Override
-        protected void onPostExecute(JSONObject jsonObject) {
-            System.out.println(jsonObject);
+        protected void onPostExecute(String jsonString) {
+            parseGeoJSON(jsonString);
+        }
+
+        private String readAll(Reader rd) throws IOException {
+            StringBuilder sb = new StringBuilder();
+            int cp;
+            while ((cp = rd.read()) != -1) {
+                sb.append((char) cp);
+            }
+            return sb.toString();
+        }
+
+        private void parseGeoJSON(String jsonString) {
+            JSONObject json = null;
+            try {
+                json = new JSONObject(jsonString);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
