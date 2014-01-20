@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import com.testflightapp.lib.core.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -296,7 +297,8 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
             try {
                 parseGeoJSON(jsonString);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Logger.w("JSON parsed was invalid. Continuing without it");
+                return;
             }
         }
 
