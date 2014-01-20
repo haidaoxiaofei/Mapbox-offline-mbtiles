@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.osmdroid.DefaultResourceProxyImpl;
@@ -292,7 +293,11 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
         @Override
         protected void onPostExecute(String jsonString) {
-            parseGeoJSON(jsonString);
+            try {
+                parseGeoJSON(jsonString);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         private String readAll(Reader rd) throws IOException {
@@ -304,14 +309,24 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
             return sb.toString();
         }
 
-        private void parseGeoJSON(String jsonString) {
+        private void parseGeoJSON(String jsonString) throws JSONException{
             JSONObject json = null;
-            try {
-                json = new JSONObject(jsonString);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            json = new JSONObject(jsonString);
+            if(json!=null){
+                JSONArray features = (JSONArray)json.get("features");
+                for(int i = 0; i<features.length(); i++){
+                    JSONObject feature = (JSONObject)features.get(i);
+                    JSONObject properties = (JSONObject)((JSONObject)features.get(i)).get("properties");
+                    String title = properties.getString("title");
+                    JSONObject geometry = (JSONObject) feature.get("geometry");
+                    JSONArray coordinates = (JSONArray) geometry.get("coordinates");
+                    double lat = (Double)coordinates.get(0);
+                    double lon = (Double)coordinates.get(1);
+                    MapView.this.addMarker(lat, lon, title, "");
+                    MapView.this.getController().animateTo(new GeoPoint(lat,lon));
+                    System.out.println("marker drawn");
+                }
             }
-
         }
     }
 
