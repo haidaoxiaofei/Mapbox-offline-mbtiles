@@ -309,24 +309,36 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
             return sb.toString();
         }
 
-        private void parseGeoJSON(String jsonString) throws JSONException{
+        private void parseGeoJSON(String jsonString) throws JSONException {
             JSONObject json = null;
-            json = new JSONObject(jsonString);
-            if(json!=null){
-                JSONArray features = (JSONArray)json.get("features");
-                for(int i = 0; i<features.length(); i++){
-                    JSONObject feature = (JSONObject)features.get(i);
-                    JSONObject properties = (JSONObject)((JSONObject)features.get(i)).get("properties");
-                    String title = properties.getString("title");
-                    JSONObject geometry = (JSONObject) feature.get("geometry");
-                    JSONArray coordinates = (JSONArray) geometry.get("coordinates");
-                    double lat = (Double)coordinates.get(0);
-                    double lon = (Double)coordinates.get(1);
-                    MapView.this.addMarker(lat, lon, title, "");
-                    MapView.this.getController().animateTo(new GeoPoint(lat,lon));
-                    System.out.println("marker drawn");
-                }
+            try {
+                json = new JSONObject(jsonString);
+            } catch (JSONException e) {
+                throw new IllegalArgumentException("Invalid JSON");
             }
+            JSONArray features = null;
+            try {
+                features = (JSONArray)json.get("features");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            for(int i = 0; i< (features != null ? features.length() : 0); i++){
+                JSONObject feature = (JSONObject) features.get(i);
+                JSONObject properties = (JSONObject) feature.get("properties");
+                String title = "";
+                if(properties.has("title")){
+                    title = properties.getString("title");
+                }
+
+                JSONObject geometry = null;
+                geometry = (JSONObject) feature.get("geometry");
+                JSONArray coordinates = (JSONArray) geometry.get("coordinates");
+                double lon = (Double)coordinates.get(0);
+                double lat = (Double)coordinates.get(1);
+                MapView.this.addMarker(lat, lon, title, "");
+
+            }
+
         }
     }
 
