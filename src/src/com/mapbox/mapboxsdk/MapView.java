@@ -270,40 +270,34 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     /**
      * Class that generates markers from formats such as GeoJSON
      */
-    public class MarkerFactory {
-        public ItemizedOverlay<Marker> fromGeoJSON(String URL){
-            GeoJSONElement geoJSONElement = new GeoJSONElement(URL);
-            return geoJSONElement.getMarkersOverlay();
-        }
-        @TargetApi(Build.VERSION_CODES.CUPCAKE)
-        private class JSONBodyGetter extends AsyncTask<String, Void, JSONObject> {
-            @Override
-            protected JSONObject doInBackground(String... params) {
-                try {
-                    URL url = new URL(params[0]);
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setDoInput(true);
-                    connection.connect();
-                    InputStream input = connection.getInputStream();
-                    BufferedReader streamReader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
-                    StringBuilder responseStrBuilder = new StringBuilder();
-                    String inputStr;
-                    while ((inputStr = streamReader.readLine()) != null)
-                        responseStrBuilder.append(inputStr);
-                    return new JSONObject(responseStrBuilder.toString());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return null;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
+    private class JSONBodyGetter extends AsyncTask<String, Void, JSONObject> {
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            try {
+                URL url = new URL(params[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                BufferedReader streamReader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+                StringBuilder responseStrBuilder = new StringBuilder();
+                String inputStr;
+                while ((inputStr = streamReader.readLine()) != null)
+                    responseStrBuilder.append(inputStr);
+                return new JSONObject(responseStrBuilder.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
                 return null;
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+            return null;
+        }
 
-            @Override
-            protected void onPostExecute(JSONObject jsonObject) {
-
-            }
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            System.out.println(jsonObject);
         }
     }
 
