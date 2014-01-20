@@ -24,10 +24,7 @@ import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
-import org.osmdroid.views.overlay.ItemizedIconOverlay;
-import org.osmdroid.views.overlay.ItemizedOverlay;
-import org.osmdroid.views.overlay.OverlayItem;
-import org.osmdroid.views.overlay.TilesOverlay;
+import org.osmdroid.views.overlay.*;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -312,18 +309,8 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         }
 
         private void parseGeoJSON(String jsonString) throws JSONException {
-            JSONObject json = null;
-            try {
-                json = new JSONObject(jsonString);
-            } catch (JSONException e) {
-                throw new IllegalArgumentException("Invalid JSON");
-            }
-            JSONArray features = null;
-            try {
-                features = (JSONArray)json.get("features");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            JSONObject json = new JSONObject(jsonString);
+            JSONArray features = (JSONArray)json.get("features");
             for(int i = 0; i< (features != null ? features.length() : 0); i++){
                 JSONObject feature = (JSONObject) features.get(i);
                 JSONObject properties = (JSONObject) feature.get("properties");
@@ -331,13 +318,35 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
                 if(properties.has("title")){
                     title = properties.getString("title");
                 }
-
                 JSONObject geometry = null;
-                geometry = (JSONObject) feature.get("geometry");
-                JSONArray coordinates = (JSONArray) geometry.get("coordinates");
-                double lon = (Double)coordinates.get(0);
-                double lat = (Double)coordinates.get(1);
-                MapView.this.addMarker(lat, lon, title, "");
+                try{
+                    geometry = (JSONObject) feature.get("geometry");
+                }
+                catch (JSONException e){
+                    Logger.w("No geometry is specified in feature"+ title);
+                    continue;
+                }
+                String type = geometry.getString("type");
+                if(type.equals("Point")){
+                    JSONArray coordinates = (JSONArray) geometry.get("coordinates");
+                    double lon = (Double)coordinates.get(0);
+                    double lat = (Double)coordinates.get(1);
+                    MapView.this.addMarker(lat, lon, title, "");
+                }
+                else if (type.equals("LineString")){
+                    System.out.println("Creating LineString");
+                    PathOverlay path = new PathOverlay(Color.BLACK,context);
+                    JSONArray points = (JSONArray) geometry.get("coordinates");
+                    JSONArray coordinates;
+                    for(int point=0; point<points.length(); point++){
+                        coordinates = (JSONArray) points.get(point);
+                        double lon = (Double)coordinates.get(0);
+                        double lat = (Double)coordinates.get(1);
+                        path.addPoint(new GeoPoint(lat, lon));
+                    }
+                    MapView.this.getOverlays().add(path);
+                }
+
 
             }
 

@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
         mapController = mv.getController();
         mapController.setCenter(startingPoint);
         mapController.setZoom(4);
-        mv.parseFromGeoJSON("https://gist.github.com/fdansv/8541618/raw/142a3127e7ef82ea292acd92d4ae367f9cbba638/geojsonpointtest");
+        mv.parseFromGeoJSON("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
         setButtonListeners();
 
     }
