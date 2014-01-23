@@ -17,7 +17,7 @@ public class MapBoxTileSource extends OnlineTileSourceBase {
      */
     private static final String MAPBOX_MAPID = "MAPBOX_MAPID";
 
-    private static final String mapBoxBaseUrl = "http://api.tiles.mapbox.com/v3/";
+    private static final String mapBoxBaseUrl = "https://api.tiles.mapbox.com/v3/";
 
     private static String mapBoxMapId = "";
 
