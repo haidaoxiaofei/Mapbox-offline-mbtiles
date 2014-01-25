@@ -147,7 +147,6 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         tilesOverlay.setLoadingBackgroundColor(Color.TRANSPARENT);
         this.getOverlays().clear();
         this.getOverlays().add(tilesOverlay);
-        this.getController().animateTo(this.getMapCenter()); // This clears tiles (for some reason)
         this.invalidate();
     }
 
