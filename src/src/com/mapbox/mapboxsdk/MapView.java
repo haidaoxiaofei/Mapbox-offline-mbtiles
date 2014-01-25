@@ -128,7 +128,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     public void removeLayer(String identifier){
 
     }
-    
+
     @Deprecated
     public void addLayer(String name){
         this.switchToLayer(name);
@@ -340,7 +340,6 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
                     MapView.this.addMarker(lat, lon, title, "");
                 }
                 else if (type.equals("LineString")){
-                    System.out.println("Creating LineString");
                     PathOverlay path = new PathOverlay(Color.BLACK,context);
                     JSONArray points = (JSONArray) geometry.get("coordinates");
                     JSONArray coordinates;
