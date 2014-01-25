@@ -75,7 +75,6 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         mFilesystemCache = pFilesystemCache;
         mNetworkAvailablityCheck = pNetworkAvailablityCheck;
         setTileSource(pTileSource);
-        System.out.println("Map downloader created");
     }
 
     // ===========================================================
