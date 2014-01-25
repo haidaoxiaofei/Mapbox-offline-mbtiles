@@ -170,7 +170,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      **/
     private String parseURL(String url) {
         if(url.contains(".json")) return getURLFromTileJSON(url);
-        if(!url.contains("http://")) return getURLFromMapBoxID(url);
+        if(!url.contains("http://") && !url.contains("https://")) return getURLFromMapBoxID(url);
         if(url.contains(".png")) return getURLFromImageTemplate(url);
         else{
             throw new IllegalArgumentException("You need to enter either a valid URL, a MapBox id, or a tile URL template");
@@ -207,7 +207,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         if(!mapBoxID.contains(".")){
             throw new IllegalArgumentException("Invalid MapBox ID, entered "+mapBoxID);
         }
-        String completeURL = "http://a.tiles.mapbox.com/v3/"+mapBoxID+"/";
+        String completeURL = "https://a.tiles.mapbox.com/v3/"+mapBoxID+"/";
         return completeURL;
     }
 
