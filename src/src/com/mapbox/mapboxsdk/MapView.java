@@ -128,6 +128,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     public void removeLayer(String identifier){
 
     }
+    
     @Deprecated
     public void addLayer(String name){
         this.switchToLayer(name);
@@ -148,6 +149,11 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         this.getOverlays().add(tilesOverlay);
         this.getController().animateTo(this.getMapCenter()); // This clears tiles (for some reason)
         this.invalidate();
+    }
+
+    @Override
+    public void setMultiTouchControls(boolean yesOrNo){
+        super.setMultiTouchControls(yesOrNo);
     }
 
 
