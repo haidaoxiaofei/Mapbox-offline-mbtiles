@@ -24,9 +24,18 @@ public class Tooltip extends Overlay{
     public Tooltip(Context ctx) {
         this(ctx, null);
     }
+
     public Tooltip(Context ctx, OverlayItem ot){
         this(ctx, ot, "");
     }
+
+    /**
+     * Initialize a tooltip
+     *
+     * @param ctx
+     * @param ot
+     * @param text
+     */
     public Tooltip(Context ctx, OverlayItem ot, String text) {
         super(ctx);
         setItem(ot);

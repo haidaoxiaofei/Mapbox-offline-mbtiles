@@ -18,9 +18,17 @@ public class Marker extends OverlayItem{
     private Tooltip tooltip;
     private MapView mapView;
 
+    /**
+     * Initialize a new marker object
+     *
+     * @param aTitle the title of the marker, in a potential tooltip
+     * @param aDescription the description of the marker, in a tooltip
+     * @param aGeoPoint the location of the marker
+     */
     public Marker(String aTitle, String aDescription, GeoPoint aGeoPoint) {
         this(null, aTitle, aDescription, aGeoPoint);
     }
+
     public Marker(MapView mv, String aTitle, String aDescription, GeoPoint aGeoPoint) {
         super(aTitle, aDescription, aGeoPoint);
         context = mv.getContext();
@@ -34,20 +42,25 @@ public class Marker extends OverlayItem{
         mapView.getOverlays().add(tooltip);
         mapView.invalidate();
     }
-
+    /**
+     * Set this marker's icon to a marker from the Maki icon set.
+     *
+     * @param makiString the name of a Maki icon symbol
+     */
     public void fromMaki(String makiString){
         String urlString = makiString+"182x";
         int id = context.getResources().getIdentifier(urlString, "drawable", context.getPackageName());
         this.setMarker(context.getResources().getDrawable(id));
     }
+
     public void setTooltipVisible(){
         tooltip.setVisible(true);
         mapView.invalidate();
     }
+
     public void setTooltipInvisible(){
         tooltip.setVisible(false);
     }
-
 
     class BitmapLoader extends AsyncTask<String, Void,Bitmap> {
 
