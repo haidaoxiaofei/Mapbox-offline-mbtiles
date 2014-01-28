@@ -33,11 +33,11 @@ public class MapViewFactory {
         catch (IOException e) {
             throw new IllegalArgumentException("MBTiles file not found in assets");
         }
-        if (inputStream==null) {
+        if (inputStream == null) {
             throw new IllegalArgumentException("InputStream is null");
         }
         File file = createFileFromInputStream(inputStream, Environment.getExternalStorageDirectory() + File.separator + URL);
-        if(file==null){
+        if (file == null) {
             throw new IllegalArgumentException("File is null");
         }
         MBTilesFileArchive mbTilesFileArchive = MBTilesFileArchive.getDatabaseFileArchive(file);
@@ -68,8 +68,7 @@ public class MapViewFactory {
             inputStream.close();
 
             return f;
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
         }
         return null;
     }
