@@ -33,44 +33,49 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The MapView class manages all of the content and state of a single map, including layers, markers,
+ * and interaction code.
+ */
 public class MapView extends org.osmdroid.views.MapView implements MapEventsReceiver {
     ////////////
     // FIELDS //
     ////////////
 
     /**
-     * The current tile source for the view (to be deprecated soon)
+     * The current tile source for the view (to be deprecated soon).
      */
     private ITileSource tileSource;
     /**
-     * The default marker Overlay, automatically added to the view to add markers directly
+     * The default marker Overlay, automatically added to the view to add markers directly.
      */
     private ItemizedIconOverlay<OverlayItem> defaultMarkerOverlay;
     /**
-     * List linked to the default marker overlay
+     * List linked to the default marker overlay.
      */
     private ArrayList<OverlayItem> defaultMarkerList = new ArrayList<OverlayItem>();
     /**
-     * Overlay for basic map touch events
+     * Overlay for basic map touch events.
      */
     private MapEventsOverlay eventsOverlay;
     /**
-     * A copy of the app context
+     * A copy of the app context.
      */
     private Context context;
     /**
-     * Whether or not a marker has been placed already
+     * Whether or not a marker has been placed already.
      */
     private boolean firstMarker = true;
 
     public final static String EXAMPLE_MAP_ID = "examples.map-z2effxa8";
+    public final static int DEFAULT_TILE_SIZE = 256;
 
     //////////////////
     // CONSTRUCTORS //
     //////////////////
 
     /**
-     * Constructor for XML layout calls. Should not be used programmatically
+     * Constructor for XML layout calls. Should not be used programmatically.
      * @param context A copy of the app context
      * @param attrs An AttributeSet object to get extra info from the XML, such as mapbox id or type of baselayer
      */
@@ -88,7 +93,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     /**
-     * Default constructor for the view
+     * Default constructor for the view.
      * @param context A copy of the app context
      * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
      */
@@ -108,21 +113,20 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
 
     /**
-     * Sets the MapView to use the specified URL
+     * Sets the MapView to use the specified URL.
      * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
      */
 
     public void setURL(String URL) {
         if (!URL.equals("")) {
             URL = parseURL(URL);
-            tileSource = new XYTileSource(URL, ResourceProxy.string.online_mode, 0, 24, 256, ".png", URL);
+            tileSource = new XYTileSource(URL, ResourceProxy.string.online_mode, 0, 24, DEFAULT_TILE_SIZE, ".png", URL);
             this.setTileSource(tileSource);
         }
-
     }
 
     /**
-     * Removes a layer from the list in the MapView
+     * Removes a layer from the list in the MapView.
      * @param identifier layer name
      */
     public void removeLayer(String identifier) {
@@ -135,13 +139,13 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     /**
-     * Switches the MapView to a layer (tile overlay)
+     * Switches the MapView to a layer (tile overlay).
      * @param name Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
      */
     public void switchToLayer(String name) {
         String URL = parseURL(name);
         final MapTileProviderBasic tileProvider = (MapTileProviderBasic) this.getTileProvider();
-        final ITileSource tileSource = new XYTileSource(name, null, 1, 16, 256, ".png", URL);
+        final ITileSource tileSource = new XYTileSource(name, null, 1, 16, DEFAULT_TILE_SIZE, ".png", URL);
         tileProvider.setTileSource(tileSource);
         this.invalidate();
     }
@@ -239,7 +243,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      * @return the marker object
      */
 
-    public Marker addMarker(double lat, double lon, String title, String text) {
+    public Marker addMarker(final double lat, final double lon, String title, String text) {
         Marker marker = new Marker(this, title, text, new GeoPoint(lat, lon));
         if (firstMarker) {
             defaultMarkerList.add(marker);
