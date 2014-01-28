@@ -25,16 +25,21 @@ public class Tooltip extends Overlay {
         this(ctx, null);
     }
 
+    /**
+     * Initialize a tooltip without text
+     * @param ctx
+     * @param ot
+     */
     public Tooltip(Context ctx, OverlayItem ot) {
         this(ctx, ot, "");
     }
 
     /**
-     * Initialize a tooltip
+     * Initialize a tooltip.
      *
-     * @param ctx
-     * @param ot
-     * @param text
+     * @param ctx a Context object on which this tooltip is drawn.
+     * @param ot an overlay item.
+     * @param text the text in the tooltip.
      */
     public Tooltip(Context ctx, OverlayItem ot, String text) {
         super(ctx);
@@ -47,7 +52,7 @@ public class Tooltip extends Overlay {
         textPaint = new TextPaint();
         textPaint.setColor(Color.rgb(50, 50, 50));
         textPaint.setTextAlign(Paint.Align.CENTER);
-        textPaint.setTextSize(40f);
+        textPaint.setTextSize(DEFAULT_TEXT_SIZE);
     }
 
     @Override
@@ -62,6 +67,7 @@ public class Tooltip extends Overlay {
             this.setTooltipShape();
         }
     }
+
     private void setTooltipShape() {
         canvas.drawRect(getRect(), paint);
         canvas.save();
@@ -69,12 +75,12 @@ public class Tooltip extends Overlay {
         canvas.drawRect(point.x - 20, point.y - 120, point.x + 20, point.y - 80, paint);
         canvas.restore();
     }
+
     private void calculatePoint() {
         GeoPoint markerCoords = item.getPoint();
         MapView.Projection projection = mapView.getProjection();
         projection.toPixels(markerCoords, point);
     }
-
 
     // Getters/setters
 
@@ -83,7 +89,7 @@ public class Tooltip extends Overlay {
      * @param text the text
      */
     public void setText(String text){
-        this.text = text;
+       this.text = text;
     }
     /**
      * Sets associated overlay of the tooltip
@@ -113,5 +119,12 @@ public class Tooltip extends Overlay {
         return new Rect(point.x - TOOLTIP_WIDTH/2, point.y - 200, point.x + TOOLTIP_WIDTH/2, point.y - 100);
     }
 
+    /**
+     * The default tooltip width, in pixels.
+     */
     public static final int TOOLTIP_WIDTH = 480;
+    /**
+     * Default text size, in points.
+     */
+    public static final float DEFAULT_TEXT_SIZE = 40f;
 }

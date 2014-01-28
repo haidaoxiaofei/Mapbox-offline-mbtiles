@@ -34,10 +34,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The MapView class manages all of the content and state of a single map, including layers, markers,
+ * The MapView class manages all of the content and
+ * state of a single map, including layers, markers,
  * and interaction code.
  */
-public class MapView extends org.osmdroid.views.MapView implements MapEventsReceiver {
+public class MapView extends org.osmdroid.views.MapView
+        implements MapEventsReceiver {
     ////////////
     // FIELDS //
     ////////////
@@ -156,27 +158,24 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
 
     /**
-     * Parses the passed ID string to use the relevant method
+     * Parses the passed ID string to use the relevant method.
      * @param url Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
      * @return the standard URL to be used by the library
      **/
     private String parseURL(String url) {
         if (url.contains(".json")) {
             return getURLFromTileJSON(url);
-        }
-        else if (!url.contains("http://") && !url.contains("https://")) {
+        } else if (!url.contains("http://") && !url.contains("https://")) {
             return getURLFromMapBoxID(url);
-        }
-        else if (url.contains(".png")) {
+        } else if (url.contains(".png")) {
             return getURLFromImageTemplate(url);
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("You need to enter either a valid URL, a MapBox id, or a tile URL template");
         }
     }
 
     /**
-     * Method that constructs the view. used in lieu of a constructor
+     * Method that constructs the view. used in lieu of a constructor.
      * @param context a copy of the app context
      */
     private void init(Context context) {
@@ -188,7 +187,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     /**
-     * Obtains the name of the application to identify the maps in the filesystem
+     * Obtains the name of the application to identify the maps in the filesystem.
      * @return the name of the app
      */
     private String getApplicationName() {
@@ -196,7 +195,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     /**
-     * Turns a Mapbox ID into a standard URL
+     * Turns a Mapbox ID into a standard URL.
      * @param mapBoxID the Mapbox ID
      * @return a standard url that will be used by the MapView
      */
@@ -209,7 +208,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     /**
-     * Turns a URL TileJSON path to the standard URL format used by the MapView
+     * Turns a URL TileJSON path to the standard URL format used by the MapView.
      * @param tileJSONURL the tileJSON URL
      * @return a standard url that will be used by the MapView
      */
@@ -218,7 +217,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     /**
-     * Gets a local TileMill address and turns it into a URL for the MapView (not yet implemented)
+     * Gets a local TileMill address and turns it into a URL for the MapView (not yet implemented).
      * @return a standard url that will be used by the MapView
      */
     private String getURLFromTilemill() {
@@ -226,7 +225,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     /**
-     * Gets a {xyz} image template URL and turns it into a standard URL for the MapView
+     * Gets a {xyz} image template URL and turns it into a standard URL for the MapView.
      * @param imageTemplateURL the template URL
      * @return a standard url that will be used by the MapView
      */
@@ -243,13 +242,13 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      * @return the marker object
      */
 
-    public Marker addMarker(final double lat, final double lon, String title, String text) {
+    public Marker addMarker(final double lat, final double lon,
+                            final String title, final String text) {
         Marker marker = new Marker(this, title, text, new GeoPoint(lat, lon));
         if (firstMarker) {
             defaultMarkerList.add(marker);
             setDefaultItemizedOverlay();
-        }
-        else {
+        } else {
             defaultMarkerOverlay.addItem(marker);
         }
         this.invalidate();
@@ -317,7 +316,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
         private void parseGeoJSON(String jsonString) throws JSONException {
             JSONObject json = new JSONObject(jsonString);
-            JSONArray features = (JSONArray)json.get("features");
+            JSONArray features = (JSONArray) json.get("features");
             for (int i = 0; i < (features != null ? features.length() : 0); i++) {
                 JSONObject feature = (JSONObject) features.get(i);
                 JSONObject properties = (JSONObject) feature.get("properties");
@@ -328,26 +327,24 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
                 JSONObject geometry = null;
                 try {
                     geometry = (JSONObject) feature.get("geometry");
-                }
-                catch (JSONException e){
+                } catch (JSONException e) {
                     Logger.w("No geometry is specified in feature"+ title);
                     continue;
                 }
                 String type = geometry.getString("type");
                 if (type.equals("Point")) {
                     JSONArray coordinates = (JSONArray) geometry.get("coordinates");
-                    double lon = (Double)coordinates.get(0);
-                    double lat = (Double)coordinates.get(1);
+                    double lon = (Double) coordinates.get(0);
+                    double lat = (Double) coordinates.get(1);
                     MapView.this.addMarker(lat, lon, title, "");
-                }
-                else if (type.equals("LineString")) {
+                } else if (type.equals("LineString")) {
                     PathOverlay path = new PathOverlay(Color.BLACK,context);
                     JSONArray points = (JSONArray) geometry.get("coordinates");
                     JSONArray coordinates;
-                    for(int point=0; point<points.length(); point++){
+                    for(int point=0; point < points.length(); point++){
                         coordinates = (JSONArray) points.get(point);
-                        double lon = (Double)coordinates.get(0);
-                        double lat = (Double)coordinates.get(1);
+                        double lon = (Double) coordinates.get(0);
+                        double lat = (Double) coordinates.get(1);
                         path.addPoint(new GeoPoint(lat, lon));
                     }
                     MapView.this.getOverlays().add(path);
@@ -357,7 +354,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     /**
-     * Sets the default itemized overlay
+     * Sets the default itemized overlay.
      */
     private void setDefaultItemizedOverlay() {
         defaultMarkerOverlay = new ItemizedIconOverlay<OverlayItem>(
@@ -366,7 +363,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
                     Marker currentMarker;
                     public boolean onItemSingleTapUp(final int index,
                                                      final OverlayItem item) {
-                        ((Marker)(item)).setTooltipVisible();
+                        ((Marker) (item)).setTooltipVisible();
 
                         return true;
                     }
@@ -383,7 +380,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     /////////////////////////
 
     /**
-     * Method coming from OSMDroid's tap handler
+     * Method coming from OSMDroid's tap handler.
      * @param p the position where the event occurred.
      * @return whether the event action is triggered or not
      */
@@ -394,7 +391,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     }
 
     /**
-     * Method coming from OSMDroid's long tap handler
+     * Method coming from OSMDroid's long tap handler.
      * @param p the position where the event occurred.
      * @return whether the event action is triggered or not
      */
