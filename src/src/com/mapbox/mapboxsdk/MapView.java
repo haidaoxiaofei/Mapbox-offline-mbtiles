@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -316,36 +317,77 @@ public class MapView extends org.osmdroid.views.MapView
 
         private void parseGeoJSON(String jsonString) throws JSONException {
             JSONObject json = new JSONObject(jsonString);
+
+            if (!json.has("features")) return;
+
             JSONArray features = (JSONArray) json.get("features");
 
-            if (features == null) return;
-
             for (int i = 0; i < features.length(); i++) {
+
                 JSONObject feature = (JSONObject) features.get(i);
                 JSONObject properties = (JSONObject) feature.get("properties");
                 String title = "";
+
                 if (properties.has("title")) {
                     title = properties.getString("title");
                 }
-                JSONObject geometry = null;
-                try {
-                    geometry = (JSONObject) feature.get("geometry");
-                } catch (JSONException e) {
+
+                if (!feature.has("geometry")) {
                     Logger.w("No geometry is specified in feature" + title);
                     continue;
                 }
+
+                JSONObject geometry = (JSONObject) feature.get("geometry");
                 String type = geometry.getString("type");
+                Logger.w("Feature has type: " + type);
+
+                int j;
                 if (type.equals("Point")) {
                     JSONArray coordinates = (JSONArray) geometry.get("coordinates");
                     double lon = (Double) coordinates.get(0);
                     double lat = (Double) coordinates.get(1);
                     MapView.this.addMarker(lat, lon, title, "");
+                } else if (type.equals("MultiPoint")) {
+                    JSONArray points = (JSONArray) geometry.get("coordinates");
+                    for (j = 0; j < points.length(); j++) {
+                        JSONArray coordinates = (JSONArray) points.get(j);
+                        double lon = (Double) coordinates.get(0);
+                        double lat = (Double) coordinates.get(1);
+                        MapView.this.addMarker(lat, lon, title, "");
+                    }
                 } else if (type.equals("LineString")) {
-                    PathOverlay path = new PathOverlay(Color.BLACK,context);
+                    PathOverlay path = new PathOverlay(Color.BLACK, context);
                     JSONArray points = (JSONArray) geometry.get("coordinates");
                     JSONArray coordinates;
-                    for (int point=0; point < points.length(); point++) {
-                        coordinates = (JSONArray) points.get(point);
+                    for (j = 0; j < points.length(); j++) {
+                        coordinates = (JSONArray) points.get(j);
+                        double lon = (Double) coordinates.get(0);
+                        double lat = (Double) coordinates.get(1);
+                        path.addPoint(new GeoPoint(lat, lon));
+                    }
+                    MapView.this.getOverlays().add(path);
+                } else if (type.equals("MultiLineString")) {
+                    JSONArray lines = (JSONArray) geometry.get("coordinates");
+                    for (int k = 0; k < lines.length(); k++) {
+                        PathOverlay path = new PathOverlay(Color.BLACK, context);
+                        JSONArray points = (JSONArray) lines.get(k);
+                        JSONArray coordinates;
+                        for (j = 0; j < points.length(); j++) {
+                            coordinates = (JSONArray) points.get(j);
+                            double lon = (Double) coordinates.get(0);
+                            double lat = (Double) coordinates.get(1);
+                            path.addPoint(new GeoPoint(lat, lon));
+                        }
+                        MapView.this.getOverlays().add(path);
+                    }
+                } else if (type.equals("Polygon")) {
+                    PathOverlay path = new PathOverlay(Color.BLACK, context);
+                    path.getPaint().setStyle(Paint.Style.FILL);
+                    JSONArray points = (JSONArray) geometry.get("coordinates");
+                    JSONArray outerRing = (JSONArray) points.get(0);
+                    JSONArray coordinates;
+                    for (j = 0; j < outerRing.length(); j++) {
+                        coordinates = (JSONArray) outerRing.get(j);
                         double lon = (Double) coordinates.get(0);
                         double lat = (Double) coordinates.get(1);
                         path.addPoint(new GeoPoint(lat, lon));
