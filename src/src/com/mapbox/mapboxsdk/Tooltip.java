@@ -9,7 +9,7 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
-public class Tooltip extends Overlay{
+public class Tooltip extends Overlay {
 
     private OverlayItem item;
     private Paint paint = new Paint();
@@ -25,7 +25,7 @@ public class Tooltip extends Overlay{
         this(ctx, null);
     }
 
-    public Tooltip(Context ctx, OverlayItem ot){
+    public Tooltip(Context ctx, OverlayItem ot) {
         this(ctx, ot, "");
     }
 
@@ -52,7 +52,7 @@ public class Tooltip extends Overlay{
 
     @Override
     protected void draw(Canvas canvas, org.osmdroid.views.MapView mapView, boolean shadow) {
-        if(this.isVisible()){
+        if (this.isVisible()) {
             StaticLayout sl = new StaticLayout(text, textPaint, 400, Layout.Alignment.ALIGN_CENTER, 1, 1, false);
             sl.draw(canvas);
             this.mapView = (MapView)mapView;
@@ -62,14 +62,14 @@ public class Tooltip extends Overlay{
             this.setTooltipShape();
         }
     }
-    private void setTooltipShape(){
+    private void setTooltipShape() {
         canvas.drawRect(getRect(), paint);
         canvas.save();
         canvas.rotate((float) 45, point.x, point.y - 100);
         canvas.drawRect(point.x - 20, point.y - 120, point.x + 20, point.y - 80, paint);
         canvas.restore();
     }
-    private void calculatePoint(){
+    private void calculatePoint() {
         GeoPoint markerCoords = item.getPoint();
         MapView.Projection projection = mapView.getProjection();
         projection.toPixels(markerCoords, point);

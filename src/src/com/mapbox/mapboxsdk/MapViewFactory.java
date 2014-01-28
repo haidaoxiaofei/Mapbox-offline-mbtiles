@@ -22,7 +22,7 @@ public class MapViewFactory {
      * @param URL the file name within assets
      * @return the MapView
      */
-    public static MapView fromMBTiles(Activity context, String URL){
+    public static MapView fromMBTiles(Activity context, String URL) {
         DefaultResourceProxyImpl mResourceProxy = new DefaultResourceProxyImpl(context);
         SimpleRegisterReceiver simpleReceiver = new SimpleRegisterReceiver(context);
         AssetManager am = context.getAssets();
@@ -33,7 +33,7 @@ public class MapViewFactory {
         catch (IOException e) {
             throw new IllegalArgumentException("MBTiles file not found in assets");
         }
-        if(inputStream==null){
+        if (inputStream==null) {
             throw new IllegalArgumentException("InputStream is null");
         }
         File file = createFileFromInputStream(inputStream, Environment.getExternalStorageDirectory() + File.separator + URL);
@@ -54,7 +54,7 @@ public class MapViewFactory {
         return new MapView(context, 256, mResourceProxy, mProvider);
     }
     private static File createFileFromInputStream(InputStream inputStream, String URL) {
-        try{
+        try {
             File f = new File(URL);
             OutputStream outputStream = new FileOutputStream(f);
             byte buffer[] = new byte[1024];
