@@ -7,6 +7,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.tileprovider.util.SimpleRegisterReceiver;
 
 import android.content.Context;
+import org.osmdroid.views.MapView;
 
 /**
  * This top-level tile provider implements a basic tile request chain which includes a
@@ -17,6 +18,7 @@ import android.content.Context;
  */
 public class MapTileProviderBasic extends MapTileProviderArray implements IMapTileProviderCallback {
     Context context;
+    private MapView mapView;
     // private static final Logger logger = LoggerFactory.getLogger(MapTileProviderBasic.class);
 
     /**
@@ -31,14 +33,14 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
      */
     public MapTileProviderBasic(final Context pContext, final ITileSource pTileSource) {
         this(new SimpleRegisterReceiver(pContext), new NetworkAvailabliltyCheck(pContext),
-                pTileSource, pContext);
+                pTileSource, pContext, null);
     }
 
     /**
      * Creates a {@link MapTileProviderBasic}.
      */
     public MapTileProviderBasic(final IRegisterReceiver pRegisterReceiver,
-                                final INetworkAvailablityCheck aNetworkAvailablityCheck, final ITileSource pTileSource, Context context) {
+                                final INetworkAvailablityCheck aNetworkAvailablityCheck, final ITileSource pTileSource, Context context, com.mapbox.mapboxsdk.MapView mapView) {
         super(pTileSource, pRegisterReceiver);
         this.context = context;
         final TileWriter tileWriter = new TileWriter();
@@ -52,9 +54,8 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
 //        mTileProviderList.add(archiveProvider);
 
         final MapTileDownloader downloaderProvider = new MapTileDownloader(pTileSource, tileWriter,
-                aNetworkAvailablityCheck);
+                aNetworkAvailablityCheck, mapView);
         if(isHighDensity()){
-
             downloaderProvider.setHighDensity(true);
         }
         for(MapTileModuleProviderBase provider: mTileProviderList){

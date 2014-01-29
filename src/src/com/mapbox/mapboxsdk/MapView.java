@@ -274,6 +274,10 @@ public class MapView extends org.osmdroid.views.MapView
         new JSONBodyGetter().execute(URL);
     }
 
+    public void onAllTilesLoaded() {
+        System.out.println("All tiles loaded boss");
+    }
+
     /**
      * Class that generates markers from formats such as GeoJSON
      */

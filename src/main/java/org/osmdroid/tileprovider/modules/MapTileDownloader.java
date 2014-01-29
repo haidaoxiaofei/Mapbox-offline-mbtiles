@@ -2,6 +2,7 @@ package org.osmdroid.tileprovider.modules;
 
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import com.mapbox.mapboxsdk.MapView;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -18,6 +19,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -45,25 +49,31 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
     private final AtomicReference<OnlineTileSourceBase> mTileSource = new AtomicReference<OnlineTileSourceBase>();
 
     private final INetworkAvailablityCheck mNetworkAvailablityCheck;
+    private MapView mapView;
     private boolean highDensity = false;
+
+    private int threadCount = 0;
+    ArrayList<Boolean> threadControl = new ArrayList<Boolean>();
 
     // ===========================================================
     // Constructors
     // ===========================================================
 
     public MapTileDownloader(final ITileSource pTileSource) {
-        this(pTileSource, null, null);
+        this(pTileSource, null);
     }
 
     public MapTileDownloader(final ITileSource pTileSource, final IFilesystemCache pFilesystemCache) {
-        this(pTileSource, pFilesystemCache, null);
+        this(pTileSource, pFilesystemCache, null, null);
     }
 
     public MapTileDownloader(final ITileSource pTileSource,
                              final IFilesystemCache pFilesystemCache,
-                             final INetworkAvailablityCheck pNetworkAvailablityCheck) {
+                             final INetworkAvailablityCheck pNetworkAvailablityCheck,
+                             final MapView mapView) {
         this(pTileSource, pFilesystemCache, pNetworkAvailablityCheck,
                 NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
+        this.mapView = mapView;
     }
 
     public MapTileDownloader(final ITileSource pTileSource,
@@ -76,6 +86,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         mNetworkAvailablityCheck = pNetworkAvailablityCheck;
         setTileSource(pTileSource);
     }
+
 
     // ===========================================================
     // Getter & Setter
@@ -150,7 +161,9 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
         @Override
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {
-
+            threadControl.add(false);
+            int threadIndex = threadControl.size()-1;
+            System.out.println("Thread " + threadCount);
             OnlineTileSourceBase tileSource = mTileSource.get();
             if (tileSource == null) {
                 return null;
@@ -224,6 +237,9 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                     byteStream.reset();
                 }
                 final Drawable result = tileSource.getDrawable(byteStream);
+                threadControl.set(threadIndex, true);
+                System.out.println(threadControl.size());
+                System.out.println("All threads done: " + checkThreadControl());
                 return result;
             } catch (final UnknownHostException e) {
                 // no network connection so empty the queue
@@ -274,5 +290,14 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             if (pDrawable instanceof ReusableBitmapDrawable)
                 BitmapPool.getInstance().returnDrawableToPool((ReusableBitmapDrawable) pDrawable);
         }
+    }
+    private boolean checkThreadControl(){
+        int index = 0;
+        for(boolean done: threadControl){
+            if(!done) return false;
+        }
+        threadControl = new ArrayList<Boolean>();
+        mapView.onAllTilesLoaded();
+        return true;
     }
 }
