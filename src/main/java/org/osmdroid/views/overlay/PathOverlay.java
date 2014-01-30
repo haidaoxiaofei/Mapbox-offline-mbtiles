@@ -14,6 +14,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 
@@ -58,6 +59,14 @@ public class PathOverlay extends Overlay {
     // ===========================================================
     // Constructors
     // ===========================================================
+    public PathOverlay() {
+        super();
+        this.mPaint.setColor(Color.BLUE);
+        this.mPaint.setStrokeWidth(10.0f);
+        this.mPaint.setStyle(Paint.Style.STROKE);
+
+        this.clearPath();
+    }
 
     public PathOverlay(final int color, final Context ctx) {
         this(color, 2.0f, new DefaultResourceProxyImpl(ctx));
@@ -86,61 +95,6 @@ public class PathOverlay extends Overlay {
 
     public void setAlpha(final int a) {
         this.mPaint.setAlpha(a);
-    }
-
-    /**
-     * Draw a great circle.
-     * Calculate a point for every 100km along the path.
-     *
-     * @param startPoint start point of the great circle
-     * @param endPoint   end point of the great circle
-     */
-    public void addGreatCircle(final GeoPoint startPoint, final GeoPoint endPoint) {
-        //	get the great circle path length in meters
-        final int greatCircleLength = startPoint.distanceTo(endPoint);
-
-        //	add one point for every 100kms of the great circle path
-        final int numberOfPoints = greatCircleLength / 100000;
-
-        addGreatCircle(startPoint, endPoint, numberOfPoints);
-    }
-
-    /**
-     * Draw a great circle.
-     *
-     * @param startPoint     start point of the great circle
-     * @param endPoint       end point of the great circle
-     * @param numberOfPoints number of points to calculate along the path
-     */
-    public void addGreatCircle(final GeoPoint startPoint, final GeoPoint endPoint, final int numberOfPoints) {
-        //	adapted from page http://compastic.blogspot.co.uk/2011/07/how-to-draw-great-circle-on-map-in.html
-        //	which was adapted from page http://maps.forum.nu/gm_flight_path.html
-
-        // convert to radians
-        final double lat1 = startPoint.getLatitudeE6() / 1E6 * Math.PI / 180;
-        final double lon1 = startPoint.getLongitudeE6() / 1E6 * Math.PI / 180;
-        final double lat2 = endPoint.getLatitudeE6() / 1E6 * Math.PI / 180;
-        final double lon2 = endPoint.getLongitudeE6() / 1E6 * Math.PI / 180;
-
-        final double d = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin((lat1 - lat2) / 2), 2) + Math.cos(lat1) * Math.cos(lat2)
-                * Math.pow(Math.sin((lon1 - lon2) / 2), 2)));
-        double bearing = Math.atan2(Math.sin(lon1 - lon2) * Math.cos(lat2),
-                Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2))
-                / -(Math.PI / 180);
-        bearing = bearing < 0 ? 360 + bearing : bearing;
-
-        for (int i = 0, j = numberOfPoints + 1; i < j; i++) {
-            final double f = 1.0 / numberOfPoints * i;
-            final double A = Math.sin((1 - f) * d) / Math.sin(d);
-            final double B = Math.sin(f * d) / Math.sin(d);
-            final double x = A * Math.cos(lat1) * Math.cos(lon1) + B * Math.cos(lat2) * Math.cos(lon2);
-            final double y = A * Math.cos(lat1) * Math.sin(lon1) + B * Math.cos(lat2) * Math.sin(lon2);
-            final double z = A * Math.sin(lat1) + B * Math.sin(lat2);
-
-            final double latN = Math.atan2(z, Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
-            final double lonN = Math.atan2(y, x);
-            addPoint((int) (latN / (Math.PI / 180) * 1E6), (int) (lonN / (Math.PI / 180) * 1E6));
-        }
     }
 
     public Paint getPaint() {

@@ -7,7 +7,6 @@ import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IMapView;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.util.constants.OverlayConstants;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -30,7 +29,7 @@ import android.view.MotionEvent;
  *
  * @author Nicolas Gramlich
  */
-public abstract class Overlay implements OverlayConstants {
+public abstract class Overlay {
 
     // ===========================================================
     // Constants
@@ -46,14 +45,17 @@ public abstract class Overlay implements OverlayConstants {
     // Fields
     // ===========================================================
 
-    protected final ResourceProxy mResourceProxy;
-    protected final float mScale;
+    protected ResourceProxy mResourceProxy;
+    protected float mScale;
     private static final Rect mRect = new Rect();
     private boolean mEnabled = true;
 
     // ===========================================================
     // Constructors
     // ===========================================================
+
+    public Overlay() {
+    }
 
     public Overlay(final Context ctx) {
         mResourceProxy = new DefaultResourceProxyImpl(ctx);
@@ -63,6 +65,14 @@ public abstract class Overlay implements OverlayConstants {
     public Overlay(final ResourceProxy pResourceProxy) {
         mResourceProxy = pResourceProxy;
         mScale = mResourceProxy.getDisplayMetricsDensity();
+    }
+
+    /**
+     */
+    public Overlay setContext(final Context ctx) {
+        mResourceProxy = new DefaultResourceProxyImpl(ctx);
+        mScale = ctx.getResources().getDisplayMetrics().density;
+        return this;
     }
 
     // ===========================================================
@@ -306,4 +316,13 @@ public abstract class Overlay implements OverlayConstants {
         boolean onSnapToItem(int x, int y, Point snapPoint, IMapView mapView);
     }
 
+    // ===========================================================
+    // Final Fields
+    // ===========================================================
+
+    public static final boolean DEBUGMODE = false;
+
+    public static final int NOT_SET = Integer.MIN_VALUE;
+
+    public static final int DEFAULT_ZOOMLEVEL_MINIMAP_DIFFERENCE = 3;
 }
