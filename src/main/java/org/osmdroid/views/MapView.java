@@ -126,7 +126,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     protected Rect mScrollableAreaLimit;
 
     // for speed (avoiding allocations)
-    private final MapTileProviderBase mTileProvider;
+    protected final MapTileProviderBase mTileProvider;
 
     private final Handler mTileRequestCompleteHandler;
 
@@ -134,6 +134,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     private final Point mPoint = new Point();
 
     private HashSet<String> activeLayers = new HashSet<String>();
+    private TilesLoadedListener tilesLoadedListener;
 
     // ===========================================================
     // Constructors
@@ -154,7 +155,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
             final ITileSource tileSource = getTileSourceFromAttributes(attrs);
             tileProvider = isInEditMode()
                     ? new MapTileProviderArray(tileSource, null, new MapTileModuleProviderBase[0])
-                    : new MapTileProviderBasic(context, tileSource);
+                    : new MapTileProviderBasic(context, tileSource, this);
         }
 
         mTileRequestCompleteHandler = tileRequestCompleteHandler == null
@@ -1717,6 +1718,17 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         public LayoutParams(final ViewGroup.LayoutParams source) {
             super(source);
         }
+    }
+
+    public interface TilesLoadedListener{
+        public boolean onTilesLoaded();
+    }
+    public void setOnTilesLoadedListener(TilesLoadedListener tilesLoadedListener) {
+        this.tilesLoadedListener = tilesLoadedListener;
+    }
+
+    public TilesLoadedListener getTilesLoadedListener() {
+        return tilesLoadedListener;
     }
 
 }

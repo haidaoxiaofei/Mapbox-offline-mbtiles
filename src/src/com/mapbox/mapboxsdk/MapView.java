@@ -72,7 +72,7 @@ public class MapView extends org.osmdroid.views.MapView
 
     public final static String EXAMPLE_MAP_ID = "examples.map-z2effxa8";
     public final static int DEFAULT_TILE_SIZE = 256;
-    private TilesLoadedListener tilesLoadedListener;
+    TilesLoadedListener tilesLoadedListener;
 
     //////////////////
     // CONSTRUCTORS //
@@ -96,6 +96,7 @@ public class MapView extends org.osmdroid.views.MapView
                 setURL(mapboxID);
             }
         }
+        mTileProvider.setMapView(this);
     }
 
     /**
@@ -276,15 +277,6 @@ public class MapView extends org.osmdroid.views.MapView
     public void parseFromGeoJSON(String URL) {
         new JSONBodyGetter().execute(URL);
     }
-
-    public void onAllTilesLoaded() {
-        System.out.println("All tiles loaded boss");
-    }
-
-    public void setOnTilesLoadedListener(TilesLoadedListener tilesLoadedListener) {
-        this.tilesLoadedListener = tilesLoadedListener;
-    }
-
     /**
      * Class that generates markers from formats such as GeoJSON
      */
@@ -463,9 +455,7 @@ public class MapView extends org.osmdroid.views.MapView
     public void onTap(IGeoPoint p) {
     }
 
-    public interface TilesLoadedListener{
-        public boolean onTilesLoaded();
-    }
+
 
 
 }
