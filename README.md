@@ -1,3 +1,5 @@
+**This is pre-alpha software. It may be broken at any time in development, and there is zero guarantee of API stability. Kick the tires at your own risk, they may explode.**
+
 # Mapbox Android SDK
 
 Open source alternative for native Mapbox maps on Android. 
