@@ -18,29 +18,28 @@ import org.osmdroid.views.MapView;
  */
 public class MapTileProviderBasic extends MapTileProviderArray implements IMapTileProviderCallback {
     Context context;
-    private MapView mapView;
     // private static final Logger logger = LoggerFactory.getLogger(MapTileProviderBasic.class);
 
     /**
      * Creates a {@link MapTileProviderBasic}.
      */
     public MapTileProviderBasic(final Context pContext) {
-        this(pContext, TileSourceFactory.DEFAULT_TILE_SOURCE);
+        this(pContext, TileSourceFactory.DEFAULT_TILE_SOURCE, null);
     }
 
     /**
      * Creates a {@link MapTileProviderBasic}.
      */
-    public MapTileProviderBasic(final Context pContext, final ITileSource pTileSource) {
+    public MapTileProviderBasic(final Context pContext, final ITileSource pTileSource, MapView mapView) {
         this(new SimpleRegisterReceiver(pContext), new NetworkAvailabliltyCheck(pContext),
-                pTileSource, pContext, null);
+                pTileSource, pContext, mapView);
     }
 
     /**
      * Creates a {@link MapTileProviderBasic}.
      */
     public MapTileProviderBasic(final IRegisterReceiver pRegisterReceiver,
-                                final INetworkAvailablityCheck aNetworkAvailablityCheck, final ITileSource pTileSource, Context context, com.mapbox.mapboxsdk.MapView mapView) {
+                                final INetworkAvailablityCheck aNetworkAvailablityCheck, final ITileSource pTileSource, Context context, MapView mapView) {
         super(pTileSource, pRegisterReceiver);
         this.context = context;
         final TileWriter tileWriter = new TileWriter();
