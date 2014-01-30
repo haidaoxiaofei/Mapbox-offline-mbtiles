@@ -41,6 +41,14 @@ public class MainActivity extends Activity {
         mapController.setZoom(4);
         mv.parseFromGeoJSON("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
         setButtonListeners();
+
+        mv.setOnTilesLoadedListener(new MapView.TilesLoadedListener() {
+            @Override
+            public boolean onTilesLoaded() {
+                System.out.println("All tiles have been loaded");
+                return false;
+            }
+        });
     }
 
     private void setButtonListeners() {
