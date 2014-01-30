@@ -239,8 +239,12 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 }
                 final Drawable result = tileSource.getDrawable(byteStream);
                 threadControl.set(threadIndex, true);
-                System.out.println(threadIndex + " set to true");
-                System.out.println("All threads done: " + checkThreadControl());
+                if(checkThreadControl()) {
+                    MapView.TilesLoadedListener listener = mapView.getTilesLoadedListener();
+                    if (listener != null){
+                        listener.onTilesLoaded();
+                    }
+                }
                 return result;
             } catch (final UnknownHostException e) {
                 // no network connection so empty the queue
