@@ -72,7 +72,6 @@ public class MapView extends org.osmdroid.views.MapView
 
     public final static String EXAMPLE_MAP_ID = "examples.map-z2effxa8";
     public final static int DEFAULT_TILE_SIZE = 256;
-    TilesLoadedListener tilesLoadedListener;
 
     //////////////////
     // CONSTRUCTORS //
@@ -96,7 +95,6 @@ public class MapView extends org.osmdroid.views.MapView
                 setURL(mapboxID);
             }
         }
-        mTileProvider.setMapView(this);
     }
 
     /**

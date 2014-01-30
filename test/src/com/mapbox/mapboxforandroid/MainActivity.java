@@ -49,6 +49,7 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
+        mv.setVisibility(View.VISIBLE);
     }
 
     private void setButtonListeners() {

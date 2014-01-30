@@ -2,7 +2,6 @@ package org.osmdroid.tileprovider.modules;
 
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
-import com.mapbox.mapboxsdk.MapView;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -14,6 +13,7 @@ import org.osmdroid.tileprovider.tilesource.BitmapTileSourceBase.LowMemoryExcept
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
 import org.osmdroid.tileprovider.util.StreamUtils;
+import org.osmdroid.views.MapView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

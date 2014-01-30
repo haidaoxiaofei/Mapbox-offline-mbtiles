@@ -4,13 +4,13 @@ package org.osmdroid.tileprovider;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.mapbox.mapboxsdk.MapView;
 import microsoft.mappoint.TileSystem;
 
 import org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants;
 import org.osmdroid.tileprovider.modules.MapTileModuleProviderBase;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.util.TileLooper;
+import org.osmdroid.views.MapView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
