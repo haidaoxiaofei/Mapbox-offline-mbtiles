@@ -277,6 +277,22 @@ public class MapView extends org.osmdroid.views.MapView
         new JSONBodyGetter().execute(URL);
     }
 
+    /**
+     * Load and parse a GeoJSON file at a given URL
+     * @param URL the URL from which to load the GeoJSON file
+     */
+    public void parseFromGeoJSONURL(String URL) {
+        new JSONBodyGetter().execute(URL);
+    }
+
+    /**
+     * Load and parse a GeoJSON file at a given URL
+     * @param geoJSON the GeoJSON string to parse
+     */
+    public void parseFromGeoJSONString(String geoJSON) throws JSONException {
+        new JSONBodyGetter().parseGeoJSON(geoJSON);
+    }
+
 
     /**
      * Class that generates markers from formats such as GeoJSON
