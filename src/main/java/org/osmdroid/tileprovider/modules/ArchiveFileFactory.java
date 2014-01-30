@@ -19,22 +19,6 @@ public class ArchiveFileFactory {
      */
     public static IArchiveFile getArchiveFile(final File pFile) {
 
-        if (pFile.getName().endsWith(".zip")) {
-            try {
-                return ZipFileArchive.getZipFileArchive(pFile);
-            } catch (final IOException e) {
-                logger.error("Error opening ZIP file", e);
-            }
-        }
-
-        if (pFile.getName().endsWith(".sqlite")) {
-            try {
-                return DatabaseFileArchive.getDatabaseFileArchive(pFile);
-            } catch (final SQLiteException e) {
-                logger.error("Error opening SQL file", e);
-            }
-        }
-
         if (pFile.getName().endsWith(".mbtiles")) {
             try {
                 return MBTilesFileArchive.getDatabaseFileArchive(pFile);

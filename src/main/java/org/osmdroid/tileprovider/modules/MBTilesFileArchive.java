@@ -69,7 +69,7 @@ public class MBTilesFileArchive implements IArchiveFile {
 
     @Override
     public String toString() {
-        return "DatabaseFileArchive [mDatabase=" + mDatabase.getPath() + "]";
+        return "MBTiles [mDatabase=" + mDatabase.getPath() + "]";
     }
     public int getMinZoomLevel(){
         Cursor cursor = mDatabase.rawQuery("SELECT MIN(zoom_level) FROM tiles", null);
