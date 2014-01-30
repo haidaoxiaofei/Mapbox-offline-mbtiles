@@ -269,7 +269,7 @@ public class MapView extends org.osmdroid.views.MapView
     }
 
     /**
-     * Load and parse a GeoJSON file at a given URL
+     * Load and parse a GeoJSON file at a given URL. Deprecated method. Use {@link #loadFromGeoJSONURL(String)} or {@link #loadFromGeoJSONString(String)}
      * @param URL the URL from which to load the GeoJSON file
      */
     @Deprecated
@@ -281,7 +281,7 @@ public class MapView extends org.osmdroid.views.MapView
      * Load and parse a GeoJSON file at a given URL
      * @param URL the URL from which to load the GeoJSON file
      */
-    public void parseFromGeoJSONURL(String URL) {
+    public void loadFromGeoJSONURL(String URL) {
         new JSONBodyGetter().execute(URL);
     }
 
@@ -289,7 +289,7 @@ public class MapView extends org.osmdroid.views.MapView
      * Load and parse a GeoJSON file at a given URL
      * @param geoJSON the GeoJSON string to parse
      */
-    public void parseFromGeoJSONString(String geoJSON) throws JSONException {
+    public void loadFromGeoJSONString(String geoJSON) throws JSONException {
         new JSONBodyGetter().parseGeoJSON(geoJSON);
     }
 
