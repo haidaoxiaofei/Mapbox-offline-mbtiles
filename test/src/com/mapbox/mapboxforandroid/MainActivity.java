@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import com.mapbox.mapboxsdk.MapView;
+import com.mapbox.mapboxsdk.Marker;
+import com.mapbox.mapboxsdk.Icon;
 import com.testflightapp.lib.TestFlight;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.MapTileProviderBasic;
@@ -41,6 +43,9 @@ public class MainActivity extends Activity {
         mapController.setZoom(4);
         mv.parseFromGeoJSON("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
         setButtonListeners();
+        Marker m = new Marker(mv, "Hello", "World", new GeoPoint(0f, 0f));
+        m.setIcon(new Icon(Icon.Size.l, "bus", "000"));
+        mv.addMarker(m);
 
         mv.setOnTilesLoadedListener(new MapView.TilesLoadedListener() {
             @Override

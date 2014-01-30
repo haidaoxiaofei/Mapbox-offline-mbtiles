@@ -245,9 +245,7 @@ public class MapView extends org.osmdroid.views.MapView
      * @return the marker object
      */
 
-    public Marker addMarker(final double lat, final double lon,
-                            final String title, final String text) {
-        Marker marker = new Marker(this, title, text, new GeoPoint(lat, lon));
+    public Marker addMarker(Marker marker) {
         if (firstMarker) {
             defaultMarkerList.add(marker);
             setDefaultItemizedOverlay();
@@ -256,7 +254,15 @@ public class MapView extends org.osmdroid.views.MapView
         }
         this.invalidate();
         firstMarker = false;
-        return null;
+        return marker;
+    }
+
+    // TODO: remove
+    public Marker createMarker(final double lat, final double lon,
+                            final String title, final String text) {
+        Marker marker = new Marker(this, title, text, new GeoPoint(lat, lon));
+        addMarker(marker);
+        return marker;
     }
 
     /**

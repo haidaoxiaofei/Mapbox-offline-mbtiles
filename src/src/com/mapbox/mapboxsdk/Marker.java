@@ -1,10 +1,6 @@
 package com.mapbox.mapboxsdk;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.AsyncTask;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.OverlayItem;
 
@@ -64,6 +60,11 @@ public class Marker extends OverlayItem {
         this.setMarker(context.getResources().getDrawable(id));
     }
 
+    public Marker setIcon(Icon icon) {
+        icon.setMarker(this);
+        return this;
+    }
+
     public void setTooltipVisible() {
         tooltip.setVisible(true);
         mapView.invalidate();
@@ -71,29 +72,5 @@ public class Marker extends OverlayItem {
 
     public void setTooltipInvisible() {
         tooltip.setVisible(false);
-    }
-
-    class BitmapLoader extends AsyncTask<String, Void,Bitmap> {
-
-        @Override
-        protected Bitmap doInBackground(String... src) {
-            try {
-                URL url = new URL(src[0]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-                return myBitmap;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-        @Override
-        protected void onPostExecute(Bitmap bitmap){
-            bitmap.setDensity(120);
-            Marker.this.setMarker(new BitmapDrawable(bitmap));
-        }
     }
 }
