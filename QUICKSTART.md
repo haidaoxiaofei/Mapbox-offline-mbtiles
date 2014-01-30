@@ -8,11 +8,20 @@ The quickest way is just to download the [JAR from our the GitHub repository](ht
 
 ### Required Permissions
 
-Ensure the following permissions are requested in your `AndroidManifest.xml` file:
+Ensure the following *core* permissions are requested in your `AndroidManifest.xml` file:
 
 ```xml
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```
+
+If your project needs to access location services, it'll also need the following permissions too:
+
+```xml
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 ```
 
 ###The MapView
@@ -25,7 +34,7 @@ To add the ```MapView``` as a layout element, add the following to your xml file
 android:id="@+id/mapview"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent"
-mapboxID="Your MapBox ID">
+mapboxID="Your MapBox ID" />
 ```
 
 

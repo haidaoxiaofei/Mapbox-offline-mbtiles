@@ -9,6 +9,7 @@ build/
 .idea/
 src/.idea/
 .gradle/
+gradle/
 test/assets/
 
 local.properties
