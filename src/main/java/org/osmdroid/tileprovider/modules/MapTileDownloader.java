@@ -49,7 +49,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
     private final AtomicReference<OnlineTileSourceBase> mTileSource = new AtomicReference<OnlineTileSourceBase>();
 
     private final INetworkAvailablityCheck mNetworkAvailablityCheck;
-    private MapView mapView;
+    private org.osmdroid.views.MapView mapView;
     private boolean highDensity = false;
 
     private int threadCount = 0;
@@ -70,7 +70,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
     public MapTileDownloader(final ITileSource pTileSource,
                              final IFilesystemCache pFilesystemCache,
                              final INetworkAvailablityCheck pNetworkAvailablityCheck,
-                             final MapView mapView) {
+                             final org.osmdroid.views.MapView mapView) {
         this(pTileSource, pFilesystemCache, pNetworkAvailablityCheck,
                 NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
         System.out.println(mapView);
@@ -301,8 +301,6 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             if(!done) return false;
         }
         threadControl = new ArrayList<Boolean>();
-
-        mapView.onAllTilesLoaded();
         return true;
     }
 }
