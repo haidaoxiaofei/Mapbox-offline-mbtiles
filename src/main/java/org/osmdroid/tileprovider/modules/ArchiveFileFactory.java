@@ -43,14 +43,6 @@ public class ArchiveFileFactory {
             }
         }
 
-        if (pFile.getName().endsWith(".gemf")) {
-            try {
-                return GEMFFileArchive.getGEMFFileArchive(pFile);
-            } catch (final IOException e) {
-                logger.error("Error opening GEMF file", e);
-            }
-        }
-
         return null;
     }
 
