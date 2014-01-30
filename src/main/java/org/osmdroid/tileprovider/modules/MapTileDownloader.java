@@ -73,6 +73,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                              final MapView mapView) {
         this(pTileSource, pFilesystemCache, pNetworkAvailablityCheck,
                 NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
+        System.out.println(mapView);
         this.mapView = mapView;
     }
 
@@ -163,7 +164,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {
             threadControl.add(false);
             int threadIndex = threadControl.size()-1;
-            System.out.println("Thread " + threadCount);
+            System.out.println(threadIndex+" set");
             OnlineTileSourceBase tileSource = mTileSource.get();
             if (tileSource == null) {
                 return null;
@@ -238,7 +239,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 }
                 final Drawable result = tileSource.getDrawable(byteStream);
                 threadControl.set(threadIndex, true);
-                System.out.println(threadControl.size());
+                System.out.println(threadIndex + " set to true");
                 System.out.println("All threads done: " + checkThreadControl());
                 return result;
             } catch (final UnknownHostException e) {
@@ -292,11 +293,11 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         }
     }
     private boolean checkThreadControl(){
-        int index = 0;
         for(boolean done: threadControl){
             if(!done) return false;
         }
         threadControl = new ArrayList<Boolean>();
+
         mapView.onAllTilesLoaded();
         return true;
     }
