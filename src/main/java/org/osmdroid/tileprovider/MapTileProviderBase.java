@@ -1,8 +1,10 @@
 // Created by plusminus on 21:46:22 - 25.09.2008
 package org.osmdroid.tileprovider;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.mapbox.mapboxsdk.MapView;
 import microsoft.mappoint.TileSystem;
 
 import org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants;
@@ -42,6 +44,7 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
     protected boolean mUseDataConnection = true;
 
     private ITileSource mTileSource;
+    protected MapView mapView;
 
     /**
      * Attempts to get a Drawable that represents a {@link MapTile}. If the tile is not immediately
@@ -244,6 +247,10 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
         logger.info("Finished rescale in " + (endMs - startMs) + "ms");
     }
 
+    public void setMapView(MapView mapView) {
+        this.mapView = mapView;
+    }
+
     private abstract class ScaleTileLooper extends TileLooper {
 
         /**
@@ -420,5 +427,6 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
             }
         }
     }
+
 
 }
