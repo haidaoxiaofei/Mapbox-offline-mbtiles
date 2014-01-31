@@ -238,10 +238,7 @@ public class MapView extends org.osmdroid.views.MapView
 
     /**
      * Adds a marker to the default marker overlay
-     * @param lat latitude of the marker
-     * @param lon longitude of the marker
-     * @param title title of the marker
-     * @param text body of the marker's tooltip
+     * @param marker the marker object to be added
      * @return the marker object
      */
 
