@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.testflightapp.lib.core.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,7 +41,7 @@ import java.util.List;
  * and interaction code.
  */
 public class MapView extends org.osmdroid.views.MapView
-        implements MapEventsReceiver {
+        implements MapboxConstants, MapEventsReceiver {
     ////////////
     // FIELDS //
     ////////////
@@ -206,7 +207,7 @@ public class MapView extends org.osmdroid.views.MapView
         if (!mapBoxID.contains(".")) {
             throw new IllegalArgumentException("Invalid MapBox ID, entered " + mapBoxID);
         }
-        String completeURL = "https://a.tiles.mapbox.com/v3/" + mapBoxID + "/";
+        String completeURL = MAPBOX_BASE_URL + mapBoxID + "/";
         return completeURL;
     }
 
