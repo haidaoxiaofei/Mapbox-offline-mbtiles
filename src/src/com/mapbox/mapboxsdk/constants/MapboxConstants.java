@@ -1,8 +1,5 @@
 package com.mapbox.mapboxsdk.constants;
 
-/**
- * Created by Francisco on 31/01/14.
- */
 public interface MapboxConstants {
-    
+    public static final String MAPBOX_BASE_URL = "https://a.tiles.mapbox.com/v3/";
 }
