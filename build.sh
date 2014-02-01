@@ -1,3 +1,4 @@
+#!/bin/sh
 echo
 echo
 echo Mapbox Android SDK builder
