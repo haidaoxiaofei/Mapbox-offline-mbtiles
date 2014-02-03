@@ -234,7 +234,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                     mFilesystemCache.saveFile(tileSource, tile, byteStream);
                     byteStream.reset();
                 }
-                final Drawable result = tileSource.getDrawable(byteStream);
+                Drawable result = tileSource.getDrawable(byteStream);
                 threadControl.set(threadIndex, true);
                 if(checkThreadControl()) {
                     MapView.TilesLoadedListener listener = mapView.getTilesLoadedListener();
@@ -242,6 +242,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                         listener.onTilesLoaded();
                     }
                 }
+                result = mapView.hasTileLoadedListener()? onTileLoaded(result): result;
                 return result;
             } catch (final UnknownHostException e) {
                 // no network connection so empty the queue
@@ -284,7 +285,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         @Override
         protected void tileLoaded(final MapTileRequestState pState, Drawable pDrawable) {
             removeTileFromQueues(pState.getMapTile());
-            pDrawable = mapView.hasTileLoadedListener()? onTileLoaded(pDrawable): pDrawable;
+
             // don't return the tile because we'll wait for the fs provider to ask for it
             // this prevent flickering when a load of delayed downloads complete for tiles
             // that we might not even be interested in any more
