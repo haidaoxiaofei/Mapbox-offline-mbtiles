@@ -152,7 +152,7 @@ public class TilesOverlay extends SafeDrawOverlay implements IOverlayMenuProvide
 
         // draw a cross at center in debug mode
         if (DEBUGMODE) {
-            // final GeoPoint center = osmv.getMapCenter();
+            // final LatLng center = osmv.getMapCenter();
             final Point centerPoint = new Point(viewPort.centerX() - mWorldSize_2,
                     viewPort.centerY() - mWorldSize_2);
             c.drawLine(centerPoint.x, centerPoint.y - 9, centerPoint.x, centerPoint.y + 9, mDebugPaint);

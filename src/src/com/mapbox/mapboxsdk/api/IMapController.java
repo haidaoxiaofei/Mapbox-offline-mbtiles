@@ -9,11 +9,11 @@ import com.mapbox.mapboxsdk.views.MapController;
  * @author Neil Boyd
  */
 public interface IMapController {
-    void animateTo(IGeoPoint geoPoint);
+    void animateTo(ILatLng geoPoint);
 
     void scrollBy(int x, int y);
 
-    void setCenter(IGeoPoint point);
+    void setCenter(ILatLng point);
 
     int setZoom(int zoomLevel);
 

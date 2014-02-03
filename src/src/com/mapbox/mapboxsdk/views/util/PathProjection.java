@@ -3,7 +3,7 @@ package com.mapbox.mapboxsdk.views.util;
 import java.util.List;
 
 import com.mapbox.mapboxsdk.util.BoundingBoxE6;
-import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.LatLng;
 import com.mapbox.mapboxsdk.util.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
 
@@ -14,12 +14,12 @@ import android.graphics.Rect;
 
 public class PathProjection {
 
-    public static Path toPixels(Projection projection, final List<? extends GeoPoint> in,
+    public static Path toPixels(Projection projection, final List<? extends LatLng> in,
                                 final Path reuse) {
         return toPixels(projection, in, reuse, true);
     }
 
-    public static Path toPixels(Projection projection, final List<? extends GeoPoint> in,
+    public static Path toPixels(Projection projection, final List<? extends LatLng> in,
                                 final Path reuse, final boolean doGudermann) throws IllegalArgumentException {
         if (in.size() < 2) {
             throw new IllegalArgumentException("List of GeoPoints needs to be at least 2.");
@@ -29,7 +29,7 @@ public class PathProjection {
         out.incReserve(in.size());
 
         boolean first = true;
-        for (final GeoPoint gp : in) {
+        for (final LatLng gp : in) {
             final Point underGeopointTileCoords = TileSystem.LatLongToPixelXY(
                     gp.getLatitudeE6() / 1E6, gp.getLongitudeE6() / 1E6, projection.getZoomLevel(),
                     null);
@@ -44,13 +44,13 @@ public class PathProjection {
             final Point lowerLeft = TileSystem.TileXYToPixelXY(underGeopointTileCoords.x
                     + TileSystem.getTileSize(),
                     underGeopointTileCoords.y + TileSystem.getTileSize(), null);
-            final GeoPoint neGeoPoint = TileSystem.PixelXYToLatLong(upperRight.x, upperRight.y,
+            final LatLng neLatLng = TileSystem.PixelXYToLatLong(upperRight.x, upperRight.y,
                     projection.getZoomLevel(), null);
-            final GeoPoint swGeoPoint = TileSystem.PixelXYToLatLong(lowerLeft.x, lowerLeft.y,
+            final LatLng swLatLng = TileSystem.PixelXYToLatLong(lowerLeft.x, lowerLeft.y,
                     projection.getZoomLevel(), null);
-            final BoundingBoxE6 bb = new BoundingBoxE6(neGeoPoint.getLatitudeE6(),
-                    neGeoPoint.getLongitudeE6(), swGeoPoint.getLatitudeE6(),
-                    swGeoPoint.getLongitudeE6());
+            final BoundingBoxE6 bb = new BoundingBoxE6(neLatLng.getLatitudeE6(),
+                    neLatLng.getLongitudeE6(), swLatLng.getLatitudeE6(),
+                    swLatLng.getLongitudeE6());
 
             final PointF relativePositionInCenterMapTile;
             if (doGudermann && (projection.getZoomLevel() < 7)) {

@@ -11,13 +11,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.*;
+import com.mapbox.mapboxsdk.api.ILatLng;
+import com.mapbox.mapboxsdk.util.LatLng;
 import org.metalev.multitouch.controller.MultiTouchController;
 import org.metalev.multitouch.controller.MultiTouchController.MultiTouchObjectCanvas;
 import org.metalev.multitouch.controller.MultiTouchController.PointInfo;
 import org.metalev.multitouch.controller.MultiTouchController.PositionAndScale;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.api.IGeoPoint;
 import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.api.IProjection;
@@ -33,7 +34,6 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
 import com.mapbox.mapboxsdk.util.BoundingBoxE6;
-import com.mapbox.mapboxsdk.util.GeoPoint;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.constants.GeoConstants;
 import com.mapbox.mapboxsdk.views.overlay.Overlay;
@@ -264,9 +264,9 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         final Rect screenRect = getScreenRect(null);
         screenRect.offset(world_2, world_2);
 
-        final IGeoPoint neGeoPoint = TileSystem.PixelXYToLatLong(screenRect.right, screenRect.top,
+        final ILatLng neGeoPoint = TileSystem.PixelXYToLatLong(screenRect.right, screenRect.top,
                 mZoomLevel, null);
-        final IGeoPoint swGeoPoint = TileSystem.PixelXYToLatLong(screenRect.left,
+        final ILatLng swGeoPoint = TileSystem.PixelXYToLatLong(screenRect.left,
                 screenRect.bottom, mZoomLevel, null);
 
         return new BoundingBoxE6(neGeoPoint.getLatitudeE6(), neGeoPoint.getLongitudeE6(),
@@ -318,15 +318,15 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         return mProjection;
     }
 
-    void setMapCenter(final IGeoPoint aCenter) {
+    void setMapCenter(final ILatLng aCenter) {
         getController().animateTo(aCenter);
     }
 
     /**
-     * @deprecated use {@link #setMapCenter(IGeoPoint)}
+     * @deprecated use {@link #setMapCenter(com.mapbox.mapboxsdk.api.ILatLng)}
      */
     void setMapCenter(final int aLatitudeE6, final int aLongitudeE6) {
-        setMapCenter(new GeoPoint(aLatitudeE6, aLongitudeE6));
+        setMapCenter(new LatLng(aLatitudeE6, aLongitudeE6));
     }
 
     public void setTileSource(final ITileSource aTileSource) {
@@ -360,7 +360,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
             // to do it the hard way.
             final int worldSize_current_2 = TileSystem.MapSize(curZoomLevel) / 2;
             final int worldSize_new_2 = TileSystem.MapSize(newZoomLevel) / 2;
-            final IGeoPoint centerGeoPoint = TileSystem.PixelXYToLatLong(getScrollX()
+            final ILatLng centerGeoPoint = TileSystem.PixelXYToLatLong(getScrollX()
                     + worldSize_current_2, getScrollY() + worldSize_current_2, curZoomLevel, null);
             final Point centerPoint = TileSystem.LatLongToPixelXY(
                     centerGeoPoint.getLatitudeE6() / 1E6, centerGeoPoint.getLongitudeE6() / 1E6,
@@ -427,7 +427,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
                         requiredLatitudeZoom : requiredLongitudeZoom));
 
         getController().setCenter(
-                new GeoPoint(boundingBox.getCenter().getLatitudeE6(), boundingBox.getCenter()
+                new LatLng(boundingBox.getCenter().getLatitudeE6(), boundingBox.getCenter()
                         .getLongitudeE6()));
     }
 
@@ -511,7 +511,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         return getController().zoomIn();
     }
 
-    boolean zoomInFixing(final IGeoPoint point) {
+    boolean zoomInFixing(final ILatLng point) {
         Point coords = getProjection().toMapPixels(point, null);
         return getController().zoomInFixing(coords.x, coords.y);
     }
@@ -527,7 +527,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         return getController().zoomOut();
     }
 
-    boolean zoomOutFixing(final IGeoPoint point) {
+    boolean zoomOutFixing(final ILatLng point) {
         Point coords = getProjection().toMapPixels(point, null);
         return zoomOutFixing(coords.x, coords.y);
     }
@@ -537,12 +537,12 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     }
 
     /**
-     * Returns the current center-point position of the map, as a GeoPoint (latitude and longitude).
+     * Returns the current center-point position of the map, as a LatLng (latitude and longitude).
      *
-     * @return A GeoPoint of the map's center-point.
+     * @return A LatLng of the map's center-point.
      */
     @Override
-    public IGeoPoint getMapCenter() {
+    public ILatLng getMapCenter() {
         final int world_2 = TileSystem.MapSize(mZoomLevel) / 2;
         final Rect screenRect = getScreenRect(null);
         screenRect.offset(world_2, world_2);
@@ -643,7 +643,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     /**
      * Returns a set of layout parameters with a width of
      * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}, a height of
-     * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT} at the {@link GeoPoint} (0, 0) align
+     * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT} at the {@link com.mapbox.mapboxsdk.util.LatLng} (0, 0) align
      * with {@link MapView.LayoutParams#BOTTOM_CENTER}.
      */
     @Override
@@ -1316,13 +1316,13 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         }
 
         /**
-         * Converts <I>screen coordinates</I> to the underlying GeoPoint.
+         * Converts <I>screen coordinates</I> to the underlying LatLng.
          *
          * @param x
          * @param y
-         * @return GeoPoint under x/y.
+         * @return LatLng under x/y.
          */
-        public IGeoPoint fromPixels(final float x, final float y) {
+        public ILatLng fromPixels(final float x, final float y) {
             final Rect screenRect = getIntrinsicScreenRect();
             return TileSystem.PixelXYToLatLong(screenRect.left + (int) x + worldSize_2,
                     screenRect.top + (int) y + worldSize_2, mZoomLevelProjection, null);
@@ -1336,13 +1336,13 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         }
 
         /**
-         * Converts a GeoPoint to its <I>screen coordinates</I>.
+         * Converts a LatLng to its <I>screen coordinates</I>.
          *
-         * @param in    the GeoPoint you want the <I>screen coordinates</I> of
+         * @param in    the LatLng you want the <I>screen coordinates</I> of
          * @param reuse just pass null if you do not have a Point to be 'recycled'.
-         * @return the Point containing the <I>screen coordinates</I> of the GeoPoint passed.
+         * @return the Point containing the <I>screen coordinates</I> of the LatLng passed.
          */
-        public Point toMapPixels(final IGeoPoint in, final Point reuse) {
+        public Point toMapPixels(final ILatLng in, final Point reuse) {
             final Point out = reuse != null ? reuse : new Point();
             TileSystem.LatLongToPixelXY(
                     in.getLatitudeE6() / 1E6,
@@ -1392,7 +1392,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
          *
          * @param in    the Point calculated by the toMapPixelsProjected
          * @param reuse just pass null if you do not have a Point to be 'recycled'.
-         * @return the Point containing the <I>Screen coordinates</I> of the initial GeoPoint passed
+         * @return the Point containing the <I>Screen coordinates</I> of the initial LatLng passed
          *         to the toMapPixelsProjected.
          */
         public Point toMapPixelsTranslated(final Point in, final Point reuse) {
@@ -1446,13 +1446,13 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
             final Point reuse = new Point();
 
             toMapPixels(
-                    new GeoPoint(pBoundingBoxE6.getLatNorthE6(), pBoundingBoxE6.getLonWestE6()),
+                    new LatLng(pBoundingBoxE6.getLatNorthE6(), pBoundingBoxE6.getLonWestE6()),
                     reuse);
             rect.left = reuse.x;
             rect.top = reuse.y;
 
             toMapPixels(
-                    new GeoPoint(pBoundingBoxE6.getLatSouthE6(), pBoundingBoxE6.getLonEastE6()),
+                    new LatLng(pBoundingBoxE6.getLatSouthE6(), pBoundingBoxE6.getLonEastE6()),
                     reuse);
             rect.right = reuse.x;
             rect.bottom = reuse.y;
@@ -1466,22 +1466,22 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         }
 
         @Override
-        public IGeoPoint getNorthEast() {
+        public ILatLng getNorthEast() {
             return fromPixels(getWidth(), 0);
         }
 
         @Override
-        public IGeoPoint getSouthWest() {
+        public ILatLng getSouthWest() {
             return fromPixels(0, getHeight());
         }
 
         @Override
-        public Point toPixels(final IGeoPoint in, final Point out) {
+        public Point toPixels(final ILatLng in, final Point out) {
             return toMapPixels(in, out);
         }
 
         @Override
-        public IGeoPoint fromPixels(final int x, final int y) {
+        public ILatLng fromPixels(final int x, final int y) {
             return fromPixels((float) x, (float) y);
         }
     }
@@ -1571,7 +1571,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
                 return true;
             }
 
-            final IGeoPoint center = getProjection().fromPixels(e.getX(), e.getY());
+            final ILatLng center = getProjection().fromPixels(e.getX(), e.getY());
             return zoomInFixing(center);
         }
 
@@ -1666,7 +1666,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         /**
          * The location of the child within the map view.
          */
-        public IGeoPoint geoPoint;
+        public ILatLng geoPoint;
 
         /**
          * The alignment the alignment of the view compared to the location.
@@ -1692,13 +1692,13 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
          * @param offsetY   the additional Y offset from the alignment location to draw the child within
          *                  the map view
          */
-        public LayoutParams(final int width, final int height, final IGeoPoint geoPoint,
+        public LayoutParams(final int width, final int height, final ILatLng geoPoint,
                             final int alignment, final int offsetX, final int offsetY) {
             super(width, height);
             if (geoPoint != null) {
                 this.geoPoint = geoPoint;
             } else {
-                this.geoPoint = new GeoPoint(0, 0);
+                this.geoPoint = new LatLng(0, 0);
             }
             this.alignment = alignment;
             this.offsetX = offsetX;
@@ -1715,7 +1715,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
          */
         public LayoutParams(final Context c, final AttributeSet attrs) {
             super(c, attrs);
-            this.geoPoint = new GeoPoint(0, 0);
+            this.geoPoint = new LatLng(0, 0);
             this.alignment = BOTTOM_CENTER;
         }
 

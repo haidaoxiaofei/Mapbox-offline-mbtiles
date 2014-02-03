@@ -5,17 +5,17 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.AttributeSet;
+import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.testflightapp.lib.core.Logger;
 import org.json.JSONException;
-import com.mapbox.mapboxsdk.api.IGeoPoint;
 import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
 import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
-import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.LatLng;
 import com.mapbox.mapboxsdk.views.overlay.*;
 
 import java.io.*;
@@ -246,7 +246,7 @@ public class MapView extends com.mapbox.mapboxsdk.views.MapView
     // TODO: remove
     public Marker createMarker(final double lat, final double lon,
                             final String title, final String text) {
-        Marker marker = new Marker(this, title, text, new GeoPoint(lat, lon));
+        Marker marker = new Marker(this, title, text, new LatLng(lat, lon));
         addMarker(marker);
         return marker;
     }
@@ -365,7 +365,7 @@ public class MapView extends com.mapbox.mapboxsdk.views.MapView
      * @return whether the event action is triggered or not
      */
     @Override
-    public boolean singleTapUpHelper(IGeoPoint p) {
+    public boolean singleTapUpHelper(ILatLng p) {
         onTap(p);
         return true;
     }
@@ -377,14 +377,14 @@ public class MapView extends com.mapbox.mapboxsdk.views.MapView
      */
 
     @Override
-    public boolean longPressHelper(IGeoPoint p) {
+    public boolean longPressHelper(ILatLng p) {
         onLongPress(p);
         return false;
     }
 
-    public void onLongPress(IGeoPoint p) {
+    public void onLongPress(ILatLng p) {
     }
-    public void onTap(IGeoPoint p) {
+    public void onTap(ILatLng p) {
     }
 
 

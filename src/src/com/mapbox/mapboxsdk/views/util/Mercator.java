@@ -1,9 +1,9 @@
 // Created by plusminus on 17:53:07 - 25.09.2008
 package com.mapbox.mapboxsdk.views.util;
 
-import com.mapbox.mapboxsdk.api.IGeoPoint;
+import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.util.BoundingBoxE6;
-import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.LatLng;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
 import android.graphics.Point;
@@ -49,7 +49,7 @@ public class Mercator implements MapViewConstants {
     // ===========================================================
 
     /**
-     * Mercator projection of GeoPoint at given zoom level
+     * Mercator projection of LatLng at given zoom level
      *
      * @param aLat              latitude in degrees [-89000000 to 89000000]
      * @param aLon              longitude in degrees [-180000000 to 180000000]
@@ -63,21 +63,21 @@ public class Mercator implements MapViewConstants {
     }
 
     /**
-     * Mercator projection of GeoPoint at given zoom level
+     * Mercator projection of LatLng at given zoom level
      *
      * @param pGeoPoint
      * @param zoom              zoom level
      * @param pUseAsReturnValue
      * @return Point with x,y in the range [-2^(zoom-1) to 2^(zoom-1)]
      */
-    public static Point projectGeoPoint(final IGeoPoint pGeoPoint, final int pZoom,
+    public static Point projectGeoPoint(final ILatLng pGeoPoint, final int pZoom,
                                         final Point pUseAsReturnValue) {
         return projectGeoPoint(pGeoPoint.getLatitudeE6() * 1E-6, pGeoPoint.getLongitudeE6() * 1E-6,
                 pZoom, pUseAsReturnValue);
     }
 
     /**
-     * Mercator projection of GeoPoint at given zoom level
+     * Mercator projection of LatLng at given zoom level
      *
      * @param aLat              latitude in degrees [-89 to 89]
      * @param aLon              longitude in degrees [-180 to 180]
@@ -130,8 +130,8 @@ public class Mercator implements MapViewConstants {
     /**
      * Reverse Mercator projection of Point at given zoom level
      */
-    public static GeoPoint projectPoint(final int x, final int y, final int aZoom) {
-        return new GeoPoint((int) (tile2lat(y, aZoom) * 1E6), (int) (tile2lon(x, aZoom) * 1E6));
+    public static LatLng projectPoint(final int x, final int y, final int aZoom) {
+        return new LatLng((int) (tile2lat(y, aZoom) * 1E6), (int) (tile2lon(x, aZoom) * 1E6));
     }
 
     public static double tile2lon(final int x, final int aZoom) {

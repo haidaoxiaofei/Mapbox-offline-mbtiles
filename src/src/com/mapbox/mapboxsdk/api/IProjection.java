@@ -13,20 +13,20 @@ import android.graphics.Point;
 public interface IProjection {
 
     /**
-     * Converts the given GeoPoint to onscreen pixel coordinates, relative to the top-left of the
+     * Converts the given LatLng to onscreen pixel coordinates, relative to the top-left of the
      * MapView that provided this Projection.
      *
      * @param in  The latitude/longitude pair to convert.
      * @param out A pre-existing object to use for the output; if null, a new Point will be
      *            allocated and returned.
      */
-    Point toPixels(IGeoPoint in, Point out);
+    Point toPixels(ILatLng in, Point out);
 
     /**
-     * Create a new GeoPoint from pixel coordinates relative to the top-left of the MapView that
+     * Create a new LatLng from pixel coordinates relative to the top-left of the MapView that
      * provided this PixelConverter.
      */
-    IGeoPoint fromPixels(int x, int y);
+    ILatLng fromPixels(int x, int y);
 
     /**
      * Converts a distance in meters (along the equator) to one in (horizontal) pixels at the
@@ -42,11 +42,11 @@ public interface IProjection {
     /**
      * Get the coordinates of the most north-easterly visible point of the map.
      */
-    IGeoPoint getNorthEast();
+    ILatLng getNorthEast();
 
     /**
      * Get the coordinates of the most south-westerly visible point of the map.
      */
-    IGeoPoint getSouthWest();
+    ILatLng getSouthWest();
 
 }

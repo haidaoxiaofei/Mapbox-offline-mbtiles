@@ -7,7 +7,7 @@ import static com.mapbox.mapboxsdk.util.MyMath.gudermannInverse;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.mapbox.mapboxsdk.api.IGeoPoint;
+import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
 import android.graphics.PointF;
@@ -58,15 +58,15 @@ public class BoundingBoxE6 implements Parcelable, Serializable, MapViewConstants
     // ===========================================================
 
     /**
-     * @return GeoPoint center of this BoundingBox
+     * @return LatLng center of this BoundingBox
      */
-    public GeoPoint getCenter() {
-        return new GeoPoint((this.mLatNorthE6 + this.mLatSouthE6) / 2,
+    public LatLng getCenter() {
+        return new LatLng((this.mLatNorthE6 + this.mLatSouthE6) / 2,
                 (this.mLonEastE6 + this.mLonWestE6) / 2);
     }
 
     public int getDiagonalLengthInMeters() {
-        return new GeoPoint(this.mLatNorthE6, this.mLonWestE6).distanceTo(new GeoPoint(
+        return new LatLng(this.mLatNorthE6, this.mLonWestE6).distanceTo(new LatLng(
                 this.mLatSouthE6, this.mLonEastE6));
     }
 
@@ -120,7 +120,7 @@ public class BoundingBoxE6 implements Parcelable, Serializable, MapViewConstants
         return out;
     }
 
-    public GeoPoint getGeoPointOfRelativePositionWithLinearInterpolation(final float relX,
+    public LatLng getGeoPointOfRelativePositionWithLinearInterpolation(final float relX,
                                                                          final float relY) {
 
         int lat = (int) (this.mLatNorthE6 - (this.getLatitudeSpanE6() * relY));
@@ -139,10 +139,10 @@ public class BoundingBoxE6 implements Parcelable, Serializable, MapViewConstants
         while (lon < -180000000)
             lon += 180000000;
 
-        return new GeoPoint(lat, lon);
+        return new LatLng(lat, lon);
     }
 
-    public GeoPoint getGeoPointOfRelativePositionWithExactGudermannInterpolation(final float relX,
+    public LatLng getGeoPointOfRelativePositionWithExactGudermannInterpolation(final float relX,
                                                                                  final float relY) {
 
         final double gudNorth = gudermannInverse(this.mLatNorthE6 / 1E6);
@@ -164,11 +164,11 @@ public class BoundingBoxE6 implements Parcelable, Serializable, MapViewConstants
         while (lon < -180000000)
             lon += 180000000;
 
-        return new GeoPoint(lat, lon);
+        return new LatLng(lat, lon);
     }
 
     public BoundingBoxE6 increaseByScale(final float pBoundingboxPaddingRelativeScale) {
-        final GeoPoint pCenter = this.getCenter();
+        final LatLng pCenter = this.getCenter();
         final int mLatSpanE6Padded_2 = (int) ((this.getLatitudeSpanE6() * pBoundingboxPaddingRelativeScale) / 2);
         final int mLonSpanE6Padded_2 = (int) ((this.getLongitudeSpanE6() * pBoundingboxPaddingRelativeScale) / 2);
 
@@ -192,17 +192,17 @@ public class BoundingBoxE6 implements Parcelable, Serializable, MapViewConstants
     // Methods
     // ===========================================================
 
-    public GeoPoint bringToBoundingBox(final int aLatitudeE6, final int aLongitudeE6) {
-        return new GeoPoint(Math.max(this.mLatSouthE6, Math.min(this.mLatNorthE6, aLatitudeE6)),
+    public LatLng bringToBoundingBox(final int aLatitudeE6, final int aLongitudeE6) {
+        return new LatLng(Math.max(this.mLatSouthE6, Math.min(this.mLatNorthE6, aLatitudeE6)),
                 Math.max(this.mLonWestE6, Math.min(this.mLonEastE6, aLongitudeE6)));
     }
 
-    public static BoundingBoxE6 fromGeoPoints(final ArrayList<? extends GeoPoint> partialPolyLine) {
+    public static BoundingBoxE6 fromGeoPoints(final ArrayList<? extends LatLng> partialPolyLine) {
         int minLat = Integer.MAX_VALUE;
         int minLon = Integer.MAX_VALUE;
         int maxLat = Integer.MIN_VALUE;
         int maxLon = Integer.MIN_VALUE;
-        for (final GeoPoint gp : partialPolyLine) {
+        for (final LatLng gp : partialPolyLine) {
             final int latitudeE6 = gp.getLatitudeE6();
             final int longitudeE6 = gp.getLongitudeE6();
 
@@ -215,7 +215,7 @@ public class BoundingBoxE6 implements Parcelable, Serializable, MapViewConstants
         return new BoundingBoxE6(maxLat, maxLon, minLat, minLon);
     }
 
-    public boolean contains(final IGeoPoint pGeoPoint) {
+    public boolean contains(final ILatLng pGeoPoint) {
         return contains(pGeoPoint.getLatitudeE6(), pGeoPoint.getLongitudeE6());
     }
 

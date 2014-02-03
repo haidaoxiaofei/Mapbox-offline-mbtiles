@@ -1,13 +1,13 @@
 // Created by plusminus on 00:02:58 - 03.10.2008
 package com.mapbox.mapboxsdk.views.overlay;
 
-import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.LatLng;
 
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 
 /**
- * Immutable class describing a GeoPoint with a Title and a Description.
+ * Immutable class describing a LatLng with a Title and a Description.
  *
  * @author Nicolas Gramlich
  * @author Theodore Hong
@@ -40,7 +40,7 @@ public class OverlayItem {
     protected final String mUid;
     protected final String mTitle;
     protected final String mSnippet;
-    protected final GeoPoint mGeoPoint;
+    protected final LatLng mLatLng;
     protected Drawable mMarker;
     protected HotspotPlace mHotspotPlace;
 
@@ -51,17 +51,17 @@ public class OverlayItem {
     /**
      * @param aTitle    this should be <b>singleLine</b> (no <code>'\n'</code> )
      * @param aSnippet  a <b>multiLine</b> description ( <code>'\n'</code> possible)
-     * @param aGeoPoint
+     * @param aLatLng
      */
-    public OverlayItem(final String aTitle, final String aSnippet, final GeoPoint aGeoPoint) {
-        this(null, aTitle, aSnippet, aGeoPoint);
+    public OverlayItem(final String aTitle, final String aSnippet, final LatLng aLatLng) {
+        this(null, aTitle, aSnippet, aLatLng);
     }
 
     public OverlayItem(final String aUid, final String aTitle, final String aDescription,
-                       final GeoPoint aGeoPoint) {
+                       final LatLng aLatLng) {
         this.mTitle = aTitle;
         this.mSnippet = aDescription;
-        this.mGeoPoint = aGeoPoint;
+        this.mLatLng = aLatLng;
         this.mUid = aUid;
     }
 
@@ -80,8 +80,8 @@ public class OverlayItem {
         return mSnippet;
     }
 
-    public GeoPoint getPoint() {
-        return mGeoPoint;
+    public LatLng getPoint() {
+        return mLatLng;
     }
 
     /*

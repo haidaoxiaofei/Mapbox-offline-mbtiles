@@ -1,9 +1,9 @@
 package com.mapbox.mapboxsdk.api;
 
 /**
- * An interface that resembles the Google Maps API GeoPoint class.
+ * An interface that resembles the Google Maps API LatLng class.
  */
-public interface IGeoPoint {
+public interface ILatLng {
     int getLatitudeE6();
 
     int getLongitudeE6();

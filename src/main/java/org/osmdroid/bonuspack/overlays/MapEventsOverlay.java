@@ -1,6 +1,6 @@
 package org.osmdroid.bonuspack.overlays;
 
-import com.mapbox.mapboxsdk.api.IGeoPoint;
+import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
 import com.mapbox.mapboxsdk.views.overlay.Overlay;
@@ -34,13 +34,13 @@ public class MapEventsOverlay extends Overlay {
 
     @Override public boolean onSingleTapUp(MotionEvent e, MapView mapView){
         Projection proj = mapView.getProjection();
-        IGeoPoint p = proj.fromPixels(e.getX(), e.getY());
+        ILatLng p = proj.fromPixels(e.getX(), e.getY());
         return mReceiver.singleTapUpHelper(p);
     }
 
     @Override public boolean onLongPress(MotionEvent e, MapView mapView) {
         Projection proj = mapView.getProjection();
-        IGeoPoint p = proj.fromPixels(e.getX(), e.getY());
+        ILatLng p = proj.fromPixels(e.getX(), e.getY());
         //throw event to the receiver:
         return mReceiver.longPressHelper(p);
     }

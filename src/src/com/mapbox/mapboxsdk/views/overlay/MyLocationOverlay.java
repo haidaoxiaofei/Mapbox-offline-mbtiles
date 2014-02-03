@@ -10,7 +10,7 @@ import com.mapbox.mapboxsdk.SensorEventListenerProxy;
 import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.api.IMyLocationOverlay;
-import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.LatLng;
 import com.mapbox.mapboxsdk.util.LocationUtils;
 import com.mapbox.mapboxsdk.util.NetworkLocationIgnorer;
 import com.mapbox.mapboxsdk.util.TileSystem;
@@ -86,7 +86,7 @@ public class MyLocationOverlay extends Overlay implements IMyLocationOverlay, IO
     private final Point mMapCoords = new Point();
 
     private Location mLocation;
-    private final GeoPoint mGeoPoint = new GeoPoint(0, 0); // for reuse
+    private final LatLng mLatLng = new LatLng(0, 0); // for reuse
     private long mLocationUpdateMinTime = 0;
     private float mLocationUpdateMinDistance = 0.0f;
     protected boolean mFollow = false; // follow location updates
@@ -405,9 +405,9 @@ public class MyLocationOverlay extends Overlay implements IMyLocationOverlay, IO
         mMapCoords.offset(-worldSize_2, -worldSize_2);
 
         if (mFollow) {
-            mGeoPoint.setLatitudeE6((int) (mLocation.getLatitude() * 1E6));
-            mGeoPoint.setLongitudeE6((int) (mLocation.getLongitude() * 1E6));
-            mMapController.animateTo(mGeoPoint);
+            mLatLng.setLatitudeE6((int) (mLocation.getLatitude() * 1E6));
+            mLatLng.setLongitudeE6((int) (mLocation.getLongitude() * 1E6));
+            mMapController.animateTo(mLatLng);
         } else {
             if (mLocation != null) {
                 // Get new drawing bounds
@@ -548,13 +548,13 @@ public class MyLocationOverlay extends Overlay implements IMyLocationOverlay, IO
     // ===========================================================
 
     /**
-     * Return a GeoPoint of the last known location, or null if not known.
+     * Return a LatLng of the last known location, or null if not known.
      */
-    public GeoPoint getMyLocation() {
+    public LatLng getMyLocation() {
         if (mLocation == null) {
             return null;
         } else {
-            return new GeoPoint(mLocation);
+            return new LatLng(mLocation);
         }
     }
 
@@ -589,7 +589,7 @@ public class MyLocationOverlay extends Overlay implements IMyLocationOverlay, IO
                 TileSystem.LatLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(), MapViewConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
                 final int worldSize_2 = TileSystem.MapSize(MapViewConstants.MAXIMUM_ZOOMLEVEL) / 2;
                 mMapCoords.offset(-worldSize_2, -worldSize_2);
-                mMapController.animateTo(new GeoPoint(mLocation));
+                mMapController.animateTo(new LatLng(mLocation));
             }
         }
 
@@ -642,7 +642,7 @@ public class MyLocationOverlay extends Overlay implements IMyLocationOverlay, IO
                 TileSystem.LatLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(), MapViewConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
                 final int worldSize_2 = TileSystem.MapSize(MapViewConstants.MAXIMUM_ZOOMLEVEL) / 2;
                 mMapCoords.offset(-worldSize_2, -worldSize_2);
-                mMapController.animateTo(new GeoPoint(mLocation));
+                mMapController.animateTo(new LatLng(mLocation));
             }
         }
 

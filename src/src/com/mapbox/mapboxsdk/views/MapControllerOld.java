@@ -1,12 +1,12 @@
 // Created by plusminus on 21:37:08 - 27.09.2008
 package com.mapbox.mapboxsdk.views;
 
+import com.mapbox.mapboxsdk.api.ILatLng;
 import microsoft.mappoint.TileSystem;
 
-import com.mapbox.mapboxsdk.api.IGeoPoint;
 import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.util.BoundingBoxE6;
-import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.LatLng;
 import com.mapbox.mapboxsdk.views.util.MyMath;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MathConstants;
@@ -84,7 +84,7 @@ public class MapControllerOld implements IMapController, MapViewConstants {
      * Start animating the map towards the given point.
      */
     @Override
-    public void animateTo(final IGeoPoint point) {
+    public void animateTo(final ILatLng point) {
         animateTo(point.getLatitudeE6() / 1E6, point.getLongitudeE6() / 1E6);
     }
 
@@ -102,22 +102,22 @@ public class MapControllerOld implements IMapController, MapViewConstants {
     }
 
     /**
-     * Animates the underlying {@link MapView} that it centers the passed {@link GeoPoint} in the
+     * Animates the underlying {@link MapView} that it centers the passed {@link com.mapbox.mapboxsdk.util.LatLng} in the
      * end. Uses: {@link MapControllerOld.ANIMATION_SMOOTHNESS_DEFAULT} and
      * {@link MapControllerOld.ANIMATION_DURATION_DEFAULT}.
      *
      * @param gp
      */
-    public void animateTo(final GeoPoint gp, final AnimationType aAnimationType) {
+    public void animateTo(final LatLng gp, final AnimationType aAnimationType) {
         animateTo(gp.getLatitudeE6(), gp.getLongitudeE6(), aAnimationType,
                 ANIMATION_DURATION_DEFAULT, ANIMATION_SMOOTHNESS_DEFAULT);
     }
 
     /**
-     * Animates the underlying {@link MapView} that it centers the passed {@link GeoPoint} in the
+     * Animates the underlying {@link MapView} that it centers the passed {@link com.mapbox.mapboxsdk.util.LatLng} in the
      * end.
      *
-     * @param gp          GeoPoint to be centered in the end.
+     * @param gp          LatLng to be centered in the end.
      * @param aSmoothness steps made during animation. I.e.: {@link MapControllerOld.ANIMATION_SMOOTHNESS_LOW},
      *                    {@link MapControllerOld.ANIMATION_SMOOTHNESS_DEFAULT},
      *                    {@link MapControllerOld.ANIMATION_SMOOTHNESS_HIGH}
@@ -125,7 +125,7 @@ public class MapControllerOld implements IMapController, MapViewConstants {
      *                    {@link MapControllerOld.ANIMATION_DURATION_DEFAULT},
      *                    {@link MapControllerOld.ANIMATION_DURATION_LONG}
      */
-    public void animateTo(final GeoPoint gp, final AnimationType aAnimationType,
+    public void animateTo(final LatLng gp, final AnimationType aAnimationType,
                           final int aSmoothness, final int aDuration) {
         animateTo(gp.getLatitudeE6(), gp.getLongitudeE6(), aAnimationType, aSmoothness, aDuration);
     }
@@ -194,7 +194,7 @@ public class MapControllerOld implements IMapController, MapViewConstants {
      * Set the map view to the given center. There will be no animation.
      */
     @Override
-    public void setCenter(final IGeoPoint point) {
+    public void setCenter(final ILatLng point) {
         final Point p = TileSystem.LatLongToPixelXY(point.getLatitudeE6() / 1E6,
                 point.getLongitudeE6() / 1E6, this.mOsmv.getZoomLevel(), null);
         final int worldSize_2 = TileSystem.MapSize(this.mOsmv.getZoomLevel()) / 2;
@@ -212,7 +212,7 @@ public class MapControllerOld implements IMapController, MapViewConstants {
         if (currentAnimationRunner != null && !currentAnimationRunner.isDone()) {
             currentAnimationRunner.interrupt();
             if (jumpToTarget) {
-                setCenter(new GeoPoint(currentAnimationRunner.mTargetLatitudeE6,
+                setCenter(new LatLng(currentAnimationRunner.mTargetLatitudeE6,
                         currentAnimationRunner.mTargetLongitudeE6));
             }
         }
@@ -236,7 +236,7 @@ public class MapControllerOld implements IMapController, MapViewConstants {
         return mOsmv.zoomIn();
     }
 
-    public boolean zoomInFixing(final GeoPoint point) {
+    public boolean zoomInFixing(final LatLng point) {
         return mOsmv.zoomInFixing(point);
     }
 
@@ -253,7 +253,7 @@ public class MapControllerOld implements IMapController, MapViewConstants {
         return mOsmv.zoomOut();
     }
 
-    public boolean zoomOutFixing(final GeoPoint point) {
+    public boolean zoomOutFixing(final LatLng point) {
         return mOsmv.zoomOutFixing(point);
     }
 
@@ -408,7 +408,7 @@ public class MapControllerOld implements IMapController, MapViewConstants {
 
 			/* Get the current mapview-center. */
             final MapView mapview = MapControllerOld.this.mOsmv;
-            final IGeoPoint mapCenter = mapview.getMapCenter();
+            final ILatLng mapCenter = mapview.getMapCenter();
 
             this.mPanTotalLatitudeE6 = mapCenter.getLatitudeE6() - aTargetLatitudeE6;
             this.mPanTotalLongitudeE6 = mapCenter.getLongitudeE6() - aTargetLongitudeE6;
@@ -451,7 +451,7 @@ public class MapControllerOld implements IMapController, MapViewConstants {
 
 			/* Get the current mapview-center. */
             final MapView mapview = MapControllerOld.this.mOsmv;
-            final IGeoPoint mapCenter = mapview.getMapCenter();
+            final ILatLng mapCenter = mapview.getMapCenter();
 
             this.mPanPerStepLatitudeE6 = (mapCenter.getLatitudeE6() - aTargetLatitudeE6)
                     / aSmoothness;
@@ -468,7 +468,7 @@ public class MapControllerOld implements IMapController, MapViewConstants {
         @Override
         public void onRunAnimation() {
             final MapView mapview = MapControllerOld.this.mOsmv;
-            final IGeoPoint mapCenter = mapview.getMapCenter();
+            final ILatLng mapCenter = mapview.getMapCenter();
             final int panPerStepLatitudeE6 = this.mPanPerStepLatitudeE6;
             final int panPerStepLongitudeE6 = this.mPanPerStepLongitudeE6;
             final int stepDuration = this.mStepDuration;
@@ -480,7 +480,7 @@ public class MapControllerOld implements IMapController, MapViewConstants {
 
                     newMapCenterLatE6 = mapCenter.getLatitudeE6() - panPerStepLatitudeE6;
                     newMapCenterLonE6 = mapCenter.getLongitudeE6() - panPerStepLongitudeE6;
-                    mapview.setMapCenter(new GeoPoint(newMapCenterLatE6, newMapCenterLonE6));
+                    mapview.setMapCenter(new LatLng(newMapCenterLatE6, newMapCenterLonE6));
 
                     Thread.sleep(stepDuration);
                 }
@@ -521,7 +521,7 @@ public class MapControllerOld implements IMapController, MapViewConstants {
         @Override
         public void onRunAnimation() {
             final MapView mapview = MapControllerOld.this.mOsmv;
-            final IGeoPoint mapCenter = mapview.getMapCenter();
+            final ILatLng mapCenter = mapview.getMapCenter();
             final int stepDuration = this.mStepDuration;
             try {
                 int newMapCenterLatE6;
@@ -535,11 +535,11 @@ public class MapControllerOld implements IMapController, MapViewConstants {
 
                     newMapCenterLatE6 = mapCenter.getLatitudeE6() - deltaLatitudeE6;
                     newMapCenterLonE6 = mapCenter.getLongitudeE6() - detlaLongitudeE6;
-                    mapview.setMapCenter(new GeoPoint(newMapCenterLatE6, newMapCenterLonE6));
+                    mapview.setMapCenter(new LatLng(newMapCenterLatE6, newMapCenterLonE6));
 
                     Thread.sleep(stepDuration);
                 }
-                mapview.setMapCenter(new GeoPoint(super.mTargetLatitudeE6, super.mTargetLongitudeE6));
+                mapview.setMapCenter(new LatLng(super.mTargetLatitudeE6, super.mTargetLongitudeE6));
             } catch (final Exception e) {
                 this.interrupt();
             }
@@ -594,7 +594,7 @@ public class MapControllerOld implements IMapController, MapViewConstants {
         @Override
         public void onRunAnimation() {
             final MapView mapview = MapControllerOld.this.mOsmv;
-            final IGeoPoint mapCenter = mapview.getMapCenter();
+            final ILatLng mapCenter = mapview.getMapCenter();
             final int stepDuration = this.mStepDuration;
             final float amountStretch = this.mAmountStretch;
             try {
@@ -611,11 +611,11 @@ public class MapControllerOld implements IMapController, MapViewConstants {
 
                     newMapCenterLatE6 = mapCenter.getLatitudeE6() - deltaLatitudeE6;
                     newMapCenterLonE6 = mapCenter.getLongitudeE6() - deltaLongitudeE6;
-                    mapview.setMapCenter(new GeoPoint(newMapCenterLatE6, newMapCenterLonE6));
+                    mapview.setMapCenter(new LatLng(newMapCenterLatE6, newMapCenterLonE6));
 
                     Thread.sleep(stepDuration);
                 }
-                mapview.setMapCenter(new GeoPoint(super.mTargetLatitudeE6, super.mTargetLongitudeE6));
+                mapview.setMapCenter(new LatLng(super.mTargetLatitudeE6, super.mTargetLongitudeE6));
             } catch (final Exception e) {
                 this.interrupt();
             }

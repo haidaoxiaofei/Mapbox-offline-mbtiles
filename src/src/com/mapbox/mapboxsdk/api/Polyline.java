@@ -9,7 +9,7 @@ import android.graphics.Color;
 public class Polyline {
 
     public Polyline() {
-        points = new ArrayList<IGeoPoint>();
+        points = new ArrayList<ILatLng>();
     }
 
     /**
@@ -43,13 +43,13 @@ public class Polyline {
     /**
      * The points of the polyline.
      */
-    public List<IGeoPoint> points;
+    public List<ILatLng> points;
 
     /**
      * The points of the polyline.
      * This method returns the polyline for convenient method chaining.
      */
-    public Polyline points(final List<IGeoPoint> aPoints) {
+    public Polyline points(final List<ILatLng> aPoints) {
         points = aPoints;
         return this;
     }
@@ -58,7 +58,7 @@ public class Polyline {
      * The points of the polyline.
      * This method returns the polyline for convenient method chaining.
      */
-    public Polyline points(final IGeoPoint... aPoints) {
+    public Polyline points(final ILatLng... aPoints) {
         return points(Arrays.asList(aPoints));
     }
 }

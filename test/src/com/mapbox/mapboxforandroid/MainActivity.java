@@ -14,15 +14,15 @@ import android.widget.Button;
 import com.mapbox.mapboxsdk.MapView;
 import com.mapbox.mapboxsdk.Marker;
 import com.mapbox.mapboxsdk.Icon;
+import com.mapbox.mapboxsdk.util.LatLng;
 import com.testflightapp.lib.TestFlight;
 import com.mapbox.mapboxsdk.api.IMapController;
-import com.mapbox.mapboxsdk.util.GeoPoint;
 import com.mapbox.mapboxsdk.views.overlay.PathOverlay;
 import com.mapbox.mapboxsdk.views.overlay.mylocation.MyLocationNewOverlay;
 
 public class MainActivity extends Activity {
 	private IMapController mapController;
-	private GeoPoint startingPoint = new GeoPoint(51f, 0f);
+	private LatLng startingPoint = new LatLng(51f, 0f);
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
     private Paint paint;
@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
         mapController.setZoom(4);
         mv.parseFromGeoJSON("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
         setButtonListeners();
-        Marker m = new Marker(mv, "Hello", "World", new GeoPoint(0f, 0f));
+        Marker m = new Marker(mv, "Hello", "World", new LatLng(0f, 0f));
         m.setIcon(new Icon(Icon.Size.l, "bus", "000"));
         mv.addMarker(m);
 
@@ -120,8 +120,8 @@ public class MainActivity extends Activity {
         linePaint.setStrokeWidth(5);
         po.setPaint(linePaint);
         po.addPoint(startingPoint);
-        po.addPoint(new GeoPoint(51.7, 0.3));
-        po.addPoint(new GeoPoint(51.2, 0));
+        po.addPoint(new LatLng(51.7, 0.3));
+        po.addPoint(new LatLng(51.2, 0));
 
         // Adds line and marker to the overlay
         mv.getOverlays().add(po);
@@ -135,8 +135,8 @@ public class MainActivity extends Activity {
 		return true;
 	}
     private Button changeButtonTypeface(Button button){
-        Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/semibold.ttf");
-        button.setTypeface(tf);
+        //Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/semibold.ttf");
+        //button.setTypeface(tf);
         return button;
     }
 

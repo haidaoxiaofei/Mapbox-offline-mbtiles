@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.api.IGeoPoint;
+import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
 
@@ -112,7 +112,7 @@ public class PathOverlay extends Overlay {
         this.mPointsPrecomputed = 0;
     }
 
-    public void addPoint(final IGeoPoint aPoint) {
+    public void addPoint(final ILatLng aPoint) {
         addPoint(aPoint.getLatitudeE6(), aPoint.getLongitudeE6());
     }
 
@@ -120,14 +120,14 @@ public class PathOverlay extends Overlay {
         mPoints.add(new Point(aLatitudeE6, aLongitudeE6));
     }
 
-    public void addPoints(final IGeoPoint... aPoints) {
-        for (final IGeoPoint point : aPoints) {
+    public void addPoints(final ILatLng... aPoints) {
+        for (final ILatLng point : aPoints) {
             addPoint(point);
         }
     }
 
-    public void addPoints(final List<IGeoPoint> aPoints) {
-        for (final IGeoPoint point : aPoints) {
+    public void addPoints(final List<ILatLng> aPoints) {
+        for (final ILatLng point : aPoints) {
             addPoint(point);
         }
     }

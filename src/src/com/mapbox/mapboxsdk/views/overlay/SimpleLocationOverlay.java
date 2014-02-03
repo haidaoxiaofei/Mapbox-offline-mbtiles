@@ -3,7 +3,7 @@ package com.mapbox.mapboxsdk.views.overlay;
 
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
 
@@ -33,7 +33,7 @@ public class SimpleLocationOverlay extends Overlay {
      */
     protected final android.graphics.Point PERSON_HOTSPOT = new android.graphics.Point(24, 39);
 
-    protected GeoPoint mLocation;
+    protected LatLng mLocation;
     private final Point screenCoords = new Point();
 
     // ===========================================================
@@ -54,11 +54,11 @@ public class SimpleLocationOverlay extends Overlay {
     // Getter & Setter
     // ===========================================================
 
-    public void setLocation(final GeoPoint mp) {
+    public void setLocation(final LatLng mp) {
         this.mLocation = mp;
     }
 
-    public GeoPoint getMyLocation() {
+    public LatLng getMyLocation() {
         return this.mLocation;
     }
 

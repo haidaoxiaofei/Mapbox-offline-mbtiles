@@ -9,7 +9,7 @@ import android.graphics.Color;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
-import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.LatLng;
 import com.mapbox.mapboxsdk.views.overlay.Overlay;
 import com.mapbox.mapboxsdk.views.overlay.OverlayItem;
 
@@ -93,7 +93,7 @@ public class Tooltip extends Overlay {
     }
 
     private void calculatePoint() {
-        GeoPoint markerCoords = item.getPoint();
+        LatLng markerCoords = item.getPoint();
         MapView.Projection projection = mapView.getProjection();
         projection.toPixels(markerCoords, point);
     }

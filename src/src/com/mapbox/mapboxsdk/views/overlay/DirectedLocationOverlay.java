@@ -3,7 +3,7 @@ package com.mapbox.mapboxsdk.views.overlay;
 
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
 
@@ -33,7 +33,7 @@ public class DirectedLocationOverlay extends Overlay {
 
     protected final Bitmap DIRECTION_ARROW;
 
-    protected GeoPoint mLocation;
+    protected LatLng mLocation;
     protected float mBearing;
 
     private final Matrix directionRotater = new Matrix();
@@ -78,11 +78,11 @@ public class DirectedLocationOverlay extends Overlay {
         this.mShowAccuracy = pShowIt;
     }
 
-    public void setLocation(final GeoPoint mp) {
+    public void setLocation(final LatLng mp) {
         this.mLocation = mp;
     }
 
-    public GeoPoint getLocation() {
+    public LatLng getLocation() {
         return this.mLocation;
     }
 

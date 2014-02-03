@@ -22,7 +22,7 @@ public interface IMapView {
 
     int getLongitudeSpan();
 
-    IGeoPoint getMapCenter();
+    ILatLng getMapCenter();
 
     // some methods from View
     // (well, just one for now)

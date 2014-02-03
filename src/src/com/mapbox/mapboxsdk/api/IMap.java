@@ -18,7 +18,7 @@ public interface IMap {
     /**
      * Get the center of the map
      */
-    IGeoPoint getCenter();
+    ILatLng getCenter();
 
     /**
      * Set the center of the map
@@ -87,7 +87,7 @@ public interface IMap {
      * @param points the points to add
      * @throws IllegalArgumentException if a polyline with this id was not added
      */
-    void addPointsToPolyline(int id, IGeoPoint... points);
+    void addPointsToPolyline(int id, ILatLng... points);
 
     /**
      * Removes one polyline.

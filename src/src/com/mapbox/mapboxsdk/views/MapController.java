@@ -1,7 +1,7 @@
 // Created by plusminus on 21:37:08 - 27.09.2008
 package com.mapbox.mapboxsdk.views;
 
-import com.mapbox.mapboxsdk.api.IGeoPoint;
+import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.util.BoundingBoxE6;
 import com.mapbox.mapboxsdk.views.util.MyMath;
@@ -106,7 +106,7 @@ public class MapController implements IMapController, MapViewConstants {
      * Start animating the map towards the given point.
      */
     @Override
-    public void animateTo(final IGeoPoint point) {
+    public void animateTo(final ILatLng point) {
         Point p = mMapView.getProjection().toMapPixels(point, null);
         animateTo(p.x, p.y);
     }
@@ -134,7 +134,7 @@ public class MapController implements IMapController, MapViewConstants {
      * Set the map view to the given center. There will be no animation.
      */
     @Override
-    public void setCenter(final IGeoPoint point) {
+    public void setCenter(final ILatLng point) {
         Point p = mMapView.getProjection().toMapPixels(point, null);
         this.mMapView.scrollTo(p.x, p.y);
     }

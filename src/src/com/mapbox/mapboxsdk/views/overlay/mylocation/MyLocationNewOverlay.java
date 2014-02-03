@@ -6,7 +6,7 @@ import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.api.IMapView;
-import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.LatLng;
 import com.mapbox.mapboxsdk.util.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
@@ -63,7 +63,7 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
     private final Point mMapCoords = new Point();
 
     private Location mLocation;
-    private final GeoPoint mGeoPoint = new GeoPoint(0, 0); // for reuse
+    private final LatLng mLatLng = new LatLng(0, 0); // for reuse
     private boolean mIsLocationEnabled = false;
     protected boolean mIsFollowing = false; // follow location updates
     protected boolean mDrawAccuracyEnabled = true;
@@ -363,13 +363,13 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
     // ===========================================================
 
     /**
-     * Return a GeoPoint of the last known location, or null if not known.
+     * Return a LatLng of the last known location, or null if not known.
      */
-    public GeoPoint getMyLocation() {
+    public LatLng getMyLocation() {
         if (mLocation == null) {
             return null;
         } else {
-            return new GeoPoint(mLocation);
+            return new LatLng(mLocation);
         }
     }
 
@@ -392,7 +392,7 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
                         MapViewConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
                 final int worldSize_2 = TileSystem.MapSize(MapViewConstants.MAXIMUM_ZOOMLEVEL) / 2;
                 mMapCoords.offset(-worldSize_2, -worldSize_2);
-                mMapController.animateTo(new GeoPoint(mLocation));
+                mMapController.animateTo(new LatLng(mLocation));
             }
         }
 
@@ -438,9 +438,9 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
             mMapCoords.offset(-worldSize_2, -worldSize_2);
 
             if (mIsFollowing) {
-                mGeoPoint.setLatitudeE6((int) (mLocation.getLatitude() * 1E6));
-                mGeoPoint.setLongitudeE6((int) (mLocation.getLongitude() * 1E6));
-                mMapController.animateTo(mGeoPoint);
+                mLatLng.setLatitudeE6((int) (mLocation.getLatitude() * 1E6));
+                mLatLng.setLongitudeE6((int) (mLocation.getLongitude() * 1E6));
+                mMapController.animateTo(mLatLng);
             } else {
                 // Get new drawing bounds
                 this.getMyLocationDrawingBounds(mMapView.getZoomLevel(), mLocation, mMyLocationRect);
@@ -499,7 +499,7 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
                         MapViewConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
                 final int worldSize_2 = TileSystem.MapSize(MapViewConstants.MAXIMUM_ZOOMLEVEL) / 2;
                 mMapCoords.offset(-worldSize_2, -worldSize_2);
-                mMapController.animateTo(new GeoPoint(mLocation));
+                mMapController.animateTo(new LatLng(mLocation));
             }
         }
 

@@ -1,6 +1,7 @@
 package com.mapbox.mapboxsdk;
 
 import android.graphics.Paint;
+import com.mapbox.mapboxsdk.util.LatLng;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,7 +86,7 @@ public class GeoJSON {
                 coordinates = (JSONArray) points.get(j);
                 double lon = (Double) coordinates.get(0);
                 double lat = (Double) coordinates.get(1);
-                path.addPoint(new com.mapbox.mapboxsdk.util.GeoPoint(lat, lon));
+                path.addPoint(new LatLng(lat, lon));
             }
             mv.getOverlays().add(path);
         } else if (type.equals("MultiLineString")) {
@@ -98,7 +99,7 @@ public class GeoJSON {
                     coordinates = (JSONArray) points.get(j);
                     double lon = (Double) coordinates.get(0);
                     double lat = (Double) coordinates.get(1);
-                    path.addPoint(new com.mapbox.mapboxsdk.util.GeoPoint(lat, lon));
+                    path.addPoint(new LatLng(lat, lon));
                 }
                 mv.getOverlays().add(path);
             }
@@ -112,7 +113,7 @@ public class GeoJSON {
                 coordinates = (JSONArray) outerRing.get(j);
                 double lon = (Double) coordinates.get(0);
                 double lat = (Double) coordinates.get(1);
-                path.addPoint(new com.mapbox.mapboxsdk.util.GeoPoint(lat, lon));
+                path.addPoint(new LatLng(lat, lon));
             }
             mv.getOverlays().add(path);
         }
