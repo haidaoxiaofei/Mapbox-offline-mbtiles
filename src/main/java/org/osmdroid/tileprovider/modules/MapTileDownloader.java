@@ -2,6 +2,7 @@ package org.osmdroid.tileprovider.modules;
 
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.Log;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -14,8 +15,6 @@ import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
 import org.osmdroid.tileprovider.util.StreamUtils;
 import org.osmdroid.views.MapView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.UnknownHostException;
@@ -31,12 +30,12 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author Manuel Stahl
  */
 public class MapTileDownloader extends MapTileModuleProviderBase {
+    private static final String TAG = "Tile downloader";
 
     // ===========================================================
     // Constants
     // ===========================================================
 
-    private static final Logger logger = LoggerFactory.getLogger(MapTileDownloader.class);
 
     // ===========================================================
     // Fields
@@ -173,11 +172,11 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             final MapTile tile = aState.getMapTile();
 
             try {
-                logger.debug("getting tile " + tile.getX() + ", " + tile.getY());
+                Log.d(TAG, "getting tile " + tile.getX() + ", " + tile.getY());
                 if (mNetworkAvailablityCheck != null
                         && !mNetworkAvailablityCheck.getNetworkAvailable()) {
                     if (DEBUGMODE) {
-                        logger.debug("Skipping " + getName() + " due to NetworkAvailabilityCheck.");
+                        Log.d(TAG, "Skipping " + getName() + " due to NetworkAvailabilityCheck.");
                     }
                     return null;
                 }
@@ -191,7 +190,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                     tileURLString = tileURLString.replace(".png", ".png?secure");
                 }
                 if (DEBUGMODE) {
-                    logger.debug("Downloading Maptile from url: " + tileURLString);
+                    Log.d(TAG, "Downloading Maptile from url: " + tileURLString);
                 }
 
                 if (TextUtils.isEmpty(tileURLString)) {
@@ -203,7 +202,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 org.apache.http.StatusLine line = response.getStatusLine();
 
                 while (line.getStatusCode() != 200 && attempts<5) {
-                    logger.debug("Retrying MapTile: " + tile + " HTTP response: " + line);
+                    Log.d(TAG, "Retrying MapTile: " + tile + " HTTP response: " + line);
 
                     if(tileURLString.contains("mapbox.com")){
 
@@ -218,7 +217,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
                 final HttpEntity entity = response.getEntity();
                 if (entity == null) {
-                    logger.debug("No content downloading MapTile: " + tile);
+                    Log.d(TAG, "No content downloading MapTile: " + tile);
                     return null;
                 }
                 in = entity.getContent();
@@ -246,18 +245,18 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 return result;
             } catch (final UnknownHostException e) {
                 // no network connection so empty the queue
-                logger.debug("UnknownHostException downloading MapTile: " + tile + " : " + e);
+                Log.d(TAG, "UnknownHostException downloading MapTile: " + tile + " : " + e);
                 throw new CantContinueException(e);
             } catch (final LowMemoryException e) {
                 // low memory so empty the queue
-                logger.debug("LowMemoryException downloading MapTile: " + tile + " : " + e);
+                Log.d(TAG, "LowMemoryException downloading MapTile: " + tile + " : " + e);
                 throw new CantContinueException(e);
             } catch (final FileNotFoundException e) {
-                logger.debug("Tile not found: " + tile + " : " + e);
+                Log.d(TAG, "Tile not found: " + tile + " : " + e);
             } catch (final IOException e) {
-                logger.debug("IOException downloading MapTile: " + tile + " : " + e);
+                Log.d(TAG, "IOException downloading MapTile: " + tile + " : " + e);
             } catch (final Throwable e) {
-                logger.debug("Error downloading MapTile: " + tile);
+                Log.d(TAG, "Error downloading MapTile: " + tile);
             } finally {
                 StreamUtils.closeStream(in);
                 StreamUtils.closeStream(out);
