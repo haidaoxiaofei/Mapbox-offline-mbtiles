@@ -1,6 +1,6 @@
 package com.mapbox.mapboxsdk;
 
-import org.osmdroid.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.GeoPoint;
 
 /**
  * Created by tmcw on 1/28/14.

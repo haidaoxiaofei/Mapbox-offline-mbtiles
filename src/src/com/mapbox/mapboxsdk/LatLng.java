@@ -5,7 +5,7 @@
 package com.mapbox.mapboxsdk;
 
 import android.location.Location;
-import org.osmdroid.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.GeoPoint;
 
 public class LatLng extends GeoPoint
 {

@@ -41,9 +41,9 @@ android {
 
             java.srcDirs = ['test/src', 'src/src', 'src/main/java']
 
-            resources.srcDirs = ['test/res', 'src/res', 'src/main/resources']
+            resources.srcDirs = ['test/res', 'src/res', 'resources']
 
-            res.srcDirs = ['test/res', 'src/res', 'src/main/resources']
+            res.srcDirs = ['test/res', 'src/res', 'resources']
 
             assets.srcDirs = ['test/assets']
 

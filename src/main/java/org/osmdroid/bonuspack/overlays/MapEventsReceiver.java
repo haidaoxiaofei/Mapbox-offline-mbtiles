@@ -1,6 +1,6 @@
 package org.osmdroid.bonuspack.overlays;
 
-import org.osmdroid.api.IGeoPoint;
+import com.mapbox.mapboxsdk.api.IGeoPoint;
 
 /**
  * Interface for objects that need to handle map events thrown by a MapEventsOverlay. 

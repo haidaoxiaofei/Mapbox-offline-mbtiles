@@ -15,11 +15,10 @@ import com.mapbox.mapboxsdk.MapView;
 import com.mapbox.mapboxsdk.Marker;
 import com.mapbox.mapboxsdk.Icon;
 import com.testflightapp.lib.TestFlight;
-import org.osmdroid.api.IMapController;
-import org.osmdroid.tileprovider.MapTileProviderBasic;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.overlay.PathOverlay;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
+import com.mapbox.mapboxsdk.api.IMapController;
+import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.views.overlay.PathOverlay;
+import com.mapbox.mapboxsdk.views.overlay.mylocation.MyLocationNewOverlay;
 
 public class MainActivity extends Activity {
 	private IMapController mapController;

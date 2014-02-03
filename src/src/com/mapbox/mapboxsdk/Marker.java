@@ -1,13 +1,8 @@
 package com.mapbox.mapboxsdk;
 
 import android.content.Context;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.overlay.OverlayItem;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.views.overlay.OverlayItem;
 
 /**
  * A Marker object is a visible representation of a point on a Map that has a geographical place.

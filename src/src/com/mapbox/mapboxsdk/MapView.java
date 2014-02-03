@@ -2,45 +2,33 @@ package com.mapbox.mapboxsdk;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.testflightapp.lib.core.Logger;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.osmdroid.DefaultResourceProxyImpl;
-import org.osmdroid.ResourceProxy;
-import org.osmdroid.api.IGeoPoint;
+import com.mapbox.mapboxsdk.api.IGeoPoint;
 import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
 import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
-import org.osmdroid.tileprovider.MapTileProviderBase;
-import org.osmdroid.tileprovider.MapTileProviderBasic;
-import org.osmdroid.tileprovider.tilesource.ITileSource;
-import org.osmdroid.tileprovider.tilesource.XYTileSource;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapController;
-import org.osmdroid.views.overlay.*;
+import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
+import com.mapbox.mapboxsdk.util.GeoPoint;
+import com.mapbox.mapboxsdk.views.overlay.*;
 
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The MapView class manages all of the content and
  * state of a single map, including layers, markers,
  * and interaction code.
  */
-public class MapView extends org.osmdroid.views.MapView
+public class MapView extends com.mapbox.mapboxsdk.views.MapView
         implements MapboxConstants, MapEventsReceiver {
     ////////////
     // FIELDS //
