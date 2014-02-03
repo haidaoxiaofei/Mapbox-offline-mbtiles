@@ -193,12 +193,12 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
      * @return distance in meters
      * @see <a href="http://www.geocities.com/DrChengalva/GPSDistance.html">GPSDistance.html</a>
      */
-    public int distanceTo(final ILatLng other) {
+    public int distanceTo(final LatLng other) {
 
         final double a1 = DEG2RAD * this.latitude;
         final double a2 = DEG2RAD * this.longitude;
-        final double b1 = DEG2RAD * other.getLatitude();
-        final double b2 = DEG2RAD * other.getLongitude();
+        final double b1 = DEG2RAD * other.latitude;
+        final double b2 = DEG2RAD * other.longitude;
 
         final double cosa1 = Math.cos(a1);
         final double cosb1 = Math.cos(b1);
@@ -218,11 +218,11 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
      * @return bearing in degrees
      * @see <a href="http://groups.google.com/group/osmdroid/browse_thread/thread/d22c4efeb9188fe9/bc7f9b3111158dd">discussion</a>
      */
-    public double bearingTo(final ILatLng other) {
+    public double bearingTo(final LatLng other) {
         final double lat1 = Math.toRadians(this.latitude);
         final double long1 = Math.toRadians(this.longitude);
-        final double lat2 = Math.toRadians(other.getLatitude());
-        final double long2 = Math.toRadians(other.getLongitude());
+        final double lat2 = Math.toRadians(other.latitude);
+        final double long2 = Math.toRadians(other.longitude);
         final double delta_long = long2 - long1;
         final double a = Math.sin(delta_long) * Math.cos(lat2);
         final double b = Math.cos(lat1) * Math.sin(lat2) -
@@ -263,8 +263,8 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
     }
 
     public static LatLng fromCenterBetween(final LatLng latLngA, final LatLng latLngB) {
-        return new LatLng((latLngA.getLatitude() + latLngB.getLatitude()) / 2,
-                (latLngA.getLongitude() + latLngB.getLongitude()) / 2);
+        return new LatLng((latLngA.latitude + latLngB.latitude) / 2,
+                (latLngA.longitude + latLngB.longitude) / 2);
     }
 
     public String toDoubleString() {
