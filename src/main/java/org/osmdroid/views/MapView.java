@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.*;
 import com.mapbox.mapboxforandroid.R;
 import org.metalev.multitouch.controller.MultiTouchController;
@@ -44,8 +45,6 @@ import org.osmdroid.views.overlay.OverlayManager;
 import org.osmdroid.views.overlay.TilesOverlay;
 import org.osmdroid.views.safecanvas.ISafeCanvas;
 import org.osmdroid.views.util.constants.MapViewConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -70,10 +69,9 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     // Constants
     // ===========================================================
 
-    private static final Logger logger = LoggerFactory.getLogger(MapView.class);
-
     private static final double ZOOM_SENSITIVITY = 1.0;
     private static final double ZOOM_LOG_BASE_INV = 1.0 / Math.log(2.0 / ZOOM_SENSITIVITY);
+    private static final String TAG = "OSMD MapView";
     private static Method sMotionEventTransformMethod;
 
     // ===========================================================
@@ -851,7 +849,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     public boolean dispatchTouchEvent(final MotionEvent event) {
 
         if (DEBUGMODE) {
-            logger.debug("dispatchTouchEvent(" + event + ")");
+            Log.d(TAG,"dispatchTouchEvent(" + event + ")");
         }
 
         if (mZoomController.isVisible() && mZoomController.onTouch(this, event)) {
@@ -864,7 +862,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         try {
             if (super.dispatchTouchEvent(event)) {
                 if (DEBUGMODE) {
-                    logger.debug("super handled onTouchEvent");
+                    Log.d(TAG, "super handled onTouchEvent");
                 }
                 return true;
             }
@@ -875,14 +873,14 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 
             if (mMultiTouchController != null && mMultiTouchController.onTouchEvent(event)) {
                 if (DEBUGMODE) {
-                    logger.debug("mMultiTouchController handled onTouchEvent");
+                    Log.d(TAG, "mMultiTouchController handled onTouchEvent");
                 }
                 return true;
             }
 
             if (mGestureDetector.onTouchEvent(rotatedEvent)) {
                 if (DEBUGMODE) {
-                    logger.debug("mGestureDetector handled onTouchEvent");
+                    Log.d(TAG, "mGestureDetector handled onTouchEvent");
                 }
                 return true;
             }
@@ -892,7 +890,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         }
 
         if (DEBUGMODE) {
-            logger.debug("no-one handled onTouchEvent");
+            Log.d(TAG, "no-one handled onTouchEvent");
         }
         return false;
     }
@@ -1048,7 +1046,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 
         if (DEBUGMODE) {
             final long endMs = System.currentTimeMillis();
-            logger.debug("Rendering overall: " + (endMs - startMs) + "ms");
+            Log.d(TAG, "Rendering overall: " + (endMs - startMs) + "ms");
         }
     }
 
@@ -1194,10 +1192,10 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
             if (tileSourceAttr != null) {
                 try {
                     final ITileSource r = TileSourceFactory.getTileSource(tileSourceAttr);
-                    logger.info("Using tile source specified in layout attributes: " + r);
+                    Log.i(TAG,"Using tile source specified in layout attributes: " + r);
                     tileSource = r;
                 } catch (final IllegalArgumentException e) {
-                    logger.warn("Invalid tile source specified in layout attributes: " + tileSource);
+                    Log.w(TAG, "Invalid tile source specified in layout attributes: " + tileSource);
                 }
             }
         }
@@ -1205,14 +1203,14 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         if (aAttributeSet != null && tileSource instanceof IStyledTileSource) {
             final String style = aAttributeSet.getAttributeValue(null, "style");
             if (style == null) {
-                logger.info("Using default style: 1");
+                Log.i(TAG,"Using default style: 1");
             } else {
-                logger.info("Using style specified in layout attributes: " + style);
+                Log.i(TAG,"Using style specified in layout attributes: " + style);
                 ((IStyledTileSource<?>) tileSource).setStyle(style);
             }
         }
 
-        logger.info("Using tile source: " + tileSource);
+        Log.i(TAG,"Using tile source: " + tileSource);
         return tileSource;
     }
 

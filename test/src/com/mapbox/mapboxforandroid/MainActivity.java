@@ -3,7 +3,9 @@ package com.mapbox.mapboxforandroid;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -52,6 +54,14 @@ public class MainActivity extends Activity {
             public boolean onTilesLoaded() {
                 System.out.println("All tiles have been loaded");
                 return false;
+            }
+        });
+
+        mv.setOnTileLoadedListener(new MapView.TileLoadedListener(){
+            @Override
+            public Drawable onTileLoaded(Drawable d){
+                d.setColorFilter( 0xffff0000, PorterDuff.Mode.MULTIPLY);
+                return d;
             }
         });
         mv.setVisibility(View.VISIBLE);
