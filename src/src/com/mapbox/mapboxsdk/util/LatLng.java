@@ -19,9 +19,9 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
 
     static final long serialVersionUID = 1L;
 
-    protected double longitude;
-    protected double latitude;
-    protected double mAltitude;
+    public double longitude;
+    public double latitude;
+    public double mAltitude;
 
     public LatLng(final double aLatitude, final double aLongitude) {
         this.latitude = aLatitude;
