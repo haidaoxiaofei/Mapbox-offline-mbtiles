@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk.views.overlay;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.util.LatLng;
@@ -117,7 +118,7 @@ public class PathOverlay extends Overlay {
     }
 
     public void addPoint(final double aLatitude, final double aLongitude) {
-        mPoints.add(new Point((int) (aLatitude * 1E6), (int) (aLongitude * 1E6)));
+        mPoints.add(new Point((int) aLatitude, (int) aLongitude));
     }
 
     public void addPoints(final LatLng... aPoints) {
