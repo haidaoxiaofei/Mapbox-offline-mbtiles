@@ -2,7 +2,7 @@ package com.mapbox.mapboxsdk.views.util;
 
 import java.util.List;
 
-import com.mapbox.mapboxsdk.util.BoundingBoxE6;
+import com.mapbox.mapboxsdk.util.BoundingBox;
 import com.mapbox.mapboxsdk.util.LatLng;
 import com.mapbox.mapboxsdk.util.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
@@ -31,7 +31,7 @@ public class PathProjection {
         boolean first = true;
         for (final LatLng gp : in) {
             final Point underGeopointTileCoords = TileSystem.LatLongToPixelXY(
-                    gp.getLatitudeE6() / 1E6, gp.getLongitudeE6() / 1E6, projection.getZoomLevel(),
+                    gp.getLatitude(), gp.getLongitude(), projection.getZoomLevel(),
                     null);
             TileSystem.PixelXYToTileXY(underGeopointTileCoords.x, underGeopointTileCoords.y,
                     underGeopointTileCoords);
@@ -48,19 +48,19 @@ public class PathProjection {
                     projection.getZoomLevel(), null);
             final LatLng swLatLng = TileSystem.PixelXYToLatLong(lowerLeft.x, lowerLeft.y,
                     projection.getZoomLevel(), null);
-            final BoundingBoxE6 bb = new BoundingBoxE6(neLatLng.getLatitudeE6(),
-                    neLatLng.getLongitudeE6(), swLatLng.getLatitudeE6(),
-                    swLatLng.getLongitudeE6());
+            final BoundingBox bb = new BoundingBox(neLatLng.getLatitude(),
+                    neLatLng.getLongitude(), swLatLng.getLatitude(),
+                    swLatLng.getLongitude());
 
             final PointF relativePositionInCenterMapTile;
             if (doGudermann && (projection.getZoomLevel() < 7)) {
                 relativePositionInCenterMapTile = bb
                         .getRelativePositionOfGeoPointInBoundingBoxWithExactGudermannInterpolation(
-                                gp.getLatitudeE6(), gp.getLongitudeE6(), null);
+                                gp.getLatitude(), gp.getLongitude(), null);
             } else {
                 relativePositionInCenterMapTile = bb
                         .getRelativePositionOfGeoPointInBoundingBoxWithLinearInterpolation(
-                                gp.getLatitudeE6(), gp.getLongitudeE6(), null);
+                                gp.getLatitude(), gp.getLongitude(), null);
             }
 
             final Rect screenRect = projection.getScreenRect();

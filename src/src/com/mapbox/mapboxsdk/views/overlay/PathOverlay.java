@@ -3,9 +3,10 @@ package com.mapbox.mapboxsdk.views.overlay;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.api.ILatLng;
+import com.mapbox.mapboxsdk.util.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
 
@@ -112,22 +113,22 @@ public class PathOverlay extends Overlay {
         this.mPointsPrecomputed = 0;
     }
 
-    public void addPoint(final ILatLng aPoint) {
-        addPoint(aPoint.getLatitudeE6(), aPoint.getLongitudeE6());
+    public void addPoint(final LatLng aPoint) {
+        addPoint(aPoint.latitude, aPoint.longitude);
     }
 
-    public void addPoint(final int aLatitudeE6, final int aLongitudeE6) {
-        mPoints.add(new Point(aLatitudeE6, aLongitudeE6));
+    public void addPoint(final double aLatitude, final double aLongitude) {
+        mPoints.add(new Point((int) aLatitude, (int) aLongitude));
     }
 
-    public void addPoints(final ILatLng... aPoints) {
-        for (final ILatLng point : aPoints) {
+    public void addPoints(final LatLng... aPoints) {
+        for (final LatLng point : aPoints) {
             addPoint(point);
         }
     }
 
-    public void addPoints(final List<ILatLng> aPoints) {
-        for (final ILatLng point : aPoints) {
+    public void addPoints(final List<LatLng> aPoints) {
+        for (final LatLng point : aPoints) {
             addPoint(point);
         }
     }

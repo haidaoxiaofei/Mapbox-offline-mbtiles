@@ -438,8 +438,8 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
             mMapCoords.offset(-worldSize_2, -worldSize_2);
 
             if (mIsFollowing) {
-                mLatLng.setLatitudeE6((int) (mLocation.getLatitude() * 1E6));
-                mLatLng.setLongitudeE6((int) (mLocation.getLongitude() * 1E6));
+                mLatLng.setLatitude(mLocation.getLatitude());
+                mLatLng.setLongitude(mLocation.getLongitude());
                 mMapController.animateTo(mLatLng);
             } else {
                 // Get new drawing bounds
