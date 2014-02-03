@@ -322,13 +322,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         getController().animateTo(aCenter);
     }
 
-    /**
-     * @deprecated use {@link #setMapCenter(com.mapbox.mapboxsdk.api.ILatLng)}
-     */
-    void setMapCenter(final int aLatitudeE6, final int aLongitudeE6) {
-        setMapCenter(new LatLng(aLatitudeE6, aLongitudeE6));
-    }
-
     public void setTileSource(final ITileSource aTileSource) {
         mTileProvider.setTileSource(aTileSource);
         TileSystem.setTileSize(aTileSource.getTileSizePixels());
@@ -1286,36 +1279,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         }
 
         /**
-         * @deprecated Use TileSystem.getTileSize() instead.
-         */
-        @Deprecated
-        public int getTileSizePixels() {
-            return TileSystem.getTileSize();
-        }
-
-        /**
-         * @deprecated Use
-         *             <code>Point out = TileSystem.PixelXYToTileXY(screenRect.centerX(), screenRect.centerY(), null);</code>
-         *             instead.
-         */
-        @Deprecated
-        public Point getCenterMapTileCoords() {
-            final Rect rect = getScreenRect();
-            return TileSystem.PixelXYToTileXY(rect.centerX(), rect.centerY(), null);
-        }
-
-        /**
-         * @deprecated Use
-         *             <code>final Point out = TileSystem.TileXYToPixelXY(centerMapTileCoords.x, centerMapTileCoords.y, null);</code>
-         *             instead.
-         */
-        @Deprecated
-        public Point getUpperLeftCornerOfCenterMapTile() {
-            final Point centerMapTileCoords = getCenterMapTileCoords();
-            return TileSystem.TileXYToPixelXY(centerMapTileCoords.x, centerMapTileCoords.y, null);
-        }
-
-        /**
          * Converts <I>screen coordinates</I> to the underlying LatLng.
          *
          * @param x
@@ -1421,43 +1384,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 
             result.set(Math.min(x0, x1), Math.min(y0, y1), Math.max(x0, x1), Math.max(y0, y1));
             return result;
-        }
-
-        /**
-         * @deprecated Use TileSystem.TileXYToPixelXY
-         */
-        @Deprecated
-        public Point toPixels(final Point tileCoords, final Point reuse) {
-            return toPixels(tileCoords.x, tileCoords.y, reuse);
-        }
-
-        /**
-         * @deprecated Use TileSystem.TileXYToPixelXY
-         */
-        @Deprecated
-        public Point toPixels(final int tileX, final int tileY, final Point reuse) {
-            return TileSystem.TileXYToPixelXY(tileX, tileY, reuse);
-        }
-
-        // not presently used
-        public Rect toPixels(final BoundingBoxE6 pBoundingBoxE6) {
-            final Rect rect = new Rect();
-
-            final Point reuse = new Point();
-
-            toMapPixels(
-                    new LatLng(pBoundingBoxE6.getLatNorthE6(), pBoundingBoxE6.getLonWestE6()),
-                    reuse);
-            rect.left = reuse.x;
-            rect.top = reuse.y;
-
-            toMapPixels(
-                    new LatLng(pBoundingBoxE6.getLatSouthE6(), pBoundingBoxE6.getLonEastE6()),
-                    reuse);
-            rect.right = reuse.x;
-            rect.bottom = reuse.y;
-
-            return rect;
         }
 
         @Override

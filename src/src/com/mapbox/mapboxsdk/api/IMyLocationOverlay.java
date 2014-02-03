@@ -1,7 +1,5 @@
 package com.mapbox.mapboxsdk.api;
 
-import com.mapbox.mapboxsdk.views.overlay.MyLocationOverlay;
-
 import android.location.Location;
 import android.os.Bundle;
 

@@ -82,18 +82,6 @@ public class SafeTranslatedPath extends Path {
     }
 
     /**
-     * @deprecated Use {@link #isRect(Rect)} instead.
-     */
-    @Override
-    public boolean isRect(RectF rect) {
-        // Should we offset here?
-        rect.offset(xOffset, yOffset);
-        boolean result = super.isRect(rect);
-        rect.offset(-xOffset, -yOffset);
-        return result;
-    }
-
-    /**
      * @see {@link #isRect(RectF)}
      */
     public boolean isRect(Rect rect) {
@@ -102,15 +90,6 @@ public class SafeTranslatedPath extends Path {
         boolean result = super.isRect(this.toOffsetRectF(rect, sRectF));
         rect.offset(-xOffset, -yOffset);
         return result;
-    }
-
-    /**
-     * @deprecated Use {@link #computeBounds(Rect, boolean)} instead.
-     */
-    @Override
-    public void computeBounds(RectF bounds, boolean exact) {
-        super.computeBounds(bounds, exact);
-        bounds.offset(-xOffset, -yOffset);
     }
 
     /**
@@ -128,14 +107,6 @@ public class SafeTranslatedPath extends Path {
     }
 
     /**
-     * @deprecated Use {@link #moveTo(double, double)} instead.
-     */
-    @Override
-    public void moveTo(float x, float y) {
-        super.moveTo(x + xOffset, y + yOffset);
-    }
-
-    /**
      * @see {@link #moveTo(float, float)}
      */
     public void moveTo(double x, double y) {
@@ -148,14 +119,6 @@ public class SafeTranslatedPath extends Path {
     }
 
     /**
-     * @deprecated Use {@link #lineTo(double, double)} instead.
-     */
-    @Override
-    public void lineTo(float x, float y) {
-        super.lineTo(x + xOffset, y + yOffset);
-    }
-
-    /**
      * @see {@link #lineTo(float, float)}
      */
     public void lineTo(double x, double y) {
@@ -165,14 +128,6 @@ public class SafeTranslatedPath extends Path {
     @Override
     public void rLineTo(float dx, float dy) {
         super.rLineTo(dx, dy);
-    }
-
-    /**
-     * @deprecated Use {@link #quadTo(double, double, double, double)} instead.
-     */
-    @Override
-    public void quadTo(float x1, float y1, float x2, float y2) {
-        super.quadTo(x1 + xOffset, y1 + yOffset, x2 + xOffset, y2 + yOffset);
     }
 
     /**
@@ -189,15 +144,6 @@ public class SafeTranslatedPath extends Path {
     }
 
     /**
-     * @deprecated Use {@link #cubicTo(double, double, double, double, double, double)} instead.
-     */
-    @Override
-    public void cubicTo(float x1, float y1, float x2, float y2, float x3, float y3) {
-        super.cubicTo(x1 + xOffset, y1 + yOffset, x2 + xOffset, y2 + yOffset, x3 + xOffset, y3
-                + yOffset);
-    }
-
-    /**
      * @see {@link #cubicTo(float, float, float, float, float, float)}
      */
     public void cubicTo(double x1, double y1, double x2, double y2, double x3, double y3) {
@@ -211,31 +157,11 @@ public class SafeTranslatedPath extends Path {
     }
 
     /**
-     * @deprecated use {@link #arcTo(Rect, float, float, boolean)}
-     */
-    @Override
-    public void arcTo(RectF oval, float startAngle, float sweepAngle, boolean forceMoveTo) {
-        oval.offset(xOffset, yOffset);
-        super.arcTo(oval, startAngle, sweepAngle, forceMoveTo);
-        oval.offset(-xOffset, -yOffset);
-    }
-
-    /**
      * @see {@link #arcTo(RectF, float, float, boolean)}
      */
     public void arcTo(Rect oval, float startAngle, float sweepAngle, boolean forceMoveTo) {
         oval.offset(xOffset, yOffset);
         super.arcTo(this.toOffsetRectF(oval, sRectF), startAngle, sweepAngle, forceMoveTo);
-        oval.offset(-xOffset, -yOffset);
-    }
-
-    /**
-     * @deprecated use {@link #arcTo(Rect, float, float)}
-     */
-    @Override
-    public void arcTo(RectF oval, float startAngle, float sweepAngle) {
-        oval.offset(xOffset, yOffset);
-        super.arcTo(oval, startAngle, sweepAngle);
         oval.offset(-xOffset, -yOffset);
     }
 
@@ -254,16 +180,6 @@ public class SafeTranslatedPath extends Path {
     }
 
     /**
-     * @deprecated use {@link #addRect(Rect, Direction)}
-     */
-    @Override
-    public void addRect(RectF rect, Direction dir) {
-        rect.offset(xOffset, yOffset);
-        super.addRect(rect, dir);
-        rect.offset(-xOffset, -yOffset);
-    }
-
-    /**
      * @see {@link #addRect(RectF, Direction)}
      */
     public void addRect(Rect rect, Direction dir) {
@@ -273,29 +189,11 @@ public class SafeTranslatedPath extends Path {
     }
 
     /**
-     * @deprecated use {@link #addRect(double, double, double, double, Direction)}
-     */
-    @Override
-    public void addRect(float left, float top, float right, float bottom, Direction dir) {
-        super.addRect(left + xOffset, top + yOffset, right + xOffset, bottom + yOffset, dir);
-    }
-
-    /**
      * @see {@link #addRect(float, float, float, float, Direction)}
      */
     public void addRect(double left, double top, double right, double bottom, Direction dir) {
         super.addRect((float) (left + xOffset), (float) (top + yOffset), (float) (right + xOffset),
                 (float) (bottom + yOffset), dir);
-    }
-
-    /**
-     * @deprecated use {@link #addOval(Rect, Direction)
-     */
-    @Override
-    public void addOval(RectF oval, Direction dir) {
-        oval.offset(xOffset, yOffset);
-        super.addOval(oval, dir);
-        oval.offset(-xOffset, -yOffset);
     }
 
     /**
@@ -308,28 +206,10 @@ public class SafeTranslatedPath extends Path {
     }
 
     /**
-     * @deprecated use {@link #addCircle(double, double, double, Direction)}
-     */
-    @Override
-    public void addCircle(float x, float y, float radius, Direction dir) {
-        super.addCircle(x + xOffset, y + yOffset, radius, dir);
-    }
-
-    /**
      * @see {@link #addCircle(float, float, float, Direction)}
      */
     public void addCircle(double x, double y, float radius, Direction dir) {
         super.addCircle((float) (x + xOffset), (float) (y + yOffset), radius, dir);
-    }
-
-    /**
-     * @deprecated use {@link #addArc(Rect, float, float)}
-     */
-    @Override
-    public void addArc(RectF oval, float startAngle, float sweepAngle) {
-        oval.offset(xOffset, yOffset);
-        super.addArc(oval, startAngle, sweepAngle);
-        oval.offset(-xOffset, -yOffset);
     }
 
     /**
@@ -342,30 +222,11 @@ public class SafeTranslatedPath extends Path {
     }
 
     /**
-     * @deprecated use {@link #addRoundRect(Rect, float, float)}
-     */
-    @Override
-    public void addRoundRect(RectF rect, float rx, float ry, Direction dir) {
-        rect.offset(xOffset, yOffset);
-        super.addRoundRect(rect, rx, ry, dir);
-        rect.offset(-xOffset, -yOffset);
-    }
-
-    /**
      * @see {@link #addRoundRect(RectF, float, float)}
      */
     public void addRoundRect(Rect rect, float rx, float ry, Direction dir) {
         rect.offset(xOffset, yOffset);
         super.addRoundRect(this.toOffsetRectF(rect, sRectF), rx, ry, dir);
-        rect.offset(-xOffset, -yOffset);
-    }
-
-    /**
-     * @deprecated use {@link #addRoundRect(Rect, float, Direction)}
-     */
-    public void addRoundRect(RectF rect, float[] radii, Direction dir) {
-        rect.offset(xOffset, yOffset);
-        super.addRoundRect(rect, radii, dir);
         rect.offset(-xOffset, -yOffset);
     }
 
@@ -416,14 +277,6 @@ public class SafeTranslatedPath extends Path {
     @Override
     public void offset(float dx, float dy) {
         super.offset(dx, dy);
-    }
-
-    /**
-     * @deprecated use {@link #setLastPoint(double, double)}
-     */
-    @Override
-    public void setLastPoint(float dx, float dy) {
-        super.setLastPoint(dx + xOffset, dy + yOffset);
     }
 
     /**
