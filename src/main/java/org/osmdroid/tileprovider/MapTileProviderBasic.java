@@ -31,7 +31,7 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
      * Creates a {@link MapTileProviderBasic}.
      */
     public MapTileProviderBasic(final Context pContext, final ITileSource pTileSource, MapView mapView) {
-        this(new SimpleRegisterReceiver(pContext), new NetworkAvailabliltyCheck(pContext),
+        this(new SimpleRegisterReceiver(pContext), new NetworkAvailabilityCheck(pContext),
                 pTileSource, pContext, mapView);
     }
 
@@ -39,7 +39,7 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
      * Creates a {@link MapTileProviderBasic}.
      */
     public MapTileProviderBasic(final IRegisterReceiver pRegisterReceiver,
-                                final INetworkAvailablityCheck aNetworkAvailablityCheck, final ITileSource pTileSource, Context context, MapView mapView) {
+                                final INetworkAvailabilityCheck aNetworkAvailablityCheck, final ITileSource pTileSource, Context context, MapView mapView) {
         super(pTileSource, pRegisterReceiver);
         this.context = context;
         final TileWriter tileWriter = new TileWriter();

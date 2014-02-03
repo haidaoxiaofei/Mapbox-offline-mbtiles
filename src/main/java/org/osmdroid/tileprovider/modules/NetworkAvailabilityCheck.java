@@ -12,11 +12,12 @@ import android.net.NetworkInfo;
  * @author Marc Kurtz
  */
 
-public class NetworkAvailabliltyCheck implements INetworkAvailablityCheck {
+public class NetworkAvailabilityCheck implements INetworkAvailabilityCheck
+{
 
     private final ConnectivityManager mConnectionManager;
 
-    public NetworkAvailabliltyCheck(final Context aContext) {
+    public NetworkAvailabilityCheck(final Context aContext) {
         mConnectionManager = (ConnectivityManager) aContext
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
     }
