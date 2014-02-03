@@ -35,13 +35,15 @@ import android.view.SubMenu;
  * see {@link MapTile} for an overview of how tiles are acquired by this overlay.
  */
 
-public class TilesOverlay extends SafeDrawOverlay implements IOverlayMenuProvider {
+public class TilesOverlay
+        extends SafeDrawOverlay
+        implements IOverlayMenuProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(TilesOverlay.class);
 
     public static final int MENU_MAP_MODE = getSafeMenuId();
-    public static final int MENU_TILE_SOURCE_STARTING_ID = getSafeMenuIdSequence(TileSourceFactory
-            .getTileSources().size());
+    public static final int MENU_TILE_SOURCE_STARTING_ID =
+            getSafeMenuIdSequence(TileSourceFactory.getTileSources().size());
     public static final int MENU_OFFLINE = getSafeMenuId();
 
     /**
@@ -155,8 +157,10 @@ public class TilesOverlay extends SafeDrawOverlay implements IOverlayMenuProvide
             // final LatLng center = osmv.getMapCenter();
             final Point centerPoint = new Point(viewPort.centerX() - mWorldSize_2,
                     viewPort.centerY() - mWorldSize_2);
-            c.drawLine(centerPoint.x, centerPoint.y - 9, centerPoint.x, centerPoint.y + 9, mDebugPaint);
-            c.drawLine(centerPoint.x - 9, centerPoint.y, centerPoint.x + 9, centerPoint.y, mDebugPaint);
+            c.drawLine(centerPoint.x, centerPoint.y - 9,
+                    centerPoint.x, centerPoint.y + 9, mDebugPaint);
+            c.drawLine(centerPoint.x - 9, centerPoint.y,
+                    centerPoint.x + 9, centerPoint.y, mDebugPaint);
         }
 
     }
@@ -170,7 +174,11 @@ public class TilesOverlay extends SafeDrawOverlay implements IOverlayMenuProvide
         }
 
         @Override
-        public void handleTile(final Canvas pCanvas, final int pTileSizePx, final MapTile pTile, final int pX, final int pY) {
+        public void handleTile(final Canvas pCanvas,
+                               final int pTileSizePx,
+                               final MapTile pTile,
+                               final int pX,
+                               final int pY) {
             Drawable currentMapTile = mTileProvider.getMapTile(pTile);
             boolean isReusable = currentMapTile instanceof ReusableBitmapDrawable;
             if (currentMapTile == null) {
@@ -178,7 +186,8 @@ public class TilesOverlay extends SafeDrawOverlay implements IOverlayMenuProvide
             }
 
             if (currentMapTile != null) {
-                mTileRect.set(pX * pTileSizePx, pY * pTileSizePx, pX * pTileSizePx + pTileSizePx,
+                mTileRect.set(pX * pTileSizePx, pY * pTileSizePx,
+                        pX * pTileSizePx + pTileSizePx,
                         pY * pTileSizePx + pTileSizePx);
                 if (isReusable)
                     ((ReusableBitmapDrawable) currentMapTile).beginUsingDrawable();
@@ -195,7 +204,9 @@ public class TilesOverlay extends SafeDrawOverlay implements IOverlayMenuProvide
             }
 
             if (DEBUGMODE) {
-                mTileRect.set(pX * pTileSizePx, pY * pTileSizePx, pX * pTileSizePx + pTileSizePx, pY
+                mTileRect.set(pX * pTileSizePx,
+                        pY * pTileSizePx,
+                        pX * pTileSizePx + pTileSizePx, pY
                         * pTileSizePx + pTileSizePx);
                 mTileRect.offset(-mWorldSize_2, -mWorldSize_2);
                 pCanvas.drawText(pTile.toString(), mTileRect.left + 1,
@@ -226,13 +237,17 @@ public class TilesOverlay extends SafeDrawOverlay implements IOverlayMenuProvide
 
     @Override
     public boolean isOptionsMenuEnabled() {
+
+
         return this.mOptionsMenuEnabled;
     }
 
     @Override
     public boolean onCreateOptionsMenu(final Menu pMenu, final int pMenuIdOffset,
                                        final MapView pMapView) {
-        final SubMenu mapMenu = pMenu.addSubMenu(0, MENU_MAP_MODE + pMenuIdOffset, Menu.NONE,
+        final SubMenu mapMenu = pMenu.addSubMenu(0,
+                MENU_MAP_MODE + pMenuIdOffset,
+                Menu.NONE,
                 mResourceProxy.getString(ResourceProxy.string.map_mode)).setIcon(
                 mResourceProxy.getDrawable(ResourceProxy.bitmap.ic_menu_mapmode));
 
@@ -321,7 +336,8 @@ public class TilesOverlay extends SafeDrawOverlay implements IOverlayMenuProvide
     private Drawable getLoadingTile() {
         if (mLoadingTile == null && mLoadingBackgroundColor != Color.TRANSPARENT) {
             try {
-                final int tileSize = mTileProvider.getTileSource() != null ? mTileProvider
+                final int tileSize = mTileProvider.getTileSource() != null ?
+                        mTileProvider
                         .getTileSource().getTileSizePixels() : 256;
                 final Bitmap bitmap = Bitmap.createBitmap(tileSize, tileSize,
                         Bitmap.Config.ARGB_8888);
@@ -356,9 +372,12 @@ public class TilesOverlay extends SafeDrawOverlay implements IOverlayMenuProvide
     }
 
     /**
-     * Set this to overshoot the tile cache. By default the TilesOverlay only creates a cache large
-     * enough to hold the minimum number of tiles necessary to draw to the screen. Setting this
-     * value will allow you to overshoot the tile cache and allow more tiles to be cached. This
+     * Set this to overshoot the tile cache.
+     * By default the TilesOverlay only creates a cache large
+     * enough to hold the minimum number of tiles
+     * necessary to draw to the screen. Setting this
+     * value will allow you to overshoot the tile cache
+     * and allow more tiles to be cached. This
      * increases the memory usage, but increases drawing performance.
      *
      * @param overshootTileCache the number of tiles to overshoot the tile cache by
