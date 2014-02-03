@@ -3,7 +3,7 @@ package com.mapbox.mapboxsdk.views;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.api.IMapController;
-import com.mapbox.mapboxsdk.util.BoundingBoxE6;
+import com.mapbox.mapboxsdk.util.BoundingBox;
 import com.mapbox.mapboxsdk.views.util.MyMath;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
@@ -72,33 +72,33 @@ public class MapController implements IMapController, MapViewConstants {
         }
     }
 
-    public void zoomToSpan(final BoundingBoxE6 bb) {
-        zoomToSpan(bb.getLatitudeSpanE6(), bb.getLongitudeSpanE6());
+    public void zoomToSpan(final BoundingBox bb) {
+        zoomToSpan(bb.getLatitudeSpan(), bb.getLongitudeSpan());
     }
 
     // TODO rework zoomToSpan
     @Override
-    public void zoomToSpan(int latSpanE6, int lonSpanE6) {
-        if (latSpanE6 <= 0 || lonSpanE6 <= 0) {
+    public void zoomToSpan(double latSpan, double lonSpan) {
+        if (latSpan <= 0 || lonSpan <= 0) {
             return;
         }
 
-        final BoundingBoxE6 bb = this.mMapView.getBoundingBox();
+        final BoundingBox bb = this.mMapView.getBoundingBox();
         final int curZoomLevel = this.mMapView.getZoomLevel();
 
-        final int curLatSpan = bb.getLatitudeSpanE6();
-        final int curLonSpan = bb.getLongitudeSpanE6();
+        final double curLatSpan = bb.getLatitudeSpan();
+        final double curLonSpan = bb.getLongitudeSpan();
 
-        final float diffNeededLat = (float) latSpanE6 / curLatSpan; // i.e. 600/500 = 1,2
-        final float diffNeededLon = (float) lonSpanE6 / curLonSpan; // i.e. 300/400 = 0,75
+        final double diffNeededLat = (double) latSpan / curLatSpan; // i.e. 600/500 = 1,2
+        final double diffNeededLon = (double) lonSpan / curLonSpan; // i.e. 300/400 = 0,75
 
-        final float diffNeeded = Math.max(diffNeededLat, diffNeededLon); // i.e. 1,2
+        final double diffNeeded = Math.max(diffNeededLat, diffNeededLon); // i.e. 1,2
 
         if (diffNeeded > 1) { // Zoom Out
-            this.mMapView.setZoomLevel(curZoomLevel - MyMath.getNextSquareNumberAbove(diffNeeded));
+            this.mMapView.setZoomLevel(curZoomLevel - MyMath.getNextSquareNumberAbove((float) diffNeeded));
         } else if (diffNeeded < 0.5) { // Can Zoom in
             this.mMapView.setZoomLevel(curZoomLevel
-                    + MyMath.getNextSquareNumberAbove(1 / diffNeeded) - 1);
+                    + MyMath.getNextSquareNumberAbove(1 / (float) diffNeeded) - 1);
         }
     }
 

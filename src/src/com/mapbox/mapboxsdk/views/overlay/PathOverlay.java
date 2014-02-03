@@ -113,11 +113,11 @@ public class PathOverlay extends Overlay {
     }
 
     public void addPoint(final ILatLng aPoint) {
-        addPoint(aPoint.getLatitudeE6(), aPoint.getLongitudeE6());
+        addPoint(aPoint.getLatitude(), aPoint.getLongitude());
     }
 
-    public void addPoint(final int aLatitudeE6, final int aLongitudeE6) {
-        mPoints.add(new Point(aLatitudeE6, aLongitudeE6));
+    public void addPoint(final double aLatitude, final double aLongitude) {
+        mPoints.add(new Point((int) (aLatitude * 1E6), (int) (aLongitude * 1E6)));
     }
 
     public void addPoints(final ILatLng... aPoints) {

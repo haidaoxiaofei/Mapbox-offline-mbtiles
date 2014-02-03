@@ -18,9 +18,9 @@ public interface IMapView {
 
     int getMaxZoomLevel();
 
-    int getLatitudeSpan();
+    double getLatitudeSpan();
 
-    int getLongitudeSpan();
+    double getLongitudeSpan();
 
     ILatLng getMapCenter();
 

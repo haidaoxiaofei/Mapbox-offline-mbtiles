@@ -17,54 +17,31 @@ import android.os.Parcelable;
  */
 public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable, Serializable, Cloneable {
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
     static final long serialVersionUID = 1L;
 
-    // ===========================================================
-    // Fields
-    // ===========================================================
-
-    private int mLongitudeE6;
-    private int mLatitudeE6;
-    private int mAltitude;
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
-
-    public LatLng(final int aLatitudeE6, final int aLongitudeE6) {
-        this.mLatitudeE6 = aLatitudeE6;
-        this.mLongitudeE6 = aLongitudeE6;
-    }
-
-    public LatLng(final int aLatitudeE6, final int aLongitudeE6, final int aAltitude) {
-        this.mLatitudeE6 = aLatitudeE6;
-        this.mLongitudeE6 = aLongitudeE6;
-        this.mAltitude = aAltitude;
-    }
+    protected double longitude;
+    protected double latitude;
+    protected double mAltitude;
 
     public LatLng(final double aLatitude, final double aLongitude) {
-        this.mLatitudeE6 = (int) (aLatitude * 1E6);
-        this.mLongitudeE6 = (int) (aLongitude * 1E6);
+        this.latitude = aLatitude;
+        this.longitude = aLongitude;
     }
 
     public LatLng(final double aLatitude, final double aLongitude, final double aAltitude) {
-        this.mLatitudeE6 = (int) (aLatitude * 1E6);
-        this.mLongitudeE6 = (int) (aLongitude * 1E6);
-        this.mAltitude = (int) aAltitude;
+        this.latitude = aLatitude;
+        this.longitude = aLongitude;
+        this.mAltitude = aAltitude;
     }
 
     public LatLng(final Location aLocation) {
         this(aLocation.getLatitude(), aLocation.getLongitude(), aLocation.getAltitude());
     }
 
-    public LatLng(final LatLng aGeopoint) {
-        this.mLatitudeE6 = aGeopoint.mLatitudeE6;
-        this.mLongitudeE6 = aGeopoint.mLongitudeE6;
-        this.mAltitude = aGeopoint.mAltitude;
+    public LatLng(final LatLng aLatLng) {
+        this.latitude = aLatLng.latitude;
+        this.longitude = aLatLng.longitude;
+        this.mAltitude = aLatLng.mAltitude;
     }
 
     public static LatLng fromDoubleString(final String s, final char spacer) {
@@ -117,63 +94,45 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
         }
     }
 
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
-
-    @Override
-    public int getLongitudeE6() {
-        return this.mLongitudeE6;
-    }
-
-    @Override
-    public int getLatitudeE6() {
-        return this.mLatitudeE6;
-    }
 
     @Override
     public double getLongitude() {
-        return this.mLongitudeE6 / 1E6;
+        return this.longitude;
     }
 
     @Override
     public double getLatitude() {
-        return this.mLatitudeE6 / 1E6;
+        return this.latitude;
     }
 
-    public int getAltitude() {
+    public double getAltitude() {
         return this.mAltitude;
     }
 
-    public void setLongitudeE6(final int aLongitudeE6) {
-        this.mLongitudeE6 = aLongitudeE6;
+    public void setLongitude(final double aLongitude) {
+        this.longitude = aLongitude;
     }
 
-    public void setLatitudeE6(final int aLatitudeE6) {
-        this.mLatitudeE6 = aLatitudeE6;
+    public void setLatitude(final double aLatitude) {
+        this.latitude = aLatitude;
     }
 
-    public void setAltitude(final int aAltitude) {
+    public void setAltitude(final double aAltitude) {
         this.mAltitude = aAltitude;
     }
 
-    public void setCoordsE6(final int aLatitudeE6, final int aLongitudeE6) {
-        this.mLatitudeE6 = aLatitudeE6;
-        this.mLongitudeE6 = aLongitudeE6;
-    }
-
-    // ===========================================================
-    // Methods from SuperClass/Interfaces
-    // ===========================================================
-
     @Override
     public Object clone() {
-        return new LatLng(this.mLatitudeE6, this.mLongitudeE6);
+        return new LatLng(this.latitude, this.longitude);
     }
 
     @Override
     public String toString() {
-        return new StringBuilder().append(this.mLatitudeE6).append(",").append(this.mLongitudeE6).append(",").append(this.mAltitude)
+        return new StringBuilder().append(this.latitude)
+                .append(",")
+                .append(this.longitude)
+                .append(",")
+                .append(this.mAltitude)
                 .toString();
     }
 
@@ -189,21 +148,21 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
             return false;
         }
         final LatLng rhs = (LatLng) obj;
-        return rhs.mLatitudeE6 == this.mLatitudeE6 && rhs.mLongitudeE6 == this.mLongitudeE6 && rhs.mAltitude == this.mAltitude;
+        return rhs.latitude == this.latitude && rhs.longitude == this.longitude && rhs.mAltitude == this.mAltitude;
     }
 
     @Override
     public int hashCode() {
-        return 37 * (17 * mLatitudeE6 + mLongitudeE6) + mAltitude;
+        return (int) (37.0 * (17.0 * latitude * 1E6d + longitude * 1E6d) + mAltitude);
     }
 
     // ===========================================================
     // Parcelable
     // ===========================================================
     private LatLng(final Parcel in) {
-        this.mLatitudeE6 = in.readInt();
-        this.mLongitudeE6 = in.readInt();
-        this.mAltitude = in.readInt();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
+        this.mAltitude = in.readDouble();
     }
 
     @Override
@@ -213,9 +172,9 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
 
     @Override
     public void writeToParcel(final Parcel out, final int flags) {
-        out.writeInt(mLatitudeE6);
-        out.writeInt(mLongitudeE6);
-        out.writeInt(mAltitude);
+        out.writeDouble(latitude);
+        out.writeDouble(longitude);
+        out.writeDouble(mAltitude);
     }
 
     public static final Parcelable.Creator<LatLng> CREATOR = new Parcelable.Creator<LatLng>() {
@@ -230,20 +189,16 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
         }
     };
 
-    // ===========================================================
-    // Methods
-    // ===========================================================
-
     /**
      * @return distance in meters
      * @see <a href="http://www.geocities.com/DrChengalva/GPSDistance.html">GPSDistance.html</a>
      */
     public int distanceTo(final ILatLng other) {
 
-        final double a1 = DEG2RAD * this.mLatitudeE6 / 1E6;
-        final double a2 = DEG2RAD * this.mLongitudeE6 / 1E6;
-        final double b1 = DEG2RAD * other.getLatitudeE6() / 1E6;
-        final double b2 = DEG2RAD * other.getLongitudeE6() / 1E6;
+        final double a1 = DEG2RAD * this.latitude;
+        final double a2 = DEG2RAD * this.longitude;
+        final double b1 = DEG2RAD * other.getLatitude();
+        final double b2 = DEG2RAD * other.getLongitude();
 
         final double cosa1 = Math.cos(a1);
         final double cosb1 = Math.cos(b1);
@@ -264,10 +219,10 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
      * @see <a href="http://groups.google.com/group/osmdroid/browse_thread/thread/d22c4efeb9188fe9/bc7f9b3111158dd">discussion</a>
      */
     public double bearingTo(final ILatLng other) {
-        final double lat1 = Math.toRadians(this.mLatitudeE6 / 1E6);
-        final double long1 = Math.toRadians(this.mLongitudeE6 / 1E6);
-        final double lat2 = Math.toRadians(other.getLatitudeE6() / 1E6);
-        final double long2 = Math.toRadians(other.getLongitudeE6() / 1E6);
+        final double lat1 = Math.toRadians(this.latitude);
+        final double long1 = Math.toRadians(this.longitude);
+        final double lat2 = Math.toRadians(other.getLatitude());
+        final double long2 = Math.toRadians(other.getLongitude());
         final double delta_long = long2 - long1;
         final double a = Math.sin(delta_long) * Math.cos(lat2);
         final double b = Math.cos(lat1) * Math.sin(lat2) -
@@ -292,8 +247,8 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
         final float brng = DEG2RAD * aBearingInDegrees;
 
         // get current location in radians
-        final double lat1 = DEG2RAD * getLatitudeE6() / 1E6;
-        final double lon1 = DEG2RAD * getLongitudeE6() / 1E6;
+        final double lat1 = DEG2RAD * getLatitude();
+        final double lon1 = DEG2RAD * getLongitude();
 
         final double lat2 = Math.asin(Math.sin(lat1) * Math.cos(dist) + Math.cos(lat1)
                 * Math.sin(dist) * Math.cos(brng));
@@ -308,21 +263,17 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
     }
 
     public static LatLng fromCenterBetween(final LatLng latLngA, final LatLng latLngB) {
-        return new LatLng((latLngA.getLatitudeE6() + latLngB.getLatitudeE6()) / 2,
-                (latLngA.getLongitudeE6() + latLngB.getLongitudeE6()) / 2);
+        return new LatLng((latLngA.getLatitude() + latLngB.getLatitude()) / 2,
+                (latLngA.getLongitude() + latLngB.getLongitude()) / 2);
     }
 
     public String toDoubleString() {
-        return new StringBuilder().append(this.mLatitudeE6 / 1E6).append(",")
-                .append(this.mLongitudeE6 / 1E6).append(",").append(this.mAltitude).toString();
+        return new StringBuilder().append(this.latitude / 1E6).append(",")
+                .append(this.longitude / 1E6).append(",").append(this.mAltitude).toString();
     }
 
     public String toInvertedDoubleString() {
-        return new StringBuilder().append(this.mLongitudeE6 / 1E6).append(",")
-                .append(this.mLatitudeE6 / 1E6).append(",").append(this.mAltitude).toString();
+        return new StringBuilder().append(this.longitude / 1E6).append(",")
+                .append(this.latitude / 1E6).append(",").append(this.mAltitude).toString();
     }
-
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
 }

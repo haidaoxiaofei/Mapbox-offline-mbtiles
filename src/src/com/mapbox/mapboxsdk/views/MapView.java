@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.*;
 import com.mapbox.mapboxsdk.api.ILatLng;
+import com.mapbox.mapboxsdk.util.BoundingBox;
 import com.mapbox.mapboxsdk.util.LatLng;
 import org.metalev.multitouch.controller.MultiTouchController;
 import org.metalev.multitouch.controller.MultiTouchController.MultiTouchObjectCanvas;
@@ -33,7 +34,6 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.IStyledTileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
-import com.mapbox.mapboxsdk.util.BoundingBoxE6;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.constants.GeoConstants;
 import com.mapbox.mapboxsdk.views.overlay.Overlay;
@@ -118,7 +118,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     private final float[] mRotatePoints = new float[2];
     private final Rect mInvalidateRect = new Rect();
 
-    protected BoundingBoxE6 mScrollableAreaBoundingBox;
+    protected BoundingBox mScrollableAreaBoundingBox;
     protected Rect mScrollableAreaLimit;
 
     // for speed (avoiding allocations)
@@ -245,20 +245,20 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     }
 
     @Override
-    public int getLatitudeSpan() {
-        return this.getBoundingBox().getLatitudeSpanE6();
+    public double getLatitudeSpan() {
+        return this.getBoundingBox().getLatitudeSpan();
     }
 
     @Override
-    public int getLongitudeSpan() {
-        return this.getBoundingBox().getLongitudeSpanE6();
+    public double getLongitudeSpan() {
+        return this.getBoundingBox().getLongitudeSpan();
     }
 
-    public BoundingBoxE6 getBoundingBox() {
+    public BoundingBox getBoundingBox() {
         return getBoundingBox(getWidth(), getHeight());
     }
 
-    public BoundingBoxE6 getBoundingBox(final int pViewWidth, final int pViewHeight) {
+    public BoundingBox getBoundingBox(final int pViewWidth, final int pViewHeight) {
 
         final int world_2 = TileSystem.MapSize(mZoomLevel) / 2;
         final Rect screenRect = getScreenRect(null);
@@ -269,8 +269,8 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         final ILatLng swGeoPoint = TileSystem.PixelXYToLatLong(screenRect.left,
                 screenRect.bottom, mZoomLevel, null);
 
-        return new BoundingBoxE6(neGeoPoint.getLatitudeE6(), neGeoPoint.getLongitudeE6(),
-                swGeoPoint.getLatitudeE6(), swGeoPoint.getLongitudeE6());
+        return new BoundingBox(neGeoPoint.getLatitude(), neGeoPoint.getLongitude(),
+                swGeoPoint.getLatitude(), swGeoPoint.getLongitude());
     }
 
     /**
@@ -356,7 +356,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
             final ILatLng centerGeoPoint = TileSystem.PixelXYToLatLong(getScrollX()
                     + worldSize_current_2, getScrollY() + worldSize_current_2, curZoomLevel, null);
             final Point centerPoint = TileSystem.LatLongToPixelXY(
-                    centerGeoPoint.getLatitudeE6() / 1E6, centerGeoPoint.getLongitudeE6() / 1E6,
+                    centerGeoPoint.getLatitude(), centerGeoPoint.getLongitude(),
                     newZoomLevel, null);
             scrollTo(centerPoint.x - worldSize_new_2, centerPoint.y - worldSize_new_2);
         } else if (newZoomLevel < curZoomLevel) {
@@ -391,27 +391,27 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
      * will always zoom to center of zoom  level 0.
      * Suggestion: Check getScreenRect(null).getHeight() > 0
      */
-    public void zoomToBoundingBox(final BoundingBoxE6 boundingBox) {
-        final BoundingBoxE6 currentBox = getBoundingBox();
+    public void zoomToBoundingBox(final BoundingBox boundingBox) {
+        final BoundingBox currentBox = getBoundingBox();
 
         // Calculated required zoom based on latitude span
         final double maxZoomLatitudeSpan = mZoomLevel == getMaxZoomLevel() ?
-                currentBox.getLatitudeSpanE6() :
-                currentBox.getLatitudeSpanE6() / Math.pow(2, getMaxZoomLevel() - mZoomLevel);
+                currentBox.getLatitudeSpan() :
+                currentBox.getLatitudeSpan() / Math.pow(2, getMaxZoomLevel() - mZoomLevel);
 
         final double requiredLatitudeZoom =
                 getMaxZoomLevel() -
-                        Math.ceil(Math.log(boundingBox.getLatitudeSpanE6() / maxZoomLatitudeSpan) / Math.log(2));
+                        Math.ceil(Math.log(boundingBox.getLatitudeSpan() / maxZoomLatitudeSpan) / Math.log(2));
 
 
         // Calculated required zoom based on longitude span
         final double maxZoomLongitudeSpan = mZoomLevel == getMaxZoomLevel() ?
-                currentBox.getLongitudeSpanE6() :
-                currentBox.getLongitudeSpanE6() / Math.pow(2, getMaxZoomLevel() - mZoomLevel);
+                currentBox.getLongitudeSpan() :
+                currentBox.getLongitudeSpan() / Math.pow(2, getMaxZoomLevel() - mZoomLevel);
 
         final double requiredLongitudeZoom =
                 getMaxZoomLevel() -
-                        Math.ceil(Math.log(boundingBox.getLongitudeSpanE6() / maxZoomLongitudeSpan) / Math.log(2));
+                        Math.ceil(Math.log(boundingBox.getLongitudeSpan() / maxZoomLongitudeSpan) / Math.log(2));
 
 
         // Zoom to boundingBox center, at calculated maximum allowed zoom level
@@ -420,8 +420,8 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
                         requiredLatitudeZoom : requiredLongitudeZoom));
 
         getController().setCenter(
-                new LatLng(boundingBox.getCenter().getLatitudeE6(), boundingBox.getCenter()
-                        .getLongitudeE6()));
+                new LatLng(boundingBox.getCenter().getLatitude(), boundingBox.getCenter()
+                        .getLongitude()));
     }
 
     /**
@@ -574,14 +574,14 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     }
 
     /**
-     * Set the map to limit it's scrollable view to the specified BoundingBoxE6. Note this does not
+     * Set the map to limit it's scrollable view to the specified BoundingBox. Note this does not
      * limit zooming so it will be possible for the user to zoom to an area that is larger than the
      * limited area.
      *
      * @param boundingBox A lat/long bounding box to limit scrolling to, or null to remove any scrolling
      *                    limitations
      */
-    public void setScrollableAreaLimit(BoundingBoxE6 boundingBox) {
+    public void setScrollableAreaLimit(BoundingBox boundingBox) {
         final int worldSize_2 = TileSystem.MapSize(MapViewConstants.MAXIMUM_ZOOMLEVEL) / 2;
 
         mScrollableAreaBoundingBox = boundingBox;
@@ -593,18 +593,18 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         }
 
         // Get NW/upper-left
-        final Point upperLeft = TileSystem.LatLongToPixelXY(boundingBox.getLatNorthE6() / 1E6,
-                boundingBox.getLonWestE6() / 1E6, MapViewConstants.MAXIMUM_ZOOMLEVEL, null);
+        final Point upperLeft = TileSystem.LatLongToPixelXY(boundingBox.getLatNorth(),
+                boundingBox.getLonWest(), MapViewConstants.MAXIMUM_ZOOMLEVEL, null);
         upperLeft.offset(-worldSize_2, -worldSize_2);
 
         // Get SE/lower-right
-        final Point lowerRight = TileSystem.LatLongToPixelXY(boundingBox.getLatSouthE6() / 1E6,
-                boundingBox.getLonEastE6() / 1E6, MapViewConstants.MAXIMUM_ZOOMLEVEL, null);
+        final Point lowerRight = TileSystem.LatLongToPixelXY(boundingBox.getLatSouth(),
+                boundingBox.getLonEast(), MapViewConstants.MAXIMUM_ZOOMLEVEL, null);
         lowerRight.offset(-worldSize_2, -worldSize_2);
         mScrollableAreaLimit = new Rect(upperLeft.x, upperLeft.y, lowerRight.x, lowerRight.y);
     }
 
-    public BoundingBoxE6 getScrollableAreaLimit() {
+    public BoundingBox getScrollableAreaLimit() {
         return mScrollableAreaBoundingBox;
     }
 
@@ -1240,7 +1240,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         private final int offsetX = -worldSize_2;
         private final int offsetY = -worldSize_2;
 
-        private final BoundingBoxE6 mBoundingBoxProjection;
+        private final BoundingBox mBoundingBoxProjection;
         private final int mZoomLevelProjection;
         private final Rect mScreenRectProjection;
         private final Rect mIntrinsicScreenRectProjection;
@@ -1262,7 +1262,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
             return mZoomLevelProjection;
         }
 
-        public BoundingBoxE6 getBoundingBox() {
+        public BoundingBox getBoundingBox() {
             return mBoundingBoxProjection;
         }
 
@@ -1308,8 +1308,8 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         public Point toMapPixels(final ILatLng in, final Point reuse) {
             final Point out = reuse != null ? reuse : new Point();
             TileSystem.LatLongToPixelXY(
-                    in.getLatitudeE6() / 1E6,
-                    in.getLongitudeE6() / 1E6,
+                    in.getLatitude(),
+                    in.getLongitude(),
                     getZoomLevel(), out);
             out.offset(offsetX, offsetY);
             if (Math.abs(out.x - getScrollX()) >
@@ -1335,17 +1335,17 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
          * Performs only the first computationally heavy part of the projection. Call
          * toMapPixelsTranslated to get the final position.
          *
-         * @param latituteE6  the latitute of the point
-         * @param longitudeE6 the longitude of the point
+         * @param latitute  the latitude of the point
+         * @param longitude the longitude of the point
          * @param reuse       just pass null if you do not have a Point to be 'recycled'.
          * @return intermediate value to be stored and passed to toMapPixelsTranslated.
          */
-        public Point toMapPixelsProjected(final int latituteE6, final int longitudeE6,
+        public Point toMapPixelsProjected(final double latitude, final double longitude,
                                           final Point reuse) {
             final Point out = reuse != null ? reuse : new Point();
 
             TileSystem
-                    .LatLongToPixelXY(latituteE6 / 1E6, longitudeE6 / 1E6, MAXIMUM_ZOOMLEVEL, out);
+                    .LatLongToPixelXY(latitude, longitude, MAXIMUM_ZOOMLEVEL, out);
             return out;
         }
 
