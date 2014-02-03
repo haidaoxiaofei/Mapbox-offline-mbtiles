@@ -20,8 +20,6 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -48,7 +46,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
     private final AtomicReference<OnlineTileSourceBase> mTileSource = new AtomicReference<OnlineTileSourceBase>();
 
-    private final INetworkAvailablityCheck mNetworkAvailablityCheck;
+    private final INetworkAvailabilityCheck mNetworkAvailablityCheck;
     private org.osmdroid.views.MapView mapView;
     private boolean highDensity = false;
 
@@ -69,7 +67,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
     public MapTileDownloader(final ITileSource pTileSource,
                              final IFilesystemCache pFilesystemCache,
-                             final INetworkAvailablityCheck pNetworkAvailablityCheck,
+                             final INetworkAvailabilityCheck pNetworkAvailablityCheck,
                              final org.osmdroid.views.MapView mapView) {
         this(pTileSource, pFilesystemCache, pNetworkAvailablityCheck,
                 NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
@@ -79,7 +77,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
     public MapTileDownloader(final ITileSource pTileSource,
                              final IFilesystemCache pFilesystemCache,
-                             final INetworkAvailablityCheck pNetworkAvailablityCheck, int pThreadPoolSize,
+                             final INetworkAvailabilityCheck pNetworkAvailablityCheck, int pThreadPoolSize,
                              int pPendingQueueSize) {
         super(pThreadPoolSize, pPendingQueueSize);
 
@@ -179,7 +177,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 if (mNetworkAvailablityCheck != null
                         && !mNetworkAvailablityCheck.getNetworkAvailable()) {
                     if (DEBUGMODE) {
-                        logger.debug("Skipping " + getName() + " due to NetworkAvailabliltyCheck.");
+                        logger.debug("Skipping " + getName() + " due to NetworkAvailabilityCheck.");
                     }
                     return null;
                 }
