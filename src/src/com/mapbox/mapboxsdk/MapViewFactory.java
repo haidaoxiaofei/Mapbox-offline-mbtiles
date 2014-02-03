@@ -3,15 +3,13 @@ package com.mapbox.mapboxsdk;
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Environment;
-import org.osmdroid.DefaultResourceProxyImpl;
-import org.osmdroid.ResourceProxy;
-import org.osmdroid.tileprovider.MapTileProviderArray;
-import org.osmdroid.tileprovider.modules.IArchiveFile;
-import org.osmdroid.tileprovider.modules.MBTilesFileArchive;
-import org.osmdroid.tileprovider.modules.MapTileFileArchiveProvider;
-import org.osmdroid.tileprovider.modules.MapTileModuleProviderBase;
-import org.osmdroid.tileprovider.tilesource.XYTileSource;
-import org.osmdroid.tileprovider.util.SimpleRegisterReceiver;
+import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
+import com.mapbox.mapboxsdk.tileprovider.modules.IArchiveFile;
+import com.mapbox.mapboxsdk.tileprovider.modules.MBTilesFileArchive;
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileFileArchiveProvider;
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
+import com.mapbox.mapboxsdk.tileprovider.util.SimpleRegisterReceiver;
 
 import java.io.*;
 

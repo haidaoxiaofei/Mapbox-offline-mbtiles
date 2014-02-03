@@ -8,7 +8,7 @@ package microsoft.mappoint;
  *
  */
 
-import org.osmdroid.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.GeoPoint;
 
 import android.graphics.Point;
 
