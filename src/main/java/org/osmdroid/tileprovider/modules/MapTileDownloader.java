@@ -283,8 +283,9 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         }
 
         @Override
-        protected void tileLoaded(final MapTileRequestState pState, final Drawable pDrawable) {
+        protected void tileLoaded(final MapTileRequestState pState, Drawable pDrawable) {
             removeTileFromQueues(pState.getMapTile());
+            pDrawable = mapView.hasTileLoadedListener()? onTileLoaded(pDrawable): pDrawable;
             // don't return the tile because we'll wait for the fs provider to ask for it
             // this prevent flickering when a load of delayed downloads complete for tiles
             // that we might not even be interested in any more
@@ -294,6 +295,11 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 BitmapPool.getInstance().returnDrawableToPool((ReusableBitmapDrawable) pDrawable);
         }
     }
+
+    private Drawable onTileLoaded(Drawable pDrawable) {
+        return mapView.getTileLoadedListener().onTileLoaded(pDrawable);
+    }
+
     private boolean checkThreadControl(){
         for(boolean done: threadControl){
             if(!done) return false;

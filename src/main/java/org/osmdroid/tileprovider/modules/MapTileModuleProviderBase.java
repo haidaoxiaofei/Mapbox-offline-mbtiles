@@ -48,6 +48,7 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
      */
     protected abstract Runnable getTileLoader();
 
+
     /**
      * Returns true if implementation uses a data connection, false otherwise. This value is used to
      * determine if this provider should be skipped if there is no data connection.
