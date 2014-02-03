@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.*;
+import com.mapbox.mapboxforandroid.R;
 import org.metalev.multitouch.controller.MultiTouchController;
 import org.metalev.multitouch.controller.MultiTouchController.MultiTouchObjectCanvas;
 import org.metalev.multitouch.controller.MultiTouchController.PointInfo;
@@ -135,6 +137,9 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 
     private HashSet<String> activeLayers = new HashSet<String>();
     private TilesLoadedListener tilesLoadedListener;
+    TileLoadedListener tileLoadedListener;
+
+
 
     // ===========================================================
     // Constructors
@@ -295,6 +300,10 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         out.set(getScrollX() - getWidth() / 2, getScrollY() - getHeight() / 2, getScrollX()
                 + getWidth() / 2, getScrollY() + getHeight() / 2);
         return out;
+    }
+
+    public boolean hasTileLoadedListener(){
+        return tileLoadedListener!=null;
     }
 
 
@@ -1207,6 +1216,10 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         return tileSource;
     }
 
+    public TileLoadedListener getTileLoadedListener() {
+        return tileLoadedListener;
+    }
+
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================
@@ -1723,6 +1736,15 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     public interface TilesLoadedListener{
         public boolean onTilesLoaded();
     }
+
+    public interface TileLoadedListener{
+        public Drawable onTileLoaded(Drawable pDrawable);
+    }
+
+    public void setOnTileLoadedListener(TileLoadedListener tileLoadedListener){
+        this.tileLoadedListener = tileLoadedListener;
+    }
+
     public void setOnTilesLoadedListener(TilesLoadedListener tilesLoadedListener) {
         this.tilesLoadedListener = tilesLoadedListener;
     }
