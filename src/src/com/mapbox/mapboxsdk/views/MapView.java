@@ -30,7 +30,6 @@ import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.IStyledTileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
@@ -1186,16 +1185,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
                 } catch (final IllegalArgumentException e) {
                     Log.w(TAG, "Invalid tile source specified in layout attributes: " + tileSource);
                 }
-            }
-        }
-
-        if (aAttributeSet != null && tileSource instanceof IStyledTileSource) {
-            final String style = aAttributeSet.getAttributeValue(null, "style");
-            if (style == null) {
-                Log.i(TAG,"Using default style: 1");
-            } else {
-                Log.i(TAG,"Using style specified in layout attributes: " + style);
-                ((IStyledTileSource<?>) tileSource).setStyle(style);
             }
         }
 
