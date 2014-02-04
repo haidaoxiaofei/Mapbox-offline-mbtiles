@@ -1,7 +1,5 @@
 package com.mapbox.mapboxsdk.api;
 
-import com.mapbox.mapboxsdk.views.MapView;
-
 /**
  * An interface that resembles the Google Maps API MapView class
  * and is implemented by the osmdroid {@link MapView} class.

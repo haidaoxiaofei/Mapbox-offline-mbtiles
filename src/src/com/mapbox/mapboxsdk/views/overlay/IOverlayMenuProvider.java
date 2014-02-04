@@ -1,9 +1,8 @@
 package com.mapbox.mapboxsdk.views.overlay;
 
-import com.mapbox.mapboxsdk.views.MapView;
-
 import android.view.Menu;
 import android.view.MenuItem;
+import com.mapbox.mapboxsdk.views.MapView;
 
 public interface IOverlayMenuProvider {
     public boolean onCreateOptionsMenu(final Menu pMenu, final int pMenuIdOffset,

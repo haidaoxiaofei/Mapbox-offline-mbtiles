@@ -10,6 +10,7 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.overlay.Overlay;
 import com.mapbox.mapboxsdk.views.overlay.OverlayItem;
 
@@ -67,12 +68,12 @@ public class Tooltip extends Overlay {
     }
 
     @Override
-    protected void draw(Canvas canvas, com.mapbox.mapboxsdk.views.MapView mapView, boolean shadow) {
+    protected void draw(Canvas canvas, MapView mapView, boolean shadow) {
         if (this.isVisible()) {
             StaticLayout sl = new StaticLayout(text, textPaint,
                     400, Layout.Alignment.ALIGN_CENTER, 1, 1, false);
             sl.draw(canvas);
-            this.mapView = (MapView)mapView;
+            this.mapView = mapView;
             this.calculatePoint();
             this.canvas = canvas;
             paint.setColor(Color.WHITE);

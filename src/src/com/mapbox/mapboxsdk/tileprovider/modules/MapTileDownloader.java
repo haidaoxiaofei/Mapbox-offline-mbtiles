@@ -9,12 +9,12 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import com.mapbox.mapboxsdk.http.HttpClientFactory;
+import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.tileprovider.*;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.BitmapTileSourceBase.LowMemoryException;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.OnlineTileSourceBase;
 import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
-import com.mapbox.mapboxsdk.views.MapView;
 
 import java.io.*;
 import java.net.UnknownHostException;
@@ -37,7 +37,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
     private final AtomicReference<OnlineTileSourceBase> mTileSource = new AtomicReference<OnlineTileSourceBase>();
 
     private final INetworkAvailabilityCheck mNetworkAvailablityCheck;
-    private com.mapbox.mapboxsdk.views.MapView mapView;
+    private MapView mapView;
     private boolean highDensity = false;
 
     private int threadCount = 0;
@@ -58,7 +58,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
     public MapTileDownloader(final ITileSource pTileSource,
                              final IFilesystemCache pFilesystemCache,
                              final INetworkAvailabilityCheck pNetworkAvailablityCheck,
-                             final com.mapbox.mapboxsdk.views.MapView mapView) {
+                             final MapView mapView) {
         this(pTileSource, pFilesystemCache, pNetworkAvailablityCheck,
                 NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
         System.out.println(mapView);

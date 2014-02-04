@@ -5,8 +5,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.api.IMapView;
 
 import android.content.Context;
 import android.graphics.Canvas;

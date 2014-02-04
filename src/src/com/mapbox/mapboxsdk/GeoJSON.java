@@ -2,6 +2,7 @@ package com.mapbox.mapboxsdk;
 
 import android.graphics.Paint;
 import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.views.MapView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +20,7 @@ public class GeoJSON {
      * @return
      * @throws JSONException
      */
-    static void parseString(String jsonString, MapView mv) throws JSONException {
+    public static void parseString(String jsonString, MapView mv) throws JSONException {
         parse(new JSONObject(jsonString), mv);
     }
 
@@ -30,7 +31,7 @@ public class GeoJSON {
      * @param mv a mapview for the overlays to be added to
      * @throws JSONException
      */
-    static void parse(JSONObject json, MapView mv) throws JSONException {
+    public static void parse(JSONObject json, MapView mv) throws JSONException {
         String type = json.optString("type");
         if (type.equals("FeatureCollection")) {
             featureCollectionToLayers(json, mv);
@@ -39,7 +40,7 @@ public class GeoJSON {
         }
     }
 
-    static void featureCollectionToLayers(JSONObject featureCollection, MapView mv) throws JSONException {
+    public static void featureCollectionToLayers(JSONObject featureCollection, MapView mv) throws JSONException {
         JSONArray features = (JSONArray) featureCollection.get("features");
         for (int i = 0; i < features.length(); i++) {
             featureToLayer((JSONObject) features.get(i), mv);
@@ -54,7 +55,7 @@ public class GeoJSON {
      * @param overlays
      * @throws JSONException
      */
-    static void featureToLayer(JSONObject feature, MapView mv) throws JSONException {
+    public static void featureToLayer(JSONObject feature, MapView mv) throws JSONException {
 
         JSONObject properties = (JSONObject) feature.get("properties");
         String title = "";
