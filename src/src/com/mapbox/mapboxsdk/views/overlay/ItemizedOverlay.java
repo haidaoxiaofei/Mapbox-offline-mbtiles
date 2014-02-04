@@ -4,8 +4,8 @@ package com.mapbox.mapboxsdk.views.overlay;
 import java.util.ArrayList;
 
 import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
+import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.overlay.OverlayItem.HotspotPlace;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas.UnsafeCanvasHandler;

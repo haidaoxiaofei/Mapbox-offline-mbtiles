@@ -1,64 +1,100 @@
-// Created by plusminus on 17:45:56 - 25.09.2008
 package com.mapbox.mapboxsdk.views;
 
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.graphics.*;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Handler;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.*;
+import android.widget.Scroller;
+import android.widget.ZoomButtonsController;
+import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
+import com.mapbox.mapboxsdk.GeoJSON;
+import com.mapbox.mapboxsdk.Marker;
+import com.mapbox.mapboxsdk.ResourceProxy;
+import com.mapbox.mapboxsdk.api.ILatLng;
+import com.mapbox.mapboxsdk.api.IMapController;
+import com.mapbox.mapboxsdk.api.IProjection;
+import com.mapbox.mapboxsdk.api.IMapView;
+import com.mapbox.mapboxsdk.constants.MapboxConstants;
+import com.mapbox.mapboxsdk.events.MapListener;
+import com.mapbox.mapboxsdk.events.ScrollEvent;
+import com.mapbox.mapboxsdk.events.ZoomEvent;
+import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
+import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
+import com.mapbox.mapboxsdk.util.BoundingBox;
+import com.mapbox.mapboxsdk.util.GeometryMath;
+import com.mapbox.mapboxsdk.util.constants.GeoConstants;
+import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
+import com.testflightapp.lib.core.Logger;
+import microsoft.mappoint.TileSystem;
+import org.json.JSONException;
+import org.metalev.multitouch.controller.MultiTouchController;
+import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
+import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
+import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.views.overlay.*;
+import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
+
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import android.graphics.drawable.Drawable;
-import android.util.Log;
-import android.view.*;
-import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.util.BoundingBox;
-import com.mapbox.mapboxsdk.util.LatLng;
-import org.metalev.multitouch.controller.MultiTouchController;
-import org.metalev.multitouch.controller.MultiTouchController.MultiTouchObjectCanvas;
-import org.metalev.multitouch.controller.MultiTouchController.PointInfo;
-import org.metalev.multitouch.controller.MultiTouchController.PositionAndScale;
-import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
-import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.api.IMapController;
-import com.mapbox.mapboxsdk.api.IMapView;
-import com.mapbox.mapboxsdk.api.IProjection;
-import com.mapbox.mapboxsdk.events.MapListener;
-import com.mapbox.mapboxsdk.events.ScrollEvent;
-import com.mapbox.mapboxsdk.events.ZoomEvent;
-import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
-import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
-import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
-import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
-import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
-import com.mapbox.mapboxsdk.util.GeometryMath;
-import com.mapbox.mapboxsdk.util.constants.GeoConstants;
-import com.mapbox.mapboxsdk.views.overlay.Overlay;
-import com.mapbox.mapboxsdk.views.overlay.OverlayManager;
-import com.mapbox.mapboxsdk.views.overlay.TilesOverlay;
-import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
-import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
+/**
+ * The MapView class manages all of the content and
+ * state of a single map, including layers, markers,
+ * and interaction code.
+ */
+public class MapView extends ViewGroup implements IMapView,
+        MapViewConstants, MapEventsReceiver, MapboxConstants, MultiTouchController.MultiTouchObjectCanvas<Object> {
+    ////////////
+    // FIELDS //
+    ////////////
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Point;
-import android.graphics.PointF;
-import android.graphics.Rect;
-import android.os.Build;
-import android.os.Handler;
-import android.util.AttributeSet;
-import android.view.GestureDetector.OnGestureListener;
-import android.widget.Scroller;
-import android.widget.ZoomButtonsController;
-import android.widget.ZoomButtonsController.OnZoomListener;
+    /**
+     * The current tile source for the view (to be deprecated soon).
+     */
+    private ITileSource tileSource;
+    /**
+     * The default marker Overlay, automatically added to the view to add markers directly.
+     */
+    private ItemizedIconOverlay<OverlayItem> defaultMarkerOverlay;
+    /**
+     * List linked to the default marker overlay.
+     */
+    private ArrayList<OverlayItem> defaultMarkerList = new ArrayList<OverlayItem>();
+    /**
+     * Overlay for basic map touch events.
+     */
+    private MapEventsOverlay eventsOverlay;
+    /**
+     * A copy of the app context.
+     */
+    private Context context;
+    /**
+     * Whether or not a marker has been placed already.
+     */
+    private boolean firstMarker = true;
 
-import microsoft.mappoint.TileSystem;
+    public final static String EXAMPLE_MAP_ID = "examples.map-z2effxa8";
+    public final static int DEFAULT_TILE_SIZE = 256;
 
-public class MapView extends ViewGroup implements IMapView, MapViewConstants,
-        MultiTouchObjectCanvas<Object> {
 
     // ===========================================================
     // Constants
@@ -132,17 +168,18 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
 
+    //////////////////
+    // CONSTRUCTORS //
+    //////////////////
 
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
-
-
-
+    /**
+     * Constructor for XML layout calls. Should not be used programmatically.
+     * @param context A copy of the app context
+     * @param attrs An AttributeSet object to get extra info from the XML, such as mapbox id or type of baselayer
+     */
     protected MapView(final Context context, final int tileSizePixels,
-                      final ResourceProxy resourceProxy, MapTileProviderBase tileProvider,
-                      final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
+                             final ResourceProxy resourceProxy, MapTileProviderBase tileProvider,
+                             final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
         super(context, attrs);
         mResourceProxy = resourceProxy;
         this.mController = new MapController(this);
@@ -174,38 +211,322 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 
         mGestureDetector = new GestureDetector(context, new MapViewGestureDetectorListener());
         mGestureDetector.setOnDoubleTapListener(new MapViewDoubleClickListener());
+        this.context = context;
+        setURL(EXAMPLE_MAP_ID);
+        eventsOverlay = new MapEventsOverlay(context, this);
+        this.getOverlays().add(eventsOverlay);
+        this.setMultiTouchControls(true);
+        if (attrs!=null){
+            final String mapboxID = attrs.getAttributeValue(null, "mapboxID");
+            if (mapboxID != null) {
+                setURL(mapboxID);
+            }
+        }
     }
 
-    /**
-     * Constructor used by XML layout resource (uses default tile source).
-     */
     public MapView(final Context context, AttributeSet attrs) {
         this(context, 256, new DefaultResourceProxyImpl(context), null, null, attrs);
     }
 
     /**
-     * Standard Constructor.
+     * Default constructor for the view.
+     * @param context A copy of the app context
+     * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
      */
-    public MapView(final Context context, final int tileSizePixels) {
-        this(context, tileSizePixels, new DefaultResourceProxyImpl(context));
+    public MapView(Context context, String URL) {
+        this(context, (AttributeSet) null);
+        setURL(URL);
     }
 
-    public MapView(final Context context, final int tileSizePixels,
-                   final ResourceProxy resourceProxy) {
-        this(context, tileSizePixels, resourceProxy, null);
+    protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileProviderBase aTileProvider) {
+        this(context, tileSizePixels, resourceProxy, aTileProvider, null, null);
+        init(context);
     }
 
-    public MapView(final Context context, final int tileSizePixels,
-                   final ResourceProxy resourceProxy, final MapTileProviderBase aTileProvider) {
-        this(context, tileSizePixels, resourceProxy, aTileProvider, null);
+    ////////////////////
+    // PUBLIC METHODS //
+    ////////////////////
+
+
+    /**
+     * Sets the MapView to use the specified URL.
+     * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
+     */
+
+    public void setURL(String URL) {
+        if (!URL.equals("")) {
+            URL = parseURL(URL);
+            tileSource = new XYTileSource(URL, ResourceProxy.string.online_mode, 0, 24, DEFAULT_TILE_SIZE, ".png", URL);
+            this.setTileSource(tileSource);
+        }
     }
 
-    public MapView(final Context context, final int tileSizePixels,
-                   final ResourceProxy resourceProxy, final MapTileProviderBase aTileProvider,
-                   final Handler tileRequestCompleteHandler) {
-        this(context, tileSizePixels, resourceProxy, aTileProvider, tileRequestCompleteHandler,
-                null);
+    /**
+     * Removes a layer from the list in the MapView.
+     * @param identifier layer name
+     */
+    public void removeLayer(String identifier) {
+
     }
+
+    @Deprecated
+    public void addLayer(String name) {
+        this.switchToLayer(name);
+    }
+
+    /**
+     * Switches the MapView to a layer (tile overlay).
+     * @param name Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
+     */
+    public void switchToLayer(String name) {
+        String URL = parseURL(name);
+        final MapTileProviderBasic tileProvider = (MapTileProviderBasic) this.getTileProvider();
+        final ITileSource tileSource = new XYTileSource(name, null, 1, 16, DEFAULT_TILE_SIZE, ".png", URL);
+        tileProvider.setTileSource(tileSource);
+        this.invalidate();
+    }
+
+    /////////////////////
+    // PRIVATE METHODS //
+    /////////////////////
+
+
+    /**
+     * Parses the passed ID string to use the relevant method.
+     * @param url Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
+     * @return the standard URL to be used by the library
+     **/
+    private String parseURL(String url) {
+        if (url.contains(".json")) {
+            return getURLFromTileJSON(url);
+        } else if (!url.contains("http://") && !url.contains("https://")) {
+            return getURLFromMapBoxID(url);
+        } else if (url.contains(".png")) {
+            return getURLFromImageTemplate(url);
+        } else {
+            throw new IllegalArgumentException("You need to enter either a valid URL, a MapBox id, or a tile URL template");
+        }
+    }
+
+    /**
+     * Method that constructs the view. used in lieu of a constructor.
+     * @param context a copy of the app context
+     */
+    private void init(Context context) {
+        this.context = context;
+        setURL("");
+        eventsOverlay = new MapEventsOverlay(context, this);
+        this.getOverlays().add(eventsOverlay);
+        this.setMultiTouchControls(true);
+    }
+
+    /**
+     * Obtains the name of the application to identify the maps in the filesystem.
+     * @return the name of the app
+     */
+    private String getApplicationName() {
+        return context.getPackageName();
+    }
+
+    /**
+     * Turns a Mapbox ID into a standard URL.
+     * @param mapBoxID the Mapbox ID
+     * @return a standard url that will be used by the MapView
+     */
+    private String getURLFromMapBoxID(String mapBoxID) {
+        if (!mapBoxID.contains(".")) {
+            throw new IllegalArgumentException("Invalid MapBox ID, entered " + mapBoxID);
+        }
+        String completeURL = MAPBOX_BASE_URL + mapBoxID + "/";
+        return completeURL;
+    }
+
+    /**
+     * Turns a URL TileJSON path to the standard URL format used by the MapView.
+     * @param tileJSONURL the tileJSON URL
+     * @return a standard url that will be used by the MapView
+     */
+    private String getURLFromTileJSON(String tileJSONURL) {
+        return tileJSONURL.replace(".json", "/");
+    }
+
+    /**
+     * Gets a local TileMill address and turns it into a URL for the MapView (not yet implemented).
+     * @return a standard url that will be used by the MapView
+     */
+    private String getURLFromTilemill() {
+        return null;
+    }
+
+    /**
+     * Gets a {xyz} image template URL and turns it into a standard URL for the MapView.
+     * @param imageTemplateURL the template URL
+     * @return a standard url that will be used by the MapView
+     */
+    private String getURLFromImageTemplate(String imageTemplateURL) {
+        return imageTemplateURL.replace("/{z}/{x}/{y}.png", "/");
+    }
+
+    /**
+     * Adds a marker to the default marker overlay
+     * @param marker the marker object to be added
+     * @return the marker object
+     */
+
+    public Marker addMarker(Marker marker) {
+        if (firstMarker) {
+            defaultMarkerList.add(marker);
+            setDefaultItemizedOverlay();
+        } else {
+            defaultMarkerOverlay.addItem(marker);
+        }
+        this.invalidate();
+        firstMarker = false;
+        return marker;
+    }
+
+    // TODO: remove
+    public Marker createMarker(final double lat, final double lon,
+                            final String title, final String text) {
+        Marker marker = new Marker(this, title, text, new LatLng(lat, lon));
+        addMarker(marker);
+        return marker;
+    }
+
+    /**
+     * Adds a new ItemizedOverlay to the MapView
+     * @param itemizedOverlay the itemized overlay
+     */
+    public void addItemizedOverlay(ItemizedOverlay<Marker> itemizedOverlay) {
+        this.getOverlays().add(itemizedOverlay);
+
+    }
+
+    /**
+     * Load and parse a GeoJSON file at a given URL. Deprecated method. Use {@link #loadFromGeoJSONURL(String)} or {@link #loadFromGeoJSONString(String)}
+     * @param URL the URL from which to load the GeoJSON file
+     */
+    @Deprecated
+    public void parseFromGeoJSON(String URL) {
+        new JSONBodyGetter().execute(URL);
+    }
+
+    /**
+     * Load and parse a GeoJSON file at a given URL
+     * @param URL the URL from which to load the GeoJSON file
+     */
+    public void loadFromGeoJSONURL(String URL) {
+        new JSONBodyGetter().execute(URL);
+    }
+
+    /**
+     * Load and parse a GeoJSON file at a given URL
+     * @param geoJSON the GeoJSON string to parse
+     */
+    public void loadFromGeoJSONString(String geoJSON) throws JSONException {
+        new JSONBodyGetter().parseGeoJSON(geoJSON);
+    }
+
+
+    /**
+     * Class that generates markers from formats such as GeoJSON
+     */
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
+    public class JSONBodyGetter extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            InputStream is = null;
+            String jsonText = null;
+            try {
+                is = new URL(params[0]).openStream();
+                BufferedReader rd = new BufferedReader(new InputStreamReader(is,
+                        Charset.forName("UTF-8")));
+
+                jsonText = readAll(rd);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return jsonText;
+        }
+
+        @Override
+        protected void onPostExecute(String jsonString) {
+            try {
+                parseGeoJSON(jsonString);
+            } catch (JSONException e) {
+                Logger.w("JSON parsed was invalid. Continuing without it");
+                return;
+            }
+        }
+
+        private String readAll(Reader rd) throws IOException {
+            StringBuilder sb = new StringBuilder();
+            int cp;
+            while ((cp = rd.read()) != -1) {
+                sb.append((char) cp);
+            }
+            return sb.toString();
+        }
+
+        private void parseGeoJSON(String jsonString) throws JSONException {
+            Logger.w("MAPBOX parsing from string");
+            GeoJSON.parseString(jsonString, MapView.this);
+        }
+    }
+
+    /**
+     * Sets the default itemized overlay.
+     */
+    private void setDefaultItemizedOverlay() {
+        defaultMarkerOverlay = new ItemizedIconOverlay<OverlayItem>(
+                defaultMarkerList,
+                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                    Marker currentMarker;
+                    public boolean onItemSingleTapUp(final int index,
+                                                     final OverlayItem item) {
+                        ((Marker) (item)).setTooltipVisible();
+
+                        return true;
+                    }
+                    public boolean onItemLongPress(final int index,
+                                                   final OverlayItem item) {
+                        return true;
+                    }
+                }, new DefaultResourceProxyImpl(context.getApplicationContext()));
+        this.getOverlays().add(defaultMarkerOverlay);
+    }
+
+    /////////////////////////
+    // IMPLEMENTED METHODS //
+    /////////////////////////
+
+    /**
+     * Method coming from OSMDroid's tap handler.
+     * @param p the position where the event occurred.
+     * @return whether the event action is triggered or not
+     */
+    public boolean singleTapUpHelper(ILatLng p) {
+        onTap(p);
+        return true;
+    }
+
+    /**
+     * Method coming from OSMDroid's long tap handler.
+     * @param p the position where the event occurred.
+     * @return whether the event action is triggered or not
+     */
+    public boolean longPressHelper(ILatLng p) {
+        onLongPress(p);
+        return false;
+    }
+
+    public void onLongPress(ILatLng p) {
+    }
+    public void onTap(ILatLng p) {
+    }
+
+
 
     // ===========================================================
     // Getter & Setter
@@ -837,7 +1158,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     public boolean dispatchTouchEvent(final MotionEvent event) {
 
         if (DEBUGMODE) {
-            Log.d(TAG,"dispatchTouchEvent(" + event + ")");
+            Log.d(TAG, "dispatchTouchEvent(" + event + ")");
         }
 
         if (mZoomController.isVisible() && mZoomController.onTouch(this, event)) {
@@ -1041,7 +1362,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     /**
      * Returns true if the safe drawing canvas is being used.
      *
-     * @see {@link ISafeCanvas}
+     * @see {@link com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas}
      */
     public boolean isUsingSafeCanvas() {
         return this.getOverlayManager().isUsingSafeCanvas();
@@ -1050,7 +1371,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     /**
      * Sets whether the safe drawing canvas is being used.
      *
-     * @see {@link ISafeCanvas}
+     * @see {@link com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas}
      */
     public void setUseSafeCanvas(boolean useSafeCanvas) {
         this.getOverlayManager().setUseSafeCanvas(useSafeCanvas);
@@ -1082,7 +1403,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     // ===========================================================
 
     @Override
-    public Object getDraggableObjectAtPoint(final PointInfo pt) {
+    public Object getDraggableObjectAtPoint(final MultiTouchController.PointInfo pt) {
         if (this.isAnimating()) {
             // Zoom animations use the mMultiTouchScale variables to perform their animations so we
             // don't want to step on that.
@@ -1095,12 +1416,12 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     }
 
     @Override
-    public void getPositionAndScale(final Object obj, final PositionAndScale objPosAndScaleOut) {
+    public void getPositionAndScale(final Object obj, final MultiTouchController.PositionAndScale objPosAndScaleOut) {
         objPosAndScaleOut.set(0, 0, true, mMultiTouchScale, false, 0, 0, false, 0);
     }
 
     @Override
-    public void selectObject(final Object obj, final PointInfo pt) {
+    public void selectObject(final Object obj, final MultiTouchController.PointInfo pt) {
         // if obj is null it means we released the pointers
         // if scale is not 1 it means we pinched
         if (obj == null && mMultiTouchScale != 1.0f) {
@@ -1130,8 +1451,8 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     }
 
     @Override
-    public boolean setPositionAndScale(final Object obj, final PositionAndScale aNewObjPosAndScale,
-                                       final PointInfo aTouchPoint) {
+    public boolean setPositionAndScale(final Object obj, final MultiTouchController.PositionAndScale aNewObjPosAndScale,
+                                       final MultiTouchController.PointInfo aTouchPoint) {
         float multiTouchScale = aNewObjPosAndScale.getScale();
         // If we are at the first or last zoom level, prevent pinching/expanding
         if (multiTouchScale > 1 && !canZoomIn()) {
@@ -1401,7 +1722,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         }
     }
 
-    private class MapViewGestureDetectorListener implements OnGestureListener {
+    private class MapViewGestureDetectorListener implements GestureDetector.OnGestureListener {
 
         @Override
         public boolean onDown(final MotionEvent e) {
@@ -1509,7 +1830,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
         }
     }
 
-    private class MapViewZoomListener implements OnZoomListener {
+    private class MapViewZoomListener implements ZoomButtonsController.OnZoomListener {
         @Override
         public void onZoom(final boolean zoomIn) {
             if (zoomIn) {
@@ -1661,5 +1982,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
     public TilesLoadedListener getTilesLoadedListener() {
         return tilesLoadedListener;
     }
+
+
 
 }

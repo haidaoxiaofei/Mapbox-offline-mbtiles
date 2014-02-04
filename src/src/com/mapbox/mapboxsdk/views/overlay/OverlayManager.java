@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.views.overlay.Overlay.Snappable;
 
 import android.graphics.Canvas;
