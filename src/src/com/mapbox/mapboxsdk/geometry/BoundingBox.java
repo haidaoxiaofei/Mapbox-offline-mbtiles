@@ -1,8 +1,8 @@
 // Created by plusminus on 19:06:38 - 25.09.2008
 package com.mapbox.mapboxsdk.geometry;
 
-import static com.mapbox.mapboxsdk.util.MyMath.gudermann;
-import static com.mapbox.mapboxsdk.util.MyMath.gudermannInverse;
+import static com.mapbox.mapboxsdk.util.GeometryMath.gudermann;
+import static com.mapbox.mapboxsdk.util.GeometryMath.gudermannInverse;
 
 import java.io.Serializable;
 import java.util.ArrayList;
