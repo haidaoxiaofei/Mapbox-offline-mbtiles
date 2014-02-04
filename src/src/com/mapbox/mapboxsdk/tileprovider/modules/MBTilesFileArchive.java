@@ -3,7 +3,7 @@ package com.mapbox.mapboxsdk.tileprovider.modules;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import com.mapbox.mapboxsdk.Bounds;
+import com.mapbox.mapboxsdk.geometry.Bounds;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import org.slf4j.Logger;

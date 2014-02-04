@@ -1,7 +1,7 @@
 package com.mapbox.mapboxsdk;
 
 import android.content.Context;
-import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.overlay.OverlayItem;
 

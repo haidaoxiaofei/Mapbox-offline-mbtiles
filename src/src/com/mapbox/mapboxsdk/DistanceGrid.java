@@ -1,6 +1,6 @@
 package com.mapbox.mapboxsdk;
 
-import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 
 /**
  * Created by tmcw on 1/28/14.

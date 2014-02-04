@@ -1,6 +1,7 @@
 package com.mapbox.mapboxsdk.util;
 
 import android.graphics.Point;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 
 /**
  * Proxy class for TileSystem. For coordinate conversions (tile to lat/lon and reverse) TileSystem
@@ -62,7 +63,7 @@ public final class TileSystem {
     }
 
     /**
-     * @see microsoft.mappoint.TileSystem#PixelXYToLatLong(int, int, int, LatLng)
+     * @see microsoft.mappoint.TileSystem#PixelXYToLatLong(int, int, int, com.mapbox.mapboxsdk.geometry.LatLng)
      */
     public static LatLng PixelXYToLatLong(
             final int pixelX, final int pixelY, final int levelOfDetail) {

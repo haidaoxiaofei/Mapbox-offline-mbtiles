@@ -1,5 +1,5 @@
 // Created by plusminus on 21:28:12 - 25.09.2008
-package com.mapbox.mapboxsdk.util;
+package com.mapbox.mapboxsdk.geometry;
 
 import java.io.Serializable;
 

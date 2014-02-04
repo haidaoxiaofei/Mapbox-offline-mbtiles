@@ -2,8 +2,8 @@ package com.mapbox.mapboxsdk.views.util;
 
 import java.util.List;
 
-import com.mapbox.mapboxsdk.util.BoundingBox;
-import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.util.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
 

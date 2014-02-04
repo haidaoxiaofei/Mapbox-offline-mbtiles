@@ -1,7 +1,7 @@
 // Created by plusminus on 00:02:58 - 03.10.2008
 package com.mapbox.mapboxsdk.views.overlay;
 
-import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;

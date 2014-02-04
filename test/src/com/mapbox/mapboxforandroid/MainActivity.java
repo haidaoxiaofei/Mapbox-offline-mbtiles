@@ -13,7 +13,7 @@ import android.widget.Button;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.Marker;
 import com.mapbox.mapboxsdk.Icon;
-import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.testflightapp.lib.TestFlight;
 import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.views.overlay.PathOverlay;

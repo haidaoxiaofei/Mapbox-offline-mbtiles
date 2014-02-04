@@ -8,7 +8,7 @@ package microsoft.mappoint;
  *
  */
 
-import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 
 import android.graphics.Point;
 

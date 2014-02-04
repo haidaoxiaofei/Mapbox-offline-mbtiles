@@ -3,7 +3,7 @@ package com.mapbox.mapboxsdk.views;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.api.IMapController;
-import com.mapbox.mapboxsdk.util.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.views.util.MyMath;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 

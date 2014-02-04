@@ -1,5 +1,5 @@
 // Created by plusminus on 19:06:38 - 25.09.2008
-package com.mapbox.mapboxsdk.util;
+package com.mapbox.mapboxsdk.geometry;
 
 import static com.mapbox.mapboxsdk.util.MyMath.gudermann;
 import static com.mapbox.mapboxsdk.util.MyMath.gudermannInverse;

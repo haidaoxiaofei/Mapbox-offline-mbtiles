@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk;
+package com.mapbox.mapboxsdk.geometry;
 
 /**
  * Created by Francisco on 30/12/13.

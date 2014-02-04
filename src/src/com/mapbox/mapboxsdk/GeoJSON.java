@@ -1,7 +1,7 @@
 package com.mapbox.mapboxsdk;
 
 import android.graphics.Paint;
-import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import org.json.JSONArray;
 import org.json.JSONException;
