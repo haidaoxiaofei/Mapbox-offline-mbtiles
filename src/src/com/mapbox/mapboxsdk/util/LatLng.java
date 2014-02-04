@@ -18,9 +18,9 @@ public final class LatLng implements ILatLng, MathConstants, GeoConstants, Parce
 
     static final long serialVersionUID = 1L;
 
-    public double longitude;
-    public double latitude;
-    public double altitude;
+    private double longitude;
+    private double latitude;
+    private double altitude;
 
     public LatLng(final double aLatitude, final double aLongitude) {
         this.latitude = aLatitude;
@@ -159,13 +159,11 @@ public final class LatLng implements ILatLng, MathConstants, GeoConstants, Parce
         final double long1 = Math.toRadians(from.longitude);
         final double lat2 = Math.toRadians(to.latitude);
         final double long2 = Math.toRadians(to.longitude);
-        final double delta_long = long2 - long1;
-        final double a = Math.sin(delta_long) * Math.cos(lat2);
-        final double b = Math.cos(lat1) * Math.sin(lat2) -
-                Math.sin(lat1) * Math.cos(lat2) * Math.cos(delta_long);
-        final double bearing = Math.toDegrees(Math.atan2(a, b));
-        final double bearing_normalized = (bearing + 360) % 360;
-        return bearing_normalized;
+        final double deltaLong = long2 - long1;
+        final double a = Math.sin(deltaLong) * Math.cos(lat2);
+        final double b = Math.cos(lat1) * Math.sin(lat2)
+                - Math.sin(lat1) * Math.cos(lat2) * Math.cos(deltaLong);
+        return (Math.toDegrees(Math.atan2(a, b)) + 360) % 360;
     }
 
     /**

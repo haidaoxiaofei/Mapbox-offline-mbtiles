@@ -114,7 +114,7 @@ public class PathOverlay extends Overlay {
     }
 
     public void addPoint(final LatLng aPoint) {
-        addPoint(aPoint.latitude, aPoint.longitude);
+        addPoint(aPoint.getLatitude(), aPoint.getLongitude());
     }
 
     public void addPoint(final double aLatitude, final double aLongitude) {
