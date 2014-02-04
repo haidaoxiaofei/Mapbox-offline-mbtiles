@@ -92,16 +92,10 @@ public class MapView extends ViewGroup implements IMapView,
      */
     private boolean firstMarker = true;
 
-    public final static String EXAMPLE_MAP_ID = "examples.map-z2effxa8";
-    public final static int DEFAULT_TILE_SIZE = 256;
-
-
     // ===========================================================
     // Constants
     // ===========================================================
 
-    private static final double ZOOM_SENSITIVITY = 1.0;
-    private static final double ZOOM_LOG_BASE_INV = 1.0 / Math.log(2.0 / ZOOM_SENSITIVITY);
     private static final String TAG = "MapBox MapView";
     private static Method sMotionEventTransformMethod;
 
@@ -262,19 +256,6 @@ public class MapView extends ViewGroup implements IMapView,
     }
 
     /**
-     * Removes a layer from the list in the MapView.
-     * @param identifier layer name
-     */
-    public void removeLayer(String identifier) {
-
-    }
-
-    @Deprecated
-    public void addLayer(String name) {
-        this.switchToLayer(name);
-    }
-
-    /**
      * Switches the MapView to a layer (tile overlay).
      * @param name Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
      */
@@ -403,14 +384,10 @@ public class MapView extends ViewGroup implements IMapView,
     }
 
     /**
-     * Load and parse a GeoJSON file at a given URL. Deprecated method. Use {@link #loadFromGeoJSONURL(String)} or {@link #loadFromGeoJSONString(String)}
+     * Load and parse a GeoJSON file at a given URL.
+     * Use {@link #loadFromGeoJSONURL(String)} or {@link #loadFromGeoJSONString(String)}
      * @param URL the URL from which to load the GeoJSON file
      */
-    @Deprecated
-    public void parseFromGeoJSON(String URL) {
-        new JSONBodyGetter().execute(URL);
-    }
-
     /**
      * Load and parse a GeoJSON file at a given URL
      * @param URL the URL from which to load the GeoJSON file
@@ -638,8 +615,8 @@ public class MapView extends ViewGroup implements IMapView,
         return mProjection;
     }
 
-    void setMapCenter(final ILatLng aCenter) {
-        getController().animateTo(aCenter);
+    void setCenter(final ILatLng aCenter) {
+        getController().setCenter(aCenter);
     }
 
     public void setTileSource(final ITileSource aTileSource) {
@@ -1981,7 +1958,4 @@ public class MapView extends ViewGroup implements IMapView,
     public TilesLoadedListener getTilesLoadedListener() {
         return tilesLoadedListener;
     }
-
-
-
 }
