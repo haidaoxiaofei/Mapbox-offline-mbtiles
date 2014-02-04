@@ -3,7 +3,7 @@ package com.mapbox.mapboxsdk.tileprovider.modules;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import com.mapbox.mapboxsdk.geometry.Bounds;
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import android.util.Log;
@@ -104,12 +104,12 @@ public class MBTilesFileArchive implements IArchiveFile {
         cursor.moveToFirst();
         return cursor.getString(1);
     }
-    public Bounds getBounds(){
+    public BoundingBox getBounds(){
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'bounds'", null);
         cursor.moveToFirst();
         String boundsString = cursor.getString(1);
         String[] boundsArray = boundsString.split(",");
-        return new Bounds(Double.parseDouble(boundsArray[0]),
+        return new BoundingBox(Double.parseDouble(boundsArray[0]),
                           Double.parseDouble(boundsArray[1]),
                           Double.parseDouble(boundsArray[2]),
                           Double.parseDouble(boundsArray[3]));
