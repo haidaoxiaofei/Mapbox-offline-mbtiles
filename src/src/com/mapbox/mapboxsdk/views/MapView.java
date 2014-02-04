@@ -33,7 +33,7 @@ import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.geometry.GeoConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
-import com.testflightapp.lib.core.Logger;
+import android.util.Log;
 import org.json.JSONException;
 import com.mapbox.mapboxsdk.views.util.MultiTouchController;
 import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
@@ -63,9 +63,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class MapView extends ViewGroup implements IMapView,
         MapViewConstants, MapEventsReceiver, MapboxConstants, MultiTouchController.MultiTouchObjectCanvas<Object> {
-    ////////////
-    // FIELDS //
-    ////////////
 
     /**
      * The current tile source for the view (to be deprecated soon).
@@ -92,16 +89,9 @@ public class MapView extends ViewGroup implements IMapView,
      */
     private boolean firstMarker = true;
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
     private static final String TAG = "MapBox MapView";
     private static Method sMotionEventTransformMethod;
 
-    // ===========================================================
-    // Fields
-    // ===========================================================
 
     /**
      * Current zoom level for map tiles.
@@ -141,7 +131,6 @@ public class MapView extends ViewGroup implements IMapView,
 
     protected MapListener mListener;
 
-    // For rotation
     private float mapOrientation = 0;
     private final Matrix mRotateMatrix = new Matrix();
     private final float[] mRotatePoints = new float[2];
@@ -332,14 +321,6 @@ public class MapView extends ViewGroup implements IMapView,
     }
 
     /**
-     * Gets a local TileMill address and turns it into a URL for the MapView (not yet implemented).
-     * @return a standard url that will be used by the MapView
-     */
-    private String getURLFromTilemill() {
-        return null;
-    }
-
-    /**
      * Gets a {xyz} image template URL and turns it into a standard URL for the MapView.
      * @param imageTemplateURL the template URL
      * @return a standard url that will be used by the MapView
@@ -404,7 +385,6 @@ public class MapView extends ViewGroup implements IMapView,
         new JSONBodyGetter().parseGeoJSON(geoJSON);
     }
 
-
     /**
      * Class that generates markers from formats such as GeoJSON
      */
@@ -432,7 +412,7 @@ public class MapView extends ViewGroup implements IMapView,
             try {
                 parseGeoJSON(jsonString);
             } catch (JSONException e) {
-                Logger.w("JSON parsed was invalid. Continuing without it");
+                Log.w(TAG, "JSON parsed was invalid. Continuing without it");
                 return;
             }
         }
@@ -447,7 +427,7 @@ public class MapView extends ViewGroup implements IMapView,
         }
 
         private void parseGeoJSON(String jsonString) throws JSONException {
-            Logger.w("MAPBOX parsing from string");
+            Log.w(TAG, "MAPBOX parsing from string");
             GeoJSON.parseString(jsonString, MapView.this);
         }
     }
@@ -503,11 +483,6 @@ public class MapView extends ViewGroup implements IMapView,
     public void onTap(ILatLng p) {
     }
 
-
-
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
 
     @Override
     public IMapController getController() {

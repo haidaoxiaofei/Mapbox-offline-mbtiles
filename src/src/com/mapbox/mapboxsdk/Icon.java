@@ -4,8 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
-
-import com.testflightapp.lib.core.Logger;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,10 +63,12 @@ public class Icon {
         protected void onPostExecute(Bitmap bitmap) {
             bitmap.setDensity(120);
             drawable = new BitmapDrawable(bitmap);
-            Logger.w("icon loaded");
+            Log.w(TAG, "icon loaded");
             if (marker != null) {
                 marker.setMarker(drawable);
             }
         }
     }
+
+    private static final String TAG = "Icon";
 }
