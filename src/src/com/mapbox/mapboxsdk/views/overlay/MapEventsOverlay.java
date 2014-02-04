@@ -1,9 +1,8 @@
-package org.osmdroid.bonuspack.overlays;
+package com.mapbox.mapboxsdk.views.overlay;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
-import com.mapbox.mapboxsdk.views.overlay.Overlay;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;

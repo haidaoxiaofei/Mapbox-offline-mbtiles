@@ -35,15 +35,15 @@ import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.testflightapp.lib.core.Logger;
 import org.json.JSONException;
-import org.metalev.multitouch.controller.MultiTouchController;
-import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
+import com.mapbox.mapboxsdk.views.util.MultiTouchController;
+import com.mapbox.mapboxsdk.views.overlay.MapEventsOverlay;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.overlay.*;
-import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
+import com.mapbox.mapboxsdk.views.overlay.MapEventsReceiver;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;

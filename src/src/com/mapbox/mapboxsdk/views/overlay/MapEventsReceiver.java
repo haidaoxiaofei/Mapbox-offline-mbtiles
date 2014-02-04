@@ -1,10 +1,10 @@
-package org.osmdroid.bonuspack.overlays;
+package com.mapbox.mapboxsdk.views.overlay;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
 
 /**
  * Interface for objects that need to handle map events thrown by a MapEventsOverlay. 
- * @see MapEventsOverlay
+ * @see com.mapbox.mapboxsdk.views.overlay.MapEventsOverlay
  * @author M.Kergall
  */
 public interface MapEventsReceiver {

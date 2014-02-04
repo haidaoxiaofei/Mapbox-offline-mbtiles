@@ -1,4 +1,4 @@
-package org.metalev.multitouch.controller;
+package com.mapbox.mapboxsdk.views.util;
 
 /**
  * MultiTouchController.java
