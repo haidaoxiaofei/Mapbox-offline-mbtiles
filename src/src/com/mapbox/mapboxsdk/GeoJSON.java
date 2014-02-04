@@ -6,7 +6,7 @@ import com.mapbox.mapboxsdk.views.MapView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.mapbox.mapboxsdk.views.overlay.*;
+import com.mapbox.mapboxsdk.overlay.*;
 
 /**
  * A GeoJSON parser.

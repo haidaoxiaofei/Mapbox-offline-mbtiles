@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk.views.overlay;
+package com.mapbox.mapboxsdk.overlay;
 
 import java.util.AbstractList;
 import java.util.Iterator;
@@ -7,7 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.api.IMapView;
-import com.mapbox.mapboxsdk.views.overlay.Overlay.Snappable;
+import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
 
 import android.graphics.Canvas;
 import android.graphics.Point;

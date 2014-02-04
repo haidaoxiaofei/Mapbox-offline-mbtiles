@@ -16,8 +16,8 @@ import com.mapbox.mapboxsdk.Icon;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.testflightapp.lib.TestFlight;
 import com.mapbox.mapboxsdk.api.IMapController;
-import com.mapbox.mapboxsdk.views.overlay.PathOverlay;
-import com.mapbox.mapboxsdk.views.overlay.mylocation.MyLocationNewOverlay;
+import com.mapbox.mapboxsdk.overlay.PathOverlay;
+import com.mapbox.mapboxsdk.overlay.mylocation.MyLocationNewOverlay;
 
 public class MainActivity extends Activity {
 	private IMapController mapController;

@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk.views.overlay.compass;
+package com.mapbox.mapboxsdk.overlay.compass;
 
 import android.content.Context;
 import android.hardware.Sensor;

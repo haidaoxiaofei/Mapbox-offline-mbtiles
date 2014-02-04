@@ -1,11 +1,11 @@
 // Created by plusminus on 22:01:11 - 29.09.2008
-package com.mapbox.mapboxsdk.views.overlay.compass;
+package com.mapbox.mapboxsdk.overlay.compass;
 
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.views.overlay.IOverlayMenuProvider;
-import com.mapbox.mapboxsdk.views.overlay.SafeDrawOverlay;
+import com.mapbox.mapboxsdk.overlay.IOverlayMenuProvider;
+import com.mapbox.mapboxsdk.overlay.SafeDrawOverlay;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 

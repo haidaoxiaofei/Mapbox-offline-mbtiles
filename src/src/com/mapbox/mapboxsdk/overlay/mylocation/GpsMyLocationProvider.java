@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk.views.overlay.mylocation;
+package com.mapbox.mapboxsdk.overlay.mylocation;
 
 import com.mapbox.mapboxsdk.util.NetworkLocationIgnorer;
 

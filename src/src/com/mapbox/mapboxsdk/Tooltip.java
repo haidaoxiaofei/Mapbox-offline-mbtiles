@@ -11,8 +11,8 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.views.overlay.Overlay;
-import com.mapbox.mapboxsdk.views.overlay.OverlayItem;
+import com.mapbox.mapboxsdk.overlay.Overlay;
+import com.mapbox.mapboxsdk.overlay.OverlayItem;
 
 public class Tooltip extends Overlay {
 

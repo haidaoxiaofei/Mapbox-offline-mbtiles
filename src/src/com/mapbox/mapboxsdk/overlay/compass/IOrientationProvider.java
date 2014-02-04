@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk.views.overlay.compass;
+package com.mapbox.mapboxsdk.overlay.compass;
 
 
 public interface IOrientationProvider {

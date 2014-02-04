@@ -1,5 +1,5 @@
 // Created by plusminus on 20:32:01 - 27.09.2008
-package com.mapbox.mapboxsdk.views.overlay;
+package com.mapbox.mapboxsdk.overlay;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

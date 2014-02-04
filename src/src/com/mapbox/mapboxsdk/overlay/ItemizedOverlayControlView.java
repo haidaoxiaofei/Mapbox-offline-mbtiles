@@ -1,5 +1,5 @@
 // Created by plusminus on 22:59:38 - 12.09.2008
-package com.mapbox.mapboxsdk.views.overlay;
+package com.mapbox.mapboxsdk.overlay;
 
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;

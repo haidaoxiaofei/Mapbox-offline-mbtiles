@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk.views.overlay;
+package com.mapbox.mapboxsdk.overlay;
 
 import java.util.ArrayList;
 import java.util.List;

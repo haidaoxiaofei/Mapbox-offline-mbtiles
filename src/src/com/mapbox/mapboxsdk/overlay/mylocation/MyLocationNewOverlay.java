@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk.views.overlay.mylocation;
+package com.mapbox.mapboxsdk.overlay.mylocation;
 
 import java.util.LinkedList;
 
@@ -10,9 +10,9 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.views.overlay.IOverlayMenuProvider;
-import com.mapbox.mapboxsdk.views.overlay.Overlay.Snappable;
-import com.mapbox.mapboxsdk.views.overlay.SafeDrawOverlay;
+import com.mapbox.mapboxsdk.overlay.IOverlayMenuProvider;
+import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
+import com.mapbox.mapboxsdk.overlay.SafeDrawOverlay;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;

@@ -36,14 +36,14 @@ import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.testflightapp.lib.core.Logger;
 import org.json.JSONException;
 import com.mapbox.mapboxsdk.views.util.MultiTouchController;
-import com.mapbox.mapboxsdk.views.overlay.MapEventsOverlay;
+import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.views.overlay.*;
-import com.mapbox.mapboxsdk.views.overlay.MapEventsReceiver;
+import com.mapbox.mapboxsdk.overlay.*;
+import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;

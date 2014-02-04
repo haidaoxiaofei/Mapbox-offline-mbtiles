@@ -1,5 +1,5 @@
 // Created by plusminus on 00:02:58 - 03.10.2008
-package com.mapbox.mapboxsdk.views.overlay;
+package com.mapbox.mapboxsdk.overlay;
 
 import com.mapbox.mapboxsdk.geometry.LatLng;
 

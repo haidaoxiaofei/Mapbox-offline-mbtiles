@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk.views.overlay;
+package com.mapbox.mapboxsdk.overlay;
 
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;

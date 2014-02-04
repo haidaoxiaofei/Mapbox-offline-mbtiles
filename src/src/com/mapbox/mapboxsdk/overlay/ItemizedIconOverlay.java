@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk.views.overlay;
+package com.mapbox.mapboxsdk.overlay;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
     public ItemizedIconOverlay(
             final List<Item> pList,
             final Drawable pDefaultMarker,
-            final com.mapbox.mapboxsdk.views.overlay.ItemizedIconOverlay.OnItemGestureListener<Item> pOnItemGestureListener,
+            final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Item> pOnItemGestureListener,
             final ResourceProxy pResourceProxy) {
         super(pDefaultMarker, pResourceProxy);
 
@@ -36,7 +36,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
 
     public ItemizedIconOverlay(
             final List<Item> pList,
-            final com.mapbox.mapboxsdk.views.overlay.ItemizedIconOverlay.OnItemGestureListener<Item> pOnItemGestureListener,
+            final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Item> pOnItemGestureListener,
             final ResourceProxy pResourceProxy) {
         this(pList, pResourceProxy.getDrawable(bitmap.marker_default), pOnItemGestureListener,
                 pResourceProxy);
@@ -45,7 +45,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
     public ItemizedIconOverlay(
             final Context pContext,
             final List<Item> pList,
-            final com.mapbox.mapboxsdk.views.overlay.ItemizedIconOverlay.OnItemGestureListener<Item> pOnItemGestureListener) {
+            final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Item> pOnItemGestureListener) {
         this(pList, new DefaultResourceProxyImpl(pContext).getDrawable(bitmap.marker_default),
                 pOnItemGestureListener, new DefaultResourceProxyImpl(pContext));
     }
