@@ -2,45 +2,33 @@ package com.mapbox.mapboxsdk;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
+import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.testflightapp.lib.core.Logger;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.osmdroid.DefaultResourceProxyImpl;
-import org.osmdroid.ResourceProxy;
-import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
 import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
-import org.osmdroid.tileprovider.MapTileProviderBase;
-import org.osmdroid.tileprovider.MapTileProviderBasic;
-import org.osmdroid.tileprovider.tilesource.ITileSource;
-import org.osmdroid.tileprovider.tilesource.XYTileSource;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapController;
-import org.osmdroid.views.overlay.*;
+import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
+import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.views.overlay.*;
 
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The MapView class manages all of the content and
  * state of a single map, including layers, markers,
  * and interaction code.
  */
-public class MapView extends org.osmdroid.views.MapView
+public class MapView extends com.mapbox.mapboxsdk.views.MapView
         implements MapboxConstants, MapEventsReceiver {
     ////////////
     // FIELDS //
@@ -258,7 +246,7 @@ public class MapView extends org.osmdroid.views.MapView
     // TODO: remove
     public Marker createMarker(final double lat, final double lon,
                             final String title, final String text) {
-        Marker marker = new Marker(this, title, text, new GeoPoint(lat, lon));
+        Marker marker = new Marker(this, title, text, new LatLng(lat, lon));
         addMarker(marker);
         return marker;
     }
@@ -377,7 +365,7 @@ public class MapView extends org.osmdroid.views.MapView
      * @return whether the event action is triggered or not
      */
     @Override
-    public boolean singleTapUpHelper(IGeoPoint p) {
+    public boolean singleTapUpHelper(ILatLng p) {
         onTap(p);
         return true;
     }
@@ -389,14 +377,14 @@ public class MapView extends org.osmdroid.views.MapView
      */
 
     @Override
-    public boolean longPressHelper(IGeoPoint p) {
+    public boolean longPressHelper(ILatLng p) {
         onLongPress(p);
         return false;
     }
 
-    public void onLongPress(IGeoPoint p) {
+    public void onLongPress(ILatLng p) {
     }
-    public void onTap(IGeoPoint p) {
+    public void onTap(ILatLng p) {
     }
 
 

@@ -1,13 +1,8 @@
 package com.mapbox.mapboxsdk;
 
 import android.content.Context;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.overlay.OverlayItem;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.views.overlay.OverlayItem;
 
 /**
  * A Marker object is a visible representation of a point on a Map that has a geographical place.
@@ -22,10 +17,10 @@ public class Marker extends OverlayItem {
      *
      * @param aTitle the title of the marker, in a potential tooltip
      * @param aDescription the description of the marker, in a tooltip
-     * @param aGeoPoint the location of the marker
+     * @param aLatLng the location of the marker
      */
-    public Marker(String aTitle, String aDescription, GeoPoint aGeoPoint) {
-        this(null, aTitle, aDescription, aGeoPoint);
+    public Marker(String aTitle, String aDescription, LatLng aLatLng) {
+        this(null, aTitle, aDescription, aLatLng);
     }
 
     /**
@@ -33,10 +28,10 @@ public class Marker extends OverlayItem {
      * @param mv a mapview
      * @param aTitle the title of the marker, in a potential tooltip
      * @param aDescription the description of the marker, in a tooltip
-     * @param aGeoPoint the location of the marker
+     * @param aLatLng the location of the marker
      */
-    public Marker(MapView mv, String aTitle, String aDescription, GeoPoint aGeoPoint) {
-        super(aTitle, aDescription, aGeoPoint);
+    public Marker(MapView mv, String aTitle, String aDescription, LatLng aLatLng) {
+        super(aTitle, aDescription, aLatLng);
         context = mv.getContext();
         mapView = mv;
         fromMaki("markerstroked");

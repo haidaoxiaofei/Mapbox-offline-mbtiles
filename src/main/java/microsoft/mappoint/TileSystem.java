@@ -8,7 +8,7 @@ package microsoft.mappoint;
  *
  */
 
-import org.osmdroid.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.LatLng;
 
 import android.graphics.Point;
 
@@ -117,12 +117,12 @@ public final class TileSystem {
      * @param pixelX        X coordinate of the point, in pixels
      * @param pixelY        Y coordinate of the point, in pixels
      * @param levelOfDetail Level of detail, from 1 (lowest detail) to 23 (highest detail)
-     * @param reuse         An optional GeoPoint to be recycled, or null to create a new one automatically
+     * @param reuse         An optional LatLng to be recycled, or null to create a new one automatically
      * @return Output parameter receiving the latitude and longitude in degrees.
      */
-    public static GeoPoint PixelXYToLatLong(final int pixelX, final int pixelY,
-                                            final int levelOfDetail, final GeoPoint reuse) {
-        final GeoPoint out = (reuse == null ? new GeoPoint(0, 0) : reuse);
+    public static LatLng PixelXYToLatLong(final int pixelX, final int pixelY,
+                                            final int levelOfDetail, final LatLng reuse) {
+        final LatLng out = (reuse == null ? new LatLng(0, 0) : reuse);
 
         final double mapSize = MapSize(levelOfDetail);
         final double x = (Clip(pixelX, 0, mapSize - 1) / mapSize) - 0.5;
@@ -131,8 +131,8 @@ public final class TileSystem {
         final double latitude = 90 - 360 * Math.atan(Math.exp(-y * 2 * Math.PI)) / Math.PI;
         final double longitude = 360 * x;
 
-        out.setLatitudeE6((int) (latitude * 1E6));
-        out.setLongitudeE6((int) (longitude * 1E6));
+        out.setLatitude(latitude);
+        out.setLongitude(longitude);
         return out;
     }
 

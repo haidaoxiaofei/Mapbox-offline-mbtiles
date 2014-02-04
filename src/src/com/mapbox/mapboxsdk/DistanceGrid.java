@@ -1,6 +1,6 @@
 package com.mapbox.mapboxsdk;
 
-import org.osmdroid.util.GeoPoint;
+import com.mapbox.mapboxsdk.util.LatLng;
 
 /**
  * Created by tmcw on 1/28/14.
@@ -8,7 +8,7 @@ import org.osmdroid.util.GeoPoint;
 public class DistanceGrid {
     private int cellSize;
 
-    public void addObject(Marker marker, GeoPoint point) {
+    public void addObject(Marker marker, LatLng point) {
         int x = getCoord(point.getLongitude());
         int y = getCoord(point.getLatitude());
     }
