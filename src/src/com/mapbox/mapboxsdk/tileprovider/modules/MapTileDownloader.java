@@ -32,15 +32,6 @@ import java.util.concurrent.atomic.AtomicReference;
 public class MapTileDownloader extends MapTileModuleProviderBase {
     private static final String TAG = "Tile downloader";
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
-
     private final IFilesystemCache mFilesystemCache;
 
     private final AtomicReference<OnlineTileSourceBase> mTileSource = new AtomicReference<OnlineTileSourceBase>();
@@ -160,8 +151,8 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         @Override
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {
             threadControl.add(false);
-            int threadIndex = threadControl.size()-1;
-            System.out.println(threadIndex+" set");
+            int threadIndex = threadControl.size() - 1;
+            System.out.println(threadIndex + " set");
             OnlineTileSourceBase tileSource = mTileSource.get();
             if (tileSource == null) {
                 return null;
@@ -182,15 +173,14 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 }
 
                 String tileURLString = tileSource.getTileURLString(tile);
-                if(MapTileDownloader.this.isHighDensity() && isMapBox(tileURLString)){
+                if (MapTileDownloader.this.isHighDensity() && isMapBox(tileURLString)) {
                     tileURLString = tileURLString.replace(".png","@2x.png");
-
                 }
-                if(isMapBox(tileURLString) && tileURLString.contains("https://")){
+                if (isMapBox(tileURLString) && tileURLString.contains("https://")) {
                     tileURLString = tileURLString.replace(".png", ".png?secure");
                 }
                 if (DEBUGMODE) {
-                    Log.d(TAG, "Downloading Maptile from url: " + tileURLString);
+                    Log.d(TAG, "Downloading MapTile from url: " + tileURLString);
                 }
 
                 if (TextUtils.isEmpty(tileURLString)) {
@@ -203,17 +193,13 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
                 while (line.getStatusCode() != 200 && attempts<5) {
                     Log.d(TAG, "Retrying MapTile: " + tile + " HTTP response: " + line);
-
-                    if(tileURLString.contains("mapbox.com")){
-
-                        tileURLString = changeMapBoxSubdomain(tileURLString, attempts);
-                    }
-
                     response = this.makeRequest(tileURLString);
                     line = response.getStatusLine();
                     attempts++;
                 }
-                if(line.getStatusCode() != 200) return null;
+                if (line.getStatusCode() != 200) {
+                    return null;
+                }
 
                 final HttpEntity entity = response.getEntity();
                 if (entity == null) {
@@ -236,9 +222,9 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 }
                 Drawable result = tileSource.getDrawable(byteStream);
                 threadControl.set(threadIndex, true);
-                if(checkThreadControl()) {
+                if (checkThreadControl()) {
                     MapView.TilesLoadedListener listener = mapView.getTilesLoadedListener();
-                    if (listener != null){
+                    if (listener != null) {
                         listener.onTilesLoaded();
                     }
                 }
@@ -271,11 +257,6 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             return URL.contains("mapbox.com");
         }
 
-        private String changeMapBoxSubdomain(String url, int attempts) {
-            String tileURL = url.replace(url.substring(0, 8), "http://"+domainLetters[attempts%(domainLetters.length-1)]);
-            return tileURL;
-        }
-
         private HttpResponse makeRequest(String tileURLString) throws IOException {
             final HttpClient client = HttpClientFactory.createHttpClient();
             final HttpUriRequest head = new HttpGet(tileURLString);
@@ -291,8 +272,9 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             // that we might not even be interested in any more
             pState.getCallback().mapTileRequestCompleted(pState, null);
             // We want to return the Bitmap to the BitmapPool if applicable
-            if (pDrawable instanceof ReusableBitmapDrawable)
+            if (pDrawable instanceof ReusableBitmapDrawable) {
                 BitmapPool.getInstance().returnDrawableToPool((ReusableBitmapDrawable) pDrawable);
+            }
         }
     }
 
@@ -300,9 +282,11 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         return mapView.getTileLoadedListener().onTileLoaded(pDrawable);
     }
 
-    private boolean checkThreadControl(){
-        for(boolean done: threadControl){
-            if(!done) return false;
+    private boolean checkThreadControl() {
+        for (boolean done: threadControl) {
+            if (!done) {
+                return false;
+            }
         }
         threadControl = new ArrayList<Boolean>();
         return true;

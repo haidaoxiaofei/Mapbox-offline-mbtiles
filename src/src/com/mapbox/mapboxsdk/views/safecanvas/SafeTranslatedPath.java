@@ -242,31 +242,37 @@ public class SafeTranslatedPath extends Path {
     @Override
     public void addPath(Path src, float dx, float dy) {
         boolean safePath = src instanceof SafeTranslatedPath;
-        if (!safePath)
+        if (!safePath) {
             src.offset(xOffset, yOffset);
+        }
         super.addPath(src, dx, dy);
-        if (!safePath)
+        if (!safePath) {
             src.offset(-xOffset, -yOffset);
+        }
     }
 
     @Override
     public void addPath(Path src) {
         boolean safePath = src instanceof SafeTranslatedPath;
-        if (!safePath)
+        if (!safePath) {
             src.offset(xOffset, yOffset);
+        }
         super.addPath(src);
-        if (!safePath)
+        if (!safePath) {
             src.offset(-xOffset, -yOffset);
+        }
     }
 
     @Override
     public void addPath(Path src, Matrix matrix) {
         boolean safePath = src instanceof SafeTranslatedPath;
-        if (!safePath)
+        if (!safePath) {
             matrix.preTranslate(xOffset, yOffset);
+        }
         super.addPath(src, matrix);
-        if (!safePath)
+        if (!safePath) {
             matrix.preTranslate(-xOffset, -yOffset);
+        }
     }
 
     @Override
@@ -307,8 +313,9 @@ public class SafeTranslatedPath extends Path {
      * Helper function to convert a Rect to RectF and adjust the values of the Rect by the offsets.
      */
     protected final RectF toOffsetRectF(Rect rect, RectF reuse) {
-        if (reuse == null)
+        if (reuse == null) {
             reuse = new RectF();
+        }
 
         reuse.set(rect.left + xOffset, rect.top + yOffset, rect.right + xOffset, rect.bottom
                 + yOffset);
