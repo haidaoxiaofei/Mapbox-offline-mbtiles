@@ -26,7 +26,7 @@ public class MapBoxTileSource extends OnlineTileSourceBase {
      * <br> <b>Warning, the static method {@link #retrieveMapBoxMapId(android.content.Context)} should have been invoked once before constructor invocation</b>
      */
     public MapBoxTileSource() {
-        super("mbtiles", ResourceProxy.string.base, 1, 20, 256, ".png", mapBoxBaseUrl);
+        super("mbtiles", ResourceProxy.string.mapnik, 1, 20, 256, ".png", mapBoxBaseUrl);
     }
 
     /**

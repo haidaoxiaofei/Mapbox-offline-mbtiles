@@ -48,8 +48,6 @@ public class DefaultResourceProxyImpl implements ResourceProxy, MapViewConstants
         switch (pResId) {
             case mapnik:
                 return "Mapnik";
-            case base:
-                return "OSM base layer";
             case format_distance_meters:
                 return "%s m";
             case format_distance_kilometers:

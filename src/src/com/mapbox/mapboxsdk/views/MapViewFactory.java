@@ -12,7 +12,6 @@ import com.mapbox.mapboxsdk.tileprovider.modules.MapTileFileArchiveProvider;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleRegisterReceiver;
-import com.mapbox.mapboxsdk.views.MapView;
 
 import java.io.*;
 

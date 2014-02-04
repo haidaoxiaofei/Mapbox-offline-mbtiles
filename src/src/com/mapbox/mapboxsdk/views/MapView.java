@@ -102,7 +102,7 @@ public class MapView extends ViewGroup implements IMapView,
 
     private static final double ZOOM_SENSITIVITY = 1.0;
     private static final double ZOOM_LOG_BASE_INV = 1.0 / Math.log(2.0 / ZOOM_SENSITIVITY);
-    private static final String TAG = "OSMD MapView";
+    private static final String TAG = "MapBox MapView";
     private static Method sMotionEventTransformMethod;
 
     // ===========================================================
