@@ -8,7 +8,7 @@ import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import com.mapbox.mapboxsdk.util.TileLooper;
-import com.mapbox.mapboxsdk.util.TileSystem;
+import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;

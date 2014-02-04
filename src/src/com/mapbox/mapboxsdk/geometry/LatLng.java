@@ -4,7 +4,6 @@ package com.mapbox.mapboxsdk.geometry;
 import java.io.Serializable;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.util.constants.GeoConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MathConstants;
 
 import android.location.Location;

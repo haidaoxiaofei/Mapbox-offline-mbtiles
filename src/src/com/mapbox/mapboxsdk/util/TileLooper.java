@@ -1,5 +1,6 @@
 package com.mapbox.mapboxsdk.util;
 
+import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 
 import android.graphics.Canvas;

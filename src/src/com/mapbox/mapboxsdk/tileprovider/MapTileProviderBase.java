@@ -3,13 +3,12 @@ package com.mapbox.mapboxsdk.tileprovider;
 
 import java.util.HashMap;
 
-import microsoft.mappoint.TileSystem;
-
 import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.tile.TileSystem;
 import android.util.Log;
 
 import android.graphics.Bitmap;
