@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk;
+package com.mapbox.mapboxsdk.overlay;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

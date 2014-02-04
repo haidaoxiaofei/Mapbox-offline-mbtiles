@@ -1,6 +1,7 @@
 package com.mapbox.mapboxsdk;
 
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.overlay.Marker;
 
 /**
  * Created by tmcw on 1/28/14.

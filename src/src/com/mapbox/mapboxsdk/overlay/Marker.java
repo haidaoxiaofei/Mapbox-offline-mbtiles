@@ -1,10 +1,8 @@
-package com.mapbox.mapboxsdk;
+package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.Tooltip;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.overlay.OverlayItem;
 
 /**
  * A Marker object is a visible representation of a point on a Map that has a geographical place.
