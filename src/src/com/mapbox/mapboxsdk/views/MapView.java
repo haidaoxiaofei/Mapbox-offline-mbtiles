@@ -13,7 +13,7 @@ import android.view.*;
 import android.widget.Scroller;
 import android.widget.ZoomButtonsController;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
-import com.mapbox.mapboxsdk.GeoJSON;
+import com.mapbox.mapboxsdk.format.GeoJSON;
 import com.mapbox.mapboxsdk.Marker;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.api.ILatLng;

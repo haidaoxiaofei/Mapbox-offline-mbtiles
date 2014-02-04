@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk;
+package com.mapbox.mapboxsdk.format;
 
 import android.graphics.Paint;
 import com.mapbox.mapboxsdk.geometry.LatLng;

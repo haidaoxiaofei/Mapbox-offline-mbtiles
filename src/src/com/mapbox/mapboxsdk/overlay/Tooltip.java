@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk;
+package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,8 +11,6 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.overlay.Overlay;
-import com.mapbox.mapboxsdk.overlay.OverlayItem;
 
 public class Tooltip extends Overlay {
 
