@@ -580,7 +580,7 @@ public class MapView extends ViewGroup implements IMapView,
             // value since that is the same as the shifted center.
             int centerX = this.getScrollX();
             int centerY = this.getScrollY();
-            GeometryMath.getBoundingBoxForRotatatedRectangle(out, centerX, centerY,
+            GeometryMath.getBoundingBoxForRotatedRectangle(out, centerX, centerY,
                     this.getMapOrientation(), out);
         }
         return out;
@@ -922,7 +922,7 @@ public class MapView extends ViewGroup implements IMapView,
         int centerY = this.getScrollY();
 
         if (this.getMapOrientation() != 0)
-            GeometryMath.getBoundingBoxForRotatatedRectangle(mInvalidateRect, centerX, centerY,
+            GeometryMath.getBoundingBoxForRotatedRectangle(mInvalidateRect, centerX, centerY,
                     this.getMapOrientation() + 180, mInvalidateRect);
         mInvalidateRect.offset(width_2, height_2);
 

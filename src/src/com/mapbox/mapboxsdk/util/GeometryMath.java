@@ -10,17 +10,17 @@ public class GeometryMath {
     public static final double DEG2RAD = (Math.PI / 180.0);
     public static final double RAD2DEG = (180.0 / Math.PI);
 
-    public static final Rect getBoundingBoxForRotatatedRectangle(Rect rect, float angle, Rect reuse) {
-        return getBoundingBoxForRotatatedRectangle(rect, rect.centerX(), rect.centerY(), angle,
+    public static final Rect getBoundingBoxForRotatedRectangle(Rect rect, float angle, Rect reuse) {
+        return getBoundingBoxForRotatedRectangle(rect, rect.centerX(), rect.centerY(), angle,
                 reuse);
     }
 
-    public static final Rect getBoundingBoxForRotatatedRectangle(Rect rect, Point centerPoint,
+    public static final Rect getBoundingBoxForRotatedRectangle(Rect rect, Point centerPoint,
                                                                  float angle, Rect reuse) {
-        return getBoundingBoxForRotatatedRectangle(rect, centerPoint.x, centerPoint.y, angle, reuse);
+        return getBoundingBoxForRotatedRectangle(rect, centerPoint.x, centerPoint.y, angle, reuse);
     }
 
-    public static final Rect getBoundingBoxForRotatatedRectangle(Rect rect, int centerX,
+    public static final Rect getBoundingBoxForRotatedRectangle(Rect rect, int centerX,
                                                                  int centerY, float angle, Rect reuse) {
         if (reuse == null)
             reuse = new Rect();
