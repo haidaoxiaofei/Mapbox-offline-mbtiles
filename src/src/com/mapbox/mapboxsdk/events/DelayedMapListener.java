@@ -1,7 +1,6 @@
 package com.mapbox.mapboxsdk.events;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import android.util.Log;
 
 import android.os.Handler;
 
@@ -14,8 +13,6 @@ import android.os.Handler;
  * @author Theodore Hong
  */
 public class DelayedMapListener implements MapListener {
-
-    private static final Logger logger = LoggerFactory.getLogger(DelayedMapListener.class);
 
     /**
      * Default listening delay
@@ -99,8 +96,10 @@ public class DelayedMapListener implements MapListener {
                 wrappedListener.onZoom((ZoomEvent) event);
             } else {
                 // unknown event; discard
-                logger.debug("Unknown event received: " + event);
+                Log.i(TAG, "Unknown event received: " + event);
             }
         }
     }
+
+    private static final String TAG = "DelayedMapListener";
 }

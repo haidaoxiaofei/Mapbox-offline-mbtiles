@@ -12,9 +12,8 @@ import com.mapbox.mapboxsdk.util.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import android.util.Log;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -38,8 +37,6 @@ import android.view.SubMenu;
 public class TilesOverlay
         extends SafeDrawOverlay
         implements IOverlayMenuProvider {
-
-    private static final Logger logger = LoggerFactory.getLogger(TilesOverlay.class);
 
     public static final int MENU_MAP_MODE = getSafeMenuId();
     public static final int MENU_TILE_SOURCE_STARTING_ID =
@@ -119,7 +116,7 @@ public class TilesOverlay
     protected void drawSafe(final ISafeCanvas c, final MapView osmv, final boolean shadow) {
 
         if (DEBUGMODE) {
-            logger.trace("onDraw(" + shadow + ")");
+            Log.i(TAG, "onDraw(" + shadow + ")");
         }
 
         if (shadow) {
@@ -353,7 +350,7 @@ public class TilesOverlay
                 }
                 mLoadingTile = new BitmapDrawable(bitmap);
             } catch (final OutOfMemoryError e) {
-                logger.error("OutOfMemoryError getting loading tile");
+                Log.e(TAG, "OutOfMemoryError getting loading tile");
                 System.gc();
             }
         }
@@ -394,4 +391,6 @@ public class TilesOverlay
     public int getOvershootTileCache() {
         return mOvershootTileCache;
     }
+
+    private static final String TAG = "TilesOverlay";
 }

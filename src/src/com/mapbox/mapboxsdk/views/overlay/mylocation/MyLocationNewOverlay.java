@@ -16,8 +16,8 @@ import com.mapbox.mapboxsdk.views.overlay.SafeDrawOverlay;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import android.util.Log;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -38,7 +38,6 @@ import android.view.MotionEvent;
  */
 public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocationConsumer,
         IOverlayMenuProvider, Snappable {
-    private static final Logger logger = LoggerFactory.getLogger(MyLocationNewOverlay.class);
 
     // ===========================================================
     // Constants
@@ -290,7 +289,7 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
             final double yDiff = y - mMapCoords.y;
             final boolean snap = xDiff * xDiff + yDiff * yDiff < 64;
             if (DEBUGMODE) {
-                logger.debug("snap=" + snap);
+                Log.i(TAG, "snap=" + snap);
             }
             return snap;
         } else {
@@ -542,4 +541,6 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
             return false;
         }
     }
+
+    private static final String TAG = "MyLocationNewOverlay";
 }

@@ -3,8 +3,7 @@ package com.mapbox.mapboxsdk.tileprovider;
 import java.util.LinkedHashMap;
 
 import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import android.util.Log;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,8 +17,6 @@ public class LRUMapTileCache extends LinkedHashMap<MapTile, Drawable>
         void onTileRemoved(MapTile mapTile);
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(LRUMapTileCache.class);
-
     private static final long serialVersionUID = -541142277575493335L;
 
     private int mCapacity;
@@ -32,7 +29,7 @@ public class LRUMapTileCache extends LinkedHashMap<MapTile, Drawable>
 
     public void ensureCapacity(final int aCapacity) {
         if (aCapacity > mCapacity) {
-            logger.info("Tile cache increased from " + mCapacity + " to " + aCapacity);
+            Log.e(TAG, "Tile cache increased from " + mCapacity + " to " + aCapacity);
             mCapacity = aCapacity;
         }
     }
@@ -72,7 +69,7 @@ public class LRUMapTileCache extends LinkedHashMap<MapTile, Drawable>
         if (size() > mCapacity) {
             final MapTile eldest = aEldest.getKey();
             if (DEBUGMODE) {
-                logger.debug("Remove old tile: " + eldest);
+                Log.i(TAG, "Remove old tile: " + eldest);
             }
             remove(eldest);
             // don't return true because we've already removed it
@@ -87,4 +84,6 @@ public class LRUMapTileCache extends LinkedHashMap<MapTile, Drawable>
     public void setTileRemovedListener(TileRemovedListener tileRemovedListener) {
         mTileRemovedListener = tileRemovedListener;
     }
+
+    private static final String TAG = "LRUMapTileCache";
 }
