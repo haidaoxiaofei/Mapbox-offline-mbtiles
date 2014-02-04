@@ -54,9 +54,10 @@ public class BoundingBox implements Parcelable, Serializable, MapViewConstants {
                 (this.mLonEast + this.mLonWest) / 2);
     }
 
-    public int getDiagonalLengthInMeters() {
-        return new LatLng(this.mLatNorth, this.mLonWest).distanceTo(new LatLng(
-                this.mLatSouth, this.mLonEast));
+    public double getDiagonalLengthInMeters() {
+        return LatLng.distanceTo(
+                new LatLng(this.mLatNorth, this.mLonWest),
+                new LatLng(this.mLatSouth, this.mLonEast));
     }
 
     public double getLatNorth() {
@@ -70,6 +71,7 @@ public class BoundingBox implements Parcelable, Serializable, MapViewConstants {
     public double getLonEast() {
         return this.mLonEast;
     }
+
 
     public double getLonWest() {
         return this.mLonWest;

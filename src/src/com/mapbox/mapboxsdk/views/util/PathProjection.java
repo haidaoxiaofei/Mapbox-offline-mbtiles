@@ -45,9 +45,9 @@ public class PathProjection {
                     + TileSystem.getTileSize(),
                     underGeopointTileCoords.y + TileSystem.getTileSize(), null);
             final LatLng neLatLng = TileSystem.PixelXYToLatLong(upperRight.x, upperRight.y,
-                    projection.getZoomLevel(), null);
+                    projection.getZoomLevel());
             final LatLng swLatLng = TileSystem.PixelXYToLatLong(lowerLeft.x, lowerLeft.y,
-                    projection.getZoomLevel(), null);
+                    projection.getZoomLevel());
             final BoundingBox bb = new BoundingBox(neLatLng.getLatitude(),
                     neLatLng.getLongitude(), swLatLng.getLatitude(),
                     swLatLng.getLongitude());

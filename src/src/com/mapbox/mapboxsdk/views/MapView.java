@@ -585,9 +585,9 @@ public class MapView extends ViewGroup implements IMapView,
         screenRect.offset(world_2, world_2);
 
         final ILatLng neGeoPoint = TileSystem.PixelXYToLatLong(screenRect.right, screenRect.top,
-                mZoomLevel, null);
+                mZoomLevel);
         final ILatLng swGeoPoint = TileSystem.PixelXYToLatLong(screenRect.left,
-                screenRect.bottom, mZoomLevel, null);
+                screenRect.bottom, mZoomLevel);
 
         return new BoundingBox(neGeoPoint.getLatitude(), neGeoPoint.getLongitude(),
                 swGeoPoint.getLatitude(), swGeoPoint.getLongitude());
@@ -674,7 +674,7 @@ public class MapView extends ViewGroup implements IMapView,
             final int worldSize_current_2 = TileSystem.MapSize(curZoomLevel) / 2;
             final int worldSize_new_2 = TileSystem.MapSize(newZoomLevel) / 2;
             final ILatLng centerGeoPoint = TileSystem.PixelXYToLatLong(getScrollX()
-                    + worldSize_current_2, getScrollY() + worldSize_current_2, curZoomLevel, null);
+                    + worldSize_current_2, getScrollY() + worldSize_current_2, curZoomLevel);
             final Point centerPoint = TileSystem.LatLongToPixelXY(
                     centerGeoPoint.getLatitude(), centerGeoPoint.getLongitude(),
                     newZoomLevel, null);
@@ -859,8 +859,7 @@ public class MapView extends ViewGroup implements IMapView,
         final int world_2 = TileSystem.MapSize(mZoomLevel) / 2;
         final Rect screenRect = getScreenRect(null);
         screenRect.offset(world_2, world_2);
-        return TileSystem.PixelXYToLatLong(screenRect.centerX(), screenRect.centerY(), mZoomLevel,
-                null);
+        return TileSystem.PixelXYToLatLong(screenRect.centerX(), screenRect.centerY(), mZoomLevel);
     }
 
     public ResourceProxy getResourceProxy() {
@@ -1598,7 +1597,7 @@ public class MapView extends ViewGroup implements IMapView,
         public ILatLng fromPixels(final float x, final float y) {
             final Rect screenRect = getIntrinsicScreenRect();
             return TileSystem.PixelXYToLatLong(screenRect.left + (int) x + worldSize_2,
-                    screenRect.top + (int) y + worldSize_2, mZoomLevelProjection, null);
+                    screenRect.top + (int) y + worldSize_2, mZoomLevelProjection);
         }
 
         public Point fromMapPixels(final int x, final int y, final Point reuse) {

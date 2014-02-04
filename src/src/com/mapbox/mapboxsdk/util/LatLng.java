@@ -12,10 +12,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * @author Nicolas Gramlich
- * @author Theodore Hong
+ * An immutable latitude, longitude point. Coordinates are stored as WGS84 degrees.
  */
-public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable, Serializable, Cloneable {
+public final class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable, Serializable, Cloneable {
 
     static final long serialVersionUID = 1L;
 
@@ -44,63 +43,10 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
         this.altitude = aLatLng.altitude;
     }
 
-    public static LatLng fromDoubleString(final String s, final char spacer) {
-        final int spacerPos1 = s.indexOf(spacer);
-        final int spacerPos2 = s.indexOf(spacer, spacerPos1 + 1);
-
-        if (spacerPos2 == -1) {
-            return new LatLng(
-                    (int) (Double.parseDouble(s.substring(0, spacerPos1)) * 1E6),
-                    (int) (Double.parseDouble(s.substring(spacerPos1 + 1, s.length())) * 1E6));
-        } else {
-            return new LatLng(
-                    (int) (Double.parseDouble(s.substring(0, spacerPos1)) * 1E6),
-                    (int) (Double.parseDouble(s.substring(spacerPos1 + 1, spacerPos2)) * 1E6),
-                    (int) Double.parseDouble(s.substring(spacerPos2 + 1, s.length())));
-        }
-    }
-
-    public static LatLng fromInvertedDoubleString(final String s, final char spacer) {
-        final int spacerPos1 = s.indexOf(spacer);
-        final int spacerPos2 = s.indexOf(spacer, spacerPos1 + 1);
-
-        if (spacerPos2 == -1) {
-            return new LatLng(
-                    (int) (Double.parseDouble(s.substring(spacerPos1 + 1, s.length())) * 1E6),
-                    (int) (Double.parseDouble(s.substring(0, spacerPos1)) * 1E6));
-        } else {
-            return new LatLng(
-                    (int) (Double.parseDouble(s.substring(spacerPos1 + 1, spacerPos2)) * 1E6),
-                    (int) (Double.parseDouble(s.substring(0, spacerPos1)) * 1E6),
-                    (int) Double.parseDouble(s.substring(spacerPos2 + 1, s.length())));
-
-        }
-    }
-
-    public static LatLng fromIntString(final String s) {
-        final int commaPos1 = s.indexOf(',');
-        final int commaPos2 = s.indexOf(',', commaPos1 + 1);
-
-        if (commaPos2 == -1) {
-            return new LatLng(
-                    Integer.parseInt(s.substring(0, commaPos1)),
-                    Integer.parseInt(s.substring(commaPos1 + 1, s.length())));
-        } else {
-            return new LatLng(
-                    Integer.parseInt(s.substring(0, commaPos1)),
-                    Integer.parseInt(s.substring(commaPos1 + 1, commaPos2)),
-                    Integer.parseInt(s.substring(commaPos2 + 1, s.length()))
-            );
-        }
-    }
-
-
-    @Override
     public double getLongitude() {
         return this.longitude;
     }
 
-    @Override
     public double getLatitude() {
         return this.latitude;
     }
@@ -109,26 +55,15 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
         return this.altitude;
     }
 
-    public void setLongitude(final double aLongitude) {
-        this.longitude = aLongitude;
-    }
-
-    public void setLatitude(final double aLatitude) {
-        this.latitude = aLatitude;
-    }
-
-    public void setAltitude(final double aAltitude) {
-        this.altitude = aAltitude;
-    }
-
     @Override
-    public Object clone() {
+    public LatLng clone() {
         return new LatLng(this.latitude, this.longitude);
     }
 
     @Override
     public String toString() {
-        return new StringBuilder().append(this.latitude)
+        return new StringBuilder()
+                .append(this.latitude)
                 .append(",")
                 .append(this.longitude)
                 .append(",")
@@ -156,9 +91,10 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
         return (int) (37.0 * (17.0 * latitude * 1E6d + longitude * 1E6d) + altitude);
     }
 
-    // ===========================================================
-    // Parcelable
-    // ===========================================================
+    /**
+     * Write LatLng to parcel.
+     * @param in
+     */
     private LatLng(final Parcel in) {
         this.latitude = in.readDouble();
         this.longitude = in.readDouble();
@@ -193,12 +129,12 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
      * @return distance in meters
      * @see <a href="http://www.geocities.com/DrChengalva/GPSDistance.html">GPSDistance.html</a>
      */
-    public int distanceTo(final LatLng other) {
+    public static double distanceTo(final LatLng a, final LatLng b) {
 
-        final double a1 = DEG2RAD * this.latitude;
-        final double a2 = DEG2RAD * this.longitude;
-        final double b1 = DEG2RAD * other.latitude;
-        final double b2 = DEG2RAD * other.longitude;
+        final double a1 = DEG2RAD * a.latitude;
+        final double a2 = DEG2RAD * a.longitude;
+        final double b1 = DEG2RAD * b.latitude;
+        final double b2 = DEG2RAD * b.longitude;
 
         final double cosa1 = Math.cos(a1);
         final double cosb1 = Math.cos(b1);
@@ -211,18 +147,18 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
 
         final double tt = Math.acos(t1 + t2 + t3);
 
-        return (int) (RADIUS_EARTH_METERS * tt);
+        return RADIUS_EARTH_METERS * tt;
     }
 
     /**
      * @return bearing in degrees
      * @see <a href="http://groups.google.com/group/osmdroid/browse_thread/thread/d22c4efeb9188fe9/bc7f9b3111158dd">discussion</a>
      */
-    public double bearingTo(final LatLng other) {
-        final double lat1 = Math.toRadians(this.latitude);
-        final double long1 = Math.toRadians(this.longitude);
-        final double lat2 = Math.toRadians(other.latitude);
-        final double long2 = Math.toRadians(other.longitude);
+    public static double bearingTo(final LatLng from, final LatLng to) {
+        final double lat1 = Math.toRadians(from.latitude);
+        final double long1 = Math.toRadians(from.longitude);
+        final double lat2 = Math.toRadians(to.latitude);
+        final double long2 = Math.toRadians(to.longitude);
         final double delta_long = long2 - long1;
         final double a = Math.sin(delta_long) * Math.cos(lat2);
         final double b = Math.cos(lat1) * Math.sin(lat2) -
@@ -265,15 +201,5 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
     public static LatLng fromCenterBetween(final LatLng latLngA, final LatLng latLngB) {
         return new LatLng((latLngA.latitude + latLngB.latitude) / 2,
                 (latLngA.longitude + latLngB.longitude) / 2);
-    }
-
-    public String toDoubleString() {
-        return new StringBuilder().append(this.latitude / 1E6).append(",")
-                .append(this.longitude / 1E6).append(",").append(this.altitude).toString();
-    }
-
-    public String toInvertedDoubleString() {
-        return new StringBuilder().append(this.longitude / 1E6).append(",")
-                .append(this.latitude / 1E6).append(",").append(this.altitude).toString();
     }
 }

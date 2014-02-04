@@ -65,12 +65,12 @@ public final class TileSystem {
      * @see microsoft.mappoint.TileSystem#PixelXYToLatLong(int, int, int, LatLng)
      */
     public static LatLng PixelXYToLatLong(
-            final int pixelX, final int pixelY, final int levelOfDetail, final LatLng reuse) {
+            final int pixelX, final int pixelY, final int levelOfDetail) {
         final int mapSize = MapSize(levelOfDetail);
         return microsoft.mappoint.TileSystem.PixelXYToLatLong(
                 (int) wrap(pixelX, 0, mapSize - 1, mapSize),
                 (int) wrap(pixelY, 0, mapSize - 1, mapSize),
-                levelOfDetail, reuse);
+                levelOfDetail);
     }
 
     /**

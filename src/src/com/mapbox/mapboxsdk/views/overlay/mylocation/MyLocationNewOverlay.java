@@ -63,7 +63,6 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
     private final Point mMapCoords = new Point();
 
     private Location mLocation;
-    private final LatLng mLatLng = new LatLng(0, 0); // for reuse
     private boolean mIsLocationEnabled = false;
     protected boolean mIsFollowing = false; // follow location updates
     protected boolean mDrawAccuracyEnabled = true;
@@ -438,9 +437,7 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
             mMapCoords.offset(-worldSize_2, -worldSize_2);
 
             if (mIsFollowing) {
-                mLatLng.setLatitude(mLocation.getLatitude());
-                mLatLng.setLongitude(mLocation.getLongitude());
-                mMapController.animateTo(mLatLng);
+                mMapController.animateTo(new LatLng(mLocation));
             } else {
                 // Get new drawing bounds
                 this.getMyLocationDrawingBounds(mMapView.getZoomLevel(), mLocation, mMyLocationRect);

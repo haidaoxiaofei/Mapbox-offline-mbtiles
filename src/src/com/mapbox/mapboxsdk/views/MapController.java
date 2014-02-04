@@ -25,14 +25,6 @@ import android.view.animation.ScaleAnimation;
  */
 public class MapController implements IMapController, MapViewConstants {
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
-
     protected final MapView mMapView;
 
     // Zoom animations
@@ -42,10 +34,6 @@ public class MapController implements IMapController, MapViewConstants {
     private ScaleAnimation mZoomOutAnimationOld;
 
     private Animator mCurrentAnimator;
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
 
     public MapController(MapView mapView) {
         mMapView = mapView;
