@@ -21,7 +21,7 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
 
     public double longitude;
     public double latitude;
-    public double mAltitude;
+    public double altitude;
 
     public LatLng(final double aLatitude, final double aLongitude) {
         this.latitude = aLatitude;
@@ -31,7 +31,7 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
     public LatLng(final double aLatitude, final double aLongitude, final double aAltitude) {
         this.latitude = aLatitude;
         this.longitude = aLongitude;
-        this.mAltitude = aAltitude;
+        this.altitude = aAltitude;
     }
 
     public LatLng(final Location aLocation) {
@@ -41,7 +41,7 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
     public LatLng(final LatLng aLatLng) {
         this.latitude = aLatLng.latitude;
         this.longitude = aLatLng.longitude;
-        this.mAltitude = aLatLng.mAltitude;
+        this.altitude = aLatLng.altitude;
     }
 
     public static LatLng fromDoubleString(final String s, final char spacer) {
@@ -106,7 +106,7 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
     }
 
     public double getAltitude() {
-        return this.mAltitude;
+        return this.altitude;
     }
 
     public void setLongitude(final double aLongitude) {
@@ -118,7 +118,7 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
     }
 
     public void setAltitude(final double aAltitude) {
-        this.mAltitude = aAltitude;
+        this.altitude = aAltitude;
     }
 
     @Override
@@ -132,7 +132,7 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
                 .append(",")
                 .append(this.longitude)
                 .append(",")
-                .append(this.mAltitude)
+                .append(this.altitude)
                 .toString();
     }
 
@@ -148,12 +148,12 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
             return false;
         }
         final LatLng rhs = (LatLng) obj;
-        return rhs.latitude == this.latitude && rhs.longitude == this.longitude && rhs.mAltitude == this.mAltitude;
+        return rhs.latitude == this.latitude && rhs.longitude == this.longitude && rhs.altitude == this.altitude;
     }
 
     @Override
     public int hashCode() {
-        return (int) (37.0 * (17.0 * latitude * 1E6d + longitude * 1E6d) + mAltitude);
+        return (int) (37.0 * (17.0 * latitude * 1E6d + longitude * 1E6d) + altitude);
     }
 
     // ===========================================================
@@ -162,7 +162,7 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
     private LatLng(final Parcel in) {
         this.latitude = in.readDouble();
         this.longitude = in.readDouble();
-        this.mAltitude = in.readDouble();
+        this.altitude = in.readDouble();
     }
 
     @Override
@@ -174,7 +174,7 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
     public void writeToParcel(final Parcel out, final int flags) {
         out.writeDouble(latitude);
         out.writeDouble(longitude);
-        out.writeDouble(mAltitude);
+        out.writeDouble(altitude);
     }
 
     public static final Parcelable.Creator<LatLng> CREATOR = new Parcelable.Creator<LatLng>() {
@@ -269,11 +269,11 @@ public class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable,
 
     public String toDoubleString() {
         return new StringBuilder().append(this.latitude / 1E6).append(",")
-                .append(this.longitude / 1E6).append(",").append(this.mAltitude).toString();
+                .append(this.longitude / 1E6).append(",").append(this.altitude).toString();
     }
 
     public String toInvertedDoubleString() {
         return new StringBuilder().append(this.longitude / 1E6).append(",")
-                .append(this.latitude / 1E6).append(",").append(this.mAltitude).toString();
+                .append(this.latitude / 1E6).append(",").append(this.altitude).toString();
     }
 }
