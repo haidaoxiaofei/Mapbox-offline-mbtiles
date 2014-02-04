@@ -7,8 +7,7 @@ import java.util.List;
 
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import android.util.Log;
 
 import android.graphics.drawable.Drawable;
 
@@ -30,8 +29,6 @@ import android.graphics.drawable.Drawable;
 public class MapTileProviderArray extends MapTileProviderBase {
 
     protected final HashMap<MapTile, MapTileRequestState> mWorking;
-
-    private static final Logger logger = LoggerFactory.getLogger(MapTileProviderArray.class);
 
     protected final List<MapTileModuleProviderBase> mTileProviderList;
 
@@ -88,7 +85,7 @@ public class MapTileProviderArray extends MapTileProviderBase {
 
             if (!alreadyInProgress) {
                 if (DEBUG_TILE_PROVIDERS) {
-                    logger.debug("MapTileProviderArray.getMapTile() requested but not in cache, trying from async providers: "
+                    Log.i(TAG, "MapTileProviderArray.getMapTile() requested but not in cache, trying from async providers: "
                             + pTile);
                 }
 
@@ -229,4 +226,6 @@ public class MapTileProviderArray extends MapTileProviderBase {
             }
         }
     }
+
+    private static final String TAG = "MapTileProviderArray";
 }

@@ -1,8 +1,7 @@
 package com.mapbox.mapboxsdk.tileprovider.modules;
 
 import com.mapbox.mapboxsdk.tileprovider.IRegisterReceiver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import android.util.Log;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,8 +10,6 @@ import android.content.IntentFilter;
 import android.os.Environment;
 
 public abstract class MapTileFileStorageProviderBase extends MapTileModuleProviderBase {
-
-    private static final Logger logger = LoggerFactory.getLogger(MapTileFileStorageProviderBase.class);
 
     /**
      * whether the sdcard is mounted read/write
@@ -40,7 +37,7 @@ public abstract class MapTileFileStorageProviderBase extends MapTileModuleProvid
 
     private void checkSdCard() {
         final String state = Environment.getExternalStorageState();
-        logger.info("sdcard state: " + state);
+        Log.i(TAG, "sdcard state: " + state);
         mSdCardAvailable = Environment.MEDIA_MOUNTED.equals(state);
     }
 
@@ -84,4 +81,6 @@ public abstract class MapTileFileStorageProviderBase extends MapTileModuleProvid
             }
         }
     }
+
+    private static final String TAG = "MapTileFileStorageProviderBase";
 }

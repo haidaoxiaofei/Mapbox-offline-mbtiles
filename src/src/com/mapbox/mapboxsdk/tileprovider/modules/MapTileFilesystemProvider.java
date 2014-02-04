@@ -10,8 +10,7 @@ import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.BitmapTileSourceBase.LowMemoryException;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import android.util.Log;
 
 import android.graphics.drawable.Drawable;
 
@@ -24,11 +23,6 @@ import android.graphics.drawable.Drawable;
  */
 public class MapTileFilesystemProvider extends MapTileFileStorageProviderBase {
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
-    private static final Logger logger = LoggerFactory.getLogger(MapTileFilesystemProvider.class);
 
     // ===========================================================
     // Fields
@@ -138,7 +132,7 @@ public class MapTileFilesystemProvider extends MapTileFileStorageProviderBase {
             // if there's no sdcard then don't do anything
             if (!getSdCardAvailable()) {
                 if (DEBUGMODE) {
-                    logger.debug("No sdcard - do nothing for tile: " + tile);
+                    Log.i(TAG, "No sdcard - do nothing for tile: " + tile);
                 }
                 return null;
             }
@@ -159,7 +153,7 @@ public class MapTileFilesystemProvider extends MapTileFileStorageProviderBase {
 
                     if (fileExpired) {
                         if (DEBUGMODE) {
-                            logger.debug("Tile expired: " + tile);
+                            Log.i(TAG, "Tile expired: " + tile);
                         }
                         drawable.setState(new int[]{ExpirableBitmapDrawable.EXPIRED});
                     }
@@ -167,7 +161,7 @@ public class MapTileFilesystemProvider extends MapTileFileStorageProviderBase {
                     return drawable;
                 } catch (final LowMemoryException e) {
                     // low memory so empty the queue
-                    logger.warn("LowMemoryException downloading MapTile: " + tile + " : " + e);
+                    Log.w(TAG, "LowMemoryException downloading MapTile: " + tile + " : " + e);
                     throw new CantContinueException(e);
                 }
             }
@@ -178,4 +172,6 @@ public class MapTileFilesystemProvider extends MapTileFileStorageProviderBase {
 
 
     }
+
+    private static final String TAG = "MapTileFileSystemProvider";
 }

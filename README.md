@@ -38,10 +38,6 @@ The MapBox Android SDK has the following dependencies. All of them are included 
 
 [OSMDroid](https://code.google.com/p/osmdroid/) is an open source project to display OSM maps in Android. It provides a Google Maps for Android-like MapView object in which the map rests. Our fork of this library resides in ```path/to/sdk/src/main```
 
-**slf4j**
-
-OSMDroid needs slf4j to be added to the project when building from source. It's a logging library that is located within the SDK in ```src/main/java/org/osmdroid```
-
 **The SDK**
 
 Our library itself is located in ```path/to/sdk/src/src```
@@ -51,8 +47,7 @@ Our library itself is located in ```path/to/sdk/src/src```
 * Created an Android project in IDEA
 * Go to Import Module... and select the OSMDroid folder
 * Repeat the step with the SDK
-* Go to File-Project Structure-Modules, and add both projects as module dependencies of your app project. 
-* Add **slf4j** like any other library.
+* Go to File-Project Structure-Modules, and add both projects as module dependencies of your app project.
 
 **Resources**
 

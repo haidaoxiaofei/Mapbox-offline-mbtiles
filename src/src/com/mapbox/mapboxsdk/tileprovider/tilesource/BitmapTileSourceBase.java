@@ -10,8 +10,7 @@ import com.mapbox.mapboxsdk.tileprovider.BitmapPool;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
 import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import android.util.Log;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,8 +18,6 @@ import android.graphics.drawable.Drawable;
 
 public abstract class BitmapTileSourceBase implements ITileSource,
         OpenStreetMapTileProviderConstants {
-
-    private static final Logger logger = LoggerFactory.getLogger(BitmapTileSourceBase.class);
 
     private static int globalOrdinal = 0;
 
@@ -101,11 +98,11 @@ public abstract class BitmapTileSourceBase implements ITileSource,
                 try {
                     new File(aFilePath).delete();
                 } catch (final Throwable e) {
-                    logger.error("Error deleting invalid file: " + aFilePath, e);
+                    Log.e(TAG, "Error deleting invalid file: " + aFilePath + "," + e);
                 }
             }
         } catch (final OutOfMemoryError e) {
-            logger.error("OutOfMemoryError loading bitmap: " + aFilePath);
+            Log.e(TAG, "OutOfMemoryError loading bitmap: " + aFilePath);
             System.gc();
         }
         return null;
@@ -137,7 +134,7 @@ public abstract class BitmapTileSourceBase implements ITileSource,
                 return new ReusableBitmapDrawable(bitmap);
             }
         } catch (final OutOfMemoryError e) {
-            logger.error("OutOfMemoryError loading bitmap");
+            Log.e(TAG, "OutOfMemoryError loading bitmap");
             System.gc();
             throw new LowMemoryException(e);
         }
@@ -155,4 +152,6 @@ public abstract class BitmapTileSourceBase implements ITileSource,
             super(pThrowable);
         }
     }
+
+    private static final String TAG = "BitmapTileSourceBase";
 }

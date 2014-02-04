@@ -6,16 +6,13 @@ import android.database.sqlite.SQLiteException;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 
 public class MBTilesFileArchive implements IArchiveFile {
-
-    private static final Logger logger = LoggerFactory.getLogger(MBTilesFileArchive.class);
 
     private final SQLiteDatabase mDatabase;
 
@@ -61,7 +58,7 @@ public class MBTilesFileArchive implements IArchiveFile {
                 return ret;
             }
         } catch (final Throwable e) {
-            logger.warn("Error getting db stream: " + pTile, e);
+            Log.w(TAG, "Error getting db stream: " + pTile, e);
         }
 
         return null;
@@ -117,5 +114,7 @@ public class MBTilesFileArchive implements IArchiveFile {
                           Double.parseDouble(boundsArray[2]),
                           Double.parseDouble(boundsArray[3]));
     }
+
+    private static final String TAG = "MBTilesFileArchive";
 
 }
