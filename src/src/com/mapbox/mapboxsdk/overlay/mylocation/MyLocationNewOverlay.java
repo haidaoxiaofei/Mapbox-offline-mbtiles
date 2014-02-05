@@ -446,16 +446,13 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
                     mMyLocationRect.union(mMyLocationPreviousRect);
                 }
 
-                final int left = mMyLocationRect.left;
-                final int top = mMyLocationRect.top;
-                final int right = mMyLocationRect.right;
-                final int bottom = mMyLocationRect.bottom;
+                final Rect invalidateRect = new Rect(mMyLocationRect);
 
                 // Invalidate the bounds
                 mMapView.post(new Runnable() {
                     @Override
                     public void run() {
-                        mMapView.invalidateMapCoordinates(left, top, right, bottom);
+                        mMapView.invalidateMapCoordinates(invalidateRect);
                     }
                 });
             }

@@ -9,11 +9,19 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.*;
+import android.view.GestureDetector;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Scroller;
 import android.widget.ZoomButtonsController;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.format.GeoJSON;
+import com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay;
+import com.mapbox.mapboxsdk.overlay.ItemizedOverlay;
+import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
+import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.api.ILatLng;
@@ -24,6 +32,10 @@ import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
 import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
+import com.mapbox.mapboxsdk.overlay.Overlay;
+import com.mapbox.mapboxsdk.overlay.OverlayItem;
+import com.mapbox.mapboxsdk.overlay.OverlayManager;
+import com.mapbox.mapboxsdk.overlay.TilesOverlay;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
@@ -35,16 +47,17 @@ import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import org.json.JSONException;
 import com.mapbox.mapboxsdk.views.util.MultiTouchController;
-import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.*;
-import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -90,7 +103,6 @@ public class MapView extends ViewGroup implements IMapView,
 
     private static final String TAG = "MapBox MapView";
     private static Method sMotionEventTransformMethod;
-
 
     /**
      * Current zoom level for map tiles.
@@ -150,10 +162,6 @@ public class MapView extends ViewGroup implements IMapView,
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
     private String identifier = EXAMPLE_MAP_ID;
-
-    //////////////////
-    // CONSTRUCTORS //
-    //////////////////
 
     /**
      * Constructor for XML layout calls. Should not be used programmatically.
@@ -226,16 +234,10 @@ public class MapView extends ViewGroup implements IMapView,
         init(context);
     }
 
-    ////////////////////
-    // PUBLIC METHODS //
-    ////////////////////
-
-
     /**
      * Sets the MapView to use the specified URL.
      * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
      */
-
     public void setURL(String URL) {
         if (!URL.equals("")) {
             URL = parseURL(URL);
@@ -255,11 +257,6 @@ public class MapView extends ViewGroup implements IMapView,
         tileProvider.setTileSource(tileSource);
         this.invalidate();
     }
-
-    /////////////////////
-    // PRIVATE METHODS //
-    /////////////////////
-
 
     /**
      * Parses the passed ID string to use the relevant method.
@@ -455,10 +452,6 @@ public class MapView extends ViewGroup implements IMapView,
         this.getOverlays().add(defaultMarkerOverlay);
     }
 
-    /////////////////////////
-    // IMPLEMENTED METHODS //
-    /////////////////////////
-
     /**
      * Method coming from OSMDroid's tap handler.
      * @param p the position where the event occurred.
@@ -569,11 +562,9 @@ public class MapView extends ViewGroup implements IMapView,
         return out;
     }
 
-    public boolean hasTileLoadedListener(){
-        return tileLoadedListener!=null;
+    public boolean hasTileLoadedListener() {
+        return tileLoadedListener != null;
     }
-
-
 
     /**
      * Get a projection for converting between screen-pixel coordinates and latitude/longitude
@@ -880,15 +871,8 @@ public class MapView extends ViewGroup implements IMapView,
         return mScrollableAreaBoundingBox;
     }
 
-    // ===========================================================
-    // Methods from SuperClass/Interfaces
-    // ===========================================================
-    public void invalidateMapCoordinates(Rect dirty) {
-        invalidateMapCoordinates(dirty.left, dirty.top, dirty.right, dirty.bottom);
-    }
-
-    public void invalidateMapCoordinates(int left, int top, int right, int bottom) {
-        mInvalidateRect.set(left, top, right, bottom);
+    public void invalidateMapCoordinates(final Rect dirty) {
+        mInvalidateRect.set(dirty);
         final int width_2 = this.getWidth() / 2;
         final int height_2 = this.getHeight() / 2;
 
@@ -1243,24 +1227,28 @@ public class MapView extends ViewGroup implements IMapView,
 
             // Adjust if we are outside the scrollable area
             if (scrollableWidth <= width) {
-                if (x - (width / 2) > minX)
+                if (x - (width / 2) > minX) {
                     x = minX + (width / 2);
-                else if (x + (width / 2) < maxX)
+                } else if (x + (width / 2) < maxX) {
                     x = maxX - (width / 2);
-            } else if (x - (width / 2) < minX)
+                }
+            } else if (x - (width / 2) < minX) {
                 x = minX + (width / 2);
-            else if (x + (width / 2) > maxX)
+            } else if (x + (width / 2) > maxX) {
                 x = maxX - (width / 2);
+            }
 
             if (scrollableHeight <= height) {
-                if (y - (height / 2) > minY)
+                if (y - (height / 2) > minY) {
                     y = minY + (height / 2);
-                else if (y + (height / 2) < maxY)
+                } else if (y + (height / 2) < maxY) {
                     y = maxY - (height / 2);
-            } else if (y - (height / 2) < minY)
+                }
+            } else if (y - (height / 2) < minY) {
                 y = minY + (height / 2);
-            else if (y + (height / 2) > maxY)
+            } else if (y + (height / 2) > maxY) {
                 y = maxY - (height / 2);
+            }
         }
         super.scrollTo(x, y);
 
@@ -1425,10 +1413,6 @@ public class MapView extends ViewGroup implements IMapView,
         mListener = ml;
     }
 
-    // ===========================================================
-    // Methods
-    // ===========================================================
-
     private void checkZoomButtons() {
         this.mZoomController.setZoomInEnabled(canZoomIn());
         this.mZoomController.setZoomOutEnabled(canZoomOut());
@@ -1468,10 +1452,6 @@ public class MapView extends ViewGroup implements IMapView,
     public TileLoadedListener getTileLoadedListener() {
         return tileLoadedListener;
     }
-
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
 
     /**
      * A Projection serves to translate between the coordinate system of x/y on-screen pixel
@@ -1574,20 +1554,20 @@ public class MapView extends ViewGroup implements IMapView,
                     in.getLongitude(),
                     getZoomLevel(), out);
             out.offset(offsetX, offsetY);
-            if (Math.abs(out.x - getScrollX()) >
-                    Math.abs(out.x - TileSystem.MapSize(getZoomLevel()) - getScrollX())) {
+            if (Math.abs(out.x - getScrollX())
+                    > Math.abs(out.x - TileSystem.MapSize(getZoomLevel()) - getScrollX())) {
                 out.x -= TileSystem.MapSize(getZoomLevel());
             }
-            if (Math.abs(out.x - getScrollX()) >
-                    Math.abs(out.x + TileSystem.MapSize(getZoomLevel()) - getScrollX())) {
+            if (Math.abs(out.x - getScrollX())
+                    > Math.abs(out.x + TileSystem.MapSize(getZoomLevel()) - getScrollX())) {
                 out.x += TileSystem.MapSize(getZoomLevel());
             }
-            if (Math.abs(out.y - getScrollY()) >
-                    Math.abs(out.y - TileSystem.MapSize(getZoomLevel()) - getScrollY())) {
+            if (Math.abs(out.y - getScrollY())
+                    > Math.abs(out.y - TileSystem.MapSize(getZoomLevel()) - getScrollY())) {
                 out.y -= TileSystem.MapSize(getZoomLevel());
             }
-            if (Math.abs(out.y - getScrollY()) >
-                    Math.abs(out.y + TileSystem.MapSize(getZoomLevel()) - getScrollY())) {
+            if (Math.abs(out.y - getScrollY())
+                    > Math.abs(out.y + TileSystem.MapSize(getZoomLevel()) - getScrollY())) {
                 out.y += TileSystem.MapSize(getZoomLevel());
             }
             return out;
@@ -1696,10 +1676,10 @@ public class MapView extends ViewGroup implements IMapView,
         @Override
         public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX,
                                final float velocityY) {
-            if(mMultiTouchController == null){
+            if (mMultiTouchController == null) {
                 return false;
             }
-            if(mMultiTouchController.postZoom){
+            if (mMultiTouchController.postZoom) {
                 mMultiTouchController.postZoom = false;
                 return false;
             }
@@ -1726,10 +1706,10 @@ public class MapView extends ViewGroup implements IMapView,
         @Override
         public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX,
                                 final float distanceY) {
-            if(mMultiTouchController == null){
+            if (mMultiTouchController == null) {
                 return false;
             }
-            if(mMultiTouchController.postZoom){
+            if (mMultiTouchController.postZoom) {
                 mMultiTouchController.postZoom = false;
                 return false;
             }
@@ -1921,15 +1901,15 @@ public class MapView extends ViewGroup implements IMapView,
         }
     }
 
-    public interface TilesLoadedListener{
+    public interface TilesLoadedListener {
         public boolean onTilesLoaded();
     }
 
-    public interface TileLoadedListener{
+    public interface TileLoadedListener {
         public Drawable onTileLoaded(Drawable pDrawable);
     }
 
-    public void setOnTileLoadedListener(TileLoadedListener tileLoadedListener){
+    public void setOnTileLoadedListener(TileLoadedListener tileLoadedListener) {
         this.tileLoadedListener = tileLoadedListener;
     }
 
