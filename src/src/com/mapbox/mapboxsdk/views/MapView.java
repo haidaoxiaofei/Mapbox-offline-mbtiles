@@ -1696,6 +1696,9 @@ public class MapView extends ViewGroup implements IMapView,
         @Override
         public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX,
                                final float velocityY) {
+            if(mMultiTouchController == null){
+                return false;
+            }
             if(mMultiTouchController.postZoom){
                 mMultiTouchController.postZoom = false;
                 return false;
@@ -1723,6 +1726,9 @@ public class MapView extends ViewGroup implements IMapView,
         @Override
         public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX,
                                 final float distanceY) {
+            if(mMultiTouchController == null){
+                return false;
+            }
             if(mMultiTouchController.postZoom){
                 mMultiTouchController.postZoom = false;
                 return false;
