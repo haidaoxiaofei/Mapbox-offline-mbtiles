@@ -161,6 +161,7 @@ public class MapView extends ViewGroup implements IMapView,
     private HashSet<String> activeLayers = new HashSet<String>();
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
+    private String identifier = EXAMPLE_MAP_ID;
 
     //////////////////
     // CONSTRUCTORS //
@@ -278,6 +279,7 @@ public class MapView extends ViewGroup implements IMapView,
      * @return the standard URL to be used by the library
      **/
     private String parseURL(String url) {
+        identifier = url;
         if (url.contains(".json")) {
             return getURLFromTileJSON(url);
         } else if (!url.contains("http://") && !url.contains("https://")) {
@@ -1621,7 +1623,7 @@ public class MapView extends ViewGroup implements IMapView,
          * Performs only the first computationally heavy part of the projection. Call
          * toMapPixelsTranslated to get the final position.
          *
-         * @param latitute  the latitude of the point
+         * @param latitude  the latitude of the point
          * @param longitude the longitude of the point
          * @param reuse       just pass null if you do not have a Point to be 'recycled'.
          * @return intermediate value to be stored and passed to toMapPixelsTranslated.
@@ -1957,5 +1959,10 @@ public class MapView extends ViewGroup implements IMapView,
 
     public TilesLoadedListener getTilesLoadedListener() {
         return tilesLoadedListener;
+    }
+
+    @Override
+    public String toString() {
+        return "MapView {" + identifier + "}";
     }
 }

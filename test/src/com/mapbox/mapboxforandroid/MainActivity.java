@@ -46,6 +46,7 @@ public class MainActivity extends Activity {
         Marker m = new Marker(mv, "Hello", "World", new LatLng(0f, 0f));
         m.setIcon(new Icon(Icon.Size.l, "bus", "000"));
         mv.addMarker(m);
+        System.out.println(mv);
 
         mv.setOnTilesLoadedListener(new MapView.TilesLoadedListener() {
             @Override
@@ -80,7 +81,7 @@ public class MainActivity extends Activity {
         terBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!currentLayer.equals("terrain"))  {
+                if (!currentLayer.equals("terrain")) {
                     replaceMapView(terrain);
                     currentLayer = "terrain";
                 }
