@@ -150,6 +150,7 @@ public class MapView extends ViewGroup implements IMapView,
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
     private String identifier = EXAMPLE_MAP_ID;
+    private Tooltip tooltip;
 
     //////////////////
     // CONSTRUCTORS //
@@ -205,6 +206,13 @@ public class MapView extends ViewGroup implements IMapView,
                 setURL(mapboxID);
             }
         }
+
+        addTooltip();
+    }
+
+    private void addTooltip() {
+        tooltip = new Tooltip(context, this);
+        addView(tooltip);
     }
 
     public MapView(final Context context, AttributeSet attrs) {
