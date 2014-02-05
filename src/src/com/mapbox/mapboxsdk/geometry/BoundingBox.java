@@ -17,7 +17,7 @@ import android.os.Parcelable;
 /**
  * @author Nicolas Gramlich
  */
-public class BoundingBox implements Parcelable, Serializable, MapViewConstants {
+public final class BoundingBox implements Parcelable, Serializable, MapViewConstants {
 
     // ===========================================================
     // Constants
