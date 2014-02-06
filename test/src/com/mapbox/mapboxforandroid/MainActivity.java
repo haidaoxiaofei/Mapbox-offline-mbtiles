@@ -30,6 +30,8 @@ public class MainActivity extends Activity {
     private String terrain = "examples.map-zgrqqx0w";
     private String currentLayer = "terrain";
 
+    private PathOverlay equator;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,10 @@ public class MainActivity extends Activity {
             }
         });
         mv.setVisibility(View.VISIBLE);
+        equator = new PathOverlay();
+        equator.addPoint(0,-89);
+        equator.addPoint(0,89);
+        mv.getOverlays().add(equator);
     }
 
     private void setButtonListeners() {

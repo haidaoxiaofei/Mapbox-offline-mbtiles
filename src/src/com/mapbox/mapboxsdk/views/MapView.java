@@ -212,7 +212,7 @@ public class MapView extends ViewGroup implements IMapView,
 
     private void addTooltip() {
         tooltip = new Tooltip(context, this);
-        addView(tooltip);
+
     }
 
     public MapView(final Context context, AttributeSet attrs) {
