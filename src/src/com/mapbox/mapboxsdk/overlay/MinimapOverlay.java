@@ -116,19 +116,19 @@ public class MinimapOverlay extends TilesOverlay {
     }
 
     @Override
-    protected void drawSafe(final ISafeCanvas pC, final MapView pOsmv, final boolean shadow) {
+    protected void drawSafe(final ISafeCanvas pC, final MapView mapView, final boolean shadow) {
 
         if (shadow) {
             return;
         }
 
         // Don't draw if we are animating
-        if (pOsmv.isAnimating()) {
+        if (mapView.isAnimating()) {
             return;
         }
 
         // Calculate the half-world size
-        final Projection projection = pOsmv.getProjection();
+        final Projection projection = mapView.getProjection();
         final int zoomLevel = projection.getZoomLevel();
         mWorldSize_2 = TileSystem.MapSize(zoomLevel) / 2;
 

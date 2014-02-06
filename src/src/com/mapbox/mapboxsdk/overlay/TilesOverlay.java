@@ -112,7 +112,7 @@ public class TilesOverlay
     }
 
     @Override
-    protected void drawSafe(final ISafeCanvas c, final MapView osmv, final boolean shadow) {
+    protected void drawSafe(final ISafeCanvas c, final MapView mapView, final boolean shadow) {
 
         if (DEBUGMODE) {
             Log.i(TAG, "onDraw(" + shadow + ")");
@@ -123,7 +123,7 @@ public class TilesOverlay
         }
 
         // Calculate the half-world size
-        final Projection pj = osmv.getProjection();
+        final Projection pj = mapView.getProjection();
         final int zoomLevel = pj.getZoomLevel();
         mWorldSize_2 = TileSystem.MapSize(zoomLevel) >> 1;
 
@@ -150,7 +150,6 @@ public class TilesOverlay
 
         // draw a cross at center in debug mode
         if (DEBUGMODE) {
-            // final LatLng center = osmv.getMapCenter();
             final Point centerPoint = new Point(viewPort.centerX() - mWorldSize_2,
                     viewPort.centerY() - mWorldSize_2);
             c.drawLine(centerPoint.x, centerPoint.y - 9,

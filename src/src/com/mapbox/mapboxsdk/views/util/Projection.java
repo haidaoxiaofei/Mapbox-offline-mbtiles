@@ -31,14 +31,13 @@ import com.mapbox.mapboxsdk.geometry.GeoConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
 
+/**
+ * A geographical project that is used to translate between points
+ * on screen and points on the globe. This uses a Mercator project
+ * scaled to different degrees based on the map's zoom level.
+ */
 public class Projection implements IProjection, GeoConstants {
     private MapView mapView = null;
-
-    private int viewWidth_2;
-    private int viewHeight_2;
-    private int worldSize_2;
-    private final int offsetX = -worldSize_2;
-    private final int offsetY = -worldSize_2;
 
     private final BoundingBox mBoundingBoxProjection;
     private final int mZoomLevelProjection;
@@ -48,10 +47,6 @@ public class Projection implements IProjection, GeoConstants {
     public Projection(MapView mv) {
         super();
         this.mapView = mv;
-
-	    /*
-         * Do some calculations and drag attributes to local variables to save some performance.
-		 */
         mZoomLevelProjection = mapView.getZoomLevel();
         mBoundingBoxProjection = mapView.getBoundingBox();
         mScreenRectProjection = mapView.getScreenRect(null);
@@ -84,10 +79,6 @@ public class Projection implements IProjection, GeoConstants {
 
     public Rect getIntrinsicScreenRect() {
         return mIntrinsicScreenRectProjection;
-    }
-
-    public float getMapOrientation() {
-        return mapView.getMapOrientation();
     }
 
     /**
@@ -123,7 +114,7 @@ public class Projection implements IProjection, GeoConstants {
                 in.getLatitude(),
                 in.getLongitude(),
                 getZoomLevel(), out);
-        out.offset(offsetX, offsetY);
+        out.offset(-worldSize_2(), -worldSize_2());
         if (Math.abs(out.x - mapView.getScrollX())
                 > Math.abs(out.x - TileSystem.MapSize(getZoomLevel()) - mapView.getScrollX())) {
             out.x -= TileSystem.MapSize(getZoomLevel());
@@ -174,7 +165,7 @@ public class Projection implements IProjection, GeoConstants {
         final Point out = reuse != null ? reuse : new Point();
 
         final int zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
-        out.set((in.x >> zoomDifference) + offsetX, (in.y >> zoomDifference) + offsetY);
+        out.set((in.x >> zoomDifference) -worldSize_2(), (in.y >> zoomDifference) - worldSize_2());
         return out;
     }
 
@@ -189,10 +180,10 @@ public class Projection implements IProjection, GeoConstants {
 
         final int zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
 
-        final int x0 = in.left - offsetX << zoomDifference;
-        final int x1 = in.right - offsetX << zoomDifference;
-        final int y0 = in.bottom - offsetY << zoomDifference;
-        final int y1 = in.top - offsetY << zoomDifference;
+        final int x0 = in.left + worldSize_2() << zoomDifference;
+        final int x1 = in.right + worldSize_2() << zoomDifference;
+        final int y0 = in.bottom + worldSize_2() << zoomDifference;
+        final int y1 = in.top + worldSize_2() << zoomDifference;
 
         result.set(Math.min(x0, x1), Math.min(y0, y1), Math.max(x0, x1), Math.max(y0, y1));
         return result;

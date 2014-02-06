@@ -142,9 +142,9 @@ public class ItemizedOverlayWithFocus<Item extends OverlayItem> extends Itemized
     private final Rect mRect = new Rect();
 
     @Override
-    public void draw(final Canvas c, final MapView osmv, final boolean shadow) {
+    public void draw(final Canvas c, final MapView mapView, final boolean shadow) {
 
-        super.draw(c, osmv, shadow);
+        super.draw(c, mapView, shadow);
 
         if (shadow) {
             return;
@@ -162,7 +162,7 @@ public class ItemizedOverlayWithFocus<Item extends OverlayItem> extends Itemized
         }
 
 		/* Calculate and set the bounds of the marker. */
-        osmv.getProjection().toMapPixels(focusedItem.getPoint(), mFocusedScreenCoords);
+        mapView.getProjection().toMapPixels(focusedItem.getPoint(), mFocusedScreenCoords);
 
         markerFocusedBase.copyBounds(mRect);
         mRect.offset(mFocusedScreenCoords.x, mFocusedScreenCoords.y);
@@ -266,7 +266,7 @@ public class ItemizedOverlayWithFocus<Item extends OverlayItem> extends Itemized
 		/*
 		 * Finally draw the marker base. This is done in the end to make it look better.
 		 */
-        Overlay.drawAt(c, markerFocusedBase, mFocusedScreenCoords.x, mFocusedScreenCoords.y, false, osmv.getMapOrientation());
+        Overlay.drawAt(c, markerFocusedBase, mFocusedScreenCoords.x, mFocusedScreenCoords.y, false, mapView.getMapOrientation());
     }
 
     // ===========================================================

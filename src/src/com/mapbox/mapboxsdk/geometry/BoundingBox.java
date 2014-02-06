@@ -1,4 +1,3 @@
-// Created by plusminus on 19:06:38 - 25.09.2008
 package com.mapbox.mapboxsdk.geometry;
 
 import java.io.Serializable;
@@ -7,12 +6,11 @@ import java.util.ArrayList;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
-import android.graphics.PointF;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * @author Nicolas Gramlich
+ * A rectangular geographical area defined in latitude and longitude units.
  */
 public final class BoundingBox implements Parcelable, Serializable, MapViewConstants {
 
@@ -63,10 +61,20 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
         return this.mLonWest;
     }
 
+    /**
+     * Get the absolute distance, in degrees, between the north and
+     * south boundaries of this bounding box
+     * @return
+     */
     public double getLatitudeSpan() {
         return Math.abs(this.mLatNorth - this.mLatSouth);
     }
 
+    /**
+     * Get the absolute distance, in degrees, between the west and
+     * east boundaries of this bounding box
+     * @return
+     */
     public double getLongitudeSpan() {
         return Math.abs(this.mLonEast - this.mLonWest);
     }
@@ -98,6 +106,12 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
         return new BoundingBox(maxLat, maxLon, minLat, minLon);
     }
 
+    /**
+     * Determine whether this bounding box contains a point and the point
+     * does not touch its boundary.
+     * @param pGeoPoint the point which may be contained
+     * @return true, if the point is contained within the box.
+     */
     public boolean contains(final ILatLng pGeoPoint) {
         final double latitude = pGeoPoint.getLatitude();
         final double longitude = pGeoPoint.getLongitude();
