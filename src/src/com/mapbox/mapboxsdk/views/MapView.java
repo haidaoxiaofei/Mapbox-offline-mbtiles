@@ -212,6 +212,7 @@ public class MapView extends ViewGroup implements IMapView,
 
     private void addTooltip() {
         tooltip = new Tooltip(context, this);
+        tooltip.setPosition(new LatLng(50,0));
 
     }
 
@@ -1734,6 +1735,8 @@ public class MapView extends ViewGroup implements IMapView,
         @Override
         public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX,
                                 final float distanceY) {
+            System.out.println("Position: " + tooltip.getX() + "," + tooltip.getY());
+            System.out.println("Scroll: " + tooltip.getScrollX() + "," + tooltip.getScrollY());
             if(mMultiTouchController == null){
                 return false;
             }
