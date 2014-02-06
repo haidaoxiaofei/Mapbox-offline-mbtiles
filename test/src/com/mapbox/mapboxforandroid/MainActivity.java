@@ -142,6 +142,4 @@ public class MainActivity extends Activity {
         //button.setTypeface(tf);
         return button;
     }
-
-
 }

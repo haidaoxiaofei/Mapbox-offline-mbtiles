@@ -31,8 +31,7 @@ import com.mapbox.mapboxsdk.geometry.GeoConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
 
-public class Projection implements IProjection, GeoConstants
-{
+public class Projection implements IProjection, GeoConstants {
     private MapView mapView = null;
 
     private int viewWidth_2;
