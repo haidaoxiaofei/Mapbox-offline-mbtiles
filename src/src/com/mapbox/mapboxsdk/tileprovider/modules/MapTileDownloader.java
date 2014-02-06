@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk.tileprovider.modules;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
+import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -223,7 +224,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 Drawable result = tileSource.getDrawable(byteStream);
                 threadControl.set(threadIndex, true);
                 if (checkThreadControl()) {
-                    MapView.TilesLoadedListener listener = mapView.getTilesLoadedListener();
+                    TilesLoadedListener listener = mapView.getTilesLoadedListener();
                     if (listener != null) {
                         listener.onTilesLoaded();
                     }

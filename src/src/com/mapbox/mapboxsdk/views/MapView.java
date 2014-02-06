@@ -3,7 +3,6 @@ package com.mapbox.mapboxsdk.views;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.*;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -26,7 +25,6 @@ import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.api.IMapController;
-import com.mapbox.mapboxsdk.api.IProjection;
 import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
@@ -42,7 +40,9 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.util.GeometryMath;
-import com.mapbox.mapboxsdk.geometry.GeoConstants;
+import com.mapbox.mapboxsdk.views.util.Projection;
+import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
+import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import org.json.JSONException;
@@ -52,7 +52,6 @@ import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -577,7 +576,7 @@ public class MapView extends ViewGroup implements IMapView,
     @Override
     public Projection getProjection() {
         if (mProjection == null) {
-            mProjection = new Projection();
+            mProjection = new Projection(this);
         }
         return mProjection;
     }
@@ -632,7 +631,7 @@ public class MapView extends ViewGroup implements IMapView,
 
         // snap for all snappables
         final Point snapPoint = new Point();
-        mProjection = new Projection();
+        mProjection = new Projection(this);
         if (this.getOverlayManager().onSnapToItem(getScrollX(), getScrollY(), snapPoint, this)) {
             scrollTo(snapPoint.x, snapPoint.y);
         }
@@ -1269,7 +1268,7 @@ public class MapView extends ViewGroup implements IMapView,
     protected void dispatchDraw(final Canvas c) {
         final long startMs = System.currentTimeMillis();
 
-        mProjection = new Projection();
+        mProjection = new Projection(this);
 
         // Save the current canvas matrix
         c.save();
@@ -1451,207 +1450,6 @@ public class MapView extends ViewGroup implements IMapView,
 
     public TileLoadedListener getTileLoadedListener() {
         return tileLoadedListener;
-    }
-
-    /**
-     * A Projection serves to translate between the coordinate system of x/y on-screen pixel
-     * coordinates and that of latitude/longitude points on the surface of the earth. You obtain a
-     * Projection from MapView.getProjection(). You should not hold on to this object for more than
-     * one draw, since the projection of the map could change. <br />
-     * <br />
-     * <I>Screen coordinates</I> are in the coordinate system of the screen's Canvas. The origin is
-     * in the center of the plane. <I>Screen coordinates</I> are appropriate for using to draw to
-     * the screen.<br />
-     * <br />
-     * <I>Map coordinates</I> are in the coordinate system of the standard Mercator projection. The
-     * origin is in the upper-left corner of the plane. <I>Map coordinates</I> are appropriate for
-     * use in the TileSystem class.<br />
-     * <br />
-     * <I>Intermediate coordinates</I> are used to cache the computationally heavy part of the
-     * projection. They aren't suitable for use until translated into <I>screen coordinates</I> or
-     * <I>map coordinates</I>.
-     *
-     * @author Nicolas Gramlich
-     * @author Manuel Stahl
-     */
-    public class Projection implements IProjection, GeoConstants {
-
-        private final int viewWidth_2 = getWidth() / 2;
-        private final int viewHeight_2 = getHeight() / 2;
-        private final int worldSize_2 = TileSystem.MapSize(mZoomLevel) / 2;
-        private final int offsetX = -worldSize_2;
-        private final int offsetY = -worldSize_2;
-
-        private final BoundingBox mBoundingBoxProjection;
-        private final int mZoomLevelProjection;
-        private final Rect mScreenRectProjection;
-        private final Rect mIntrinsicScreenRectProjection;
-        private final float mMapOrientation;
-
-        private Projection() {
-
-			/*
-             * Do some calculations and drag attributes to local variables to save some performance.
-			 */
-            mZoomLevelProjection = MapView.this.mZoomLevel;
-            mBoundingBoxProjection = MapView.this.getBoundingBox();
-            mScreenRectProjection = MapView.this.getScreenRect(null);
-            mIntrinsicScreenRectProjection = MapView.this.getIntrinsicScreenRect(null);
-            mMapOrientation = MapView.this.getMapOrientation();
-        }
-
-        public int getZoomLevel() {
-            return mZoomLevelProjection;
-        }
-
-        public BoundingBox getBoundingBox() {
-            return mBoundingBoxProjection;
-        }
-
-        public Rect getScreenRect() {
-            return mScreenRectProjection;
-        }
-
-        public Rect getIntrinsicScreenRect() {
-            return mIntrinsicScreenRectProjection;
-        }
-
-        public float getMapOrientation() {
-            return mMapOrientation;
-        }
-
-        /**
-         * Converts <I>screen coordinates</I> to the underlying LatLng.
-         *
-         * @param x
-         * @param y
-         * @return LatLng under x/y.
-         */
-        public ILatLng fromPixels(final float x, final float y) {
-            final Rect screenRect = getIntrinsicScreenRect();
-            return TileSystem.PixelXYToLatLong(screenRect.left + (int) x + worldSize_2,
-                    screenRect.top + (int) y + worldSize_2, mZoomLevelProjection);
-        }
-
-        public Point fromMapPixels(final int x, final int y, final Point reuse) {
-            final Point out = reuse != null ? reuse : new Point();
-            out.set(x - viewWidth_2, y - viewHeight_2);
-            out.offset(getScrollX(), getScrollY());
-            return out;
-        }
-
-        /**
-         * Converts a LatLng to its <I>screen coordinates</I>.
-         *
-         * @param in    the LatLng you want the <I>screen coordinates</I> of
-         * @param reuse just pass null if you do not have a Point to be 'recycled'.
-         * @return the Point containing the <I>screen coordinates</I> of the LatLng passed.
-         */
-        public Point toMapPixels(final ILatLng in, final Point reuse) {
-            final Point out = reuse != null ? reuse : new Point();
-            TileSystem.LatLongToPixelXY(
-                    in.getLatitude(),
-                    in.getLongitude(),
-                    getZoomLevel(), out);
-            out.offset(offsetX, offsetY);
-            if (Math.abs(out.x - getScrollX())
-                    > Math.abs(out.x - TileSystem.MapSize(getZoomLevel()) - getScrollX())) {
-                out.x -= TileSystem.MapSize(getZoomLevel());
-            }
-            if (Math.abs(out.x - getScrollX())
-                    > Math.abs(out.x + TileSystem.MapSize(getZoomLevel()) - getScrollX())) {
-                out.x += TileSystem.MapSize(getZoomLevel());
-            }
-            if (Math.abs(out.y - getScrollY())
-                    > Math.abs(out.y - TileSystem.MapSize(getZoomLevel()) - getScrollY())) {
-                out.y -= TileSystem.MapSize(getZoomLevel());
-            }
-            if (Math.abs(out.y - getScrollY())
-                    > Math.abs(out.y + TileSystem.MapSize(getZoomLevel()) - getScrollY())) {
-                out.y += TileSystem.MapSize(getZoomLevel());
-            }
-            return out;
-        }
-
-        /**
-         * Performs only the first computationally heavy part of the projection. Call
-         * toMapPixelsTranslated to get the final position.
-         *
-         * @param latitude  the latitude of the point
-         * @param longitude the longitude of the point
-         * @param reuse       just pass null if you do not have a Point to be 'recycled'.
-         * @return intermediate value to be stored and passed to toMapPixelsTranslated.
-         */
-        public Point toMapPixelsProjected(final double latitude, final double longitude,
-                                          final Point reuse) {
-            final Point out = reuse != null ? reuse : new Point();
-
-            TileSystem
-                    .LatLongToPixelXY(latitude, longitude, MAXIMUM_ZOOMLEVEL, out);
-            return out;
-        }
-
-        /**
-         * Performs the second computationally light part of the projection. Returns results in
-         * <I>screen coordinates</I>.
-         *
-         * @param in    the Point calculated by the toMapPixelsProjected
-         * @param reuse just pass null if you do not have a Point to be 'recycled'.
-         * @return the Point containing the <I>Screen coordinates</I> of the initial LatLng passed
-         *         to the toMapPixelsProjected.
-         */
-        public Point toMapPixelsTranslated(final Point in, final Point reuse) {
-            final Point out = reuse != null ? reuse : new Point();
-
-            final int zoomDifference = MAXIMUM_ZOOMLEVEL - getZoomLevel();
-            out.set((in.x >> zoomDifference) + offsetX, (in.y >> zoomDifference) + offsetY);
-            return out;
-        }
-
-        /**
-         * Translates a rectangle from <I>screen coordinates</I> to <I>intermediate coordinates</I>.
-         *
-         * @param in the rectangle in <I>screen coordinates</I>
-         * @return a rectangle in </I>intermediate coordindates</I>.
-         */
-        public Rect fromPixelsToProjected(final Rect in) {
-            final Rect result = new Rect();
-
-            final int zoomDifference = MAXIMUM_ZOOMLEVEL - getZoomLevel();
-
-            final int x0 = in.left - offsetX << zoomDifference;
-            final int x1 = in.right - offsetX << zoomDifference;
-            final int y0 = in.bottom - offsetY << zoomDifference;
-            final int y1 = in.top - offsetY << zoomDifference;
-
-            result.set(Math.min(x0, x1), Math.min(y0, y1), Math.max(x0, x1), Math.max(y0, y1));
-            return result;
-        }
-
-        @Override
-        public float metersToEquatorPixels(final float meters) {
-            return meters / (float) TileSystem.GroundResolution(0, mZoomLevelProjection);
-        }
-
-        @Override
-        public ILatLng getNorthEast() {
-            return fromPixels(getWidth(), 0);
-        }
-
-        @Override
-        public ILatLng getSouthWest() {
-            return fromPixels(0, getHeight());
-        }
-
-        @Override
-        public Point toPixels(final ILatLng in, final Point out) {
-            return toMapPixels(in, out);
-        }
-
-        @Override
-        public ILatLng fromPixels(final int x, final int y) {
-            return fromPixels((float) x, (float) y);
-        }
     }
 
     private class MapViewGestureDetectorListener implements GestureDetector.OnGestureListener {
@@ -1899,14 +1697,6 @@ public class MapView extends ViewGroup implements IMapView,
         public LayoutParams(final ViewGroup.LayoutParams source) {
             super(source);
         }
-    }
-
-    public interface TilesLoadedListener {
-        public boolean onTilesLoaded();
-    }
-
-    public interface TileLoadedListener {
-        public Drawable onTileLoaded(Drawable pDrawable);
     }
 
     public void setOnTileLoadedListener(TileLoadedListener tileLoadedListener) {

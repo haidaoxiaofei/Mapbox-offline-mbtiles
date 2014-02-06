@@ -4,17 +4,16 @@ package com.mapbox.mapboxsdk.overlay;
 import java.util.ArrayList;
 
 import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.views.MapView.Projection;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.overlay.OverlayItem.HotspotPlace;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas.UnsafeCanvasHandler;
-
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
+import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
  * Draws a list of {@link OverlayItem} as markers to a map. The item with the lowest index is drawn
