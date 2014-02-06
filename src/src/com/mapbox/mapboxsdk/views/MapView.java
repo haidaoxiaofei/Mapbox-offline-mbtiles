@@ -3,7 +3,6 @@ package com.mapbox.mapboxsdk.views;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.*;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -42,6 +41,8 @@ import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.views.util.Projection;
+import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
+import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import org.json.JSONException;
@@ -1696,14 +1697,6 @@ public class MapView extends ViewGroup implements IMapView,
         public LayoutParams(final ViewGroup.LayoutParams source) {
             super(source);
         }
-    }
-
-    public interface TilesLoadedListener {
-        public boolean onTilesLoaded();
-    }
-
-    public interface TileLoadedListener {
-        public Drawable onTileLoaded(Drawable pDrawable);
     }
 
     public void setOnTileLoadedListener(TileLoadedListener tileLoadedListener) {

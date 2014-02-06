@@ -14,6 +14,8 @@ import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
+import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.testflightapp.lib.TestFlight;
 import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
@@ -48,7 +50,7 @@ public class MainActivity extends Activity {
         m.setIcon(new Icon(Icon.Size.l, "bus", "000"));
         mv.addMarker(m);
 
-        mv.setOnTilesLoadedListener(new MapView.TilesLoadedListener() {
+        mv.setOnTilesLoadedListener(new TilesLoadedListener() {
             @Override
             public boolean onTilesLoaded() {
                 System.out.println("All tiles have been loaded");
@@ -56,7 +58,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        mv.setOnTileLoadedListener(new MapView.TileLoadedListener(){
+        mv.setOnTileLoadedListener(new TileLoadedListener(){
             @Override
             public Drawable onTileLoaded(Drawable d){
                 d.setColorFilter( 0xffff0000, PorterDuff.Mode.MULTIPLY);
