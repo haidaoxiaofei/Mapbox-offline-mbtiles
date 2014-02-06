@@ -45,16 +45,10 @@ public class Projection implements IProjection, GeoConstants
     private final int mZoomLevelProjection;
     private final Rect mScreenRectProjection;
     private final Rect mIntrinsicScreenRectProjection;
-    private final float mMapOrientation;
 
-    public Projection(MapView mv)
-    {
+    public Projection(MapView mv) {
         super();
         this.mapView = mv;
-
-        viewWidth_2 = mapView.getWidth() / 2;
-        viewHeight_2 = mapView.getHeight() / 2;
-        worldSize_2 = TileSystem.MapSize(mapView.getZoomLevel() / 2);
 
 	    /*
          * Do some calculations and drag attributes to local variables to save some performance.
@@ -63,7 +57,18 @@ public class Projection implements IProjection, GeoConstants
         mBoundingBoxProjection = mapView.getBoundingBox();
         mScreenRectProjection = mapView.getScreenRect(null);
         mIntrinsicScreenRectProjection = mapView.getIntrinsicScreenRect(null);
-        mMapOrientation = mapView.getMapOrientation();
+    }
+
+    private int worldSize_2() {
+        return TileSystem.MapSize(mapView.getZoomLevel() / 2);
+    }
+
+    private int viewHeight_2() {
+        return mapView.getHeight() / 2;
+    }
+
+    private int viewWidth_2() {
+        return mapView.getWidth() / 2;
     }
 
     public int getZoomLevel() {
@@ -83,7 +88,7 @@ public class Projection implements IProjection, GeoConstants
     }
 
     public float getMapOrientation() {
-        return mMapOrientation;
+        return mapView.getMapOrientation();
     }
 
     /**
@@ -95,13 +100,13 @@ public class Projection implements IProjection, GeoConstants
      */
     public ILatLng fromPixels(final float x, final float y) {
         final Rect screenRect = getIntrinsicScreenRect();
-        return TileSystem.PixelXYToLatLong(screenRect.left + (int) x + worldSize_2,
-                screenRect.top + (int) y + worldSize_2, mZoomLevelProjection);
+        return TileSystem.PixelXYToLatLong(screenRect.left + (int) x + worldSize_2(),
+                screenRect.top + (int) y + worldSize_2(), mZoomLevelProjection);
     }
 
     public Point fromMapPixels(final int x, final int y, final Point reuse) {
         final Point out = reuse != null ? reuse : new Point();
-        out.set(x - viewWidth_2, y - viewHeight_2);
+        out.set(x - viewWidth_2(), y - viewHeight_2());
         out.offset(mapView.getScrollX(), mapView.getScrollY());
         return out;
     }
