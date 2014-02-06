@@ -4,21 +4,20 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import com.mapbox.mapboxsdk.MapView;
-import com.mapbox.mapboxsdk.Marker;
-import com.mapbox.mapboxsdk.Icon;
-import com.mapbox.mapboxsdk.util.LatLng;
+import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.overlay.Marker;
+import com.mapbox.mapboxsdk.overlay.Icon;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.testflightapp.lib.TestFlight;
 import com.mapbox.mapboxsdk.api.IMapController;
-import com.mapbox.mapboxsdk.views.overlay.PathOverlay;
-import com.mapbox.mapboxsdk.views.overlay.mylocation.MyLocationNewOverlay;
+import com.mapbox.mapboxsdk.overlay.PathOverlay;
+import com.mapbox.mapboxsdk.overlay.mylocation.MyLocationNewOverlay;
 
 public class MainActivity extends Activity {
 	private IMapController mapController;
@@ -42,7 +41,8 @@ public class MainActivity extends Activity {
         mapController = mv.getController();
         mapController.setCenter(startingPoint);
         mapController.setZoom(4);
-        mv.parseFromGeoJSON("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
+
+        mv.loadFromGeoJSONURL("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
         setButtonListeners();
         Marker m = new Marker(mv, "Hello", "World", new LatLng(0f, 0f));
         m.setIcon(new Icon(Icon.Size.l, "bus", "000"));
@@ -75,13 +75,14 @@ public class MainActivity extends Activity {
                     replaceMapView(satellite);
                     currentLayer = "satellite";
                 }
+                mv.setMultiTouchControls(false);
             }
         });
         Button terBut = changeButtonTypeface((Button)findViewById(R.id.terbut));
         terBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!currentLayer.equals("terrain"))  {
+                if (!currentLayer.equals("terrain")) {
                     replaceMapView(terrain);
                     currentLayer = "terrain";
                 }

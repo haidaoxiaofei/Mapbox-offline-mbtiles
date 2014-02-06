@@ -1,5 +1,6 @@
 package com.mapbox.mapboxsdk.util;
 
+import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 
 import android.graphics.Canvas;
@@ -39,8 +40,8 @@ public abstract class TileLooper {
         }
         Collections.sort(orderedList, new ClosenessToCenterComparator());
         for(Point point: orderedList){
-            final int tileY = MyMath.mod(point.y, mapTileUpperBound);
-            final int tileX = MyMath.mod(point.x, mapTileUpperBound);
+            final int tileY = GeometryMath.mod(point.y, mapTileUpperBound);
+            final int tileX = GeometryMath.mod(point.x, mapTileUpperBound);
             final MapTile tile = new MapTile(pZoomLevel, tileX, tileY);
             handleTile(pCanvas, pTileSizePx, tile, point.x, point.y);
         }

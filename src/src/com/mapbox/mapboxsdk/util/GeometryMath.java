@@ -1,26 +1,16 @@
 package com.mapbox.mapboxsdk.util;
 
-import android.graphics.Point;
 import android.graphics.Rect;
+import com.mapbox.mapboxsdk.views.util.constants.MathConstants;
 
 /**
  * @author Marc Kurtz
  */
-public class GeometryMath {
+public class GeometryMath implements MathConstants {
     public static final double DEG2RAD = (Math.PI / 180.0);
     public static final double RAD2DEG = (180.0 / Math.PI);
 
-    public static final Rect getBoundingBoxForRotatatedRectangle(Rect rect, float angle, Rect reuse) {
-        return getBoundingBoxForRotatatedRectangle(rect, rect.centerX(), rect.centerY(), angle,
-                reuse);
-    }
-
-    public static final Rect getBoundingBoxForRotatatedRectangle(Rect rect, Point centerPoint,
-                                                                 float angle, Rect reuse) {
-        return getBoundingBoxForRotatatedRectangle(rect, centerPoint.x, centerPoint.y, angle, reuse);
-    }
-
-    public static final Rect getBoundingBoxForRotatatedRectangle(Rect rect, int centerX,
+    public static final Rect getBoundingBoxForRotatedRectangle(Rect rect, int centerX,
                                                                  int centerY, float angle, Rect reuse) {
         if (reuse == null)
             reuse = new Rect();
@@ -56,5 +46,53 @@ public class GeometryMath {
 
     private static double Max4(double a, double b, double c, double d) {
         return Math.ceil(Math.max(Math.max(a, b), Math.max(c, d)));
+    }
+
+    /**
+     * Calculates i.e. the increase of zoomlevel needed when the visible latitude needs to be bigger
+     * by <code>factor</code>.
+     * <p/>
+     * Assert.assertEquals(1, getNextSquareNumberAbove(1.1f)); Assert.assertEquals(2,
+     * getNextSquareNumberAbove(2.1f)); Assert.assertEquals(2, getNextSquareNumberAbove(3.9f));
+     * Assert.assertEquals(3, getNextSquareNumberAbove(4.1f)); Assert.assertEquals(3,
+     * getNextSquareNumberAbove(7.9f)); Assert.assertEquals(4, getNextSquareNumberAbove(8.1f));
+     * Assert.assertEquals(5, getNextSquareNumberAbove(16.1f));
+     * <p/>
+     * Assert.assertEquals(-1, - getNextSquareNumberAbove(1 / 0.4f) + 1); Assert.assertEquals(-2, -
+     * getNextSquareNumberAbove(1 / 0.24f) + 1);
+     *
+     * @param factor
+     * @return
+     */
+    public static int getNextSquareNumberAbove(final float factor) {
+        int out = 0;
+        int cur = 1;
+        int i = 1;
+        while (true) {
+            if (cur > factor)
+                return out;
+
+            out = i;
+            cur *= 2;
+            i++;
+        }
+    }
+
+    public static double gudermannInverse(final double aLatitude) {
+        return Math.log(Math.tan(PI_4 + (DEG2RAD * aLatitude / 2)));
+    }
+
+    public static double gudermann(final double y) {
+        return RAD2DEG * Math.atan(Math.sinh(y));
+    }
+
+    public static int mod(int number, final int modulus) {
+        if (number > 0)
+            return number % modulus;
+
+        while (number < 0)
+            number += modulus;
+
+        return number;
     }
 }

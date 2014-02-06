@@ -8,8 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,8 +19,6 @@ import java.lang.reflect.Field;
  * string resources and reads the jar package to get bitmap resources.
  */
 public class DefaultResourceProxyImpl implements ResourceProxy, MapViewConstants {
-
-    private static final Logger logger = LoggerFactory.getLogger(DefaultResourceProxyImpl.class);
 
     private Resources mResources;
     private DisplayMetrics mDisplayMetrics;
@@ -38,7 +35,7 @@ public class DefaultResourceProxyImpl implements ResourceProxy, MapViewConstants
             mResources = pContext.getResources();
             mDisplayMetrics = mResources.getDisplayMetrics();
             if (DEBUGMODE) {
-                logger.debug("mDisplayMetrics=" + mDisplayMetrics);
+                Log.i(TAG, "mDisplayMetrics=" + mDisplayMetrics);
             }
         }
     }
@@ -48,8 +45,6 @@ public class DefaultResourceProxyImpl implements ResourceProxy, MapViewConstants
         switch (pResId) {
             case mapnik:
                 return "Mapnik";
-            case base:
-                return "OSM base layer";
             case format_distance_meters:
                 return "%s m";
             case format_distance_kilometers:
@@ -96,7 +91,7 @@ public class DefaultResourceProxyImpl implements ResourceProxy, MapViewConstants
             }
             return BitmapFactory.decodeStream(is, null, options);
         } catch (final OutOfMemoryError e) {
-            logger.error("OutOfMemoryError getting bitmap resource: " + pResId);
+            Log.e(TAG, "OutOfMemoryError getting bitmap resource: " + pResId);
             System.gc();
             // there's not much we can do here
             // - when we load a bitmap from resources we expect it to be found
@@ -143,4 +138,5 @@ public class DefaultResourceProxyImpl implements ResourceProxy, MapViewConstants
         return mDisplayMetrics.density;
     }
 
+    private static final String TAG = "DefaultResourceProxyImpl";
 }

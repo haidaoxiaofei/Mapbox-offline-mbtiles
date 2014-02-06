@@ -6,44 +6,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import android.util.Log;
 
 public class StreamUtils {
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
-    private static final Logger logger = LoggerFactory.getLogger(StreamUtils.class);
 
     public static final int IO_BUFFER_SIZE = 8 * 1024;
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
 
     /**
      * This is a utility class with only static members.
      */
     private StreamUtils() {
     }
-
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
-
-    // ===========================================================
-    // Methods from SuperClass/Interfaces
-    // ===========================================================
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
 
     /**
      * Copy the content of the input stream into the output stream, using a temporary byte array
@@ -75,12 +49,10 @@ public class StreamUtils {
             try {
                 stream.close();
             } catch (final IOException e) {
-                logger.error("IO", "Could not close stream", e);
+                Log.e(TAG, "Could not close stream " + e);
             }
         }
     }
 
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
+    private static final String TAG = "StreamUtils";
 }

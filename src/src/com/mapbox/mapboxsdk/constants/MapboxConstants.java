@@ -11,4 +11,6 @@ public interface MapboxConstants {
      */
     public static final String MAPBOX_BASE_URL =
             "https://a.tiles.mapbox.com/v3/";
+
+    public final static String EXAMPLE_MAP_ID = "examples.map-z2effxa8";
 }

@@ -2,9 +2,9 @@ package com.mapbox.mapboxsdk.views.util;
 
 import java.util.List;
 
-import com.mapbox.mapboxsdk.util.BoundingBox;
-import com.mapbox.mapboxsdk.util.LatLng;
-import com.mapbox.mapboxsdk.util.TileSystem;
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView.Projection;
 
 import android.graphics.Path;
@@ -45,9 +45,9 @@ public class PathProjection {
                     + TileSystem.getTileSize(),
                     underGeopointTileCoords.y + TileSystem.getTileSize(), null);
             final LatLng neLatLng = TileSystem.PixelXYToLatLong(upperRight.x, upperRight.y,
-                    projection.getZoomLevel(), null);
+                    projection.getZoomLevel());
             final LatLng swLatLng = TileSystem.PixelXYToLatLong(lowerLeft.x, lowerLeft.y,
-                    projection.getZoomLevel(), null);
+                    projection.getZoomLevel());
             final BoundingBox bb = new BoundingBox(neLatLng.getLatitude(),
                     neLatLng.getLongitude(), swLatLng.getLatitude(),
                     swLatLng.getLongitude());

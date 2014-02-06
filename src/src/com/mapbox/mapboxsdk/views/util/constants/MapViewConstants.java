@@ -23,6 +23,9 @@ public interface MapViewConstants {
     public static final int ANIMATION_DURATION_DEFAULT = 500;
     public static final int ANIMATION_DURATION_LONG = 2000;
 
+    public static final double ZOOM_SENSITIVITY = 1.0;
+    public static final double ZOOM_LOG_BASE_INV = 1.0 / Math.log(2.0 / ZOOM_SENSITIVITY);
+
     /**
      * Minimum Zoom Level
      */
@@ -33,4 +36,5 @@ public interface MapViewConstants {
      * but we also have a tile size that is typically 2^8, so (32-1)-8-1 = 22
      */
     public static final int MAXIMUM_ZOOMLEVEL = 22;
+    public final static int DEFAULT_TILE_SIZE = 256;
 }

@@ -11,12 +11,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import android.util.Log;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * An implementation of {@link IFilesystemCache}. It writes tiles to the file system cache. If the
@@ -25,25 +24,10 @@ import org.slf4j.LoggerFactory;
  * @author Neil Boyd
  */
 public class TileWriter implements IFilesystemCache, OpenStreetMapTileProviderConstants {
-
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
-    private static final Logger logger = LoggerFactory.getLogger(TileWriter.class);
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
-
     /**
      * amount of disk space used by tile cache *
      */
     private static long mUsedCacheSpace;
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
 
     public TileWriter() {
 
@@ -57,7 +41,7 @@ public class TileWriter implements IFilesystemCache, OpenStreetMapTileProviderCo
                     cutCurrentCache();
                 }
                 if (DEBUGMODE) {
-                    logger.debug("Finished init thread");
+                    Log.i(TAG, "Finished init thread");
                 }
             }
         };
@@ -124,7 +108,7 @@ public class TileWriter implements IFilesystemCache, OpenStreetMapTileProviderCo
             return true;
         }
         if (DEBUGMODE) {
-            logger.debug("Failed to create " + pFile + " - wait and check again");
+            Log.w(TAG, "Failed to create " + pFile + " - wait and check again");
         }
 
         // if create failed, wait a bit in case another thread created it
@@ -135,12 +119,12 @@ public class TileWriter implements IFilesystemCache, OpenStreetMapTileProviderCo
         // and then check again
         if (pFile.exists()) {
             if (DEBUGMODE) {
-                logger.debug("Seems like another thread created " + pFile);
+                Log.w(TAG, "Seems like another thread created " + pFile);
             }
             return true;
         } else {
             if (DEBUGMODE) {
-                logger.debug("File still doesn't exist: " + pFile);
+                Log.w(TAG, "File still doesn't exist: " + pFile);
             }
             return false;
         }
@@ -211,7 +195,7 @@ public class TileWriter implements IFilesystemCache, OpenStreetMapTileProviderCo
 
             if (mUsedCacheSpace > TILE_TRIM_CACHE_SIZE_BYTES) {
 
-                logger.info("Trimming tile cache from " + mUsedCacheSpace + " to "
+                Log.i(TAG, "Trimming tile cache from " + mUsedCacheSpace + " to "
                         + TILE_TRIM_CACHE_SIZE_BYTES);
 
                 final List<File> z = getDirectoryFileList(TILE_PATH_BASE);
@@ -236,9 +220,10 @@ public class TileWriter implements IFilesystemCache, OpenStreetMapTileProviderCo
                     }
                 }
 
-                logger.info("Finished trimming tile cache");
+                Log.i(TAG, "Finished trimming tile cache");
             }
         }
     }
 
+    private static final String TAG = "TileWriter";
 }

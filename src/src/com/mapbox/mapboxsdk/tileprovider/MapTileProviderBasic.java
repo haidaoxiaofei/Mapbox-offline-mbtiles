@@ -1,13 +1,13 @@
 package com.mapbox.mapboxsdk.tileprovider;
 
 import android.util.DisplayMetrics;
+import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.tileprovider.modules.*;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleRegisterReceiver;
 
 import android.content.Context;
-import com.mapbox.mapboxsdk.views.MapView;
 
 /**
  * This top-level tile provider implements a basic tile request chain which includes a

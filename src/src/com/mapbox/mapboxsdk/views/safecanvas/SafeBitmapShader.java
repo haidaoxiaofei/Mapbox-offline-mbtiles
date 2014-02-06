@@ -1,6 +1,6 @@
 package com.mapbox.mapboxsdk.views.safecanvas;
 
-import com.mapbox.mapboxsdk.views.overlay.Overlay;
+import com.mapbox.mapboxsdk.overlay.Overlay;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

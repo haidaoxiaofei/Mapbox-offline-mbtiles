@@ -30,7 +30,7 @@ The ```MapView``` class is the key component of our library. It behaves like any
 #### XML layout
 To add the ```MapView``` as a layout element, add the following to your xml file:
 ```xml
-<com.mapbox.mapboxsdk.MapView
+<com.mapbox.mapboxsdk.views.MapView
 android:id="@+id/mapview"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent"

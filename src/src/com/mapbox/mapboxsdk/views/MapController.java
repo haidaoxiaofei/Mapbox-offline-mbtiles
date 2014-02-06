@@ -3,8 +3,8 @@ package com.mapbox.mapboxsdk.views;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.api.IMapController;
-import com.mapbox.mapboxsdk.util.BoundingBox;
-import com.mapbox.mapboxsdk.views.util.MyMath;
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
 import android.animation.Animator;
@@ -25,14 +25,6 @@ import android.view.animation.ScaleAnimation;
  */
 public class MapController implements IMapController, MapViewConstants {
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
-
     protected final MapView mMapView;
 
     // Zoom animations
@@ -42,10 +34,6 @@ public class MapController implements IMapController, MapViewConstants {
     private ScaleAnimation mZoomOutAnimationOld;
 
     private Animator mCurrentAnimator;
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
 
     public MapController(MapView mapView) {
         mMapView = mapView;
@@ -95,10 +83,10 @@ public class MapController implements IMapController, MapViewConstants {
         final double diffNeeded = Math.max(diffNeededLat, diffNeededLon); // i.e. 1,2
 
         if (diffNeeded > 1) { // Zoom Out
-            this.mMapView.setZoomLevel(curZoomLevel - MyMath.getNextSquareNumberAbove((float) diffNeeded));
+            this.mMapView.setZoomLevel(curZoomLevel - GeometryMath.getNextSquareNumberAbove((float) diffNeeded));
         } else if (diffNeeded < 0.5) { // Can Zoom in
             this.mMapView.setZoomLevel(curZoomLevel
-                    + MyMath.getNextSquareNumberAbove(1 / (float) diffNeeded) - 1);
+                    + GeometryMath.getNextSquareNumberAbove(1 / (float) diffNeeded) - 1);
         }
     }
 
