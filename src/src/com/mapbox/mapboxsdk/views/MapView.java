@@ -410,7 +410,6 @@ public class MapView extends ViewGroup implements IMapView,
                 parseGeoJSON(jsonString);
             } catch (JSONException e) {
                 Log.w(TAG, "JSON parsed was invalid. Continuing without it");
-                return;
             }
         }
 
@@ -744,6 +743,10 @@ public class MapView extends ViewGroup implements IMapView,
         mMaximumZoomLevel = zoomLevel;
     }
 
+    /**
+     * Determine whether the map is at its maximum zoom
+     * @return whether the map can zoom in
+     */
     public boolean canZoomIn() {
         final int maxZoomLevel = getMaxZoomLevel();
         if ((isAnimating() ? mTargetZoomLevel.get() : mZoomLevel) >= maxZoomLevel) {
@@ -752,6 +755,10 @@ public class MapView extends ViewGroup implements IMapView,
         return true;
     }
 
+    /**
+     * Determine whether the map is at its minimum zoom
+     * @return whether the map can zoom out
+     */
     public boolean canZoomOut() {
         final int minZoomLevel = getMinZoomLevel();
         if ((isAnimating() ? mTargetZoomLevel.get() : mZoomLevel) <= minZoomLevel) {

@@ -240,7 +240,6 @@ public abstract class Overlay {
     }
 
     public void onShowPress(final MotionEvent pEvent, final MapView pMapView) {
-        return;
     }
 
     /**
