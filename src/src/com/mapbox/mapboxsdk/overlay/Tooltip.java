@@ -11,6 +11,7 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.views.util.Projection;
 
 public class Tooltip extends Overlay {
 
@@ -93,7 +94,7 @@ public class Tooltip extends Overlay {
 
     private void calculatePoint() {
         LatLng markerCoords = item.getPoint();
-        MapView.Projection projection = mapView.getProjection();
+        Projection projection = mapView.getProjection();
         projection.toPixels(markerCoords, point);
     }
 

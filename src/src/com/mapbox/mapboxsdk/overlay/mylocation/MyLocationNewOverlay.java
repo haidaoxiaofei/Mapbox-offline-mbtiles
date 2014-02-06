@@ -8,17 +8,15 @@ import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tile.TileSystem;
-import com.mapbox.mapboxsdk.views.MapView.Projection;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.overlay.IOverlayMenuProvider;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
 import com.mapbox.mapboxsdk.overlay.SafeDrawOverlay;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
+import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-
 import android.util.Log;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;

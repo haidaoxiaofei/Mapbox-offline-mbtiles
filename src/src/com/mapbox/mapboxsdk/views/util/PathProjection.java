@@ -5,8 +5,6 @@ import java.util.List;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tile.TileSystem;
-import com.mapbox.mapboxsdk.views.MapView.Projection;
-
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;

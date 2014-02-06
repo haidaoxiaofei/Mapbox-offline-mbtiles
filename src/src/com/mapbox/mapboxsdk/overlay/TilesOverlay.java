@@ -10,9 +10,7 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.views.MapView.Projection;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
-
 import android.util.Log;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,6 +25,7 @@ import android.os.Build;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
  * These objects are the principle consumer of map tiles.

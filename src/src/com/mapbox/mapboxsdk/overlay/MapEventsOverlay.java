@@ -2,10 +2,10 @@ package com.mapbox.mapboxsdk.overlay;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.views.MapView.Projection;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
+import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
  * Empty overlay than can be used to detect events on the map, 
