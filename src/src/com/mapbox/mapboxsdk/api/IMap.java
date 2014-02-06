@@ -38,11 +38,6 @@ public interface IMap {
     void setBearing(float bearing);
 
     /**
-     * Set the position of the map
-     */
-    void setPosition(IPosition position);
-
-    /**
      * Increase zoom level by one
      */
     boolean zoomIn();
@@ -101,9 +96,4 @@ public interface IMap {
      * Removes all markers, polylines, polygons, overlays, etc from the map.
      */
     void clear();
-
-    /**
-     * Sets a callback that's invoked when the map view changes position.
-     */
-    void setOnCameraChangeListener(OnCameraChangeListener listener);
 }
