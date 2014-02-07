@@ -37,8 +37,8 @@ public class Projection implements IProjection, GeoConstants {
     private int viewWidth_2;
     private int viewHeight_2;
     private int worldSize_2;
-    private final int offsetX = -worldSize_2;
-    private final int offsetY = -worldSize_2;
+    private final int offsetX;
+    private final int offsetY;
 
     private final BoundingBox mBoundingBoxProjection;
     private final int mZoomLevelProjection;
@@ -55,7 +55,10 @@ public class Projection implements IProjection, GeoConstants {
         viewHeight_2 = mapView.getHeight() / 2;
         worldSize_2 = TileSystem.MapSize(mapView.getZoomLevel() / 2);
 
-        mZoomLevelProjection = mapView.getZoomLevel();
+        offsetX = -worldSize_2;
+        offsetY = -worldSize_2;
+
+        mZoomLevelProjection = mapView.getZoomLevel(false);
         mBoundingBoxProjection = mapView.getBoundingBox();
         mScreenRectProjection = mapView.getScreenRect(null);
         mIntrinsicScreenRectProjection = mapView.getIntrinsicScreenRect(null);
