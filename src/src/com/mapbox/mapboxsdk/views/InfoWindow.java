@@ -121,11 +121,8 @@ public abstract class InfoWindow {
                 offsetX, offsetY);
 
         close(); //if it was already opened
-
         mMapView.addView(mView, lp);
-
         mIsVisible = true;
-
     }
 
 
