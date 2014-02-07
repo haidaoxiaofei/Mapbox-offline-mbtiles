@@ -2,8 +2,11 @@ package com.mapbox.mapboxsdk.views;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.*;
-import android.os.AsyncTask;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.PointF;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -33,6 +36,7 @@ import com.mapbox.mapboxsdk.overlay.Overlay;
 import com.mapbox.mapboxsdk.overlay.OverlayItem;
 import com.mapbox.mapboxsdk.overlay.OverlayManager;
 import com.mapbox.mapboxsdk.overlay.TilesOverlay;
+import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
@@ -52,11 +56,6 @@ import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -206,7 +205,7 @@ public class MapView extends ViewGroup implements IMapView,
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
-        if (attrs!=null){
+        if (attrs!=null) {
             final String mapboxID = attrs.getAttributeValue(null, "mapboxID");
             if (mapboxID != null) {
                 setURL(mapboxID);
@@ -288,14 +287,6 @@ public class MapView extends ViewGroup implements IMapView,
     }
 
     /**
-     * Obtains the name of the application to identify the maps in the filesystem.
-     * @return the name of the app
-     */
-    private String getApplicationName() {
-        return context.getPackageName();
-    }
-
-    /**
      * Turns a Mapbox ID into a standard URL.
      * @param mapBoxID the Mapbox ID
      * @return a standard url that will be used by the MapView
@@ -371,7 +362,7 @@ public class MapView extends ViewGroup implements IMapView,
      * @param URL the URL from which to load the GeoJSON file
      */
     public void loadFromGeoJSONURL(String URL) {
-        new JSONBodyGetter().execute(URL);
+        new GeoJSONLayer(this).loadURL(URL);
     }
 
     /**
@@ -379,53 +370,7 @@ public class MapView extends ViewGroup implements IMapView,
      * @param geoJSON the GeoJSON string to parse
      */
     public void loadFromGeoJSONString(String geoJSON) throws JSONException {
-        new JSONBodyGetter().parseGeoJSON(geoJSON);
-    }
-
-    /**
-     * Class that generates markers from formats such as GeoJSON
-     */
-    @TargetApi(Build.VERSION_CODES.CUPCAKE)
-    public class JSONBodyGetter extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            InputStream is = null;
-            String jsonText = null;
-            try {
-                is = new URL(params[0]).openStream();
-                BufferedReader rd = new BufferedReader(new InputStreamReader(is,
-                        Charset.forName("UTF-8")));
-
-                jsonText = readAll(rd);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return jsonText;
-        }
-
-        @Override
-        protected void onPostExecute(String jsonString) {
-            try {
-                parseGeoJSON(jsonString);
-            } catch (JSONException e) {
-                Log.w(TAG, "JSON parsed was invalid. Continuing without it");
-            }
-        }
-
-        private String readAll(Reader rd) throws IOException {
-            StringBuilder sb = new StringBuilder();
-            int cp;
-            while ((cp = rd.read()) != -1) {
-                sb.append((char) cp);
-            }
-            return sb.toString();
-        }
-
-        private void parseGeoJSON(String jsonString) throws JSONException {
-            Log.w(TAG, "MAPBOX parsing from string");
-            GeoJSON.parseString(jsonString, MapView.this);
-        }
+        GeoJSON.parseString(geoJSON, MapView.this);
     }
 
     /**

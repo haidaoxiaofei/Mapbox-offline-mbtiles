@@ -40,7 +40,12 @@ public class MapBoxTileSource extends OnlineTileSourceBase {
      * @param tileSizePixels      Size of Tile Pixels
      * @param imageFilenameEnding Image File Extension
      */
-    public MapBoxTileSource(String name, ResourceProxy.string resourceId, int zoomMinLevel, int zoomMaxLevel, int tileSizePixels, String imageFilenameEnding) {
+    public MapBoxTileSource(String name,
+                            ResourceProxy.string resourceId,
+                            int zoomMinLevel,
+                            int zoomMaxLevel,
+                            int tileSizePixels,
+                            String imageFilenameEnding) {
         super(name, resourceId, zoomMinLevel, zoomMaxLevel, tileSizePixels, imageFilenameEnding, mapBoxBaseUrl);
     }
 
