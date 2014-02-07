@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.views.util.Projection;
 
 
 public class Tooltip extends View {
@@ -58,7 +59,7 @@ public class Tooltip extends View {
 
     private Point getScreenPosition(LatLng point){
         Point scrollPoint = new Point();
-        MapView.Projection projection = parentMapView.getProjection();
+        Projection projection = parentMapView.getProjection();
         projection.toPixels(point, scrollPoint);
         return scrollPoint;
     }
@@ -66,7 +67,7 @@ public class Tooltip extends View {
     private Point pointFromGeoPoint(LatLng gp){
 
         Point rtnPoint = new Point();
-        MapView.Projection projection = parentMapView.getProjection();
+        Projection projection = parentMapView.getProjection();
         projection.toPixels(gp, rtnPoint);
         // Get the top left GeoPoint
         LatLng geoPointTopLeft = (LatLng) projection.fromPixels(0, 0);
