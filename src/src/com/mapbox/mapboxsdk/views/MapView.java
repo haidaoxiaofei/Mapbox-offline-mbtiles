@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.Scroller;
 import android.widget.ZoomButtonsController;
+import com.mapbox.mapboxforandroid.R;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.format.GeoJSON;
 import com.mapbox.mapboxsdk.overlay.Marker;
@@ -452,7 +453,7 @@ public class MapView extends ViewGroup implements IMapView,
                     Marker currentMarker;
                     public boolean onItemSingleTapUp(final int index,
                                                      final OverlayItem item) {
-                        ((Marker) (item)).setTooltipVisible();
+                        ((Marker)item).showBubble(new DefaultInfoWindow(R.layout.tootip, MapView.this), MapView.this, true);
 
                         return true;
                     }
@@ -1735,8 +1736,6 @@ public class MapView extends ViewGroup implements IMapView,
         @Override
         public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX,
                                 final float distanceY) {
-            System.out.println("Position: " + tooltip.getX() + "," + tooltip.getY());
-            System.out.println("Scroll: " + tooltip.getScrollX() + "," + tooltip.getScrollY());
             if(mMultiTouchController == null){
                 return false;
             }
