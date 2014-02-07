@@ -2,7 +2,6 @@
 package com.mapbox.mapboxsdk.views;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
@@ -23,7 +22,7 @@ import android.view.animation.ScaleAnimation;
  * @author Nicolas Gramlich
  * @author Marc Kurtz
  */
-public class MapController implements IMapController, MapViewConstants {
+public class MapController implements MapViewConstants {
 
     protected final MapView mMapView;
 
@@ -65,7 +64,6 @@ public class MapController implements IMapController, MapViewConstants {
     }
 
     // TODO rework zoomToSpan
-    @Override
     public void zoomToSpan(double latSpan, double lonSpan) {
         if (latSpan <= 0 || lonSpan <= 0) {
             return;
@@ -93,7 +91,6 @@ public class MapController implements IMapController, MapViewConstants {
     /**
      * Start animating the map towards the given point.
      */
-    @Override
     public void animateTo(final ILatLng point) {
         Point p = mMapView.getProjection().toMapPixels(point, null);
         animateTo(p.x, p.y);
@@ -113,7 +110,6 @@ public class MapController implements IMapController, MapViewConstants {
         }
     }
 
-    @Override
     public void scrollBy(int x, int y) {
         this.mMapView.scrollBy(x, y);
     }
@@ -121,13 +117,11 @@ public class MapController implements IMapController, MapViewConstants {
     /**
      * Set the map view to the given center. There will be no animation.
      */
-    @Override
     public void setCenter(final ILatLng point) {
         Point p = mMapView.getProjection().toMapPixels(point, null);
         this.mMapView.scrollTo(p.x, p.y);
     }
 
-    @Override
     public void stopPanning() {
         mMapView.mIsFlinging = false;
         mMapView.getScroller().forceFinished(true);
@@ -138,7 +132,6 @@ public class MapController implements IMapController, MapViewConstants {
      *
      * @param jumpToTarget
      */
-    @Override
     public void stopAnimation(final boolean jumpToTarget) {
 
         if (!mMapView.getScroller().isFinished()) {
@@ -164,7 +157,7 @@ public class MapController implements IMapController, MapViewConstants {
         }
     }
 
-    @Override
+
     public int setZoom(final int zoomlevel) {
         return mMapView.setZoomLevel(zoomlevel);
     }
@@ -172,13 +165,11 @@ public class MapController implements IMapController, MapViewConstants {
     /**
      * Zoom in by one zoom level.
      */
-    @Override
     public boolean zoomIn() {
-        Point coords = mMapView.getProjection().toMapPixels(mMapView.getMapCenter(), null);
+        Point coords = mMapView.getProjection().toMapPixels(mMapView.getCenter(), null);
         return zoomInFixing(coords.x, coords.y);
     }
 
-    @Override
     public boolean zoomInFixing(final int xPixel, final int yPixel) {
         mMapView.mMultiTouchScalePoint.set(xPixel, yPixel);
         if (mMapView.canZoomIn()) {
@@ -203,13 +194,11 @@ public class MapController implements IMapController, MapViewConstants {
     /**
      * Zoom out by one zoom level.
      */
-    @Override
     public boolean zoomOut() {
-        Point coords = mMapView.getProjection().toMapPixels(mMapView.getMapCenter(), null);
+        Point coords = mMapView.getProjection().toMapPixels(mMapView.getCenter(), null);
         return zoomOutFixing(coords.x, coords.y);
     }
 
-    @Override
     public boolean zoomOutFixing(final int xPixel, final int yPixel) {
         mMapView.mMultiTouchScalePoint.set(xPixel, yPixel);
         if (mMapView.canZoomOut()) {

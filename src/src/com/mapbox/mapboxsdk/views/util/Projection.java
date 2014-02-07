@@ -65,7 +65,6 @@ public class Projection implements IProjection, GeoConstants {
         mScreenRectProjection = mapView.getScreenRect(null);
         mIntrinsicScreenRectProjection = mapView.getIntrinsicScreenRect(null);
         mMapOrientation = mapView.getMapOrientation();
-        Log.i(TAG, "worldSize" + worldSize_2);
     }
 
     public int getZoomLevel() {

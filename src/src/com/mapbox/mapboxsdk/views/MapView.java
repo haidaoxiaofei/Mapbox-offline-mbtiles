@@ -24,7 +24,6 @@ import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
@@ -477,7 +476,7 @@ public class MapView extends ViewGroup implements IMapView,
 
 
     @Override
-    public IMapController getController() {
+    public MapController getController() {
         return this.mController;
     }
 
@@ -805,19 +804,6 @@ public class MapView extends ViewGroup implements IMapView,
 
     boolean zoomOutFixing(final int xPixel, final int yPixel) {
         return getController().zoomOutFixing(xPixel, yPixel);
-    }
-
-    /**
-     * Returns the current center-point position of the map, as a LatLng (latitude and longitude).
-     *
-     * @return A LatLng of the map's center-point.
-     */
-    @Override
-    public ILatLng getMapCenter() {
-        final int world_2 = TileSystem.MapSize(mZoomLevel) / 2;
-        final Rect screenRect = getScreenRect(null);
-        screenRect.offset(world_2, world_2);
-        return TileSystem.PixelXYToLatLong(screenRect.centerX(), screenRect.centerY(), mZoomLevel);
     }
 
     public ResourceProxy getResourceProxy() {
