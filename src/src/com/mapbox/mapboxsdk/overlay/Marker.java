@@ -7,7 +7,7 @@ import com.mapbox.mapboxsdk.views.MapView;
 /**
  * A Marker object is a visible representation of a point on a Map that has a geographical place.
  */
-public class Marker extends OverlayItem {
+public class Marker extends ExtendedOverlayItem {
     private Context context;
     private Tooltip tooltip;
     private MapView mapView;
@@ -31,11 +31,11 @@ public class Marker extends OverlayItem {
      * @param aLatLng the location of the marker
      */
     public Marker(MapView mv, String aTitle, String aDescription, LatLng aLatLng) {
-        super(aTitle, aDescription, aLatLng);
+        super(aTitle, aDescription, aLatLng, mv.getContext());
         context = mv.getContext();
         mapView = mv;
         fromMaki("markerstroked");
-        attachTooltip();
+        //attachTooltip();
     }
 
     private void attachTooltip() {
@@ -61,8 +61,8 @@ public class Marker extends OverlayItem {
     }
 
     public void setTooltipVisible() {
-        tooltip.setVisible(true);
-        mapView.invalidate();
+        //tooltip.setVisible(true);
+        //mapView.invalidate();
     }
 
     public void setTooltipInvisible() {
