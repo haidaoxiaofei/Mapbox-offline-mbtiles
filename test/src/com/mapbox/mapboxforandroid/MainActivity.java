@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.mapboxTileLayer;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.overlay.Marker;
@@ -103,8 +104,7 @@ public class MainActivity extends Activity {
     }
 
     protected void replaceMapView(String layer) {
-        mv.switchToLayer(layer);
-
+        mv.setTileSource(new mapboxTileLayer(layer));
     }
 
     private void addLocationOverlay() {

@@ -229,7 +229,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                         listener.onTilesLoaded();
                     }
                 }
-                result = mapView.hasTileLoadedListener()? onTileLoaded(result): result;
+                result = mapView.getTileLoadedListener() != null ? onTileLoaded(result) : result;
                 return result;
             } catch (final UnknownHostException e) {
                 // no network connection so empty the queue

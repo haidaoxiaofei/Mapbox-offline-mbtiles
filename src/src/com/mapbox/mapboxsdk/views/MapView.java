@@ -40,6 +40,7 @@ import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.mapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.util.GeometryMath;
@@ -201,15 +202,16 @@ public class MapView extends ViewGroup implements IMapView,
         mGestureDetector = new GestureDetector(context, new MapViewGestureDetectorListener());
         mGestureDetector.setOnDoubleTapListener(new MapViewDoubleClickListener());
         this.context = context;
-        setURL(EXAMPLE_MAP_ID);
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
-        if (attrs!=null) {
+        if (attrs != null) {
             final String mapboxID = attrs.getAttributeValue(null, "mapboxID");
             if (mapboxID != null) {
-                setURL(mapboxID);
+                setTileSource(new mapboxTileLayer(mapboxID));
             }
+        } else {
+            setTileSource(new mapboxTileLayer(EXAMPLE_MAP_ID));
         }
     }
 
@@ -224,7 +226,6 @@ public class MapView extends ViewGroup implements IMapView,
      */
     public MapView(Context context, String URL) {
         this(context, (AttributeSet) null);
-        setURL(URL);
     }
 
     protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileProviderBase aTileProvider) {
@@ -232,46 +233,12 @@ public class MapView extends ViewGroup implements IMapView,
         init(context);
     }
 
-    /**
-     * Sets the MapView to use the specified URL.
-     * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
-     */
-    public void setURL(String URL) {
-        if (!URL.equals("")) {
-            URL = parseURL(URL);
-            tileSource = new XYTileSource(URL, ResourceProxy.string.online_mode, 0, 24, DEFAULT_TILE_SIZE, ".png", URL);
-            this.setTileSource(tileSource);
-        }
-    }
-
-    /**
-     * Switches the MapView to a layer (tile overlay).
-     * @param name Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
-     */
-    public void switchToLayer(String name) {
-        String URL = parseURL(name);
-        final MapTileProviderBasic tileProvider = (MapTileProviderBasic) this.getTileProvider();
-        final ITileSource tileSource = new XYTileSource(name, null, 1, 16, DEFAULT_TILE_SIZE, ".png", URL);
-        tileProvider.setTileSource(tileSource);
-        this.invalidate();
-    }
-
-    /**
-     * Parses the passed ID string to use the relevant method.
-     * @param url Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
-     * @return the standard URL to be used by the library
-     **/
-    private String parseURL(String url) {
-        identifier = url;
-        if (url.contains(".json")) {
-            return getURLFromTileJSON(url);
-        } else if (!url.contains("http://") && !url.contains("https://")) {
-            return getURLFromMapBoxID(url);
-        } else if (url.contains(".png")) {
-            return getURLFromImageTemplate(url);
-        } else {
-            throw new IllegalArgumentException("You need to enter either a valid URL, a MapBox id, or a tile URL template");
-        }
+    public void setTileSource(final ITileSource aTileSource) {
+        mTileProvider.setTileSource(aTileSource);
+        TileSystem.setTileSize(aTileSource.getTileSizePixels());
+        this.checkZoomButtons();
+        this.setZoomLevel(mZoomLevel); // revalidate zoom level
+        postInvalidate();
     }
 
     /**
@@ -280,41 +247,9 @@ public class MapView extends ViewGroup implements IMapView,
      */
     private void init(Context context) {
         this.context = context;
-        setURL("");
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
-    }
-
-    /**
-     * Turns a Mapbox ID into a standard URL.
-     * @param mapBoxID the Mapbox ID
-     * @return a standard url that will be used by the MapView
-     */
-    private String getURLFromMapBoxID(String mapBoxID) {
-        if (!mapBoxID.contains(".")) {
-            throw new IllegalArgumentException("Invalid MapBox ID, entered " + mapBoxID);
-        }
-        String completeURL = MAPBOX_BASE_URL + mapBoxID + "/";
-        return completeURL;
-    }
-
-    /**
-     * Turns a URL TileJSON path to the standard URL format used by the MapView.
-     * @param tileJSONURL the tileJSON URL
-     * @return a standard url that will be used by the MapView
-     */
-    private String getURLFromTileJSON(String tileJSONURL) {
-        return tileJSONURL.replace(".json", "/");
-    }
-
-    /**
-     * Gets a {xyz} image template URL and turns it into a standard URL for the MapView.
-     * @param imageTemplateURL the template URL
-     * @return a standard url that will be used by the MapView
-     */
-    private String getURLFromImageTemplate(String imageTemplateURL) {
-        return imageTemplateURL.replace("/{z}/{x}/{y}.png", "/");
     }
 
     /**
@@ -513,10 +448,6 @@ public class MapView extends ViewGroup implements IMapView,
         return out;
     }
 
-    public boolean hasTileLoadedListener() {
-        return tileLoadedListener != null;
-    }
-
     /**
      * Get a projection for converting between screen-pixel coordinates and latitude/longitude
      * coordinates. You should not hold on to this object for more than one draw, since the
@@ -535,14 +466,6 @@ public class MapView extends ViewGroup implements IMapView,
 
     void setCenter(final ILatLng aCenter) {
         getController().setCenter(aCenter);
-    }
-
-    public void setTileSource(final ITileSource aTileSource) {
-        mTileProvider.setTileSource(aTileSource);
-        TileSystem.setTileSize(aTileSource.getTileSizePixels());
-        this.checkZoomButtons();
-        this.setZoomLevel(mZoomLevel); // revalidate zoom level
-        postInvalidate();
     }
 
     /**
