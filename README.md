@@ -8,14 +8,6 @@ Open source alternative for native Mapbox maps on Android.
 
 The development of the SDK is on its very earliest stage, so many of its elements will be unstable and not fully tested. If you want to try it in your app project, the easiest option is to download the latest JAR build [here](./mapbox-android-sdk.jar). Otherwise you can build the library from source, and experiment with the latest additions to the project.
 
-
-### Installing from JAR
-
-To include the library in your project [as a jar](./mapbox-android-sdk.jar) you just need to copy it somewhere in your app project (conventionally in Android that's the ```lib``` directory), and add the library to your classpath.
-
-* In Eclipse, find the library file in your project's file explorer and right click - Build Path - Add to Build Path...
-* In IntelliJ IDEA, right click the file in the project explorer and select "Add as library".
-
 ### Building from source
 
 **With Gradle** *(recommended)*

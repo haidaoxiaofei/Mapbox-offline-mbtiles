@@ -1,8 +1,8 @@
 package com.mapbox.mapboxsdk.api;
 
-import com.mapbox.mapboxsdk.views.MapView.Projection;
-
 import android.graphics.Point;
+
+import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
  * An interface that resembles the Google Maps API Projection interface and is implemented by the

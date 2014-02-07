@@ -5,10 +5,8 @@ import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.views.MapView.Projection;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -17,6 +15,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.MotionEvent;
+import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
  * Draws a mini-map as an overlay layer. It currently uses its own MapTileProviderBasic or a tile
@@ -117,19 +116,19 @@ public class MinimapOverlay extends TilesOverlay {
     }
 
     @Override
-    protected void drawSafe(final ISafeCanvas pC, final MapView pOsmv, final boolean shadow) {
+    protected void drawSafe(final ISafeCanvas pC, final MapView mapView, final boolean shadow) {
 
         if (shadow) {
             return;
         }
 
         // Don't draw if we are animating
-        if (pOsmv.isAnimating()) {
+        if (mapView.isAnimating()) {
             return;
         }
 
         // Calculate the half-world size
-        final Projection projection = pOsmv.getProjection();
+        final Projection projection = mapView.getProjection();
         final int zoomLevel = projection.getZoomLevel();
         mWorldSize_2 = TileSystem.MapSize(zoomLevel) / 2;
 

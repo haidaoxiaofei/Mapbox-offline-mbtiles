@@ -3,49 +3,61 @@ package com.mapbox.mapboxsdk.views;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.*;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.*;
+import android.view.GestureDetector;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Scroller;
 import android.widget.ZoomButtonsController;
 import com.mapbox.mapboxforandroid.R;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.format.GeoJSON;
+import com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay;
+import com.mapbox.mapboxsdk.overlay.ItemizedOverlay;
+import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
+import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.api.IMapController;
-import com.mapbox.mapboxsdk.api.IProjection;
 import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
 import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
+import com.mapbox.mapboxsdk.overlay.Overlay;
+import com.mapbox.mapboxsdk.overlay.OverlayItem;
+import com.mapbox.mapboxsdk.overlay.OverlayManager;
+import com.mapbox.mapboxsdk.overlay.TilesOverlay;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.util.GeometryMath;
-import com.mapbox.mapboxsdk.geometry.GeoConstants;
+import com.mapbox.mapboxsdk.views.util.Projection;
+import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
+import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import org.json.JSONException;
 import com.mapbox.mapboxsdk.views.util.MultiTouchController;
-import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.*;
-import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -91,7 +103,6 @@ public class MapView extends ViewGroup implements IMapView,
 
     private static final String TAG = "MapBox MapView";
     private static Method sMotionEventTransformMethod;
-
 
     /**
      * Current zoom level for map tiles.
@@ -152,10 +163,6 @@ public class MapView extends ViewGroup implements IMapView,
     TileLoadedListener tileLoadedListener;
     private String identifier = EXAMPLE_MAP_ID;
     private Tooltip tooltip;
-
-    //////////////////
-    // CONSTRUCTORS //
-    //////////////////
 
     /**
      * Constructor for XML layout calls. Should not be used programmatically.
@@ -236,16 +243,10 @@ public class MapView extends ViewGroup implements IMapView,
         init(context);
     }
 
-    ////////////////////
-    // PUBLIC METHODS //
-    ////////////////////
-
-
     /**
      * Sets the MapView to use the specified URL.
      * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
      */
-
     public void setURL(String URL) {
         if (!URL.equals("")) {
             URL = parseURL(URL);
@@ -265,11 +266,6 @@ public class MapView extends ViewGroup implements IMapView,
         tileProvider.setTileSource(tileSource);
         this.invalidate();
     }
-
-    /////////////////////
-    // PRIVATE METHODS //
-    /////////////////////
-
 
     /**
      * Parses the passed ID string to use the relevant method.
@@ -424,7 +420,6 @@ public class MapView extends ViewGroup implements IMapView,
                 parseGeoJSON(jsonString);
             } catch (JSONException e) {
                 Log.w(TAG, "JSON parsed was invalid. Continuing without it");
-                return;
             }
         }
 
@@ -464,10 +459,6 @@ public class MapView extends ViewGroup implements IMapView,
                 }, new DefaultResourceProxyImpl(context.getApplicationContext()));
         this.getOverlays().add(defaultMarkerOverlay);
     }
-
-    /////////////////////////
-    // IMPLEMENTED METHODS //
-    /////////////////////////
 
     /**
      * Method coming from OSMDroid's tap handler.
@@ -557,6 +548,14 @@ public class MapView extends ViewGroup implements IMapView,
     }
 
     /**
+     * Get centerpoint of the phone as latitude and longitude.
+     * @return centerpoint
+     */
+    public LatLng getCenter() {
+        return getBoundingBox().getCenter();
+    }
+
+    /**
      * Gets the current bounds of the screen in <I>screen coordinates</I>.
      */
     public Rect getScreenRect(final Rect reuse) {
@@ -579,11 +578,9 @@ public class MapView extends ViewGroup implements IMapView,
         return out;
     }
 
-    public boolean hasTileLoadedListener(){
-        return tileLoadedListener!=null;
+    public boolean hasTileLoadedListener() {
+        return tileLoadedListener != null;
     }
-
-
 
     /**
      * Get a projection for converting between screen-pixel coordinates and latitude/longitude
@@ -596,7 +593,7 @@ public class MapView extends ViewGroup implements IMapView,
     @Override
     public Projection getProjection() {
         if (mProjection == null) {
-            mProjection = new Projection();
+            mProjection = new Projection(this);
         }
         return mProjection;
     }
@@ -651,7 +648,7 @@ public class MapView extends ViewGroup implements IMapView,
 
         // snap for all snappables
         final Point snapPoint = new Point();
-        mProjection = new Projection();
+        mProjection = new Projection(this);
         if (this.getOverlayManager().onSnapToItem(getScrollX(), getScrollY(), snapPoint, this)) {
             scrollTo(snapPoint.x, snapPoint.y);
         }
@@ -764,6 +761,10 @@ public class MapView extends ViewGroup implements IMapView,
         mMaximumZoomLevel = zoomLevel;
     }
 
+    /**
+     * Determine whether the map is at its maximum zoom
+     * @return whether the map can zoom in
+     */
     public boolean canZoomIn() {
         final int maxZoomLevel = getMaxZoomLevel();
         if ((isAnimating() ? mTargetZoomLevel.get() : mZoomLevel) >= maxZoomLevel) {
@@ -772,6 +773,10 @@ public class MapView extends ViewGroup implements IMapView,
         return true;
     }
 
+    /**
+     * Determine whether the map is at its minimum zoom
+     * @return whether the map can zoom out
+     */
     public boolean canZoomOut() {
         final int minZoomLevel = getMinZoomLevel();
         if ((isAnimating() ? mTargetZoomLevel.get() : mZoomLevel) <= minZoomLevel) {
@@ -890,15 +895,8 @@ public class MapView extends ViewGroup implements IMapView,
         return mScrollableAreaBoundingBox;
     }
 
-    // ===========================================================
-    // Methods from SuperClass/Interfaces
-    // ===========================================================
-    public void invalidateMapCoordinates(Rect dirty) {
-        invalidateMapCoordinates(dirty.left, dirty.top, dirty.right, dirty.bottom);
-    }
-
-    public void invalidateMapCoordinates(int left, int top, int right, int bottom) {
-        mInvalidateRect.set(left, top, right, bottom);
+    public void invalidateMapCoordinates(final Rect dirty) {
+        mInvalidateRect.set(dirty);
         final int width_2 = this.getWidth() / 2;
         final int height_2 = this.getHeight() / 2;
 
@@ -1253,24 +1251,28 @@ public class MapView extends ViewGroup implements IMapView,
 
             // Adjust if we are outside the scrollable area
             if (scrollableWidth <= width) {
-                if (x - (width / 2) > minX)
+                if (x - (width / 2) > minX) {
                     x = minX + (width / 2);
-                else if (x + (width / 2) < maxX)
+                } else if (x + (width / 2) < maxX) {
                     x = maxX - (width / 2);
-            } else if (x - (width / 2) < minX)
+                }
+            } else if (x - (width / 2) < minX) {
                 x = minX + (width / 2);
-            else if (x + (width / 2) > maxX)
+            } else if (x + (width / 2) > maxX) {
                 x = maxX - (width / 2);
+            }
 
             if (scrollableHeight <= height) {
-                if (y - (height / 2) > minY)
+                if (y - (height / 2) > minY) {
                     y = minY + (height / 2);
-                else if (y + (height / 2) < maxY)
+                } else if (y + (height / 2) < maxY) {
                     y = maxY - (height / 2);
-            } else if (y - (height / 2) < minY)
+                }
+            } else if (y - (height / 2) < minY) {
                 y = minY + (height / 2);
-            else if (y + (height / 2) > maxY)
+            } else if (y + (height / 2) > maxY) {
                 y = maxY - (height / 2);
+            }
         }
         super.scrollTo(x, y);
 
@@ -1291,7 +1293,7 @@ public class MapView extends ViewGroup implements IMapView,
     protected void dispatchDraw(final Canvas c) {
         final long startMs = System.currentTimeMillis();
 
-        mProjection = new Projection();
+        mProjection = new Projection(this);
 
         // Save the current canvas matrix
         c.save();
@@ -1435,10 +1437,6 @@ public class MapView extends ViewGroup implements IMapView,
         mListener = ml;
     }
 
-    // ===========================================================
-    // Methods
-    // ===========================================================
-
     private void checkZoomButtons() {
         this.mZoomController.setZoomInEnabled(canZoomIn());
         this.mZoomController.setZoomOutEnabled(canZoomOut());
@@ -1479,211 +1477,6 @@ public class MapView extends ViewGroup implements IMapView,
         return tileLoadedListener;
     }
 
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
-
-    /**
-     * A Projection serves to translate between the coordinate system of x/y on-screen pixel
-     * coordinates and that of latitude/longitude points on the surface of the earth. You obtain a
-     * Projection from MapView.getProjection(). You should not hold on to this object for more than
-     * one draw, since the projection of the map could change. <br />
-     * <br />
-     * <I>Screen coordinates</I> are in the coordinate system of the screen's Canvas. The origin is
-     * in the center of the plane. <I>Screen coordinates</I> are appropriate for using to draw to
-     * the screen.<br />
-     * <br />
-     * <I>Map coordinates</I> are in the coordinate system of the standard Mercator projection. The
-     * origin is in the upper-left corner of the plane. <I>Map coordinates</I> are appropriate for
-     * use in the TileSystem class.<br />
-     * <br />
-     * <I>Intermediate coordinates</I> are used to cache the computationally heavy part of the
-     * projection. They aren't suitable for use until translated into <I>screen coordinates</I> or
-     * <I>map coordinates</I>.
-     *
-     * @author Nicolas Gramlich
-     * @author Manuel Stahl
-     */
-    public class Projection implements IProjection, GeoConstants {
-
-        private final int viewWidth_2 = getWidth() / 2;
-        private final int viewHeight_2 = getHeight() / 2;
-        private final int worldSize_2 = TileSystem.MapSize(mZoomLevel) / 2;
-        private final int offsetX = -worldSize_2;
-        private final int offsetY = -worldSize_2;
-
-        private final BoundingBox mBoundingBoxProjection;
-        private final int mZoomLevelProjection;
-        private final Rect mScreenRectProjection;
-        private final Rect mIntrinsicScreenRectProjection;
-        private final float mMapOrientation;
-
-        private Projection() {
-
-			/*
-             * Do some calculations and drag attributes to local variables to save some performance.
-			 */
-            mZoomLevelProjection = MapView.this.mZoomLevel;
-            mBoundingBoxProjection = MapView.this.getBoundingBox();
-            mScreenRectProjection = MapView.this.getScreenRect(null);
-            mIntrinsicScreenRectProjection = MapView.this.getIntrinsicScreenRect(null);
-            mMapOrientation = MapView.this.getMapOrientation();
-        }
-
-        public int getZoomLevel() {
-            return mZoomLevelProjection;
-        }
-
-        public BoundingBox getBoundingBox() {
-            return mBoundingBoxProjection;
-        }
-
-        public Rect getScreenRect() {
-            return mScreenRectProjection;
-        }
-
-        public Rect getIntrinsicScreenRect() {
-            return mIntrinsicScreenRectProjection;
-        }
-
-        public float getMapOrientation() {
-            return mMapOrientation;
-        }
-
-        /**
-         * Converts <I>screen coordinates</I> to the underlying LatLng.
-         *
-         * @param x
-         * @param y
-         * @return LatLng under x/y.
-         */
-        public ILatLng fromPixels(final float x, final float y) {
-            final Rect screenRect = getIntrinsicScreenRect();
-            return TileSystem.PixelXYToLatLong(screenRect.left + (int) x + worldSize_2,
-                    screenRect.top + (int) y + worldSize_2, mZoomLevelProjection);
-        }
-
-        public Point fromMapPixels(final int x, final int y, final Point reuse) {
-            final Point out = reuse != null ? reuse : new Point();
-            out.set(x - viewWidth_2, y - viewHeight_2);
-            out.offset(getScrollX(), getScrollY());
-            return out;
-        }
-
-        /**
-         * Converts a LatLng to its <I>screen coordinates</I>.
-         *
-         * @param in    the LatLng you want the <I>screen coordinates</I> of
-         * @param reuse just pass null if you do not have a Point to be 'recycled'.
-         * @return the Point containing the <I>screen coordinates</I> of the LatLng passed.
-         */
-        public Point toMapPixels(final ILatLng in, final Point reuse) {
-            final Point out = reuse != null ? reuse : new Point();
-            TileSystem.LatLongToPixelXY(
-                    in.getLatitude(),
-                    in.getLongitude(),
-                    getZoomLevel(), out);
-            out.offset(offsetX, offsetY);
-            if (Math.abs(out.x - getScrollX()) >
-                    Math.abs(out.x - TileSystem.MapSize(getZoomLevel()) - getScrollX())) {
-                out.x -= TileSystem.MapSize(getZoomLevel());
-            }
-            if (Math.abs(out.x - getScrollX()) >
-                    Math.abs(out.x + TileSystem.MapSize(getZoomLevel()) - getScrollX())) {
-                out.x += TileSystem.MapSize(getZoomLevel());
-            }
-            if (Math.abs(out.y - getScrollY()) >
-                    Math.abs(out.y - TileSystem.MapSize(getZoomLevel()) - getScrollY())) {
-                out.y -= TileSystem.MapSize(getZoomLevel());
-            }
-            if (Math.abs(out.y - getScrollY()) >
-                    Math.abs(out.y + TileSystem.MapSize(getZoomLevel()) - getScrollY())) {
-                out.y += TileSystem.MapSize(getZoomLevel());
-            }
-            return out;
-        }
-
-        /**
-         * Performs only the first computationally heavy part of the projection. Call
-         * toMapPixelsTranslated to get the final position.
-         *
-         * @param latitude  the latitude of the point
-         * @param longitude the longitude of the point
-         * @param reuse       just pass null if you do not have a Point to be 'recycled'.
-         * @return intermediate value to be stored and passed to toMapPixelsTranslated.
-         */
-        public Point toMapPixelsProjected(final double latitude, final double longitude,
-                                          final Point reuse) {
-            final Point out = reuse != null ? reuse : new Point();
-
-            TileSystem
-                    .LatLongToPixelXY(latitude, longitude, MAXIMUM_ZOOMLEVEL, out);
-            return out;
-        }
-
-        /**
-         * Performs the second computationally light part of the projection. Returns results in
-         * <I>screen coordinates</I>.
-         *
-         * @param in    the Point calculated by the toMapPixelsProjected
-         * @param reuse just pass null if you do not have a Point to be 'recycled'.
-         * @return the Point containing the <I>Screen coordinates</I> of the initial LatLng passed
-         *         to the toMapPixelsProjected.
-         */
-        public Point toMapPixelsTranslated(final Point in, final Point reuse) {
-            final Point out = reuse != null ? reuse : new Point();
-
-            final int zoomDifference = MAXIMUM_ZOOMLEVEL - getZoomLevel();
-            out.set((in.x >> zoomDifference) + offsetX, (in.y >> zoomDifference) + offsetY);
-            return out;
-        }
-
-        /**
-         * Translates a rectangle from <I>screen coordinates</I> to <I>intermediate coordinates</I>.
-         *
-         * @param in the rectangle in <I>screen coordinates</I>
-         * @return a rectangle in </I>intermediate coordindates</I>.
-         */
-        public Rect fromPixelsToProjected(final Rect in) {
-            final Rect result = new Rect();
-
-            final int zoomDifference = MAXIMUM_ZOOMLEVEL - getZoomLevel();
-
-            final int x0 = in.left - offsetX << zoomDifference;
-            final int x1 = in.right - offsetX << zoomDifference;
-            final int y0 = in.bottom - offsetY << zoomDifference;
-            final int y1 = in.top - offsetY << zoomDifference;
-
-            result.set(Math.min(x0, x1), Math.min(y0, y1), Math.max(x0, x1), Math.max(y0, y1));
-            return result;
-        }
-
-        @Override
-        public float metersToEquatorPixels(final float meters) {
-            return meters / (float) TileSystem.GroundResolution(0, mZoomLevelProjection);
-        }
-
-        @Override
-        public ILatLng getNorthEast() {
-            return fromPixels(getWidth(), 0);
-        }
-
-        @Override
-        public ILatLng getSouthWest() {
-            return fromPixels(0, getHeight());
-        }
-
-        @Override
-        public Point toPixels(final ILatLng in, final Point out) {
-            return toMapPixels(in, out);
-        }
-
-        @Override
-        public ILatLng fromPixels(final int x, final int y) {
-            return fromPixels((float) x, (float) y);
-        }
-    }
-
     private class MapViewGestureDetectorListener implements GestureDetector.OnGestureListener {
 
         @Override
@@ -1706,10 +1499,10 @@ public class MapView extends ViewGroup implements IMapView,
         @Override
         public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX,
                                final float velocityY) {
-            if(mMultiTouchController == null){
+            if (mMultiTouchController == null) {
                 return false;
             }
-            if(mMultiTouchController.postZoom){
+            if (mMultiTouchController.postZoom) {
                 mMultiTouchController.postZoom = false;
                 return false;
             }
@@ -1736,10 +1529,10 @@ public class MapView extends ViewGroup implements IMapView,
         @Override
         public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX,
                                 final float distanceY) {
-            if(mMultiTouchController == null){
+            if (mMultiTouchController == null) {
                 return false;
             }
-            if(mMultiTouchController.postZoom){
+            if (mMultiTouchController.postZoom) {
                 mMultiTouchController.postZoom = false;
                 return false;
             }
@@ -1931,15 +1724,7 @@ public class MapView extends ViewGroup implements IMapView,
         }
     }
 
-    public interface TilesLoadedListener{
-        public boolean onTilesLoaded();
-    }
-
-    public interface TileLoadedListener{
-        public Drawable onTileLoaded(Drawable pDrawable);
-    }
-
-    public void setOnTileLoadedListener(TileLoadedListener tileLoadedListener){
+    public void setOnTileLoadedListener(TileLoadedListener tileLoadedListener) {
         this.tileLoadedListener = tileLoadedListener;
     }
 

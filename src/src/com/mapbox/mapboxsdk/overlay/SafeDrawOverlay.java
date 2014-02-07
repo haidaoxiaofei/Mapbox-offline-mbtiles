@@ -23,7 +23,7 @@ public abstract class SafeDrawOverlay extends Overlay {
     private static final Matrix sMatrix = new Matrix();
     private boolean mUseSafeCanvas = true;
 
-    protected abstract void drawSafe(final ISafeCanvas c, final MapView osmv, final boolean shadow);
+    protected abstract void drawSafe(final ISafeCanvas c, final MapView mapView, final boolean shadow);
 
     public SafeDrawOverlay(Context ctx) {
         super(ctx);
@@ -34,23 +34,23 @@ public abstract class SafeDrawOverlay extends Overlay {
     }
 
     @Override
-    protected void draw(final Canvas c, final MapView osmv, final boolean shadow) {
+    protected void draw(final Canvas c, final MapView mapView, final boolean shadow) {
 
         sSafeCanvas.setCanvas(c);
 
         if (this.isUsingSafeCanvas()) {
 
             // Find the screen offset
-            Rect screenRect = osmv.getProjection().getScreenRect();
+            Rect screenRect = mapView.getProjection().getScreenRect();
             sSafeCanvas.xOffset = -screenRect.left;
             sSafeCanvas.yOffset = -screenRect.top;
 
             // Save the canvas state
             c.save();
 
-            if (osmv.getMapOrientation() != 0) {
+            if (mapView.getMapOrientation() != 0) {
                 // Un-rotate the maps so we can rotate them accurately using the safe canvas
-                c.rotate(-osmv.getMapOrientation(), screenRect.exactCenterX(),
+                c.rotate(-mapView.getMapOrientation(), screenRect.exactCenterX(),
                         screenRect.exactCenterY());
             }
 
@@ -61,8 +61,8 @@ public abstract class SafeDrawOverlay extends Overlay {
 
             // Translate the coordinates
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                final float scaleX = osmv.getScaleX();
-                final float scaleY = osmv.getScaleY();
+                final float scaleX = mapView.getScaleX();
+                final float scaleY = mapView.getScaleY();
                 c.translate(screenRect.left * scaleX, screenRect.top * scaleY);
                 c.translate(floatErrorX, floatErrorY);
             } else {
@@ -72,9 +72,9 @@ public abstract class SafeDrawOverlay extends Overlay {
                 c.setMatrix(sMatrix);
             }
 
-            if (osmv.getMapOrientation() != 0) {
+            if (mapView.getMapOrientation() != 0) {
                 // Safely re-rotate the maps
-                sSafeCanvas.rotate(osmv.getMapOrientation(), (double) screenRect.exactCenterX(),
+                sSafeCanvas.rotate(mapView.getMapOrientation(), (double) screenRect.exactCenterX(),
                         (double) screenRect.exactCenterY());
             }
 
@@ -82,7 +82,7 @@ public abstract class SafeDrawOverlay extends Overlay {
             sSafeCanvas.xOffset = 0;
             sSafeCanvas.yOffset = 0;
         }
-        this.drawSafe(sSafeCanvas, osmv, shadow);
+        this.drawSafe(sSafeCanvas, mapView, shadow);
 
         if (this.isUsingSafeCanvas()) {
             c.restore();

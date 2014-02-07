@@ -16,6 +16,8 @@ import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
+import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.testflightapp.lib.TestFlight;
 import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
@@ -52,13 +54,16 @@ public class MainActivity extends Activity {
         m.setIcon(new Icon(Icon.Size.l, "bus", "000"));
         mv.addMarker(m);
 
-        mv.setOnTilesLoadedListener(new MapView.TilesLoadedListener() {
+        mv.setOnTilesLoadedListener(new TilesLoadedListener() {
             @Override
             public boolean onTilesLoaded() {
                 return false;
             }
         });
 
+<<<<<<< HEAD
+=======
+>>>>>>> master
         mv.setVisibility(View.VISIBLE);
         equator = new PathOverlay();
         equator.addPoint(0,-89);
@@ -140,6 +145,4 @@ public class MainActivity extends Activity {
         //button.setTypeface(tf);
         return button;
     }
-
-
 }

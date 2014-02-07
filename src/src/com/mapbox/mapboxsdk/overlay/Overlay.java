@@ -30,28 +30,16 @@ import android.view.MotionEvent;
  */
 public abstract class Overlay {
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
     private static AtomicInteger sOrdinal = new AtomicInteger();
 
     // From Google Maps API
     protected static final float SHADOW_X_SKEW = -0.8999999761581421f;
     protected static final float SHADOW_Y_SCALE = 0.5f;
 
-    // ===========================================================
-    // Fields
-    // ===========================================================
-
     protected ResourceProxy mResourceProxy;
     protected float mScale;
     private static final Rect mRect = new Rect();
     private boolean mEnabled = true;
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
 
     public Overlay() {
     }
@@ -73,10 +61,6 @@ public abstract class Overlay {
         mScale = ctx.getResources().getDisplayMetrics().density;
         return this;
     }
-
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
 
     /**
      * Sets whether the Overlay is marked to be enabled. This setting does nothing by default, but
@@ -256,7 +240,6 @@ public abstract class Overlay {
     }
 
     public void onShowPress(final MotionEvent pEvent, final MapView pMapView) {
-        return;
     }
 
     /**
@@ -288,10 +271,6 @@ public abstract class Overlay {
         drawable.setBounds(mRect);
         canvas.restore();
     }
-
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
 
     /**
      * Interface definition for overlays that contain items that can be snapped to (for example,

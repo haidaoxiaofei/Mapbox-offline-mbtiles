@@ -77,8 +77,8 @@ public class MapController implements IMapController, MapViewConstants {
         final double curLatSpan = bb.getLatitudeSpan();
         final double curLonSpan = bb.getLongitudeSpan();
 
-        final double diffNeededLat = (double) latSpan / curLatSpan; // i.e. 600/500 = 1,2
-        final double diffNeededLon = (double) lonSpan / curLonSpan; // i.e. 300/400 = 0,75
+        final double diffNeededLat = latSpan / curLatSpan; // i.e. 600/500 = 1,2
+        final double diffNeededLon = lonSpan / curLonSpan; // i.e. 300/400 = 0,75
 
         final double diffNeeded = Math.max(diffNeededLat, diffNeededLon); // i.e. 1,2
 

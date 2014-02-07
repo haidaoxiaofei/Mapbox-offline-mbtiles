@@ -23,10 +23,9 @@ public class Icon {
 
     public enum Size {
         l, m, s
-    };
+    }
 
     public Icon(Size size, String symbol, String color) {
-        this.marker = marker;
         String url = BASE_URL + "marker/pin-" +
             size.toString() + "-" + symbol + "+" + color + ".png";
         new BitmapLoader().execute(url);

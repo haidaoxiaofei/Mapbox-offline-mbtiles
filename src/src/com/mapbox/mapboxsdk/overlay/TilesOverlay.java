@@ -10,9 +10,7 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.views.MapView.Projection;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
-
 import android.util.Log;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,6 +25,7 @@ import android.os.Build;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
  * These objects are the principle consumer of map tiles.
@@ -113,7 +112,7 @@ public class TilesOverlay
     }
 
     @Override
-    protected void drawSafe(final ISafeCanvas c, final MapView osmv, final boolean shadow) {
+    protected void drawSafe(final ISafeCanvas c, final MapView mapView, final boolean shadow) {
 
         if (DEBUGMODE) {
             Log.i(TAG, "onDraw(" + shadow + ")");
@@ -124,7 +123,7 @@ public class TilesOverlay
         }
 
         // Calculate the half-world size
-        final Projection pj = osmv.getProjection();
+        final Projection pj = mapView.getProjection();
         final int zoomLevel = pj.getZoomLevel();
         mWorldSize_2 = TileSystem.MapSize(zoomLevel) >> 1;
 
@@ -151,7 +150,6 @@ public class TilesOverlay
 
         // draw a cross at center in debug mode
         if (DEBUGMODE) {
-            // final LatLng center = osmv.getMapCenter();
             final Point centerPoint = new Point(viewPort.centerX() - mWorldSize_2,
                     viewPort.centerY() - mWorldSize_2);
             c.drawLine(centerPoint.x, centerPoint.y - 9,
