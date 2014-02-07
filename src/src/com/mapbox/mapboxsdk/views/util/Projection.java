@@ -31,6 +31,8 @@ import com.mapbox.mapboxsdk.geometry.GeoConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
 
+import android.util.Log;
+
 public class Projection implements IProjection, GeoConstants {
     private MapView mapView = null;
 
@@ -53,7 +55,7 @@ public class Projection implements IProjection, GeoConstants {
 
         viewWidth_2 = mapView.getWidth() / 2;
         viewHeight_2 = mapView.getHeight() / 2;
-        worldSize_2 = TileSystem.MapSize(mapView.getZoomLevel() / 2);
+        worldSize_2 = TileSystem.MapSize(mapView.getZoomLevel()) / 2;
 
         offsetX = -worldSize_2;
         offsetY = -worldSize_2;
@@ -63,6 +65,7 @@ public class Projection implements IProjection, GeoConstants {
         mScreenRectProjection = mapView.getScreenRect(null);
         mIntrinsicScreenRectProjection = mapView.getIntrinsicScreenRect(null);
         mMapOrientation = mapView.getMapOrientation();
+        Log.i(TAG, "worldSize" + worldSize_2);
     }
 
     public int getZoomLevel() {
@@ -217,4 +220,7 @@ public class Projection implements IProjection, GeoConstants {
     public ILatLng fromPixels(final int x, final int y) {
         return fromPixels((float) x, (float) y);
     }
+
+
+    private static final String TAG = "Projection";
 }
