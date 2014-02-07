@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import com.mapbox.mapboxsdk.views.DefaultInfoWindow;
+import com.mapbox.mapboxsdk.views.InfoWindow;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.Icon;
@@ -53,22 +55,14 @@ public class MainActivity extends Activity {
         mv.setOnTilesLoadedListener(new MapView.TilesLoadedListener() {
             @Override
             public boolean onTilesLoaded() {
-                System.out.println("All tiles have been loaded");
                 return false;
             }
         });
 
-        mv.setOnTileLoadedListener(new MapView.TileLoadedListener(){
-            @Override
-            public Drawable onTileLoaded(Drawable d){
-                d.setColorFilter( 0xffff0000, PorterDuff.Mode.MULTIPLY);
-                return d;
-            }
-        });
         mv.setVisibility(View.VISIBLE);
         equator = new PathOverlay();
         equator.addPoint(0,-89);
-        equator.addPoint(0,89);
+        equator.addPoint(0, 89);
         mv.getOverlays().add(equator);
     }
 

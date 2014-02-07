@@ -30,7 +30,6 @@ public class Tooltip extends View {
         parentMapView = mapView;
         TextView tv = new TextView(context);
         tv.setText("hello");
-        this.addView(tv);
         parent = (ViewGroup)mapView.getParent();
         mapView.addView(this);
         this.getLayoutParams().width = 10;
