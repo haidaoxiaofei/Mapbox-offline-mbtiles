@@ -538,6 +538,14 @@ public class MapView extends ViewGroup implements IMapView,
     }
 
     /**
+     * Get centerpoint of the phone as latitude and longitude.
+     * @return centerpoint
+     */
+    public LatLng getCenter() {
+        return getBoundingBox().getCenter();
+    }
+
+    /**
      * Gets the current bounds of the screen in <I>screen coordinates</I>.
      */
     public Rect getScreenRect(final Rect reuse) {
