@@ -2,8 +2,11 @@ package com.mapbox.mapboxsdk.views;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.*;
-import android.os.AsyncTask;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.PointF;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -25,7 +28,6 @@ import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
@@ -35,13 +37,16 @@ import com.mapbox.mapboxsdk.overlay.Overlay;
 import com.mapbox.mapboxsdk.overlay.OverlayItem;
 import com.mapbox.mapboxsdk.overlay.OverlayManager;
 import com.mapbox.mapboxsdk.overlay.TilesOverlay;
+import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.mapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.views.util.Projection;
+import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
@@ -53,11 +58,6 @@ import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -204,15 +204,16 @@ public class MapView extends ViewGroup implements IMapView,
         mGestureDetector = new GestureDetector(context, new MapViewGestureDetectorListener());
         mGestureDetector.setOnDoubleTapListener(new MapViewDoubleClickListener());
         this.context = context;
-        setURL(EXAMPLE_MAP_ID);
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
-        if (attrs!=null){
+        if (attrs != null) {
             final String mapboxID = attrs.getAttributeValue(null, "mapboxID");
             if (mapboxID != null) {
-                setURL(mapboxID);
+                setTileSource(new mapboxTileLayer(mapboxID));
             }
+        } else {
+            setTileSource(new mapboxTileLayer(EXAMPLE_MAP_ID));
         }
 
         addTooltip();
@@ -235,7 +236,6 @@ public class MapView extends ViewGroup implements IMapView,
      */
     public MapView(Context context, String URL) {
         this(context, (AttributeSet) null);
-        setURL(URL);
     }
 
     protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileProviderBase aTileProvider) {
@@ -243,46 +243,12 @@ public class MapView extends ViewGroup implements IMapView,
         init(context);
     }
 
-    /**
-     * Sets the MapView to use the specified URL.
-     * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
-     */
-    public void setURL(String URL) {
-        if (!URL.equals("")) {
-            URL = parseURL(URL);
-            tileSource = new XYTileSource(URL, ResourceProxy.string.online_mode, 0, 24, DEFAULT_TILE_SIZE, ".png", URL);
-            this.setTileSource(tileSource);
-        }
-    }
-
-    /**
-     * Switches the MapView to a layer (tile overlay).
-     * @param name Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
-     */
-    public void switchToLayer(String name) {
-        String URL = parseURL(name);
-        final MapTileProviderBasic tileProvider = (MapTileProviderBasic) this.getTileProvider();
-        final ITileSource tileSource = new XYTileSource(name, null, 1, 16, DEFAULT_TILE_SIZE, ".png", URL);
-        tileProvider.setTileSource(tileSource);
-        this.invalidate();
-    }
-
-    /**
-     * Parses the passed ID string to use the relevant method.
-     * @param url Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
-     * @return the standard URL to be used by the library
-     **/
-    private String parseURL(String url) {
-        identifier = url;
-        if (url.contains(".json")) {
-            return getURLFromTileJSON(url);
-        } else if (!url.contains("http://") && !url.contains("https://")) {
-            return getURLFromMapBoxID(url);
-        } else if (url.contains(".png")) {
-            return getURLFromImageTemplate(url);
-        } else {
-            throw new IllegalArgumentException("You need to enter either a valid URL, a MapBox id, or a tile URL template");
-        }
+    public void setTileSource(final ITileSource aTileSource) {
+        mTileProvider.setTileSource(aTileSource);
+        TileSystem.setTileSize(aTileSource.getTileSizePixels());
+        this.checkZoomButtons();
+        this.setZoomLevel(mZoomLevel); // revalidate zoom level
+        postInvalidate();
     }
 
     /**
@@ -291,49 +257,9 @@ public class MapView extends ViewGroup implements IMapView,
      */
     private void init(Context context) {
         this.context = context;
-        setURL("");
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
-    }
-
-    /**
-     * Obtains the name of the application to identify the maps in the filesystem.
-     * @return the name of the app
-     */
-    private String getApplicationName() {
-        return context.getPackageName();
-    }
-
-    /**
-     * Turns a Mapbox ID into a standard URL.
-     * @param mapBoxID the Mapbox ID
-     * @return a standard url that will be used by the MapView
-     */
-    private String getURLFromMapBoxID(String mapBoxID) {
-        if (!mapBoxID.contains(".")) {
-            throw new IllegalArgumentException("Invalid MapBox ID, entered " + mapBoxID);
-        }
-        String completeURL = MAPBOX_BASE_URL + mapBoxID + "/";
-        return completeURL;
-    }
-
-    /**
-     * Turns a URL TileJSON path to the standard URL format used by the MapView.
-     * @param tileJSONURL the tileJSON URL
-     * @return a standard url that will be used by the MapView
-     */
-    private String getURLFromTileJSON(String tileJSONURL) {
-        return tileJSONURL.replace(".json", "/");
-    }
-
-    /**
-     * Gets a {xyz} image template URL and turns it into a standard URL for the MapView.
-     * @param imageTemplateURL the template URL
-     * @return a standard url that will be used by the MapView
-     */
-    private String getURLFromImageTemplate(String imageTemplateURL) {
-        return imageTemplateURL.replace("/{z}/{x}/{y}.png", "/");
     }
 
     /**
@@ -381,7 +307,7 @@ public class MapView extends ViewGroup implements IMapView,
      * @param URL the URL from which to load the GeoJSON file
      */
     public void loadFromGeoJSONURL(String URL) {
-        new JSONBodyGetter().execute(URL);
+        new GeoJSONLayer(this).loadURL(URL);
     }
 
     /**
@@ -389,53 +315,7 @@ public class MapView extends ViewGroup implements IMapView,
      * @param geoJSON the GeoJSON string to parse
      */
     public void loadFromGeoJSONString(String geoJSON) throws JSONException {
-        new JSONBodyGetter().parseGeoJSON(geoJSON);
-    }
-
-    /**
-     * Class that generates markers from formats such as GeoJSON
-     */
-    @TargetApi(Build.VERSION_CODES.CUPCAKE)
-    public class JSONBodyGetter extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            InputStream is = null;
-            String jsonText = null;
-            try {
-                is = new URL(params[0]).openStream();
-                BufferedReader rd = new BufferedReader(new InputStreamReader(is,
-                        Charset.forName("UTF-8")));
-
-                jsonText = readAll(rd);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return jsonText;
-        }
-
-        @Override
-        protected void onPostExecute(String jsonString) {
-            try {
-                parseGeoJSON(jsonString);
-            } catch (JSONException e) {
-                Log.w(TAG, "JSON parsed was invalid. Continuing without it");
-            }
-        }
-
-        private String readAll(Reader rd) throws IOException {
-            StringBuilder sb = new StringBuilder();
-            int cp;
-            while ((cp = rd.read()) != -1) {
-                sb.append((char) cp);
-            }
-            return sb.toString();
-        }
-
-        private void parseGeoJSON(String jsonString) throws JSONException {
-            Log.w(TAG, "MAPBOX parsing from string");
-            GeoJSON.parseString(jsonString, MapView.this);
-        }
+        GeoJSON.parseString(geoJSON, MapView.this);
     }
 
     /**
@@ -487,7 +367,7 @@ public class MapView extends ViewGroup implements IMapView,
 
 
     @Override
-    public IMapController getController() {
+    public MapController getController() {
         return this.mController;
     }
 
@@ -578,10 +458,6 @@ public class MapView extends ViewGroup implements IMapView,
         return out;
     }
 
-    public boolean hasTileLoadedListener() {
-        return tileLoadedListener != null;
-    }
-
     /**
      * Get a projection for converting between screen-pixel coordinates and latitude/longitude
      * coordinates. You should not hold on to this object for more than one draw, since the
@@ -600,14 +476,6 @@ public class MapView extends ViewGroup implements IMapView,
 
     void setCenter(final ILatLng aCenter) {
         getController().setCenter(aCenter);
-    }
-
-    public void setTileSource(final ITileSource aTileSource) {
-        mTileProvider.setTileSource(aTileSource);
-        TileSystem.setTileSize(aTileSource.getTileSizePixels());
-        this.checkZoomButtons();
-        this.setZoomLevel(mZoomLevel); // revalidate zoom level
-        postInvalidate();
     }
 
     /**
@@ -815,19 +683,6 @@ public class MapView extends ViewGroup implements IMapView,
 
     boolean zoomOutFixing(final int xPixel, final int yPixel) {
         return getController().zoomOutFixing(xPixel, yPixel);
-    }
-
-    /**
-     * Returns the current center-point position of the map, as a LatLng (latitude and longitude).
-     *
-     * @return A LatLng of the map's center-point.
-     */
-    @Override
-    public ILatLng getMapCenter() {
-        final int world_2 = TileSystem.MapSize(mZoomLevel) / 2;
-        final Rect screenRect = getScreenRect(null);
-        screenRect.offset(world_2, world_2);
-        return TileSystem.PixelXYToLatLong(screenRect.centerX(), screenRect.centerY(), mZoomLevel);
     }
 
     public ResourceProxy getResourceProxy() {
@@ -1613,53 +1468,7 @@ public class MapView extends ViewGroup implements IMapView,
     /**
      * Per-child layout information associated with OpenStreetMapView.
      */
-    public static class LayoutParams extends ViewGroup.LayoutParams {
-
-        /**
-         * Special value for the alignment requested by a View. TOP_LEFT means that the location
-         * will at the top left the View.
-         */
-        public static final int TOP_LEFT = 1;
-        /**
-         * Special value for the alignment requested by a View. TOP_RIGHT means that the location
-         * will be centered at the top of the View.
-         */
-        public static final int TOP_CENTER = 2;
-        /**
-         * Special value for the alignment requested by a View. TOP_RIGHT means that the location
-         * will at the top right the View.
-         */
-        public static final int TOP_RIGHT = 3;
-        /**
-         * Special value for the alignment requested by a View. CENTER_LEFT means that the location
-         * will at the center left the View.
-         */
-        public static final int CENTER_LEFT = 4;
-        /**
-         * Special value for the alignment requested by a View. CENTER means that the location will
-         * be centered at the center of the View.
-         */
-        public static final int CENTER = 5;
-        /**
-         * Special value for the alignment requested by a View. CENTER_RIGHT means that the location
-         * will at the center right the View.
-         */
-        public static final int CENTER_RIGHT = 6;
-        /**
-         * Special value for the alignment requested by a View. BOTTOM_LEFT means that the location
-         * will be at the bottom left of the View.
-         */
-        public static final int BOTTOM_LEFT = 7;
-        /**
-         * Special value for the alignment requested by a View. BOTTOM_CENTER means that the
-         * location will be centered at the bottom of the view.
-         */
-        public static final int BOTTOM_CENTER = 8;
-        /**
-         * Special value for the alignment requested by a View. BOTTOM_RIGHT means that the location
-         * will be at the bottom right of the View.
-         */
-        public static final int BOTTOM_RIGHT = 9;
+    public static class LayoutParams extends ViewGroup.LayoutParams implements MapViewLayouts  {
         /**
          * The location of the child within the map view.
          */

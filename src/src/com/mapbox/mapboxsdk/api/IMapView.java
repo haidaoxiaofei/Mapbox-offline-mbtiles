@@ -1,5 +1,7 @@
 package com.mapbox.mapboxsdk.api;
 
+import com.mapbox.mapboxsdk.views.MapController;
+
 /**
  * An interface that resembles the Google Maps API MapView class
  * and is implemented by the osmdroid {@link MapView} class.
@@ -8,7 +10,7 @@ package com.mapbox.mapboxsdk.api;
  */
 public interface IMapView {
 
-    IMapController getController();
+    MapController getController();
 
     IProjection getProjection();
 
@@ -20,7 +22,7 @@ public interface IMapView {
 
     double getLongitudeSpan();
 
-    ILatLng getMapCenter();
+    ILatLng getCenter();
 
     // some methods from View
     // (well, just one for now)

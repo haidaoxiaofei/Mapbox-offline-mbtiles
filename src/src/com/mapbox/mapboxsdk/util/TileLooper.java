@@ -39,7 +39,7 @@ public abstract class TileLooper {
             }
         }
         Collections.sort(orderedList, new ClosenessToCenterComparator());
-        for(Point point: orderedList){
+        for (Point point: orderedList) {
             final int tileY = GeometryMath.mod(point.y, mapTileUpperBound);
             final int tileX = GeometryMath.mod(point.x, mapTileUpperBound);
             final MapTile tile = new MapTile(pZoomLevel, tileX, tileY);
@@ -55,13 +55,19 @@ public abstract class TileLooper {
     protected class ClosenessToCenterComparator implements Comparator<Point>{
         @Override
         public int compare(Point one, Point two) {
-            if(length(one)>length(two)) return 1;
-            if(length(one)<length(two)) return -1;
-            return 0;
+            float oneLength = length(one);
+            float twoLength = length(two);
+            if (oneLength > twoLength) {
+                return 1;
+            } else if (oneLength < twoLength) {
+                return -1;
+            } else {
+                return 0;
+            }
         }
-        private float length(Point point){
-            float length = (float) Math.sqrt(Math.pow(point.x - center.x, 2) + Math.pow(point.y-center.y,2));
-            return length;
+        private float length(Point point) {
+            return (float) (Math.sqrt(Math.pow(point.x - center.x, 2) +
+                    Math.pow(point.y - center.y, 2)));
         }
     }
 

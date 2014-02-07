@@ -10,21 +10,20 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import com.mapbox.mapboxsdk.views.DefaultInfoWindow;
-import com.mapbox.mapboxsdk.views.InfoWindow;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.mapboxTileLayer;
 import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.testflightapp.lib.TestFlight;
-import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
 import com.mapbox.mapboxsdk.overlay.mylocation.MyLocationNewOverlay;
 
 public class MainActivity extends Activity {
-	private IMapController mapController;
+	private MapController mapController;
 	private LatLng startingPoint = new LatLng(51f, 0f);
 	private MapView mv;
 	private MyLocationNewOverlay myLocationOverlay;
@@ -60,10 +59,6 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
-
-<<<<<<< HEAD
-=======
->>>>>>> master
         mv.setVisibility(View.VISIBLE);
         equator = new PathOverlay();
         equator.addPoint(0,-89);
@@ -106,8 +101,7 @@ public class MainActivity extends Activity {
     }
 
     protected void replaceMapView(String layer) {
-        mv.switchToLayer(layer);
-
+        mv.setTileSource(new mapboxTileLayer(layer));
     }
 
     private void addLocationOverlay() {

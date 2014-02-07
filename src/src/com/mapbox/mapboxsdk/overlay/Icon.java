@@ -12,7 +12,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by tmcw on 1/30/14.
+ * An Icon provided by the Mapbox marker API, optionally
+ * with a symbol from Maki
  */
 public class Icon {
 
@@ -25,6 +26,13 @@ public class Icon {
         l, m, s
     }
 
+    /**
+     * Initialize an icon with size, symbol, and color, and start a
+     * download process to load it from the API.
+     * @param size
+     * @param symbol
+     * @param color
+     */
     public Icon(Size size, String symbol, String color) {
         String url = BASE_URL + "marker/pin-" +
             size.toString() + "-" + symbol + "+" + color + ".png";
@@ -38,8 +46,6 @@ public class Icon {
         }
         return this;
     }
-
-    // marker/pin-m-bus+48a.png"
 
     class BitmapLoader extends AsyncTask<String, Void,Bitmap> {
 

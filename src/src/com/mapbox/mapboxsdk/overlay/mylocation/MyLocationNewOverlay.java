@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.api.IMapController;
 import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tile.TileSystem;
@@ -16,6 +15,7 @@ import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
+import com.mapbox.mapboxsdk.views.MapController;
 import android.util.Log;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -53,7 +53,7 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
 
     protected final MapView mMapView;
 
-    private final IMapController mMapController;
+    private final MapController mMapController;
     public IMyLocationProvider mMyLocationProvider;
 
     private final LinkedList<Runnable> mRunOnFirstFix = new LinkedList<Runnable>();

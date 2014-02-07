@@ -43,7 +43,7 @@ public class MBTilesFileArchive implements IArchiveFile {
             final String[] tile = {COL_TILES_TILE_DATA};
             final String[] xyz = {
                     Integer.toString(pTile.getX())
-                    , Double.toString(Math.pow(2, pTile.getZoomLevel()) - pTile.getY() - 1)  // Use Google Tiling Spec
+                    , Double.toString(Math.pow(2, pTile.getZoomLevel()) - pTile.getY() - 1)
                     , Integer.toString(pTile.getZoomLevel())
             };
 
