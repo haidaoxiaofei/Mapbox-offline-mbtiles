@@ -31,21 +31,20 @@ android {
     buildToolsVersion "19.0.0"
 
     sourceSets {
-
         main {
 
-            manifest.srcFile 'test/AndroidManifest.xml'
+            manifest.srcFile 'src/main/AndroidManifest.xml'
 
-            java.srcDirs = ['test/src', 'src/src', 'src/main/java']
+            java.srcDirs = ['src/main/java']
 
-            resources.srcDirs = ['test/res', 'src/res', 'resources']
+            resources.srcDirs = ['src/main/resources']
 
-            res.srcDirs = ['test/res', 'src/res', 'resources']
+            res.srcDirs = ['src/main/res']
 
-            assets.srcDirs = ['test/assets']
-
+            assets {
+                srcDir 'assets'
+            }
         }
-
     }
     lintOptions {
           abortOnError false
