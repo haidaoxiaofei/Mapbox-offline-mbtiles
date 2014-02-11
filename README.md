@@ -48,19 +48,12 @@ Our library itself is located in ```path/to/sdk/src/src```
 * Choose directory of downloaded project.
 * Will appear two projects: mapbox-android-sdk\src and mapbox-android-sdk\test
 * In IDE you will see the errors in class "com.mapbox.mapboxsdk.views.MapView":
-* You need to correct the line 21: "import com.mapbox.mapboxforandroid.R;" to "import com.mapbox.mapboxsdk.R;" or just 
-* do "Organize imports"(Ctrl+Shift+O)
-* Then let's correct project name "src". Preferably, to rename "src" project name to "MapboxSDK", after rename you will 
-* get that your SDK project is compiled correctly. 
-* We can start using the SDK project, but in future we will need to use markers and to fix an issue in OSMDroidTests we 
-* need to add some default pictures which are in OSM android library and were not included in our SDK.
-* So what we gonna do is to add all '.png' images from OSM android jar 
-* (https://code.google.com/p/osmdroid/downloads/detail?name=osmdroid-android-4.0.jar&can=1&q=) 
-* resources folder to com.mapbox.mapboxsdk package. The main important image is marker_default.png that will cause you 
-* the errors in log if you are going to use markers in OSMDroidTest project.
+* You need to correct the line 21: "import com.mapbox.mapboxforandroid.R;" to "import com.mapbox.mapboxsdk.R;" or just do "Organize imports"(Ctrl+Shift+O)
+* Then let's correct project name "src". Preferably, to rename "src" project name to "MapboxSDK", after rename you will get that your SDK project is compiled correctly. 
+* We can start using the SDK project, but in future we will need to use markers and to fix an issue in OSMDroidTests we need to add some default pictures which are in OSM android library and were not included in our SDK.
+* So what we gonna do is to add all '.png' images from OSM android jar  (https://code.google.com/p/osmdroid/downloads/detail?name=osmdroid-android-4.0.jar&can=1&q=) to resources folder to com.mapbox.mapboxsdk package. The main important image is marker_default.png that will cause you the errors in log if you are going to use markers in OSMDroidTest project.
 * SDK is ready to be used.
-* Open properties of the second project "OSMDroidTests" ->Android -> at the bottom you will see Library -> click on Add 
-* button to add your SDK project.
+* Open properties of the second project "OSMDroidTests" ->Android -> at the bottom you will see Library -> click on Add button to add your SDK project.
 * That's all now your test project - "OSMDroidTests" is working in Eclipse. Enjoy!
 
 
