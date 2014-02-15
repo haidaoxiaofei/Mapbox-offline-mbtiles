@@ -16,8 +16,7 @@ public class GeoJSON {
     /**
      * Parse a string of GeoJSON data, returning an array of Overlay objects.
      *
-     * @param jsonString
-     * @return
+     * @param jsonString GeoJSON string
      * @throws JSONException
      */
     public static void parseString(String jsonString, MapView mv) throws JSONException {
@@ -27,7 +26,7 @@ public class GeoJSON {
     /**
      * Parse a GeoJSON object into an array of overlays.
      *
-     * @param json
+     * @param json GeoJSON
      * @param mv a mapview for the overlays to be added to
      * @throws JSONException
      */
@@ -51,15 +50,13 @@ public class GeoJSON {
      * Parse a GeoJSON feature object into some number of overlays, adding them to the overlays
      * array.
      *
-     * @param feature
-     * @param overlays
+     * @param feature GeoJSON
      * @throws JSONException
      */
     public static void featureToLayer(JSONObject feature, MapView mv) throws JSONException {
 
         JSONObject properties = (JSONObject) feature.get("properties");
-        String title = "";
-        title = properties.optString("title");
+        String title = properties.optString("title");
 
         JSONObject geometry = (JSONObject) feature.get("geometry");
         String type = geometry.optString("type");
