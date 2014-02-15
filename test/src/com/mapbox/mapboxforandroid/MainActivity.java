@@ -3,20 +3,17 @@ package com.mapbox.mapboxforandroid;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.mapboxTileLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.testflightapp.lib.TestFlight;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
@@ -101,7 +98,7 @@ public class MainActivity extends Activity {
     }
 
     protected void replaceMapView(String layer) {
-        mv.setTileSource(new mapboxTileLayer(layer));
+        mv.setTileSource(new MapboxTileLayer(layer));
     }
 
     private void addLocationOverlay() {

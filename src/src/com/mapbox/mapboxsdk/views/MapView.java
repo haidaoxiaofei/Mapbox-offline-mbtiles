@@ -1,6 +1,5 @@
 package com.mapbox.mapboxsdk.views;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -40,8 +39,8 @@ import com.mapbox.mapboxsdk.overlay.TilesOverlay;
 import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.mapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.util.GeometryMath;
@@ -56,12 +55,9 @@ import com.mapbox.mapboxsdk.views.util.MultiTouchController;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.XYTileSource;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -208,12 +204,12 @@ public class MapView extends ViewGroup implements IMapView,
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
         if (attrs != null) {
-            final String mapboxID = attrs.getAttributeValue(null, "mapboxID");
-            if (mapboxID != null) {
-                setTileSource(new mapboxTileLayer(mapboxID));
+            final String mapid = attrs.getAttributeValue(null, "mapid");
+            if (mapid != null) {
+                setTileSource(new MapboxTileLayer(mapid));
             }
         } else {
-            setTileSource(new mapboxTileLayer(EXAMPLE_MAP_ID));
+            setTileSource(new MapboxTileLayer(EXAMPLE_MAP_ID));
         }
 
         addTooltip();

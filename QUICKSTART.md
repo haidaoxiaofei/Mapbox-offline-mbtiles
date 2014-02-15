@@ -34,7 +34,7 @@ To add the ```MapView``` as a layout element, add the following to your xml file
 android:id="@+id/mapview"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent"
-mapboxID="Your MapBox ID" />
+mapid="Your MapBox mapid" />
 ```
 
 
@@ -46,7 +46,7 @@ this.findViewById(R.id.mapview);
 
 #### On runtime
 
-On runtime you can create a new MapView by specifying the context of the application and a valid [MapBox ID](https://www.mapbox.com/developers/api-overview/), a TileJSON file or a zxy image template.
+On runtime you can create a new MapView by specifying the context of the application and a valid [MapBox mapid](https://www.mapbox.com/developers/api-overview/), a TileJSON file or a zxy image template.
 
 ```java
 MapView mapView = new MapView(this, "examples.map-vyofok3q");
