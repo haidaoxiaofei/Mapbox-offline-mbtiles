@@ -208,9 +208,9 @@ public class MapView extends ViewGroup implements IMapView,
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
         if (attrs != null) {
-            final String mapboxID = attrs.getAttributeValue(null, "mapboxID");
-            if (mapboxID != null) {
-                setTileSource(new mapboxTileLayer(mapboxID));
+            final String mapid = attrs.getAttributeValue(null, "mapid");
+            if (mapid != null) {
+                setTileSource(new mapboxTileLayer(mapid));
             }
         } else {
             setTileSource(new mapboxTileLayer(EXAMPLE_MAP_ID));
