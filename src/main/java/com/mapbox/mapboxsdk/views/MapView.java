@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
+import android.widget.Toast;
 import android.widget.ZoomButtonsController;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.R;
@@ -39,11 +40,12 @@ import com.mapbox.mapboxsdk.overlay.TilesOverlay;
 import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.mapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.util.GeometryMath;
+import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
@@ -69,8 +71,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * state of a single map, including layers, markers,
  * and interaction code.
  */
-public class MapView extends ViewGroup implements IMapView,
-        MapViewConstants, MapEventsReceiver, MapboxConstants, MultiTouchController.MultiTouchObjectCanvas<Object> {
+public class MapView extends ViewGroup implements IMapView, MapViewConstants, MapEventsReceiver, MapboxConstants, MultiTouchController.MultiTouchObjectCanvas<Object> {
 
     /**
      * The current tile source for the view (to be deprecated soon).
@@ -204,12 +205,12 @@ public class MapView extends ViewGroup implements IMapView,
         this.getOverlays().add(eventsOverlay);
         this.setMultiTouchControls(true);
         if (attrs != null) {
-            final String mapboxID = attrs.getAttributeValue(null, "mapboxID");
-            if (mapboxID != null) {
-                setTileSource(new mapboxTileLayer(mapboxID));
+            final String mapid = attrs.getAttributeValue(null, "mapid");
+            if (mapid != null) {
+                setTileSource(new MapboxTileLayer(mapid));
             }
         } else {
-            setTileSource(new mapboxTileLayer(EXAMPLE_MAP_ID));
+            setTileSource(new MapboxTileLayer(EXAMPLE_MAP_ID));
         }
 
         addTooltip();
@@ -294,15 +295,14 @@ public class MapView extends ViewGroup implements IMapView,
     }
 
     /**
-     * Load and parse a GeoJSON file at a given URL.
-     * Use {@link #loadFromGeoJSONURL(String)} or {@link #loadFromGeoJSONString(String)}
-     * @param URL the URL from which to load the GeoJSON file
-     */
-    /**
      * Load and parse a GeoJSON file at a given URL
      * @param URL the URL from which to load the GeoJSON file
      */
     public void loadFromGeoJSONURL(String URL) {
+        if (!NetworkUtils.isNetworkAvailable(getContext())) {
+            Toast.makeText(getContext(), R.string.networkNotAvailable, Toast.LENGTH_LONG).show();
+            return;
+        }
         new GeoJSONLayer(this).loadURL(URL);
     }
 
