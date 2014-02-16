@@ -14,7 +14,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Point;
 import com.mapbox.mapboxsdk.views.util.Projection;
 
-public class DirectedLocationOverlay extends Overlay {
+public class CoreLocationOverlay extends Overlay {
     // ===========================================================
     // Constants
     // ===========================================================
@@ -58,11 +58,11 @@ public class DirectedLocationOverlay extends Overlay {
     // Constructors
     // ===========================================================
 
-    public DirectedLocationOverlay(final Context ctx, int overlayStyle) {
+    public CoreLocationOverlay(final Context ctx, int overlayStyle) {
         this(ctx, new DefaultResourceProxyImpl(ctx), overlayStyle);
     }
 
-    public DirectedLocationOverlay(final Context ctx, final ResourceProxy pResourceProxy, int overlayStyle) {
+    public CoreLocationOverlay(final Context ctx, final ResourceProxy pResourceProxy, int overlayStyle) {
         super(pResourceProxy);
 
         this.overlayStyle = overlayStyle;
