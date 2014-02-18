@@ -6,11 +6,16 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:0.7.+'
+        classpath 'com.github.dcendents:android-maven-plugin:1.0'
     }
 
 }
 
-apply plugin: 'android'
+apply plugin: 'android-library'
+apply plugin: 'android-maven'
+
+group = 'com.mapbox.mapboxsdk'
+version = '1.0.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -26,21 +31,20 @@ android {
     buildToolsVersion "19.0.0"
 
     sourceSets {
-
         main {
 
-            manifest.srcFile 'test/AndroidManifest.xml'
+            manifest.srcFile 'src/main/AndroidManifest.xml'
 
-            java.srcDirs = ['test/src', 'src/src', 'src/main/java']
+            java.srcDirs = ['src/main/java']
 
-            resources.srcDirs = ['test/res', 'src/res', 'resources']
+            resources.srcDirs = ['src/main/resources']
 
-            res.srcDirs = ['test/res', 'src/res', 'resources']
+            res.srcDirs = ['src/main/res']
 
-            assets.srcDirs = ['test/assets']
-
+            assets {
+                srcDir 'assets'
+            }
         }
-
     }
     lintOptions {
           abortOnError false
