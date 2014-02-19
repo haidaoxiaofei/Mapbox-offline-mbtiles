@@ -9,7 +9,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
  * In order to use a different implementation call {@link #setFactoryInstance(IHttpClientFactory)}
  * early in your code, for example in <code>onCreate</code> in your main activity.
  * For example to use
- * <a href="http://square.github.io/okhttp/">OkHttp/</a>
+ * <a href="http://square.gith  ub.io/okhttp/">OkHttp/</a>
  * use the following code
  * <code>
  * HttpClientFactory.setFactoryInstance(new IHttpClientFactory() {

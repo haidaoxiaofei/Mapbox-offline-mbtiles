@@ -114,7 +114,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     /**
      * Handles map scrolling
      */
-    private final Scroller mScroller;
+    protected final Scroller mScroller;
     protected boolean mIsFlinging;
 
     protected final AtomicInteger mTargetZoomLevel = new AtomicInteger();
@@ -127,7 +127,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     private final ResourceProxy mResourceProxy;
 
-    private MultiTouchController<Object> mMultiTouchController;
+    protected MultiTouchController<Object> mMultiTouchController;
     protected float mMultiTouchScale = 1.0f;
     protected PointF mMultiTouchScalePoint = new PointF();
 
@@ -185,8 +185,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this.mMapOverlay = new TilesOverlay(mTileProvider, mResourceProxy);
         mOverlayManager = new OverlayManager(mMapOverlay);
 
-        mGestureDetector = new GestureDetector(context, new MapViewGestureDetectorListener());
-        mGestureDetector.setOnDoubleTapListener(new MapViewDoubleClickListener());
+        mGestureDetector = new GestureDetector(context, new MapViewGestureDetectorListener(this));
+        mGestureDetector.setOnDoubleTapListener(new MapViewDoubleClickListener(this));
         this.context = context;
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
@@ -944,18 +944,14 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     @Override
     public boolean dispatchTouchEvent(final MotionEvent event) {
 
-        if (DEBUGMODE) {
-            Log.d(TAG, "dispatchTouchEvent(" + event + ")");
-        }
+        Log.d(TAG, "dispatchTouchEvent(" + event + ")");
 
         // Get rotated event for some touch listeners.
         MotionEvent rotatedEvent = rotateTouchEvent(event);
 
         try {
             if (super.dispatchTouchEvent(event)) {
-                if (DEBUGMODE) {
-                    Log.d(TAG, "super handled onTouchEvent");
-                }
+                Log.d(TAG, "super handled onTouchEvent");
                 return true;
             }
 
@@ -964,16 +960,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             }
 
             if (mMultiTouchController != null && mMultiTouchController.onTouchEvent(event)) {
-                if (DEBUGMODE) {
-                    Log.d(TAG, "mMultiTouchController handled onTouchEvent");
-                }
+                Log.d(TAG, "mMultiTouchController handled onTouchEvent");
                 return true;
             }
 
             if (mGestureDetector.onTouchEvent(rotatedEvent)) {
-                if (DEBUGMODE) {
-                    Log.d(TAG, "mGestureDetector handled onTouchEvent");
-                }
+                Log.d(TAG, "mGestureDetector handled onTouchEvent");
                 return true;
             }
         } finally {
@@ -981,9 +973,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 rotatedEvent.recycle();
         }
 
-        if (DEBUGMODE) {
-            Log.d(TAG, "no-one handled onTouchEvent");
-        }
+        Log.d(TAG, "no-one handled onTouchEvent");
         return false;
     }
 
@@ -1257,119 +1247,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     public TileLoadedListener getTileLoadedListener() {
         return tileLoadedListener;
-    }
-
-    private class MapViewGestureDetectorListener implements GestureDetector.OnGestureListener {
-
-        @Override
-        public boolean onDown(final MotionEvent e) {
-
-            // Stop scrolling if we are in the middle of a fling!
-            if (mIsFlinging) {
-                mScroller.abortAnimation();
-                mIsFlinging = false;
-            }
-
-            if (MapView.this.getOverlayManager().onDown(e, MapView.this)) {
-                return true;
-            }
-
-            return true;
-        }
-
-        @Override
-        public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX,
-                               final float velocityY) {
-            if (mMultiTouchController == null) {
-                return false;
-            }
-            if (mMultiTouchController.postZoom) {
-                mMultiTouchController.postZoom = false;
-                return false;
-            }
-            if (MapView.this.getOverlayManager()
-                    .onFling(e1, e2, velocityX, velocityY, MapView.this)) {
-                return true;
-            }
-
-            final int worldSize = TileSystem.MapSize(MapView.this.getZoomLevel(false));
-            mIsFlinging = true;
-            mScroller.fling(getScrollX(), getScrollY(), (int) -velocityX, (int) -velocityY,
-                    -worldSize, worldSize, -worldSize, worldSize);
-            return true;
-        }
-
-        @Override
-        public void onLongPress(final MotionEvent e) {
-            if (mMultiTouchController != null && mMultiTouchController.isPinching()) {
-                return;
-            }
-            MapView.this.getOverlayManager().onLongPress(e, MapView.this);
-        }
-
-        @Override
-        public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX,
-                                final float distanceY) {
-            if (mMultiTouchController == null) {
-                return false;
-            }
-            if (mMultiTouchController.postZoom) {
-                mMultiTouchController.postZoom = false;
-                return false;
-            }
-            if (MapView.this.getOverlayManager().onScroll(e1, e2, distanceX, distanceY,
-                    MapView.this)) {
-                return true;
-            }
-
-            scrollBy((int) distanceX, (int) distanceY);
-            return true;
-        }
-
-        @Override
-        public void onShowPress(final MotionEvent e) {
-            MapView.this.getOverlayManager().onShowPress(e, MapView.this);
-        }
-
-        @Override
-        public boolean onSingleTapUp(final MotionEvent e) {
-            if (MapView.this.getOverlayManager().onSingleTapUp(e, MapView.this)) {
-                return true;
-            }
-
-            return false;
-        }
-
-    }
-
-    private class MapViewDoubleClickListener implements GestureDetector.OnDoubleTapListener {
-        @Override
-        public boolean onDoubleTap(final MotionEvent e) {
-            if (MapView.this.getOverlayManager().onDoubleTap(e, MapView.this)) {
-                return true;
-            }
-
-            final ILatLng center = getProjection().fromPixels(e.getX(), e.getY());
-            return zoomInFixing(center);
-        }
-
-        @Override
-        public boolean onDoubleTapEvent(final MotionEvent e) {
-            if (MapView.this.getOverlayManager().onDoubleTapEvent(e, MapView.this)) {
-                return true;
-            }
-
-            return false;
-        }
-
-        @Override
-        public boolean onSingleTapConfirmed(final MotionEvent e) {
-            if (MapView.this.getOverlayManager().onSingleTapConfirmed(e, MapView.this)) {
-                return true;
-            }
-
-            return false;
-        }
     }
 
     // ===========================================================
