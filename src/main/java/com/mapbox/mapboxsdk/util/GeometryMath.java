@@ -1,12 +1,11 @@
 package com.mapbox.mapboxsdk.util;
 
 import android.graphics.Rect;
-import com.mapbox.mapboxsdk.views.util.constants.MathConstants;
 
 /**
  * @author Marc Kurtz
  */
-public class GeometryMath implements MathConstants {
+public class GeometryMath {
     public static final double DEG2RAD = (Math.PI / 180.0);
     public static final double RAD2DEG = (180.0 / Math.PI);
 

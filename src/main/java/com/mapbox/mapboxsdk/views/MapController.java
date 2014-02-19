@@ -81,9 +81,9 @@ public class MapController implements MapViewConstants {
         final double diffNeeded = Math.max(diffNeededLat, diffNeededLon); // i.e. 1,2
 
         if (diffNeeded > 1) { // Zoom Out
-            this.mMapView.setZoomLevel(curZoomLevel - GeometryMath.getNextSquareNumberAbove((float) diffNeeded));
+            this.mMapView.setZoom(curZoomLevel - GeometryMath.getNextSquareNumberAbove((float) diffNeeded));
         } else if (diffNeeded < 0.5) { // Can Zoom in
-            this.mMapView.setZoomLevel(curZoomLevel
+            this.mMapView.setZoom(curZoomLevel
                     + GeometryMath.getNextSquareNumberAbove(1 / (float) diffNeeded) - 1);
         }
     }
@@ -159,7 +159,7 @@ public class MapController implements MapViewConstants {
 
 
     public MapView setZoom(final int zoomlevel) {
-        return mMapView.setZoomLevel(zoomlevel);
+        return mMapView.setZoom(zoomlevel);
     }
 
     /**

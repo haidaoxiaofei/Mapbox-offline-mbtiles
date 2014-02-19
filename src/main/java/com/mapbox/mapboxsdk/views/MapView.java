@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
 import android.widget.Toast;
-import android.widget.ZoomButtonsController;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.format.GeoJSON;
@@ -126,9 +125,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     private final MapController mController;
 
-    private final ZoomButtonsController mZoomController;
-    private boolean mEnableZoomController = false;
-
     private final ResourceProxy mResourceProxy;
 
     private MultiTouchController<Object> mMultiTouchController;
@@ -189,13 +185,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this.mMapOverlay = new TilesOverlay(mTileProvider, mResourceProxy);
         mOverlayManager = new OverlayManager(mMapOverlay);
 
-        if (isInEditMode()) {
-            mZoomController = null;
-        } else {
-            mZoomController = new ZoomButtonsController(this);
-            mZoomController.setOnZoomListener(new MapViewZoomListener());
-        }
-
         mGestureDetector = new GestureDetector(context, new MapViewGestureDetectorListener());
         mGestureDetector.setOnDoubleTapListener(new MapViewDoubleClickListener());
         this.context = context;
@@ -240,8 +229,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public void setTileSource(final ITileSource aTileSource) {
         mTileProvider.setTileSource(aTileSource);
         TileSystem.setTileSize(aTileSource.getTileSizePixels());
-        this.checkZoomButtons();
-        this.setZoomLevel(mZoomLevel); // revalidate zoom level
+        this.setZoom(mZoomLevel); // revalidate zoom level
         postInvalidate();
     }
 
@@ -381,11 +369,15 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return mTileRequestCompleteHandler;
     }
 
+    /**
+     * Compute the current geographical bounding box for this map.
+     * @return the current bounds of the map
+     */
     public BoundingBox getBoundingBox() {
         return getBoundingBox(getWidth(), getHeight());
     }
 
-    public BoundingBox getBoundingBox(final int pViewWidth, final int pViewHeight) {
+    private BoundingBox getBoundingBox(final int pViewWidth, final int pViewHeight) {
 
         final int world_2 = TileSystem.MapSize(mZoomLevel) / 2;
         final Rect screenRect = getScreenRect(null);
@@ -446,6 +438,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return mProjection;
     }
 
+    /**
+     * Set the centerpoint of the map view, given a latitude and
+     * longitude position.
+     * @param aCenter
+     * @return the map view, for chaining
+     */
     public MapView setCenter(final ILatLng aCenter) {
         getController().setCenter(aCenter);
         return this;
@@ -453,8 +451,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     /**
      * @param aZoomLevel the zoom level bound by the tile source
+     * @return the map view, for chaining
      */
-    public MapView setZoomLevel(final int aZoomLevel) {
+    public MapView setZoom(final int aZoomLevel) {
         final int minZoomLevel = getMinZoomLevel();
         final int maxZoomLevel = getMaxZoomLevel();
 
@@ -467,7 +466,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
 
         this.mZoomLevel = newZoomLevel;
-        this.checkZoomButtons();
 
         if (newZoomLevel > curZoomLevel) {
             // We are going from a lower-resolution plane to a higher-resolution plane, so we have
@@ -950,10 +948,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             Log.d(TAG, "dispatchTouchEvent(" + event + ")");
         }
 
-        if (mZoomController.isVisible() && mZoomController.onTouch(this, event)) {
-            return true;
-        }
-
         // Get rotated event for some touch listeners.
         MotionEvent rotatedEvent = rotateTouchEvent(event);
 
@@ -1040,7 +1034,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 // One last scrollTo to get to the final destination
                 scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
                 // This will facilitate snapping-to any Snappable points.
-                setZoomLevel(mZoomLevel);
+                setZoom(mZoomLevel);
                 mIsFlinging = false;
             } else {
                 scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
@@ -1172,7 +1166,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     @Override
     protected void onDetachedFromWindow() {
-        this.mZoomController.setVisible(false);
         this.onDetach();
         super.onDetachedFromWindow();
     }
@@ -1228,7 +1221,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             }
 
             // Adjust the zoomLevel
-            setZoomLevel(mZoomLevel + scaleDiffInt);
+            setZoom(mZoomLevel + scaleDiffInt);
         }
 
         // reset scale
@@ -1258,16 +1251,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         mListener = ml;
     }
 
-    private void checkZoomButtons() {
-        this.mZoomController.setZoomInEnabled(canZoomIn());
-        this.mZoomController.setZoomOutEnabled(canZoomOut());
-    }
-
-    public void setBuiltInZoomControls(final boolean on) {
-        this.mEnableZoomController = on;
-        this.checkZoomButtons();
-    }
-
     public void setMultiTouchControls(final boolean on) {
         mMultiTouchController = on ? new MultiTouchController<Object>(this, false) : null;
     }
@@ -1291,7 +1274,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 return true;
             }
 
-            mZoomController.setVisible(mEnableZoomController);
             return true;
         }
 
@@ -1387,21 +1369,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             }
 
             return false;
-        }
-    }
-
-    private class MapViewZoomListener implements ZoomButtonsController.OnZoomListener {
-        @Override
-        public void onZoom(final boolean zoomIn) {
-            if (zoomIn) {
-                getController().zoomIn();
-            } else {
-                getController().zoomOut();
-            }
-        }
-
-        @Override
-        public void onVisibilityChanged(final boolean visible) {
         }
     }
 

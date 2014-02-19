@@ -10,6 +10,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
+/**
+ * A least-recently used style cache that stores a set number of
+ * tiles at a time.
+ */
 public class LRUMapTileCache extends LinkedHashMap<MapTile, Drawable>
         implements OpenStreetMapTileProviderConstants {
 
@@ -22,11 +26,20 @@ public class LRUMapTileCache extends LinkedHashMap<MapTile, Drawable>
     private int mCapacity;
     private TileRemovedListener mTileRemovedListener;
 
+    /**
+     * Initialize a map tile cache with a desired capacity
+     * @param aCapacity desired maximum capacity
+     */
     public LRUMapTileCache(final int aCapacity) {
         super(aCapacity + 2, 0.1f, true);
         mCapacity = aCapacity;
     }
 
+    /**
+     * Ensure that the capacity is as large as the given argument, and if it isn't,
+     * expand it to that argument.
+     * @param aCapacity the desired maximum capacity
+     */
     public void ensureCapacity(final int aCapacity) {
         if (aCapacity > mCapacity) {
             Log.e(TAG, "Tile cache increased from " + mCapacity + " to " + aCapacity);

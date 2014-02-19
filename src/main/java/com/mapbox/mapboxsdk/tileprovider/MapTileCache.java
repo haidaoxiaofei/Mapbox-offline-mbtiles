@@ -35,10 +35,6 @@ public class MapTileCache implements OpenStreetMapTileProviderConstants {
         this.mCachedTiles = new LRUMapTileCache(aMaximumCacheSize);
     }
 
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
-
     public void ensureCapacity(final int aCapacity) {
         synchronized (mCachedTilesLockObject) {
             mCachedTiles.ensureCapacity(aCapacity);
@@ -58,14 +54,6 @@ public class MapTileCache implements OpenStreetMapTileProviderConstants {
             }
         }
     }
-
-    // ===========================================================
-    // Methods from SuperClass/Interfaces
-    // ===========================================================
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
 
     public boolean containsTile(final MapTile aTile) {
         synchronized (mCachedTilesLockObject) {

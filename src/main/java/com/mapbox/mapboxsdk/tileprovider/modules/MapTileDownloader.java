@@ -44,51 +44,20 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
     private int threadCount = 0;
     ArrayList<Boolean> threadControl = new ArrayList<Boolean>();
 
-    // ===========================================================
-    // Constructors
-    // ===========================================================
-
-    public MapTileDownloader(final ITileSource pTileSource) {
-        this(pTileSource, null);
-    }
-
-    public MapTileDownloader(final ITileSource pTileSource, final IFilesystemCache pFilesystemCache) {
-        this(pTileSource, pFilesystemCache, null, null);
-    }
-
     public MapTileDownloader(final ITileSource pTileSource,
                              final IFilesystemCache pFilesystemCache,
                              final INetworkAvailabilityCheck pNetworkAvailablityCheck,
                              final MapView mapView) {
-        this(pTileSource, pFilesystemCache, pNetworkAvailablityCheck,
-                NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
-        System.out.println(mapView);
+        super(NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
         this.mapView = mapView;
-    }
-
-    public MapTileDownloader(final ITileSource pTileSource,
-                             final IFilesystemCache pFilesystemCache,
-                             final INetworkAvailabilityCheck pNetworkAvailablityCheck, int pThreadPoolSize,
-                             int pPendingQueueSize) {
-        super(pThreadPoolSize, pPendingQueueSize);
-
         mFilesystemCache = pFilesystemCache;
         mNetworkAvailablityCheck = pNetworkAvailablityCheck;
         setTileSource(pTileSource);
     }
 
-
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
-
     public ITileSource getTileSource() {
         return mTileSource.get();
     }
-
-    // ===========================================================
-    // Methods from SuperClass/Interfaces
-    // ===========================================================
 
     @Override
     public boolean getUsesDataConnection() {
@@ -175,10 +144,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
                 String tileURLString = tileSource.getTileURLString(tile);
                 if (MapTileDownloader.this.isHighDensity() && isMapBox(tileURLString)) {
-                    tileURLString = tileURLString.replace(".png","@2x.png");
-                }
-                if (isMapBox(tileURLString) && tileURLString.contains("https://")) {
-                    tileURLString = tileURLString.replace(".png", ".png?secure");
+                    tileURLString = tileURLString.replace(".png", "@2x.png");
                 }
                 if (DEBUGMODE) {
                     Log.d(TAG, "Downloading MapTile from url: " + tileURLString);
@@ -187,6 +153,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 if (TextUtils.isEmpty(tileURLString)) {
                     return null;
                 }
+
                 HttpResponse response = this.makeRequest(tileURLString);
 
                 // Check to see if we got success
@@ -198,6 +165,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                     line = response.getStatusLine();
                     attempts++;
                 }
+
                 if (line.getStatusCode() != 200) {
                     return null;
                 }

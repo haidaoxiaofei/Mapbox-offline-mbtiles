@@ -152,7 +152,7 @@ public class MapTileFileArchiveProvider extends MapTileFileStorageProviderBase {
         final File[] files = OSMDROID_PATH.listFiles();
         if (files != null) {
             for (final File file : files) {
-                final IArchiveFile archiveFile = ArchiveFileFactory.getArchiveFile(file);
+                final IArchiveFile archiveFile = MBTilesFileArchive.getDatabaseFileArchive(file);
                 if (archiveFile != null) {
                     mArchiveFiles.add(archiveFile);
                 }

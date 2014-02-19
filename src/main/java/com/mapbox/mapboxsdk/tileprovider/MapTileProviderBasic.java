@@ -17,7 +17,6 @@ import android.content.Context;
  */
 public class MapTileProviderBasic extends MapTileProviderArray implements IMapTileProviderCallback {
     Context context;
-    // private static final Logger logger = LoggerFactory.getLogger(MapTileProviderBasic.class);
 
     /**
      * Creates a {@link MapTileProviderBasic}.
@@ -39,28 +38,21 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
         final MapTileFilesystemProvider fileSystemProvider = new MapTileFilesystemProvider(
                 pRegisterReceiver, pTileSource);
         mTileProviderList.add(fileSystemProvider);
-//
-//        final MapTileFileArchiveProvider archiveProvider = new MapTileFileArchiveProvider(
-//                pRegisterReceiver, pTileSource);
-//        mTileProviderList.add(archiveProvider);
 
         final MapTileDownloader downloaderProvider = new MapTileDownloader(pTileSource, tileWriter,
                 aNetworkAvailablityCheck, mapView);
-        if(isHighDensity()){
+        if (isHighDensity()) {
             downloaderProvider.setHighDensity(true);
         }
-        for(MapTileModuleProviderBase provider: mTileProviderList){
-            if(provider.getClass().isInstance(MapTileDownloader.class)){
+        for (MapTileModuleProviderBase provider: mTileProviderList) {
+            if (provider.getClass().isInstance(MapTileDownloader.class)) {
                 mTileProviderList.remove(provider);
             }
         }
         mTileProviderList.add(downloaderProvider);
     }
-    public boolean isHighDensity(){
+    public boolean isHighDensity() {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        if (metrics.densityDpi>300){
-            return true;
-        }
-        return false;
+        return metrics.densityDpi > 300;
     }
 }

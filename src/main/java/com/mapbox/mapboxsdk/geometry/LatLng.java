@@ -4,7 +4,6 @@ package com.mapbox.mapboxsdk.geometry;
 import java.io.Serializable;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.views.util.constants.MathConstants;
 
 import android.location.Location;
 import android.os.Parcel;
@@ -13,7 +12,7 @@ import android.os.Parcelable;
 /**
  * An immutable latitude, longitude, and optionally altitude point. Coordinates are stored as WGS84 degrees.
  */
-public final class LatLng implements ILatLng, MathConstants, GeoConstants, Parcelable, Serializable, Cloneable {
+public final class LatLng implements ILatLng, GeoConstants, Parcelable, Serializable, Cloneable {
 
     static final long serialVersionUID = 1L;
 
