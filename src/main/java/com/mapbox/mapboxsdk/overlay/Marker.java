@@ -13,6 +13,22 @@ public class Marker extends ExtendedOverlayItem {
     private MapView mapView;
 
     /**
+     * Initialize a new marker object, adding it to a MapView and attaching a tooltip
+     * @param mv a mapview
+     * @param aTitle the title of the marker, in a potential tooltip
+     * @param aDescription the description of the marker, in a tooltip
+     * @param aLatLng the location of the marker
+     */
+    public Marker(MapView mv, String aTitle, String aDescription, LatLng aLatLng) {
+        super(aTitle, aDescription, aLatLng);
+        if (mv != null) {
+            context = mv.getContext();
+            mapView = mv;
+            fromMaki("markerstroked");
+        }
+    }
+
+    /**
      * Initialize a new marker object
      *
      * @param aTitle the title of the marker, in a potential tooltip
@@ -23,19 +39,11 @@ public class Marker extends ExtendedOverlayItem {
         this(null, aTitle, aDescription, aLatLng);
     }
 
-    /**
-     * Initialize a new marker object, adding it to a MapView and attaching a tooltip
-     * @param mv a mapview
-     * @param aTitle the title of the marker, in a potential tooltip
-     * @param aDescription the description of the marker, in a tooltip
-     * @param aLatLng the location of the marker
-     */
-    public Marker(MapView mv, String aTitle, String aDescription, LatLng aLatLng) {
-        super(aTitle, aDescription, aLatLng, mv.getContext());
-        context = mv.getContext();
+    public Marker addTo(MapView mv) {
         mapView = mv;
+        context = mv.getContext();
         fromMaki("markerstroked");
-        //attachTooltip();
+        return this;
     }
 
     private void attachTooltip() {

@@ -67,14 +67,14 @@ public class GeoJSON {
             JSONArray coordinates = (JSONArray) geometry.get("coordinates");
             double lon = (Double) coordinates.get(0);
             double lat = (Double) coordinates.get(1);
-            mv.createMarker(lat, lon, title, "");
+            mv.addMarker(new Marker(title, "", new LatLng(lat, lon)));
         } else if (type.equals("MultiPoint")) {
             JSONArray points = (JSONArray) geometry.get("coordinates");
             for (j = 0; j < points.length(); j++) {
                 JSONArray coordinates = (JSONArray) points.get(j);
                 double lon = (Double) coordinates.get(0);
                 double lat = (Double) coordinates.get(1);
-                mv.createMarker(lat, lon, title, "");
+                mv.addMarker(new Marker(title, "", new LatLng(lat, lon)));
             }
         } else if (type.equals("LineString")) {
             PathOverlay path = new PathOverlay();

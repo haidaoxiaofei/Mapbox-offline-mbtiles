@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.api.IMapView;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -291,7 +290,7 @@ public abstract class Overlay {
          *                  to convert between on-screen pixels and latitude/longitude pairs.
          * @return Whether or not to snap to the interesting point.
          */
-        boolean onSnapToItem(int x, int y, Point snapPoint, IMapView mapView);
+        boolean onSnapToItem(int x, int y, Point snapPoint, MapView mapView);
     }
 
     // ===========================================================

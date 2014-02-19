@@ -6,7 +6,6 @@ import java.util.ListIterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
 
 import android.graphics.Canvas;
@@ -194,7 +193,7 @@ public class OverlayManager extends AbstractList<Overlay> {
         return false;
     }
 
-    public boolean onSnapToItem(final int x, final int y, final Point snapPoint, final IMapView pMapView) {
+    public boolean onSnapToItem(final int x, final int y, final Point snapPoint, final MapView pMapView) {
         for (final Overlay overlay : this.overlaysReversed()) {
             if (overlay instanceof Snappable) {
                 if (((Snappable) overlay).onSnapToItem(x, y, snapPoint, pMapView)) {

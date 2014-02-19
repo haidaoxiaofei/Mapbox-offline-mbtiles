@@ -17,7 +17,7 @@ public class ExtendedOverlayItem extends OverlayItem {
 
 
     public ExtendedOverlayItem(String aTitle, String aDescription,
-                               LatLng aGeoPoint, Context context) {
+                               LatLng aGeoPoint) {
         super(aTitle, aDescription, aGeoPoint);
         mTitle = aTitle;
         mDescription = aDescription;

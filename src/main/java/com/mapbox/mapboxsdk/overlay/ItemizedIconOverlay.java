@@ -5,7 +5,6 @@ import java.util.List;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.ResourceProxy.bitmap;
-import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.views.MapView;
 import android.content.Context;
 import android.graphics.Point;
@@ -50,7 +49,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
     }
 
     @Override
-    public boolean onSnapToItem(final int pX, final int pY, final Point pSnapPoint, final IMapView pMapView) {
+    public boolean onSnapToItem(final int pX, final int pY, final Point pSnapPoint, final MapView pMapView) {
         // TODO Implement this!
         return false;
     }

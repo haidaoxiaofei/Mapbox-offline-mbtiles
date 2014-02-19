@@ -28,7 +28,6 @@ import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
 import com.mapbox.mapboxsdk.events.ScrollEvent;
@@ -70,7 +69,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * state of a single map, including layers, markers,
  * and interaction code.
  */
-public class MapView extends ViewGroup implements IMapView, MapViewConstants, MapEventsReceiver, MapboxConstants, MultiTouchController.MultiTouchObjectCanvas<Object> {
+public class MapView extends ViewGroup implements MapViewConstants, MapEventsReceiver, MapboxConstants, MultiTouchController.MultiTouchObjectCanvas<Object> {
 
     /**
      * The current tile source for the view (to be deprecated soon).
@@ -218,7 +217,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
     private void addTooltip() {
         tooltip = new Tooltip(context, this);
         tooltip.setPosition(new LatLng(50,0));
-
     }
 
     public MapView(final Context context, AttributeSet attrs) {
@@ -263,7 +261,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
      * @param marker the marker object to be added
      * @return the marker object
      */
-
     public Marker addMarker(Marker marker) {
         if (firstMarker) {
             defaultMarkerList.add(marker);
@@ -272,15 +269,8 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
             defaultMarkerOverlay.addItem(marker);
         }
         this.invalidate();
+        marker.addTo(this);
         firstMarker = false;
-        return marker;
-    }
-
-    // TODO: remove
-    public Marker createMarker(final double lat, final double lon,
-                            final String title, final String text) {
-        Marker marker = new Marker(this, title, text, new LatLng(lat, lon));
-        addMarker(marker);
         return marker;
     }
 
@@ -336,7 +326,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
     }
 
     /**
-     * Method coming from OSMDroid's tap handler.
      * @param p the position where the event occurred.
      * @return whether the event action is triggered or not
      */
@@ -346,7 +335,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
     }
 
     /**
-     * Method coming from OSMDroid's long tap handler.
      * @param p the position where the event occurred.
      * @return whether the event action is triggered or not
      */
@@ -361,7 +349,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
     }
 
 
-    @Override
     public MapController getController() {
         return this.mController;
     }
@@ -369,6 +356,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
     public TilesOverlay getMapOverlay() {
         return mMapOverlay;
     }
+
     /**
      * You can add/remove/reorder your Overlays using the List of {@link Overlay}. The first (index
      * 0) Overlay gets drawn first, the one with the highest as the last one.
@@ -391,16 +379,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
 
     public Handler getTileRequestCompleteHandler() {
         return mTileRequestCompleteHandler;
-    }
-
-    @Override
-    public double getLatitudeSpan() {
-        return this.getBoundingBox().getLatitudeSpan();
-    }
-
-    @Override
-    public double getLongitudeSpan() {
-        return this.getBoundingBox().getLongitudeSpan();
     }
 
     public BoundingBox getBoundingBox() {
@@ -461,7 +439,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
      * @return The Projection of the map in its current state. You should not hold on to this object
      *         for more than one draw, since the projection of the map could change.
      */
-    @Override
     public Projection getProjection() {
         if (mProjection == null) {
             mProjection = new Projection(this);
@@ -469,14 +446,15 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
         return mProjection;
     }
 
-    void setCenter(final ILatLng aCenter) {
+    public MapView setCenter(final ILatLng aCenter) {
         getController().setCenter(aCenter);
+        return this;
     }
 
     /**
      * @param aZoomLevel the zoom level bound by the tile source
      */
-    int setZoomLevel(final int aZoomLevel) {
+    public MapView setZoomLevel(final int aZoomLevel) {
         final int minZoomLevel = getMinZoomLevel();
         final int maxZoomLevel = getMaxZoomLevel();
 
@@ -523,9 +501,10 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
             final ZoomEvent event = new ZoomEvent(this, newZoomLevel);
             mListener.onZoom(event);
         }
+
         // Allows any views fixed to a Location in the MapView to adjust
         this.requestLayout();
-        return this.mZoomLevel;
+        return this;
     }
 
     /**
@@ -534,7 +513,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
      * will always zoom to center of zoom  level 0.
      * Suggestion: Check getScreenRect(null).getHeight() > 0
      */
-    public void zoomToBoundingBox(final BoundingBox boundingBox) {
+    public MapView zoomToBoundingBox(final BoundingBox boundingBox) {
         final BoundingBox currentBox = getBoundingBox();
 
         // Calculated required zoom based on latitude span
@@ -565,6 +544,8 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
         getController().setCenter(
                 new LatLng(boundingBox.getCenter().getLatitude(), boundingBox.getCenter()
                         .getLongitude()));
+
+        return this;
     }
 
     /**
@@ -573,7 +554,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
      * @return the current ZoomLevel between 0 (equator) and 18/19(closest), depending on the tile
      *         source chosen.
      */
-    @Override
     public int getZoomLevel() {
         return getZoomLevel(true);
     }
@@ -603,7 +583,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
     /**
      * Get the maximum allowed zoom level for the maps.
      */
-    @Override
     public int getMaxZoomLevel() {
         return mMaximumZoomLevel == null ? mMapOverlay.getMaximumZoomLevel() : mMaximumZoomLevel;
     }
@@ -628,7 +607,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
      * Determine whether the map is at its maximum zoom
      * @return whether the map can zoom in
      */
-    public boolean canZoomIn() {
+    protected boolean canZoomIn() {
         final int maxZoomLevel = getMaxZoomLevel();
         if ((isAnimating() ? mTargetZoomLevel.get() : mZoomLevel) >= maxZoomLevel) {
             return false;
@@ -640,7 +619,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
      * Determine whether the map is at its minimum zoom
      * @return whether the map can zoom out
      */
-    public boolean canZoomOut() {
+    protected boolean canZoomOut() {
         final int minZoomLevel = getMinZoomLevel();
         if ((isAnimating() ? mTargetZoomLevel.get() : mZoomLevel) <= minZoomLevel) {
             return false;
@@ -1198,10 +1177,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
         super.onDetachedFromWindow();
     }
 
-    // ===========================================================
-    // Animation
-    // ===========================================================
-
     /**
      * Determines if maps are animating a zoom operation. Useful for overlays to avoid recalculating
      * during an animation sequence.
@@ -1211,10 +1186,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
     public boolean isAnimating() {
         return mIsAnimating.get();
     }
-
-    // ===========================================================
-    // Implementation of MultiTouchObjectCanvas
-    // ===========================================================
 
     @Override
     public Object getDraggableObjectAtPoint(final MultiTouchController.PointInfo pt) {

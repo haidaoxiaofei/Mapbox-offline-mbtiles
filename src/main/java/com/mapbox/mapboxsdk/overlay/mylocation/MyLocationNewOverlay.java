@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.api.IMapView;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -279,7 +278,7 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
 
     @Override
     public boolean onSnapToItem(final int x, final int y, final Point snapPoint,
-                                final IMapView mapView) {
+                                final MapView mapView) {
         if (this.mLocation != null) {
             snapPoint.x = mMapCoords.x;
             snapPoint.y = mMapCoords.y;
