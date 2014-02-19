@@ -4,12 +4,17 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import com.mapbox.mapboxsdk.http.HttpClientFactory;
+import com.squareup.okhttp.OkHttpClient;
+import java.net.URL;
+
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.tileprovider.*;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.BitmapTileSourceBase.LowMemoryException;
@@ -17,7 +22,6 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.OnlineTileSourceBase;
 import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
 
-import java.io.*;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
@@ -110,10 +114,6 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         return highDensity;
     }
 
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
-
     protected class TileLoader extends MapTileModuleProviderBase.TileLoader {
         private int attempts = 0;
         protected String[] domainLetters = {"a", "b", "c", "d"};
@@ -124,6 +124,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             int threadIndex = threadControl.size() - 1;
             System.out.println(threadIndex + " set");
             OnlineTileSourceBase tileSource = mTileSource.get();
+
             if (tileSource == null) {
                 return null;
             }
@@ -131,51 +132,31 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             InputStream in = null;
             OutputStream out = null;
             final MapTile tile = aState.getMapTile();
+            OkHttpClient client = new OkHttpClient();
+            if (mNetworkAvailablityCheck != null
+                    && !mNetworkAvailablityCheck.getNetworkAvailable()) {
+                Log.d(TAG, "Skipping " + getName() + " due to NetworkAvailabilityCheck.");
+                return null;
+            }
+            String url = tileSource.getTileURLString(tile);
+            if (MapTileDownloader.this.isHighDensity() && url.contains("mapbox.com")) {
+                url = url.replace(".png", "@2x.png");
+            }
+            if (TextUtils.isEmpty(url)) {
+                return null;
+            }
 
             try {
                 Log.d(TAG, "getting tile " + tile.getX() + ", " + tile.getY());
-                if (mNetworkAvailablityCheck != null
-                        && !mNetworkAvailablityCheck.getNetworkAvailable()) {
-                    if (DEBUGMODE) {
-                        Log.d(TAG, "Skipping " + getName() + " due to NetworkAvailabilityCheck.");
-                    }
-                    return null;
-                }
+                Log.d(TAG, "Downloading MapTile from url: " + url);
 
-                String tileURLString = tileSource.getTileURLString(tile);
-                if (MapTileDownloader.this.isHighDensity() && isMapBox(tileURLString)) {
-                    tileURLString = tileURLString.replace(".png", "@2x.png");
-                }
-                if (DEBUGMODE) {
-                    Log.d(TAG, "Downloading MapTile from url: " + tileURLString);
-                }
+                HttpURLConnection connection = client.open(new URL(url));
+                in = connection.getInputStream();
 
-                if (TextUtils.isEmpty(tileURLString)) {
-                    return null;
-                }
-
-                HttpResponse response = this.makeRequest(tileURLString);
-
-                // Check to see if we got success
-                org.apache.http.StatusLine line = response.getStatusLine();
-
-                while (line.getStatusCode() != 200 && attempts<5) {
-                    Log.d(TAG, "Retrying MapTile: " + tile + " HTTP response: " + line);
-                    response = this.makeRequest(tileURLString);
-                    line = response.getStatusLine();
-                    attempts++;
-                }
-
-                if (line.getStatusCode() != 200) {
-                    return null;
-                }
-
-                final HttpEntity entity = response.getEntity();
-                if (entity == null) {
+                if (in == null) {
                     Log.d(TAG, "No content downloading MapTile: " + tile);
                     return null;
                 }
-                in = entity.getContent();
 
                 final ByteArrayOutputStream dataStream = new ByteArrayOutputStream();
                 out = new BufferedOutputStream(dataStream, StreamUtils.IO_BUFFER_SIZE);
@@ -199,6 +180,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 }
                 result = mapView.getTileLoadedListener() != null ? onTileLoaded(result) : result;
                 return result;
+
             } catch (final UnknownHostException e) {
                 // no network connection so empty the queue
                 Log.d(TAG, "UnknownHostException downloading MapTile: " + tile + " : " + e);
@@ -212,24 +194,13 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             } catch (final IOException e) {
                 Log.d(TAG, "IOException downloading MapTile: " + tile + " : " + e);
             } catch (final Throwable e) {
-                Log.d(TAG, "Error downloading MapTile: " + tile);
+                Log.d(TAG, "Error downloading MapTile: " + tile + ":" + e);
             } finally {
                 StreamUtils.closeStream(in);
                 StreamUtils.closeStream(out);
             }
 
-
             return null;
-        }
-
-        private boolean isMapBox(String URL) {
-            return URL.contains("mapbox.com");
-        }
-
-        private HttpResponse makeRequest(String tileURLString) throws IOException {
-            final HttpClient client = HttpClientFactory.createHttpClient();
-            final HttpUriRequest head = new HttpGet(tileURLString);
-            return client.execute(head);
         }
 
         @Override
