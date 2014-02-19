@@ -26,22 +26,6 @@ public interface OpenStreetMapTileProviderConstants {
     public static final int MAXIMUM_ZOOMLEVEL = 22;
 
     /**
-     * Base path for osmdroid files. Zip files are in this folder.
-     */
-    public static final File OSMDROID_PATH = new File(Environment.getExternalStorageDirectory(),
-            "osmdroid");
-
-    /**
-     * Base path for tiles.
-     */
-    public static final File TILE_PATH_BASE = new File(OSMDROID_PATH, "tiles");
-
-    /**
-     * add an extension to files on sdcard so that gallery doesn't index them
-     */
-    public static final String TILE_PATH_EXTENSION = ".tile";
-
-    /**
      * Initial tile cache size. The size will be increased as required by calling {@link
      * LRUMapTileCache.ensureCapacity(int)} The tile cache will always be at least 3x3.
      */

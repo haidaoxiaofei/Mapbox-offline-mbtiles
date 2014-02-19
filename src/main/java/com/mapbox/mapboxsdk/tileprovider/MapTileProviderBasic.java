@@ -19,40 +19,34 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
     Context context;
 
     /**
-     * Creates a {@link MapTileProviderBasic}.
+     *
+     * @param pContext
+     * @param pTileSource
+     * @param mapView
      */
-    public MapTileProviderBasic(final Context pContext, final ITileSource pTileSource, MapView mapView) {
-        this(new SimpleRegisterReceiver(pContext), new NetworkAvailabilityCheck(pContext),
-                pTileSource, pContext, mapView);
-    }
+    public MapTileProviderBasic(final Context pContext,
+                                final ITileSource pTileSource,
+                                MapView mapView) {
+        super(pTileSource, new SimpleRegisterReceiver(pContext));
+        this.context = pContext;
 
-    /**
-     * Creates a {@link MapTileProviderBasic}.
-     */
-    public MapTileProviderBasic(final IRegisterReceiver pRegisterReceiver,
-                                final INetworkAvailabilityCheck aNetworkAvailablityCheck, final ITileSource pTileSource, Context context, MapView mapView) {
-        super(pTileSource, pRegisterReceiver);
-        this.context = context;
-        final TileWriter tileWriter = new TileWriter();
+        final MapTileDownloader downloaderProvider = new MapTileDownloader(pTileSource,
+                new NetworkAvailabilityCheck(pContext), mapView);
 
-        final MapTileFilesystemProvider fileSystemProvider = new MapTileFilesystemProvider(
-                pRegisterReceiver, pTileSource);
-        mTileProviderList.add(fileSystemProvider);
-
-        final MapTileDownloader downloaderProvider = new MapTileDownloader(pTileSource, tileWriter,
-                aNetworkAvailablityCheck, mapView);
         if (isHighDensity()) {
             downloaderProvider.setHighDensity(true);
         }
+
         for (MapTileModuleProviderBase provider: mTileProviderList) {
             if (provider.getClass().isInstance(MapTileDownloader.class)) {
                 mTileProviderList.remove(provider);
             }
         }
+
         mTileProviderList.add(downloaderProvider);
     }
+
     public boolean isHighDensity() {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        return metrics.densityDpi > 300;
+        return context.getResources().getDisplayMetrics().densityDpi > 300;
     }
 }

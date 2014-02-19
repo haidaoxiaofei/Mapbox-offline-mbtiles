@@ -42,13 +42,6 @@ public interface ITileSource {
      */
     String getTileRelativeFilenameString(MapTile aTile);
 
-    /**
-     * Get a rendered Drawable from the specified file path.
-     *
-     * @param aFilePath a file path
-     * @return the rendered Drawable
-     */
-    Drawable getDrawable(String aFilePath) throws LowMemoryException;
 
     /**
      * Get a rendered Drawable from the specified InputStream.

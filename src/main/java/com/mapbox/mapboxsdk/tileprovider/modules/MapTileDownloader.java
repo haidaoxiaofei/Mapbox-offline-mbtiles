@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.HttpResponseCache;
 import java.net.URL;
 
 import java.io.BufferedOutputStream;
@@ -13,6 +14,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.File;
+import java.util.UUID;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -27,8 +30,7 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * The {@link MapTileDownloader} loads tiles from an HTTP server. It saves downloaded tiles to an
- * IFilesystemCache if available.
+ * The {@link MapTileDownloader} loads tiles from an HTTP server.
  *
  * @author Marc Kurtz
  * @author Nicolas Gramlich
@@ -37,26 +39,28 @@ import java.util.concurrent.atomic.AtomicReference;
 public class MapTileDownloader extends MapTileModuleProviderBase {
     private static final String TAG = "Tile downloader";
 
-    private final IFilesystemCache mFilesystemCache;
-
     private final AtomicReference<OnlineTileSourceBase> mTileSource = new AtomicReference<OnlineTileSourceBase>();
 
     private final INetworkAvailabilityCheck mNetworkAvailablityCheck;
     private MapView mapView;
     private boolean highDensity = false;
+    HttpResponseCache cache;
 
-    private int threadCount = 0;
     ArrayList<Boolean> threadControl = new ArrayList<Boolean>();
 
     public MapTileDownloader(final ITileSource pTileSource,
-                             final IFilesystemCache pFilesystemCache,
                              final INetworkAvailabilityCheck pNetworkAvailablityCheck,
                              final MapView mapView) {
         super(NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
         this.mapView = mapView;
-        mFilesystemCache = pFilesystemCache;
         mNetworkAvailablityCheck = pNetworkAvailablityCheck;
         setTileSource(pTileSource);
+        File cacheDir = new File(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString());
+        try {
+            HttpResponseCache cache = new HttpResponseCache(cacheDir, 1024);
+        } catch(Exception e) {
+
+        }
     }
 
     public ITileSource getTileSource() {
@@ -115,8 +119,6 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
     }
 
     protected class TileLoader extends MapTileModuleProviderBase.TileLoader {
-        private int attempts = 0;
-        protected String[] domainLetters = {"a", "b", "c", "d"};
 
         @Override
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {
@@ -133,17 +135,20 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             OutputStream out = null;
             final MapTile tile = aState.getMapTile();
             OkHttpClient client = new OkHttpClient();
+            if (cache != null) {
+                client.setResponseCache(cache);
+            }
             if (mNetworkAvailablityCheck != null
                     && !mNetworkAvailablityCheck.getNetworkAvailable()) {
                 Log.d(TAG, "Skipping " + getName() + " due to NetworkAvailabilityCheck.");
                 return null;
             }
             String url = tileSource.getTileURLString(tile);
-            if (MapTileDownloader.this.isHighDensity() && url.contains("mapbox.com")) {
-                url = url.replace(".png", "@2x.png");
-            }
             if (TextUtils.isEmpty(url)) {
                 return null;
+            }
+            if (MapTileDownloader.this.isHighDensity() && url.contains("mapbox.com")) {
+                url = url.replace(".png", "@2x.png");
             }
 
             try {
@@ -165,11 +170,6 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 final byte[] data = dataStream.toByteArray();
                 final ByteArrayInputStream byteStream = new ByteArrayInputStream(data);
 
-                // Save the data to the filesystem cache
-                if (mFilesystemCache != null) {
-                    mFilesystemCache.saveFile(tileSource, tile, byteStream);
-                    byteStream.reset();
-                }
                 Drawable result = tileSource.getDrawable(byteStream);
                 threadControl.set(threadIndex, true);
                 if (checkThreadControl()) {
