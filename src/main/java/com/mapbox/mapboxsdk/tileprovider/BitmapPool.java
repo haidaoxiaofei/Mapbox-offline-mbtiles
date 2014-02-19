@@ -6,14 +6,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 
+/**
+ * A pool from which to reuse bitmap instances in order to work around memory
+ * allocation and deallocation. This follows the singleton pattern, so there's
+ * only one.
+ */
 public class BitmapPool {
     final LinkedList<Bitmap> mPool = new LinkedList<Bitmap>();
 
     private static BitmapPool sInstance;
 
     public static BitmapPool getInstance() {
-        if (sInstance == null)
+        if (sInstance == null) {
             sInstance = new BitmapPool();
+        }
 
         return sInstance;
     }
@@ -34,6 +40,11 @@ public class BitmapPool {
         }
     }
 
+    /**
+     * Get a bitmap from the pool, if the pool has any available. If none
+     * are available, returns null.
+     * @return a bitmap if available, or null
+     */
     public Bitmap obtainBitmapFromPool() {
         synchronized (mPool) {
             if (mPool.isEmpty()) {
@@ -49,6 +60,12 @@ public class BitmapPool {
         }
     }
 
+    /**
+     * Get a bitmap from the pool, being picky about its size
+     * @param aWidth
+     * @param aHeight
+     * @return a bitmap if available, null otherwise
+     */
     public Bitmap obtainSizedBitmapFromPool(final int aWidth, final int aHeight) {
         synchronized (mPool) {
             if (mPool.isEmpty()) {
@@ -78,4 +95,3 @@ public class BitmapPool {
         }
     }
 }
-

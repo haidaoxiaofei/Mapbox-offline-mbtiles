@@ -9,20 +9,9 @@ import android.graphics.drawable.Drawable;
  * @author Nicolas Gramlich
  */
 public class MapTileCache implements OpenStreetMapTileProviderConstants {
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
 
     protected final Object mCachedTilesLockObject = new Object();
     protected LRUMapTileCache mCachedTiles;
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
 
     public MapTileCache() {
         this(CACHE_MAPTILECOUNT_DEFAULT);
@@ -66,8 +55,4 @@ public class MapTileCache implements OpenStreetMapTileProviderConstants {
             this.mCachedTiles.clear();
         }
     }
-
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
 }

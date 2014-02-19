@@ -33,8 +33,11 @@ public abstract class BitmapTileSourceBase implements ITileSource,
 
     private final string mResourceId;
 
-    public BitmapTileSourceBase(final String aName, final string aResourceId,
-                                final int aZoomMinLevel, final int aZoomMaxLevel, final int aTileSizePixels,
+    public BitmapTileSourceBase(final String aName,
+                                final string aResourceId,
+                                final int aZoomMinLevel,
+                                final int aZoomMaxLevel,
+                                final int aTileSizePixels,
                                 final String aImageFilenameEnding) {
         mResourceId = aResourceId;
         mOrdinal = globalOrdinal++;
@@ -55,14 +58,6 @@ public abstract class BitmapTileSourceBase implements ITileSource,
         return mName;
     }
 
-    public String pathBase() {
-        return mName;
-    }
-
-    public String imageFilenameEnding() {
-        return mImageFilenameEnding;
-    }
-
     @Override
     public int getMinimumZoomLevel() {
         return mMinimumZoomLevel;
@@ -81,45 +76,6 @@ public abstract class BitmapTileSourceBase implements ITileSource,
     @Override
     public String localizedName(final ResourceProxy proxy) {
         return proxy.getString(mResourceId);
-    }
-
-    @Override
-    public Drawable getDrawable(final String aFilePath) {
-        try {
-            // default implementation will load the file as a bitmap and create
-            // a BitmapDrawable from it
-            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-            BitmapPool.getInstance().applyReusableOptions(bitmapOptions);
-            final Bitmap bitmap = BitmapFactory.decodeFile(aFilePath, bitmapOptions);
-            if (bitmap != null) {
-                return new ReusableBitmapDrawable(bitmap);
-            } else {
-                // if we couldn't load it then it's invalid - delete it
-                try {
-                    new File(aFilePath).delete();
-                } catch (final Throwable e) {
-                    Log.e(TAG, "Error deleting invalid file: " + aFilePath + "," + e);
-                }
-            }
-        } catch (final OutOfMemoryError e) {
-            Log.e(TAG, "OutOfMemoryError loading bitmap: " + aFilePath);
-            System.gc();
-        }
-        return null;
-    }
-
-    @Override
-    public String getTileRelativeFilenameString(final MapTile tile) {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(pathBase());
-        sb.append('/');
-        sb.append(tile.getZoomLevel());
-        sb.append('/');
-        sb.append(tile.getX());
-        sb.append('/');
-        sb.append(tile.getY());
-        sb.append(imageFilenameEnding());
-        return sb.toString();
     }
 
     @Override

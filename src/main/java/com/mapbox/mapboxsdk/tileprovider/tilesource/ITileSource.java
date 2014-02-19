@@ -32,23 +32,6 @@ public interface ITileSource {
      */
     String localizedName(ResourceProxy proxy);
 
-    /**
-     * Get a unique file path for the tile. This file path may be used to store the tile on a file
-     * system and performance considerations should be taken into consideration. It can include
-     * multiple paths. It should not begin with a leading path separator.
-     *
-     * @param aTile the tile
-     * @return the unique file path
-     */
-    String getTileRelativeFilenameString(MapTile aTile);
-
-    /**
-     * Get a rendered Drawable from the specified file path.
-     *
-     * @param aFilePath a file path
-     * @return the rendered Drawable
-     */
-    Drawable getDrawable(String aFilePath) throws LowMemoryException;
 
     /**
      * Get a rendered Drawable from the specified InputStream.

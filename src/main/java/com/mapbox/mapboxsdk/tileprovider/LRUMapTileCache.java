@@ -81,9 +81,7 @@ public class LRUMapTileCache extends LinkedHashMap<MapTile, Drawable>
     protected boolean removeEldestEntry(final java.util.Map.Entry<MapTile, Drawable> aEldest) {
         if (size() > mCapacity) {
             final MapTile eldest = aEldest.getKey();
-            if (DEBUGMODE) {
-                Log.i(TAG, "Remove old tile: " + eldest);
-            }
+            Log.i(TAG, "Remove old tile: " + eldest);
             remove(eldest);
             // don't return true because we've already removed it
         }

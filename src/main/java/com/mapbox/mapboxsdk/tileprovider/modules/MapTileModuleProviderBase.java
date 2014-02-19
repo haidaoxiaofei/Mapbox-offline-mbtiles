@@ -178,9 +178,6 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
      * as they become available. The key unimplemented method is 'loadTile'.
      */
     protected abstract class TileLoader implements Runnable {
-
-
-
         /**
          * Load the requested tile.
          *
