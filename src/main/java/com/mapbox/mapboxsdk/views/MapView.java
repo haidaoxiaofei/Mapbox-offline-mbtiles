@@ -41,7 +41,6 @@ import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.util.GeometryMath;
@@ -176,7 +175,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
         TileSystem.setTileSize(tileSizePixels);
 
         if (tileProvider == null) {
-            final ITileSource tileSource = getTileSourceFromAttributes(attrs);
+            final ITileSource tileSource = new MapboxTileLayer("examples.map-h6lnn4mm");
             tileProvider = isInEditMode()
                     ? new MapTileProviderArray(tileSource, null, new MapTileModuleProviderBase[0])
                     : new MapTileProviderBasic(context, tileSource, this);
@@ -1300,28 +1299,6 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants, Ma
 
     public void setMultiTouchControls(final boolean on) {
         mMultiTouchController = on ? new MultiTouchController<Object>(this, false) : null;
-    }
-
-    private ITileSource getTileSourceFromAttributes(final AttributeSet aAttributeSet) {
-
-        ITileSource tileSource = TileSourceFactory.DEFAULT_TILE_SOURCE;
-
-        if (aAttributeSet != null) {
-            final String tileSourceAttr = aAttributeSet.getAttributeValue(null, "tilesource");
-
-            if (tileSourceAttr != null) {
-                try {
-                    final ITileSource r = TileSourceFactory.getTileSource(tileSourceAttr);
-                    Log.i(TAG,"Using tile source specified in layout attributes: " + r);
-                    tileSource = r;
-                } catch (final IllegalArgumentException e) {
-                    Log.w(TAG, "Invalid tile source specified in layout attributes: " + tileSource);
-                }
-            }
-        }
-
-        Log.i(TAG,"Using tile source: " + tileSource);
-        return tileSource;
     }
 
     public TileLoadedListener getTileLoadedListener() {

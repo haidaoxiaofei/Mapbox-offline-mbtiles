@@ -4,7 +4,6 @@ import android.util.DisplayMetrics;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.tileprovider.modules.*;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleRegisterReceiver;
 
 import android.content.Context;
@@ -19,13 +18,6 @@ import android.content.Context;
 public class MapTileProviderBasic extends MapTileProviderArray implements IMapTileProviderCallback {
     Context context;
     // private static final Logger logger = LoggerFactory.getLogger(MapTileProviderBasic.class);
-
-    /**
-     * Creates a {@link MapTileProviderBasic}.
-     */
-    public MapTileProviderBasic(final Context pContext) {
-        this(pContext, TileSourceFactory.DEFAULT_TILE_SOURCE, null);
-    }
 
     /**
      * Creates a {@link MapTileProviderBasic}.

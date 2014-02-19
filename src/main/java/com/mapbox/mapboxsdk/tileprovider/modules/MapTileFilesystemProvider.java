@@ -9,7 +9,6 @@ import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.BitmapTileSourceBase.LowMemoryException;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import android.util.Log;
 
 import android.graphics.drawable.Drawable;
@@ -24,21 +23,9 @@ import android.graphics.drawable.Drawable;
 public class MapTileFilesystemProvider extends MapTileFileStorageProviderBase {
 
 
-    // ===========================================================
-    // Fields
-    // ===========================================================
-
     private final long mMaximumCachedFileAge;
 
     private final AtomicReference<ITileSource> mTileSource = new AtomicReference<ITileSource>();
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
-
-    public MapTileFilesystemProvider(final IRegisterReceiver pRegisterReceiver) {
-        this(pRegisterReceiver, TileSourceFactory.DEFAULT_TILE_SOURCE);
-    }
 
     public MapTileFilesystemProvider(final IRegisterReceiver pRegisterReceiver,
                                      final ITileSource aTileSource) {

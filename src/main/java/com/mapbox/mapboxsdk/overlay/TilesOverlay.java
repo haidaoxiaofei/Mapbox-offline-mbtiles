@@ -5,8 +5,6 @@ import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.TileSourceFactory;
 import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -24,7 +22,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
@@ -38,8 +35,6 @@ public class TilesOverlay
         implements IOverlayMenuProvider {
 
     public static final int MENU_MAP_MODE = getSafeMenuId();
-    public static final int MENU_TILE_SOURCE_STARTING_ID =
-            getSafeMenuIdSequence(TileSourceFactory.getTileSources().size());
     public static final int MENU_OFFLINE = getSafeMenuId();
 
     /**
@@ -240,37 +235,12 @@ public class TilesOverlay
     @Override
     public boolean onCreateOptionsMenu(final Menu pMenu, final int pMenuIdOffset,
                                        final MapView pMapView) {
-        final SubMenu mapMenu = pMenu.addSubMenu(0,
-                MENU_MAP_MODE + pMenuIdOffset,
-                Menu.NONE,
-                mResourceProxy.getString(ResourceProxy.string.map_mode)).setIcon(
-                mResourceProxy.getDrawable(ResourceProxy.bitmap.ic_menu_mapmode));
-
-        for (int a = 0; a < TileSourceFactory.getTileSources().size(); a++) {
-            final ITileSource tileSource = TileSourceFactory.getTileSources().get(a);
-            mapMenu.add(MENU_MAP_MODE + pMenuIdOffset, MENU_TILE_SOURCE_STARTING_ID + a
-                    + pMenuIdOffset, Menu.NONE, tileSource.localizedName(mResourceProxy));
-        }
-        mapMenu.setGroupCheckable(MENU_MAP_MODE + pMenuIdOffset, true, true);
-
-        final String title = pMapView.getResourceProxy().getString(
-                pMapView.useDataConnection() ? ResourceProxy.string.offline_mode
-                        : ResourceProxy.string.online_mode);
-        final Drawable icon = pMapView.getResourceProxy().getDrawable(
-                ResourceProxy.bitmap.ic_menu_offline);
-        pMenu.add(0, MENU_OFFLINE + pMenuIdOffset, Menu.NONE, title).setIcon(icon);
-
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(final Menu pMenu, final int pMenuIdOffset,
                                         final MapView pMapView) {
-        final int index = TileSourceFactory.getTileSources().indexOf(
-                pMapView.getTileProvider().getTileSource());
-        if (index >= 0) {
-            pMenu.findItem(MENU_TILE_SOURCE_STARTING_ID + index + pMenuIdOffset).setChecked(true);
-        }
 
         pMenu.findItem(MENU_OFFLINE + pMenuIdOffset).setTitle(
                 pMapView.getResourceProxy().getString(
@@ -285,13 +255,7 @@ public class TilesOverlay
                                          final MapView pMapView) {
 
         final int menuId = pItem.getItemId() - pMenuIdOffset;
-        if ((menuId >= MENU_TILE_SOURCE_STARTING_ID)
-                && (menuId < MENU_TILE_SOURCE_STARTING_ID
-                + TileSourceFactory.getTileSources().size())) {
-            pMapView.setTileSource(TileSourceFactory.getTileSources().get(
-                    menuId - MENU_TILE_SOURCE_STARTING_ID));
-            return true;
-        } else if (menuId == MENU_OFFLINE) {
+        if (menuId == MENU_OFFLINE) {
             final boolean useDataConnection = !pMapView.useDataConnection();
             pMapView.setUseDataConnection(useDataConnection);
             return true;
