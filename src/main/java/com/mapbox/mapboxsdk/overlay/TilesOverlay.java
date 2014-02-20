@@ -1,6 +1,5 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
@@ -10,7 +9,6 @@ import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import android.util.Log;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -20,8 +18,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.view.Menu;
-import android.view.MenuItem;
 import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
@@ -31,10 +27,8 @@ import com.mapbox.mapboxsdk.views.util.Projection;
  */
 
 public class TilesOverlay
-        extends SafeDrawOverlay
-        implements IOverlayMenuProvider {
+        extends SafeDrawOverlay {
 
-    public static final int MENU_MAP_MODE = getSafeMenuId();
     public static final int MENU_OFFLINE = getSafeMenuId();
 
     /**
@@ -62,10 +56,6 @@ public class TilesOverlay
      * For overshooting the tile cache *
      */
     private int mOvershootTileCache = 0;
-
-    public TilesOverlay(final MapTileProviderBase aTileProvider, final Context aContext) {
-        this(aTileProvider, new DefaultResourceProxyImpl(aContext));
-    }
 
     public TilesOverlay(final MapTileProviderBase aTileProvider, final ResourceProxy pResourceProxy) {
         super(pResourceProxy);
@@ -108,10 +98,6 @@ public class TilesOverlay
 
     @Override
     protected void drawSafe(final ISafeCanvas c, final MapView mapView, final boolean shadow) {
-
-        if (DEBUGMODE) {
-            Log.i(TAG, "onDraw(" + shadow + ")");
-        }
 
         if (shadow) {
             return;
@@ -157,7 +143,7 @@ public class TilesOverlay
 
     private final TileLooper mTileLooper = new TileLooper() {
         @Override
-        public void initialiseLoop(final int pZoomLevel, final int pTileSizePx) {
+        public void initializeLoop(final int pZoomLevel, final int pTileSizePx) {
             // make sure the cache is big enough for all the tiles
             final int numNeeded = (mLowerRight.y - mUpperLeft.y + 1) * (mLowerRight.x - mUpperLeft.x + 1);
             mTileProvider.ensureCapacity(numNeeded + mOvershootTileCache);
@@ -176,20 +162,26 @@ public class TilesOverlay
             }
 
             if (currentMapTile != null) {
-                mTileRect.set(pX * pTileSizePx, pY * pTileSizePx,
+                mTileRect.set(
+                        pX * pTileSizePx,
+                        pY * pTileSizePx,
                         pX * pTileSizePx + pTileSizePx,
                         pY * pTileSizePx + pTileSizePx);
-                if (isReusable)
+                if (isReusable) {
                     ((ReusableBitmapDrawable) currentMapTile).beginUsingDrawable();
+                }
                 try {
                     if (isReusable && !((ReusableBitmapDrawable) currentMapTile).isBitmapValid()) {
                         currentMapTile = getLoadingTile();
                         isReusable = false;
                     }
-                    onTileReadyToDraw(pCanvas, currentMapTile, mTileRect);
+                    mTileRect.offset(-mWorldSize_2, -mWorldSize_2);
+                    currentMapTile.setBounds(mTileRect);
+                    currentMapTile.draw(pCanvas);
                 } finally {
-                    if (isReusable)
+                    if (isReusable) {
                         ((ReusableBitmapDrawable) currentMapTile).finishUsingDrawable();
+                    }
                 }
             }
 
@@ -209,60 +201,9 @@ public class TilesOverlay
         }
 
         @Override
-        public void finaliseLoop() {
+        public void finalizeLoop() {
         }
     };
-
-    protected void onTileReadyToDraw(final Canvas c, final Drawable currentMapTile,
-                                     final Rect tileRect) {
-        tileRect.offset(-mWorldSize_2, -mWorldSize_2);
-        currentMapTile.setBounds(tileRect);
-        currentMapTile.draw(c);
-    }
-
-    @Override
-    public void setOptionsMenuEnabled(final boolean pOptionsMenuEnabled) {
-        this.mOptionsMenuEnabled = pOptionsMenuEnabled;
-    }
-
-    @Override
-    public boolean isOptionsMenuEnabled() {
-
-
-        return this.mOptionsMenuEnabled;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(final Menu pMenu, final int pMenuIdOffset,
-                                       final MapView pMapView) {
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(final Menu pMenu, final int pMenuIdOffset,
-                                        final MapView pMapView) {
-
-        pMenu.findItem(MENU_OFFLINE + pMenuIdOffset).setTitle(
-                pMapView.getResourceProxy().getString(
-                        pMapView.useDataConnection() ? ResourceProxy.string.offline_mode
-                                : ResourceProxy.string.online_mode));
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem pItem, final int pMenuIdOffset,
-                                         final MapView pMapView) {
-
-        final int menuId = pItem.getItemId() - pMenuIdOffset;
-        if (menuId == MENU_OFFLINE) {
-            final boolean useDataConnection = !pMapView.useDataConnection();
-            pMapView.setUseDataConnection(useDataConnection);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public int getLoadingBackgroundColor() {
         return mLoadingBackgroundColor;
@@ -292,6 +233,10 @@ public class TilesOverlay
         }
     }
 
+    /**
+     * Draw a 'loading' placeholder with a canvas.
+     * @return
+     */
     private Drawable getLoadingTile() {
         if (mLoadingTile == null && mLoadingBackgroundColor != Color.TRANSPARENT) {
             try {
@@ -328,30 +273,6 @@ public class TilesOverlay
                 bitmapDrawable.getBitmap().recycle();
             }
         }
-    }
-
-    /**
-     * Set this to overshoot the tile cache.
-     * By default the TilesOverlay only creates a cache large
-     * enough to hold the minimum number of tiles
-     * necessary to draw to the screen. Setting this
-     * value will allow you to overshoot the tile cache
-     * and allow more tiles to be cached. This
-     * increases the memory usage, but increases drawing performance.
-     *
-     * @param overshootTileCache the number of tiles to overshoot the tile cache by
-     */
-    public void setOvershootTileCache(int overshootTileCache) {
-        mOvershootTileCache = overshootTileCache;
-    }
-
-    /**
-     * Get the tile cache overshoot value.
-     *
-     * @return the number of tiles to overshoot tile cache
-     */
-    public int getOvershootTileCache() {
-        return mOvershootTileCache;
     }
 
     private static final String TAG = "TilesOverlay";

@@ -178,9 +178,6 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
      * as they become available. The key unimplemented method is 'loadTile'.
      */
     protected abstract class TileLoader implements Runnable {
-
-
-
         /**
          * Load the requested tile.
          *
@@ -238,10 +235,7 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
          * A tile has loaded.
          */
         protected void tileLoaded(final MapTileRequestState pState, final Drawable pDrawable) {
-            if (DEBUG_TILE_PROVIDERS) {
-                Log.i(TAG, "TileLoader.tileLoaded() on provider: " + getName() + " with tile: "
-                        + pState.getMapTile());
-            }
+            Log.i(TAG, "tileloaded called");
             removeTileFromQueues(pState.getMapTile());
             pState.getCallback().mapTileRequestCompleted(pState, pDrawable);
         }
@@ -251,10 +245,6 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
          * Return it <b>and</b> send request to next provider.
          */
         protected void tileLoadedExpired(final MapTileRequestState pState, final Drawable pDrawable) {
-            if (DEBUG_TILE_PROVIDERS) {
-                Log.i(TAG, "TileLoader.tileLoadedExpired() on provider: " + getName()
-                        + " with tile: " + pState.getMapTile());
-            }
             removeTileFromQueues(pState.getMapTile());
             pState.getCallback().mapTileRequestExpiredTile(pState, pDrawable);
         }
@@ -266,9 +256,6 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
             }
             removeTileFromQueues(pState.getMapTile());
             pState.getCallback().mapTileRequestFailed(pState);
-        }
-        protected void processNext(){
-
         }
 
         /**
@@ -282,9 +269,6 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
             MapTileRequestState state;
             Drawable result = null;
             while ((state = nextTile()) != null) {
-                if (DEBUG_TILE_PROVIDERS) {
-                    Log.i(TAG, "TileLoader.run() processing next tile: " + state.getMapTile());
-                }
                 try {
                     result = null;
                     result = loadTile(state);

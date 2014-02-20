@@ -1,8 +1,5 @@
 package com.mapbox.mapboxsdk.tileprovider.constants;
 
-import java.io.File;
-
-import android.os.Environment;
 
 /**
  * This class contains constants used by the tile provider.
@@ -24,22 +21,6 @@ public interface OpenStreetMapTileProviderConstants {
      * but we also have a tile size that is typically 2^8, so (32-1)-8-1 = 22
      */
     public static final int MAXIMUM_ZOOMLEVEL = 22;
-
-    /**
-     * Base path for osmdroid files. Zip files are in this folder.
-     */
-    public static final File OSMDROID_PATH = new File(Environment.getExternalStorageDirectory(),
-            "osmdroid");
-
-    /**
-     * Base path for tiles.
-     */
-    public static final File TILE_PATH_BASE = new File(OSMDROID_PATH, "tiles");
-
-    /**
-     * add an extension to files on sdcard so that gallery doesn't index them
-     */
-    public static final String TILE_PATH_EXTENSION = ".tile";
 
     /**
      * Initial tile cache size. The size will be increased as required by calling {@link

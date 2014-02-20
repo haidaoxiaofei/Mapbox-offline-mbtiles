@@ -28,7 +28,7 @@ public abstract class TileLooper {
         center.set((mUpperLeft.x + mLowerRight.x)/2, (mUpperLeft.y + mLowerRight.y)/2);
         final int mapTileUpperBound = 1 << pZoomLevel;
         ArrayList<Point> orderedList = new ArrayList<Point>();
-        initialiseLoop(pZoomLevel, pTileSizePx);
+        initializeLoop(pZoomLevel, pTileSizePx);
 
         /**
          * TO DO - there is definitely a more efficient way of doing this
@@ -46,7 +46,7 @@ public abstract class TileLooper {
             handleTile(pCanvas, pTileSizePx, tile, point.x, point.y);
         }
 
-        finaliseLoop();
+        finalizeLoop();
     }
 
     /**
@@ -71,9 +71,9 @@ public abstract class TileLooper {
         }
     }
 
-    public abstract void initialiseLoop(int pZoomLevel, int pTileSizePx);
+    public abstract void initializeLoop(int pZoomLevel, int pTileSizePx);
 
     public abstract void handleTile(Canvas pCanvas, int pTileSizePx, MapTile pTile, int pX, int pY);
 
-    public abstract void finaliseLoop();
+    public abstract void finalizeLoop();
 }

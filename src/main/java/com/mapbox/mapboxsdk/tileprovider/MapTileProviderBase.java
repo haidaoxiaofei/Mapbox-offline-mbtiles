@@ -9,7 +9,6 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.tile.TileSystem;
-import android.util.Log;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -19,6 +18,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.util.Log;
 
 /**
  * This is an abstract class. The tile provider is responsible for:
@@ -168,9 +168,8 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
     }
 
     protected void putTileIntoCache(MapTileRequestState pState, Drawable pDrawable) {
-        final MapTile tile = pState.getMapTile();
         if (pDrawable != null) {
-            mTileCache.putTile(tile, pDrawable);
+            mTileCache.putTile(pState.getMapTile(), pDrawable);
         }
     }
 
@@ -271,7 +270,7 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
         }
 
         @Override
-        public void initialiseLoop(final int pZoomLevel, final int pTileSizePx) {
+        public void initializeLoop(final int pZoomLevel, final int pTileSizePx) {
             mDiff = Math.abs(pZoomLevel - mOldZoomLevel);
             mTileSize_2 = pTileSizePx >> mDiff;
         }
@@ -294,17 +293,20 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
         }
 
         @Override
-        public void finaliseLoop() {
+        public void finalizeLoop() {
             // now add the new ones, pushing out the old ones
             while (!mNewTiles.isEmpty()) {
+
                 final MapTile tile = mNewTiles.keySet().iterator().next();
                 final Bitmap bitmap = mNewTiles.remove(tile);
                 final ExpirableBitmapDrawable drawable = new ReusableBitmapDrawable(bitmap);
                 drawable.setState(new int[]{ExpirableBitmapDrawable.EXPIRED});
                 Drawable existingTile = mTileCache.getMapTile(tile);
-                if (existingTile == null || ExpirableBitmapDrawable.isDrawableExpired(existingTile))
+                if (existingTile == null || ExpirableBitmapDrawable.isDrawableExpired(existingTile)) {
                     putExpiredTileIntoCache(new MapTileRequestState(tile,
                             new MapTileModuleProviderBase[0], null), drawable);
+                }
+
             }
         }
 
@@ -318,8 +320,8 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
 
         @Override
         public void handleTile(final int pTileSizePx, final MapTile pTile, final int pX, final int pY) {
-            // get the correct fraction of the tile from cache and scale up
 
+            // get the correct fraction of the tile from cache and scale up
             final MapTile oldTile = new MapTile(mOldZoomLevel, pTile.getX() >> mDiff, pTile.getY() >> mDiff);
             final Drawable oldDrawable = mTileCache.getMapTile(oldTile);
 
@@ -333,15 +335,18 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
                 Bitmap bitmap;
                 bitmap = BitmapPool.getInstance().obtainSizedBitmapFromPool(pTileSizePx,
                         pTileSizePx);
-                if (bitmap == null)
+
+                if (bitmap == null) {
                     bitmap = Bitmap.createBitmap(pTileSizePx, pTileSizePx,
                             Bitmap.Config.ARGB_8888);
+                }
 
                 final Canvas canvas = new Canvas(bitmap);
                 final boolean isReusable = oldDrawable instanceof ReusableBitmapDrawable;
                 boolean success = false;
-                if (isReusable)
+                if (isReusable) {
                     ((ReusableBitmapDrawable) oldDrawable).beginUsingDrawable();
+                }
                 try {
                     if (!isReusable || ((ReusableBitmapDrawable) oldDrawable).isBitmapValid()) {
                         final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
