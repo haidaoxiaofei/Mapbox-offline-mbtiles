@@ -138,7 +138,6 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             if (cache != null) {
                 client.setResponseCache(cache);
             }
-
             if (mNetworkAvailablityCheck != null
                     && !mNetworkAvailablityCheck.getNetworkAvailable()) {
                 Log.d(TAG, "Skipping " + getName() + " due to NetworkAvailabilityCheck.");
@@ -146,7 +145,6 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
             }
 
             String url = tileSource.getTileURLString(tile);
-
             if (TextUtils.isEmpty(url)) {
                 return null;
             }

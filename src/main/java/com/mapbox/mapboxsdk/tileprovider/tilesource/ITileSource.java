@@ -32,7 +32,6 @@ public interface ITileSource {
      */
     String localizedName(ResourceProxy proxy);
 
-
     /**
      * Get a rendered Drawable from the specified InputStream.
      *
