@@ -1,8 +1,5 @@
 package com.mapbox.mapboxsdk.tileprovider.constants;
 
-import java.io.File;
-
-import android.os.Environment;
 
 /**
  * This class contains constants used by the tile provider.

@@ -1,5 +1,6 @@
 // Created by plusminus on 17:58:57 - 25.09.2008
 package com.mapbox.mapboxsdk.tileprovider;
+import android.util.Log;
 
 import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
 
@@ -55,4 +56,6 @@ public class MapTileCache implements OpenStreetMapTileProviderConstants {
             this.mCachedTiles.clear();
         }
     }
+
+    final static String TAG = "MapTileCache";
 }

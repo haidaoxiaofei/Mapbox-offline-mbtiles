@@ -15,7 +15,7 @@ public abstract class OnlineTileSourceBase extends BitmapTileSourceBase {
         mBaseUrls = aBaseUrl;
     }
 
-    public abstract String getTileURLString(MapTile aTile);
+    public abstract String getTileURLString(MapTile aTile, boolean hdpi);
 
     /**
      * Get the base url, which will be a random one if there are more than one.

@@ -1,7 +1,6 @@
 package com.mapbox.mapboxsdk.overlay;
 
 
-import android.content.Context;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import com.mapbox.mapboxsdk.geometry.LatLng;

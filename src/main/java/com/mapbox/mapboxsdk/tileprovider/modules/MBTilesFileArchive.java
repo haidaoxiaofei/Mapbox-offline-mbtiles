@@ -43,8 +43,8 @@ public class MBTilesFileArchive implements IArchiveFile {
             final String[] tile = {COL_TILES_TILE_DATA};
             final String[] xyz = {
                     Integer.toString(pTile.getX())
-                    , Double.toString(Math.pow(2, pTile.getZoomLevel()) - pTile.getY() - 1)
-                    , Integer.toString(pTile.getZoomLevel())
+                    , Double.toString(Math.pow(2, pTile.getZ()) - pTile.getY() - 1)
+                    , Integer.toString(pTile.getZ())
             };
 
             final Cursor cur = mDatabase.query(TABLE_TILES, tile, "tile_column=? and tile_row=? and zoom_level=?", xyz, null, null, null);

@@ -319,10 +319,6 @@ public class OverlayManager extends AbstractList<Overlay> {
             }
         }
 
-        if (mTilesOverlay != null && mTilesOverlay.isOptionsMenuEnabled()) {
-            result &= mTilesOverlay.onCreateOptionsMenu(pMenu, menuIdOffset, mapView);
-        }
-
         return result;
     }
 
@@ -334,10 +330,6 @@ public class OverlayManager extends AbstractList<Overlay> {
                     overlayMenuProvider.onPrepareOptionsMenu(pMenu, menuIdOffset, mapView);
                 }
             }
-        }
-
-        if (mTilesOverlay != null && mTilesOverlay.isOptionsMenuEnabled()) {
-            mTilesOverlay.onPrepareOptionsMenu(pMenu, menuIdOffset, mapView);
         }
 
         return true;
@@ -352,12 +344,6 @@ public class OverlayManager extends AbstractList<Overlay> {
                     return true;
                 }
             }
-        }
-
-        if (mTilesOverlay != null &&
-                mTilesOverlay.isOptionsMenuEnabled() &&
-                mTilesOverlay.onOptionsItemSelected(item, menuIdOffset, mapView)) {
-            return true;
         }
 
         return false;

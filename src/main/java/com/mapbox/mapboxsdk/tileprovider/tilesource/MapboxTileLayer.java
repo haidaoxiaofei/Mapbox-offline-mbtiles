@@ -25,8 +25,10 @@ public class MapboxTileLayer extends OnlineTileSourceBase implements MapViewCons
     }
 
     @Override
-    public String getTileURLString(final MapTile aTile) {
-        return baseUrl + aTile.getZoomLevel() + "/" + aTile.getX() + "/" + aTile.getY()
+    public String getTileURLString(final MapTile aTile, boolean hdpi) {
+        String url = baseUrl + aTile.getZ() + "/" + aTile.getX() + "/" + aTile.getY()
                 + mImageFilenameEnding;
+        url = url.replace(".png", "@2x.png");
+        return url;
     }
 }

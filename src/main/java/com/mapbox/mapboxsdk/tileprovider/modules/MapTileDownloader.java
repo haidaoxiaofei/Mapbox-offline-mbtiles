@@ -3,6 +3,8 @@ package com.mapbox.mapboxsdk.tileprovider.modules;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
+import com.mapbox.mapboxsdk.tileprovider.MapTile;
+import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.HttpResponseCache;
@@ -11,30 +13,21 @@ import java.net.URL;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.File;
 import java.util.UUID;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.tileprovider.*;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.BitmapTileSourceBase.LowMemoryException;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.OnlineTileSourceBase;
 import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * The {@link MapTileDownloader} loads tiles from an HTTP server.
- *
- * @author Marc Kurtz
- * @author Nicolas Gramlich
- * @author Manuel Stahl
  */
 public class MapTileDownloader extends MapTileModuleProviderBase {
     private static final String TAG = "Tile downloader";
@@ -43,8 +36,8 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
     private final INetworkAvailabilityCheck mNetworkAvailablityCheck;
     private MapView mapView;
-    private boolean highDensity = false;
     HttpResponseCache cache;
+    boolean hdpi;
 
     ArrayList<Boolean> threadControl = new ArrayList<Boolean>();
 
@@ -53,6 +46,9 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                              final MapView mapView) {
         super(NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
         this.mapView = mapView;
+
+        hdpi = mapView.getContext().getResources().getDisplayMetrics().densityDpi > 300;
+
         mNetworkAvailablityCheck = pNetworkAvailablityCheck;
         setTileSource(pTileSource);
         File cacheDir = new File(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString());
@@ -110,21 +106,12 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         }
     }
 
-    public void setHighDensity(boolean highDensity) {
-        this.highDensity = highDensity;
-    }
-
-    public boolean isHighDensity() {
-        return highDensity;
-    }
-
     protected class TileLoader extends MapTileModuleProviderBase.TileLoader {
 
         @Override
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {
             threadControl.add(false);
             int threadIndex = threadControl.size() - 1;
-            System.out.println(threadIndex + " set");
             OnlineTileSourceBase tileSource = mTileSource.get();
 
             if (tileSource == null) {
@@ -144,17 +131,15 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 return null;
             }
 
-            String url = tileSource.getTileURLString(tile);
+            String url = tileSource.getTileURLString(tile, hdpi);
+
             if (TextUtils.isEmpty(url)) {
                 return null;
             }
-            if (MapTileDownloader.this.isHighDensity() && url.contains("mapbox.com")) {
-                url = url.replace(".png", "@2x.png");
-            }
 
             try {
-                Log.d(TAG, "getting tile " + tile.getX() + ", " + tile.getY());
-                Log.d(TAG, "Downloading MapTile from url: " + url);
+                // Log.d(TAG, "getting tile " + tile.getX() + ", " + tile.getY());
+                // Log.d(TAG, "Downloading MapTile from url: " + url);
 
                 HttpURLConnection connection = client.open(new URL(url));
                 in = connection.getInputStream();
@@ -181,19 +166,6 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 }
                 result = mapView.getTileLoadedListener() != null ? onTileLoaded(result) : result;
                 return result;
-
-            } catch (final UnknownHostException e) {
-                // no network connection so empty the queue
-                Log.d(TAG, "UnknownHostException downloading MapTile: " + tile + " : " + e);
-                throw new CantContinueException(e);
-            } catch (final LowMemoryException e) {
-                // low memory so empty the queue
-                Log.d(TAG, "LowMemoryException downloading MapTile: " + tile + " : " + e);
-                throw new CantContinueException(e);
-            } catch (final FileNotFoundException e) {
-                Log.d(TAG, "Tile not found: " + tile + " : " + e);
-            } catch (final IOException e) {
-                Log.d(TAG, "IOException downloading MapTile: " + tile + " : " + e);
             } catch (final Throwable e) {
                 Log.d(TAG, "Error downloading MapTile: " + tile + ":" + e);
             } finally {
@@ -207,19 +179,12 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         @Override
         protected void tileLoaded(final MapTileRequestState pState, Drawable pDrawable) {
             removeTileFromQueues(pState.getMapTile());
-
-            // don't return the tile because we'll wait for the fs provider to ask for it
-            // this prevent flickering when a load of delayed downloads complete for tiles
-            // that we might not even be interested in any more
-            pState.getCallback().mapTileRequestCompleted(pState, null);
-            // We want to return the Bitmap to the BitmapPool if applicable
-            if (pDrawable instanceof ReusableBitmapDrawable) {
-                BitmapPool.getInstance().returnDrawableToPool((ReusableBitmapDrawable) pDrawable);
-            }
+            pState.getCallback().mapTileRequestCompleted(pState, pDrawable);
         }
     }
 
     private Drawable onTileLoaded(Drawable pDrawable) {
+        Log.i(TAG, "tile loaded on downloader");
         return mapView.getTileLoadedListener().onTileLoaded(pDrawable);
     }
 

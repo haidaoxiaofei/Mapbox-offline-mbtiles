@@ -83,7 +83,9 @@ public class MapTileProviderArray extends MapTileProviderBase {
                 alreadyInProgress = mWorking.containsKey(pTile);
             }
 
-            if (!alreadyInProgress) {
+            if (alreadyInProgress) {
+                //
+            } else {
                 if (DEBUG_TILE_PROVIDERS) {
                     Log.i(TAG, "MapTileProviderArray.getMapTile() requested but not in cache, trying from async providers: "
                             + pTile);
@@ -174,7 +176,7 @@ public class MapTileProviderArray extends MapTileProviderBase {
                 providerDoesntExist = !this.getProviderExists(provider);
                 providerCantGetDataConnection = !useDataConnection()
                         && provider.getUsesDataConnection();
-                int zoomLevel = aState.getMapTile().getZoomLevel();
+                int zoomLevel = aState.getMapTile().getZ();
                 providerCantServiceZoomlevel = zoomLevel > provider.getMaximumZoomLevel()
                         || zoomLevel < provider.getMinimumZoomLevel();
             }

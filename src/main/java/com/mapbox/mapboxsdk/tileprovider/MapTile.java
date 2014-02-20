@@ -26,7 +26,7 @@ public class MapTile {
         this.y = tileY;
     }
 
-    public int getZoomLevel() {
+    public int getZ() {
         return zoomLevel;
     }
 

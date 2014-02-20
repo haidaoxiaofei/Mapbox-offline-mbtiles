@@ -1,13 +1,11 @@
 package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.Random;
 
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.ResourceProxy.string;
 import com.mapbox.mapboxsdk.tileprovider.BitmapPool;
-import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
 import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
 import android.util.Log;
@@ -16,6 +14,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 
+/**
+ * An abstract tile layer that is able to load bitmap tiles from a
+ * local or remote source.
+ */
 public abstract class BitmapTileSourceBase implements ITileSource,
         OpenStreetMapTileProviderConstants {
 

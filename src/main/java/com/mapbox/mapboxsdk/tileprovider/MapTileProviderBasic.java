@@ -1,6 +1,5 @@
 package com.mapbox.mapboxsdk.tileprovider;
 
-import android.util.DisplayMetrics;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.tileprovider.modules.*;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
@@ -12,8 +11,6 @@ import android.content.Context;
  * This top-level tile provider implements a basic tile request chain which includes a
  * {@link MapTileFilesystemProvider} (a file-system cache), a {@link MapTileFileArchiveProvider}
  * (archive provider), and a {@link MapTileDownloader} (downloads map tiles via tile source).
- *
- * @author Marc Kurtz
  */
 public class MapTileProviderBasic extends MapTileProviderArray implements IMapTileProviderCallback {
     Context context;
@@ -30,12 +27,10 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
         super(pTileSource, new SimpleRegisterReceiver(pContext));
         this.context = pContext;
 
-        final MapTileDownloader downloaderProvider = new MapTileDownloader(pTileSource,
-                new NetworkAvailabilityCheck(pContext), mapView);
-
-        if (isHighDensity()) {
-            downloaderProvider.setHighDensity(true);
-        }
+        final MapTileDownloader downloaderProvider = new MapTileDownloader(
+                pTileSource,
+                new NetworkAvailabilityCheck(pContext),
+                mapView);
 
         for (MapTileModuleProviderBase provider: mTileProviderList) {
             if (provider.getClass().isInstance(MapTileDownloader.class)) {
@@ -44,9 +39,5 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
         }
 
         mTileProviderList.add(downloaderProvider);
-    }
-
-    public boolean isHighDensity() {
-        return context.getResources().getDisplayMetrics().densityDpi > 300;
     }
 }
