@@ -40,3 +40,4 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
 
         mTileProviderList.add(downloaderProvider);
     }
+}

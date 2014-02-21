@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk.tileprovider.modules;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.DisplayMetrics;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
