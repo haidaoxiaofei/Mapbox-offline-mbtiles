@@ -47,7 +47,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         super(NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
         this.mapView = mapView;
 
-        hdpi = mapView.getContext().getResources().getDisplayMetrics().densityDpi > 300;
+        hdpi = mapView.getContext().getResources().getDisplayMetrics().densityDpi > DisplayMetrics.DENSITY_XHIGH;
 
         mNetworkAvailablityCheck = pNetworkAvailablityCheck;
         setTileSource(pTileSource);
