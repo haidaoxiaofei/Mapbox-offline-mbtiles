@@ -3,7 +3,6 @@ package com.mapbox.mapboxsdk.views;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.views.MapView;
 
 class MapViewDoubleClickListener implements GestureDetector.OnDoubleTapListener {
 
