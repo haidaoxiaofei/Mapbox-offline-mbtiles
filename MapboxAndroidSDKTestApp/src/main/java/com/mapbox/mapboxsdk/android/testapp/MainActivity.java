@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.overlay.Marker;
@@ -131,6 +132,16 @@ public class MainActivity extends ActionBarActivity {
         //Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/semibold.ttf");
         //button.setTypeface(tf);
         return button;
+    }
+
+    public LatLng getMapCenter()
+    {
+        return mv.getCenter();
+    }
+
+    public void setMapCenter(ILatLng center)
+    {
+        mv.setCenter(center);
     }
 
 }
