@@ -3,7 +3,6 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 import java.io.InputStream;
 
 import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.BitmapTileSourceBase.LowMemoryException;
 
 import android.graphics.drawable.Drawable;

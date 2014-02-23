@@ -3,7 +3,6 @@ package com.mapbox.mapboxsdk.views;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import com.mapbox.mapboxsdk.tile.TileSystem;
-import com.mapbox.mapboxsdk.views.MapView;
 
 public class MapViewGestureDetectorListener implements GestureDetector.OnGestureListener {
 
