@@ -68,8 +68,9 @@ public class GeometryMath {
         int cur = 1;
         int i = 1;
         while (true) {
-            if (cur > factor)
+            if (cur > factor) {
                 return out;
+            }
 
             out = i;
             cur *= 2;
@@ -78,11 +79,13 @@ public class GeometryMath {
     }
 
     public static int mod(int number, final int modulus) {
-        if (number > 0)
+        if (number > 0) {
             return number % modulus;
+        }
 
-        while (number < 0)
+        while (number < 0) {
             number += modulus;
+        }
 
         return number;
     }

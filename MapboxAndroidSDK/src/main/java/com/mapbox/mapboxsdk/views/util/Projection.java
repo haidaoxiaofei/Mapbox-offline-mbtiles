@@ -46,8 +46,7 @@ public class Projection implements IProjection, GeoConstants {
     private final Rect mIntrinsicScreenRectProjection;
     private final float mMapOrientation;
 
-    public Projection(MapView mv)
-    {
+    public Projection(MapView mv) {
         super();
         this.mapView = mv;
 
