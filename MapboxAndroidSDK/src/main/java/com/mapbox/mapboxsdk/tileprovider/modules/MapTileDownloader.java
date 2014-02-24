@@ -54,7 +54,7 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
         setTileSource(pTileSource);
         File cacheDir = new File(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString());
         try {
-            HttpResponseCache cache = new HttpResponseCache(cacheDir, 1024);
+            cache = new HttpResponseCache(cacheDir, 1024);
         } catch(Exception e) {
 
         }
