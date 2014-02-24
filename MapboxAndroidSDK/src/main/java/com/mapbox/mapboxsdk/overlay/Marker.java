@@ -24,7 +24,7 @@ public class Marker extends ExtendedOverlayItem {
         if (mv != null) {
             context = mv.getContext();
             mapView = mv;
-            fromMaki("markerstroked");
+            setIcon(new Icon(Icon.Size.l, "", "000"));
         }
     }
 
@@ -42,7 +42,7 @@ public class Marker extends ExtendedOverlayItem {
     public Marker addTo(MapView mv) {
         mapView = mv;
         context = mv.getContext();
-        fromMaki("markerstroked");
+        setIcon(new Icon(Icon.Size.l, "", "000"));
         return this;
     }
 
@@ -52,25 +52,12 @@ public class Marker extends ExtendedOverlayItem {
         mapView.invalidate();
     }
 
-    /**
-     * Set this marker's icon to a marker from the Maki icon set.
-     *
-     * @param makiString the name of a Maki icon symbol
-     */
-    public void fromMaki(String makiString) {
-        String urlString = makiString+"182x";
-        int id = context.getResources().getIdentifier(urlString, "drawable", context.getPackageName());
-        this.setMarker(context.getResources().getDrawable(id));
-    }
-
     public Marker setIcon(Icon icon) {
         icon.setMarker(this);
         return this;
     }
 
     public void setTooltipVisible() {
-        //tooltip.setVisible(true);
-        //mapView.invalidate();
     }
 
     public void setTooltipInvisible() {

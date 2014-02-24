@@ -56,9 +56,7 @@ public class Icon {
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-                return myBitmap;
+                return BitmapFactory.decodeStream(connection.getInputStream());
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
@@ -66,7 +64,6 @@ public class Icon {
         }
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            bitmap.setDensity(120);
             drawable = new BitmapDrawable(bitmap);
             Log.w(TAG, "icon loaded");
             if (marker != null) {
