@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk.overlay.mylocation;
+package com.mapbox.mapboxsdk.overlay;
 
 import java.util.LinkedList;
 
@@ -7,9 +7,7 @@ import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.overlay.IOverlayMenuProvider;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
-import com.mapbox.mapboxsdk.overlay.SafeDrawOverlay;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.Projection;
@@ -33,7 +31,7 @@ import android.view.MotionEvent;
  * @author Marc Kurtz
  * @author Manuel Stahl
  */
-public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocationConsumer,
+public class UserLocationOverlay extends SafeDrawOverlay implements
         IOverlayMenuProvider, Snappable {
 
     // ===========================================================
@@ -53,7 +51,7 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
     protected final MapView mMapView;
 
     private final MapController mMapController;
-    public IMyLocationProvider mMyLocationProvider;
+    public GpsLocationProvider mMyLocationProvider;
 
     private final LinkedList<Runnable> mRunOnFirstFix = new LinkedList<Runnable>();
     private final Point mMapCoords = new Point();
@@ -85,17 +83,17 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
     // Constructors
     // ===========================================================
 
-    public MyLocationNewOverlay(Context context, MapView mapView) {
-        this(context, new GpsMyLocationProvider(context), mapView);
+    public UserLocationOverlay(Context context, MapView mapView) {
+        this(context, new GpsLocationProvider(context), mapView);
     }
 
-    public MyLocationNewOverlay(Context context, IMyLocationProvider myLocationProvider,
-                                MapView mapView) {
+    public UserLocationOverlay(Context context, GpsLocationProvider myLocationProvider,
+                               MapView mapView) {
         this(myLocationProvider, mapView, new DefaultResourceProxyImpl(context));
     }
 
-    public MyLocationNewOverlay(IMyLocationProvider myLocationProvider, MapView mapView,
-                                ResourceProxy resourceProxy) {
+    public UserLocationOverlay(GpsLocationProvider myLocationProvider, MapView mapView,
+                               ResourceProxy resourceProxy) {
         super(resourceProxy);
 
         mMapView = mapView;
@@ -143,17 +141,15 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
         return mDrawAccuracyEnabled;
     }
 
-    public IMyLocationProvider getMyLocationProvider() {
+    public GpsLocationProvider getMyLocationProvider() {
         return mMyLocationProvider;
     }
 
-    protected void setMyLocationProvider(IMyLocationProvider myLocationProvider) {
-        if (myLocationProvider == null)
-            throw new RuntimeException(
-                    "You must pass an IMyLocationProvider to setMyLocationProvider()");
+    protected void setMyLocationProvider(GpsLocationProvider myLocationProvider) {
 
-        if (mMyLocationProvider != null)
+        if (mMyLocationProvider != null) {
             mMyLocationProvider.stopLocationProvider();
+        }
 
         mMyLocationProvider = myLocationProvider;
     }
@@ -414,8 +410,7 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
         return mIsFollowing;
     }
 
-    @Override
-    public void onLocationChanged(Location location, IMyLocationProvider source) {
+    public void onLocationChanged(Location location, GpsLocationProvider source) {
         // If we had a previous location, let's get those bounds
         Location oldLocation = mLocation;
         if (oldLocation != null) {
@@ -461,14 +456,14 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
         mRunOnFirstFix.clear();
     }
 
-    public boolean enableMyLocation(IMyLocationProvider myLocationProvider) {
+    public boolean enableMyLocation(GpsLocationProvider myLocationProvider) {
         this.setMyLocationProvider(myLocationProvider);
         mIsLocationEnabled = false;
         return enableMyLocation();
     }
 
     /**
-     * Enable receiving location updates from the provided IMyLocationProvider and show your
+     * Enable receiving location updates from the provided GpsLocationProvider and show your
      * location on the maps. You will likely want to call enableMyLocation() from your Activity's
      * Activity.onResume() method, to enable the features of this overlay. Remember to call the
      * corresponding disableMyLocation() in your Activity's Activity.onPause() method to turn off
@@ -536,5 +531,5 @@ public class MyLocationNewOverlay extends SafeDrawOverlay implements IMyLocation
         }
     }
 
-    private static final String TAG = "MyLocationNewOverlay";
+    private static final String TAG = "UserLocationOverlay";
 }

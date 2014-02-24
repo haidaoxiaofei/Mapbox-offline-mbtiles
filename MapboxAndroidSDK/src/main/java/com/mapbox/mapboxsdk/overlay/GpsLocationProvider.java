@@ -1,4 +1,4 @@
-package com.mapbox.mapboxsdk.overlay.mylocation;
+package com.mapbox.mapboxsdk.overlay;
 
 import com.mapbox.mapboxsdk.util.NetworkLocationIgnorer;
 
@@ -8,16 +8,16 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
-public class GpsMyLocationProvider implements IMyLocationProvider, LocationListener {
+public class GpsLocationProvider implements LocationListener {
     private final LocationManager mLocationManager;
     private Location mLocation;
 
-    private IMyLocationConsumer mMyLocationConsumer;
+    private UserLocationOverlay mMyLocationConsumer;
     private long mLocationUpdateMinTime = 0;
     private float mLocationUpdateMinDistance = 0.0f;
     private final NetworkLocationIgnorer mIgnorer = new NetworkLocationIgnorer();
 
-    public GpsMyLocationProvider(Context context) {
+    public GpsLocationProvider(Context context) {
         mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
@@ -55,18 +55,13 @@ public class GpsMyLocationProvider implements IMyLocationProvider, LocationListe
         mLocationUpdateMinDistance = meters;
     }
 
-    //
-    // IMyLocationProvider
-    //
-
     /**
      * Enable location updates and show your current location on the map. By default this will
      * request location updates as frequently as possible, but you can change the frequency and/or
      * distance by calling {@link setLocationUpdateMinTime(long)} and/or {@link
      * setLocationUpdateMinDistance(float)} before calling this method.
      */
-    @Override
-    public boolean startLocationProvider(IMyLocationConsumer myLocationConsumer) {
+    public boolean startLocationProvider(UserLocationOverlay myLocationConsumer) {
         mMyLocationConsumer = myLocationConsumer;
         boolean result = false;
         for (final String provider : mLocationManager.getProviders(true)) {
@@ -80,13 +75,11 @@ public class GpsMyLocationProvider implements IMyLocationProvider, LocationListe
         return result;
     }
 
-    @Override
     public void stopLocationProvider() {
         mMyLocationConsumer = null;
         mLocationManager.removeUpdates(this);
     }
 
-    @Override
     public Location getLastKnownLocation() {
         return mLocation;
     }
@@ -98,12 +91,14 @@ public class GpsMyLocationProvider implements IMyLocationProvider, LocationListe
     @Override
     public void onLocationChanged(final Location location) {
         // ignore temporary non-gps fix
-        if (mIgnorer.shouldIgnore(location.getProvider(), System.currentTimeMillis()))
+        if (mIgnorer.shouldIgnore(location.getProvider(), System.currentTimeMillis())) {
             return;
+        }
 
         mLocation = location;
-        if (mMyLocationConsumer != null)
+        if (mMyLocationConsumer != null) {
             mMyLocationConsumer.onLocationChanged(mLocation, this);
+        }
     }
 
     @Override
