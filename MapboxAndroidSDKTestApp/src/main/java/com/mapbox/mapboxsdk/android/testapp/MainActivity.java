@@ -13,7 +13,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
-import com.mapbox.mapboxsdk.overlay.mylocation.MyLocationNewOverlay;
+import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -24,7 +24,7 @@ public class MainActivity extends ActionBarActivity {
     private MapController mapController;
     private LatLng startingPoint = new LatLng(51f, 0f);
     private MapView mv;
-    private MyLocationNewOverlay myLocationOverlay;
+    private UserLocationOverlay myLocationOverlay;
     private Paint paint;
     private String satellite = "brunosan.map-cyglrrfu";
     private String street = "examples.map-vyofok3q";
@@ -100,7 +100,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void addLocationOverlay() {
         // Adds an icon that shows location
-        myLocationOverlay = new MyLocationNewOverlay(this, mv);
+        myLocationOverlay = new UserLocationOverlay(this, mv);
         myLocationOverlay.enableMyLocation();
         myLocationOverlay.setDrawAccuracyEnabled(true);
         mv.getOverlays().add(myLocationOverlay);
