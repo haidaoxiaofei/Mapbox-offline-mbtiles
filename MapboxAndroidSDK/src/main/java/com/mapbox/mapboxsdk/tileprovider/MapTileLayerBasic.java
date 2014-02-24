@@ -7,7 +7,7 @@ import com.mapbox.mapboxsdk.tileprovider.util.SimpleRegisterReceiver;
 
 import android.content.Context;
 
-public class MapTileProviderBasic extends MapTileProviderArray implements IMapTileProviderCallback {
+public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProviderCallback {
     Context context;
 
     /**
@@ -16,9 +16,9 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
      * @param pTileSource
      * @param mapView
      */
-    public MapTileProviderBasic(final Context pContext,
-                                final ITileLayer pTileSource,
-                                MapView mapView) {
+    public MapTileLayerBasic(final Context pContext,
+                             final ITileLayer pTileSource,
+                             MapView mapView) {
         super(pTileSource, new SimpleRegisterReceiver(pContext));
         this.context = pContext;
 
@@ -27,7 +27,7 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
                 new NetworkAvailabilityCheck(pContext),
                 mapView);
 
-        for (MapTileModuleProviderBase provider: mTileProviderList) {
+        for (MapTileModuleLayerBase provider: mTileProviderList) {
             if (provider.getClass().isInstance(MapTileDownloader.class)) {
                 mTileProviderList.remove(provider);
             }

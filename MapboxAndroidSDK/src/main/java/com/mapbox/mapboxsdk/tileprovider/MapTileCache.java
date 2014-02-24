@@ -1,15 +1,14 @@
 // Created by plusminus on 17:58:57 - 25.09.2008
 package com.mapbox.mapboxsdk.tileprovider;
-import android.util.Log;
 
-import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
+import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 
 import android.graphics.drawable.Drawable;
 
 /**
  * @author Nicolas Gramlich
  */
-public class MapTileCache implements OpenStreetMapTileProviderConstants {
+public class MapTileCache implements TileLayerConstants {
 
     protected final Object mCachedTilesLockObject = new Object();
     protected LRUMapTileCache mCachedTiles;

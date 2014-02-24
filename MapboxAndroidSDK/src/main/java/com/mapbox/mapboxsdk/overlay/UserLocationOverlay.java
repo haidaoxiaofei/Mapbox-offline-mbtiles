@@ -34,14 +34,6 @@ import android.view.MotionEvent;
 public class UserLocationOverlay extends SafeDrawOverlay implements
         IOverlayMenuProvider, Snappable {
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
-
     protected final SafePaint mPaint = new SafePaint();
     protected final SafePaint mCirclePaint = new SafePaint();
 
@@ -79,10 +71,6 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
     private final Rect mMyLocationRect = new Rect();
     private final Rect mMyLocationPreviousRect = new Rect();
 
-    // ===========================================================
-    // Constructors
-    // ===========================================================
-
     public UserLocationOverlay(Context context, MapView mapView) {
         this(context, new GpsLocationProvider(context), mapView);
     }
@@ -118,10 +106,6 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
         this.disableMyLocation();
         super.onDetach(mapView);
     }
-
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
 
     /**
      * If enabled, an accuracy circle will be drawn around your current position.
@@ -258,10 +242,6 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
         return reuse;
     }
 
-    // ===========================================================
-    // Methods from SuperClass/Interfaces
-    // ===========================================================
-
     @Override
     protected void drawSafe(ISafeCanvas canvas, MapView mapView, boolean shadow) {
         if (shadow)
@@ -298,10 +278,6 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
 
         return super.onTouchEvent(event, mapView);
     }
-
-    // ===========================================================
-    // Menu handling methods
-    // ===========================================================
 
     @Override
     public void setOptionsMenuEnabled(final boolean pOptionsMenuEnabled) {
@@ -348,10 +324,6 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
             return false;
         }
     }
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
 
     /**
      * Return a LatLng of the last known location, or null if not known.

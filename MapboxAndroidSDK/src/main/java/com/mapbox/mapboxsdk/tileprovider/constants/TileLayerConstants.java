@@ -6,9 +6,8 @@ package com.mapbox.mapboxsdk.tileprovider.constants;
  *
  * @author Neil Boyd
  */
-public interface OpenStreetMapTileProviderConstants {
+public interface TileLayerConstants {
 
-    public static final boolean DEBUGMODE = false;
     public static final boolean DEBUG_TILE_PROVIDERS = false;
 
     /**
@@ -34,32 +33,6 @@ public interface OpenStreetMapTileProviderConstants {
      */
     public static final int NUMBER_OF_TILE_DOWNLOAD_THREADS = 8;
 
-    public static final int NUMBER_OF_TILE_FILESYSTEM_THREADS = 8;
-
-    public static final long ONE_SECOND = 1000;
-    public static final long ONE_MINUTE = ONE_SECOND * 60;
-    public static final long ONE_HOUR = ONE_MINUTE * 60;
-    public static final long ONE_DAY = ONE_HOUR * 24;
-    public static final long ONE_WEEK = ONE_DAY * 7;
-    public static final long ONE_YEAR = ONE_DAY * 365;
-    public static final long DEFAULT_MAXIMUM_CACHED_FILE_AGE = ONE_WEEK;
-
     public static final int TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE = 40;
-    public static final int TILE_FILESYSTEM_MAXIMUM_QUEUE_SIZE = 40;
-
-    /**
-     * 30 days
-     */
-    public static final long TILE_EXPIRY_TIME_MILLISECONDS = 1000L * 60 * 60 * 24 * 30;
-
-    /**
-     * 600 Mb
-     */
-    public static final long TILE_MAX_CACHE_SIZE_BYTES = 600L * 1024 * 1024;
-
-    /**
-     * 500 Mb
-     */
-    public static final long TILE_TRIM_CACHE_SIZE_BYTES = 500L * 1024 * 1024;
 
 }

@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable;
 import com.mapbox.mapboxsdk.tileprovider.ExpirableBitmapDrawable;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
-import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
+import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import android.util.Log;
 
@@ -22,7 +22,7 @@ import java.util.concurrent.RejectedExecutionException;
  * @author Marc Kurtz
  * @author Neil Boyd
  */
-public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProviderConstants {
+public abstract class MapTileModuleLayerBase implements TileLayerConstants {
 
     /**
      * Gets the human-friendly name assigned to this tile provider.
@@ -83,7 +83,7 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
     protected final HashMap<MapTile, MapTileRequestState> mWorking;
     protected final LinkedHashMap<MapTile, MapTileRequestState> mPending;
 
-    public MapTileModuleProviderBase(int pThreadPoolSize, final int pPendingQueueSize) {
+    public MapTileModuleLayerBase(int pThreadPoolSize, final int pPendingQueueSize) {
         if (pPendingQueueSize < pThreadPoolSize) {
             Log.w(TAG, "The pending queue size is smaller than the thread pool size. Automatically reducing the thread pool size.");
             pThreadPoolSize = pPendingQueueSize;
@@ -127,12 +127,12 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
     public void loadMapTileAsync(final MapTileRequestState pState) {
         synchronized (mQueueLockObject) {
             if (DEBUG_TILE_PROVIDERS) {
-                Log.i(TAG, "MapTileModuleProviderBase.loadMaptileAsync() on provider: "
+                Log.i(TAG, "MapTileModuleLayerBase.loadMaptileAsync() on provider: "
                         + getName() + " for tile: " + pState.getMapTile());
                 if (mPending.containsKey(pState.getMapTile()))
-                    Log.i(TAG, "MapTileModuleProviderBase.loadMaptileAsync() tile already exists in request queue for modular provider. Moving to front of queue.");
+                    Log.i(TAG, "MapTileModuleLayerBase.loadMaptileAsync() tile already exists in request queue for modular provider. Moving to front of queue.");
                 else
-                    Log.i(TAG, "MapTileModuleProviderBase.loadMaptileAsync() adding tile to request queue for modular provider.");
+                    Log.i(TAG, "MapTileModuleLayerBase.loadMaptileAsync() adding tile to request queue for modular provider.");
             }
 
             // this will put the tile in the queue, or move it to the front of
@@ -164,7 +164,7 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
     void removeTileFromQueues(final MapTile mapTile) {
         synchronized (mQueueLockObject) {
             if (DEBUG_TILE_PROVIDERS) {
-                Log.i(TAG, "MapTileModuleProviderBase.removeTileFromQueues() on provider: "
+                Log.i(TAG, "MapTileModuleLayerBase.removeTileFromQueues() on provider: "
                         + getName() + " for tile: " + mapTile);
             }
             mPending.remove(mapTile);
@@ -309,5 +309,5 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
         }
     }
 
-    private static final String TAG = "MapTileModuleProviderBase";
+    private static final String TAG = "MapTileModuleLayerBase";
 }

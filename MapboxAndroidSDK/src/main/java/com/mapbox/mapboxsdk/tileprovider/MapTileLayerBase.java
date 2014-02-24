@@ -3,8 +3,8 @@ package com.mapbox.mapboxsdk.tileprovider;
 
 import java.util.HashMap;
 
-import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
-import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -31,8 +31,8 @@ import android.util.Log;
  * @author Marc Kurtz
  * @author Nicolas Gramlich
  */
-public abstract class MapTileProviderBase implements IMapTileProviderCallback,
-        OpenStreetMapTileProviderConstants {
+public abstract class MapTileLayerBase implements IMapTileProviderCallback,
+        TileLayerConstants {
 
     protected final MapTileCache mTileCache;
     protected Handler mTileRequestCompleteHandler;
@@ -94,12 +94,12 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
         return new MapTileCache();
     }
 
-    public MapTileProviderBase(final ITileLayer pTileSource) {
+    public MapTileLayerBase(final ITileLayer pTileSource) {
         this(pTileSource, null);
     }
 
-    public MapTileProviderBase(final ITileLayer pTileSource,
-                               final Handler pDownloadFinishedListener) {
+    public MapTileLayerBase(final ITileLayer pTileSource,
+                            final Handler pDownloadFinishedListener) {
         mTileCache = this.createTileCache();
         mTileRequestCompleteHandler = pDownloadFinishedListener;
         mTileSource = pTileSource;
@@ -123,7 +123,7 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
         }
 
         if (DEBUG_TILE_PROVIDERS) {
-            Log.i(TAG, "MapTileProviderBase.mapTileRequestCompleted(): " + pState.getMapTile());
+            Log.i(TAG, "MapTileLayerBase.mapTileRequestCompleted(): " + pState.getMapTile());
         }
     }
 
@@ -140,7 +140,7 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
         }
 
         if (DEBUG_TILE_PROVIDERS) {
-            Log.i(TAG, "MapTileProviderBase.mapTileRequestFailed(): " + pState.getMapTile());
+            Log.i(TAG, "MapTileLayerBase.mapTileRequestFailed(): " + pState.getMapTile());
         }
     }
 
@@ -163,7 +163,7 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
         }
 
         if (DEBUG_TILE_PROVIDERS) {
-            Log.i(TAG, "MapTileProviderBase.mapTileRequestExpiredTile(): " + pState.getMapTile());
+            Log.i(TAG, "MapTileLayerBase.mapTileRequestExpiredTile(): " + pState.getMapTile());
         }
     }
 
@@ -304,7 +304,7 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
                 Drawable existingTile = mTileCache.getMapTile(tile);
                 if (existingTile == null || ExpirableBitmapDrawable.isDrawableExpired(existingTile)) {
                     putExpiredTileIntoCache(new MapTileRequestState(tile,
-                            new MapTileModuleProviderBase[0], null), drawable);
+                            new MapTileModuleLayerBase[0], null), drawable);
                 }
 
             }
@@ -352,11 +352,11 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
                         final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
                         canvas.drawBitmap(oldBitmap, mSrcRect, mDestRect, null);
                         success = true;
-                        if (DEBUGMODE) {
+                        /*
                             Log.i(TAG, "Created scaled tile: " + pTile);
                             mDebugPaint.setTextSize(40);
                             canvas.drawText("scaled", 50, 50, mDebugPaint);
-                        }
+                        */
                     }
                 } finally {
                     if (isReusable)
@@ -419,15 +419,15 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
 
             if (bitmap != null) {
                 mNewTiles.put(pTile, bitmap);
-                if (DEBUGMODE) {
+                /*
                     Log.i(TAG, "Created scaled tile: " + pTile);
                     mDebugPaint.setTextSize(40);
                     canvas.drawText("scaled", 50, 50, mDebugPaint);
-                }
+                */
             }
         }
     }
 
-    private static final String TAG = "MapTileProviderBase";
+    private static final String TAG = "MapTileLayerBase";
 
 }

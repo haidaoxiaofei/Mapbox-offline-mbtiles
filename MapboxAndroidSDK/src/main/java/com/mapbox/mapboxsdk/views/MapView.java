@@ -36,8 +36,10 @@ import com.mapbox.mapboxsdk.overlay.OverlayItem;
 import com.mapbox.mapboxsdk.overlay.OverlayManager;
 import com.mapbox.mapboxsdk.overlay.TilesOverlay;
 import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
-import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
-import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
+import com.mapbox.mapboxsdk.tileprovider.MapTileLayerArray;
+import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic;
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
@@ -52,8 +54,6 @@ import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import org.json.JSONException;
 import com.mapbox.mapboxsdk.views.util.MultiTouchController;
-import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
-import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -142,7 +142,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     protected Rect mScrollableAreaLimit;
 
     // for speed (avoiding allocations)
-    protected final MapTileProviderBase mTileProvider;
+    protected final MapTileLayerBase mTileProvider;
 
     private final Handler mTileRequestCompleteHandler;
 
@@ -161,7 +161,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @param attrs An AttributeSet object to get extra info from the XML, such as mapbox id or type of baselayer
      */
     protected MapView(final Context context, final int tileSizePixels,
-                             final ResourceProxy resourceProxy, MapTileProviderBase tileProvider,
+                             final ResourceProxy resourceProxy, MapTileLayerBase tileProvider,
                              final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
         super(context, attrs);
         mResourceProxy = resourceProxy;
@@ -172,8 +172,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         if (tileProvider == null) {
             final ITileLayer tileSource = new MapboxTileLayer("examples.map-h6lnn4mm");
             tileProvider = isInEditMode()
-                    ? new MapTileProviderArray(tileSource, null, new MapTileModuleProviderBase[0])
-                    : new MapTileProviderBasic(context, tileSource, this);
+                    ? new MapTileLayerArray(tileSource, null, new MapTileModuleLayerBase[0])
+                    : new MapTileLayerBasic(context, tileSource, this);
         }
 
         mTileRequestCompleteHandler = tileRequestCompleteHandler == null
@@ -221,7 +221,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this(context, (AttributeSet) null);
     }
 
-    protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileProviderBase aTileProvider) {
+    protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileLayerBase aTileProvider) {
         this(context, tileSizePixels, resourceProxy, aTileProvider, null, null);
         init(context);
     }
@@ -357,7 +357,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return mOverlayManager;
     }
 
-    public MapTileProviderBase getTileProvider() {
+    public MapTileLayerBase getTileProvider() {
         return mTileProvider;
     }
 

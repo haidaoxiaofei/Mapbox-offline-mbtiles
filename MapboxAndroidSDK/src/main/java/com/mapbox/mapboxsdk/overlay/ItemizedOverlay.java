@@ -29,14 +29,6 @@ import com.mapbox.mapboxsdk.views.util.Projection;
 public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDrawOverlay implements
         Overlay.Snappable {
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
-
     protected final Drawable mDefaultMarker;
     private final ArrayList<Item> mInternalItemList;
     private final Rect mRect = new Rect();
@@ -45,10 +37,6 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
     private Item mFocusedItem;
     private boolean mPendingFocusChangedEvent = false;
     private OnFocusChangeListener mOnFocusChangeListener;
-
-    // ===========================================================
-    // Abstract methods
-    // ===========================================================
 
     /**
      * Method by which subclasses create the actual Items. This will only be called from populate()
@@ -60,10 +48,6 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
      * The number of items in this overlay.
      */
     public abstract int size();
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
 
     public ItemizedOverlay(final Drawable pDefaultMarker, final ResourceProxy pResourceProxy) {
 
@@ -77,10 +61,6 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
 
         mInternalItemList = new ArrayList<Item>();
     }
-
-    // ===========================================================
-    // Methods from SuperClass/Interfaces (and supporting methods)
-    // ===========================================================
 
     /**
      * Draw a marker on each of our items. populate() must have been called first.<br/>
@@ -123,10 +103,6 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
             onDrawItem(canvas, item, mCurScreenCoords, mapView.getMapOrientation());
         }
     }
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
 
     /**
      * Utility method to perform all processing on a new ItemizedOverlay. Subclasses provide Items

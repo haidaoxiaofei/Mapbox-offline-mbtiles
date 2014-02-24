@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * The {@link MapTileDownloader} loads tiles from an HTTP server.
  */
-public class MapTileDownloader extends MapTileModuleProviderBase {
+public class MapTileDownloader extends MapTileModuleLayerBase {
     private static final String TAG = "Tile downloader";
 
     private final AtomicReference<TileLayer> mTileSource = new AtomicReference<TileLayer>();
@@ -107,7 +107,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         }
     }
 
-    protected class TileLoader extends MapTileModuleProviderBase.TileLoader {
+    protected class TileLoader extends MapTileModuleLayerBase.TileLoader {
 
         @Override
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {

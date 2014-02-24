@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import android.util.Log;
 
@@ -14,55 +14,55 @@ import android.graphics.drawable.Drawable;
 /**
  * This top-level tile provider allows a consumer to provide an array of modular asynchronous tile
  * providers to be used to obtain map tiles. When a tile is requested, the
- * {@link MapTileProviderArray} first checks the {@link MapTileCache} (synchronously) and returns
- * the tile if available. If not, then the {@link MapTileProviderArray} returns null and sends the
+ * {@link MapTileLayerArray} first checks the {@link MapTileCache} (synchronously) and returns
+ * the tile if available. If not, then the {@link MapTileLayerArray} returns null and sends the
  * tile request through the asynchronous tile request chain. Each asynchronous tile provider returns
- * success/failure to the {@link MapTileProviderArray}. If successful, the
- * {@link MapTileProviderArray} passes the result to the base class. If failed, then the next
+ * success/failure to the {@link MapTileLayerArray}. If successful, the
+ * {@link MapTileLayerArray} passes the result to the base class. If failed, then the next
  * asynchronous tile provider is called in the chain. If there are no more asynchronous tile
  * providers in the chain, then the failure result is passed to the base class. The
- * {@link MapTileProviderArray} provides a mechanism so that only one unique tile-request can be in
+ * {@link MapTileLayerArray} provides a mechanism so that only one unique tile-request can be in
  * the map tile request chain at a time.
  *
  * @author Marc Kurtz
  */
-public class MapTileProviderArray extends MapTileProviderBase {
+public class MapTileLayerArray extends MapTileLayerBase {
 
     protected final HashMap<MapTile, MapTileRequestState> mWorking;
 
-    protected final List<MapTileModuleProviderBase> mTileProviderList;
+    protected final List<MapTileModuleLayerBase> mTileProviderList;
 
     /**
-     * Creates an {@link MapTileProviderArray} with no tile providers.
+     * Creates an {@link MapTileLayerArray} with no tile providers.
      *
      * @param pRegisterReceiver a {@link IRegisterReceiver}
      */
-    protected MapTileProviderArray(final ITileLayer pTileSource,
-                                   final IRegisterReceiver pRegisterReceiver) {
-        this(pTileSource, pRegisterReceiver, new MapTileModuleProviderBase[0]);
+    protected MapTileLayerArray(final ITileLayer pTileSource,
+                                final IRegisterReceiver pRegisterReceiver) {
+        this(pTileSource, pRegisterReceiver, new MapTileModuleLayerBase[0]);
     }
 
     /**
-     * Creates an {@link MapTileProviderArray} with the specified tile providers.
+     * Creates an {@link MapTileLayerArray} with the specified tile providers.
      *
      * @param aRegisterReceiver  a {@link IRegisterReceiver}
-     * @param pTileProviderArray an array of {@link MapTileModuleProviderBase}
+     * @param pTileProviderArray an array of {@link com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase}
      */
-    public MapTileProviderArray(final ITileLayer pTileSource,
-                                final IRegisterReceiver aRegisterReceiver,
-                                final MapTileModuleProviderBase[] pTileProviderArray) {
+    public MapTileLayerArray(final ITileLayer pTileSource,
+                             final IRegisterReceiver aRegisterReceiver,
+                             final MapTileModuleLayerBase[] pTileProviderArray) {
         super(pTileSource);
 
         mWorking = new HashMap<MapTile, MapTileRequestState>();
 
-        mTileProviderList = new ArrayList<MapTileModuleProviderBase>();
+        mTileProviderList = new ArrayList<MapTileModuleLayerBase>();
         Collections.addAll(mTileProviderList, pTileProviderArray);
     }
 
     @Override
     public void detach() {
         synchronized (mTileProviderList) {
-            for (final MapTileModuleProviderBase tileProvider : mTileProviderList) {
+            for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
                 tileProvider.detach();
             }
         }
@@ -87,14 +87,14 @@ public class MapTileProviderArray extends MapTileProviderBase {
                 //
             } else {
                 if (DEBUG_TILE_PROVIDERS) {
-                    Log.i(TAG, "MapTileProviderArray.getMapTile() requested but not in cache, trying from async providers: "
+                    Log.i(TAG, "MapTileLayerArray.getMapTile() requested but not in cache, trying from async providers: "
                             + pTile);
                 }
 
                 final MapTileRequestState state;
                 synchronized (mTileProviderList) {
-                    final MapTileModuleProviderBase[] providerArray =
-                            new MapTileModuleProviderBase[mTileProviderList.size()];
+                    final MapTileModuleLayerBase[] providerArray =
+                            new MapTileModuleLayerBase[mTileProviderList.size()];
                     state = new MapTileRequestState(pTile,
                             mTileProviderList.toArray(providerArray), this);
                 }
@@ -109,7 +109,7 @@ public class MapTileProviderArray extends MapTileProviderBase {
                     mWorking.put(pTile, state);
                 }
 
-                final MapTileModuleProviderBase provider = findNextAppropriateProvider(state);
+                final MapTileModuleLayerBase provider = findNextAppropriateProvider(state);
                 if (provider != null) {
                     provider.loadMapTileAsync(state);
                 } else {
@@ -130,7 +130,7 @@ public class MapTileProviderArray extends MapTileProviderBase {
 
     @Override
     public void mapTileRequestFailed(final MapTileRequestState aState) {
-        final MapTileModuleProviderBase nextProvider = findNextAppropriateProvider(aState);
+        final MapTileModuleLayerBase nextProvider = findNextAppropriateProvider(aState);
         if (nextProvider != null) {
             nextProvider.loadMapTileAsync(aState);
         } else {
@@ -148,7 +148,7 @@ public class MapTileProviderArray extends MapTileProviderBase {
         super.mapTileRequestExpiredTile(aState, aDrawable);
 
         // Continue through the provider chain
-        final MapTileModuleProviderBase nextProvider = findNextAppropriateProvider(aState);
+        final MapTileModuleLayerBase nextProvider = findNextAppropriateProvider(aState);
         if (nextProvider != null) {
             nextProvider.loadMapTileAsync(aState);
         } else {
@@ -162,8 +162,8 @@ public class MapTileProviderArray extends MapTileProviderBase {
      * We want to not use a provider that doesn't exist anymore in the chain, and we want to not use
      * a provider that requires a data connection when one is not available.
      */
-    protected MapTileModuleProviderBase findNextAppropriateProvider(final MapTileRequestState aState) {
-        MapTileModuleProviderBase provider = null;
+    protected MapTileModuleLayerBase findNextAppropriateProvider(final MapTileRequestState aState) {
+        MapTileModuleLayerBase provider = null;
         boolean providerDoesntExist = false, providerCantGetDataConnection = false, providerCantServiceZoomlevel = false;
         // The logic of the while statement is
         // "Keep looping until you get null, or a provider that still exists
@@ -185,7 +185,7 @@ public class MapTileProviderArray extends MapTileProviderBase {
         return provider;
     }
 
-    public boolean getProviderExists(final MapTileModuleProviderBase provider) {
+    public boolean getProviderExists(final MapTileModuleLayerBase provider) {
         synchronized (mTileProviderList) {
             return mTileProviderList.contains(provider);
         }
@@ -195,7 +195,7 @@ public class MapTileProviderArray extends MapTileProviderBase {
     public int getMinimumZoomLevel() {
         int result = MAXIMUM_ZOOMLEVEL;
         synchronized (mTileProviderList) {
-            for (final MapTileModuleProviderBase tileProvider : mTileProviderList) {
+            for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
                 if (tileProvider.getMinimumZoomLevel() < result) {
                     result = tileProvider.getMinimumZoomLevel();
                 }
@@ -208,7 +208,7 @@ public class MapTileProviderArray extends MapTileProviderBase {
     public int getMaximumZoomLevel() {
         int result = MINIMUM_ZOOMLEVEL;
         synchronized (mTileProviderList) {
-            for (final MapTileModuleProviderBase tileProvider : mTileProviderList) {
+            for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
                 if (tileProvider.getMaximumZoomLevel() > result) {
                     result = tileProvider.getMaximumZoomLevel();
                 }
@@ -222,12 +222,12 @@ public class MapTileProviderArray extends MapTileProviderBase {
         super.setTileSource(aTileSource);
 
         synchronized (mTileProviderList) {
-            for (final MapTileModuleProviderBase tileProvider : mTileProviderList) {
+            for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
                 tileProvider.setTileSource(aTileSource);
                 clearTileCache();
             }
         }
     }
 
-    private static final String TAG = "MapTileProviderArray";
+    private static final String TAG = "MapTileLayerArray";
 }

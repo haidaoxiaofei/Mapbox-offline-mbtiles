@@ -2,7 +2,7 @@ package com.mapbox.mapboxsdk.overlay;
 
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
-import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
 import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.tile.TileSystem;
@@ -34,7 +34,7 @@ public class TilesOverlay
     /**
      * Current tile source
      */
-    protected final MapTileProviderBase mTileProvider;
+    protected final MapTileLayerBase mTileProvider;
 
     /* to avoid allocations during draw */
     protected final Paint mDebugPaint = new Paint();
@@ -57,7 +57,7 @@ public class TilesOverlay
      */
     private int mOvershootTileCache = 0;
 
-    public TilesOverlay(final MapTileProviderBase aTileProvider, final ResourceProxy pResourceProxy) {
+    public TilesOverlay(final MapTileLayerBase aTileProvider, final ResourceProxy pResourceProxy) {
         super(pResourceProxy);
         if (aTileProvider == null) {
             throw new IllegalArgumentException(

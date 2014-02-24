@@ -2,7 +2,7 @@ package com.mapbox.mapboxsdk.tileprovider;
 
 import java.util.LinkedHashMap;
 
-import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
+import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import android.util.Log;
 
 import android.graphics.Bitmap;
@@ -15,7 +15,7 @@ import android.os.Build;
  * tiles at a time.
  */
 public class LRUMapTileCache extends LinkedHashMap<MapTile, Drawable>
-        implements OpenStreetMapTileProviderConstants {
+        implements TileLayerConstants {
 
     public interface TileRemovedListener {
         void onTileRemoved(MapTile mapTile);

@@ -1,12 +1,11 @@
 package com.mapbox.mapboxsdk.tileprovider;
 
-import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
 import com.mapbox.mapboxsdk.overlay.TilesOverlay;
 
 /**
  * A map tile is distributed using the observer pattern. The tile is delivered by a tile provider
- * (i.e. a descendant of {@link MapTileModuleProviderBase} or
- * {@link MapTileProviderBase} to a consumer of tiles (e.g. descendant of
+ * (i.e. a descendant of {@link com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase} or
+ * {@link MapTileLayerBase} to a consumer of tiles (e.g. descendant of
  * {@link TilesOverlay}). Tiles are typically images (e.g. png or jpeg).
  */
 public class MapTile {

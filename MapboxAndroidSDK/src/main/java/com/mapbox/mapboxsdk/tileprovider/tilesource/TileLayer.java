@@ -7,13 +7,13 @@ import android.util.Log;
 import com.mapbox.mapboxsdk.tileprovider.BitmapPool;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
-import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
+import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.tileprovider.util.LowMemoryException;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
 import java.io.InputStream;
 
-public class TileLayer implements ITileLayer, OpenStreetMapTileProviderConstants, MapViewConstants {
+public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstants {
 
     private static int globalOrdinal = 0;
     private String mBaseUrl;
