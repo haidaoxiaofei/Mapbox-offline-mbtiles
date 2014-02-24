@@ -18,16 +18,16 @@ public class MapTile {
     // (ie all the fields are final).
     private final int x;
     private final int y;
-    private final int zoomLevel;
+    private final int z;
 
-    public MapTile(final int zoomLevel, final int tileX, final int tileY) {
-        this.zoomLevel = zoomLevel;
+    public MapTile(final int z, final int tileX, final int tileY) {
+        this.z = z;
         this.x = tileX;
         this.y = tileY;
     }
 
     public int getZ() {
-        return zoomLevel;
+        return z;
     }
 
     public int getX() {
@@ -40,7 +40,7 @@ public class MapTile {
 
     @Override
     public String toString() {
-        return "/" + zoomLevel + "/" + x + "/" + y;
+        return "/" + z + "/" + x + "/" + y;
     }
 
     @Override
@@ -52,13 +52,13 @@ public class MapTile {
         if (!(obj instanceof MapTile))
             return false;
         final MapTile rhs = (MapTile) obj;
-        return zoomLevel == rhs.zoomLevel && x == rhs.x && y == rhs.y;
+        return z == rhs.z && x == rhs.x && y == rhs.y;
     }
 
     @Override
     public int hashCode() {
         int code = 17;
-        code *= 37 + zoomLevel;
+        code *= 37 + z;
         code *= 37 + x;
         code *= 37 + y;
         return code;

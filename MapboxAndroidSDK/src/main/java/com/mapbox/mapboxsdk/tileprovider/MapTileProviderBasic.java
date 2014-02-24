@@ -1,8 +1,8 @@
 package com.mapbox.mapboxsdk.tileprovider;
 
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.tileprovider.modules.*;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleRegisterReceiver;
 
 import android.content.Context;
@@ -22,7 +22,7 @@ public class MapTileProviderBasic extends MapTileProviderArray implements IMapTi
      * @param mapView
      */
     public MapTileProviderBasic(final Context pContext,
-                                final ITileSource pTileSource,
+                                final ITileLayer pTileSource,
                                 MapView mapView) {
         super(pTileSource, new SimpleRegisterReceiver(pContext));
         this.context = pContext;

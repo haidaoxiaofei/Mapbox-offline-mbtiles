@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import android.util.Log;
 
 import android.graphics.drawable.Drawable;
@@ -37,7 +37,7 @@ public class MapTileProviderArray extends MapTileProviderBase {
      *
      * @param pRegisterReceiver a {@link IRegisterReceiver}
      */
-    protected MapTileProviderArray(final ITileSource pTileSource,
+    protected MapTileProviderArray(final ITileLayer pTileSource,
                                    final IRegisterReceiver pRegisterReceiver) {
         this(pTileSource, pRegisterReceiver, new MapTileModuleProviderBase[0]);
     }
@@ -48,7 +48,7 @@ public class MapTileProviderArray extends MapTileProviderBase {
      * @param aRegisterReceiver  a {@link IRegisterReceiver}
      * @param pTileProviderArray an array of {@link MapTileModuleProviderBase}
      */
-    public MapTileProviderArray(final ITileSource pTileSource,
+    public MapTileProviderArray(final ITileLayer pTileSource,
                                 final IRegisterReceiver aRegisterReceiver,
                                 final MapTileModuleProviderBase[] pTileProviderArray) {
         super(pTileSource);
@@ -218,7 +218,7 @@ public class MapTileProviderArray extends MapTileProviderBase {
     }
 
     @Override
-    public void setTileSource(final ITileSource aTileSource) {
+    public void setTileSource(final ITileLayer aTileSource) {
         super.setTileSource(aTileSource);
 
         synchronized (mTileProviderList) {

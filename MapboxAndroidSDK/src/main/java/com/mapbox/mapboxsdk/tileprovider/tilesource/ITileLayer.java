@@ -2,12 +2,11 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
 import java.io.InputStream;
 
-import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.BitmapTileSourceBase.LowMemoryException;
+import com.mapbox.mapboxsdk.tileprovider.util.LowMemoryException;
 
 import android.graphics.drawable.Drawable;
 
-public interface ITileSource {
+public interface ITileLayer {
 
     /**
      * An ordinal identifier for this tile source
@@ -15,21 +14,6 @@ public interface ITileSource {
      * @return the ordinal value
      */
     int ordinal();
-
-    /**
-     * A human-friendly name for this tile source
-     *
-     * @return the tile source name
-     */
-    String name();
-
-    /**
-     * A localized human-friendly name for this tile source
-     *
-     * @param proxy a resource proxy
-     * @return the localized tile source name
-     */
-    String localizedName(ResourceProxy proxy);
 
     /**
      * Get a rendered Drawable from the specified InputStream.

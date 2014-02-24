@@ -5,7 +5,7 @@ import com.mapbox.mapboxsdk.tileprovider.ExpirableBitmapDrawable;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
 import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import android.util.Log;
 
 import java.util.HashMap;
@@ -75,7 +75,7 @@ public abstract class MapTileModuleProviderBase implements OpenStreetMapTileProv
      *
      * @param tileSource the tile source
      */
-    public abstract void setTileSource(ITileSource tileSource);
+    public abstract void setTileSource(ITileLayer tileSource);
 
     private final ExecutorService mExecutor;
 

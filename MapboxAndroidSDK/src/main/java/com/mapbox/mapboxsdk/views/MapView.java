@@ -38,6 +38,7 @@ import com.mapbox.mapboxsdk.overlay.TilesOverlay;
 import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
@@ -53,7 +54,6 @@ import org.json.JSONException;
 import com.mapbox.mapboxsdk.views.util.MultiTouchController;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -73,7 +73,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     /**
      * The current tile source for the view (to be deprecated soon).
      */
-    private ITileSource tileSource;
+    private ITileLayer tileSource;
     /**
      * The default marker Overlay, automatically added to the view to add markers directly.
      */
@@ -170,7 +170,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         TileSystem.setTileSize(tileSizePixels);
 
         if (tileProvider == null) {
-            final ITileSource tileSource = new MapboxTileLayer("examples.map-h6lnn4mm");
+            final ITileLayer tileSource = new MapboxTileLayer("examples.map-h6lnn4mm");
             tileProvider = isInEditMode()
                     ? new MapTileProviderArray(tileSource, null, new MapTileModuleProviderBase[0])
                     : new MapTileProviderBasic(context, tileSource, this);
@@ -226,7 +226,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         init(context);
     }
 
-    public void setTileSource(final ITileSource aTileSource) {
+    public void setTileSource(final ITileLayer aTileSource) {
         mTileProvider.setTileSource(aTileSource);
         TileSystem.setTileSize(aTileSource.getTileSizePixels());
         this.setZoom(mZoomLevel); // revalidate zoom level

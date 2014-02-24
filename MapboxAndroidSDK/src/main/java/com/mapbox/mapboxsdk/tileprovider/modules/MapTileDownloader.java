@@ -6,6 +6,7 @@ import android.util.Log;
 import android.util.DisplayMetrics;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.HttpResponseCache;
@@ -20,8 +21,7 @@ import java.util.UUID;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.OnlineTileSourceBase;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class MapTileDownloader extends MapTileModuleProviderBase {
     private static final String TAG = "Tile downloader";
 
-    private final AtomicReference<OnlineTileSourceBase> mTileSource = new AtomicReference<OnlineTileSourceBase>();
+    private final AtomicReference<TileLayer> mTileSource = new AtomicReference<TileLayer>();
 
     private final INetworkAvailabilityCheck mNetworkAvailablityCheck;
     private MapView mapView;
@@ -42,7 +42,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
     ArrayList<Boolean> threadControl = new ArrayList<Boolean>();
 
-    public MapTileDownloader(final ITileSource pTileSource,
+    public MapTileDownloader(final ITileLayer pTileSource,
                              final INetworkAvailabilityCheck pNetworkAvailablityCheck,
                              final MapView mapView) {
         super(NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
@@ -60,7 +60,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         }
     }
 
-    public ITileSource getTileSource() {
+    public ITileLayer getTileSource() {
         return mTileSource.get();
     }
 
@@ -86,21 +86,21 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
 
     @Override
     public int getMinimumZoomLevel() {
-        OnlineTileSourceBase tileSource = mTileSource.get();
-        return (tileSource != null ? tileSource.getMinimumZoomLevel() : MINIMUM_ZOOMLEVEL);
+        TileLayer tileLayer = mTileSource.get();
+        return (tileLayer != null ? tileLayer.getMinimumZoomLevel() : MINIMUM_ZOOMLEVEL);
     }
 
     @Override
     public int getMaximumZoomLevel() {
-        OnlineTileSourceBase tileSource = mTileSource.get();
-        return (tileSource != null ? tileSource.getMaximumZoomLevel() : MAXIMUM_ZOOMLEVEL);
+        TileLayer tileLayer = mTileSource.get();
+        return (tileLayer != null ? tileLayer.getMaximumZoomLevel() : MAXIMUM_ZOOMLEVEL);
     }
 
     @Override
-    public void setTileSource(final ITileSource tileSource) {
-        // We are only interested in OnlineTileSourceBase tile sources
-        if (tileSource instanceof OnlineTileSourceBase) {
-            mTileSource.set((OnlineTileSourceBase) tileSource);
+    public void setTileSource(final ITileLayer tileSource) {
+        // We are only interested in TileLayer tile sources
+        if (tileSource instanceof TileLayer) {
+            mTileSource.set((TileLayer) tileSource);
         } else {
             // Otherwise shut down the tile downloader
             mTileSource.set(null);
@@ -113,9 +113,9 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {
             threadControl.add(false);
             int threadIndex = threadControl.size() - 1;
-            OnlineTileSourceBase tileSource = mTileSource.get();
+            TileLayer tileLayer = mTileSource.get();
 
-            if (tileSource == null) {
+            if (tileLayer == null) {
                 return null;
             }
 
@@ -132,7 +132,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 return null;
             }
 
-            String url = tileSource.getTileURLString(tile, hdpi);
+            String url = tileLayer.getTileURLString(tile, hdpi);
 
             if (TextUtils.isEmpty(url)) {
                 return null;
@@ -157,7 +157,7 @@ public class MapTileDownloader extends MapTileModuleProviderBase {
                 final byte[] data = dataStream.toByteArray();
                 final ByteArrayInputStream byteStream = new ByteArrayInputStream(data);
 
-                Drawable result = tileSource.getDrawable(byteStream);
+                Drawable result = tileLayer.getDrawable(byteStream);
                 threadControl.set(threadIndex, true);
                 if (checkThreadControl()) {
                     TilesLoadedListener listener = mapView.getTilesLoadedListener();

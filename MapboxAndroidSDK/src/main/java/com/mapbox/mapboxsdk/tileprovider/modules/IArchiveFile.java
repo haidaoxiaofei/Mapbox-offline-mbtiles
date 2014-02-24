@@ -3,7 +3,7 @@ package com.mapbox.mapboxsdk.tileprovider.modules;
 import java.io.InputStream;
 
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 
 public interface IArchiveFile {
 
@@ -12,6 +12,6 @@ public interface IArchiveFile {
      *
      * @return the input stream, or null if the archive doesn't contain an entry for the requested tile
      */
-    InputStream getInputStream(ITileSource tileSource, MapTile tile);
+    InputStream getInputStream(ITileLayer tileSource, MapTile tile);
 
 }

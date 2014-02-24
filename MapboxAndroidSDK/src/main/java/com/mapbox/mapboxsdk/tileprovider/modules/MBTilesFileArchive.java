@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import android.util.Log;
 
 import java.io.ByteArrayInputStream;
@@ -36,7 +36,7 @@ public class MBTilesFileArchive implements IArchiveFile {
     }
 
     @Override
-    public InputStream getInputStream(final ITileSource pTileSource, final MapTile pTile) {
+    public InputStream getInputStream(final ITileLayer pTileSource, final MapTile pTile) {
 
         try {
             InputStream ret = null;

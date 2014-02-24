@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import com.mapbox.mapboxsdk.tileprovider.constants.OpenStreetMapTileProviderConstants;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.tile.TileSystem;
@@ -38,7 +38,7 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
     protected Handler mTileRequestCompleteHandler;
     protected boolean mUseDataConnection = true;
 
-    private ITileSource mTileSource;
+    private ITileLayer mTileSource;
     protected MapView mapView;
 
     /**
@@ -73,7 +73,7 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
      *
      * @param pTileSource the tile source
      */
-    public void setTileSource(final ITileSource pTileSource) {
+    public void setTileSource(final ITileLayer pTileSource) {
         mTileSource = pTileSource;
         clearTileCache();
     }
@@ -83,7 +83,7 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
      *
      * @return the tile source
      */
-    public ITileSource getTileSource() {
+    public ITileLayer getTileSource() {
         return mTileSource;
     }
 
@@ -94,11 +94,11 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
         return new MapTileCache();
     }
 
-    public MapTileProviderBase(final ITileSource pTileSource) {
+    public MapTileProviderBase(final ITileLayer pTileSource) {
         this(pTileSource, null);
     }
 
-    public MapTileProviderBase(final ITileSource pTileSource,
+    public MapTileProviderBase(final ITileLayer pTileSource,
                                final Handler pDownloadFinishedListener) {
         mTileCache = this.createTileCache();
         mTileRequestCompleteHandler = pDownloadFinishedListener;
