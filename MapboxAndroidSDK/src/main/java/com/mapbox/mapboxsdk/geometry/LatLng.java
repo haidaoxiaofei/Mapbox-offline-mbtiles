@@ -18,7 +18,7 @@ public final class LatLng implements ILatLng, GeoConstants, Parcelable, Serializ
 
     private double longitude;
     private double latitude;
-    private double altitude;
+    private double altitude = 0f;
 
     /**
      * Construct a new latitude, longitude point given float arguments

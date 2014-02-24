@@ -1313,9 +1313,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             this.alignment = BOTTOM_CENTER;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         public LayoutParams(final ViewGroup.LayoutParams source) {
             super(source);
         }

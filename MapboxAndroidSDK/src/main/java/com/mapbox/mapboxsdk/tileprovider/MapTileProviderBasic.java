@@ -7,11 +7,6 @@ import com.mapbox.mapboxsdk.tileprovider.util.SimpleRegisterReceiver;
 
 import android.content.Context;
 
-/**
- * This top-level tile provider implements a basic tile request chain which includes a
- * {@link MapTileFilesystemProvider} (a file-system cache), a {@link MapTileFileArchiveProvider}
- * (archive provider), and a {@link MapTileDownloader} (downloads map tiles via tile source).
- */
 public class MapTileProviderBasic extends MapTileProviderArray implements IMapTileProviderCallback {
     Context context;
 
