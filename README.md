@@ -1,38 +1,33 @@
-**This is pre-alpha software. It may be broken at any time in development, and there is zero guarantee of API stability. Kick the tires at your own risk, they may explode.**
+**This is pre-alpha software. It may be broken at any time in development,
+and there is zero guarantee of API stability. Kick the tires at your own
+risk, they may explode.**
 
 # Mapbox Android SDK
 
-Open source alternative for native Mapbox maps on Android. 
+An open source alternative for native maps on Android.
 
 ## Including the library in your project
 
-The development of the SDK is on its very earliest stage, so many of its elements will be unstable and not fully tested. If you want to try it in your app project, the easiest option is to download the latest JAR build [here](./mapbox-android-sdk.jar). Otherwise you can build the library from source, and experiment with the latest additions to the project.
+The development of the SDK is on its very earliest stage, so many of its elements
+will be unstable and not fully tested. Otherwise you can build the library from
+source, and experiment with the latest additions to the project.
 
 ### Building from source
 
 **With Gradle** *(recommended)*
 
-We use Gradle to generate a built version of our latest code in a matter of seconds. To use it with your IDE, make sure that Gradle is installed on your machine and import the project by selecting build.gradle as the project file.
+We use Gradle to generate a built version of our latest code in a matter of seconds.
+To use it with your IDE, make sure that Gradle is installed on your machine and
+import the project by selecting build.gradle as the project file.
 
-If you don't have Gradle installed we also provide a small shell script that autoextracts Gradle and builds the project. Just run ```build.sh``` in a terminal, and you're set.
+If you don't have Gradle installed we also provide a small shell script that
+auto-extracts Gradle and builds the project. Run `build.sh` in a terminal, and you're set.
 
 **Manually**
 
 Building from source means you get the very latest version of our code. The first step is to clone the repository to a directory in your system
 
 ```git clone https://github.com/mapbox/mapbox-android-sdk.git ```
-
-
-
-The MapBox Android SDK has the following dependencies. All of them are included in this repository, but they need to be added manually in your IDE:
-
-**Our flavor of OSMDroid**
-
-[OSMDroid](https://code.google.com/p/osmdroid/) is an open source project to display OSM maps in Android. It provides a Google Maps for Android-like MapView object in which the map rests. Our fork of this library resides in ```path/to/sdk/src/main```
-
-**The SDK**
-
-Our library itself is located in ```path/to/sdk/src/src```
 
 #### Building in IntelliJ IDEA or Android Studio
 
@@ -56,14 +51,4 @@ Our library itself is located in ```path/to/sdk/src/src```
 * Open properties of the second project "OSMDroidTests" ->Android -> at the bottom you will see Library -> click on Add button to add your SDK project.
 * That's all now your test project - "OSMDroidTests" is working in Eclipse. Enjoy!
 
-
-**Resources**
-
-OSMDroid is at the moment built as a Java library, not an explicit Android library, so there are references to resource static files that need to be referenced in your classpath. This will be corrected soon, but for now it needs to be done in IntelliJ IDEA. To do so:
-
-* Go to File-Project Structure-SDKs.
-* For each SDK, add the path to OSMDroid's resources - ```path/to/mapboxsdk/mapbox-android-sdk/src/main/resources/org/osmdroid```
-
-## Using the library
-
-Read the [quick start guide](https://github.com/mapbox/mapbox-android-sdk/blob/master/QUICKSTART.md)
+## [Quick-start Guide](https://github.com/mapbox/mapbox-android-sdk/blob/master/QUICKSTART.md)
