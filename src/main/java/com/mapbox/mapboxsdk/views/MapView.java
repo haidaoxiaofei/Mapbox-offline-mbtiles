@@ -292,6 +292,19 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 }
             }
         }
+        getGroupSet();
+    }
+
+    public HashSet<Integer> getGroupSet(){
+        HashSet<Integer> set = new HashSet<Integer>();
+        for(OverlayItem element: defaultMarkerList){
+            if(!set.contains(element.getGroup())){
+                set.add(element.getGroup());
+            }
+        }
+        System.out.println("group set: " + set);
+        return set;
+
     }
 
     private double screenX(OverlayItem item){
