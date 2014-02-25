@@ -23,6 +23,15 @@ public class OverlayItem {
     public static final int ITEM_STATE_SELECTED_MASK = 2;
 
     protected static final Point DEFAULT_MARKER_SIZE = new Point(26, 94);
+    private int group = 0;
+
+    public int getGroup() {
+        return group;
+    }
+
+    public void assignGroup(int currentGroup) {
+        group = currentGroup;
+    }
 
     /**
      * Indicates a hotspot for an area. This is where the origin (0,0) of a point will be located
