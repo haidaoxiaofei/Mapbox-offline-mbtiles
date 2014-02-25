@@ -291,6 +291,25 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         GeoJSON.parseString(geoJSON, MapView.this);
     }
 
+    public void cluster(){
+        currentGroup++;
+        for(OverlayItem item: defaultMarkerList){
+            if (item.getGroup() == 0){
+                item.assignGroup(currentGroup);
+                for(OverlayItem item2: defaultMarkerList){
+                    if(item2.getGroup() == 0 && dist(point.x, point.y, comparedPoint.x, comparedPoint.y)<CLUSTERING_THRESHOLD){
+                        comparedPoint.assignGroup(currentGroup);
+                    }
+                }
+            }
+        }
+    }
+    
+
+    private double dist(double x1, double y1, double x2, double y2){
+        return Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+    }
+
     /**
      * Sets the default itemized overlay.
      */
