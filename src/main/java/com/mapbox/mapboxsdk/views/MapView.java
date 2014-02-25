@@ -1,60 +1,44 @@
 package com.mapbox.mapboxsdk.views;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Point;
-import android.graphics.PointF;
-import android.graphics.Rect;
+import android.graphics.*;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.Scroller;
 import android.widget.Toast;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.R;
-import com.mapbox.mapboxsdk.format.GeoJSON;
-import com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay;
-import com.mapbox.mapboxsdk.overlay.ItemizedOverlay;
-import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
-import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
-import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
 import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
-import com.mapbox.mapboxsdk.overlay.Overlay;
-import com.mapbox.mapboxsdk.overlay.OverlayItem;
-import com.mapbox.mapboxsdk.overlay.OverlayManager;
-import com.mapbox.mapboxsdk.overlay.TilesOverlay;
-import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
+import com.mapbox.mapboxsdk.format.GeoJSON;
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.overlay.*;
+import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.tileprovider.MapTileProviderArray;
+import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleProviderBase;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
-import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
+import com.mapbox.mapboxsdk.views.util.MultiTouchController;
 import com.mapbox.mapboxsdk.views.util.Projection;
-import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-import com.mapbox.mapboxsdk.tile.TileSystem;
+import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import org.json.JSONException;
-import com.mapbox.mapboxsdk.views.util.MultiTouchController;
-import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBase;
-import com.mapbox.mapboxsdk.tileprovider.MapTileProviderBasic;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileSource;
-import com.mapbox.mapboxsdk.geometry.LatLng;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -292,13 +276,18 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public void cluster(){
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        final double CLUSTERING_THRESHOLD = size.x;
         currentGroup++;
         for(OverlayItem item: defaultMarkerList){
             if (item.getGroup() == 0){
                 item.assignGroup(currentGroup);
                 for(OverlayItem item2: defaultMarkerList){
-                    if(item2.getGroup() == 0 && dist(point.x, point.y, comparedPoint.x, comparedPoint.y)<CLUSTERING_THRESHOLD){
-                        comparedPoint.assignGroup(currentGroup);
+                    if(item2.getGroup() == 0 && dist(screenX(item), screenY(item), screenX(item2), screenY(item2)) < CLUSTERING_THRESHOLD){
+                        item2.assignGroup(currentGroup);
                     }
                 }
             }
@@ -307,7 +296,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     
 
     private double dist(double x1, double y1, double x2, double y2){
-        return Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 
     /**
