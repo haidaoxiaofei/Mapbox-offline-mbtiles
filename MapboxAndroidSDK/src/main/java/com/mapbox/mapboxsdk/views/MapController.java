@@ -110,7 +110,7 @@ public class MapController implements MapViewConstants {
         }
     }
 
-    public void scrollBy(int x, int y) {
+    public void panBy(int x, int y) {
         this.mMapView.scrollBy(x, y);
     }
 
@@ -171,7 +171,6 @@ public class MapController implements MapViewConstants {
     }
 
     public boolean zoomInFixing(final int xPixel, final int yPixel) {
-        mMapView.mMultiTouchScalePoint.set(xPixel, yPixel);
         if (mMapView.canZoomIn()) {
             if (mMapView.mIsAnimating.getAndSet(true)) {
                 // TODO extend zoom (and return true)
@@ -200,7 +199,6 @@ public class MapController implements MapViewConstants {
     }
 
     public boolean zoomOutFixing(final int xPixel, final int yPixel) {
-        mMapView.mMultiTouchScalePoint.set(xPixel, yPixel);
         if (mMapView.canZoomOut()) {
             if (mMapView.mIsAnimating.getAndSet(true)) {
                 // TODO extend zoom (and return true)
@@ -227,8 +225,7 @@ public class MapController implements MapViewConstants {
     protected void onAnimationEnd() {
         final Rect screenRect = mMapView.getProjection().getScreenRect();
         final Matrix m = new Matrix();
-        m.setScale(1 / mMapView.mMultiTouchScale, 1 / mMapView.mMultiTouchScale,
-                mMapView.mMultiTouchScalePoint.x, mMapView.mMultiTouchScalePoint.y);
+        m.setScale(1 / mMapView.mMultiTouchScale, 1 / mMapView.mMultiTouchScale);
         m.postRotate(-mMapView.getMapOrientation(), screenRect.exactCenterX(),
                 screenRect.exactCenterY());
         float[] pts = new float[2];

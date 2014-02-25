@@ -4,6 +4,10 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import com.mapbox.mapboxsdk.api.ILatLng;
 
+/**
+ * A custom listener for double-tap gestures that zooms in on
+ * the right location.
+ */
 class MapViewDoubleClickListener implements GestureDetector.OnDoubleTapListener {
 
     private final MapView mapView;
@@ -23,19 +27,11 @@ class MapViewDoubleClickListener implements GestureDetector.OnDoubleTapListener 
 
     @Override
     public boolean onDoubleTapEvent(final MotionEvent e) {
-        if (this.mapView.getOverlayManager().onDoubleTapEvent(e, this.mapView)) {
-            return true;
-        }
-
-        return false;
+        return this.mapView.getOverlayManager().onDoubleTapEvent(e, this.mapView);
     }
 
     @Override
     public boolean onSingleTapConfirmed(final MotionEvent e) {
-        if (this.mapView.getOverlayManager().onSingleTapConfirmed(e, this.mapView)) {
-            return true;
-        }
-
-        return false;
+        return this.mapView.getOverlayManager().onSingleTapConfirmed(e, this.mapView);
     }
 }

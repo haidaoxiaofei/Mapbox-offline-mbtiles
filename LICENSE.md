@@ -15,3 +15,6 @@ limitations under the License.
 This is a fork of [OSMDroid](https://code.google.com/p/osmdroid/), also licensed under
 
     http://www.apache.org/licenses/LICENSE-2.0
+
+Includes `MultiTouchController.java`, by Luke Hutchison (luke.hutch@mit.edu),
+licensed uner Apache License 2.0 and GPLv2.

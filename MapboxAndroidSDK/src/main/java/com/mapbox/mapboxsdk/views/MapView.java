@@ -10,11 +10,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.Scroller;
 import android.widget.Toast;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
@@ -53,12 +49,10 @@ import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import org.json.JSONException;
-import com.mapbox.mapboxsdk.views.util.MultiTouchController;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -68,12 +62,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * state of a single map, including layers, markers,
  * and interaction code.
  */
-public class MapView extends ViewGroup implements MapViewConstants, MapEventsReceiver, MapboxConstants, MultiTouchController.MultiTouchObjectCanvas<Object> {
-
-    /**
-     * The current tile source for the view (to be deprecated soon).
-     */
-    private ITileLayer tileSource;
+public class MapView extends ViewGroup implements MapViewConstants, MapEventsReceiver, MapboxConstants {
     /**
      * The default marker Overlay, automatically added to the view to add markers directly.
      */
@@ -110,6 +99,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private final TilesOverlay mMapOverlay;
 
     private final GestureDetector mGestureDetector;
+    private final ScaleGestureDetector mScaleGestureDetector;
 
     /**
      * Handles map scrolling
@@ -127,9 +117,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     private final ResourceProxy mResourceProxy;
 
-    protected MultiTouchController<Object> mMultiTouchController;
     protected float mMultiTouchScale = 1.0f;
-    protected PointF mMultiTouchScalePoint = new PointF();
 
     protected MapListener mListener;
 
@@ -149,7 +137,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     /* a point that will be reused to design added views */
     private final Point mPoint = new Point();
 
-    private HashSet<String> activeLayers = new HashSet<String>();
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
     private String identifier = EXAMPLE_MAP_ID;
@@ -185,12 +172,15 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this.mMapOverlay = new TilesOverlay(mTileProvider, mResourceProxy);
         mOverlayManager = new OverlayManager(mMapOverlay);
 
-        mGestureDetector = new GestureDetector(context, new MapViewGestureDetectorListener(this));
+        this.mGestureDetector = new GestureDetector(context, new MapViewGestureDetectorListener(this));
         mGestureDetector.setOnDoubleTapListener(new MapViewDoubleClickListener(this));
+
+        mScaleGestureDetector = new ScaleGestureDetector(context, new MapViewScaleGestureDetectorListener(this));
+
         this.context = context;
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
-        this.setMultiTouchControls(true);
+
         if (attrs != null) {
             final String mapid = attrs.getAttributeValue(null, "mapid");
             if (mapid != null) {
@@ -229,7 +219,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public void setTileSource(final ITileLayer aTileSource) {
         mTileProvider.setTileSource(aTileSource);
         TileSystem.setTileSize(aTileSource.getTileSizePixels());
-        this.setZoom(mZoomLevel); // revalidate zoom level
+        this.setZoom(mZoomLevel);
         postInvalidate();
     }
 
@@ -241,7 +231,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this.context = context;
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
-        this.setMultiTouchControls(true);
     }
 
     /**
@@ -446,6 +435,17 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      */
     public MapView setCenter(final ILatLng aCenter) {
         getController().setCenter(aCenter);
+        return this;
+    }
+
+    public MapView panBy(int x, int y) {
+        scrollBy(x, y);
+        return this;
+    }
+
+    public MapView setScale(float scale) {
+        mMultiTouchScale = scale;
+        invalidate();
         return this;
     }
 
@@ -956,21 +956,23 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             }
 
             if (this.getOverlayManager().onTouchEvent(rotatedEvent, this)) {
+                Log.d(TAG, "OverlayManager handled onTouchEvent");
                 return true;
             }
 
-            if (mMultiTouchController != null && mMultiTouchController.onTouchEvent(event)) {
-                Log.d(TAG, "mMultiTouchController handled onTouchEvent");
+            if (mScaleGestureDetector.onTouchEvent(event)) {
+                Log.d(TAG, "ScaleDetector handled onTouchEvent");
                 return true;
             }
 
             if (mGestureDetector.onTouchEvent(rotatedEvent)) {
-                Log.d(TAG, "mGestureDetector handled onTouchEvent");
+                Log.d(TAG, "GestureDetector handled onTouchEvent");
                 return true;
             }
         } finally {
-            if (rotatedEvent != event)
+            if (rotatedEvent != event) {
                 rotatedEvent.recycle();
+            }
         }
 
         Log.d(TAG, "no-one handled onTouchEvent");
@@ -1104,7 +1106,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     @Override
     protected void dispatchDraw(final Canvas c) {
-        final long startMs = System.currentTimeMillis();
 
         mProjection = new Projection(this);
 
@@ -1112,12 +1113,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         c.save();
 
         c.translate(getWidth() / 2, getHeight() / 2);
-        c.scale(mMultiTouchScale, mMultiTouchScale, mMultiTouchScalePoint.x,
-                mMultiTouchScalePoint.y);
+        c.scale(mMultiTouchScale, mMultiTouchScale, getWidth() / 2, getHeight() / 2);
 
 		/* rotate Canvas */
-        c.rotate(mapOrientation, mProjection.getScreenRect().exactCenterX(), mProjection
-                .getScreenRect().exactCenterY());
+        c.rotate(mapOrientation,
+            mProjection.getScreenRect().exactCenterX(),
+            mProjection.getScreenRect().exactCenterY());
 
 		/* Draw background */
         // c.drawColor(mBackgroundColor);
@@ -1129,11 +1130,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         c.restore();
 
         super.dispatchDraw(c);
-
-        if (DEBUGMODE) {
-            final long endMs = System.currentTimeMillis();
-            Log.d(TAG, "Rendering overall: " + (endMs - startMs) + "ms");
-        }
     }
 
     /**
@@ -1170,88 +1166,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return mIsAnimating.get();
     }
 
-    @Override
-    public Object getDraggableObjectAtPoint(final MultiTouchController.PointInfo pt) {
-        if (this.isAnimating()) {
-            // Zoom animations use the mMultiTouchScale variables to perform their animations so we
-            // don't want to step on that.
-            return null;
-        } else {
-            mMultiTouchScalePoint.x = pt.getX() + getScrollX() - (this.getWidth() / 2);
-            mMultiTouchScalePoint.y = pt.getY() + getScrollY() - (this.getHeight() / 2);
-            return this;
-        }
-    }
-
-    @Override
-    public void getPositionAndScale(final Object obj, final MultiTouchController.PositionAndScale objPosAndScaleOut) {
-        objPosAndScaleOut.set(0, 0, true, mMultiTouchScale, false, 0, 0, false, 0);
-    }
-
-    @Override
-    public void selectObject(final Object obj, final MultiTouchController.PointInfo pt) {
-        // if obj is null it means we released the pointers
-        // if scale is not 1 it means we pinched
-        if (obj == null && mMultiTouchScale != 1.0f) {
-            final float scaleDiffFloat = (float) (Math.log(mMultiTouchScale) * ZOOM_LOG_BASE_INV);
-            final int scaleDiffInt = Math.round(scaleDiffFloat);
-            // If we are changing zoom levels,
-            // adjust the center point in respect to the scaling point
-            if (scaleDiffInt != 0) {
-                Matrix m = new Matrix();
-                m.setScale(1 / mMultiTouchScale, 1 / mMultiTouchScale, mMultiTouchScalePoint.x,
-                        mMultiTouchScalePoint.y);
-                m.postRotate(-mapOrientation, mProjection.getScreenRect().centerX(), mProjection
-                        .getScreenRect().centerY());
-                float[] pts = new float[2];
-                pts[0] = getScrollX();
-                pts[1] = getScrollY();
-                m.mapPoints(pts);
-                scrollTo((int) pts[0], (int) pts[1]);
-            }
-
-            // Adjust the zoomLevel
-            setZoom(mZoomLevel + scaleDiffInt);
-        }
-
-        // reset scale
-        mMultiTouchScale = 1.0f;
-    }
-
-    @Override
-    public boolean setPositionAndScale(final Object obj, final MultiTouchController.PositionAndScale aNewObjPosAndScale,
-                                       final MultiTouchController.PointInfo aTouchPoint) {
-        float multiTouchScale = aNewObjPosAndScale.getScale();
-        // If we are at the first or last zoom level, prevent pinching/expanding
-        if (multiTouchScale > 1 && !canZoomIn()) {
-            multiTouchScale = 1;
-        }
-        if (multiTouchScale < 1 && !canZoomOut()) {
-            multiTouchScale = 1;
-        }
-        mMultiTouchScale = multiTouchScale;
-        invalidate(); // redraw
-        return true;
-    }
-
-    /*
-     * Set the MapListener for this view
-     */
-    public void setMapListener(final MapListener ml) {
-        mListener = ml;
-    }
-
-    public void setMultiTouchControls(final boolean on) {
-        mMultiTouchController = on ? new MultiTouchController<Object>(this, false) : null;
-    }
-
     public TileLoadedListener getTileLoadedListener() {
         return tileLoadedListener;
     }
-
-    // ===========================================================
-    // Public Classes
-    // ===========================================================
 
     /**
      * Per-child layout information associated with OpenStreetMapView.
