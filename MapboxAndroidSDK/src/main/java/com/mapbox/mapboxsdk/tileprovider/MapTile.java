@@ -19,10 +19,10 @@ public class MapTile {
     private final int y;
     private final int z;
 
-    public MapTile(final int z, final int tileX, final int tileY) {
+    public MapTile(final int z, final int x, final int y) {
         this.z = z;
-        this.x = tileX;
-        this.y = tileY;
+        this.x = x;
+        this.y = y;
     }
 
     public int getZ() {
@@ -44,12 +44,15 @@ public class MapTile {
 
     @Override
     public boolean equals(final Object obj) {
-        if (obj == null)
+        if (obj == null) {
             return false;
-        if (obj == this)
+        }
+        if (obj == this) {
             return true;
-        if (!(obj instanceof MapTile))
+        }
+        if (!(obj instanceof MapTile)) {
             return false;
+        }
         final MapTile rhs = (MapTile) obj;
         return z == rhs.z && x == rhs.x && y == rhs.y;
     }

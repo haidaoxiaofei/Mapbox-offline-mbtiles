@@ -14,7 +14,7 @@ public class MapboxTileLayer extends TileLayer implements MapViewConstants, Mapb
     public MapboxTileLayer(String id) {
         super(id);
         if (!id.contains("http://") && !id.contains("https://") && id.contains("")) {
-            this.setUrl(MAPBOX_BASE_URL + id + "/{z}/{x}/{y}{2x}.png");
+            this.setURL(MAPBOX_BASE_URL + id + "/{z}/{x}/{y}{2x}.png");
         }
     }
 }

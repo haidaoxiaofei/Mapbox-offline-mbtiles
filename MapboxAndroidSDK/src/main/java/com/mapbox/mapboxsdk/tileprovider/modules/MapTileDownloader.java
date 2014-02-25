@@ -132,7 +132,7 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
                 return null;
             }
 
-            String url = tileLayer.getTileURLString(tile, hdpi);
+            String url = tileLayer.getTileURL(tile, hdpi);
 
             if (TextUtils.isEmpty(url)) {
                 return null;

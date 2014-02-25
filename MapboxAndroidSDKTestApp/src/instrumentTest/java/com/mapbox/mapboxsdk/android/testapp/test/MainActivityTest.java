@@ -10,16 +10,16 @@ import com.mapbox.mapboxsdk.android.testapp.MainActivity;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.tile.TileSystem;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer;
+import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import junit.framework.Assert;
 
-public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity>
-{
+public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
     public MainActivityTest() {
         super(MainActivity.class);
     }
 
-    public void testSetMapCenter() throws Exception
-    {
+    public void testSetMapCenter() throws Exception {
         LatLng center = new LatLng(43.07472, -89.38421);
         MainActivity activity = getActivity();
         activity.setMapCenter(center);
@@ -63,5 +63,27 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         TileSystem.setTileSize(256);
         Assert.assertEquals(TileSystem.getTileSize(), 256);
         Assert.assertEquals(TileSystem.MapSize(5), 8192);
+    }
+
+    public void testMapTile() throws Exception {
+        MapTile tile = new MapTile(1, 2, 3);
+        MapTile tileB = new MapTile(1, 2, 3);
+        MapTile tileC = new MapTile(1, 2, 4);
+
+        Assert.assertEquals(tile.getZ(), 1);
+        Assert.assertEquals(tile.getX(), 2);
+        Assert.assertEquals(tile.getY(), 3);
+        Assert.assertEquals(tile.toString(), "/1/2/3");
+
+        Assert.assertTrue(tile.equals(tileB));
+        Assert.assertFalse(tile.equals(tileC));
+    }
+
+    public void testTileLayer() throws Exception {
+        TileLayer tl = new TileLayer("http://hi.com/{z}/{x}/{y}{2x}.png");
+        MapTile tile = new MapTile(0, 0, 0);
+        Assert.assertEquals(tl.getTileURL(tile, true), "http://hi.com/0/0/0@2x.png");
+        Assert.assertEquals(tl.setURL("http://hello.com/{z}/{x}/{y}{2x}.png"), tl);
+        Assert.assertEquals(tl.getTileURL(tile, true), "http://hello.com/0/0/0@2x.png");
     }
 }
