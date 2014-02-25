@@ -276,21 +276,23 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public void cluster(){
+        int currentGroup = 0;
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        final double CLUSTERING_THRESHOLD = size.x;
+        final double CLUSTERING_THRESHOLD = size.x/5;
         currentGroup++;
         for(OverlayItem item: defaultMarkerList){
             if (item.getGroup() == 0){
                 item.assignGroup(currentGroup);
                 for(OverlayItem item2: defaultMarkerList){
-                    if(item2.getGroup() == 0 && dist(screenX(item), screenY(item), screenX(item2), screenY(item2)) < CLUSTERING_THRESHOLD){
+                    if(item2.getGroup() == 0 && dist(screenX(item), screenY(item), screenX(item2), screenY(item2)) <= CLUSTERING_THRESHOLD){
                         item2.assignGroup(currentGroup);
                     }
                 }
             }
+            currentGroup++;
         }
         getGroupSet();
     }
@@ -314,7 +316,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private double screenY(OverlayItem item){
         return mProjection.toPixels(item.getPoint(), null).y;
     }
-
 
     private double dist(double x1, double y1, double x2, double y2){
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
