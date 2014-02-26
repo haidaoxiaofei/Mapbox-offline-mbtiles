@@ -391,6 +391,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             }
         }
         LatLng result = getCenter(tempList);
+        Marker m = new Marker(this, "Hello", "This is the center of group "+group+"'s cluster", result);
+        m.setIcon(new Icon(Icon.Size.l, "circle", "f00"));
+        clusterList.add(m);
         System.out.println("center for group " + group + " is: " + result);
         return result;
     }
