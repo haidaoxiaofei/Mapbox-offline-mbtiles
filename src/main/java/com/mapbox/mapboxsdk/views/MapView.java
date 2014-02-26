@@ -282,11 +282,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     public void cluster(){
         int currentGroup = 0;
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        final double CLUSTERING_THRESHOLD = size.x/5;
+        final double CLUSTERING_THRESHOLD = getThreshold();
         currentGroup++;
         for(OverlayItem item: defaultMarkerList){
             if (item.getGroup() == 0){
@@ -300,6 +296,14 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             currentGroup++;
         }
         getGroupSet();
+    }
+
+    private double getThreshold() {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size.x/10;
     }
 
     private HashSet<Integer> getGroupSet(){
