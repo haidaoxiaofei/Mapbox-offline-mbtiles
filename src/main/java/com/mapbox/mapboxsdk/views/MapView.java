@@ -139,6 +139,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private String identifier = EXAMPLE_MAP_ID;
     private Tooltip tooltip;
 
+
+
     /**
      * Constructor for XML layout calls. Should not be used programmatically.
      * @param context A copy of the app context
@@ -280,7 +282,10 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 //    They are here temporarily
 //    ########################################
 
+    private ItemizedIconOverlay<Marker> clusters;
+    private ArrayList<Marker> clusterList = new ArrayList<Marker>();
     public void cluster(){
+        initClusterOverlay();
         int currentGroup = 0;
         final double CLUSTERING_THRESHOLD = getThreshold();
         currentGroup++;
@@ -348,6 +353,23 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         double Lat = Math.atan2(Z, Hyp);
 
         return new LatLng(Lat * 180 / Math.PI, Lon * 180 / Math.PI);
+    }
+
+
+
+    private void initClusterOverlay(){
+
+        clusters = new ItemizedIconOverlay<Marker>(clusterList, new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
+            @Override
+            public boolean onItemSingleTapUp(int index, Marker item) {
+                return false;
+            }
+
+            @Override
+            public boolean onItemLongPress(int index, Marker item) {
+                return false;
+            }
+        }, mResourceProxy);
     }
 
     private LatLng generateCenterByGroup(ArrayList<OverlayItem> list, int group) {
