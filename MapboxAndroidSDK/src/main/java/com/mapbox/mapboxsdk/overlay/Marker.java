@@ -54,6 +54,7 @@ public class Marker extends ExtendedOverlayItem {
 
     public Marker setIcon(Icon icon) {
         icon.setMarker(this);
+        this.setMarkerHotspot(HotspotPlace.CENTER);
         return this;
     }
 
