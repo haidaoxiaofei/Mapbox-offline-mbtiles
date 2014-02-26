@@ -285,7 +285,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private ItemizedIconOverlay<Marker> clusters;
     private ArrayList<Marker> clusterList = new ArrayList<Marker>();
     public void cluster(){
-        initClusterOverlay();
         int currentGroup = 0;
         final double CLUSTERING_THRESHOLD = getThreshold();
         currentGroup++;
@@ -301,6 +300,17 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             currentGroup++;
         }
         getGroupSet();
+        if(clusters != null){
+            clusters.removeAllItems();
+            clusters.addItems(clusterList);
+        }
+        else{
+            initClusterOverlay();
+            clusters.addItems(clusterList);
+        }
+        this.getOverlays().add(clusters);
+        this.invalidate();
+
     }
 
     private double getThreshold() {
