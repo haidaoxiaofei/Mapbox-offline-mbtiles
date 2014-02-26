@@ -68,9 +68,9 @@ public class Icon {
         protected void onPostExecute(Bitmap bitmap) {
             bitmap.setDensity(120);
             drawable = new BitmapDrawable(bitmap);
-            Log.w(TAG, "icon loaded");
             if (marker != null) {
                 marker.setMarker(drawable);
+                Log.w(TAG, "icon loaded");
             }
         }
     }
