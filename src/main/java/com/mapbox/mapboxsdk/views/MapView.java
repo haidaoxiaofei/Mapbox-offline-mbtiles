@@ -275,6 +275,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         GeoJSON.parseString(geoJSON, MapView.this);
     }
 
+//    ########################################
+//    CLUSTERING-RELATED METHODS
+//    They are here temporarily
+//    ########################################
+
     public void cluster(){
         int currentGroup = 0;
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -297,17 +302,64 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         getGroupSet();
     }
 
-    public HashSet<Integer> getGroupSet(){
+    private HashSet<Integer> getGroupSet(){
         HashSet<Integer> set = new HashSet<Integer>();
         for(OverlayItem element: defaultMarkerList){
             if(!set.contains(element.getGroup())){
                 set.add(element.getGroup());
+                generateCenterByGroup(defaultMarkerList, element.getGroup());
             }
         }
-        System.out.println("group set: " + set);
         return set;
 
     }
+
+    private LatLng getCenter(ArrayList<OverlayItem> list){
+        int total = list.size();
+
+        double X = 0;
+        double Y = 0;
+        double Z = 0;
+
+        for(OverlayItem i: list){
+            LatLng point = i.getPoint();
+            double lat = point.getLatitude() * Math.PI / 180;
+            double lon = point.getLongitude() * Math.PI / 180;
+
+            double x = Math.cos(lat) * Math.cos(lon);
+            double y = Math.cos(lat) * Math.sin(lon);
+            double z = Math.sin(lat);
+
+            X += x;
+            Y += y;
+            Z += z;
+        }
+
+        X = X / total;
+        Y = Y / total;
+        Z = Z / total;
+
+        double Lon = Math.atan2(Y, X);
+        double Hyp = Math.sqrt(X * X + Y * Y);
+        double Lat = Math.atan2(Z, Hyp);
+
+        return new LatLng(Lat * 180 / Math.PI, Lon * 180 / Math.PI);
+    }
+
+    private LatLng generateCenterByGroup(ArrayList<OverlayItem> list, int group) {
+        int sumlon = 0, sumlat = 0, count = 0;
+        ArrayList<OverlayItem> tempList = new ArrayList<OverlayItem>();
+        for (OverlayItem element : list) {
+            if (element.getGroup() == group) {
+                tempList.add(element);
+            }
+        }
+        LatLng result = getCenter(tempList);
+        System.out.println("center for group " + group + " is: " + result);
+        return result;
+    }
+
+
 
     private double screenX(OverlayItem item){
         return mProjection.toPixels(item.getPoint(), null).x;
@@ -320,6 +372,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private double dist(double x1, double y1, double x2, double y2){
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
+
+//    #############################################
+//    #############################################
 
     /**
      * Sets the default itemized overlay.
