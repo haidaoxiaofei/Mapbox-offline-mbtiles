@@ -161,6 +161,10 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
      * @param aMapOrientation
      */
     protected void onDrawItem(final ISafeCanvas canvas, final Item item, final Point curScreenCoords, final float aMapOrientation) {
+        if(item.beingClustered()){
+            System.out.println("Not drawing marker because of clustering");
+            return;
+        }
         final int state = (mDrawFocusedItem && (mFocusedItem == item) ? OverlayItem.ITEM_STATE_FOCUSED_MASK
                 : 0);
         final Drawable marker = (item.getMarker(state) == null) ? getDefaultMarker(state) : item
