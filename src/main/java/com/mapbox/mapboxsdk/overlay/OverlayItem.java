@@ -24,13 +24,26 @@ public class OverlayItem {
 
     protected static final Point DEFAULT_MARKER_SIZE = new Point(26, 94);
     private int group = 0;
+    private boolean clustered;
 
     public int getGroup() {
         return group;
     }
 
     public void assignGroup(int currentGroup) {
+        if (currentGroup==0){
+            this.setClustered(false);
+        }
         group = currentGroup;
+    }
+
+    public boolean beingClustered() {
+        
+        return clustered;
+    }
+
+    public void setClustered(boolean clustered) {
+        this.clustered = clustered;
     }
 
     /**
