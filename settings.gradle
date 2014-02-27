@@ -1,1 +1,3 @@
-rootProject.name = 'mapbox-android-sdk'
+include ':MapboxAndroidSDK', ':MapboxAndroidSDKTestApp'
+
+project(":MapboxAndroidSDK").name = "mapbox-android-sdk"

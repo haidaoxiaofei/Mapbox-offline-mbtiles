@@ -111,3 +111,10 @@ We're making switchable layers as simple as possible in the SDK. You can try tog
 ```java
 mapView.switchToLayer("examples.map-vyofok3q");
 ```
+
+### Screen rotation
+By default, every time the screen is rotated, Android will call ```onCreate``` and return all states in the app to their inital values. This includes current zoom level and position of the MapView. The simplest way to avoid this is adding this line to your ```AndroidManifest.xml```, inside ```<activity>```:
+
+	android:configChanges="orientation|screenSize|uiMode"
+
+Alternatively you can override the methods ```onSaveInstanceState()``` and ```onRestoreInstanceState()``` to have broader control of the saved states in the app. See this [StackOverflow question](http://stackoverflow.com/questions/4096169/onsaveinstancestate-and-onrestoreinstancestate) for more information on these methods
