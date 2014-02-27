@@ -255,6 +255,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return marker;
     }
 
+    public void removeMarker(Marker marker){
+        defaultMarkerList.remove(marker);
+        defaultMarkerOverlay.removeItem(marker);
+        this.invalidate();
+    }
+
     /**
      * Adds a new ItemizedOverlay to the MapView
      * @param itemizedOverlay the itemized overlay
