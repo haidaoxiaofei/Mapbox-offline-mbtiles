@@ -293,13 +293,18 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public void cluster(){
         int currentGroup = 0;
         final double CLUSTERING_THRESHOLD = getThreshold();
+        for(OverlayItem item: defaultMarkerList){
+            item.assignGroup(0);
+        }
         currentGroup++;
         for(OverlayItem item: defaultMarkerList){
             if (item.getGroup() == 0){
                 item.assignGroup(currentGroup);
+                item.setClustered(true);
                 for(OverlayItem item2: defaultMarkerList){
                     if(item2.getGroup() == 0 && dist(screenX(item), screenY(item), screenX(item2), screenY(item2)) <= CLUSTERING_THRESHOLD){
                         item2.assignGroup(currentGroup);
+                        item2.setClustered(true);
                     }
                 }
             }
