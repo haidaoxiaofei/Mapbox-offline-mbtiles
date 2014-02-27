@@ -153,7 +153,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
     private String identifier = EXAMPLE_MAP_ID;
-    private Tooltip tooltip;
 
     /**
      * Constructor for XML layout calls. Should not be used programmatically.
@@ -200,12 +199,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             setTileSource(new MapboxTileLayer(EXAMPLE_MAP_ID));
         }
 
-        addTooltip();
-    }
-
-    private void addTooltip() {
-        tooltip = new Tooltip(context, this);
-        tooltip.setPosition(new LatLng(50,0));
     }
 
     public MapView(final Context context, AttributeSet attrs) {
