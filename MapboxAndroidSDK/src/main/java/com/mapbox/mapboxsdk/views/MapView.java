@@ -322,8 +322,13 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Point size = new Point();
-        display.getSize(size);
-        return size.x/10;
+        if (android.os.Build.VERSION.SDK_INT >=13){
+            display.getSize(size);
+            return size.x/10;
+        }
+        else{
+            return display.getWidth();
+        }
     }
 
     private HashSet<Integer> getGroupSet(){
