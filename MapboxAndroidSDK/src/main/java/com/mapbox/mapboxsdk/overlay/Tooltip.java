@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
-import android.view.View;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -25,7 +24,6 @@ public class Tooltip extends Overlay {
     private String description;
     private MapView mapView;
     private Canvas canvas;
-    private View view;
 
     /**
      * Is this tooltip currently visible.
