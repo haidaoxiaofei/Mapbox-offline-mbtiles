@@ -76,6 +76,10 @@ public class Tooltip extends Overlay {
         if (this.isVisible()) {
             StaticLayout sl = new StaticLayout(title, textPaint, 400, Layout.Alignment.ALIGN_CENTER, 1, 1, false);
             sl.draw(canvas);
+            if (description != null) {
+                StaticLayout sd = new StaticLayout(description, textPaint, 400, Layout.Alignment.ALIGN_CENTER, 1, 1, false);
+                sd.draw(canvas);
+            }
             this.mapView = mapView;
             this.canvas = canvas;
             paint.setColor(Color.WHITE);
