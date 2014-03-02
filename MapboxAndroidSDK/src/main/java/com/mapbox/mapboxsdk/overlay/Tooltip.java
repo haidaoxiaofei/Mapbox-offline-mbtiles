@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.view.View;
+import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
@@ -18,9 +20,12 @@ public class Tooltip extends Overlay {
     private OverlayItem item;
     private Paint paint = new Paint();
     private Point point = new Point();
-    private String text;
+    private Context context;
+    private String title;
+    private String description;
     private MapView mapView;
     private Canvas canvas;
+    private View view;
 
     /**
      * Is this tooltip currently visible.
@@ -32,17 +37,13 @@ public class Tooltip extends Overlay {
      */
     private TextPaint textPaint;
 
-    public Tooltip(Context ctx) {
-        this(ctx, null);
-    }
-
     /**
-     * Initialize a tooltip without text
-     * @param ctx
-     * @param ot
+     * Initialize a tooltip without title or description
+     * @param ctx a Context object on which this tooltip is drawn.
+     * @param ot an overlay item.
      */
     public Tooltip(Context ctx, OverlayItem ot) {
-        this(ctx, ot, "");
+        this(ctx, ot, "", "");
     }
 
     /**
@@ -50,18 +51,22 @@ public class Tooltip extends Overlay {
      *
      * @param ctx a Context object on which this tooltip is drawn.
      * @param ot an overlay item.
-     * @param text the text in the tooltip.
+     * @param title the title in the tooltip.
+     * @param description the description text in the tooltip
      */
-    public Tooltip(Context ctx, OverlayItem ot, String text) {
+    public Tooltip(Context ctx, OverlayItem ot, String title, String description) {
         super(ctx);
+        this.context = ctx;
         setItem(ot);
         initTextPaint();
-        setText(text);
+        setTitle(title);
+        setDescription(description);
+        setVisible(true);
     }
 
     private void initTextPaint() {
         textPaint = new TextPaint();
-        textPaint.setColor(Color.rgb(50, 50, 50));
+        textPaint.setColor(context.getResources().getColor(R.color.toolTipText));
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(DEFAULT_TEXT_SIZE);
     }
@@ -69,11 +74,9 @@ public class Tooltip extends Overlay {
     @Override
     protected void draw(Canvas canvas, MapView mapView, boolean shadow) {
         if (this.isVisible()) {
-            StaticLayout sl = new StaticLayout(text, textPaint,
-                    400, Layout.Alignment.ALIGN_CENTER, 1, 1, false);
+            StaticLayout sl = new StaticLayout(title, textPaint, 400, Layout.Alignment.ALIGN_CENTER, 1, 1, false);
             sl.draw(canvas);
             this.mapView = mapView;
-            this.calculatePoint();
             this.canvas = canvas;
             paint.setColor(Color.WHITE);
             this.setTooltipShape();
@@ -100,14 +103,26 @@ public class Tooltip extends Overlay {
 
     // Getters/setters
 
+
     /**
-     * Sets text to be displayed in the tooltip
-     * @param text the text
+     * Sets description to be displayed in the tooltip
+     * @param description the description text
      * @return Tooltip the tooltip, for chaining.
      */
-    public Tooltip setText(String text) {
-       this.text = text;
+    public Tooltip setDescription(String description)
+    {
+        this.description = description;
         return this;
+    }
+
+    /**
+     * Sets title to be displayed in the tooltip
+     * @param title the title
+     * @return Tooltip the tooltip, for chaining.
+     */
+    public Tooltip setTitle(String title) {
+       this.title = title;
+       return this;
     }
 
     /**
@@ -154,7 +169,7 @@ public class Tooltip extends Overlay {
      */
     public static final int TOOLTIP_WIDTH = 480;
     /**
-     * Default text size, in points.
+     * Default title size, in points.
      */
     public static final float DEFAULT_TEXT_SIZE = 40f;
 }

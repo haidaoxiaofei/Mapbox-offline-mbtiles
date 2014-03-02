@@ -70,7 +70,8 @@ mapView.getOverlays();
 Adding a marker with the default styling is as simple as calling this for every marker you want to add:
 
 ```java
-mapView.addMarker(latitude, longitude, title, text);
+Marker marker = new Marker(mapView, title, description, LatLng)
+mapView.addMarker(marker);
 ```
 
 #### Location overlay
