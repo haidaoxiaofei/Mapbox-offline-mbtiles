@@ -17,13 +17,13 @@ import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
 import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
-import com.mapbox.mapboxsdk.overlay.Overlay;
-import com.mapbox.mapboxsdk.overlay.OverlayItem;
-import com.mapbox.mapboxsdk.overlay.OverlayManager;
-import com.mapbox.mapboxsdk.overlay.TilesOverlay;
-import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
-import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
+import com.mapbox.mapboxsdk.format.GeoJSON;
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.overlay.*;
+import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerArray;
+import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
@@ -38,8 +38,7 @@ import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import org.json.JSONException;
-import com.mapbox.mapboxsdk.views.util.MultiTouchController;
-import com.mapbox.mapboxsdk.geometry.LatLng;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -276,151 +275,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public void loadFromGeoJSONString(String geoJSON) throws JSONException {
         GeoJSON.parseString(geoJSON, MapView.this);
     }
-
-//    ########################################
-//    CLUSTERING-RELATED METHODS
-//    They are here temporarily
-//    ########################################
-
-    private ItemizedIconOverlay<Marker> clusters;
-    private ArrayList<Marker> clusterList = new ArrayList<Marker>();
-    public void cluster(){
-        int currentGroup = 0;
-        final double CLUSTERING_THRESHOLD = getThreshold();
-        for(OverlayItem item: defaultMarkerList){
-            item.assignGroup(0);
-        }
-        currentGroup++;
-        for(OverlayItem item: defaultMarkerList){
-            if (item.getGroup() == 0){
-                item.assignGroup(currentGroup);
-                item.setClustered(true);
-                for(OverlayItem item2: defaultMarkerList){
-                    if(item2.getGroup() == 0 && PointF.length(screenX(item)-screenX(item2), screenY(item)-screenY(item2)) <= CLUSTERING_THRESHOLD){
-                        item2.assignGroup(currentGroup);
-                        item2.setClustered(true);
-                    }
-                }
-            }
-            currentGroup++;
-        }
-        getGroupSet();
-        if(clusters != null){
-            clusters.removeAllItems();
-            clusters.addItems(clusterList);
-        }
-        else{
-            initClusterOverlay();
-            clusters.addItems(clusterList);
-        }
-        this.getOverlays().add(clusters);
-        this.invalidate();
-
-    }
-
-    private double getThreshold() {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        if (android.os.Build.VERSION.SDK_INT >=13){
-            display.getSize(size);
-            return size.x/10;
-        }
-        else{
-            return display.getWidth();
-        }
-    }
-
-    private HashSet<Integer> getGroupSet(){
-        HashSet<Integer> set = new HashSet<Integer>();
-        for(OverlayItem element: defaultMarkerList){
-            if(!set.contains(element.getGroup())){
-                set.add(element.getGroup());
-                generateCenterByGroup(defaultMarkerList, element.getGroup());
-            }
-        }
-        return set;
-
-    }
-
-    private LatLng getCenter(ArrayList<OverlayItem> list){
-        int total = list.size();
-
-        double X = 0;
-        double Y = 0;
-        double Z = 0;
-
-        for(OverlayItem i: list){
-            LatLng point = i.getPoint();
-            double lat = point.getLatitude() * Math.PI / 180;
-            double lon = point.getLongitude() * Math.PI / 180;
-
-            double x = Math.cos(lat) * Math.cos(lon);
-            double y = Math.cos(lat) * Math.sin(lon);
-            double z = Math.sin(lat);
-
-            X += x;
-            Y += y;
-            Z += z;
-        }
-
-        X = X / total;
-        Y = Y / total;
-        Z = Z / total;
-
-        double Lon = Math.atan2(Y, X);
-        double Hyp = Math.sqrt(X * X + Y * Y);
-        double Lat = Math.atan2(Z, Hyp);
-
-        return new LatLng(Lat * 180 / Math.PI, Lon * 180 / Math.PI);
-    }
-
-
-
-    private void initClusterOverlay(){
-
-        clusters = new ItemizedIconOverlay<Marker>(clusterList, new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
-            @Override
-            public boolean onItemSingleTapUp(int index, Marker item) {
-                return false;
-            }
-
-            @Override
-            public boolean onItemLongPress(int index, Marker item) {
-                return false;
-            }
-        }, mResourceProxy);
-    }
-
-    private LatLng generateCenterByGroup(ArrayList<OverlayItem> list, int group) {
-        int sumlon = 0, sumlat = 0, count = 0;
-        ArrayList<OverlayItem> tempList = new ArrayList<OverlayItem>();
-        for (OverlayItem element : list) {
-            if (element.getGroup() == group) {
-                tempList.add(element);
-            }
-        }
-        LatLng result = getCenter(tempList);
-        Marker m = new Marker(this, "Hello", "This is the center of group "+group+"'s cluster", result);
-        m.setIcon(new Icon(Icon.Size.l, "circle", "f00"));
-        clusterList.add(m);
-        System.out.println("center for group " + group + " is: " + result);
-        return result;
-    }
-
-
-
-    private float screenX(OverlayItem item){
-        return mProjection.toPixels(item.getPoint(), null).x;
-    }
-
-    private float screenY(OverlayItem item){
-        return mProjection.toPixels(item.getPoint(), null).y;
-    }
-
-
-//    #############################################
-//    #############################################
 
     /**
      * Sets the default itemized overlay.
