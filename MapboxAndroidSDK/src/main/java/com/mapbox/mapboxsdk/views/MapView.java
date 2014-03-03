@@ -1234,6 +1234,10 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return tileLoadedListener;
     }
 
+    public void cluster() {
+        defaultMarkerOverlay.cluster(this, context);
+    }
+
     // ===========================================================
     // Public Classes
     // ===========================================================
