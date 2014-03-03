@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -34,8 +33,14 @@ public class Icon {
      * @param color
      */
     public Icon(Size size, String symbol, String color) {
-        String url = BASE_URL + "marker/pin-" +
-            size.toString() + "-" + symbol + "+" + color + ".png";
+        String url = BASE_URL + "marker/pin-" + size.toString();
+        System.out.println("symbol "+symbol);
+        if(!symbol.equals("")){
+            url+= "-" + symbol + "+" + color + ".png";
+        }
+        else{
+            url+= "+" + color + ".png";
+        }
         new BitmapLoader().execute(url);
     }
 
