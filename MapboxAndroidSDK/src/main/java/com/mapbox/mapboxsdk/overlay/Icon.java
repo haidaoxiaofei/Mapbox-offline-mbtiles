@@ -34,7 +34,6 @@ public class Icon {
      */
     public Icon(Size size, String symbol, String color) {
         String url = BASE_URL + "marker/pin-" + size.toString();
-        System.out.println("symbol "+symbol);
         if(!symbol.equals("")){
             url+= "-" + symbol + "+" + color + ".png";
         }
