@@ -1,16 +1,22 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import java.util.List;
-
+import android.content.Context;
+import android.graphics.Point;
+import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
+import android.view.Display;
+import android.view.MotionEvent;
+import android.view.WindowManager;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.ResourceProxy.bitmap;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
-import android.content.Context;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
-import android.view.MotionEvent;
 import com.mapbox.mapboxsdk.views.util.Projection;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverlay<Item> {
 
@@ -19,6 +25,10 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
     private int mDrawnItemsLimit = Integer.MAX_VALUE;
     private final Point mTouchScreenPoint = new Point();
     private final Point mItemPoint = new Point();
+
+    private ItemizedIconOverlay<Marker> clusters;
+    private MapView view;
+    private Context context;
 
     public ItemizedIconOverlay(
             final List<Item> pList,
@@ -180,6 +190,145 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
             }
         }
         return false;
+    }
+
+    public void cluster(MapView view, Context context){
+        this.view = view;
+        this.context = context;
+        int currentGroup = 0;
+        final double CLUSTERING_THRESHOLD = getThreshold();
+        for(OverlayItem item: this.mItemList){
+            item.assignGroup(0);
+        }
+        currentGroup++;
+        for(OverlayItem item: this.mItemList){
+            if (item.getGroup() == 0){
+                item.assignGroup(currentGroup);
+                item.setClustered(true);
+                for(OverlayItem item2: this.mItemList){
+                    if(item2.getGroup() == 0 && PointF.length(screenX(item) - screenX(item2), screenY(item) - screenY(item2)) <= CLUSTERING_THRESHOLD){
+                        item2.assignGroup(currentGroup);
+                        item2.setClustered(true);
+                    }
+                }
+            }
+            currentGroup++;
+        }
+        getGroupSet();
+        if(clusters != null){
+            clusters.removeAllItems();
+            clusters.addItems(clusterList);
+        }
+        else{
+            initClusterOverlay();
+            clusters.addItems(clusterList);
+        }
+        view.getOverlays().add(clusters);
+        view.invalidate();
+
+    }
+
+    private ArrayList<Marker> clusterList = new ArrayList<Marker>();
+
+
+    private double getThreshold() {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        if (android.os.Build.VERSION.SDK_INT >=13){
+            display.getSize(size);
+            return size.x/10;
+        }
+        else{
+            return display.getWidth();
+        }
+    }
+
+    private HashSet<Integer> getGroupSet(){
+        HashSet<Integer> set = new HashSet<Integer>();
+        for(OverlayItem element: mItemList){
+            if(!set.contains(element.getGroup())){
+                set.add(element.getGroup());
+                generateCenterByGroup((ArrayList<OverlayItem>) mItemList, element.getGroup());
+            }
+        }
+        return set;
+
+    }
+
+    private LatLng getCenter(ArrayList<OverlayItem> list){
+        int total = list.size();
+
+        double X = 0;
+        double Y = 0;
+        double Z = 0;
+
+        for(OverlayItem i: list){
+            LatLng point = i.getPoint();
+            double lat = point.getLatitude() * Math.PI / 180;
+            double lon = point.getLongitude() * Math.PI / 180;
+
+            double x = Math.cos(lat) * Math.cos(lon);
+            double y = Math.cos(lat) * Math.sin(lon);
+            double z = Math.sin(lat);
+
+            X += x;
+            Y += y;
+            Z += z;
+        }
+
+        X = X / total;
+        Y = Y / total;
+        Z = Z / total;
+
+        double Lon = Math.atan2(Y, X);
+        double Hyp = Math.sqrt(X * X + Y * Y);
+        double Lat = Math.atan2(Z, Hyp);
+
+        return new LatLng(Lat * 180 / Math.PI, Lon * 180 / Math.PI);
+    }
+
+
+
+    private void initClusterOverlay(){
+
+        clusters = new ItemizedIconOverlay<Marker>(clusterList, new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
+            @Override
+            public boolean onItemSingleTapUp(int index, Marker item) {
+                return false;
+            }
+
+            @Override
+            public boolean onItemLongPress(int index, Marker item) {
+                return false;
+            }
+        }, mResourceProxy);
+    }
+
+    private LatLng generateCenterByGroup(ArrayList<OverlayItem> list, int group) {
+        int sumlon = 0, sumlat = 0, count = 0;
+        ArrayList<OverlayItem> tempList = new ArrayList<OverlayItem>();
+        for (OverlayItem element : list) {
+            if (element.getGroup() == group) {
+                tempList.add(element);
+            }
+        }
+        LatLng result = getCenter(tempList);
+        Marker m = new Marker(view, "Hello", "This is the center of group "+group+"'s cluster", result);
+        m.setIcon(new Icon(Icon.Size.l, "circle", "f00"));
+        clusterList.add(m);
+        System.out.println("center for group " + group + " is: " + result);
+        return result;
+    }
+
+
+
+    private float screenX(OverlayItem item){
+        return view.getProjection().toPixels(item.getPoint(), null).x;
+    }
+
+    private float screenY(OverlayItem item){
+        return view.getProjection().toPixels(item.getPoint(), null).y;
     }
 
     // ===========================================================
