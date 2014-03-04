@@ -1,7 +1,11 @@
 package com.mapbox.mapboxsdk.android.testapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -149,7 +153,7 @@ public class MainActivity extends ActionBarActivity {
      * On pressing Settings button will lauch Settings Options - GPS
      */
     public void showSettingsAlert() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
 
         // Setting Dialog Title
         alertDialog.setTitle("GPS settings");
@@ -161,7 +165,7 @@ public class MainActivity extends ActionBarActivity {
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                mContext.startActivity(intent);
+                getBaseContext().startActivity(intent);
             }
         });
 
