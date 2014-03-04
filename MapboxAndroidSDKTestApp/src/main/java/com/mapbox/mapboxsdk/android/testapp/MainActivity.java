@@ -1,7 +1,11 @@
 package com.mapbox.mapboxsdk.android.testapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -143,5 +147,38 @@ public class MainActivity extends ActionBarActivity {
     {
         mv.setCenter(center);
     }
+
+    /**
+     * Method to show settings  in alert dialog
+     * On pressing Settings button will lauch Settings Options - GPS
+     */
+    public void showSettingsAlert() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
+
+        // Setting Dialog Title
+        alertDialog.setTitle("GPS settings");
+
+        // Setting Dialog Message
+        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+
+        // On pressing Settings button
+        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                getBaseContext().startActivity(intent);
+            }
+        });
+
+        // on pressing cancel button
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
 
 }
