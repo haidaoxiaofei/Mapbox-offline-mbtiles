@@ -13,6 +13,7 @@ import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import junit.framework.Assert;
+import java.util.ArrayList;
 
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
     public MainActivityTest() {
@@ -57,6 +58,13 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         Assert.assertEquals(bb.getCenter().getLongitude(), 5.0d);
         Assert.assertEquals(bb.getLongitudeSpan(), 10.0d);
         Assert.assertEquals(bb.getLatitudeSpan(), 10.0d);
+        Assert.assertTrue(bb.contains(new LatLng(5f, 5f)));
+        Assert.assertFalse(bb.contains(new LatLng(15f, 5f)));
+
+        ArrayList pts = new ArrayList();
+        pts.add(new LatLng(0f, 0f));
+        pts.add(new LatLng(10f, 10f));
+        Assert.assertTrue(bb.equals(BoundingBox.fromGeoPoints(pts)));
     }
 
     public void testTileSystem() throws Exception {
