@@ -273,7 +273,6 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
             }
         }
         return set;
-
     }
 
     private LatLng getCenter(ArrayList<OverlayItem> list){
@@ -315,6 +314,12 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
         clusters = new ItemizedIconOverlay<Marker>(clusterList, new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
             @Override
             public boolean onItemSingleTapUp(int index, Marker item) {
+                ArrayList<LatLng> activePoints = getCoordinateList(getGroupElements((List<OverlayItem>) mItemList, item.getGroup()));
+                System.out.println("CLUS OK ACTIVE POINTS");
+                view.setCenter(BoundingBox.fromGeoPoints(activePoints).getCenter());
+                System.out.println("CLUS OK CENTER OF ACTIVE");
+                view.setZoom(getBoundsZoom(activePoints));
+                System.out.println("CLUS OK GET NEW ZOOM");
                 return false;
             }
 
