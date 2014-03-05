@@ -89,10 +89,13 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     }
 
     public static BoundingBox fromGeoPoints(final ArrayList<? extends LatLng> partialPolyLine) {
-        double minLat = Double.MAX_VALUE;
-        double minLon = Double.MAX_VALUE;
-        double maxLat = Double.MIN_VALUE;
-        double maxLon = Double.MIN_VALUE;
+        double minLat = 90;
+        double minLon = 180;
+        double maxLat = -90;
+        double maxLon = -180;
+
+
+
         for (final LatLng gp : partialPolyLine) {
             final double latitude = gp.getLatitude();
             final double longitude = gp.getLongitude();
