@@ -99,7 +99,6 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
         for (int i = size; i >= 0; i--) {
             final Item item = getItem(i);
             pj.toMapPixels(item.getPoint(), mCurScreenCoords);
-
             onDrawItem(canvas, item, mCurScreenCoords, mapView.getMapOrientation());
         }
     }
@@ -138,7 +137,6 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
      */
     protected void onDrawItem(final ISafeCanvas canvas, final Item item, final Point curScreenCoords, final float aMapOrientation) {
         if(item.beingClustered()){
-            System.out.println("Not drawing marker because of clustering");
             return;
         }
         final int state = (mDrawFocusedItem && (mFocusedItem == item) ? OverlayItem.ITEM_STATE_FOCUSED_MASK
