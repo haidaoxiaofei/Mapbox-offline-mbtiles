@@ -229,25 +229,6 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
 
     }
 
-    public int getBoundsZoom(ArrayList<LatLng> list){
-        LatLng previousCenter = view.getCenter();
-        int previousZoom = view.getZoomLevel();
-        BoundingBox boundingBox = BoundingBox.fromGeoPoints(list);
-        LatLng center = boundingBox.getCenter();
-        int zoom = view.getMaxZoomLevel();
-        view.setCenter(center);
-        view.setZoom(zoom);
-
-        BoundingBox screenBB = view.getProjection().getBoundingBox();
-        while(!screenBB.containsAll(list)){
-            view.setZoom(zoom);
-            screenBB = view.getProjection().getBoundingBox();
-            zoom--;
-        }
-        view.setZoom(previousZoom);
-        view.setCenter(previousCenter);
-        return zoom;
-    }
 
     private ArrayList<Marker> clusterList = new ArrayList<Marker>();
 
