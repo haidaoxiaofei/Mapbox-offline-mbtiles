@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.ResourceProxy.bitmap;
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
@@ -226,6 +227,25 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
         view.getOverlays().add(clusters);
         view.invalidate();
 
+    }
+
+    public int getBoundsZoom(ArrayList<LatLng> list){
+        LatLng previousCenter = view.getCenter();
+        int previousZoom = view.getZoomLevel();
+        BoundingBox boundingBox = BoundingBox.fromGeoPoints(list);
+        LatLng center = boundingBox.getCenter();
+        int zoom = view.getMaxZoomLevel();
+        view.setCenter(center);
+        view.setZoom(zoom);
+        BoundingBox screenBB = view.getProjection().getBoundingBox();
+        while(!screenBB.containsAll(list)){
+            view.setZoom(zoom);
+            screenBB = view.getProjection().getBoundingBox();
+            zoom--;
+        }
+        view.setZoom(previousZoom);
+        view.setCenter(previousCenter);
+        return zoom;
     }
 
     private ArrayList<Marker> clusterList = new ArrayList<Marker>();
