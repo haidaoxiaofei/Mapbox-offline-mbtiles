@@ -237,6 +237,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
         int zoom = view.getMaxZoomLevel();
         view.setCenter(center);
         view.setZoom(zoom);
+
         BoundingBox screenBB = view.getProjection().getBoundingBox();
         while(!screenBB.containsAll(list)){
             view.setZoom(zoom);
@@ -315,11 +316,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
             @Override
             public boolean onItemSingleTapUp(int index, Marker item) {
                 ArrayList<LatLng> activePoints = getCoordinateList(getGroupElements((List<OverlayItem>) mItemList, item.getGroup()));
-                System.out.println("CLUS OK ACTIVE POINTS");
-                view.setCenter(BoundingBox.fromGeoPoints(activePoints).getCenter());
-                System.out.println("CLUS OK CENTER OF ACTIVE");
-                view.setZoom(getBoundsZoom(activePoints));
-                System.out.println("CLUS OK GET NEW ZOOM");
+                view.zoomToBoundingBox(BoundingBox.fromGeoPoints(activePoints));
                 return false;
             }
 
