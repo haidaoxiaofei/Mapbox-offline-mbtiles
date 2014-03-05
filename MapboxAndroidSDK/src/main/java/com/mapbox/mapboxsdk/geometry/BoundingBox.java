@@ -1,13 +1,13 @@
 package com.mapbox.mapboxsdk.geometry;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A rectangular geographical area defined in latitude and longitude units.
@@ -117,6 +117,15 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
         final double longitude = pGeoPoint.getLongitude();
         return ((latitude < this.mLatNorth) && (latitude > this.mLatSouth))
                 && ((longitude < this.mLonEast) && (longitude > this.mLonWest));
+    }
+
+    public boolean containsAll(final List<LatLng> list){
+        for(LatLng element: list){
+            if(!this.contains(element)){
+                return false;
+            }
+        }
+        return true;
     }
 
     public static final Parcelable.Creator<BoundingBox> CREATOR = new Parcelable.Creator<BoundingBox>() {
