@@ -118,6 +118,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private final ResourceProxy mResourceProxy;
 
     protected float mMultiTouchScale = 1.0f;
+    protected PointF mMultiTouchScalePoint = new PointF();
 
     protected MapListener mListener;
 
@@ -628,27 +629,23 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     /**
      * Zoom in by one zoom level.
      */
-    boolean zoomIn() {
+    public boolean zoomIn() {
         return getController().zoomIn();
     }
 
-    boolean zoomInFixing(final ILatLng point) {
+    public boolean zoomInFixing(final ILatLng point) {
         Point coords = getProjection().toMapPixels(point, null);
         return getController().zoomInFixing(coords.x, coords.y);
-    }
-
-    boolean zoomInFixing(final int xPixel, final int yPixel) {
-        return getController().zoomInFixing(xPixel, yPixel);
     }
 
     /**
      * Zoom out by one zoom level.
      */
-    boolean zoomOut() {
+    public boolean zoomOut() {
         return getController().zoomOut();
     }
 
-    boolean zoomOutFixing(final ILatLng point) {
+    public boolean zoomOutFixing(final ILatLng point) {
         Point coords = getProjection().toMapPixels(point, null);
         return zoomOutFixing(coords.x, coords.y);
     }
@@ -960,15 +957,20 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 return true;
             }
 
-            if (mScaleGestureDetector.onTouchEvent(event)) {
-                Log.d(TAG, "ScaleDetector handled onTouchEvent");
-                return true;
+            if (event.getPointerCount() == 1) {
+                if (mGestureDetector.onTouchEvent(rotatedEvent)) {
+                    Log.d(TAG, "GestureDetector handled onTouchEvent");
+                    return true;
+                }
+            } else {
+                // despite the docs, scalegesturedetector does not return
+                // false if it doesn't handle an event.
+                if (mScaleGestureDetector.onTouchEvent(event)) {
+                    Log.d(TAG, "ScaleDetector handled onTouchEvent");
+                    return true;
+                }
             }
 
-            if (mGestureDetector.onTouchEvent(rotatedEvent)) {
-                Log.d(TAG, "GestureDetector handled onTouchEvent");
-                return true;
-            }
         } finally {
             if (rotatedEvent != event) {
                 rotatedEvent.recycle();
@@ -1113,20 +1115,17 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         c.save();
 
         c.translate(getWidth() / 2, getHeight() / 2);
-        c.scale(mMultiTouchScale, mMultiTouchScale, getWidth() / 2, getHeight() / 2);
+        c.scale(mMultiTouchScale, mMultiTouchScale, mMultiTouchScalePoint.x,
+            mMultiTouchScalePoint.y);
 
-		/* rotate Canvas */
+		// rotate Canvas
         c.rotate(mapOrientation,
             mProjection.getScreenRect().exactCenterX(),
             mProjection.getScreenRect().exactCenterY());
 
-		/* Draw background */
-        // c.drawColor(mBackgroundColor);
-
-		/* Draw all Overlays. */
+		// Draw all Overlays.
         this.getOverlayManager().onDraw(c, this);
 
-        // Restore the canvas matrix
         c.restore();
 
         super.dispatchDraw(c);
