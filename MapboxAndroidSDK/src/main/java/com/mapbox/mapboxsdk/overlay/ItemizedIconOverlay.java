@@ -332,18 +332,31 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
 
     private LatLng generateCenterByGroup(ArrayList<OverlayItem> list, int group) {
         int sumlon = 0, sumlat = 0, count = 0;
+        ArrayList<OverlayItem> tempList = getGroupElements(list, group);
+        LatLng result = getCenter(tempList);
+        Marker m = new Marker(view, "Hello", "This is the center of group "+group+"'s cluster", result);
+        m.setIcon(new Icon(Icon.Size.l, "circle", "f00"));
+        m.assignGroup(group);
+        clusterList.add(m);
+        return result;
+    }
+
+    private ArrayList<OverlayItem> getGroupElements(List<OverlayItem> list, int group){
         ArrayList<OverlayItem> tempList = new ArrayList<OverlayItem>();
         for (OverlayItem element : list) {
             if (element.getGroup() == group) {
                 tempList.add(element);
             }
         }
-        LatLng result = getCenter(tempList);
-        Marker m = new Marker(view, "Hello", "This is the center of group "+group+"'s cluster", result);
-        m.setIcon(new Icon(Icon.Size.l, "circle", "f00"));
-        clusterList.add(m);
-        System.out.println("center for group " + group + " is: " + result);
-        return result;
+        return tempList;
+    }
+
+    private ArrayList<LatLng> getCoordinateList(List<OverlayItem> list){
+        ArrayList<LatLng> theList = new ArrayList<LatLng>();
+        for(OverlayItem element: list){
+            theList.add(element.getPoint());
+        }
+        return theList;
     }
 
 
