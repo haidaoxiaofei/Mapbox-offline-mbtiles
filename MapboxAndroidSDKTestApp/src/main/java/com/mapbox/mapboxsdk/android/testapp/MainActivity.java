@@ -73,7 +73,6 @@ public class MainActivity extends ActionBarActivity {
                     replaceMapView(satellite);
                     currentLayer = "satellite";
                 }
-                // mv.setMultiTouchControls(false);
             }
         });
         Button terBut = changeButtonTypeface((Button)findViewById(R.id.terbut));
