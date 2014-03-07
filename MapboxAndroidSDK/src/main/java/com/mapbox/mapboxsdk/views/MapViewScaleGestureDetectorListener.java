@@ -52,6 +52,7 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
 
         float scale = scaleGestureDetector.getCurrentSpan() / firstSpan;
         this.mapView.mMultiTouchScale = scale;
+        this.mapView.panBy((int) (lastFocusX - focusX), (int) (lastFocusY - focusY));
         this.mapView.invalidate();
 
         lastSpanX = spanX;
