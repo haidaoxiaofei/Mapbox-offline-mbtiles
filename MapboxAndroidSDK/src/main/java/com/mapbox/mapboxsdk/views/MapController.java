@@ -1,8 +1,6 @@
 package com.mapbox.mapboxsdk.views;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.geometry.BoundingBox;
-import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
 import android.animation.Animator;
@@ -13,7 +11,6 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.ScaleAnimation;
@@ -134,10 +131,10 @@ public class MapController implements MapViewConstants {
      */
     public boolean zoomIn() {
         Point coords = mMapView.getProjection().toMapPixels(mMapView.getCenter(), null);
-        return zoomInFixing(coords.x, coords.y);
+        return zoomInAbout(coords.x, coords.y);
     }
 
-    public boolean zoomInFixing(final int xPixel, final int yPixel) {
+    public boolean zoomInAbout(final int xPixel, final int yPixel) {
         mMapView.mMultiTouchScalePoint.set(xPixel, yPixel);
         if (!mMapView.canZoomIn()) return false;
 
@@ -161,10 +158,10 @@ public class MapController implements MapViewConstants {
      */
     public boolean zoomOut() {
         Point coords = mMapView.getProjection().toMapPixels(mMapView.getCenter(), null);
-        return zoomOutFixing(coords.x, coords.y);
+        return zoomOutAbout(coords.x, coords.y);
     }
 
-    public boolean zoomOutFixing(final int xPixel, final int yPixel) {
+    public boolean zoomOutAbout(final int xPixel, final int yPixel) {
         mMapView.mMultiTouchScalePoint.set(xPixel, yPixel);
         if (mMapView.canZoomOut()) {
             if (mMapView.mIsAnimating.getAndSet(true)) {
