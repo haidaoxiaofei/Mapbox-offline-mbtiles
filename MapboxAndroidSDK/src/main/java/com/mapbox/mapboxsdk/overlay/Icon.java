@@ -55,6 +55,7 @@ public class Icon implements MapboxConstants
         else{
             url+= "+" + color + ".png";
         }
+        Log.d(TAG, "Maki url to load = '" + url + "'");
         new BitmapLoader().execute(url);
     }
 
@@ -72,6 +73,7 @@ public class Icon implements MapboxConstants
         protected Bitmap doInBackground(String... src) {
             try {
                 URL url = new URL(src[0]);
+                Log.d(TAG, "Icon url to load = '" + url + "'");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.connect();

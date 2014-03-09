@@ -59,6 +59,9 @@ public class MainActivity extends ActionBarActivity {
         m.setIcon(new Icon(getResources(), Icon.Size.LARGE, "land-use", "00FFFF"));
         mv.addMarker(m);
 
+        m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
+        mv.addMarker(m);
+
         mv.setOnTilesLoadedListener(new TilesLoadedListener() {
             @Override
             public boolean onTilesLoaded() {

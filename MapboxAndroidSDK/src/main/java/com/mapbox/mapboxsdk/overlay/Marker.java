@@ -11,6 +11,7 @@ public class Marker extends ExtendedOverlayItem {
     private Context context;
     private Tooltip tooltip;
     private MapView mapView;
+    private Icon icon;
 
     /**
      * Initialize a new marker object, adding it to a MapView and attaching a tooltip
@@ -24,7 +25,7 @@ public class Marker extends ExtendedOverlayItem {
         if (mv != null) {
             context = mv.getContext();
             mapView = mv;
-            setIcon(new Icon(mv.getResources(), Icon.Size.LARGE, "", "000"));
+//            setIcon(new Icon(mv.getResources(), Icon.Size.LARGE, "", "000"));
 //            attachTooltip();
         }
     }
@@ -43,7 +44,11 @@ public class Marker extends ExtendedOverlayItem {
     public Marker addTo(MapView mv) {
         mapView = mv;
         context = mv.getContext();
-        setIcon(new Icon(mv.getResources(), Icon.Size.LARGE, "", "000"));
+        if (icon == null)
+        {
+            // Set default icon
+            setIcon(new Icon(mv.getResources(), Icon.Size.LARGE, "", "000"));
+        }
         return this;
     }
 
@@ -54,6 +59,7 @@ public class Marker extends ExtendedOverlayItem {
     }
 
     public Marker setIcon(Icon icon) {
+        this.icon = icon;
         icon.setMarker(this);
         this.setMarkerHotspot(HotspotPlace.CENTER);
         return this;
