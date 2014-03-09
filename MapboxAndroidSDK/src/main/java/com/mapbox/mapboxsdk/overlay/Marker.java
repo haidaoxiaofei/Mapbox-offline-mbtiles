@@ -1,6 +1,7 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 
@@ -50,6 +51,17 @@ public class Marker extends ExtendedOverlayItem {
             setIcon(new Icon(mv.getResources(), Icon.Size.LARGE, "", "000"));
         }
         return this;
+    }
+
+    /**
+     * Sets Marker, then redraws map to display it.
+     * @param marker Marker
+     */
+    @Override
+    public void setMarker(Drawable marker)
+    {
+        super.setMarker(marker);
+        mapView.invalidate();
     }
 
     private void attachTooltip() {
