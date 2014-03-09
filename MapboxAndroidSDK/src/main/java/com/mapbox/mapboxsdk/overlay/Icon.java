@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
+import com.mapbox.mapboxsdk.util.BitmapUtils;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -74,7 +75,7 @@ public class Icon implements MapboxConstants
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.connect();
-                return BitmapFactory.decodeStream(connection.getInputStream());
+                return BitmapFactory.decodeStream(connection.getInputStream(), null, BitmapUtils.getBitmapOptions(mResources.getDisplayMetrics()));
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;

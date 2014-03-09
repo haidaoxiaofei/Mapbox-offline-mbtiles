@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import android.util.Log;
 
@@ -86,7 +87,7 @@ public class DefaultResourceProxyImpl implements ResourceProxy, MapViewConstants
             }
             BitmapFactory.Options options = null;
             if (mDisplayMetrics != null) {
-                options = getBitmapOptions();
+                options = BitmapUtils.getBitmapOptions(mDisplayMetrics);
             }
             return BitmapFactory.decodeStream(is, null, options);
         } catch (final OutOfMemoryError e) {
@@ -103,25 +104,6 @@ public class DefaultResourceProxyImpl implements ResourceProxy, MapViewConstants
                 }
             }
         }
-    }
-
-    private BitmapFactory.Options getBitmapOptions() {
-        try {
-            // TODO I think this can all be done without reflection now because all these properties are SDK 4
-            final Field density = DisplayMetrics.class.getDeclaredField("DENSITY_DEFAULT");
-            final Field inDensity = BitmapFactory.Options.class.getDeclaredField("inDensity");
-            final Field inTargetDensity = BitmapFactory.Options.class.getDeclaredField("inTargetDensity");
-            final Field targetDensity = DisplayMetrics.class.getDeclaredField("densityDpi");
-            final BitmapFactory.Options options = new BitmapFactory.Options();
-            inDensity.setInt(options, density.getInt(null));
-            inTargetDensity.setInt(options, targetDensity.getInt(mDisplayMetrics));
-            return options;
-        } catch (final IllegalAccessException ex) {
-            // ignore
-        } catch (final NoSuchFieldException ex) {
-            // ignore
-        }
-        return null;
     }
 
     @Override
