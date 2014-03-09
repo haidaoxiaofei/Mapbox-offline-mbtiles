@@ -1,8 +1,11 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
 
 /**
@@ -12,6 +15,7 @@ public class Marker extends ExtendedOverlayItem {
     private Context context;
     private Tooltip tooltip;
     private MapView mapView;
+    private LatLng latLng;
     private Icon icon;
 
     /**
@@ -23,6 +27,7 @@ public class Marker extends ExtendedOverlayItem {
      */
     public Marker(MapView mv, String aTitle, String aDescription, LatLng aLatLng) {
         super(aTitle, aDescription, aLatLng);
+        this.latLng = aLatLng;
         if (mv != null) {
             context = mv.getContext();
             mapView = mv;
@@ -61,6 +66,21 @@ public class Marker extends ExtendedOverlayItem {
     public void setMarker(Drawable marker)
     {
         super.setMarker(marker);
+
+//        mapView.invalidateMapCoordinates(marker.getBounds());
+
+/*
+        // Determine bounding box of drawable
+        Point point = mapView.getProjection().toMapPixels(latLng, null);
+        int widthBuffer = getWidth() / 2;
+        int heightBuffer = getHeight() / 2;
+
+        // l, t, r, b
+        Rect rect = new Rect(point.x - widthBuffer, point.y + heightBuffer, point.x + widthBuffer, point.y - heightBuffer);
+
+        mapView.invalidateMapCoordinates(rect);
+*/
+
         mapView.invalidate();
     }
 
