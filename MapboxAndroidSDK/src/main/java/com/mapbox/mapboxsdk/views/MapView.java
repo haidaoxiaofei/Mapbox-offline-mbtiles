@@ -52,12 +52,10 @@ import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import org.json.JSONException;
-import com.mapbox.mapboxsdk.views.util.MultiTouchController;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -122,7 +120,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     private final ResourceProxy mResourceProxy;
 
-    protected MultiTouchController<Object> mMultiTouchController;
+	protected ScaleGestureDetector mScaleGestureDetector;
     protected float mMultiTouchScale = 1.0f;
     protected PointF mMultiTouchScalePoint = new PointF();
 
@@ -675,7 +673,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     boolean zoomOutFixing(final int xPixel, final int yPixel) {
-        return getController().zoomOutFixing(xPixel, yPixel);
+        return getController().zoomOutAbout(xPixel, yPixel);
     }
 
     public ResourceProxy getResourceProxy() {
