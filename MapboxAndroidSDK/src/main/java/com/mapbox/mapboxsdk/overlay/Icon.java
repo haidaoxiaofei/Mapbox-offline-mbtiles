@@ -86,7 +86,7 @@ public class Icon implements MapboxConstants
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             drawable = new BitmapDrawable(mResources, bitmap);
-            Log.w(TAG, "icon loaded");
+            Log.d(TAG, "icon loaded");
             if (marker != null) {
                 marker.setMarker(drawable);
             }
