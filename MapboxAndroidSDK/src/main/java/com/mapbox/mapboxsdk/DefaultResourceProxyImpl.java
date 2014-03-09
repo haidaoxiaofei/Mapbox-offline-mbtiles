@@ -82,8 +82,7 @@ public class DefaultResourceProxyImpl implements ResourceProxy, MapViewConstants
             final String resName = pResId.name() + ".png";
             is = ResourceProxy.class.getResourceAsStream(resName);
             if (is == null) {
-                throw new IllegalArgumentException("Resource not found: " + resName
-                        + "");
+                throw new IllegalArgumentException("Resource not found: " + resName);
             }
             BitmapFactory.Options options = null;
             if (mDisplayMetrics != null) {
@@ -111,8 +110,7 @@ public class DefaultResourceProxyImpl implements ResourceProxy, MapViewConstants
             // TODO I think this can all be done without reflection now because all these properties are SDK 4
             final Field density = DisplayMetrics.class.getDeclaredField("DENSITY_DEFAULT");
             final Field inDensity = BitmapFactory.Options.class.getDeclaredField("inDensity");
-            final Field inTargetDensity = BitmapFactory.Options.class
-                    .getDeclaredField("inTargetDensity");
+            final Field inTargetDensity = BitmapFactory.Options.class.getDeclaredField("inTargetDensity");
             final Field targetDensity = DisplayMetrics.class.getDeclaredField("densityDpi");
             final BitmapFactory.Options options = new BitmapFactory.Options();
             inDensity.setInt(options, density.getInt(null));

@@ -1,5 +1,6 @@
 package com.mapbox.mapboxsdk.overlay;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,6 +19,7 @@ public class Icon implements MapboxConstants
 {
     private Marker marker;
     private BitmapDrawable drawable;
+    private Resources mResources;
 
     public enum Size {
         LARGE("l"), MEDIUM("m"), SMALL("s");
@@ -38,11 +40,13 @@ public class Icon implements MapboxConstants
     /**
      * Initialize an icon with size, symbol, and color, and start a
      * download process to load it from the API.
+     * @param resources Android Resources - Used for proper Bitmap Density generation
      * @param size Size of Icon
      * @param symbol Maki Symbol
      * @param color Color of Icon
      */
-    public Icon(Size size, String symbol, String color) {
+    public Icon(Resources resources, Size size, String symbol, String color) {
+        this.mResources = resources;
         String url = MAPBOX_BASE_URL + "marker/pin-" + size.getApiString();
         if(!symbol.equals("")){
             url+= "-" + symbol + "+" + color + ".png";
@@ -78,7 +82,7 @@ public class Icon implements MapboxConstants
         }
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            drawable = new BitmapDrawable(bitmap);
+            drawable = new BitmapDrawable(mResources, bitmap);
             Log.w(TAG, "icon loaded");
             if (marker != null) {
                 marker.setMarker(drawable);
