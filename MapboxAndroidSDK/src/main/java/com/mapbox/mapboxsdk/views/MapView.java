@@ -193,23 +193,27 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         } else {
             setTileSource(new MapboxTileLayer(EXAMPLE_MAP_ID));
         }
-
-		String mapId = attrs.getAttributeValue(null, "mapid");
+        String mapId = null;
+        if (attrs != null)
+        {
+        	mapId = attrs.getAttributeValue(null, "mapid");
+        }
 		if (mapId != null) {
 			setTileSource(new MapboxTileLayer(mapId));
-		} else {
-			AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-			dialog.setTitle(R.string.errorTitle);
-			dialog.setMessage(R.string.missingMapIdErrorMessage);
-			dialog.setNegativeButton(R.string.closeText, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which)
-				{
-					((Activity)getContext()).finish();
-				}
-			});
-			dialog.create().show();
 		}
+//		else {
+//			AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+//			dialog.setTitle(R.string.errorTitle);
+//			dialog.setMessage(R.string.missingMapIdErrorMessage);
+//			dialog.setNegativeButton(R.string.closeText, new DialogInterface.OnClickListener() {
+//				@Override
+//				public void onClick(DialogInterface dialog, int which)
+//				{
+//					((Activity)getContext()).finish();
+//				}
+//			});
+//			dialog.create().show();
+//		}
 	}
 
     public MapView(final Context context, AttributeSet attrs) {
