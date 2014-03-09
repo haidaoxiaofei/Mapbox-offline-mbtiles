@@ -141,7 +141,10 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
             try {
                 // Log.d(TAG, "getting tile " + tile.getX() + ", " + tile.getY());
                 // Log.d(TAG, "Downloading MapTile from url: " + url);
-
+            	TilesLoadedListener listener = mapView.getTilesLoadedListener();
+                if (listener != null) {
+                    listener.onTilesLoadStarted();
+                }
                 HttpURLConnection connection = client.open(new URL(url));
                 in = connection.getInputStream();
 
@@ -160,7 +163,6 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
                 Drawable result = tileLayer.getDrawable(byteStream);
                 threadControl.set(threadIndex, true);
                 if (checkThreadControl()) {
-                    TilesLoadedListener listener = mapView.getTilesLoadedListener();
                     if (listener != null) {
                         listener.onTilesLoaded();
                     }
