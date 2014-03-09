@@ -90,6 +90,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private boolean firstMarker = true;
 
     private static final String TAG = "MapBox MapView";
+	private static final String EXAMPLE_MAP_ID = "examples.map-vyofok3q";
     private static Method sMotionEventTransformMethod;
 
     /**
