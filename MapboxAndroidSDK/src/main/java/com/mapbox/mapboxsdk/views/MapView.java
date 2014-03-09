@@ -659,7 +659,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     boolean zoomOutFixing(final int xPixel, final int yPixel) {
-        return getController().zoomInAbout(xPixel, yPixel);
+        return getController().zoomOutAbout(xPixel, yPixel);
     }
 
     public ResourceProxy getResourceProxy() {
