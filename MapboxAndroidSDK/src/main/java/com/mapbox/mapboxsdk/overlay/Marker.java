@@ -24,7 +24,7 @@ public class Marker extends ExtendedOverlayItem {
         if (mv != null) {
             context = mv.getContext();
             mapView = mv;
-            setIcon(new Icon(Icon.Size.l, "", "000"));
+            setIcon(new Icon(Icon.Size.LARGE, "", "000"));
 //            attachTooltip();
         }
     }
@@ -43,7 +43,7 @@ public class Marker extends ExtendedOverlayItem {
     public Marker addTo(MapView mv) {
         mapView = mv;
         context = mv.getContext();
-        setIcon(new Icon(Icon.Size.l, "", "000"));
+        setIcon(new Icon(Icon.Size.LARGE, "", "000"));
         return this;
     }
 
