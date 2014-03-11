@@ -195,11 +195,14 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
     }
 
     public void cluster(MapView view, Context context){
+        System.out.println("CLUSTERLIST 1 "+ mItemList);
         this.view = view;
         this.context = context;
         int currentGroup = 0;
         final double CLUSTERING_THRESHOLD = getThreshold();
+        clusterList = new ArrayList<ClusterItem>();
         for(OverlayItem item: this.mItemList){
+            item.setClustered(false);
             item.assignGroup(0);
         }
         currentGroup++;
@@ -214,11 +217,12 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
                         item2.setClustered(true);
                         counter++;
                     }
+                }
                     if (counter==0) { // If the item has no markers near it there is no sense in clustering it
                         item.setClustered(false);
                         item.assignGroup(0);
                     }
-                }
+
             }
             currentGroup++;
         }
