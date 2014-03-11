@@ -319,9 +319,11 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
         int sumlon = 0, sumlat = 0, count = 0;
         ArrayList<OverlayItem> tempList = getGroupElements(list, group);
         LatLng result = getCenter(tempList);
-        Marker m = new Marker(view, "Hello", "This is the center of group "+group+"'s cluster", result);
-        m.setIcon(new Icon(Icon.Size.l, "circle", "f00"));
+        ClusterItem m = new ClusterItem(view, "", "", result);
+        m.setMarker(context.getResources().getDrawable(R.drawable.clusteri));
         m.assignGroup(group);
+        m.setMarkerHotspot(OverlayItem.HotspotPlace.CENTER);
+        m.setChildCount(tempList.size());
         clusterList.add(m);
         return result;
     }
