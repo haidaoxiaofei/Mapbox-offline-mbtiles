@@ -17,6 +17,10 @@ public class ClusterItem extends Marker{
         super(aTitle, aSnippet, aLatLng);
     }
 
+    public ClusterItem(MapView view, LatLng result) {
+        super(view, "", "", result);
+    }
+
     public int getChildCount() {
         return childCount;
     }
