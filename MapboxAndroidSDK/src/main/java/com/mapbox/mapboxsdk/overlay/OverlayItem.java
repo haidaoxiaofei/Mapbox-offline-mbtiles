@@ -39,7 +39,6 @@ public class OverlayItem {
     }
 
     public boolean beingClustered() {
-        
         return clustered;
     }
 

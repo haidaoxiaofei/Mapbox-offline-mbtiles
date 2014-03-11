@@ -255,6 +255,17 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     }
 
+    public ArrayList<ItemizedIconOverlay> getItemizedOverlays(){
+        ArrayList<ItemizedIconOverlay> list = new ArrayList<ItemizedIconOverlay>();
+        for(Overlay overlay: getOverlays()){
+            System.out.println("ITEMIZED "+overlay);
+            if(overlay instanceof ItemizedOverlay){
+                list.add((ItemizedIconOverlay) overlay);
+            }
+        }
+        return list;
+    }
+
     /**
      * Load and parse a GeoJSON file at a given URL
      * @param URL the URL from which to load the GeoJSON file
