@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import java.io.IOException;
@@ -68,6 +69,7 @@ public class Icon {
         }
         @Override
         protected void onPostExecute(Bitmap bitmap) {
+            bitmap.setDensity(DisplayMetrics.DENSITY_XHIGH/2);
             drawable = new BitmapDrawable(bitmap);
             if (marker != null) {
                 marker.setMarker(drawable);
