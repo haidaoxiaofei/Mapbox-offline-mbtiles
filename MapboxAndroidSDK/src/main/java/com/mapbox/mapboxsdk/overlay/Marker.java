@@ -1,6 +1,8 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 
@@ -24,7 +26,7 @@ public class Marker extends ExtendedOverlayItem {
         if (mv != null) {
             context = mv.getContext();
             mapView = mv;
-            setIcon(new Icon(Icon.Size.l, "", "000"));
+            setMarker(context.getResources().getDrawable(R.drawable.defpin));
 //            attachTooltip();
         }
     }
@@ -52,11 +54,15 @@ public class Marker extends ExtendedOverlayItem {
         mapView.getOverlays().add(tooltip);
         mapView.invalidate();
     }
+    @Override
+    public void setMarker(Drawable drawable){
+        super.setMarker(drawable);
+        mapView.invalidate();
+    }
 
     public Marker setIcon(Icon icon) {
         icon.setMarker(this);
         this.setMarkerHotspot(HotspotPlace.CENTER);
-        mapView.invalidate();
         return this;
     }
 
