@@ -235,7 +235,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         } else {
             defaultMarkerOverlay.addItem(marker);
         }
-        this.invalidate();
         marker.addTo(this);
         firstMarker = false;
         return marker;
