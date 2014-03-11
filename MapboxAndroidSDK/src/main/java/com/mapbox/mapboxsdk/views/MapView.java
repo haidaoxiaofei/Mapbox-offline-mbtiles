@@ -1245,7 +1245,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public void cluster() {
-        defaultMarkerOverlay.cluster(this, context);
+        for(ItemizedIconOverlay overlay: getItemizedOverlays()){
+            overlay.cluster(this, context);
+        }
     }
 
     // ===========================================================
