@@ -26,6 +26,7 @@ public class OverlayItem {
     private int group = 0;
     private boolean clustered;
 
+
     public int getGroup() {
         return group;
     }
@@ -45,6 +46,10 @@ public class OverlayItem {
     public void setClustered(boolean clustered) {
         this.clustered = clustered;
     }
+
+
+
+
 
     /**
      * Indicates a hotspot for an area. This is where the origin (0,0) of a point will be located
@@ -131,6 +136,7 @@ public class OverlayItem {
 
     public void setMarker(final Drawable marker) {
         this.mMarker = marker;
+
     }
 
     public void setMarkerHotspot(final HotspotPlace place) {

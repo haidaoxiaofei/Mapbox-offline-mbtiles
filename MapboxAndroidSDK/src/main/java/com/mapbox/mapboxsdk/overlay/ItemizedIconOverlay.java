@@ -8,6 +8,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
+import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.ResourceProxy.bitmap;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
@@ -27,7 +28,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
     private final Point mTouchScreenPoint = new Point();
     private final Point mItemPoint = new Point();
 
-    private ItemizedIconOverlay<Marker> clusters;
+    private ItemizedIconOverlay<ClusterItem> clusters;
     private MapView view;
     private Context context;
 
@@ -230,7 +231,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
     }
 
 
-    private ArrayList<Marker> clusterList = new ArrayList<Marker>();
+    private ArrayList<ClusterItem> clusterList = new ArrayList<ClusterItem>();
 
 
     private double getThreshold() {
@@ -293,16 +294,16 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
 
     private void initClusterOverlay(){
 
-        clusters = new ItemizedIconOverlay<Marker>(clusterList, new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
+        clusters = new ItemizedIconOverlay<ClusterItem>(clusterList, new ItemizedIconOverlay.OnItemGestureListener<ClusterItem>() {
             @Override
-            public boolean onItemSingleTapUp(int index, Marker item) {
+            public boolean onItemSingleTapUp(int index, ClusterItem item) {
                 ArrayList<LatLng> activePoints = getCoordinateList(getGroupElements((List<OverlayItem>) mItemList, item.getGroup()));
                 view.zoomToBoundingBox(BoundingBox.fromGeoPoints(activePoints));
                 return false;
             }
 
             @Override
-            public boolean onItemLongPress(int index, Marker item) {
+            public boolean onItemLongPress(int index, ClusterItem item) {
                 return false;
             }
         }, mResourceProxy);
