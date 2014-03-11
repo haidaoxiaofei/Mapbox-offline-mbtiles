@@ -207,10 +207,16 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
             if (item.getGroup() == 0){
                 item.assignGroup(currentGroup);
                 item.setClustered(true);
+                int counter = 0;
                 for(OverlayItem item2: this.mItemList){
                     if(item2.getGroup() == 0 && PointF.length(screenX(item) - screenX(item2), screenY(item) - screenY(item2)) <= CLUSTERING_THRESHOLD){
                         item2.assignGroup(currentGroup);
                         item2.setClustered(true);
+                        counter++;
+                    }
+                    if (counter==0) { // If the item has no markers near it there is no sense in clustering it
+                        item.setClustered(false);
+                        item.assignGroup(0);
                     }
                 }
             }
