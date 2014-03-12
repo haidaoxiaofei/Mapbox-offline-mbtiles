@@ -1,11 +1,9 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
 
 /**
@@ -31,8 +29,7 @@ public class Marker extends ExtendedOverlayItem {
         if (mv != null) {
             context = mv.getContext();
             mapView = mv;
-            setIcon(new Icon(mv.getResources(), Icon.Size.LARGE, "", "000"));
-//            attachTooltip();
+            this.setMarker(context.getResources().getDrawable(R.drawable.defpin));
         }
     }
 
