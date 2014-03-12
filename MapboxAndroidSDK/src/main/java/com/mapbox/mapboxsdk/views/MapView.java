@@ -497,6 +497,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
         // Allows any views fixed to a Location in the MapView to adjust
         this.requestLayout();
+        cluster();
         return this;
     }
 
