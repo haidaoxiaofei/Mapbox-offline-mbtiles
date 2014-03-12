@@ -31,6 +31,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
     private ItemizedIconOverlay<ClusterItem> clusters;
     private MapView view;
     private Context context;
+    private boolean isClusterOverlay;
 
     public ItemizedIconOverlay(
             final List<Item> pList,
@@ -227,14 +228,17 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
             currentGroup++;
         }
         getGroupSet();
+        view.getOverlays().remove(clusters);
         if(clusters != null){
             clusters.removeAllItems();
+            initClusterOverlay();
             clusters.addItems(clusterList);
         }
         else{
             initClusterOverlay();
             clusters.addItems(clusterList);
         }
+
         view.getOverlays().add(clusters);
         view.invalidate();
 
@@ -317,6 +321,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
                 return false;
             }
         }, mResourceProxy);
+        clusters.setCluster(true);
     }
 
     private LatLng generateCenterByGroup(ArrayList<OverlayItem> list, int group) {
