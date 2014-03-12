@@ -1,7 +1,11 @@
 package com.mapbox.mapboxsdk.android.testapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -43,8 +47,19 @@ public class MainActivity extends ActionBarActivity {
 
         mv.loadFromGeoJSONURL("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
         setButtonListeners();
-        Marker m = new Marker(mv, "Hello", "World", new LatLng(0f, 0f));
-        m.setIcon(new Icon(Icon.Size.l, "bus", "000"));
+        Marker m = new Marker(mv, "Edinburgh", "Scotland", new LatLng(55.94629, -3.20777));
+        m.setIcon(new Icon(getResources(), Icon.Size.SMALL, "marker-stroked", "FF0000"));
+        mv.addMarker(m);
+
+        m = new Marker(mv, "Stockholm", "Sweden", new LatLng(59.32995, 18.06461));
+        m.setIcon(new Icon(getResources(), Icon.Size.MEDIUM, "city", "FFFF00"));
+        mv.addMarker(m);
+
+        m = new Marker(mv, "Prague", "Czech Republic", new LatLng(50.08734, 14.42112));
+        m.setIcon(new Icon(getResources(), Icon.Size.LARGE, "land-use", "00FFFF"));
+        mv.addMarker(m);
+
+        m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
         mv.addMarker(m);
 
         mv.setOnTilesLoadedListener(new TilesLoadedListener() {
@@ -69,7 +84,6 @@ public class MainActivity extends ActionBarActivity {
                     replaceMapView(satellite);
                     currentLayer = "satellite";
                 }
-                mv.setMultiTouchControls(false);
             }
         });
         Button terBut = changeButtonTypeface((Button)findViewById(R.id.terbut));
@@ -143,5 +157,38 @@ public class MainActivity extends ActionBarActivity {
     {
         mv.setCenter(center);
     }
+
+    /**
+     * Method to show settings  in alert dialog
+     * On pressing Settings button will lauch Settings Options - GPS
+     */
+    public void showSettingsAlert() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
+
+        // Setting Dialog Title
+        alertDialog.setTitle("GPS settings");
+
+        // Setting Dialog Message
+        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+
+        // On pressing Settings button
+        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                getBaseContext().startActivity(intent);
+            }
+        });
+
+        // on pressing cancel button
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
 
 }

@@ -1,9 +1,6 @@
-// Created by plusminus on 21:37:08 - 27.09.2008
 package com.mapbox.mapboxsdk.views;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.geometry.BoundingBox;
-import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
 import android.animation.Animator;
@@ -18,10 +15,6 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.ScaleAnimation;
 
-/**
- * @author Nicolas Gramlich
- * @author Marc Kurtz
- */
 public class MapController implements MapViewConstants {
 
     protected final MapView mMapView;
@@ -59,35 +52,6 @@ public class MapController implements MapViewConstants {
         }
     }
 
-    public void zoomToSpan(final BoundingBox bb) {
-        zoomToSpan(bb.getLatitudeSpan(), bb.getLongitudeSpan());
-    }
-
-    // TODO rework zoomToSpan
-    public void zoomToSpan(double latSpan, double lonSpan) {
-        if (latSpan <= 0 || lonSpan <= 0) {
-            return;
-        }
-
-        final BoundingBox bb = this.mMapView.getBoundingBox();
-        final int curZoomLevel = this.mMapView.getZoomLevel();
-
-        final double curLatSpan = bb.getLatitudeSpan();
-        final double curLonSpan = bb.getLongitudeSpan();
-
-        final double diffNeededLat = latSpan / curLatSpan; // i.e. 600/500 = 1,2
-        final double diffNeededLon = lonSpan / curLonSpan; // i.e. 300/400 = 0,75
-
-        final double diffNeeded = Math.max(diffNeededLat, diffNeededLon); // i.e. 1,2
-
-        if (diffNeeded > 1) { // Zoom Out
-            this.mMapView.setZoom(curZoomLevel - GeometryMath.getNextSquareNumberAbove((float) diffNeeded));
-        } else if (diffNeeded < 0.5) { // Can Zoom in
-            this.mMapView.setZoom(curZoomLevel
-                    + GeometryMath.getNextSquareNumberAbove(1 / (float) diffNeeded) - 1);
-        }
-    }
-
     /**
      * Start animating the map towards the given point.
      */
@@ -110,15 +74,15 @@ public class MapController implements MapViewConstants {
         }
     }
 
-    public void scrollBy(int x, int y) {
+    public void panBy(int x, int y) {
         this.mMapView.scrollBy(x, y);
     }
 
     /**
      * Set the map view to the given center. There will be no animation.
      */
-    public void setCenter(final ILatLng point) {
-        Point p = mMapView.getProjection().toMapPixels(point, null);
+    public void setCenter(final ILatLng latlng) {
+        Point p = mMapView.getProjection().toMapPixels(latlng, null);
         this.mMapView.scrollTo(p.x, p.y);
     }
 
@@ -167,27 +131,25 @@ public class MapController implements MapViewConstants {
      */
     public boolean zoomIn() {
         Point coords = mMapView.getProjection().toMapPixels(mMapView.getCenter(), null);
-        return zoomInFixing(coords.x, coords.y);
+        return zoomInAbout(coords.x, coords.y);
     }
 
-    public boolean zoomInFixing(final int xPixel, final int yPixel) {
+    public boolean zoomInAbout(final int xPixel, final int yPixel) {
         mMapView.mMultiTouchScalePoint.set(xPixel, yPixel);
-        if (mMapView.canZoomIn()) {
-            if (mMapView.mIsAnimating.getAndSet(true)) {
-                // TODO extend zoom (and return true)
-                return false;
-            } else {
-                mMapView.mTargetZoomLevel.set(mMapView.getZoomLevel(false) + 1);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    mCurrentAnimator = mZoomInAnimation;
-                    mZoomInAnimation.start();
-                } else {
-                    mMapView.startAnimation(mZoomInAnimationOld);
-                }
-                return true;
-            }
-        } else {
+        if (!mMapView.canZoomIn()) return false;
+
+        if (mMapView.mIsAnimating.getAndSet(true)) {
+            // TODO extend zoom (and return true)
             return false;
+        } else {
+            mMapView.mTargetZoomLevel.set(mMapView.getZoomLevel(false) + 1);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                mCurrentAnimator = mZoomInAnimation;
+                mZoomInAnimation.start();
+            } else {
+                mMapView.startAnimation(mZoomInAnimationOld);
+            }
+            return true;
         }
     }
 
@@ -196,10 +158,10 @@ public class MapController implements MapViewConstants {
      */
     public boolean zoomOut() {
         Point coords = mMapView.getProjection().toMapPixels(mMapView.getCenter(), null);
-        return zoomOutFixing(coords.x, coords.y);
+        return zoomOutAbout(coords.x, coords.y);
     }
 
-    public boolean zoomOutFixing(final int xPixel, final int yPixel) {
+    public boolean zoomOutAbout(final int xPixel, final int yPixel) {
         mMapView.mMultiTouchScalePoint.set(xPixel, yPixel);
         if (mMapView.canZoomOut()) {
             if (mMapView.mIsAnimating.getAndSet(true)) {
@@ -224,12 +186,14 @@ public class MapController implements MapViewConstants {
         mMapView.mIsAnimating.set(true);
     }
 
-    protected void onAnimationEnd() {
+    public void onAnimationEnd() {
         final Rect screenRect = mMapView.getProjection().getScreenRect();
         final Matrix m = new Matrix();
         m.setScale(1 / mMapView.mMultiTouchScale, 1 / mMapView.mMultiTouchScale,
-                mMapView.mMultiTouchScalePoint.x, mMapView.mMultiTouchScalePoint.y);
-        m.postRotate(-mMapView.getMapOrientation(), screenRect.exactCenterX(),
+            mMapView.mMultiTouchScalePoint.x, mMapView.mMultiTouchScalePoint.y);
+        m.postRotate(
+                -mMapView.getMapOrientation(),
+                screenRect.exactCenterX(),
                 screenRect.exactCenterY());
         float[] pts = new float[2];
         pts[0] = mMapView.getScrollX();
@@ -283,4 +247,6 @@ public class MapController implements MapViewConstants {
             // Nothing to do here...
         }
     }
+
+    private static String TAG = "MapController";
 }

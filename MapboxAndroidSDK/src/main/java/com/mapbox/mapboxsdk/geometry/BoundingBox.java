@@ -109,6 +109,13 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
         return new BoundingBox(maxLat, maxLon, minLat, minLon);
     }
 
+    public boolean equals(final BoundingBox other) {
+        return mLatNorth == other.getLatNorth() &&
+                mLatSouth == other.getLatSouth() &&
+                mLonEast == other.getLonEast() &&
+                mLonWest == other.getLonWest();
+    }
+
     /**
      * Determine whether this bounding box contains a point and the point
      * does not touch its boundary.

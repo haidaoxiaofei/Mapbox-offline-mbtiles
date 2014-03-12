@@ -57,6 +57,8 @@ public class GeoJSONLayer {
                 GeoJSON.parseString(jsonString, mapView);
             } catch (JSONException e) {
                 Log.w(TAG, "JSON parsed was invalid. Continuing without it");
+            } catch (Exception e) {
+                Log.e(TAG, "Other exception returned from async geojson load " + e.getMessage());
             }
         }
 

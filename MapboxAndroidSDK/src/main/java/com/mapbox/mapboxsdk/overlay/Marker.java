@@ -13,6 +13,8 @@ public class Marker extends ExtendedOverlayItem {
     private Context context;
     private Tooltip tooltip;
     private MapView mapView;
+    private LatLng latLng;
+    private Icon icon;
 
     /**
      * Initialize a new marker object, adding it to a MapView and attaching a tooltip
@@ -23,11 +25,11 @@ public class Marker extends ExtendedOverlayItem {
      */
     public Marker(MapView mv, String aTitle, String aDescription, LatLng aLatLng) {
         super(aTitle, aDescription, aLatLng);
+        this.latLng = aLatLng;
         if (mv != null) {
             context = mv.getContext();
             mapView = mv;
-            setMarker(context.getResources().getDrawable(R.drawable.defpin));
-//            attachTooltip();
+            this.setMarker(context.getResources().getDrawable(R.drawable.defpin));
         }
     }
 
@@ -45,8 +47,38 @@ public class Marker extends ExtendedOverlayItem {
     public Marker addTo(MapView mv) {
         mapView = mv;
         context = mv.getContext();
-        setIcon(new Icon(Icon.Size.l, "", "000"));
+        if (icon == null)
+        {
+            // Set default icon
+            setIcon(new Icon(mv.getResources(), Icon.Size.LARGE, "", "000"));
+        }
         return this;
+    }
+
+    /**
+     * Sets Marker, then redraws map to display it.
+     * @param marker Marker
+     */
+    @Override
+    public void setMarker(Drawable marker)
+    {
+        super.setMarker(marker);
+
+//        mapView.invalidateMapCoordinates(marker.getBounds());
+
+/*
+        // Determine bounding box of drawable
+        Point point = mapView.getProjection().toMapPixels(latLng, null);
+        int widthBuffer = getWidth() / 2;
+        int heightBuffer = getHeight() / 2;
+
+        // l, t, r, b
+        Rect rect = new Rect(point.x - widthBuffer, point.y + heightBuffer, point.x + widthBuffer, point.y - heightBuffer);
+
+        mapView.invalidateMapCoordinates(rect);
+*/
+
+        mapView.invalidate();
     }
 
     private void attachTooltip() {
@@ -54,13 +86,9 @@ public class Marker extends ExtendedOverlayItem {
         mapView.getOverlays().add(tooltip);
         mapView.invalidate();
     }
-    @Override
-    public void setMarker(Drawable drawable){
-        super.setMarker(drawable);
-        mapView.invalidate();
-    }
 
     public Marker setIcon(Icon icon) {
+        this.icon = icon;
         icon.setMarker(this);
         this.setMarkerHotspot(HotspotPlace.CENTER);
         return this;

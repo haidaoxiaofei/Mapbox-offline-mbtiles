@@ -15,8 +15,7 @@ public class ExtendedOverlayItem extends OverlayItem {
     private Object mRelatedObject; //reference to an object (of any kind) linked to this item.
 
 
-    public ExtendedOverlayItem(String aTitle, String aDescription,
-                               LatLng aGeoPoint) {
+    public ExtendedOverlayItem(String aTitle, String aDescription, LatLng aGeoPoint) {
         super(aTitle, aDescription, aGeoPoint);
         mTitle = aTitle;
         mDescription = aDescription;

@@ -15,34 +15,26 @@ import java.io.InputStream;
 
 public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstants {
 
-    private static int globalOrdinal = 0;
-    private String mBaseUrl;
+    private String mUrl;
     private int mMinimumZoomLevel = 1;
     private int mMaximumZoomLevel = 16;
-    private final int mOrdinal;
     private final int mTileSizePixels = DEFAULT_TILE_SIZE;
 
-    public TileLayer(final String aBaseUrl) {
-        mOrdinal = TileLayer.globalOrdinal++;
-        mBaseUrl = aBaseUrl;
+    public TileLayer(final String aUrl) {
+        mUrl = aUrl;
     }
 
-    public TileLayer setUrl(final String aUrl) {
-        mBaseUrl = aUrl;
+    public TileLayer setURL(final String aUrl) {
+        mUrl = aUrl;
         return this;
     }
 
-    public String getTileURLString(final MapTile aTile, boolean hdpi) {
-        return mBaseUrl
+    public String getTileURL(final MapTile aTile, boolean hdpi) {
+        return mUrl
                 .replace("{z}", String.valueOf(aTile.getZ()))
                 .replace("{x}", String.valueOf(aTile.getX()))
                 .replace("{y}", String.valueOf(aTile.getY()))
                 .replace("{2x}", hdpi ? "@2x" : "");
-    }
-
-    @Override
-    public int ordinal() {
-        return mOrdinal;
     }
 
     @Override
