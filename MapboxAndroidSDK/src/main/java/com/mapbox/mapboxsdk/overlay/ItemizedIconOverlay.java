@@ -379,6 +379,14 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
         this.mDrawnItemsLimit = aLimit;
     }
 
+    public boolean isClusterOverlay() {
+        return isClusterOverlay;
+    }
+
+    public void setCluster(boolean cluster) {
+        this.isClusterOverlay = cluster;
+    }
+
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================
