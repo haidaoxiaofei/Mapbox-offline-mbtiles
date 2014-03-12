@@ -299,6 +299,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                                                      final OverlayItem item) {
                         ((Marker)item).showBubble(new DefaultInfoWindow(R.layout.tootip, MapView.this), MapView.this, true);
 
+
                         return true;
                     }
                     public boolean onItemLongPress(final int index,
