@@ -65,10 +65,10 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
     @Override
     public void onScaleEnd(ScaleGestureDetector detector) {
         float scale = this.mapView.mMultiTouchScale;
-        int preZoom = this.mapView.getZoomLevel();
+        float preZoom = this.mapView.getZoomLevel();
         this.mapView.getController().onAnimationEnd();
         Log.i(TAG, "scale" + Math.round((Math.log((double) scale) / Math.log(2d))));
-        this.mapView.setZoom((int) Math.round((Math.log((double) scale) / Math.log(2d)) + preZoom));
+        this.mapView.setZoom(Math.round((Math.log((double) scale) / Math.log(2d)) + preZoom));
     }
     private static String TAG = "detector";
 }
