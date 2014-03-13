@@ -16,7 +16,7 @@ import java.io.InputStream;
 
 public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstants {
 
-    private String mUrl;
+	protected String mUrl;
     protected float mMinimumZoomLevel = 1;
     protected float mMaximumZoomLevel = 16;
     protected BoundingBox mBoundingBox = null;
