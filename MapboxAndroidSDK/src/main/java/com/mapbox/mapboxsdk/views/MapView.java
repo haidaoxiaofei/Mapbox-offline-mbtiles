@@ -1,9 +1,6 @@
 package com.mapbox.mapboxsdk.views;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -12,6 +9,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.*;
 import android.widget.Scroller;
@@ -88,7 +86,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private boolean firstMarker = true;
 
     private static final String TAG = "MapBox MapView";
-	private static final String EXAMPLE_MAP_ID = "examples.map-vyofok3q";
     private static Method sMotionEventTransformMethod;
 
     /**
@@ -159,10 +156,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         TileSystem.setTileSize(tileSizePixels);
 
         if (tileProvider == null) {
-            final ITileLayer tileSource = new MapboxTileLayer("examples.map-h6lnn4mm");
             tileProvider = isInEditMode()
-                    ? new MapTileLayerArray(tileSource, null, new MapTileModuleLayerBase[0])
-                    : new MapTileLayerBasic(context, tileSource, this);
+                    ? new MapTileLayerArray(null, null, new MapTileModuleLayerBase[0])
+                    : new MapTileLayerBasic(context, null, this);
         }
 
         mTileRequestCompleteHandler = tileRequestCompleteHandler == null
@@ -188,30 +184,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             if (mapid != null) {
                 setTileSource(new MapboxTileLayer(mapid));
             }
-        } else {
-            setTileSource(new MapboxTileLayer(EXAMPLE_MAP_ID));
         }
-        String mapId = null;
-        if (attrs != null)
-        {
-        	mapId = attrs.getAttributeValue(null, "mapid");
-        }
-		if (mapId != null) {
-			setTileSource(new MapboxTileLayer(mapId));
-		}
-//		else {
-//			AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-//			dialog.setTitle(R.string.errorTitle);
-//			dialog.setMessage(R.string.missingMapIdErrorMessage);
-//			dialog.setNegativeButton(R.string.closeText, new DialogInterface.OnClickListener() {
-//				@Override
-//				public void onClick(DialogInterface dialog, int which)
-//				{
-//					((Activity)getContext()).finish();
-//				}
-//			});
-//			dialog.create().show();
-//		}
 	}
 
     public MapView(final Context context, AttributeSet attrs) {
