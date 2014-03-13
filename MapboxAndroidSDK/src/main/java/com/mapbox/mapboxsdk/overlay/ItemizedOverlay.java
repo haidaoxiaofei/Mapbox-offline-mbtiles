@@ -137,7 +137,7 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
      * @param curScreenCoords
      * @param aMapOrientation
      */
-    protected void onDrawItem(final ISafeCanvas canvas, final Item item, final Point curScreenCoords, final float aMapOrientation) {
+    protected void onDrawItem(ISafeCanvas canvas, final Item item, final Point curScreenCoords, final float aMapOrientation) {
         if(item.beingClustered()){
             return;
         }
@@ -161,11 +161,20 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
             });
         }
         if(item instanceof ClusterItem){
-            SafePaint paint = new SafePaint();
-            paint.setTextAlign(Paint.Align.CENTER);
-            paint.setTextSize(30);
-            paint.setFakeBoldText(true);
-            canvas.drawText(""+((ClusterItem)item).getChildCount(),curScreenCoords.x, curScreenCoords.y+10, paint);
+            if (this instanceof ItemizedIconOverlay){
+                if(((ItemizedIconOverlay)this).getClusterActions()!=null){
+                    canvas = ((ItemizedIconOverlay)this)
+                            .getClusterActions()
+                            .onClusterMarkerDraw((ClusterItem)item, canvas);
+                }
+            }
+            else{
+                SafePaint paint = new SafePaint();
+                paint.setTextAlign(Paint.Align.CENTER);
+                paint.setTextSize(30);
+                paint.setFakeBoldText(true);
+                canvas.drawText(""+((ClusterItem)item).getChildCount(),curScreenCoords.x, curScreenCoords.y+10, paint);
+            }
         }
     }
 
