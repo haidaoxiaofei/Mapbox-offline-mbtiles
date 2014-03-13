@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="networkNotAvailable">Network Not Available</string>
-	<string name="errorTitle">Whoops...</string>
-	<string name="missingMapIdErrorMessage">No mapid was set for the MapView.</string>
+	<string name="missingAttributeMapIdMessage">No mapid was set for the MapView.</string>
 	<string name="closeText">Close</string>
 </resources>
