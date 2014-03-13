@@ -1099,19 +1099,20 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     @Override
     public void scrollTo(int x, int y) {
-        final int worldSize_2 = TileSystem.MapSize(this.getZoomLevel(false)) / 2;
-        while (x < -worldSize_2) {
-            x += worldSize_2 * 2;
-        }
-        while (x > worldSize_2) {
-            x -= worldSize_2 * 2;
-        }
-        while (y < -worldSize_2) {
-            y += worldSize_2 * 2;
-        }
-        while (y > worldSize_2) {
-            y -= worldSize_2 * 2;
-        }
+		// final int worldSize_2 = TileSystem.MapSize(this.getZoomLevel(false))
+		// / 2;
+		// while (x < -worldSize_2) {
+		// x += worldSize_2 * 2;
+		// }
+		// while (x > worldSize_2) {
+		// x -= worldSize_2 * 2;
+		// }
+		// while (y < -worldSize_2) {
+		// y += worldSize_2 * 2;
+		// }
+		// while (y > worldSize_2) {
+		// y -= worldSize_2 * 2;
+		// }
 
         if (mScrollableAreaLimit != null) {
 			final float zoomDiff = MapViewConstants.MAXIMUM_ZOOMLEVEL
