@@ -385,8 +385,13 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @return the current bounds of the map
      */
     public BoundingBox getBoundingBox() {
+		int w = getWidth();
+		int h = getHeight();
+		if (w > 0 && h > 0) {
         return getBoundingBox(getWidth(), getHeight());
     }
+		return mScrollableAreaBoundingBox;
+	}
 
     private BoundingBox getBoundingBox(final int pViewWidth, final int pViewHeight) {
 
