@@ -198,9 +198,12 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
         }
         return false;
     }
+    
+    public void setClusterActions(ClusterActions clusterActions){
+        this.clusterActions = clusterActions;
+    }
 
     public void cluster(MapView view, Context context){
-        System.out.println("CLUSTERLIST 1 "+ mItemList);
         this.view = view;
         this.context = context;
         int currentGroup = 0;
@@ -389,6 +392,10 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
 
     public void setCluster(boolean cluster) {
         this.isClusterOverlay = cluster;
+    }
+
+    public ClusterActions getClusterActions() {
+        return clusterActions;
     }
 
     // ===========================================================
