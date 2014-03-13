@@ -18,6 +18,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     private String mUrl;
     protected float mMinimumZoomLevel = 1;
     protected float mMaximumZoomLevel = 16;
+    protected BoundingBox mBoundingBox = null;
     private final int mTileSizePixels = DEFAULT_TILE_SIZE;
 
     public TileLayer(final String aUrl) {
@@ -72,4 +73,9 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     }
 
     final private String TAG = "OnlineTileSource";
+
+	@Override
+	public BoundingBox getBoundingBox() {
+		return mBoundingBox;
+	}
 }
