@@ -13,10 +13,10 @@ public class ExtendedOverlayItem extends OverlayItem {
     private Drawable mImage; //that will be shown in the infowindow.
     //private GeoPoint mGeoPoint //unfortunately, this is not so simple...
     private Object mRelatedObject; //reference to an object (of any kind) linked to this item.
+    private boolean bubbleShowing;
 
 
-    public ExtendedOverlayItem(String aTitle, String aDescription,
-                               LatLng aGeoPoint) {
+    public ExtendedOverlayItem(String aTitle, String aDescription, LatLng aGeoPoint) {
         super(aTitle, aDescription, aGeoPoint);
         mTitle = aTitle;
         mDescription = aDescription;
@@ -128,7 +128,12 @@ public class ExtendedOverlayItem extends OverlayItem {
         tooltip.open(this, this.getPoint(), tooltipH.x, tooltipH.y);
         if (panIntoView)
             mapView.getController().animateTo(getPoint());
+
+        bubbleShowing = true;
     }
 
+    public boolean isBubbleShowing() {
+        return bubbleShowing;
+    }
 }
 
