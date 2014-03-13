@@ -154,7 +154,7 @@ public class MapController implements MapViewConstants {
             targetZoom = mMapView.getClampedZoomLevel(targetZoom);
         	mMapView.mTargetZoomLevel.set(Float.floatToIntBits(targetZoom));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                mZoomInAnimation.setFloatValues(1.0f, (currentZoom - 1.0f + targetZoom)/currentZoom);
+                mZoomInAnimation.setFloatValues(1.0f, (float)(currentZoom - 1.0f + Math.ceil(targetZoom))/currentZoom);
                 mCurrentAnimator = mZoomInAnimation;
                 mZoomInAnimation.start();
             } else {
@@ -190,7 +190,7 @@ public class MapController implements MapViewConstants {
                 }
                 mMapView.mTargetZoomLevel.set(Float.floatToIntBits(targetZoom));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    mZoomOutAnimation.setFloatValues(1.0f, targetZoom/(currentZoom - 1.0f + targetZoom));
+                    mZoomOutAnimation.setFloatValues(1.0f, targetZoom/(float)(currentZoom - 1.0f + Math.floor(targetZoom)));
                     mCurrentAnimator = mZoomOutAnimation;
                     mZoomOutAnimation.start();
                 } else {
