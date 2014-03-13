@@ -89,4 +89,14 @@ public class GeometryMath {
 
         return number;
     }
+    
+    public static float leftShift(float value, float multiplier) 
+    {
+    	return (float) (value * Math.pow(2, multiplier));
+    }
+    
+    public static float rightShift(float value, float multiplier) 
+    {
+    	return (float) (value / Math.pow(2, multiplier));
+    }
 }
