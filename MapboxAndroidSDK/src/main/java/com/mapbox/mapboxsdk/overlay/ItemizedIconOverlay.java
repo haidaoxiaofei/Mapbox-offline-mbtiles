@@ -14,6 +14,7 @@ import com.mapbox.mapboxsdk.ResourceProxy.bitmap;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.util.Projection;
 
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
     private MapView view;
     private Context context;
     private boolean isClusterOverlay;
+    
+    private ClusterActions clusterActions;
 
     public ItemizedIconOverlay(
             final List<Item> pList,
@@ -399,11 +402,15 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
      */
     public static interface OnItemGestureListener<T> {
         public boolean onItemSingleTapUp(final int index, final T item);
-
         public boolean onItemLongPress(final int index, final T item);
     }
 
     public static interface ActiveItem {
         public boolean run(final int aIndex);
+    }
+
+    public static interface ClusterActions{
+        public ISafeCanvas onClusterMarkerDraw(ClusterItem item, ISafeCanvas canvas);
+        public boolean onClusterTap(ClusterItem item);
     }
 }
