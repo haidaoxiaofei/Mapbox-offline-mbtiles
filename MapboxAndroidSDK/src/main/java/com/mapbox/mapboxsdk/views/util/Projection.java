@@ -41,7 +41,7 @@ public class Projection implements IProjection, GeoConstants {
     private final int offsetY;
 
     private final BoundingBox mBoundingBoxProjection;
-    private final int mZoomLevelProjection;
+    private final float mZoomLevelProjection;
     private final Rect mScreenRectProjection;
     private final Rect mIntrinsicScreenRectProjection;
     private final float mMapOrientation;
@@ -64,7 +64,7 @@ public class Projection implements IProjection, GeoConstants {
         mMapOrientation = mapView.getMapOrientation();
     }
 
-    public int getZoomLevel() {
+    public float getZoomLevel() {
         return mZoomLevelProjection;
     }
 
@@ -167,8 +167,8 @@ public class Projection implements IProjection, GeoConstants {
     public Point toMapPixelsTranslated(final Point in, final Point reuse) {
         final Point out = reuse != null ? reuse : new Point();
 
-        final int zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
-        out.set((in.x >> zoomDifference) + offsetX, (in.y >> zoomDifference) + offsetY);
+        final double zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
+        out.set((int)((in.x / zoomDifference) + offsetX), (int)((in.y / zoomDifference) + offsetY));
         return out;
     }
 
@@ -181,12 +181,12 @@ public class Projection implements IProjection, GeoConstants {
     public Rect fromPixelsToProjected(final Rect in) {
         final Rect result = new Rect();
 
-        final int zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
+        final double zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
 
-        final int x0 = in.left - offsetX << zoomDifference;
-        final int x1 = in.right - offsetX << zoomDifference;
-        final int y0 = in.bottom - offsetY << zoomDifference;
-        final int y1 = in.top - offsetY << zoomDifference;
+        final int x0 = (int)(in.left - offsetX * zoomDifference);
+        final int x1 = (int)(in.right - offsetX * zoomDifference);
+        final int y0 = (int)(in.bottom - offsetY * zoomDifference);
+        final int y1 = (int)(in.top - offsetY * zoomDifference);
 
         result.set(Math.min(x0, x1), Math.min(y0, y1), Math.max(x0, x1), Math.max(y0, y1));
         return result;
