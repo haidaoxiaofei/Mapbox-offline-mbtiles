@@ -139,7 +139,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      */
     protected MapView(final Context context, final int tileSizePixels,
                              final ResourceProxy resourceProxy, MapTileLayerBase tileProvider,
-                             final Handler tileRequestCompleteHandler, final AttributeSet attrs) throws MissingAttributeException {
+                             final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
         super(context, attrs);
         mResourceProxy = resourceProxy;
         this.mController = new MapController(this);
@@ -165,7 +165,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         mGestureDetector.setOnDoubleTapListener(new MapViewDoubleClickListener(this));
 
         mScaleGestureDetector = new ScaleGestureDetector(context, new MapViewScaleGestureDetectorListener(this));
-
+        
         this.context = context;
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
@@ -179,7 +179,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
     }
 
-    public MapView(final Context context, AttributeSet attrs) throws MissingAttributeException{
+    public MapView(final Context context, AttributeSet attrs){
         this(context, 256, new DefaultResourceProxyImpl(context), null, null, attrs);
     }
 
