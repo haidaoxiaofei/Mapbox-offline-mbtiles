@@ -36,6 +36,10 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
     
     private ClusterActions clusterActions;
 
+
+
+    private boolean clusteringOn = true;
+
     public ItemizedIconOverlay(
             final List<Item> pList,
             final Drawable pDefaultMarker,
@@ -204,6 +208,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
     }
 
     public void cluster(MapView view, Context context){
+        if(!isClusteringOn()) return;
         this.view = view;
         this.context = context;
         int currentGroup = 0;
@@ -397,6 +402,13 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
 
     public void setCluster(boolean cluster) {
         this.isClusterOverlay = cluster;
+    }
+
+    public boolean isClusteringOn(){
+        return clusteringOn;
+    }
+    public void setClusteringOn(boolean clusteringOn) {
+        this.clusteringOn = clusteringOn;
     }
 
     public ClusterActions getClusterActions() {
