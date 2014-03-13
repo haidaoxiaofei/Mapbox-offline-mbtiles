@@ -4,7 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.BitmapPool;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
@@ -20,6 +22,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     protected float mMinimumZoomLevel = 1;
     protected float mMaximumZoomLevel = 16;
     protected BoundingBox mBoundingBox = null;
+    protected LatLng mCenter = new LatLng(0,0);
     private final int mTileSizePixels = DEFAULT_TILE_SIZE;
 
     public TileLayer(final String aUrl) {
