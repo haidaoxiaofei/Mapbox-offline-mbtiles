@@ -1,6 +1,7 @@
 package com.mapbox.mapboxsdk.views;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.*;
 import android.os.Build;
 import android.os.Handler;
@@ -37,7 +38,6 @@ import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import org.json.JSONException;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -170,23 +170,16 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
 
-		String mapId = attrs.getAttributeValue(null, "mapid");
-		if (mapId != null) {
-			setTileSource(new MapboxTileLayer(mapId));
-		}
-//        else {
-//			AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-//			dialog.setTitle(R.string.errorTitle);
-//			dialog.setMessage(R.string.missingMapIdErrorMessage);
-//			dialog.setNegativeButton(R.string.closeText, new DialogInterface.OnClickListener() {
-//				@Override
-//				public void onClick(DialogInterface dialog, int which)
-//				{
-//					((Activity)getContext()).finish();
-//				}
-//			});
-//			dialog.create().show();
-//		}
+        if (attrs != null)
+        {
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MapView);
+            String mapid = a.getString(R.styleable.MapView_mapid);
+            if (mapid != null)
+            {
+                setTileSource(new MapboxTileLayer(mapid));
+            }
+            a.recycle();
+        }
 	}
 
     public MapView(final Context context, AttributeSet attrs) {
