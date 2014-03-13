@@ -318,8 +318,13 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
         clusters = new ItemizedIconOverlay<ClusterItem>(clusterList, new ItemizedIconOverlay.OnItemGestureListener<ClusterItem>() {
             @Override
             public boolean onItemSingleTapUp(int index, ClusterItem item) {
-                ArrayList<LatLng> activePoints = getCoordinateList(getGroupElements((List<OverlayItem>) mItemList, item.getGroup()));
-                view.zoomToBoundingBox(BoundingBox.fromGeoPoints(activePoints));
+                if(clusterActions!=null){
+                    clusterActions.onClusterTap(item);
+                }
+                else{
+                    ArrayList<LatLng> activePoints = getCoordinateList(getGroupElements((List<OverlayItem>) mItemList, item.getGroup()));
+                    view.zoomToBoundingBox(BoundingBox.fromGeoPoints(activePoints));
+                }
                 return false;
             }
 
