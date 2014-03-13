@@ -149,17 +149,6 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
 
         boundToHotspot(marker, hotspot);
 
-        // draw it
-        if (this.isUsingSafeCanvas()) {
-            Overlay.drawAt(canvas.getSafeCanvas(), marker, curScreenCoords.x, curScreenCoords.y, false, aMapOrientation);
-        } else {
-            canvas.getUnsafeCanvas(new UnsafeCanvasHandler() {
-                @Override
-                public void onUnsafeCanvas(Canvas canvas) {
-                    Overlay.drawAt(canvas, marker, curScreenCoords.x, curScreenCoords.y, false, aMapOrientation);
-                }
-            });
-        }
         if(item instanceof ClusterItem){
             if (this instanceof ItemizedIconOverlay){
                 if(((ItemizedIconOverlay)this).getClusterActions()!=null){
@@ -176,6 +165,19 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
                 canvas.drawText(""+((ClusterItem)item).getChildCount(),curScreenCoords.x, curScreenCoords.y+10, paint);
             }
         }
+
+        // draw it
+        if (this.isUsingSafeCanvas()) {
+            Overlay.drawAt(canvas.getSafeCanvas(), marker, curScreenCoords.x, curScreenCoords.y, false, aMapOrientation);
+        } else {
+            canvas.getUnsafeCanvas(new UnsafeCanvasHandler() {
+                @Override
+                public void onUnsafeCanvas(Canvas canvas) {
+                    Overlay.drawAt(canvas, marker, curScreenCoords.x, curScreenCoords.y, false, aMapOrientation);
+                }
+            });
+        }
+
     }
 
     protected Drawable getDefaultMarker(final int state) {
