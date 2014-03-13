@@ -20,13 +20,14 @@ public abstract class TileLooper {
     protected final Point mLowerRight = new Point();
     protected final Point center = new Point();
 
-    public final void loop(final Canvas pCanvas, final int pZoomLevel, final int pTileSizePx, final Rect pViewPort) {
+    public final void loop(final Canvas pCanvas, final float pZoomLevel, final int pTileSizePx, final Rect pViewPort) {
         // Calculate the amount of tiles needed for each side around the center one.
         TileSystem.PixelXYToTileXY(pViewPort.left, pViewPort.top, mUpperLeft);
         mUpperLeft.offset(-1, -1);
         TileSystem.PixelXYToTileXY(pViewPort.right, pViewPort.bottom, mLowerRight);
         center.set((mUpperLeft.x + mLowerRight.x)/2, (mUpperLeft.y + mLowerRight.y)/2);
-        final int mapTileUpperBound = 1 << pZoomLevel;
+        final int roundedZoom = (int) Math.floor(pZoomLevel);
+        final int mapTileUpperBound = 1 << roundedZoom;
         ArrayList<Point> orderedList = new ArrayList<Point>();
         initializeLoop(pZoomLevel, pTileSizePx);
 
@@ -42,7 +43,7 @@ public abstract class TileLooper {
         for (Point point: orderedList) {
             final int tileY = GeometryMath.mod(point.y, mapTileUpperBound);
             final int tileX = GeometryMath.mod(point.x, mapTileUpperBound);
-            final MapTile tile = new MapTile(pZoomLevel, tileX, tileY);
+            final MapTile tile = new MapTile(roundedZoom, tileX, tileY);
             handleTile(pCanvas, pTileSizePx, tile, point.x, point.y);
         }
 
@@ -71,7 +72,7 @@ public abstract class TileLooper {
         }
     }
 
-    public abstract void initializeLoop(int pZoomLevel, int pTileSizePx);
+    public abstract void initializeLoop(float pZoomLevel, int pTileSizePx);
 
     public abstract void handleTile(Canvas pCanvas, int pTileSizePx, MapTile pTile, int pX, int pY);
 

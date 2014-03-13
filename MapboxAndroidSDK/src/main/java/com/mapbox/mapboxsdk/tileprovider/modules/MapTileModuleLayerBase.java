@@ -61,14 +61,14 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
      *
      * @return the minimum zoom level
      */
-    public abstract int getMinimumZoomLevel();
+    public abstract float getMinimumZoomLevel();
 
     /**
      * Gets the maximum zoom level this tile provider can provide
      *
      * @return the maximum zoom level
      */
-    public abstract int getMaximumZoomLevel();
+    public abstract float getMaximumZoomLevel();
 
     /**
      * Sets the tile source for this tile provider.

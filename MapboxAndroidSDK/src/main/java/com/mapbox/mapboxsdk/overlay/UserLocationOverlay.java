@@ -6,6 +6,7 @@ import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tile.TileSystem;
+import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
@@ -21,6 +22,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.location.Location;
 import android.util.FloatMath;
 import android.view.Menu;
@@ -68,8 +70,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
     // to avoid allocations during onDraw
     private final float[] mMatrixValues = new float[9];
     private final Matrix mMatrix = new Matrix();
-    private final Rect mMyLocationRect = new Rect();
-    private final Rect mMyLocationPreviousRect = new Rect();
+    private final RectF mMyLocationRect = new RectF();
+    private final RectF mMyLocationPreviousRect = new RectF();
 
     public UserLocationOverlay(Context context, MapView mapView) {
         this(context, new GpsLocationProvider(context), mapView);
@@ -145,7 +147,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
     protected void drawMyLocation(final ISafeCanvas canvas, final MapView mapView,
                                   final Location lastFix) {
         final Projection pj = mapView.getProjection();
-        final int zoomDiff = MapViewConstants.MAXIMUM_ZOOMLEVEL - pj.getZoomLevel();
+        final float zoomDiff = MapViewConstants.MAXIMUM_ZOOMLEVEL - pj.getZoomLevel();
 
         if (mDrawAccuracyEnabled) {
             final float radius = lastFix.getAccuracy()
@@ -154,12 +156,12 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
 
             mCirclePaint.setAlpha(50);
             mCirclePaint.setStyle(Style.FILL);
-            canvas.drawCircle(mMapCoords.x >> zoomDiff, mMapCoords.y >> zoomDiff, radius,
+            canvas.drawCircle(mMapCoords.x / zoomDiff, mMapCoords.y / zoomDiff, radius,
                     mCirclePaint);
 
             mCirclePaint.setAlpha(150);
             mCirclePaint.setStyle(Style.STROKE);
-            canvas.drawCircle(mMapCoords.x >> zoomDiff, mMapCoords.y >> zoomDiff, radius,
+            canvas.drawCircle(mMapCoords.x / zoomDiff, mMapCoords.y / zoomDiff, radius,
                     mCirclePaint);
         }
 
@@ -184,8 +186,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
         float scaleY = (float) Math.sqrt(mMatrixValues[Matrix.MSCALE_Y]
                 * mMatrixValues[Matrix.MSCALE_Y] + mMatrixValues[Matrix.MSKEW_X]
                 * mMatrixValues[Matrix.MSKEW_X]);
-        final double x = mMapCoords.x >> zoomDiff;
-        final double y = mMapCoords.y >> zoomDiff;
+        final float x = GeometryMath.rightShift(mMapCoords.x, zoomDiff);
+        final float y = GeometryMath.rightShift(mMapCoords.y, zoomDiff);
         if (lastFix.hasBearing()) {
             canvas.save();
             // Rotate the icon
@@ -208,13 +210,13 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
         }
     }
 
-    protected Rect getMyLocationDrawingBounds(int zoomLevel, Location lastFix, Rect reuse) {
+    protected RectF getMyLocationDrawingBounds(float zoomLevel, Location lastFix, RectF reuse) {
         if (reuse == null)
-            reuse = new Rect();
-
-        final int zoomDiff = MapViewConstants.MAXIMUM_ZOOMLEVEL - zoomLevel;
-        final int posX = mMapCoords.x >> zoomDiff;
-        final int posY = mMapCoords.y >> zoomDiff;
+            reuse = new RectF();
+ 
+        final float zoomDiff = MapViewConstants.MAXIMUM_ZOOMLEVEL - zoomLevel;
+        final float posX = GeometryMath.rightShift(mMapCoords.x, zoomDiff);
+        final float posY = GeometryMath.rightShift(mMapCoords.y, zoomDiff);
 
         // Start with the bitmap bounds
         if (lastFix.hasBearing()) {
@@ -231,10 +233,10 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
 
         // Add in the accuracy circle if enabled
         if (mDrawAccuracyEnabled) {
-            final int radius = (int) FloatMath.ceil(lastFix.getAccuracy()
+            final float radius = (float) Math.ceil(lastFix.getAccuracy()
                     / (float) TileSystem.GroundResolution(lastFix.getLatitude(), zoomLevel));
             reuse.union(posX - radius, posY - radius, posX + radius, posY + radius);
-            final int strokeWidth = (int) FloatMath.ceil(mCirclePaint.getStrokeWidth() == 0 ? 1
+            final float strokeWidth = (float) Math.ceil(mCirclePaint.getStrokeWidth() == 0 ? 1
                     : mCirclePaint.getStrokeWidth());
             reuse.inset(-strokeWidth, -strokeWidth);
         }
@@ -410,8 +412,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
                     mMyLocationRect.union(mMyLocationPreviousRect);
                 }
 
-                final Rect invalidateRect = new Rect(mMyLocationRect);
-
+                final Rect invalidateRect = new Rect();
+                mMyLocationRect.round(invalidateRect);
                 // Invalidate the bounds
                 mMapView.post(new Runnable() {
                     @Override

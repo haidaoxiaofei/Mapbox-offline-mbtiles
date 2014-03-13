@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk.tile;
 import android.graphics.Point;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.GeoConstants;
+import com.mapbox.mapboxsdk.util.GeometryMath;
 
 public final class TileSystem implements GeoConstants {
 
@@ -34,8 +35,8 @@ public final class TileSystem implements GeoConstants {
      * @param levelOfDetail Level of detail, from 1 (lowest detail) to 23 (highest detail)
      * @return The map width and height in pixels
      */
-    public static int MapSize(final int levelOfDetail) {
-        return mTileSize << levelOfDetail;
+    public static int MapSize(final float levelOfDetail) {
+        return (int)(GeometryMath.leftShift(mTileSize,levelOfDetail));
     }
 
     /**
@@ -46,7 +47,7 @@ public final class TileSystem implements GeoConstants {
      * @param levelOfDetail Level of detail, from 1 (lowest detail) to 23 (highest detail)
      * @return The ground resolution, in meters per pixel
      */
-    public static double GroundResolution(double latitude, final int levelOfDetail) {
+    public static double GroundResolution(double latitude, final float levelOfDetail) {
         latitude = wrap(latitude, -90, 90, 180);
         latitude = Clip(latitude, MIN_LATITUDE, MAX_LATITUDE);
         return Math.cos(latitude * Math.PI / 180) * 2 * Math.PI * RADIUS_EARTH_METERS
@@ -78,7 +79,7 @@ public final class TileSystem implements GeoConstants {
      * @return Output parameter receiving the X and Y coordinates in pixels
      */
     public static Point LatLongToPixelXY(double latitude, double longitude,
-                                         final int levelOfDetail, final Point reuse) {
+                                         final float levelOfDetail, final Point reuse) {
         latitude = wrap(latitude, -90, 90, 180);
         longitude = wrap(longitude, -180, 180, 360);
         final Point out = (reuse == null ? new Point() : reuse);
@@ -106,7 +107,7 @@ public final class TileSystem implements GeoConstants {
      * @return Output parameter receiving the latitude and longitude in degrees.
      */
     public static LatLng PixelXYToLatLong(int pixelX, int pixelY,
-                                          final int levelOfDetail) {
+                                          final float levelOfDetail) {
         final int mapSize = MapSize(levelOfDetail);
 
         pixelX = (int) wrap(pixelX, 0, mapSize - 1, mapSize);
