@@ -113,26 +113,30 @@ public class Projection implements IProjection, GeoConstants {
      */
     public Point toMapPixels(final ILatLng in, final Point reuse) {
         final Point out = reuse != null ? reuse : new Point();
+        final float zoom = getZoomLevel();
+        final int mapSize = TileSystem.MapSize(zoom);
+        final float scrollX = mapView.getScrollX();
+        final float scrollY = mapView.getScrollY();
         TileSystem.LatLongToPixelXY(
                 in.getLatitude(),
                 in.getLongitude(),
-                getZoomLevel(), out);
+                zoom, out);
         out.offset(offsetX, offsetY);
-        if (Math.abs(out.x - mapView.getScrollX())
-                > Math.abs(out.x - TileSystem.MapSize(getZoomLevel()) - mapView.getScrollX())) {
-            out.x -= TileSystem.MapSize(getZoomLevel());
+        if (Math.abs(out.x - scrollX)
+                > Math.abs(out.x - mapSize - scrollX)) {
+            out.x -= mapSize;
         }
-        if (Math.abs(out.x - mapView.getScrollX())
-                > Math.abs(out.x + TileSystem.MapSize(getZoomLevel()) - mapView.getScrollX())) {
-            out.x += TileSystem.MapSize(getZoomLevel());
+        if (Math.abs(out.x - scrollX)
+                > Math.abs(out.x + mapSize - scrollX)) {
+            out.x += mapSize;
         }
-        if (Math.abs(out.y - mapView.getScrollY())
-                > Math.abs(out.y - TileSystem.MapSize(getZoomLevel()) - mapView.getScrollY())) {
-            out.y -= TileSystem.MapSize(getZoomLevel());
+        if (Math.abs(out.y - scrollY)
+                > Math.abs(out.y - mapSize - scrollY)) {
+            out.y -= mapSize;
         }
-        if (Math.abs(out.y - mapView.getScrollY())
-                > Math.abs(out.y + TileSystem.MapSize(getZoomLevel()) - mapView.getScrollY())) {
-            out.y += TileSystem.MapSize(getZoomLevel());
+        if (Math.abs(out.y - scrollY)
+                > Math.abs(out.y + mapSize - scrollY)) {
+            out.y += mapSize;
         }
         return out;
     }
