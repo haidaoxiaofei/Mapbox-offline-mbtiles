@@ -12,6 +12,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
 import android.util.FloatMath;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.ScaleAnimation;
@@ -27,17 +28,18 @@ public class MapController implements MapViewConstants {
     private ScaleAnimation mZoomOutAnimationOld;
 
     private Animator mCurrentAnimator;
+    private float mAnimationFactor = 1.0f;
 
     public MapController(MapView mapView) {
         mMapView = mapView;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            mZoomInAnimation = ValueAnimator.ofFloat(1f, 2f);
+            mZoomInAnimation = ValueAnimator.ofFloat(0f, 1f);
             mZoomInAnimation.addListener(new MyZoomAnimatorListener());
             mZoomInAnimation.addUpdateListener(new MyZoomAnimatorUpdateListener());
             mZoomInAnimation.setDuration(ANIMATION_DURATION_SHORT);
 
-            mZoomOutAnimation = ValueAnimator.ofFloat(1f, 0.5f);
+            mZoomOutAnimation = ValueAnimator.ofFloat(0f, 1f);
             mZoomOutAnimation.addListener(new MyZoomAnimatorListener());
             mZoomOutAnimation.addUpdateListener(new MyZoomAnimatorUpdateListener());
             mZoomOutAnimation.setDuration(ANIMATION_DURATION_SHORT);
@@ -153,8 +155,8 @@ public class MapController implements MapViewConstants {
             }
             targetZoom = mMapView.getClampedZoomLevel(targetZoom);
         	mMapView.mTargetZoomLevel.set(Float.floatToIntBits(targetZoom));
+        	mAnimationFactor = (float)(currentZoom - 1.0f + Math.ceil(targetZoom))/currentZoom;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                mZoomInAnimation.setFloatValues(1.0f, (float)(currentZoom - 1.0f + Math.ceil(targetZoom))/currentZoom);
                 mCurrentAnimator = mZoomInAnimation;
                 mZoomInAnimation.start();
             } else {
@@ -189,8 +191,8 @@ public class MapController implements MapViewConstants {
                 	targetZoom = mMapView.getClampedZoomLevel((float) Math.floor(currentZoom) - 1);
                 }
                 mMapView.mTargetZoomLevel.set(Float.floatToIntBits(targetZoom));
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    mZoomOutAnimation.setFloatValues(1.0f, targetZoom/(float)(currentZoom - 1.0f + Math.floor(targetZoom)));
+            	mAnimationFactor = targetZoom/(float)(currentZoom - 1.0f + Math.floor(targetZoom));
+               if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                     mCurrentAnimator = mZoomOutAnimation;
                     mZoomOutAnimation.start();
                 } else {
@@ -246,7 +248,9 @@ public class MapController implements MapViewConstants {
     protected class MyZoomAnimatorUpdateListener implements AnimatorUpdateListener {
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
-            mMapView.mMultiTouchScale = (Float) animation.getAnimatedValue();
+        	float currentAnimFactor = (Float)animation.getAnimatedValue();
+        	mMapView.mMultiTouchScale = 1.0f + currentAnimFactor *(mAnimationFactor - 1.0f);
+            mMapView.updateScrollDuringAnimation(currentAnimFactor);
             mMapView.invalidate();
         }
     }
