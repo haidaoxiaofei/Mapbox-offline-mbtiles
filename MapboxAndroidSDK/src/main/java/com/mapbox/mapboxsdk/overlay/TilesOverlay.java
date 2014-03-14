@@ -37,7 +37,7 @@ public class TilesOverlay
     protected final MapTileLayerBase mTileProvider;
 
     /* to avoid allocations during draw */
-    protected final Paint mDebugPaint = new Paint();
+    protected static Paint mDebugPaint = null;
     private final Rect mTileRect = new Rect();
     private final Rect mViewPort = new Rect();
 
@@ -64,6 +64,13 @@ public class TilesOverlay
                     "You must pass a valid tile provider to the tiles overlay.");
         }
         this.mTileProvider = aTileProvider;
+        if (DEBUGMODE) {
+        	if (mDebugPaint == null) {
+        		mDebugPaint = new Paint();
+        		mDebugPaint.setColor(Color.RED);
+        		mDebugPaint.setStrokeWidth(2);
+        	}
+        }
     }
 
     @Override
@@ -146,6 +153,7 @@ public class TilesOverlay
         @Override
         public void initializeLoop(final float pZoomLevel, final int pTileSizePx) {
         	mCurrentZoomFactor = (float) (1 + pZoomLevel - Math.floor(pZoomLevel));
+//        	mCurrentZoomFactor = 1;
             // make sure the cache is big enough for all the tiles
             final int numNeeded = (mLowerRight.y - mUpperLeft.y + 1) * (mLowerRight.x - mUpperLeft.x + 1);
             mTileProvider.ensureCapacity(numNeeded + mOvershootTileCache);
@@ -185,21 +193,17 @@ public class TilesOverlay
                         ((ReusableBitmapDrawable) currentMapTile).finishUsingDrawable();
                     }
                 }
+                if (DEBUGMODE) {
+                    pCanvas.drawText(pTile.toString(), mTileRect.left + 1,
+                            mTileRect.top + mDebugPaint.getTextSize(), mDebugPaint);
+                    pCanvas.drawLine(mTileRect.left, mTileRect.top, mTileRect.right, mTileRect.top,
+                            mDebugPaint);
+                    pCanvas.drawLine(mTileRect.left, mTileRect.top, mTileRect.left, mTileRect.bottom,
+                            mDebugPaint);
+                }
             }
 
-            if (DEBUGMODE) {
-                mTileRect.set(pX * pTileSizePx,
-                        pY * pTileSizePx,
-                        pX * pTileSizePx + pTileSizePx, pY
-                        * pTileSizePx + pTileSizePx);
-                mTileRect.offset(-mWorldSize_2, -mWorldSize_2);
-                pCanvas.drawText(pTile.toString(), mTileRect.left + 1,
-                        mTileRect.top + mDebugPaint.getTextSize(), mDebugPaint);
-                pCanvas.drawLine(mTileRect.left, mTileRect.top, mTileRect.right, mTileRect.top,
-                        mDebugPaint);
-                pCanvas.drawLine(mTileRect.left, mTileRect.top, mTileRect.left, mTileRect.bottom,
-                        mDebugPaint);
-            }
+            
         }
 
         @Override
