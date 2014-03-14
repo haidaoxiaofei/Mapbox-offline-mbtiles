@@ -524,6 +524,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      */
     public MapView zoomToBoundingBox(final BoundingBox boundingBox) {
         final BoundingBox currentBox = getBoundingBox();
+        if(currentBox == null) return this;
 
         // Calculated required zoom based on latitude span
         final double maxZoomLatitudeSpan = mZoomLevel == getMaxZoomLevel() ?
