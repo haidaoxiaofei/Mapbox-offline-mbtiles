@@ -5,6 +5,7 @@ import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
 import com.mapbox.mapboxsdk.util.TileLooper;
+import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
@@ -64,7 +65,7 @@ public class TilesOverlay
                     "You must pass a valid tile provider to the tiles overlay.");
         }
         this.mTileProvider = aTileProvider;
-        if (DEBUGMODE) {
+        if (UtilConstants.DEBUGMODE) {
         	if (mDebugPaint == null) {
         		mDebugPaint = new Paint();
         		mDebugPaint.setColor(Color.RED);
@@ -137,7 +138,7 @@ public class TilesOverlay
         mTileLooper.loop(c, zoomLevel, tileSizePx, viewPort);
 
         // draw a cross at center in debug mode
-        if (DEBUGMODE) {
+        if (UtilConstants.DEBUGMODE) {
             final Point centerPoint = new Point(viewPort.centerX() - mWorldSize_2,
                     viewPort.centerY() - mWorldSize_2);
             c.drawLine(centerPoint.x, centerPoint.y - 9,
@@ -153,7 +154,6 @@ public class TilesOverlay
         @Override
         public void initializeLoop(final float pZoomLevel, final int pTileSizePx) {
         	mCurrentZoomFactor = (float) (1 + pZoomLevel - Math.floor(pZoomLevel));
-//        	mCurrentZoomFactor = 1;
             // make sure the cache is big enough for all the tiles
             final int numNeeded = (mLowerRight.y - mUpperLeft.y + 1) * (mLowerRight.x - mUpperLeft.x + 1);
             mTileProvider.ensureCapacity(numNeeded + mOvershootTileCache);
@@ -193,13 +193,10 @@ public class TilesOverlay
                         ((ReusableBitmapDrawable) currentMapTile).finishUsingDrawable();
                     }
                 }
-                if (DEBUGMODE) {
+                if (UtilConstants.DEBUGMODE) {
                     pCanvas.drawText(pTile.toString(), mTileRect.left + 1,
                             mTileRect.top + mDebugPaint.getTextSize(), mDebugPaint);
-                    pCanvas.drawLine(mTileRect.left, mTileRect.top, mTileRect.right, mTileRect.top,
-                            mDebugPaint);
-                    pCanvas.drawLine(mTileRect.left, mTileRect.top, mTileRect.left, mTileRect.bottom,
-                            mDebugPaint);
+                    pCanvas.drawRect(mTileRect, mDebugPaint);
                 }
             }
 

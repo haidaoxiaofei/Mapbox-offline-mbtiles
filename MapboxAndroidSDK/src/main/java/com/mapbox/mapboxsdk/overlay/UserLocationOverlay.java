@@ -7,6 +7,7 @@ import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.util.GeometryMath;
+import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
@@ -168,7 +169,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
         canvas.getMatrix(mMatrix);
         mMatrix.getValues(mMatrixValues);
 
-        if (DEBUGMODE) {
+        if (UtilConstants.DEBUGMODE) {
             final float tx = (-mMatrixValues[Matrix.MTRANS_X] + 20)
                     / mMatrixValues[Matrix.MSCALE_X];
             final float ty = (-mMatrixValues[Matrix.MTRANS_Y] + 90)
@@ -263,7 +264,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
             final double xDiff = x - mMapCoords.x;
             final double yDiff = y - mMapCoords.y;
             final boolean snap = xDiff * xDiff + yDiff * yDiff < 64;
-            if (DEBUGMODE) {
+            if (UtilConstants.DEBUGMODE) {
                 Log.i(TAG, "snap=" + snap);
             }
             return snap;
