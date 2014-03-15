@@ -139,7 +139,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      */
     protected MapView(final Context context, final int tileSizePixels,
                              final ResourceProxy resourceProxy, MapTileLayerBase tileProvider,
-                             final Handler tileRequestCompleteHandler, final AttributeSet attrs) throws MissingAttributeException {
+                             final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
         super(context, attrs);
         mResourceProxy = resourceProxy;
         this.mController = new MapController(this);
@@ -180,11 +180,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
         else
         {
-            throw new MissingAttributeException(getResources().getString(R.string.missingAttributeMapIdMessage));
+			Log.w(MapView.class.getCanonicalName(), "mapid not set.");
         }
     }
 
-    public MapView(final Context context, AttributeSet attrs) throws MissingAttributeException{
+    public MapView(final Context context, AttributeSet attrs){
         this(context, 256, new DefaultResourceProxyImpl(context), null, null, attrs);
     }
 
@@ -197,12 +197,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public MapView(Context context, String URL){
         this(context, (AttributeSet) null);
     }
-
+*/
     protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileLayerBase aTileProvider) {
         this(context, tileSizePixels, resourceProxy, aTileProvider, null, null);
         init(context);
     }
-*/
 
     public void setTileSource(final ITileLayer aTileSource) {
         mTileProvider.setTileSource(aTileSource);
