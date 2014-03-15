@@ -188,16 +188,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this(context, 256, new DefaultResourceProxyImpl(context), null, null, attrs);
     }
 
-    /**
-     * Default constructor for the view.
-     * @param context A copy of the app context
-     * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
-     */
-/*
-    public MapView(Context context, String URL){
-        this(context, (AttributeSet) null);
-    }
-*/
     protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileLayerBase aTileProvider) {
         this(context, tileSizePixels, resourceProxy, aTileProvider, null, null);
         init(context);
