@@ -18,7 +18,6 @@ import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
 import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
-import com.mapbox.mapboxsdk.exceptions.MissingAttributeException;
 import com.mapbox.mapboxsdk.format.GeoJSON;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
