@@ -249,9 +249,8 @@ public class MapController implements MapViewConstants {
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
         	float currentAnimFactor = (Float)animation.getAnimatedValue();
-        	mMapView.mMultiTouchScale = 1.0f + currentAnimFactor *(mAnimationFactor - 1.0f);
             mMapView.updateScrollDuringAnimation(currentAnimFactor);
-            mMapView.invalidate();
+            mMapView.setScale(1.0f + currentAnimFactor *(mAnimationFactor - 1.0f));
         }
     }
 
