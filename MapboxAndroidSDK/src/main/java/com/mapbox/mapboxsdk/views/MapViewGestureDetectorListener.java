@@ -3,6 +3,8 @@ package com.mapbox.mapboxsdk.views;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+
+import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 
@@ -65,7 +67,8 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
     @Override
     public void onLongPress(final MotionEvent e) {
     	if (UtilConstants.DEBUGMODE) {
-        	this.mapView.zoomOut();
+            final ILatLng center = this.mapView.getProjection().fromPixels(e.getX(), e.getY());
+        	this.mapView.zoomOutFixing(center);
     	}
     }
 
