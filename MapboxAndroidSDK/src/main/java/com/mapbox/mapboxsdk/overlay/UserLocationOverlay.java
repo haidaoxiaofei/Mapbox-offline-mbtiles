@@ -1,19 +1,5 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import java.util.LinkedList;
-
-import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
-import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.tile.TileSystem;
-import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
-import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
-import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
-import com.mapbox.mapboxsdk.views.util.Projection;
-import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-import com.mapbox.mapboxsdk.views.MapController;
-import android.util.Log;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -23,9 +9,24 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.location.Location;
 import android.util.FloatMath;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+
+import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
+import com.mapbox.mapboxsdk.ResourceProxy;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
+import com.mapbox.mapboxsdk.tile.TileSystem;
+import com.mapbox.mapboxsdk.views.MapController;
+import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
+import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
+import com.mapbox.mapboxsdk.views.util.Projection;
+import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
+
+import java.util.LinkedList;
 
 /**
  * @author Marc Kurtz
@@ -46,7 +47,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
     public GpsLocationProvider mMyLocationProvider;
 
     private final LinkedList<Runnable> mRunOnFirstFix = new LinkedList<Runnable>();
-    private final Point mMapCoords = new Point();
+    private final PointF mMapCoords = new PointF();
 
     private Location mLocation;
     private boolean mIsLocationEnabled = false;
@@ -154,12 +155,12 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
 
             mCirclePaint.setAlpha(50);
             mCirclePaint.setStyle(Style.FILL);
-            canvas.drawCircle(mMapCoords.x >> zoomDiff, mMapCoords.y >> zoomDiff, radius,
+            canvas.drawCircle((int)mMapCoords.x >> zoomDiff, (int)mMapCoords.y >> zoomDiff, radius,
                     mCirclePaint);
 
             mCirclePaint.setAlpha(150);
             mCirclePaint.setStyle(Style.STROKE);
-            canvas.drawCircle(mMapCoords.x >> zoomDiff, mMapCoords.y >> zoomDiff, radius,
+            canvas.drawCircle((int)mMapCoords.x >> zoomDiff, (int)mMapCoords.y >> zoomDiff, radius,
                     mCirclePaint);
         }
 
@@ -184,8 +185,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
         float scaleY = (float) Math.sqrt(mMatrixValues[Matrix.MSCALE_Y]
                 * mMatrixValues[Matrix.MSCALE_Y] + mMatrixValues[Matrix.MSKEW_X]
                 * mMatrixValues[Matrix.MSKEW_X]);
-        final double x = mMapCoords.x >> zoomDiff;
-        final double y = mMapCoords.y >> zoomDiff;
+        final double x = (int)mMapCoords.x >> zoomDiff;
+        final double y = (int)mMapCoords.y >> zoomDiff;
         if (lastFix.hasBearing()) {
             canvas.save();
             // Rotate the icon
@@ -213,8 +214,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
             reuse = new Rect();
 
         final int zoomDiff = MapViewConstants.MAXIMUM_ZOOMLEVEL - zoomLevel;
-        final int posX = mMapCoords.x >> zoomDiff;
-        final int posY = mMapCoords.y >> zoomDiff;
+        final int posX = (int)mMapCoords.x >> zoomDiff;
+        final int posY = (int)mMapCoords.y >> zoomDiff;
 
         // Start with the bitmap bounds
         if (lastFix.hasBearing()) {
@@ -256,8 +257,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
     public boolean onSnapToItem(final int x, final int y, final Point snapPoint,
                                 final MapView mapView) {
         if (this.mLocation != null) {
-            snapPoint.x = mMapCoords.x;
-            snapPoint.y = mMapCoords.y;
+            snapPoint.x = (int)mMapCoords.x;
+            snapPoint.y = (int)mMapCoords.y;
             final double xDiff = x - mMapCoords.x;
             final double yDiff = y - mMapCoords.y;
             final boolean snap = xDiff * xDiff + yDiff * yDiff < 64;

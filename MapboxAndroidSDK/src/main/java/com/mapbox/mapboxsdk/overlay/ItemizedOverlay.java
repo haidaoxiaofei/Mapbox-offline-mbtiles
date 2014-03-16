@@ -1,19 +1,20 @@
 // Created by plusminus on 23:18:23 - 02.10.2008
 package com.mapbox.mapboxsdk.overlay;
 
-import java.util.ArrayList;
-
-import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.overlay.OverlayItem.HotspotPlace;
-import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
-import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas.UnsafeCanvasHandler;
 import android.graphics.Canvas;
-import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
+
+import com.mapbox.mapboxsdk.ResourceProxy;
+import com.mapbox.mapboxsdk.overlay.OverlayItem.HotspotPlace;
+import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
+import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas.UnsafeCanvasHandler;
 import com.mapbox.mapboxsdk.views.util.Projection;
+
+import java.util.ArrayList;
 
 /**
  * Draws a list of {@link OverlayItem} as markers to a map. The item with the lowest index is drawn
@@ -32,7 +33,7 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
     protected final Drawable mDefaultMarker;
     private final ArrayList<Item> mInternalItemList;
     private final Rect mRect = new Rect();
-    private final Point mCurScreenCoords = new Point();
+    private final PointF mCurScreenCoords = new PointF();
     protected boolean mDrawFocusedItem = true;
     private Item mFocusedItem;
     private boolean mPendingFocusChangedEvent = false;
@@ -136,7 +137,7 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
      * @param curScreenCoords
      * @param aMapOrientation
      */
-    protected void onDrawItem(final ISafeCanvas canvas, final Item item, final Point curScreenCoords, final float aMapOrientation) {
+    protected void onDrawItem(final ISafeCanvas canvas, final Item item, final PointF curScreenCoords, final float aMapOrientation) {
         final int state = (mDrawFocusedItem && (mFocusedItem == item) ? OverlayItem.ITEM_STATE_FOCUSED_MASK
                 : 0);
         final Drawable marker = (item.getMarker(state) == null) ? getDefaultMarker(state) : item
@@ -147,12 +148,12 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
 
         // draw it
         if (this.isUsingSafeCanvas()) {
-            Overlay.drawAt(canvas.getSafeCanvas(), marker, curScreenCoords.x, curScreenCoords.y, false, aMapOrientation);
+            Overlay.drawAt(canvas.getSafeCanvas(), marker, (int)curScreenCoords.x, (int)curScreenCoords.y, false, aMapOrientation);
         } else {
             canvas.getUnsafeCanvas(new UnsafeCanvasHandler() {
                 @Override
                 public void onUnsafeCanvas(Canvas canvas) {
-                    Overlay.drawAt(canvas, marker, curScreenCoords.x, curScreenCoords.y, false, aMapOrientation);
+                    Overlay.drawAt(canvas, marker, (int)curScreenCoords.x, (int)curScreenCoords.y, false, aMapOrientation);
                 }
             });
         }
@@ -195,8 +196,8 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
             final Drawable marker = (item.getMarker(state) == null) ? getDefaultMarker(state)
                     : item.getMarker(state);
             boundToHotspot(marker, item.getMarkerHotspot());
-            if (hitTest(item, marker, -mCurScreenCoords.x + screenRect.left + (int) e.getX(),
-                    -mCurScreenCoords.y + screenRect.top + (int) e.getY())) {
+            if (hitTest(item, marker, (int)-mCurScreenCoords.x + screenRect.left + (int) e.getX(),
+                    (int)-mCurScreenCoords.y + screenRect.top + (int) e.getY())) {
                 // We have a hit, do we get a response from onTap?
                 if (onTap(i)) {
                     // We got a response so consume the event
@@ -230,7 +231,7 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
 
     /**
      * If the given Item is found in the overlay, force it to be the current focus-bearer. Any
-     * registered {@link ItemizedOverlay#OnFocusChangeListener} will be notified. This does not move
+     * registered {@link ItemizedOverlay} will be notified. This does not move
      * the map, so if the Item isn't already centered, the user may get confused. If the Item is not
      * found, this is a no-op. You can also pass null to remove focus.
      */

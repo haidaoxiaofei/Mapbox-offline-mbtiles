@@ -1,12 +1,15 @@
 package com.mapbox.mapboxsdk.format;
 
 import android.graphics.Paint;
+
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.overlay.Marker;
+import com.mapbox.mapboxsdk.overlay.PathOverlay;
 import com.mapbox.mapboxsdk.views.MapView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.mapbox.mapboxsdk.overlay.*;
 
 /**
  * A GeoJSON parser.
@@ -60,7 +63,6 @@ public class GeoJSON {
 
         JSONObject geometry = (JSONObject) feature.get("geometry");
         String type = geometry.optString("type");
-
         int j;
 
         if (type.equals("Point")) {

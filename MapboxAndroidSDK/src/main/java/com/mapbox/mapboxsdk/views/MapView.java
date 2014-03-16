@@ -13,46 +13,54 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.*;
+import android.view.GestureDetector;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Scroller;
 import android.widget.Toast;
+
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.R;
-import com.mapbox.mapboxsdk.format.GeoJSON;
-import com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay;
-import com.mapbox.mapboxsdk.overlay.ItemizedOverlay;
-import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
-import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
-import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
 import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
+import com.mapbox.mapboxsdk.format.GeoJSON;
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
+import com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay;
+import com.mapbox.mapboxsdk.overlay.ItemizedOverlay;
+import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
+import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
+import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.Overlay;
 import com.mapbox.mapboxsdk.overlay.OverlayItem;
 import com.mapbox.mapboxsdk.overlay.OverlayManager;
 import com.mapbox.mapboxsdk.overlay.TilesOverlay;
-import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
-import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
+import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerArray;
+import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
-import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.mapbox.mapboxsdk.views.util.Projection;
-import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-import com.mapbox.mapboxsdk.tile.TileSystem;
+import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
+
 import org.json.JSONException;
-import com.mapbox.mapboxsdk.geometry.LatLng;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -139,7 +147,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private final Handler mTileRequestCompleteHandler;
 
     /* a point that will be reused to design added views */
-    private final Point mPoint = new Point();
+    private final PointF mPoint = new PointF();
 
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
@@ -483,10 +491,10 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             final int worldSize_new_2 = TileSystem.MapSize(newZoomLevel) / 2;
             final ILatLng centerGeoPoint = TileSystem.PixelXYToLatLong(getScrollX()
                     + worldSize_current_2, getScrollY() + worldSize_current_2, curZoomLevel);
-            final Point centerPoint = TileSystem.LatLongToPixelXY(
+            final PointF centerPoint = TileSystem.LatLongToPixelXY(
                     centerGeoPoint.getLatitude(), centerGeoPoint.getLongitude(),
                     newZoomLevel, null);
-            scrollTo(centerPoint.x - worldSize_new_2, centerPoint.y - worldSize_new_2);
+            scrollTo((int)centerPoint.x - worldSize_new_2, (int)centerPoint.y - worldSize_new_2);
         } else if (newZoomLevel < curZoomLevel) {
             // We are going from a higher-resolution plane to a lower-resolution plane, so we can do
             // it the easy way.
@@ -642,8 +650,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public boolean zoomInFixing(final ILatLng point) {
-        Point coords = getProjection().toMapPixels(point, null);
-        return getController().zoomInAbout(coords.x, coords.y);
+        PointF coords = getProjection().toMapPixels(point, null);
+        return getController().zoomInAbout((int)coords.x, (int)coords.y);
     }
 
     /**
@@ -654,8 +662,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public boolean zoomOutFixing(final ILatLng point) {
-        Point coords = getProjection().toMapPixels(point, null);
-        return zoomOutFixing(coords.x, coords.y);
+        PointF coords = getProjection().toMapPixels(point, null);
+        return zoomOutFixing((int)coords.x, (int)coords.y);
     }
 
     boolean zoomOutFixing(final int xPixel, final int yPixel) {
@@ -712,15 +720,15 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
 
         // Get NW/upper-left
-        final Point upperLeft = TileSystem.LatLongToPixelXY(boundingBox.getLatNorth(),
+        final PointF upperLeft = TileSystem.LatLongToPixelXY(boundingBox.getLatNorth(),
                 boundingBox.getLonWest(), MapViewConstants.MAXIMUM_ZOOMLEVEL, null);
         upperLeft.offset(-worldSize_2, -worldSize_2);
 
         // Get SE/lower-right
-        final Point lowerRight = TileSystem.LatLongToPixelXY(boundingBox.getLatSouth(),
+        final PointF lowerRight = TileSystem.LatLongToPixelXY(boundingBox.getLatSouth(),
                 boundingBox.getLonEast(), MapViewConstants.MAXIMUM_ZOOMLEVEL, null);
         lowerRight.offset(-worldSize_2, -worldSize_2);
-        mScrollableAreaLimit = new Rect(upperLeft.x, upperLeft.y, lowerRight.x, lowerRight.y);
+        mScrollableAreaLimit = new Rect((int)upperLeft.x, (int)upperLeft.y, (int)lowerRight.x,(int) lowerRight.y);
     }
 
     public BoundingBox getScrollableAreaLimit() {
@@ -792,8 +800,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 final int childHeight = child.getMeasuredHeight();
                 final int childWidth = child.getMeasuredWidth();
                 getProjection().toMapPixels(lp.geoPoint, mPoint);
-                final int x = mPoint.x + getWidth() / 2;
-                final int y = mPoint.y + getHeight() / 2;
+                final int x = (int)mPoint.x + getWidth() / 2;
+                final int y = (int)mPoint.y + getHeight() / 2;
                 int childRight = x;
                 int childBottom = y;
                 switch (lp.alignment) {
@@ -867,8 +875,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 final int childHeight = child.getMeasuredHeight();
                 final int childWidth = child.getMeasuredWidth();
                 getProjection().toMapPixels(lp.geoPoint, mPoint);
-                final int x = mPoint.x + getWidth() / 2;
-                final int y = mPoint.y + getHeight() / 2;
+                final int x = (int)mPoint.x + getWidth() / 2;
+                final int y = (int)mPoint.y + getHeight() / 2;
                 int childLeft = x;
                 int childTop = y;
                 switch (lp.alignment) {

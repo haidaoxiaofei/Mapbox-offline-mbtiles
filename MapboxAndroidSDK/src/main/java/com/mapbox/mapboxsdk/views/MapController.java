@@ -1,19 +1,19 @@
 package com.mapbox.mapboxsdk.views;
 
-import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.graphics.Matrix;
-import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Build;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.ScaleAnimation;
+
+import com.mapbox.mapboxsdk.api.ILatLng;
+import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
 public class MapController implements MapViewConstants {
 
@@ -56,8 +56,8 @@ public class MapController implements MapViewConstants {
      * Start animating the map towards the given point.
      */
     public void animateTo(final ILatLng point) {
-        Point p = mMapView.getProjection().toMapPixels(point, null);
-        animateTo(p.x, p.y);
+        PointF p = mMapView.getProjection().toMapPixels(point, null);
+        animateTo((int)p.x, (int)p.y);
     }
 
     /**
@@ -82,8 +82,8 @@ public class MapController implements MapViewConstants {
      * Set the map view to the given center. There will be no animation.
      */
     public void setCenter(final ILatLng latlng) {
-        Point p = mMapView.getProjection().toMapPixels(latlng, null);
-        this.mMapView.scrollTo(p.x, p.y);
+        PointF p = mMapView.getProjection().toMapPixels(latlng, null);
+        this.mMapView.scrollTo((int)p.x, (int)p.y);
     }
 
     public void stopPanning() {
@@ -130,8 +130,8 @@ public class MapController implements MapViewConstants {
      * Zoom in by one zoom level.
      */
     public boolean zoomIn() {
-        Point coords = mMapView.getProjection().toMapPixels(mMapView.getCenter(), null);
-        return zoomInAbout(coords.x, coords.y);
+        PointF coords = mMapView.getProjection().toMapPixels(mMapView.getCenter(), null);
+        return zoomInAbout((int)coords.x, (int)coords.y);
     }
 
     public boolean zoomInAbout(final int xPixel, final int yPixel) {
@@ -157,8 +157,8 @@ public class MapController implements MapViewConstants {
      * Zoom out by one zoom level.
      */
     public boolean zoomOut() {
-        Point coords = mMapView.getProjection().toMapPixels(mMapView.getCenter(), null);
-        return zoomOutAbout(coords.x, coords.y);
+        PointF coords = mMapView.getProjection().toMapPixels(mMapView.getCenter(), null);
+        return zoomOutAbout((int)coords.x, (int)coords.y);
     }
 
     public boolean zoomOutAbout(final int xPixel, final int yPixel) {
