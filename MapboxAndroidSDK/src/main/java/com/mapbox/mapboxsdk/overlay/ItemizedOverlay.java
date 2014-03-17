@@ -149,23 +149,6 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
 
         boundToHotspot(marker, hotspot);
 
-        if(item instanceof ClusterItem){
-            if (this instanceof ItemizedIconOverlay){
-                if(((ItemizedIconOverlay)this).getClusterActions()!=null){
-                    canvas = ((ItemizedIconOverlay)this)
-                            .getClusterActions()
-                            .onClusterMarkerDraw((ClusterItem)item, canvas);
-                }
-            }
-            else{
-                SafePaint paint = new SafePaint();
-                paint.setTextAlign(Paint.Align.CENTER);
-                paint.setTextSize(30);
-                paint.setFakeBoldText(true);
-                canvas.drawText(""+((ClusterItem)item).getChildCount(),curScreenCoords.x, curScreenCoords.y+10, paint);
-            }
-        }
-
         // draw it
         if (this.isUsingSafeCanvas()) {
             Overlay.drawAt(canvas.getSafeCanvas(), marker, curScreenCoords.x, curScreenCoords.y, false, aMapOrientation);
@@ -176,6 +159,21 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
                     Overlay.drawAt(canvas, marker, curScreenCoords.x, curScreenCoords.y, false, aMapOrientation);
                 }
             });
+        }
+
+        if(item instanceof ClusterItem){
+            if(((ItemizedIconOverlay)this).getClusterActions()!=null){
+                canvas = ((ItemizedIconOverlay)this)
+                        .getClusterActions()
+                        .onClusterMarkerDraw((ClusterItem)item, canvas);
+            }
+            else{
+                SafePaint paint = new SafePaint();
+                paint.setTextAlign(Paint.Align.CENTER);
+                paint.setTextSize(30);
+                paint.setFakeBoldText(true);
+                canvas.drawText(""+((ClusterItem)item).getChildCount(),curScreenCoords.x, curScreenCoords.y+10, paint);
+            }
         }
 
     }
