@@ -40,6 +40,7 @@ public class TilesOverlay
     protected final Paint mDebugPaint = new Paint();
     private final Rect mTileRect = new Rect();
     private final Rect mViewPort = new Rect();
+	float mCurrentZoomFactor = 1;
 
     private boolean mOptionsMenuEnabled = true;
 
@@ -115,7 +116,7 @@ public class TilesOverlay
         mViewPort.offset(mWorldSize_2, mWorldSize_2);
 
         // Draw the tiles!
-        drawTiles(c.getSafeCanvas(), pj.getZoomLevel(), TileSystem.getTileSize(), mViewPort);
+        drawTiles(c.getSafeCanvas(), zoomLevel, TileSystem.getTileSize(), mViewPort);
     }
 
     /**
@@ -142,10 +143,18 @@ public class TilesOverlay
     }
 
     private final TileLooper mTileLooper = new TileLooper() {
-    	float mCurrentZoomFactor;
         @Override
         public void initializeLoop(final float pZoomLevel, final int pTileSizePx) {
-        	mCurrentZoomFactor = (float) (1 + pZoomLevel - Math.floor(pZoomLevel));
+        	
+        	final int roundedZoom = (int) Math.floor(pZoomLevel);
+            if (roundedZoom != pZoomLevel) {
+                final int mapTileUpperBound = 1 << roundedZoom;
+                mCurrentZoomFactor = (float)TileSystem.MapSize(pZoomLevel) / mapTileUpperBound / pTileSizePx;
+            }
+            else {
+            	mCurrentZoomFactor = 1.0f;
+            }
+            
             // make sure the cache is big enough for all the tiles
             final int numNeeded = (mLowerRight.y - mUpperLeft.y + 1) * (mLowerRight.x - mUpperLeft.x + 1);
             mTileProvider.ensureCapacity(numNeeded + mOvershootTileCache);
