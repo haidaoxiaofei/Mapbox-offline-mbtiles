@@ -101,8 +101,14 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
         for (int i = size; i >= 0; i--) {
             final Item item = getItem(i);
             pj.toMapPixels(item.getPoint(), mCurScreenCoords);
+            canvas.save();
+
+            canvas.scale(1/mapView.getScale(), 1/mapView.getScale(), mCurScreenCoords.x,
+            		mCurScreenCoords.y);
+
             onDrawItem(canvas, item, mCurScreenCoords, mapView.getMapOrientation());
-        }
+            canvas.restore();
+       }
     }
 
     /**
