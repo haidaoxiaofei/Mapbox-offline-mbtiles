@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
@@ -41,6 +42,7 @@ public class TilesOverlay
     protected static Paint mDebugPaint = null;
     private final Rect mTileRect = new Rect();
     private final Rect mViewPort = new Rect();
+	float mCurrentZoomFactor = 1;
 
     private boolean mOptionsMenuEnabled = true;
 
@@ -69,6 +71,7 @@ public class TilesOverlay
         	if (mDebugPaint == null) {
         		mDebugPaint = new Paint();
         		mDebugPaint.setColor(Color.RED);
+        		mDebugPaint.setStyle(Style.STROKE);
         		mDebugPaint.setStrokeWidth(2);
         	}
         }
@@ -123,7 +126,7 @@ public class TilesOverlay
         mViewPort.offset(mWorldSize_2, mWorldSize_2);
 
         // Draw the tiles!
-        drawTiles(c.getSafeCanvas(), pj.getZoomLevel(), TileSystem.getTileSize(), mViewPort);
+        drawTiles(c.getSafeCanvas(), zoomLevel, TileSystem.getTileSize(), mViewPort);
     }
 
     /**
@@ -150,10 +153,18 @@ public class TilesOverlay
     }
 
     private final TileLooper mTileLooper = new TileLooper() {
-    	float mCurrentZoomFactor;
         @Override
         public void initializeLoop(final float pZoomLevel, final int pTileSizePx) {
-        	mCurrentZoomFactor = (float) (1 + pZoomLevel - Math.floor(pZoomLevel));
+        	
+        	final int roundedZoom = (int) Math.floor(pZoomLevel);
+            if (roundedZoom != pZoomLevel) {
+                final int mapTileUpperBound = 1 << roundedZoom;
+                mCurrentZoomFactor = (float)TileSystem.MapSize(pZoomLevel) / mapTileUpperBound / pTileSizePx;
+            }
+            else {
+            	mCurrentZoomFactor = 1.0f;
+            }
+            
             // make sure the cache is big enough for all the tiles
             final int numNeeded = (mLowerRight.y - mUpperLeft.y + 1) * (mLowerRight.x - mUpperLeft.x + 1);
             mTileProvider.ensureCapacity(numNeeded + mOvershootTileCache);
