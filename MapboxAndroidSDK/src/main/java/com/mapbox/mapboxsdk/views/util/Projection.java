@@ -29,6 +29,7 @@ import com.mapbox.mapboxsdk.api.IProjection;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.GeoConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
+import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.views.MapView;
 
 public class Projection implements IProjection, GeoConstants {
@@ -112,14 +113,18 @@ public class Projection implements IProjection, GeoConstants {
      * @return the Point containing the <I>screen coordinates</I> of the LatLng passed.
      */
     public Point toMapPixels(final ILatLng in, final Point reuse) {
+        return toMapPixels(in.getLatitude(), in.getLongitude(), reuse);
+    }
+    
+    public Point toMapPixels(final double latitude, final double longitude, final Point reuse) {
         final Point out = reuse != null ? reuse : new Point();
         final float zoom = getZoomLevel();
         final int mapSize = TileSystem.MapSize(zoom);
         final float scrollX = mapView.getScrollX();
         final float scrollY = mapView.getScrollY();
         TileSystem.LatLongToPixelXY(
-                in.getLatitude(),
-                in.getLongitude(),
+        		latitude,
+        		longitude,
                 zoom, out);
         out.offset(offsetX, offsetY);
         if (Math.abs(out.x - scrollX)
@@ -171,8 +176,8 @@ public class Projection implements IProjection, GeoConstants {
     public Point toMapPixelsTranslated(final Point in, final Point reuse) {
         final Point out = reuse != null ? reuse : new Point();
 
-        final double zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
-        out.set((int)((in.x / zoomDifference) + offsetX), (int)((in.y / zoomDifference) + offsetY));
+        final float zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
+        out.set((int)(GeometryMath.rightShift(in.x, zoomDifference) + offsetX), (int)(GeometryMath.rightShift(in.y, zoomDifference) + offsetY));
         return out;
     }
 
@@ -185,12 +190,12 @@ public class Projection implements IProjection, GeoConstants {
     public Rect fromPixelsToProjected(final Rect in) {
         final Rect result = new Rect();
 
-        final double zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
+        final float zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
 
-        final int x0 = (int)(in.left - offsetX * zoomDifference);
-        final int x1 = (int)(in.right - offsetX * zoomDifference);
-        final int y0 = (int)(in.bottom - offsetY * zoomDifference);
-        final int y1 = (int)(in.top - offsetY * zoomDifference);
+        final int x0 = (int)GeometryMath.leftShift(in.left - offsetX, zoomDifference);
+        final int x1 = (int)GeometryMath.leftShift(in.right - offsetX, zoomDifference);
+        final int y0 = (int)GeometryMath.leftShift(in.bottom - offsetY, zoomDifference);
+        final int y1 = (int)GeometryMath.leftShift(in.top - offsetY, zoomDifference);
 
         result.set(Math.min(x0, x1), Math.min(y0, y1), Math.max(x0, x1), Math.max(y0, y1));
         return result;
