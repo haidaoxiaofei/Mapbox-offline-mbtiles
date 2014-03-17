@@ -1103,8 +1103,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public void updateScrollDuringAnimation(float animationFactor)
     {
     	mAnimationFactor = animationFactor;
-    	updateScrollableAreaLimit();
-        scrollTo(getScrollX(), getScrollY());
+//    	updateScrollableAreaLimit();
+//        scrollTo(getScrollX(), getScrollY());
     }
 
     @Override
