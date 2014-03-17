@@ -1,6 +1,5 @@
 package com.mapbox.mapboxsdk.views;
 
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
