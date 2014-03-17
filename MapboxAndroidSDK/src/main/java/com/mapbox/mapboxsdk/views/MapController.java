@@ -7,12 +7,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
-import android.graphics.Matrix;
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.os.Build;
-import android.util.FloatMath;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.ScaleAnimation;
@@ -29,6 +25,8 @@ public class MapController implements MapViewConstants {
 
     private Animator mCurrentAnimator;
     private float mAnimationFactor = 1.0f;
+    private ILatLng zoomOnLatLong = null;
+    private Point zoomDeltaScroll = new Point();
 
     public MapController(MapView mapView) {
         mMapView = mapView;
@@ -61,6 +59,14 @@ public class MapController implements MapViewConstants {
     public void animateTo(final ILatLng point) {
         Point p = mMapView.getProjection().toMapPixels(point, null);
         animateTo(p.x, p.y);
+    }
+    
+    /**
+     * Start animating the map towards the given point.
+     */
+    public void goTo(final ILatLng point, Point delta) {
+        Point p = mMapView.getProjection().toMapPixels(point, null);
+        mMapView.scrollTo(p.x + delta.x, p.y + delta.y);
     }
 
     /**
@@ -133,18 +139,22 @@ public class MapController implements MapViewConstants {
      * Zoom in by one zoom level.
      */
     public boolean zoomIn() {
-        Point coords = mMapView.getProjection().toMapPixels(mMapView.getCenter(), null);
-        return zoomInAbout(coords.x, coords.y);
+        return zoomInAbout(mMapView.getCenter());
     }
 
-    public boolean zoomInAbout(final int xPixel, final int yPixel) {
-        mMapView.mMultiTouchScalePoint.set(xPixel, yPixel);
+    public boolean zoomInAbout(final ILatLng latlong) {
+
         if (!mMapView.canZoomIn()) return false;
+        
 
         if (mMapView.mIsAnimating.getAndSet(true)) {
             // TODO extend zoom (and return true)
             return false;
         } else {
+            Point coords = mMapView.getProjection().toMapPixels(latlong, null);
+            zoomOnLatLong = latlong;
+            zoomDeltaScroll.set(mMapView.getScrollX() - coords.x, mMapView.getScrollY() - coords.y);
+            mMapView.mMultiTouchScalePoint.set(coords.x, coords.y);
         	float currentZoom = mMapView.getZoomLevel(false);
         	float targetZoom =(float) (Math.ceil(currentZoom) + 1);
         	float factor = (float) Math.pow(2, targetZoom - currentZoom);
@@ -170,17 +180,19 @@ public class MapController implements MapViewConstants {
      * Zoom out by one zoom level.
      */
     public boolean zoomOut() {
-        Point coords = mMapView.getProjection().toMapPixels(mMapView.getCenter(), null);
-        return zoomOutAbout(coords.x, coords.y);
+        return zoomOutAbout(mMapView.getCenter());
     }
 
-    public boolean zoomOutAbout(final int xPixel, final int yPixel) {
-        mMapView.mMultiTouchScalePoint.set(xPixel, yPixel);
+    public boolean zoomOutAbout(final ILatLng latlong) {
         if (mMapView.canZoomOut()) {
             if (mMapView.mIsAnimating.getAndSet(true)) {
                 // TODO extend zoom (and return true)
                 return false;
             } else {
+            	Point coords = mMapView.getProjection().toMapPixels(latlong, null);
+                zoomOnLatLong = latlong;
+                zoomDeltaScroll.set(mMapView.getScrollX() - coords.x, mMapView.getScrollY() - coords.y);
+                mMapView.mMultiTouchScalePoint.set(coords.x, coords.y);
             	float currentZoom = mMapView.getZoomLevel(false);
             	float targetZoom =(float) (Math.floor(currentZoom));
                 targetZoom = mMapView.getClampedZoomLevel(targetZoom);
@@ -210,20 +222,8 @@ public class MapController implements MapViewConstants {
     }
 
     public void onAnimationEnd() {
-        final Rect screenRect = mMapView.getProjection().getScreenRect();
-        final Matrix m = new Matrix();
-        m.setScale(1 / mMapView.mMultiTouchScale, 1 / mMapView.mMultiTouchScale,
-            mMapView.mMultiTouchScalePoint.x, mMapView.mMultiTouchScalePoint.y);
-        m.postRotate(
-                -mMapView.getMapOrientation(),
-                screenRect.exactCenterX(),
-                screenRect.exactCenterY());
-        float[] pts = new float[2];
-        pts[0] = mMapView.getScrollX();
-        pts[1] = mMapView.getScrollY();
-        m.mapPoints(pts);
-        mMapView.scrollTo((int) pts[0], (int) pts[1]);
         setZoom(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()));
+        goTo(zoomOnLatLong, zoomDeltaScroll);
         mMapView.mMultiTouchScale = 1f;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             mCurrentAnimator = null;
