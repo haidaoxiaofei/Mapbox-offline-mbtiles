@@ -18,7 +18,6 @@ import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
 import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
-import com.mapbox.mapboxsdk.exceptions.MissingAttributeException;
 import com.mapbox.mapboxsdk.format.GeoJSON;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -139,7 +138,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      */
     protected MapView(final Context context, final int tileSizePixels,
                              final ResourceProxy resourceProxy, MapTileLayerBase tileProvider,
-                             final Handler tileRequestCompleteHandler, final AttributeSet attrs) throws MissingAttributeException {
+                             final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
         super(context, attrs);
         mResourceProxy = resourceProxy;
         this.mController = new MapController(this);
@@ -147,7 +146,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         TileSystem.setTileSize(tileSizePixels);
 
         if (tileProvider == null) {
-            final ITileLayer tileSource = new MapboxTileLayer("examples.map-h6lnn4mm");
+            final ITileLayer tileSource = new MapboxTileLayer("examples.map-zgrqqx0w");
             tileProvider = isInEditMode()
                     ? new MapTileLayerArray(tileSource, null, new MapTileModuleLayerBase[0])
                     : new MapTileLayerBasic(context, tileSource, this);
@@ -180,29 +179,18 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
         else
         {
-            throw new MissingAttributeException(getResources().getString(R.string.missingAttributeMapIdMessage));
+			Log.w(MapView.class.getCanonicalName(), "mapid not set.");
         }
     }
 
-    public MapView(final Context context, AttributeSet attrs) throws MissingAttributeException{
+    public MapView(final Context context, AttributeSet attrs){
         this(context, 256, new DefaultResourceProxyImpl(context), null, null, attrs);
-    }
-
-    /**
-     * Default constructor for the view.
-     * @param context A copy of the app context
-     * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
-     */
-/*
-    public MapView(Context context, String URL){
-        this(context, (AttributeSet) null);
     }
 
     protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileLayerBase aTileProvider) {
         this(context, tileSizePixels, resourceProxy, aTileProvider, null, null);
         init(context);
     }
-*/
 
     public void setTileSource(final ITileLayer aTileSource) {
         mTileProvider.setTileSource(aTileSource);
