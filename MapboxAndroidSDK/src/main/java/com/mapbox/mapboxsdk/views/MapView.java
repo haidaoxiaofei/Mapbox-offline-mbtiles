@@ -677,7 +677,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     public boolean zoomInFixing(final ILatLng point) {
         Point coords = getProjection().toMapPixels(point, null);
-        return getController().zoomInAbout(coords.x, coords.y);
+        return getController().zoomInAbout(point);
     }
 
     /**
@@ -688,12 +688,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public boolean zoomOutFixing(final ILatLng point) {
-        Point coords = getProjection().toMapPixels(point, null);
-        return zoomOutFixing(coords.x, coords.y);
-    }
-
-    boolean zoomOutFixing(final int xPixel, final int yPixel) {
-        return getController().zoomOutAbout(xPixel, yPixel);
+        return getController().zoomOutAbout(point);
     }
 
     public ResourceProxy getResourceProxy() {
