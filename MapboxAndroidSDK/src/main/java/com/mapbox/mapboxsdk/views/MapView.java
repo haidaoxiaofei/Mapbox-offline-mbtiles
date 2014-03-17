@@ -726,7 +726,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         mMapOverlay.setUseDataConnection(aMode);
     }
     
-    private void updateScrollableAreaLimit()
+    public void updateScrollableAreaLimit()
     {
     	if (mScrollableAreaBoundingBox == null) return;
     	float zoom = getZoomLevel();
