@@ -61,6 +61,7 @@ public class PathOverlay extends Overlay {
     public PathOverlay() {
         super();
         this.mPaint.setColor(Color.BLUE);
+        this.mPaint.setAntiAlias(true);
         this.mPaint.setStrokeWidth(10.0f);
         this.mPaint.setStyle(Paint.Style.STROKE);
 
@@ -174,7 +175,7 @@ public class PathOverlay extends Overlay {
         mPath.rewind();
         projectedPoint0 = this.mPoints.get(size - 1);
         mLineBounds.set(projectedPoint0.x, projectedPoint0.y, projectedPoint0.x, projectedPoint0.y);
-
+        
         for (int i = size - 2; i >= 0; i--) {
             // compute next points
             projectedPoint1 = this.mPoints.get(i);
@@ -209,7 +210,9 @@ public class PathOverlay extends Overlay {
             screenPoint0.y = screenPoint1.y;
             mLineBounds.set(projectedPoint0.x, projectedPoint0.y, projectedPoint0.x, projectedPoint0.y);
         }
-
+        final float realWidth = this.mPaint.getStrokeWidth();
+        this.mPaint.setStrokeWidth(realWidth/ mapView.getScale());
         canvas.drawPath(mPath, this.mPaint);
+        this.mPaint.setStrokeWidth(realWidth);
     }
 }
