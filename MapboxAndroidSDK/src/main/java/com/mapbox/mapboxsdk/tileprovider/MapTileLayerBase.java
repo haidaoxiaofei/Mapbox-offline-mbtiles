@@ -9,6 +9,7 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 
 import android.graphics.Bitmap;
@@ -218,9 +219,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      * @param pOldZoomLevel the previous zoom level that we should get the tiles to rescale
      * @param pViewPort     the view port we need tiles for
      */
-    public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel, final Rect pViewPort) {
+    public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel, final Projection projection) {
 
-        if (pNewZoomLevel == pOldZoomLevel) {
+        if (Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel)) {
             return;
         }
 
@@ -229,13 +230,11 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         Log.i(TAG, "rescale tile cache from " + pOldZoomLevel + " to " + pNewZoomLevel);
 
         final int tileSize = getTileSource().getTileSizePixels();
-        final int worldSize_2 = TileSystem.MapSize(pNewZoomLevel) >> 1;
-        final Rect viewPort = new Rect(pViewPort);
-        viewPort.offset(worldSize_2, worldSize_2);
+        final Rect viewPort = GeometryMath.viewPortRect(pNewZoomLevel, projection, null);
 
         final ScaleTileLooper tileLooper = pNewZoomLevel > pOldZoomLevel
-                ? new ZoomInTileLooper((int)Math.floor(pOldZoomLevel))
-                : new ZoomOutTileLooper((int)Math.floor(pOldZoomLevel));
+                ? new ZoomInTileLooper(pOldZoomLevel)
+                : new ZoomOutTileLooper(pOldZoomLevel);
         tileLooper.loop(null, pNewZoomLevel, tileSize, viewPort);
 
         final long endMs = System.currentTimeMillis();
@@ -315,7 +314,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     }
 
     private class ZoomInTileLooper extends ScaleTileLooper {
-        public ZoomInTileLooper(final int pOldZoomLevel) {
+        public ZoomInTileLooper(final float pOldZoomLevel) {
             super(pOldZoomLevel);
         }
 
@@ -323,7 +322,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         public void handleTile(final int pTileSizePx, final MapTile pTile, final int pX, final int pY) {
 
             // get the correct fraction of the tile from cache and scale up
-            final MapTile oldTile = new MapTile((int) mOldZoomLevel, (int) GeometryMath.rightShift(pTile.getX(), mDiff), (int) GeometryMath.rightShift(pTile.getY(), mDiff));
+            final MapTile oldTile = new MapTile((int) Math.floor(mOldZoomLevel), (int) GeometryMath.rightShift(pX, mDiff), (int) GeometryMath.rightShift(pY, mDiff));
             final Drawable oldDrawable = mTileCache.getMapTile(oldTile);
 
             if (oldDrawable instanceof BitmapDrawable) {
@@ -384,14 +383,14 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
             }
 
             // get many tiles from cache and make one tile from them
-            final int xx = (int) GeometryMath.leftShift(pTile.getX(), mDiff);
-            final int yy = (int) GeometryMath.leftShift(pTile.getY(), mDiff);
+            final int xx = (int) GeometryMath.leftShift(pX, mDiff);
+            final int yy = (int) GeometryMath.leftShift(pY, mDiff);
             final int numTiles = (int) GeometryMath.leftShift(1, mDiff);
             Bitmap bitmap = null;
             Canvas canvas = null;
             for (int x = 0; x < numTiles; x++) {
                 for (int y = 0; y < numTiles; y++) {
-                    final MapTile oldTile = new MapTile((int) mOldZoomLevel, xx + x, yy + y);
+                    final MapTile oldTile = new MapTile((int) Math.floor(mOldZoomLevel), xx + x, yy + y);
                     final Drawable oldDrawable = mTileCache.getMapTile(oldTile);
                     if (oldDrawable instanceof BitmapDrawable) {
                         final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
