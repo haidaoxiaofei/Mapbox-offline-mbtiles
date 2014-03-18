@@ -280,9 +280,18 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                     public boolean onItemSingleTapUp(final int index,
                                                      final OverlayItem item) {
-                        ((Marker)item).showBubble(new DefaultInfoWindow(R.layout.tootip, MapView.this), MapView.this, true);
+                        if(defaultTooltip==null){
+                            defaultTooltip = new DefaultInfoWindow(R.layout.tootip, MapView.this);
+                        }
 
-
+                        // Hide tooltip if tapping on the same marker
+                        if(defaultTooltip.getBoundMarker() == item){
+                            defaultTooltip.close();
+                            defaultTooltip = null;
+                        }
+                        else{
+                            ((Marker)item).showBubble(defaultTooltip, MapView.this, true);
+                        }
                         return true;
                     }
                     public boolean onItemLongPress(final int index,
@@ -315,7 +324,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
     public void onTap(ILatLng p) {
     }
-
 
     public MapController getController() {
         return this.mController;
