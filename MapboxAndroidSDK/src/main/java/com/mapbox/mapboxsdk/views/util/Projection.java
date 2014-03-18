@@ -53,10 +53,10 @@ public class Projection implements IProjection, GeoConstants {
         super();
         this.mapView = mv;
 
-        viewWidth_2 = mapView.getWidth() / 2;
-        viewHeight_2 = mapView.getHeight() / 2;
+        viewWidth_2 = mapView.getWidth() >> 1;
+        viewHeight_2 = mapView.getHeight() >> 1;
         mZoomLevelProjection = mapView.getZoomLevel(false);
-        worldSize_2 = TileSystem.MapSize(mZoomLevelProjection) / 2;
+        worldSize_2 = TileSystem.MapSize(mZoomLevelProjection) >> 1;
 
         offsetX = -worldSize_2;
         offsetY = -worldSize_2;
