@@ -218,7 +218,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      * @param pOldZoomLevel the previous zoom level that we should get the tiles to rescale
      * @param pViewPort     the view port we need tiles for
      */
-    public void rescaleCache(final int pNewZoomLevel, final int pOldZoomLevel, final Rect pViewPort) {
+    public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel, final Rect pViewPort) {
 
         if (pNewZoomLevel == pOldZoomLevel) {
             return;
@@ -234,8 +234,8 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         viewPort.offset(worldSize_2, worldSize_2);
 
         final ScaleTileLooper tileLooper = pNewZoomLevel > pOldZoomLevel
-                ? new ZoomInTileLooper(pOldZoomLevel)
-                : new ZoomOutTileLooper(pOldZoomLevel);
+                ? new ZoomInTileLooper((int)Math.floor(pOldZoomLevel))
+                : new ZoomOutTileLooper((int)Math.floor(pOldZoomLevel));
         tileLooper.loop(null, pNewZoomLevel, tileSize, viewPort);
 
         final long endMs = System.currentTimeMillis();

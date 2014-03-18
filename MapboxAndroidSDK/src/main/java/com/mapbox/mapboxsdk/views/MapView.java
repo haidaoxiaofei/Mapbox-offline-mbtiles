@@ -461,6 +461,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @return the map view, for chaining
      */
 	public MapView setZoom(final float aZoomLevel) {
+		return this.mController.setZoom(aZoomLevel);
+	}
+
+    
+	protected MapView setZoomInternal(final float aZoomLevel) {
 		final float minZoomLevel = getMinZoomLevel();
 		final float maxZoomLevel = getMaxZoomLevel();
 
@@ -505,8 +510,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             scrollTo(snapPoint.x, snapPoint.y);
         }
 
-		mTileProvider.rescaleCache((int) Math.floor(newZoomLevel),
-				(int) Math.floor(curZoomLevel), getScreenRect(null));
+		mTileProvider.rescaleCache(newZoomLevel, curZoomLevel, mProjection.getScreenRect());
 
         // do callback on listener
         if (newZoomLevel != curZoomLevel && mListener != null) {
@@ -598,7 +602,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             return mZoomLevel;
         }
     }
-
+	
     /**
      * Get the minimum allowed zoom level for the maps.
      */
@@ -724,9 +728,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     {
     	if (mScrollableAreaBoundingBox == null) return;
     	float zoom = getZoomLevel();
-    	if (isAnimating()) {
-    		zoom = mZoomLevel + (zoom - mZoomLevel) * mAnimationFactor;
-    	}
+//    	if (isAnimating()) {
+//    		zoom = mZoomLevel + (zoom - mZoomLevel);
+//    	}
         final int worldSize_2 = TileSystem.MapSize(zoom) / 2;
         // Get NW/upper-left
         final PointF upperLeft = TileSystem.LatLongToPixelXY(mScrollableAreaBoundingBox.getLatNorth(),
@@ -1095,9 +1099,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
     }
 
-    public void updateScrollDuringAnimation(float animationFactor)
+    public void updateScrollDuringAnimation()
     {
-    	mAnimationFactor = animationFactor;
 //    	updateScrollableAreaLimit();
 //        scrollTo(getScrollX(), getScrollY());
     }

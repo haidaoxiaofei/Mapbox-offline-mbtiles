@@ -81,5 +81,5 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
 	@Override
 	public BoundingBox getBoundingBox() {
 		return mBoundingBox;
-	}
+}
 }

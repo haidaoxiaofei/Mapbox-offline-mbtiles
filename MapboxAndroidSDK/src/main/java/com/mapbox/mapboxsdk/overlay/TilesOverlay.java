@@ -118,12 +118,19 @@ public class TilesOverlay
         final Projection pj = mapView.getProjection();
         final float zoomLevel = pj.getZoomLevel();
         mWorldSize_2 = TileSystem.MapSize(zoomLevel) >> 1;
+        
+        //when using float zoom, the view port should be the one of the floored value
+        //this is because MapTiles are indexed around int values
+        int roundWorldSize_2 = TileSystem.MapSize((float) Math.floor(zoomLevel)) >> 1;
+        float scale  = (float)roundWorldSize_2 / mWorldSize_2;
 
         // Get the area we are drawing to
         mViewPort.set(pj.getScreenRect());
-
+        
+        mViewPort.set((int)(scale * mViewPort.left), (int)(scale * mViewPort.top), (int)(scale * mViewPort.right), (int)(scale * mViewPort.bottom));
+        
         // Translate the Canvas coordinates into Mercator coordinates
-        mViewPort.offset(mWorldSize_2, mWorldSize_2);
+        mViewPort.offset(roundWorldSize_2, roundWorldSize_2);     
 
         // Draw the tiles!
         drawTiles(c.getSafeCanvas(), zoomLevel, TileSystem.getTileSize(), mViewPort);
