@@ -6,12 +6,6 @@ import android.graphics.drawable.Drawable;
 public interface ResourceProxy {
 
     public static enum string {
-
-        // tile sources
-        mapnik,
-
-        // other stuff
-        unknown,
         format_distance_meters,
         format_distance_kilometers,
         format_distance_miles,
@@ -29,11 +23,6 @@ public interface ResourceProxy {
         unknown,
 
         center, direction_arrow, marker_default, person,
-
-        /**
-         * Menu icons
-         */
-        ic_menu_mylocation
     }
 
     String getString(string pResId);
