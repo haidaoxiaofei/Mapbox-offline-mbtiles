@@ -128,7 +128,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
-
+    private InfoWindow defaultTooltip;
 
 
     /**
@@ -244,7 +244,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public ArrayList<ItemizedIconOverlay> getItemizedOverlays(){
         ArrayList<ItemizedIconOverlay> list = new ArrayList<ItemizedIconOverlay>();
         for(Overlay overlay: getOverlays()){
-            System.out.println("ITEMIZED "+overlay);
             if(overlay instanceof ItemizedOverlay){
                 list.add((ItemizedIconOverlay) overlay);
             }
@@ -279,7 +278,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         defaultMarkerOverlay = new ItemizedIconOverlay<OverlayItem>(
                 defaultMarkerList,
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
-                    Marker currentMarker;
                     public boolean onItemSingleTapUp(final int index,
                                                      final OverlayItem item) {
                         ((Marker)item).showBubble(new DefaultInfoWindow(R.layout.tootip, MapView.this), MapView.this, true);
