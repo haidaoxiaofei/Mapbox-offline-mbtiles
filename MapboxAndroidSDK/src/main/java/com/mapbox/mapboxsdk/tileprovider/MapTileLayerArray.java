@@ -224,10 +224,11 @@ public class MapTileLayerArray extends MapTileLayerBase {
         super.setTileSource(aTileSource);
 
         synchronized (mTileProviderList) {
-            for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
-                tileProvider.setTileSource(aTileSource);
+        	if (mTileProviderList.size() != 0) {
+        		mTileProviderList.get(0).setTileSource(aTileSource);
                 clearTileCache();
-            }
+        	}
+            
         }
     }
 
