@@ -202,6 +202,7 @@ public class MapController implements MapViewConstants {
     }
     
     protected void aboutToStartAnimation(final ILatLng latlong, final float x, final float y) {
+        if (mMapView.isAnimating()) return;
         mMapView.mIsAnimating.set(true);
         zoomOnLatLong = latlong;
         zoomDeltaScroll.set(mMapView.getScrollX() - x, mMapView.getScrollY() - y);
