@@ -505,8 +505,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             scrollTo(snapPoint.x, snapPoint.y);
         }
 
-		mTileProvider.rescaleCache((int) Math.floor(newZoomLevel),
-				(int) Math.floor(curZoomLevel), getScreenRect(null));
+		mTileProvider.rescaleCache(newZoomLevel, curZoomLevel, mProjection.getScreenRect());
 
         // do callback on listener
         if (newZoomLevel != curZoomLevel && mListener != null) {
