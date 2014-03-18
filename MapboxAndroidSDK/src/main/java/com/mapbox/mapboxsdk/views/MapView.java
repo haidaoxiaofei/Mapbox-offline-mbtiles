@@ -159,9 +159,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
         if (tileProvider == null) {
             final ITileLayer tileSource = new MapboxTileLayer("examples.map-zgrqqx0w");
-            tileProvider = isInEditMode()
-                    ? new MapTileLayerArray(tileSource, null, new MapTileModuleLayerBase[0])
-                    : new MapTileLayerBasic(context, tileSource, this);
+            tileProvider = new MapTileLayerBasic(context, tileSource, this);
         }
 
         mTileRequestCompleteHandler = tileRequestCompleteHandler == null
