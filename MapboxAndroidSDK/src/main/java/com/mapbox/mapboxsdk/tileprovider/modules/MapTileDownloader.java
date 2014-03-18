@@ -94,13 +94,13 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     }
 
     @Override
-    public int getMinimumZoomLevel() {
+    public float getMinimumZoomLevel() {
         TileLayer tileLayer = mTileSource.get();
         return (tileLayer != null ? tileLayer.getMinimumZoomLevel() : MINIMUM_ZOOMLEVEL);
     }
 
     @Override
-    public int getMaximumZoomLevel() {
+    public float getMaximumZoomLevel() {
         TileLayer tileLayer = mTileSource.get();
         return (tileLayer != null ? tileLayer.getMaximumZoomLevel() : MAXIMUM_ZOOMLEVEL);
     }

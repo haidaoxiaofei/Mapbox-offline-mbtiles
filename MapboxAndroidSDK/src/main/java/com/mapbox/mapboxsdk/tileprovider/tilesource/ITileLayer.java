@@ -2,6 +2,7 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
 import java.io.InputStream;
 
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.util.LowMemoryException;
 
@@ -36,14 +37,14 @@ public interface ITileLayer {
      *
      * @return the minimum zoom level
      */
-    public int getMinimumZoomLevel();
+    public float getMinimumZoomLevel();
 
     /**
      * Get the maximum zoom level this tile source can provide.
      *
      * @return the maximum zoom level
      */
-    public int getMaximumZoomLevel();
+    public float getMaximumZoomLevel();
 
     /**
      * Get the tile size in pixels this tile source provides.

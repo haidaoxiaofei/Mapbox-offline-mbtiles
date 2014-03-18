@@ -1,21 +1,21 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.Rect;
 
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.Rect;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Viesturs Zarins
@@ -35,7 +35,7 @@ public class PathOverlay extends Overlay {
     /**
      * Stores points, converted to the map projection.
      */
-    private ArrayList<Point> mPoints;
+    private ArrayList<PointF> mPoints;
 
     /**
      * Number of points that have precomputed values.
@@ -49,8 +49,8 @@ public class PathOverlay extends Overlay {
 
     private final Path mPath = new Path();
 
-    private final Point mTempPoint1 = new Point();
-    private final Point mTempPoint2 = new Point();
+    private final PointF mTempPoint1 = new PointF();
+    private final PointF mTempPoint2 = new PointF();
 
     // bounding rectangle for the current line segment.
     private final Rect mLineBounds = new Rect();
@@ -61,6 +61,7 @@ public class PathOverlay extends Overlay {
     public PathOverlay() {
         super();
         this.mPaint.setColor(Color.BLUE);
+        this.mPaint.setAntiAlias(true);
         this.mPaint.setStrokeWidth(10.0f);
         this.mPaint.setStyle(Paint.Style.STROKE);
 
@@ -108,7 +109,7 @@ public class PathOverlay extends Overlay {
     }
 
     public void clearPath() {
-        this.mPoints = new ArrayList<Point>();
+        this.mPoints = new ArrayList<PointF>();
         this.mPointsPrecomputed = 0;
     }
 
@@ -117,7 +118,7 @@ public class PathOverlay extends Overlay {
     }
 
     public void addPoint(final double aLatitude, final double aLongitude) {
-        mPoints.add(new Point((int) aLatitude, (int) aLongitude));
+        mPoints.add(new PointF((float) aLatitude, (float) aLongitude));
     }
 
     public void addPoints(final LatLng... aPoints) {
@@ -157,28 +158,28 @@ public class PathOverlay extends Overlay {
 
         // precompute new points to the intermediate projection.
         while (this.mPointsPrecomputed < size) {
-            final Point pt = this.mPoints.get(this.mPointsPrecomputed);
-            pj.toMapPixelsProjected(pt.x, pt.y, pt);
+            final PointF pt = this.mPoints.get(this.mPointsPrecomputed);
+            pj.toMapPixelsProjected((double)pt.x, (double)pt.y, pt);
 
             this.mPointsPrecomputed++;
         }
 
-        Point screenPoint0 = null; // points on screen
-        Point screenPoint1;
-        Point projectedPoint0; // points from the points list
-        Point projectedPoint1;
+        PointF screenPoint0 = null; // points on screen
+        PointF screenPoint1;
+        PointF projectedPoint0; // points from the points list
+        PointF projectedPoint1;
 
         // clipping rectangle in the intermediate projection, to avoid performing projection.
         final Rect clipBounds = pj.fromPixelsToProjected(pj.getScreenRect());
 
         mPath.rewind();
         projectedPoint0 = this.mPoints.get(size - 1);
-        mLineBounds.set(projectedPoint0.x, projectedPoint0.y, projectedPoint0.x, projectedPoint0.y);
+        mLineBounds.set((int)projectedPoint0.x, (int)projectedPoint0.y, (int)projectedPoint0.x, (int)projectedPoint0.y);
 
         for (int i = size - 2; i >= 0; i--) {
             // compute next points
             projectedPoint1 = this.mPoints.get(i);
-            mLineBounds.union(projectedPoint1.x, projectedPoint1.y);
+            mLineBounds.union((int)projectedPoint1.x, (int)projectedPoint1.y);
 
             if (!Rect.intersects(clipBounds, mLineBounds)) {
                 // skip this line, move to next point
@@ -207,9 +208,11 @@ public class PathOverlay extends Overlay {
             projectedPoint0 = projectedPoint1;
             screenPoint0.x = screenPoint1.x;
             screenPoint0.y = screenPoint1.y;
-            mLineBounds.set(projectedPoint0.x, projectedPoint0.y, projectedPoint0.x, projectedPoint0.y);
+            mLineBounds.set((int)projectedPoint0.x, (int)projectedPoint0.y, (int)projectedPoint0.x, (int)projectedPoint0.y);
         }
-
+        final float realWidth = this.mPaint.getStrokeWidth();
+        this.mPaint.setStrokeWidth(realWidth/ mapView.getScale());
         canvas.drawPath(mPath, this.mPaint);
+        this.mPaint.setStrokeWidth(realWidth);
     }
 }

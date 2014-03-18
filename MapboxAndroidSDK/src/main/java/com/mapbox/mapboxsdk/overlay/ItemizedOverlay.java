@@ -3,10 +3,11 @@ package com.mapbox.mapboxsdk.overlay;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
+
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.overlay.OverlayItem.HotspotPlace;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -34,7 +35,7 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
     protected final Drawable mDefaultMarker;
     private final ArrayList<Item> mInternalItemList;
     private final Rect mRect = new Rect();
-    private final Point mCurScreenCoords = new Point();
+    private final PointF mCurScreenCoords = new PointF();
     protected boolean mDrawFocusedItem = true;
     private Item mFocusedItem;
     private boolean mPendingFocusChangedEvent = false;
@@ -101,8 +102,14 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
         for (int i = size; i >= 0; i--) {
             final Item item = getItem(i);
             pj.toMapPixels(item.getPoint(), mCurScreenCoords);
+            canvas.save();
+
+            canvas.scale(1/mapView.getScale(), 1/mapView.getScale(), mCurScreenCoords.x,
+            		mCurScreenCoords.y);
+
             onDrawItem(canvas, item, mCurScreenCoords, mapView.getMapOrientation());
-        }
+            canvas.restore();
+       }
     }
 
     /**
@@ -137,7 +144,7 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
      * @param curScreenCoords
      * @param aMapOrientation
      */
-    protected void onDrawItem(ISafeCanvas canvas, final Item item, final Point curScreenCoords, final float aMapOrientation) {
+    protected void onDrawItem(ISafeCanvas canvas, final Item item, final PointF curScreenCoords, final float aMapOrientation) {
         if(item.beingClustered()){
             return;
         }
@@ -151,12 +158,12 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
 
         // draw it
         if (this.isUsingSafeCanvas()) {
-            Overlay.drawAt(canvas.getSafeCanvas(), marker, curScreenCoords.x, curScreenCoords.y, false, aMapOrientation);
+            Overlay.drawAt(canvas.getSafeCanvas(), marker, (int)curScreenCoords.x, (int)curScreenCoords.y, false, aMapOrientation);
         } else {
             canvas.getUnsafeCanvas(new UnsafeCanvasHandler() {
                 @Override
                 public void onUnsafeCanvas(Canvas canvas) {
-                    Overlay.drawAt(canvas, marker, curScreenCoords.x, curScreenCoords.y, false, aMapOrientation);
+                    Overlay.drawAt(canvas, marker, (int)curScreenCoords.x, (int)curScreenCoords.y, false, aMapOrientation);
                 }
             });
         }
@@ -215,8 +222,8 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
             final Drawable marker = (item.getMarker(state) == null) ? getDefaultMarker(state)
                     : item.getMarker(state);
             boundToHotspot(marker, item.getMarkerHotspot());
-            if (hitTest(item, marker, -mCurScreenCoords.x + screenRect.left + (int) e.getX(),
-                    -mCurScreenCoords.y + screenRect.top + (int) e.getY())) {
+            if (hitTest(item, marker, (int)-mCurScreenCoords.x + screenRect.left + (int) e.getX(),
+                    (int)-mCurScreenCoords.y + screenRect.top + (int) e.getY())) {
                 // We have a hit, do we get a response from onTap?
                 if (onTap(i)) {
                     // We got a response so consume the event
@@ -250,7 +257,7 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
 
     /**
      * If the given Item is found in the overlay, force it to be the current focus-bearer. Any
-     * registered ItemizedOverlay will be notified. This does not move
+     * registered {@link ItemizedOverlay} will be notified. This does not move
      * the map, so if the Item isn't already centered, the user may get confused. If the Item is not
      * found, this is a no-op. You can also pass null to remove focus.
      */

@@ -40,6 +40,7 @@ public class TilesOverlay
     protected final Paint mDebugPaint = new Paint();
     private final Rect mTileRect = new Rect();
     private final Rect mViewPort = new Rect();
+	float mCurrentZoomFactor = 1;
 
     private boolean mOptionsMenuEnabled = true;
 
@@ -71,11 +72,11 @@ public class TilesOverlay
         this.mTileProvider.detach();
     }
 
-    public int getMinimumZoomLevel() {
+    public float getMinimumZoomLevel() {
         return mTileProvider.getMinimumZoomLevel();
     }
 
-    public int getMaximumZoomLevel() {
+    public float getMaximumZoomLevel() {
         return mTileProvider.getMaximumZoomLevel();
     }
 
@@ -105,17 +106,24 @@ public class TilesOverlay
 
         // Calculate the half-world size
         final Projection pj = mapView.getProjection();
-        final int zoomLevel = pj.getZoomLevel();
+        final float zoomLevel = pj.getZoomLevel();
         mWorldSize_2 = TileSystem.MapSize(zoomLevel) >> 1;
+        
+        //when using float zoom, the view port should be the one of the floored value
+        //this is because MapTiles are indexed around int values
+        int roundWorldSize_2 = TileSystem.MapSize((float) Math.floor(zoomLevel)) >> 1;
+        float scale  = (float)roundWorldSize_2 / mWorldSize_2;
 
         // Get the area we are drawing to
         mViewPort.set(pj.getScreenRect());
-
+        
+        mViewPort.set((int)(scale * mViewPort.left), (int)(scale * mViewPort.top), (int)(scale * mViewPort.right), (int)(scale * mViewPort.bottom));
+        
         // Translate the Canvas coordinates into Mercator coordinates
-        mViewPort.offset(mWorldSize_2, mWorldSize_2);
+        mViewPort.offset(roundWorldSize_2, roundWorldSize_2);     
 
         // Draw the tiles!
-        drawTiles(c.getSafeCanvas(), pj.getZoomLevel(), TileSystem.getTileSize(), mViewPort);
+        drawTiles(c.getSafeCanvas(), zoomLevel, TileSystem.getTileSize(), mViewPort);
     }
 
     /**
@@ -124,7 +132,7 @@ public class TilesOverlay
      * than the upper-left corner). Once the tile is ready to be drawn, it is passed to
      * onTileReadyToDraw where custom manipulations can be made before drawing the tile.
      */
-    public void drawTiles(final Canvas c, final int zoomLevel, final int tileSizePx,
+    public void drawTiles(final Canvas c, final float zoomLevel, final int tileSizePx,
                           final Rect viewPort) {
 
         mTileLooper.loop(c, zoomLevel, tileSizePx, viewPort);
@@ -143,7 +151,17 @@ public class TilesOverlay
 
     private final TileLooper mTileLooper = new TileLooper() {
         @Override
-        public void initializeLoop(final int pZoomLevel, final int pTileSizePx) {
+        public void initializeLoop(final float pZoomLevel, final int pTileSizePx) {
+        	
+        	final int roundedZoom = (int) Math.floor(pZoomLevel);
+            if (roundedZoom != pZoomLevel) {
+                final int mapTileUpperBound = 1 << roundedZoom;
+                mCurrentZoomFactor = (float)TileSystem.MapSize(pZoomLevel) / mapTileUpperBound / pTileSizePx;
+            }
+            else {
+            	mCurrentZoomFactor = 1.0f;
+            }
+            
             // make sure the cache is big enough for all the tiles
             final int numNeeded = (mLowerRight.y - mUpperLeft.y + 1) * (mLowerRight.x - mUpperLeft.x + 1);
             mTileProvider.ensureCapacity(numNeeded + mOvershootTileCache);
@@ -163,10 +181,10 @@ public class TilesOverlay
 
             if (currentMapTile != null) {
                 mTileRect.set(
-                        pX * pTileSizePx,
-                        pY * pTileSizePx,
-                        pX * pTileSizePx + pTileSizePx,
-                        pY * pTileSizePx + pTileSizePx);
+                        (int)(pX * pTileSizePx * mCurrentZoomFactor),
+                        (int)(pY * pTileSizePx * mCurrentZoomFactor),
+                        (int)((pX * pTileSizePx + pTileSizePx) * mCurrentZoomFactor),
+                        (int)((pY * pTileSizePx + pTileSizePx) * mCurrentZoomFactor));
                 if (isReusable) {
                     ((ReusableBitmapDrawable) currentMapTile).beginUsingDrawable();
                 }

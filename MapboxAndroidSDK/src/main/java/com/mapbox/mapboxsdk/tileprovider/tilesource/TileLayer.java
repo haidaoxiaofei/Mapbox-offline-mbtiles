@@ -16,8 +16,8 @@ import java.io.InputStream;
 public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstants {
 
     private String mUrl;
-    private int mMinimumZoomLevel = 1;
-    private int mMaximumZoomLevel = 16;
+    protected float mMinimumZoomLevel = 1;
+    protected float mMaximumZoomLevel = 16;
     private final int mTileSizePixels = DEFAULT_TILE_SIZE;
 
     public TileLayer(final String aUrl) {
@@ -38,12 +38,12 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     }
 
     @Override
-    public int getMinimumZoomLevel() {
+    public float getMinimumZoomLevel() {
         return mMinimumZoomLevel;
     }
 
     @Override
-    public int getMaximumZoomLevel() {
+    public float getMaximumZoomLevel() {
         return mMaximumZoomLevel;
     }
 

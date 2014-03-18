@@ -1,15 +1,12 @@
 package com.mapbox.mapboxsdk.views;
-
 import android.content.Context;
-
 import android.view.LayoutInflater;
-
+import android.view.MotionEvent;
 import android.view.View;
-
 import android.view.ViewGroup;
+import android.widget.TextView;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.ExtendedOverlayItem;
-
 
 /** View that can be displayed on an OSMDroid map, associated to a GeoPoint.
  * Typical usage: cartoon-like bubbles displayed when clicking an overlay item. 
@@ -21,49 +18,65 @@ import com.mapbox.mapboxsdk.overlay.ExtendedOverlayItem;
  * </ul>
  * Known issue: the window is displayed "above" the marker, so the queue of the bubble can hide the marker. 
  *
- * This is an abstract class. 
- * @see DefaultInfoWindow
+ * This is an abstract class.
  * @author M.Kergall
  */
-public abstract class InfoWindow {
-    protected View mView;
-    protected boolean mIsVisible;
-    protected MapView mMapView;
+
+public class InfoWindow {
     private ExtendedOverlayItem boundMarker;
 
     /**
      * @param layoutResId   the id of the view resource.
      * @param mapView       the mapview on which is hooked the view
-
+     *
      */
+
+    private MapView mMapView;
+    private boolean mIsVisible;
+    private View mView;
+
+    static int mTitleId = 0,
+            mDescriptionId = 0,
+            mSubDescriptionId = 0,
+            mImageId = 0;
+
+    private static void setResIds(Context context){
+        String packageName = context.getPackageName(); //get application package name
+        mTitleId = context.getResources().getIdentifier("id/tooltip_title", null, packageName);
+        mDescriptionId = context.getResources().getIdentifier("id/tooltip_description", null, packageName);
+        mSubDescriptionId = context.getResources().getIdentifier("id/tooltip_subdescription", null, packageName);
+        mImageId = context.getResources().getIdentifier("id/tooltip_image", null, packageName);
+    }
 
     public InfoWindow(int layoutResId, MapView mapView) {
         mMapView = mapView;
         mIsVisible = false;
-        ViewGroup parent=(ViewGroup)mapView.getParent();
+        ViewGroup parent = (ViewGroup) mapView.getParent();
         Context context = mapView.getContext();
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mView = inflater.inflate(layoutResId, parent, false);
+
+        if (mTitleId == 0) {
+            setResIds(mapView.getContext());
+        }
+
+        // default behavior: close it when clicking on the tooltip:
+        mView.setOnTouchListener(new View.OnTouchListener() {
+            @Override public boolean onTouch(View v, MotionEvent e) {
+                if (e.getAction() == MotionEvent.ACTION_UP)
+                    close();
+                return true; //From Osmdroid 3.0.10, event is properly consumed.
+            }
+        });
     }
-    /**
-     * Returns the Android view. This allows to set its content.
-     * @return the Android view
 
-     */
-
-    public View getView() {
-
-        return(mView);
-    }
     /**
      * open the window at the specified position.
      * @param object the graphical object on which is hooked the view
      * @param position to place the window on the map
      * @param offsetX (&offsetY) the offset of the view to the position, in pixels.
      * This allows to offset the view from the object position.
-
      */
-
     public void open(Object object, LatLng position, int offsetX, int offsetY) {
         onOpen(object);
         MapView.LayoutParams lp = new MapView.LayoutParams(
@@ -83,12 +96,41 @@ public abstract class InfoWindow {
             onClose();
         }
     }
-    public boolean isOpen(){
-        return mIsVisible;
+
+    /**
+     * Returns the Android view. This allows to set its content.
+     * @return the Android view
+     */
+    public View getView() {
+        return(mView);
     }
-    //Abstract methods to implement in sub-classes:
-    public abstract void onOpen(Object item);
-    public abstract void onClose();
+
+    public void onOpen(Object item) {
+        ExtendedOverlayItem extendedOverlayItem = (ExtendedOverlayItem) item;
+        String title = extendedOverlayItem.getTitle();
+        if (title == null) {
+            title = "";
+        }
+        ((TextView) mView.findViewById(mTitleId /*R.id.title*/)).setText(title);
+        String snippet = extendedOverlayItem.getDescription();
+        if (snippet == null) {
+            snippet = "";
+        }
+        ((TextView) mView.findViewById(mDescriptionId /*R.id.description*/)).setText(snippet);
+        //handle sub-description, hidding or showing the text view:
+        TextView subDescText = (TextView)mView.findViewById(mSubDescriptionId);
+        String subDesc = extendedOverlayItem.getSubDescription();
+        if (subDesc != null && !("".equals(subDesc))){
+            subDescText.setText(subDesc);
+            subDescText.setVisibility(View.VISIBLE);
+        } else {
+            subDescText.setVisibility(View.GONE);
+        }
+    }
+
+    public void onClose() {
+        //by default, do nothing
+    }
 
     public void setBoundMarker(ExtendedOverlayItem boundMarker) {
         this.boundMarker = boundMarker;
@@ -98,3 +140,4 @@ public abstract class InfoWindow {
         return boundMarker;
     }
 }
+ 

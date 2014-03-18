@@ -1,6 +1,6 @@
 package com.mapbox.mapboxsdk.api;
 
-import android.graphics.Point;
+import android.graphics.PointF;
 
 import com.mapbox.mapboxsdk.views.util.Projection;
 
@@ -20,7 +20,7 @@ public interface IProjection {
      * @param out A pre-existing object to use for the output; if null, a new Point will be
      *            allocated and returned.
      */
-    Point toPixels(ILatLng in, Point out);
+    PointF toPixels(ILatLng in, PointF out);
 
     /**
      * Create a new LatLng from pixel coordinates relative to the top-left of the MapView that

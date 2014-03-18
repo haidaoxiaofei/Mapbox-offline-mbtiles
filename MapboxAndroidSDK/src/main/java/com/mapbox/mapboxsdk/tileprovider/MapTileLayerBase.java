@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
+import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.tile.TileSystem;
@@ -59,14 +60,14 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      *
      * @return the minimum zoom level
      */
-    public abstract int getMinimumZoomLevel();
+    public abstract float getMinimumZoomLevel();
 
     /**
      * Gets the maximum zoom level this tile provider can provide
      *
      * @return the maximum zoom level
      */
-    public abstract int getMaximumZoomLevel();
+    public abstract float getMaximumZoomLevel();
 
     /**
      * Sets the tile source for this tile provider.
@@ -217,7 +218,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      * @param pOldZoomLevel the previous zoom level that we should get the tiles to rescale
      * @param pViewPort     the view port we need tiles for
      */
-    public void rescaleCache(final int pNewZoomLevel, final int pOldZoomLevel, final Rect pViewPort) {
+    public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel, final Rect pViewPort) {
 
         if (pNewZoomLevel == pOldZoomLevel) {
             return;
@@ -233,8 +234,8 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         viewPort.offset(worldSize_2, worldSize_2);
 
         final ScaleTileLooper tileLooper = pNewZoomLevel > pOldZoomLevel
-                ? new ZoomInTileLooper(pOldZoomLevel)
-                : new ZoomOutTileLooper(pOldZoomLevel);
+                ? new ZoomInTileLooper((int)Math.floor(pOldZoomLevel))
+                : new ZoomOutTileLooper((int)Math.floor(pOldZoomLevel));
         tileLooper.loop(null, pNewZoomLevel, tileSize, viewPort);
 
         final long endMs = System.currentTimeMillis();
@@ -254,14 +255,14 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
          */
         protected final HashMap<MapTile, Bitmap> mNewTiles;
 
-        protected final int mOldZoomLevel;
-        protected int mDiff;
+        protected final float mOldZoomLevel;
+        protected float mDiff;
         protected int mTileSize_2;
         protected Rect mSrcRect;
         protected Rect mDestRect;
         protected Paint mDebugPaint;
 
-        public ScaleTileLooper(final int pOldZoomLevel) {
+        public ScaleTileLooper(final float pOldZoomLevel) {
             mOldZoomLevel = pOldZoomLevel;
             mNewTiles = new HashMap<MapTile, Bitmap>();
             mSrcRect = new Rect();
@@ -270,9 +271,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         }
 
         @Override
-        public void initializeLoop(final int pZoomLevel, final int pTileSizePx) {
+        public void initializeLoop(final float pZoomLevel, final int pTileSizePx) {
             mDiff = Math.abs(pZoomLevel - mOldZoomLevel);
-            mTileSize_2 = pTileSizePx >> mDiff;
+            mTileSize_2 = (int) GeometryMath.rightShift(pTileSizePx, mDiff);
         }
 
         @Override
@@ -322,12 +323,12 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         public void handleTile(final int pTileSizePx, final MapTile pTile, final int pX, final int pY) {
 
             // get the correct fraction of the tile from cache and scale up
-            final MapTile oldTile = new MapTile(mOldZoomLevel, pTile.getX() >> mDiff, pTile.getY() >> mDiff);
+            final MapTile oldTile = new MapTile((int) mOldZoomLevel, (int) GeometryMath.rightShift(pTile.getX(), mDiff), (int) GeometryMath.rightShift(pTile.getY(), mDiff));
             final Drawable oldDrawable = mTileCache.getMapTile(oldTile);
 
             if (oldDrawable instanceof BitmapDrawable) {
-                final int xx = (pX % (1 << mDiff)) * mTileSize_2;
-                final int yy = (pY % (1 << mDiff)) * mTileSize_2;
+                final int xx = (pX % (int) GeometryMath.leftShift(1, mDiff)) * mTileSize_2;
+                final int yy = (pY % (int) GeometryMath.leftShift(1, mDiff)) * mTileSize_2;
                 mSrcRect.set(xx, yy, xx + mTileSize_2, yy + mTileSize_2);
                 mDestRect.set(0, 0, pTileSizePx, pTileSizePx);
 
@@ -371,7 +372,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     private class ZoomOutTileLooper extends ScaleTileLooper {
         private static final int MAX_ZOOM_OUT_DIFF = 4;
 
-        public ZoomOutTileLooper(final int pOldZoomLevel) {
+        public ZoomOutTileLooper(final float pOldZoomLevel) {
             super(pOldZoomLevel);
         }
 
@@ -383,14 +384,14 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
             }
 
             // get many tiles from cache and make one tile from them
-            final int xx = pTile.getX() << mDiff;
-            final int yy = pTile.getY() << mDiff;
-            final int numTiles = 1 << mDiff;
+            final int xx = (int) GeometryMath.leftShift(pTile.getX(), mDiff);
+            final int yy = (int) GeometryMath.leftShift(pTile.getY(), mDiff);
+            final int numTiles = (int) GeometryMath.leftShift(1, mDiff);
             Bitmap bitmap = null;
             Canvas canvas = null;
             for (int x = 0; x < numTiles; x++) {
                 for (int y = 0; y < numTiles; y++) {
-                    final MapTile oldTile = new MapTile(mOldZoomLevel, xx + x, yy + y);
+                    final MapTile oldTile = new MapTile((int) mOldZoomLevel, xx + x, yy + y);
                     final Drawable oldDrawable = mTileCache.getMapTile(oldTile);
                     if (oldDrawable instanceof BitmapDrawable) {
                         final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
