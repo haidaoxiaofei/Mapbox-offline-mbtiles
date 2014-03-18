@@ -121,7 +121,7 @@ public class MapController implements MapViewConstants {
         if (!mMapView.canZoomIn()) return false;
 
 
-        if (mMapView.mIsAnimating.getAndSet(true)) {
+        if (mMapView.isAnimating()) {
             // TODO extend zoom (and return true)
             return false;
         } else {
@@ -154,7 +154,7 @@ public class MapController implements MapViewConstants {
 
     public boolean zoomOutAbout(final ILatLng latlong) {
         if (mMapView.canZoomOut()) {
-            if (mMapView.mIsAnimating.getAndSet(true)) {
+            if (mMapView.isAnimating()) {
                 // TODO extend zoom (and return true)
                 return false;
             } else {
@@ -212,8 +212,7 @@ public class MapController implements MapViewConstants {
     public void onAnimationEnd() {
         setZoom(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()));
         goTo(zoomOnLatLong, zoomDeltaScroll);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable(){
+        (new Handler()).postDelayed(new Runnable(){
         @Override
         	public void run(){
         		mMapView.mIsAnimating.set(false);
