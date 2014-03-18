@@ -130,10 +130,7 @@ public class ExtendedOverlayItem extends OverlayItem {
             mapView.getController().animateTo(getPoint());
 
         bubbleShowing = true;
-    }
-
-    public boolean isBubbleShowing() {
-        return bubbleShowing;
+        tooltip.setBoundMarker(this);
     }
 }
 
