@@ -8,6 +8,7 @@ import android.view.View;
 
 import android.view.ViewGroup;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.overlay.ExtendedOverlayItem;
 
 
 /** View that can be displayed on an OSMDroid map, associated to a GeoPoint.
@@ -28,6 +29,8 @@ public abstract class InfoWindow {
     protected View mView;
     protected boolean mIsVisible;
     protected MapView mMapView;
+    private ExtendedOverlayItem boundMarker;
+
     /**
      * @param layoutResId   the id of the view resource.
      * @param mapView       the mapview on which is hooked the view
@@ -86,4 +89,12 @@ public abstract class InfoWindow {
     //Abstract methods to implement in sub-classes:
     public abstract void onOpen(Object item);
     public abstract void onClose();
+
+    public void setBoundMarker(ExtendedOverlayItem boundMarker) {
+        this.boundMarker = boundMarker;
+    }
+
+    public ExtendedOverlayItem getBoundMarker() {
+        return boundMarker;
+    }
 }
