@@ -446,8 +446,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public MapView setScale(float scale) {
-        mMultiTouchScale = scale;
-        invalidate();
+    	float zoomDelta = (scale < 1)?-2*(1-scale):scale-1.0f;
+    	float newZoom  = mZoomLevel + zoomDelta;
+    	if (newZoom <= mMaximumZoomLevel && newZoom >= mMinimumZoomLevel) {
+    		mMultiTouchScale = scale;
+            invalidate();
+    	}
         return this;
     }
 
@@ -1017,7 +1021,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             
             boolean handled = mScaleGestureDetector.onTouchEvent(event);
             if ( !mScaleGestureDetector.isInProgress() ) {
-            	
             	if (event.getActionMasked() == MotionEvent.ACTION_POINTER_UP && event.getPointerCount() == 2) {
                     final ILatLng center = getProjection().fromPixels(rotatedEvent.getX(), rotatedEvent.getY());
             		mController.zoomOutAbout(center);
