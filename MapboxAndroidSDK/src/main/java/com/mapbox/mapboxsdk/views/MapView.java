@@ -1,14 +1,8 @@
 package com.mapbox.mapboxsdk.views;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Point;
-import android.graphics.PointF;
-import android.graphics.Rect;
+import android.content.res.TypedArray;
+import android.graphics.*;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -21,46 +15,43 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
 import android.widget.Toast;
-
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.R;
+import com.mapbox.mapboxsdk.format.GeoJSON;
+import com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay;
+import com.mapbox.mapboxsdk.overlay.ItemizedOverlay;
+import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
+import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
+import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
 import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
-import com.mapbox.mapboxsdk.format.GeoJSON;
-import com.mapbox.mapboxsdk.geometry.BoundingBox;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
-import com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay;
-import com.mapbox.mapboxsdk.overlay.ItemizedOverlay;
-import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
-import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
-import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.Overlay;
 import com.mapbox.mapboxsdk.overlay.OverlayItem;
 import com.mapbox.mapboxsdk.overlay.OverlayManager;
 import com.mapbox.mapboxsdk.overlay.TilesOverlay;
-import com.mapbox.mapboxsdk.tile.TileSystem;
-import com.mapbox.mapboxsdk.tileprovider.MapTileLayerArray;
+import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
+import com.mapbox.mapboxsdk.tileprovider.MapTileLayerArray;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.mapbox.mapboxsdk.views.util.Projection;
+import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
-
+import com.mapbox.mapboxsdk.tile.TileSystem;
 import org.json.JSONException;
-
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -167,7 +158,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         TileSystem.setTileSize(tileSizePixels);
 
         if (tileProvider == null) {
-            final ITileLayer tileSource = new MapboxTileLayer("examples.map-h6lnn4mm");
+            final ITileLayer tileSource = new MapboxTileLayer("examples.map-zgrqqx0w");
             tileProvider = isInEditMode()
                     ? new MapTileLayerArray(tileSource, null, new MapTileModuleLayerBase[0])
                     : new MapTileLayerBasic(context, tileSource, this);
@@ -191,35 +182,21 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         eventsOverlay = new MapEventsOverlay(context, this);
         this.getOverlays().add(eventsOverlay);
 
-		String mapId = attrs.getAttributeValue(null, "mapid");
-		if (mapId != null) {
-			setTileSource(new MapboxTileLayer(mapId));
-		} else {
-			AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-			dialog.setTitle(R.string.errorTitle);
-			dialog.setMessage(R.string.missingMapIdErrorMessage);
-			dialog.setNegativeButton(R.string.closeText, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which)
-				{
-					((Activity)getContext()).finish();
-				}
-			});
-			dialog.create().show();
-		}
-	}
-
-    public MapView(final Context context, AttributeSet attrs) {
-        this(context, 256, new DefaultResourceProxyImpl(context), null, null, attrs);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MapView);
+        String mapid = a.getString(R.styleable.MapView_mapid);
+        a.recycle();
+        if (mapid != null)
+        {
+            setTileSource(new MapboxTileLayer(mapid));
+        }
+        else
+        {
+			Log.w(MapView.class.getCanonicalName(), "mapid not set.");
+        }
     }
 
-    /**
-     * Default constructor for the view.
-     * @param context A copy of the app context
-     * @param URL Valid MapBox ID, URL of tileJSON file or URL of z/x/y image template
-     */
-    public MapView(Context context, String URL) {
-        this(context, (AttributeSet) null);
+    public MapView(final Context context, AttributeSet attrs){
+        this(context, 256, new DefaultResourceProxyImpl(context), null, null, attrs);
     }
 
     protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileLayerBase aTileProvider) {
@@ -256,7 +233,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         } else {
             defaultMarkerOverlay.addItem(marker);
         }
-        this.invalidate();
         marker.addTo(this);
         firstMarker = false;
         return marker;
@@ -275,6 +251,17 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public void addItemizedOverlay(ItemizedOverlay<Marker> itemizedOverlay) {
         this.getOverlays().add(itemizedOverlay);
 
+    }
+
+    public ArrayList<ItemizedIconOverlay> getItemizedOverlays(){
+        ArrayList<ItemizedIconOverlay> list = new ArrayList<ItemizedIconOverlay>();
+        for(Overlay overlay: getOverlays()){
+            System.out.println("ITEMIZED "+overlay);
+            if(overlay instanceof ItemizedOverlay){
+                list.add((ItemizedIconOverlay) overlay);
+            }
+        }
+        return list;
     }
 
     /**
@@ -307,7 +294,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                     Marker currentMarker;
                     public boolean onItemSingleTapUp(final int index,
                                                      final OverlayItem item) {
-                        ((Marker)item).showBubble(new DefaultInfoWindow(R.layout.tootip, MapView.this), MapView.this, true);
+                        ((Marker)item).showBubble(new InfoWindow(R.layout.tootip, MapView.this), MapView.this, true);
+
 
                         return true;
                     }
@@ -519,6 +507,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
         // Allows any views fixed to a Location in the MapView to adjust
         this.requestLayout();
+        cluster();
         return this;
     }
 
@@ -1136,8 +1125,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
 		// rotate Canvas
         c.rotate(mapOrientation,
-            mProjection.getScreenRect().exactCenterX(),
-            mProjection.getScreenRect().exactCenterY());
+                mProjection.getScreenRect().exactCenterX(),
+                mProjection.getScreenRect().exactCenterY());
 
 		// Draw all Overlays.
         this.getOverlayManager().onDraw(c, this);
@@ -1184,6 +1173,18 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public TileLoadedListener getTileLoadedListener() {
         return tileLoadedListener;
     }
+
+    public void cluster() {
+        for (ItemizedIconOverlay overlay: getItemizedOverlays()) {
+            if (!overlay.isClusterOverlay()) {
+                overlay.cluster(this, context);
+            }
+        }
+    }
+
+    // ===========================================================
+    // Public Classes
+    // ===========================================================
 
     /**
      * Per-child layout information associated with OpenStreetMapView.

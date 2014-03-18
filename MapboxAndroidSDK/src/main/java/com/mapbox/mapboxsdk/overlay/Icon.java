@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -86,9 +87,9 @@ public class Icon implements MapboxConstants
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             drawable = new BitmapDrawable(mResources, bitmap);
-            Log.d(TAG, "icon loaded");
             if (marker != null) {
                 marker.setMarker(drawable);
+                Log.w(TAG, "icon loaded");
             }
         }
     }

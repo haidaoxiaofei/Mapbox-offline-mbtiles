@@ -2,6 +2,7 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -12,6 +13,7 @@ import com.mapbox.mapboxsdk.overlay.OverlayItem.HotspotPlace;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas.UnsafeCanvasHandler;
+import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.Projection;
 
 import java.util.ArrayList;
@@ -100,7 +102,6 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
         for (int i = size; i >= 0; i--) {
             final Item item = getItem(i);
             pj.toMapPixels(item.getPoint(), mCurScreenCoords);
-
             onDrawItem(canvas, item, mCurScreenCoords, mapView.getMapOrientation());
         }
     }
@@ -137,7 +138,10 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
      * @param curScreenCoords
      * @param aMapOrientation
      */
-    protected void onDrawItem(final ISafeCanvas canvas, final Item item, final PointF curScreenCoords, final float aMapOrientation) {
+    protected void onDrawItem(ISafeCanvas canvas, final Item item, final PointF curScreenCoords, final float aMapOrientation) {
+        if(item.beingClustered()){
+            return;
+        }
         final int state = (mDrawFocusedItem && (mFocusedItem == item) ? OverlayItem.ITEM_STATE_FOCUSED_MASK
                 : 0);
         final Drawable marker = (item.getMarker(state) == null) ? getDefaultMarker(state) : item
@@ -157,6 +161,22 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
                 }
             });
         }
+
+        if(item instanceof ClusterItem){
+            if(((ItemizedIconOverlay)this).getClusterActions()!=null){
+                canvas = ((ItemizedIconOverlay)this)
+                        .getClusterActions()
+                        .onClusterMarkerDraw((ClusterItem)item, canvas);
+            }
+            else{
+                SafePaint paint = new SafePaint();
+                paint.setTextAlign(Paint.Align.CENTER);
+                paint.setTextSize(30);
+                paint.setFakeBoldText(true);
+                canvas.drawText(""+((ClusterItem)item).getChildCount(),curScreenCoords.x, curScreenCoords.y+10, paint);
+            }
+        }
+
     }
 
     protected Drawable getDefaultMarker(final int state) {

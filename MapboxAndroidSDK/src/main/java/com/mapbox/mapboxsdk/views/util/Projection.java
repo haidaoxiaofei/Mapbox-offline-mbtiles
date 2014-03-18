@@ -120,21 +120,29 @@ public class Projection implements IProjection, GeoConstants {
                 in.getLongitude(),
                 getZoomLevel(), out);
         out.offset(offsetX, offsetY);
-        if (Math.abs(out.x - mapView.getScrollX())
-                > Math.abs(out.x - TileSystem.MapSize(getZoomLevel()) - mapView.getScrollX())) {
-            out.x -= TileSystem.MapSize(getZoomLevel());
+
+        float scrollX = mapView.getScrollX();
+        float scrollY = mapView.getScrollY();
+        int zoomLevel = getZoomLevel();
+
+        float scrollOffsetX = Math.abs(out.x - scrollX);
+        float scrollOffsetY = Math.abs(out.y - scrollY);
+
+        if (scrollOffsetX
+                > Math.abs(out.x - TileSystem.MapSize(zoomLevel) - scrollX)) {
+            out.x -= TileSystem.MapSize(zoomLevel);
         }
-        if (Math.abs(out.x - mapView.getScrollX())
-                > Math.abs(out.x + TileSystem.MapSize(getZoomLevel()) - mapView.getScrollX())) {
-            out.x += TileSystem.MapSize(getZoomLevel());
+        if (scrollOffsetX
+                > Math.abs(out.x + TileSystem.MapSize(zoomLevel) - scrollX)) {
+            out.x += TileSystem.MapSize(zoomLevel);
         }
-        if (Math.abs(out.y - mapView.getScrollY())
-                > Math.abs(out.y - TileSystem.MapSize(getZoomLevel()) - mapView.getScrollY())) {
-            out.y -= TileSystem.MapSize(getZoomLevel());
+        if (scrollOffsetY
+                > Math.abs(out.y - TileSystem.MapSize(zoomLevel) - scrollY)) {
+            out.y -= TileSystem.MapSize(zoomLevel);
         }
-        if (Math.abs(out.y - mapView.getScrollY())
-                > Math.abs(out.y + TileSystem.MapSize(getZoomLevel()) - mapView.getScrollY())) {
-            out.y += TileSystem.MapSize(getZoomLevel());
+        if (scrollOffsetY
+                > Math.abs(out.y + TileSystem.MapSize(zoomLevel) - scrollY)) {
+            out.y += TileSystem.MapSize(zoomLevel);
         }
         return out;
     }
