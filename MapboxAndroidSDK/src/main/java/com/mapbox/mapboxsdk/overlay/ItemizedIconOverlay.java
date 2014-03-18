@@ -5,6 +5,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.view.Display;
+import com.mapbox.mapboxsdk.R;
 import android.view.MotionEvent;
 
 import android.view.WindowManager;
@@ -289,7 +290,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
         double Y = 0;
         double Z = 0;
 
-        for(OverlayItem i: list){
+        for (OverlayItem i: list) {
             LatLng point = i.getPoint();
             double lat = point.getLatitude() * Math.PI / 180;
             double lon = point.getLongitude() * Math.PI / 180;
@@ -316,15 +317,14 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
 
 
 
-    private void initClusterOverlay(){
+    private void initClusterOverlay() {
 
         clusters = new ItemizedIconOverlay<ClusterItem>(clusterList, new ItemizedIconOverlay.OnItemGestureListener<ClusterItem>() {
             @Override
             public boolean onItemSingleTapUp(int index, ClusterItem item) {
                 if(clusterActions!=null){
                     clusterActions.onClusterTap(item);
-                }
-                else{
+                } else {
                     ArrayList<LatLng> activePoints = getCoordinateList(getGroupElements((List<OverlayItem>) mItemList, item.getGroup()));
                     view.zoomToBoundingBox(BoundingBox.fromGeoPoints(activePoints));
                 }

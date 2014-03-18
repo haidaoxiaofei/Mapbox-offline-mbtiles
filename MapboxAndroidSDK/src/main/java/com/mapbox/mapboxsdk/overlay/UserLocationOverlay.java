@@ -32,8 +32,7 @@ import java.util.LinkedList;
  * @author Marc Kurtz
  * @author Manuel Stahl
  */
-public class UserLocationOverlay extends SafeDrawOverlay implements
-        IOverlayMenuProvider, Snappable {
+public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
 
     protected final SafePaint mPaint = new SafePaint();
     protected final SafePaint mCirclePaint = new SafePaint();
@@ -278,52 +277,6 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
         }
 
         return super.onTouchEvent(event, mapView);
-    }
-
-    @Override
-    public void setOptionsMenuEnabled(final boolean pOptionsMenuEnabled) {
-        this.mOptionsMenuEnabled = pOptionsMenuEnabled;
-    }
-
-    @Override
-    public boolean isOptionsMenuEnabled() {
-        return this.mOptionsMenuEnabled;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(final Menu pMenu, final int pMenuIdOffset,
-                                       final MapView pMapView) {
-        pMenu.add(0, MENU_MY_LOCATION + pMenuIdOffset, Menu.NONE,
-                mResourceProxy.getString(ResourceProxy.string.my_location))
-                .setIcon(mResourceProxy.getDrawable(ResourceProxy.bitmap.ic_menu_mylocation))
-                .setCheckable(true);
-
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(final Menu pMenu, final int pMenuIdOffset,
-                                        final MapView pMapView) {
-        pMenu.findItem(MENU_MY_LOCATION + pMenuIdOffset).setChecked(this.isMyLocationEnabled());
-        return false;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem pItem, final int pMenuIdOffset,
-                                         final MapView pMapView) {
-        final int menuId = pItem.getItemId() - pMenuIdOffset;
-        if (menuId == MENU_MY_LOCATION) {
-            if (this.isMyLocationEnabled()) {
-                this.disableFollowLocation();
-                this.disableMyLocation();
-            } else {
-                this.enableFollowLocation();
-                this.enableMyLocation();
-            }
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
