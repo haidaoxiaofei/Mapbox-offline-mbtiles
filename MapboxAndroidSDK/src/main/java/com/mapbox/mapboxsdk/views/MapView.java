@@ -282,7 +282,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                     Marker currentMarker;
                     public boolean onItemSingleTapUp(final int index,
                                                      final OverlayItem item) {
-                        ((Marker)item).showBubble(new DefaultInfoWindow(R.layout.tootip, MapView.this), MapView.this, true);
+                        ((Marker)item).showBubble(new InfoWindow(R.layout.tootip, MapView.this), MapView.this, true);
 
 
                         return true;
