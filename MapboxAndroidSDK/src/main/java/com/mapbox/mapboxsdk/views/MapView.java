@@ -307,6 +307,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @return whether the event action is triggered or not
      */
     public boolean singleTapUpHelper(ILatLng p) {
+        if (defaultTooltip != null) {
+            defaultTooltip.close();
+        }
         onTap(p);
         return true;
     }
