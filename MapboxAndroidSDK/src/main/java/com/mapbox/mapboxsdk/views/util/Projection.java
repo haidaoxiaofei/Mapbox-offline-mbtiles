@@ -55,12 +55,12 @@ public class Projection implements IProjection, GeoConstants {
 
         viewWidth_2 = mapView.getWidth() / 2;
         viewHeight_2 = mapView.getHeight() / 2;
-        worldSize_2 = TileSystem.MapSize(mapView.getZoomLevel(false)) / 2;
+        mZoomLevelProjection = mapView.getZoomLevel(false);
+        worldSize_2 = TileSystem.MapSize(mZoomLevelProjection) / 2;
 
         offsetX = -worldSize_2;
         offsetY = -worldSize_2;
 
-        mZoomLevelProjection = mapView.getZoomLevel(false);
         mBoundingBoxProjection = mapView.getBoundingBox();
         mScreenRectProjection = mapView.getScreenRect(null);
         mIntrinsicScreenRectProjection = mapView.getIntrinsicScreenRect(null);
@@ -69,6 +69,10 @@ public class Projection implements IProjection, GeoConstants {
 
     public float getZoomLevel() {
         return mZoomLevelProjection;
+    }
+    
+    public int getHalfWorldSize() {
+        return worldSize_2;
     }
 
     public BoundingBox getBoundingBox() {
