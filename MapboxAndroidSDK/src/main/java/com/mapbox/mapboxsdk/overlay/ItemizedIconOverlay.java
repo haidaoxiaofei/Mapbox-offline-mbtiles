@@ -6,9 +6,9 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.view.Display;
 import android.view.MotionEvent;
+
 import android.view.WindowManager;
 import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
-import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.ResourceProxy.bitmap;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
@@ -27,7 +27,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
     protected OnItemGestureListener<Item> mOnItemGestureListener;
     private int mDrawnItemsLimit = Integer.MAX_VALUE;
     private final Point mTouchScreenPoint = new Point();
-    private final Point mItemPoint = new Point();
+    private final PointF mItemPoint = new PointF();
 
     private ItemizedIconOverlay<ClusterItem> clusters;
     private MapView view;
@@ -193,8 +193,8 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
 
             pj.toPixels(item.getPoint(), mItemPoint);
 
-            if (hitTest(item, marker, mTouchScreenPoint.x - mItemPoint.x, mTouchScreenPoint.y
-                    - mItemPoint.y)) {
+            if (hitTest(item, marker,(int) (mTouchScreenPoint.x - mItemPoint.x), (int)(mTouchScreenPoint.y
+                    - mItemPoint.y))) {
                 if (task.run(i)) {
                     return true;
                 }
