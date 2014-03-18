@@ -11,7 +11,13 @@ public interface ResourceProxy {
         mapnik,
 
         // other stuff
-        unknown, format_distance_meters, format_distance_kilometers, format_distance_miles, format_distance_nautical_miles, format_distance_feet, online_mode, offline_mode, my_location, compass, map_mode,
+        unknown,
+        format_distance_meters,
+        format_distance_kilometers,
+        format_distance_miles,
+        format_distance_nautical_miles,
+        format_distance_feet, online_mode,
+        offline_mode, my_location, compass, map_mode,
 
     }
 
@@ -22,12 +28,12 @@ public interface ResourceProxy {
          */
         unknown,
 
-        center, direction_arrow, marker_default, marker_default_focused_base, navto_small, next, previous, person,
+        center, direction_arrow, marker_default, person,
 
         /**
          * Menu icons
          */
-        ic_menu_offline, ic_menu_mylocation, ic_menu_compass, ic_menu_mapmode
+        ic_menu_mylocation
     }
 
     String getString(string pResId);
