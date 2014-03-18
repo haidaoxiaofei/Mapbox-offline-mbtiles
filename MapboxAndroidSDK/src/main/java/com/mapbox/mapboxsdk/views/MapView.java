@@ -968,6 +968,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     public void onDetach() {
         this.getOverlayManager().onDetach(this);
+        mTileProvider.detach();
     }
 
     @Override
