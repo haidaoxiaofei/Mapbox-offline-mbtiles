@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.OverlayItem;
+import com.mapbox.mapboxsdk.overlay.Marker;
 
 /** View that can be displayed on an OSMDroid map, associated to a GeoPoint.
  * Typical usage: cartoon-like bubbles displayed when clicking an overlay item. 
@@ -23,7 +23,7 @@ import com.mapbox.mapboxsdk.overlay.OverlayItem;
  */
 
 public class InfoWindow {
-    private OverlayItem boundMarker;
+    private Marker boundMarker;
 
     /**
      * @param layoutResId   the id of the view resource.
@@ -106,7 +106,7 @@ public class InfoWindow {
     }
 
     public void onOpen(Object item) {
-        OverlayItem overlayItem = (OverlayItem) item;
+        Marker overlayItem = (Marker) item;
         String title = overlayItem.getTitle();
         if (title == null) {
             title = "";
@@ -132,11 +132,11 @@ public class InfoWindow {
         //by default, do nothing
     }
 
-    public void setBoundMarker(OverlayItem boundMarker) {
+    public void setBoundMarker(Marker boundMarker) {
         this.boundMarker = boundMarker;
     }
 
-    public OverlayItem getBoundMarker() {
+    public Marker getBoundMarker() {
         return boundMarker;
     }
 }

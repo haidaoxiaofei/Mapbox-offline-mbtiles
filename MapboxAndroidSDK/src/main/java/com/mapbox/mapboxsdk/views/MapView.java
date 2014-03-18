@@ -53,11 +53,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     /**
      * The default marker Overlay, automatically added to the view to add markers directly.
      */
-    private ItemizedIconOverlay<OverlayItem> defaultMarkerOverlay;
+    private ItemizedIconOverlay<Marker> defaultMarkerOverlay;
     /**
      * List linked to the default marker overlay.
      */
-    private ArrayList<OverlayItem> defaultMarkerList = new ArrayList<OverlayItem>();
+    private ArrayList<Marker> defaultMarkerList = new ArrayList<Marker>();
     /**
      * Overlay for basic map touch events.
      */
@@ -270,11 +270,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * Sets the default itemized overlay.
      */
     private void setDefaultItemizedOverlay() {
-        defaultMarkerOverlay = new ItemizedIconOverlay<OverlayItem>(
+        defaultMarkerOverlay = new ItemizedIconOverlay<Marker>(
                 defaultMarkerList,
-                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
                     public boolean onItemSingleTapUp(final int index,
-                                                     final OverlayItem item) {
+                                                     final Marker item) {
                         if(defaultTooltip==null){
                             defaultTooltip = new InfoWindow(R.layout.tootip, MapView.this);
                         }
@@ -290,7 +290,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                         return true;
                     }
                     public boolean onItemLongPress(final int index,
-                                                   final OverlayItem item) {
+                                                   final Marker item) {
                         return true;
                     }
                 }, new DefaultResourceProxyImpl(context.getApplicationContext()));

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverlay<Item> {
+public class ItemizedIconOverlay<Item extends Marker> extends ItemizedOverlay<Item> {
 
     protected final List<Item> mItemList;
     protected OnItemGestureListener<Item> mOnItemGestureListener;
@@ -215,17 +215,17 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
         int currentGroup = 0;
         final double CLUSTERING_THRESHOLD = getThreshold();
         clusterList = new ArrayList<ClusterItem>();
-        for(OverlayItem item: this.mItemList){
+        for(Marker item: this.mItemList){
             item.setClustered(false);
             item.assignGroup(0);
         }
         currentGroup++;
-        for (OverlayItem item: this.mItemList) {
+        for (Marker item: this.mItemList) {
             if (item.getGroup() == 0) {
                 item.assignGroup(currentGroup);
                 item.setClustered(true);
                 int counter = 0;
-                for (OverlayItem item2: this.mItemList) {
+                for (Marker item2: this.mItemList) {
                     if (item2.getGroup() == 0 && PointF.length(screenX(item) - screenX(item2), screenY(item) - screenY(item2)) <= CLUSTERING_THRESHOLD) {
                         item2.assignGroup(currentGroup);
                         item2.setClustered(true);
@@ -274,23 +274,23 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
 
     private HashSet<Integer> getGroupSet(){
         HashSet<Integer> set = new HashSet<Integer>();
-        for(OverlayItem element: mItemList){
+        for(Marker element: mItemList){
             if(!set.contains(element.getGroup())){
                 set.add(element.getGroup());
-                generateCenterByGroup((ArrayList<OverlayItem>) mItemList, element.getGroup());
+                generateCenterByGroup((ArrayList<Marker>) mItemList, element.getGroup());
             }
         }
         return set;
     }
 
-    private LatLng getCenter(ArrayList<OverlayItem> list){
+    private LatLng getCenter(ArrayList<Marker> list){
         int total = list.size();
 
         double X = 0;
         double Y = 0;
         double Z = 0;
 
-        for (OverlayItem i: list) {
+        for (Marker i: list) {
             LatLng point = i.getPoint();
             double lat = point.getLatitude() * Math.PI / 180;
             double lon = point.getLongitude() * Math.PI / 180;
@@ -325,7 +325,7 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
                 if(clusterActions!=null){
                     clusterActions.onClusterTap(item);
                 } else {
-                    ArrayList<LatLng> activePoints = getCoordinateList(getGroupElements((List<OverlayItem>) mItemList, item.getGroup()));
+                    ArrayList<LatLng> activePoints = getCoordinateList(getGroupElements((List<Marker>) mItemList, item.getGroup()));
                     view.zoomToBoundingBox(BoundingBox.fromGeoPoints(activePoints));
                 }
                 return false;
@@ -339,14 +339,14 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
         clusters.setCluster(true);
     }
 
-    private LatLng generateCenterByGroup(ArrayList<OverlayItem> list, int group) {
+    private LatLng generateCenterByGroup(ArrayList<Marker> list, int group) {
         int sumlon = 0, sumlat = 0, count = 0;
-        ArrayList<OverlayItem> tempList = getGroupElements(list, group);
+        ArrayList<Marker> tempList = getGroupElements(list, group);
         LatLng result = getCenter(tempList);
         ClusterItem m = new ClusterItem(view, result);
         m.setMarker(context.getResources().getDrawable(R.drawable.clusteri));
         m.assignGroup(group);
-        m.setMarkerHotspot(OverlayItem.HotspotPlace.CENTER);
+        m.setMarkerHotspot(Marker.HotspotPlace.CENTER);
         m.setChildCount(tempList.size());
         if(m.getChildCount()>1){
             clusterList.add(m);
@@ -354,9 +354,9 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
         return result;
     }
 
-    private ArrayList<OverlayItem> getGroupElements(List<OverlayItem> list, int group){
-        ArrayList<OverlayItem> tempList = new ArrayList<OverlayItem>();
-        for (OverlayItem element : list) {
+    private ArrayList<Marker> getGroupElements(List<Marker> list, int group){
+        ArrayList<Marker> tempList = new ArrayList<Marker>();
+        for (Marker element : list) {
             if (element.getGroup() == group) {
                 tempList.add(element);
             }
@@ -364,9 +364,9 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
         return tempList;
     }
 
-    private ArrayList<LatLng> getCoordinateList(List<OverlayItem> list){
+    private ArrayList<LatLng> getCoordinateList(List<Marker> list){
         ArrayList<LatLng> theList = new ArrayList<LatLng>();
-        for(OverlayItem element: list){
+        for(Marker element: list){
             theList.add(element.getPoint());
         }
         return theList;
@@ -374,11 +374,11 @@ public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverl
 
 
 
-    private float screenX(OverlayItem item){
+    private float screenX(Marker item){
         return view.getProjection().toPixels(item.getPoint(), null).x;
     }
 
-    private float screenY(OverlayItem item){
+    private float screenY(Marker item){
         return view.getProjection().toPixels(item.getPoint(), null).y;
     }
 
