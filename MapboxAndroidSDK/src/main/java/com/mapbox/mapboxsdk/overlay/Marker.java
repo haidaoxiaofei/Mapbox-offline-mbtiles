@@ -24,8 +24,10 @@ public class Marker extends OverlayItem {
      * @param aLatLng the location of the marker
      */
     public Marker(MapView mv, String aTitle, String aDescription, LatLng aLatLng) {
-        super(aTitle, aDescription, aLatLng);
-        this.latLng = aLatLng;
+        this.setTitle(aTitle);
+        this.setDescription(aDescription);
+        this.mLatLng = aLatLng;
+        System.out.println("markerconst"+ mv+aTitle+aDescription+aLatLng);
         if (mv != null) {
             context = mv.getContext();
             mapView = mv;
