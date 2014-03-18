@@ -9,10 +9,8 @@ import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
 import java.lang.reflect.Field;
 
-public class BitmapUtils
-{
-    public static BitmapFactory.Options getBitmapOptions(DisplayMetrics mDisplayMetrics)
-    {
+public class BitmapUtils {
+    public static BitmapFactory.Options getBitmapOptions(DisplayMetrics mDisplayMetrics) {
         try {
             // TODO I think this can all be done without reflection now because all these properties are SDK 4
             final Field density = DisplayMetrics.class.getDeclaredField("DENSITY_DEFAULT");

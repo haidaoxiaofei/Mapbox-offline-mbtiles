@@ -16,7 +16,7 @@
 
             android:layout_height="wrap_content"
 
-            android:paddingLeft="5dp"
+            android:padding="5dp"
 
             android:orientation="vertical"
             android:background="#ffffff">
@@ -38,6 +38,8 @@
 
                       android:textColor="#000000"
 
+                      android:textSize="18dp"
+
                       android:maxEms="17"
 
                       android:layout_gravity="left"
@@ -55,7 +57,7 @@
 
                   android:textColor="#000000"
 
-                  android:textSize="12dp"
+                  android:textSize="14dp"
 
                   android:maxEms="17"
 

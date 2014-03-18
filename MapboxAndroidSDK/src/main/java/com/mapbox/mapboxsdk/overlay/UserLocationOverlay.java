@@ -1,20 +1,5 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import java.util.LinkedList;
-
-import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
-import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.tile.TileSystem;
-import com.mapbox.mapboxsdk.util.GeometryMath;
-import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
-import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
-import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
-import com.mapbox.mapboxsdk.views.util.Projection;
-import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-import com.mapbox.mapboxsdk.views.MapController;
-import android.util.Log;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -25,16 +10,31 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.location.Location;
 import android.util.FloatMath;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+
+import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
+import com.mapbox.mapboxsdk.ResourceProxy;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
+import com.mapbox.mapboxsdk.tile.TileSystem;
+import com.mapbox.mapboxsdk.util.GeometryMath;
+import com.mapbox.mapboxsdk.views.MapController;
+import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
+import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
+import com.mapbox.mapboxsdk.views.util.Projection;
+import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
+
+import java.util.LinkedList;
 
 /**
  * @author Marc Kurtz
  * @author Manuel Stahl
  */
-public class UserLocationOverlay extends SafeDrawOverlay implements
-        IOverlayMenuProvider, Snappable {
+public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
 
     protected final SafePaint mPaint = new SafePaint();
     protected final SafePaint mCirclePaint = new SafePaint();
@@ -48,7 +48,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
     public GpsLocationProvider mMyLocationProvider;
 
     private final LinkedList<Runnable> mRunOnFirstFix = new LinkedList<Runnable>();
-    private final Point mMapCoords = new Point();
+    private final PointF mMapCoords = new PointF();
 
     private Location mLocation;
     private boolean mIsLocationEnabled = false;
@@ -156,12 +156,12 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
 
             mCirclePaint.setAlpha(50);
             mCirclePaint.setStyle(Style.FILL);
-            canvas.drawCircle(mMapCoords.x / zoomDiff, mMapCoords.y / zoomDiff, radius,
+            canvas.drawCircle(GeometryMath.rightShift(mMapCoords.x, zoomDiff) , GeometryMath.rightShift(mMapCoords.y, zoomDiff), radius,
                     mCirclePaint);
 
             mCirclePaint.setAlpha(150);
             mCirclePaint.setStyle(Style.STROKE);
-            canvas.drawCircle(mMapCoords.x / zoomDiff, mMapCoords.y / zoomDiff, radius,
+            canvas.drawCircle(GeometryMath.rightShift(mMapCoords.x, zoomDiff), GeometryMath.rightShift(mMapCoords.y, zoomDiff), radius,
                     mCirclePaint);
         }
 
@@ -213,7 +213,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
     protected RectF getMyLocationDrawingBounds(float zoomLevel, Location lastFix, RectF reuse) {
         if (reuse == null)
             reuse = new RectF();
- 
+
         final float zoomDiff = MapViewConstants.MAXIMUM_ZOOMLEVEL - zoomLevel;
         final float posX = GeometryMath.rightShift(mMapCoords.x, zoomDiff);
         final float posY = GeometryMath.rightShift(mMapCoords.y, zoomDiff);
@@ -258,8 +258,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
     public boolean onSnapToItem(final int x, final int y, final Point snapPoint,
                                 final MapView mapView) {
         if (this.mLocation != null) {
-            snapPoint.x = mMapCoords.x;
-            snapPoint.y = mMapCoords.y;
+            snapPoint.x = (int)mMapCoords.x;
+            snapPoint.y = (int)mMapCoords.y;
             final double xDiff = x - mMapCoords.x;
             final double yDiff = y - mMapCoords.y;
             final boolean snap = xDiff * xDiff + yDiff * yDiff < 64;
@@ -279,52 +279,6 @@ public class UserLocationOverlay extends SafeDrawOverlay implements
         }
 
         return super.onTouchEvent(event, mapView);
-    }
-
-    @Override
-    public void setOptionsMenuEnabled(final boolean pOptionsMenuEnabled) {
-        this.mOptionsMenuEnabled = pOptionsMenuEnabled;
-    }
-
-    @Override
-    public boolean isOptionsMenuEnabled() {
-        return this.mOptionsMenuEnabled;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(final Menu pMenu, final int pMenuIdOffset,
-                                       final MapView pMapView) {
-        pMenu.add(0, MENU_MY_LOCATION + pMenuIdOffset, Menu.NONE,
-                mResourceProxy.getString(ResourceProxy.string.my_location))
-                .setIcon(mResourceProxy.getDrawable(ResourceProxy.bitmap.ic_menu_mylocation))
-                .setCheckable(true);
-
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(final Menu pMenu, final int pMenuIdOffset,
-                                        final MapView pMapView) {
-        pMenu.findItem(MENU_MY_LOCATION + pMenuIdOffset).setChecked(this.isMyLocationEnabled());
-        return false;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem pItem, final int pMenuIdOffset,
-                                         final MapView pMapView) {
-        final int menuId = pItem.getItemId() - pMenuIdOffset;
-        if (menuId == MENU_MY_LOCATION) {
-            if (this.isMyLocationEnabled()) {
-                this.disableFollowLocation();
-                this.disableMyLocation();
-            } else {
-                this.enableFollowLocation();
-                this.enableMyLocation();
-            }
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**

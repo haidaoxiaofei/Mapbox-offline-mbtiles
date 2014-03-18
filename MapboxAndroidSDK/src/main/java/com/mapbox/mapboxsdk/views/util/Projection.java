@@ -23,7 +23,9 @@
 package com.mapbox.mapboxsdk.views.util;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
+
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.api.IProjection;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
@@ -112,12 +114,12 @@ public class Projection implements IProjection, GeoConstants {
      * @param reuse just pass null if you do not have a Point to be 'recycled'.
      * @return the Point containing the <I>screen coordinates</I> of the LatLng passed.
      */
-    public Point toMapPixels(final ILatLng in, final Point reuse) {
+    public PointF toMapPixels(final ILatLng in, final PointF reuse) {
         return toMapPixels(in.getLatitude(), in.getLongitude(), reuse);
     }
     
-    public Point toMapPixels(final double latitude, final double longitude, final Point reuse) {
-        final Point out = reuse != null ? reuse : new Point();
+    public PointF toMapPixels(final double latitude, final double longitude, final PointF reuse) {
+        final PointF out = reuse != null ? reuse : new PointF();
         final float zoom = getZoomLevel();
         final int mapSize = TileSystem.MapSize(zoom);
         final float scrollX = mapView.getScrollX();
@@ -155,9 +157,9 @@ public class Projection implements IProjection, GeoConstants {
      * @param reuse       just pass null if you do not have a Point to be 'recycled'.
      * @return intermediate value to be stored and passed to toMapPixelsTranslated.
      */
-    public Point toMapPixelsProjected(final double latitude, final double longitude,
-                                      final Point reuse) {
-        final Point out = reuse != null ? reuse : new Point();
+    public PointF toMapPixelsProjected(final double latitude, final double longitude,
+                                      final PointF reuse) {
+        final PointF out = reuse != null ? reuse : new PointF();
 
         TileSystem
                 .LatLongToPixelXY(latitude, longitude, MapView.MAXIMUM_ZOOMLEVEL, out);
@@ -173,8 +175,8 @@ public class Projection implements IProjection, GeoConstants {
      * @return the Point containing the <I>Screen coordinates</I> of the initial LatLng passed
      *         to the toMapPixelsProjected.
      */
-    public Point toMapPixelsTranslated(final Point in, final Point reuse) {
-        final Point out = reuse != null ? reuse : new Point();
+    public PointF toMapPixelsTranslated(final PointF in, final PointF reuse) {
+        final PointF out = reuse != null ? reuse : new PointF();
 
         final float zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
         out.set((int)(GeometryMath.rightShift(in.x, zoomDifference) + offsetX), (int)(GeometryMath.rightShift(in.y, zoomDifference) + offsetY));
@@ -217,7 +219,7 @@ public class Projection implements IProjection, GeoConstants {
     }
 
     @Override
-    public Point toPixels(final ILatLng in, final Point out) {
+    public PointF toPixels(final ILatLng in, final PointF out) {
         return toMapPixels(in, out);
     }
 

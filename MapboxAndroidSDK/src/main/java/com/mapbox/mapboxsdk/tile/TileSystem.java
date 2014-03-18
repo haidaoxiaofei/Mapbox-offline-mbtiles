@@ -1,6 +1,8 @@
 package com.mapbox.mapboxsdk.tile;
 
 import android.graphics.Point;
+import android.graphics.PointF;
+
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.GeoConstants;
 import com.mapbox.mapboxsdk.util.GeometryMath;
@@ -78,11 +80,11 @@ public final class TileSystem implements GeoConstants {
      * @param reuse         An optional Point to be recycled, or null to create a new one automatically
      * @return Output parameter receiving the X and Y coordinates in pixels
      */
-    public static Point LatLongToPixelXY(double latitude, double longitude,
-                                         final float levelOfDetail, final Point reuse) {
+    public static PointF LatLongToPixelXY(double latitude, double longitude,
+                                         final float levelOfDetail, final PointF reuse) {
         latitude = wrap(latitude, -90, 90, 180);
         longitude = wrap(longitude, -180, 180, 360);
-        final Point out = (reuse == null ? new Point() : reuse);
+        final PointF out = (reuse == null ? new PointF() : reuse);
 
         latitude = Clip(latitude, MIN_LATITUDE, MAX_LATITUDE);
         longitude = Clip(longitude, MIN_LONGITUDE, MAX_LONGITUDE);

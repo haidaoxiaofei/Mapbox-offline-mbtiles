@@ -2,13 +2,14 @@ package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.graphics.Rect;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -18,7 +19,7 @@ public class Tooltip extends Overlay {
 
     private OverlayItem item;
     private Paint paint = new Paint();
-    private Point point = new Point();
+    private PointF point = new PointF();
     private Context context;
     private String title;
     private String description;
@@ -160,10 +161,10 @@ public class Tooltip extends Overlay {
      * @return the on-screen dimensions of this tooltip as a Rect
      */
     public Rect getRect() {
-        return new Rect(point.x - TOOLTIP_WIDTH / 2,
-                point.y - 200,
-                point.x + TOOLTIP_WIDTH / 2,
-                point.y - 100);
+        return new Rect((int)point.x - TOOLTIP_WIDTH / 2,
+                (int)point.y - 200,
+                (int)point.x + TOOLTIP_WIDTH / 2,
+                (int)point.y - 100);
     }
 
     /**
