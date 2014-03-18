@@ -104,8 +104,8 @@ public class MapController implements MapViewConstants {
 
 
     public MapView setZoom(final float zoomlevel) {
-        mMapView.setScale(1.0f);
         mMapView.setZoomInternal(zoomlevel);
+        mMapView.setScale(1.0f);
         return mMapView;
     }
 
