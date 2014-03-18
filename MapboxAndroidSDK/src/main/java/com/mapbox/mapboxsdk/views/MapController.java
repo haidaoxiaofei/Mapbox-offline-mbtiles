@@ -209,7 +209,6 @@ public class MapController implements MapViewConstants {
     }
 
     public void onAnimationEnd() {
-    	Log.i(TAG, "onAnimationEnd");
         setZoom(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()));
         goTo(zoomOnLatLong, zoomDeltaScroll);
         Handler handler = new Handler();
@@ -217,7 +216,6 @@ public class MapController implements MapViewConstants {
         @Override
         	public void run(){
         		mMapView.mIsAnimating.set(false);
-        		Log.i(TAG, "onAnimationEnd done");
            }
         }, 100);
         
