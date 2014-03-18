@@ -146,9 +146,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         TileSystem.setTileSize(tileSizePixels);
 
         if (tileProvider == null) {
-            tileProvider = isInEditMode()
-                    ? new MapTileLayerArray(null, null, new MapTileModuleLayerBase[0])
-                    : new MapTileLayerBasic(context, null, this);
+            tileProvider = new MapTileLayerBasic(context, null, this);
         }
 
         mTileRequestCompleteHandler = tileRequestCompleteHandler == null
