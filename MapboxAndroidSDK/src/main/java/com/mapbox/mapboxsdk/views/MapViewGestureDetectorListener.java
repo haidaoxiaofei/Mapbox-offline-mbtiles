@@ -67,11 +67,11 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
     @Override
     public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX,
                             final float distanceY) {
-        if (this.mapView.getOverlayManager().onScroll(e1, e2, distanceX, distanceY,
+        if (this.mapView.isAnimating() || this.mapView.getOverlayManager().onScroll(e1, e2, distanceX, distanceY,
                 this.mapView)) {
             return true;
         }
-        this.mapView.scrollBy((int) distanceX, (int) distanceY);
+        this.mapView.getController().panBy((int) distanceX, (int) distanceY);
         return true;
     }
 
