@@ -2,3 +2,7 @@
 build/
 *.iml
 
+src/main/.classpath
+src/main/.externalToolBuilders/
+src/main/.project
+
