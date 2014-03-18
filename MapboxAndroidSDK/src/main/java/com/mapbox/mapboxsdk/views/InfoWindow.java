@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.ExtendedOverlayItem;
+import com.mapbox.mapboxsdk.overlay.OverlayItem;
 
 /** View that can be displayed on an OSMDroid map, associated to a GeoPoint.
  * Typical usage: cartoon-like bubbles displayed when clicking an overlay item. 
@@ -23,7 +23,7 @@ import com.mapbox.mapboxsdk.overlay.ExtendedOverlayItem;
  */
 
 public class InfoWindow {
-    private ExtendedOverlayItem boundMarker;
+    private OverlayItem boundMarker;
 
     /**
      * @param layoutResId   the id of the view resource.
@@ -106,20 +106,20 @@ public class InfoWindow {
     }
 
     public void onOpen(Object item) {
-        ExtendedOverlayItem extendedOverlayItem = (ExtendedOverlayItem) item;
-        String title = extendedOverlayItem.getTitle();
+        OverlayItem overlayItem = (OverlayItem) item;
+        String title = overlayItem.getTitle();
         if (title == null) {
             title = "";
         }
         ((TextView) mView.findViewById(mTitleId /*R.id.title*/)).setText(title);
-        String snippet = extendedOverlayItem.getDescription();
+        String snippet = overlayItem.getDescription();
         if (snippet == null) {
             snippet = "";
         }
         ((TextView) mView.findViewById(mDescriptionId /*R.id.description*/)).setText(snippet);
         //handle sub-description, hidding or showing the text view:
         TextView subDescText = (TextView)mView.findViewById(mSubDescriptionId);
-        String subDesc = extendedOverlayItem.getSubDescription();
+        String subDesc = overlayItem.getSubDescription();
         if (subDesc != null && !("".equals(subDesc))){
             subDescText.setText(subDesc);
             subDescText.setVisibility(View.VISIBLE);
@@ -132,11 +132,11 @@ public class InfoWindow {
         //by default, do nothing
     }
 
-    public void setBoundMarker(ExtendedOverlayItem boundMarker) {
+    public void setBoundMarker(OverlayItem boundMarker) {
         this.boundMarker = boundMarker;
     }
 
-    public ExtendedOverlayItem getBoundMarker() {
+    public OverlayItem getBoundMarker() {
         return boundMarker;
     }
 }

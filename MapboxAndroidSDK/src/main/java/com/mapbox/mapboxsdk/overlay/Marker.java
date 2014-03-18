@@ -9,7 +9,7 @@ import com.mapbox.mapboxsdk.views.MapView;
 /**
  * A Marker object is a visible representation of a point on a Map that has a geographical place.
  */
-public class Marker extends ExtendedOverlayItem {
+public class Marker extends OverlayItem {
     private Context context;
     private Tooltip tooltip;
     private MapView mapView;
