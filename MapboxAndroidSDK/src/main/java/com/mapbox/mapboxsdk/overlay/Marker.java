@@ -81,12 +81,6 @@ public class Marker extends ExtendedOverlayItem {
         mapView.invalidate();
     }
 
-    private void attachTooltip() {
-        tooltip = new Tooltip(context, this, this.getTitle(), this.getDescription());
-        mapView.getOverlays().add(tooltip);
-        mapView.invalidate();
-    }
-
     public Marker setIcon(Icon icon) {
         this.icon = icon;
         icon.setMarker(this);
@@ -94,11 +88,4 @@ public class Marker extends ExtendedOverlayItem {
         return this;
     }
 
-    public void setTooltipVisible() {
-        tooltip.setVisible(true);
-    }
-
-    public void setTooltipInvisible() {
-        tooltip.setVisible(false);
-    }
 }
