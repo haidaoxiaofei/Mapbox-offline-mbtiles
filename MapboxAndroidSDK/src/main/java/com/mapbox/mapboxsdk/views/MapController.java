@@ -1,17 +1,19 @@
 package com.mapbox.mapboxsdk.views;
 
-import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
-import android.graphics.Point;
+import android.graphics.Matrix;
+import android.graphics.PointF;
+import android.graphics.Rect;
 import android.os.Build;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.ScaleAnimation;
+
+import com.mapbox.mapboxsdk.api.ILatLng;
+import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
 public class MapController implements MapViewConstants {
 
@@ -26,7 +28,7 @@ public class MapController implements MapViewConstants {
     private Animator mCurrentAnimator;
     private float mAnimationFactor = 1.0f;
     private ILatLng zoomOnLatLong = null;
-    private Point zoomDeltaScroll = new Point();
+    private PointF zoomDeltaScroll = new PointF();
 
     public MapController(MapView mapView) {
         mMapView = mapView;
@@ -57,16 +59,16 @@ public class MapController implements MapViewConstants {
      * Start animating the map towards the given point.
      */
     public void animateTo(final ILatLng point) {
-        Point p = mMapView.getProjection().toMapPixels(point, null);
-        animateTo(p.x, p.y);
+        PointF p = mMapView.getProjection().toMapPixels(point, null);
+        animateTo((int)p.x, (int)p.y);
     }
-    
+
     /**
      * Start animating the map towards the given point.
      */
-    public void goTo(final ILatLng point, Point delta) {
-        Point p = mMapView.getProjection().toMapPixels(point, null);
-        mMapView.scrollTo(p.x + delta.x, p.y + delta.y);
+    public void goTo(final ILatLng point, PointF delta) {
+    	PointF p = mMapView.getProjection().toMapPixels(point, null);
+        mMapView.scrollTo((int)(p.x + delta.x), (int)(p.y + delta.y));
     }
 
     /**
@@ -91,8 +93,8 @@ public class MapController implements MapViewConstants {
      * Set the map view to the given center. There will be no animation.
      */
     public void setCenter(final ILatLng latlng) {
-        Point p = mMapView.getProjection().toMapPixels(latlng, null);
-        this.mMapView.scrollTo(p.x, p.y);
+        PointF p = mMapView.getProjection().toMapPixels(latlng, null);
+        this.mMapView.scrollTo((int)p.x, (int)p.y);
     }
 
     public void stopPanning() {
@@ -145,13 +147,13 @@ public class MapController implements MapViewConstants {
     public boolean zoomInAbout(final ILatLng latlong) {
 
         if (!mMapView.canZoomIn()) return false;
-        
+
 
         if (mMapView.mIsAnimating.getAndSet(true)) {
             // TODO extend zoom (and return true)
             return false;
         } else {
-            Point coords = mMapView.getProjection().toMapPixels(latlong, null);
+        	PointF coords = mMapView.getProjection().toMapPixels(latlong, null);
             zoomOnLatLong = latlong;
             zoomDeltaScroll.set(mMapView.getScrollX() - coords.x, mMapView.getScrollY() - coords.y);
             mMapView.mMultiTouchScalePoint.set(coords.x, coords.y);
@@ -189,7 +191,7 @@ public class MapController implements MapViewConstants {
                 // TODO extend zoom (and return true)
                 return false;
             } else {
-            	Point coords = mMapView.getProjection().toMapPixels(latlong, null);
+            	PointF coords = mMapView.getProjection().toMapPixels(latlong, null);
                 zoomOnLatLong = latlong;
                 zoomDeltaScroll.set(mMapView.getScrollX() - coords.x, mMapView.getScrollY() - coords.y);
                 mMapView.mMultiTouchScalePoint.set(coords.x, coords.y);
@@ -204,7 +206,7 @@ public class MapController implements MapViewConstants {
                 }
                 mMapView.mTargetZoomLevel.set(Float.floatToIntBits(targetZoom));
             	mAnimationFactor = targetZoom/(float)(currentZoom - 1.0f + Math.floor(targetZoom));
-               if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                     mCurrentAnimator = mZoomOutAnimation;
                     mZoomOutAnimation.start();
                 } else {

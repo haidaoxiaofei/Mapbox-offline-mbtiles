@@ -56,8 +56,8 @@ public abstract class TileLooper {
     protected class ClosenessToCenterComparator implements Comparator<Point>{
         @Override
         public int compare(Point one, Point two) {
-            float oneLength = length(one);
-            float twoLength = length(two);
+            double oneLength = length(one);
+            double twoLength = length(two);
             if (oneLength > twoLength) {
                 return 1;
             } else if (oneLength < twoLength) {
@@ -66,9 +66,11 @@ public abstract class TileLooper {
                 return 0;
             }
         }
-        private float length(Point point) {
-            return (float) (Math.sqrt(Math.pow(point.x - center.x, 2) +
-                    Math.pow(point.y - center.y, 2)));
+
+        private double length(Point point) {
+            return Math.sqrt(
+                    ((point.x - center.x) * (point.x - center.x)) +
+                    ((point.y - center.y) * (point.y - center.y)));
         }
     }
 

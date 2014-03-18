@@ -44,8 +44,6 @@ public class DefaultResourceProxyImpl implements ResourceProxy, MapViewConstants
     @Override
     public String getString(final string pResId) {
         switch (pResId) {
-            case mapnik:
-                return "Mapnik";
             case format_distance_meters:
                 return "%s m";
             case format_distance_kilometers:
