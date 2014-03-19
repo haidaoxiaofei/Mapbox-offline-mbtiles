@@ -24,6 +24,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     /**
      * Construct a new bounding box based on its corners, given in NESW
      * order.
+     *
      * @param north
      * @param east
      * @param south
@@ -64,6 +65,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     /**
      * Get the absolute distance, in degrees, between the north and
      * south boundaries of this bounding box
+     *
      * @return
      */
     public double getLatitudeSpan() {
@@ -73,6 +75,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     /**
      * Get the absolute distance, in degrees, between the west and
      * east boundaries of this bounding box
+     *
      * @return
      */
     public double getLongitudeSpan() {
@@ -93,7 +96,6 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
         double minLon = 180;
         double maxLat = -90;
         double maxLon = -180;
-
 
 
         for (final LatLng gp : partialPolyLine) {
@@ -119,6 +121,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     /**
      * Determine whether this bounding box contains a point and the point
      * does not touch its boundary.
+     *
      * @param pGeoPoint the point which may be contained
      * @return true, if the point is contained within the box.
      */
@@ -129,9 +132,9 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
                 && ((longitude < this.mLonEast) && (longitude > this.mLonWest));
     }
 
-    public boolean containsAll(final List<LatLng> list){
-        for(LatLng element: list){
-            if(!this.contains(element)){
+    public boolean containsAll(final List<LatLng> list) {
+        for (LatLng element : list) {
+            if (!this.contains(element)) {
                 return false;
             }
         }
