@@ -29,10 +29,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    // This is important, it will run lint checks but won't abort build
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
     compile 'com.android.support:appcompat-v7:+'
+    compile project(':mapbox-android-sdk')
     compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:1.0.0-SNAPSHOT@aar') {
         transitive = true
     }
