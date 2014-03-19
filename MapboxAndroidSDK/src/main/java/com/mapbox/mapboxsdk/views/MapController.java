@@ -18,7 +18,6 @@ public class MapController implements MapViewConstants {
     // Zoom animations
     private ValueAnimator mZoomAnimation;
 
-    private float mAnimationFactor = 1.0f;
     private ILatLng zoomOnLatLong = null;
     private PointF zoomDeltaScroll = new PointF();
 
@@ -136,8 +135,7 @@ public class MapController implements MapViewConstants {
             }
             targetZoom = mMapView.getClampedZoomLevel(targetZoom);
         	mMapView.mTargetZoomLevel.set(Float.floatToIntBits(targetZoom));
-        	mAnimationFactor = (float)(currentZoom - 1.0f + Math.ceil(targetZoom))/currentZoom;
-            
+
         	float delta = Math.abs(targetZoom - currentZoom);
         	mZoomAnimation.setFloatValues(1.0f, 1.0f + delta);
             mZoomAnimation.start();
@@ -169,7 +167,6 @@ public class MapController implements MapViewConstants {
                 	targetZoom = mMapView.getClampedZoomLevel((float) Math.floor(currentZoom) - 1);
                 }
                 mMapView.mTargetZoomLevel.set(Float.floatToIntBits(targetZoom));
-            	mAnimationFactor = targetZoom/(float)(currentZoom - 1.0f + Math.floor(targetZoom));
             	float delta = Math.abs(targetZoom - currentZoom);
             	mZoomAnimation.setFloatValues(1.0f, 1.0f/(1.0f + delta));
                mZoomAnimation.start();
