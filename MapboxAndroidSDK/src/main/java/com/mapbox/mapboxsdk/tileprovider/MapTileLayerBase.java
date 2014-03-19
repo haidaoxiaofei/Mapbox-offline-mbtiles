@@ -271,7 +271,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
 
         @Override
         public void initializeLoop(final float pZoomLevel, final int pTileSizePx) {
-            mDiff = Math.abs(pZoomLevel - mOldZoomLevel);
+            mDiff = (float)Math.abs(Math.floor(pZoomLevel) - Math.floor(mOldZoomLevel));
             mTileSize_2 = (int) GeometryMath.rightShift(pTileSizePx, mDiff);
         }
 
