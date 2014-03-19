@@ -24,8 +24,8 @@ public abstract class SafeDrawOverlay extends Overlay {
 
     protected abstract void drawSafe(final ISafeCanvas c, final MapView mapView, final boolean shadow);
 
-    public SafeDrawOverlay(ResourceProxy pResourceProxy) {
-        super(pResourceProxy);
+    public SafeDrawOverlay() {
+        super();
     }
 
     @Override

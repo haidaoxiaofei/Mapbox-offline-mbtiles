@@ -7,13 +7,9 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
-
-import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
-import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,15 +65,15 @@ public class PathOverlay extends Overlay {
     }
 
     public PathOverlay(final int color, final Context ctx) {
-        this(color, 2.0f, new DefaultResourceProxyImpl(ctx));
+        this(color, 2.0f);
     }
 
-    public PathOverlay(final int color, final ResourceProxy resourceProxy) {
-        this(color, 2.0f, resourceProxy);
+    public PathOverlay(final int color) {
+        this(color, 2.0f);
     }
 
-    public PathOverlay(final int color, final float width, final ResourceProxy resourceProxy) {
-        super(resourceProxy);
+    public PathOverlay(final int color, final float width) {
+        super();
         this.mPaint.setColor(color);
         this.mPaint.setStrokeWidth(width);
         this.mPaint.setStyle(Paint.Style.STROKE);

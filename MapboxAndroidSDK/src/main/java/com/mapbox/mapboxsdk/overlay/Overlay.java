@@ -35,7 +35,6 @@ public abstract class Overlay {
     protected static final float SHADOW_X_SKEW = -0.8999999761581421f;
     protected static final float SHADOW_Y_SCALE = 0.5f;
 
-    protected ResourceProxy mResourceProxy;
     protected float mScale;
     private static final Rect mRect = new Rect();
     private boolean mEnabled = true;
@@ -44,19 +43,12 @@ public abstract class Overlay {
     }
 
     public Overlay(final Context ctx) {
-        mResourceProxy = new DefaultResourceProxyImpl(ctx);
         mScale = ctx.getResources().getDisplayMetrics().density;
-    }
-
-    public Overlay(final ResourceProxy pResourceProxy) {
-        mResourceProxy = pResourceProxy;
-        mScale = mResourceProxy.getDisplayMetricsDensity();
     }
 
     /**
      */
     public Overlay setContext(final Context ctx) {
-        mResourceProxy = new DefaultResourceProxyImpl(ctx);
         mScale = ctx.getResources().getDisplayMetrics().density;
         return this;
     }

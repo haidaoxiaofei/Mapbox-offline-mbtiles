@@ -36,7 +36,6 @@ import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import org.json.JSONException;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -270,9 +269,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * Sets the default itemized overlay.
      */
     private void setDefaultItemizedOverlay() {
-        defaultMarkerOverlay = new ItemizedIconOverlay<Marker>(
-                defaultMarkerList,
-                new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
+        defaultMarkerOverlay = new ItemizedIconOverlay<Marker>(getContext(), defaultMarkerList, new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
                     public boolean onItemSingleTapUp(final int index,
                                                      final Marker item) {
                         if(defaultTooltip==null){
@@ -293,7 +290,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                                                    final Marker item) {
                         return true;
                     }
-                }, new DefaultResourceProxyImpl(context.getApplicationContext()));
+                });
         this.getOverlays().add(defaultMarkerOverlay);
     }
 
