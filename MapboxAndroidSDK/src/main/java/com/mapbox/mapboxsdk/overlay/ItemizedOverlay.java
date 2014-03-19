@@ -9,7 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 
 import com.mapbox.mapboxsdk.ResourceProxy;
-import com.mapbox.mapboxsdk.overlay.OverlayItem.HotspotPlace;
+import com.mapbox.mapboxsdk.overlay.Marker.HotspotPlace;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas.UnsafeCanvasHandler;
@@ -19,7 +19,7 @@ import com.mapbox.mapboxsdk.views.util.Projection;
 import java.util.ArrayList;
 
 /**
- * Draws a list of {@link OverlayItem} as markers to a map. The item with the lowest index is drawn
+ * Draws a list of {@link Marker} as markers to a map. The item with the lowest index is drawn
  * as last and therefore the 'topmost' marker. It also gets checked for onTap first. This class is
  * generic, because you then you get your custom item-class passed back in onTap().
  *
@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * @author Theodore Hong
  * @author Fred Eisele
  */
-public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDrawOverlay implements
+public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverlay implements
         Overlay.Snappable {
 
     protected final Drawable mDefaultMarker;
@@ -73,7 +73,7 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
      * aligned with the geographical coordinates of the Item.<br/>
      * <br/>
      * The order of drawing may be changed by overriding the getIndexToDraw(int) method. An item may
-     * provide an alternate marker via its OverlayItem.getMarker(int) method. If that method returns
+     * provide an alternate marker via its Marker.getMarker(int) method. If that method returns
      * null, the default marker is used.<br/>
      * <br/>
      * The focused item is always drawn last, which puts it visually on top of the other items.<br/>
@@ -148,7 +148,7 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
         if(item.beingClustered()){
             return;
         }
-        final int state = (mDrawFocusedItem && (mFocusedItem == item) ? OverlayItem.ITEM_STATE_FOCUSED_MASK
+        final int state = (mDrawFocusedItem && (mFocusedItem == item) ? Marker.ITEM_STATE_FOCUSED_MASK
                 : 0);
         final Drawable marker = (item.getMarker(state) == null) ? getDefaultMarker(state) : item
                 .getMarker(state);
@@ -172,7 +172,7 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
             if(((ItemizedIconOverlay)this).getClusterActions()!=null){
                 canvas = ((ItemizedIconOverlay)this)
                         .getClusterActions()
-                        .onClusterMarkerDraw((ClusterItem)item, canvas);
+                        .onClusterMarkerDraw((ClusterItem) item, canvas);
             }
             else{
                 SafePaint paint = new SafePaint();
@@ -186,7 +186,7 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
     }
 
     protected Drawable getDefaultMarker(final int state) {
-        OverlayItem.setState(mDefaultMarker, state);
+        Marker.setState(mDefaultMarker, state);
         return mDefaultMarker;
     }
 
@@ -217,7 +217,7 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
             final Item item = getItem(i);
             pj.toMapPixels(item.getPoint(), mCurScreenCoords);
 
-            final int state = (mDrawFocusedItem && (mFocusedItem == item) ? OverlayItem.ITEM_STATE_FOCUSED_MASK
+            final int state = (mDrawFocusedItem && (mFocusedItem == item) ? Marker.ITEM_STATE_FOCUSED_MASK
                     : 0);
             final Drawable marker = (item.getMarker(state) == null) ? getDefaultMarker(state)
                     : item.getMarker(state);
@@ -333,6 +333,6 @@ public abstract class ItemizedOverlay<Item extends OverlayItem> extends SafeDraw
     }
 
     public static interface OnFocusChangeListener {
-        void onFocusChanged(ItemizedOverlay<?> overlay, OverlayItem newFocus);
+        void onFocusChanged(ItemizedOverlay<?> overlay, Marker newFocus);
     }
 }

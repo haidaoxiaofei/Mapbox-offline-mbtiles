@@ -17,7 +17,7 @@ import com.mapbox.mapboxsdk.views.util.Projection;
 
 public class Tooltip extends Overlay {
 
-    private OverlayItem item;
+    private Marker item;
     private Paint paint = new Paint();
     private PointF point = new PointF();
     private Context context;
@@ -41,7 +41,7 @@ public class Tooltip extends Overlay {
      * @param ctx a Context object on which this tooltip is drawn.
      * @param ot an overlay item.
      */
-    public Tooltip(Context ctx, OverlayItem ot) {
+    public Tooltip(Context ctx, Marker ot) {
         this(ctx, ot, "", "");
     }
 
@@ -53,7 +53,7 @@ public class Tooltip extends Overlay {
      * @param title the title in the tooltip.
      * @param description the description text in the tooltip
      */
-    public Tooltip(Context ctx, OverlayItem ot, String title, String description) {
+    public Tooltip(Context ctx, Marker ot, String title, String description) {
         super(ctx);
         this.context = ctx;
         setItem(ot);
@@ -133,7 +133,7 @@ public class Tooltip extends Overlay {
      * @param item the overlay (normally a Marker object)
      * @return Tooltip the tooltip, for chaining.
      */
-    public Tooltip setItem(OverlayItem item) {
+    public Tooltip setItem(Marker item) {
         this.item = item;
         return this;
     }

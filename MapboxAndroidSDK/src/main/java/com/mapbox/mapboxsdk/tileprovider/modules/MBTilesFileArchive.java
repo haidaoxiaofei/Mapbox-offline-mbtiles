@@ -68,51 +68,58 @@ public class MBTilesFileArchive implements IArchiveFile {
     public String toString() {
         return "MBTiles [mDatabase=" + mDatabase.getPath() + "]";
     }
-    public int getMinZoomLevel(){
+
+    public int getMinZoomLevel() {
         Cursor cursor = mDatabase.rawQuery("SELECT MIN(zoom_level) FROM tiles", null);
         cursor.moveToFirst();
         return cursor.getInt(0);
     }
-    public int getMaxZoomLevel(){
+
+    public int getMaxZoomLevel() {
         Cursor cursor = mDatabase.rawQuery("SELECT MAX(zoom_level) FROM tiles", null);
         cursor.moveToFirst();
         return cursor.getInt(0);
     }
 
-    public String getName(){
+    public String getName() {
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'name'", null);
         cursor.moveToFirst();
         return cursor.getString(1);
     }
-    public String getType(){
+
+    public String getType() {
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'template'", null);
         cursor.moveToFirst();
         return cursor.getString(1);
     }
-    public String getVersion(){
+
+    public String getVersion() {
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'version'", null);
         cursor.moveToFirst();
         return cursor.getString(1);
     }
-    public String getDescription(){
+
+    public String getDescription() {
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'description'", null);
         cursor.moveToFirst();
         return cursor.getString(1);
     }
-    public String getAttribution(){
+
+    public String getAttribution() {
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'attribution'", null);
         cursor.moveToFirst();
         return cursor.getString(1);
     }
-    public BoundingBox getBounds(){
+
+    public BoundingBox getBounds() {
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'bounds'", null);
         cursor.moveToFirst();
         String boundsString = cursor.getString(1);
         String[] boundsArray = boundsString.split(",");
         return new BoundingBox(Double.parseDouble(boundsArray[0]),
-                          Double.parseDouble(boundsArray[1]),
-                          Double.parseDouble(boundsArray[2]),
-                          Double.parseDouble(boundsArray[3]));
+                Double.parseDouble(boundsArray[1]),
+                Double.parseDouble(boundsArray[2]),
+                Double.parseDouble(boundsArray[3]));
     }
 
     private static final String TAG = "MBTilesFileArchive";

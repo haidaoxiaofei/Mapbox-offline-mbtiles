@@ -6,9 +6,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.ExtendedOverlayItem;
+import com.mapbox.mapboxsdk.overlay.Marker;
+
+/** View that can be displayed on an OSMDroid map, associated to a GeoPoint.
+ * Typical usage: cartoon-like bubbles displayed when clicking an overlay item. 
+ * It mimics the InfoWindow class of Google Maps JavaScript API V3. 
+ * Main differences are: 
+ * <ul>
+ * <li>Structure and content of the view is let to the responsibility of the caller. </li>
+ * <li>The same InfoWindow can be associated to many items. </li>
+ * </ul>
+ * Known issue: the window is displayed "above" the marker, so the queue of the bubble can hide the marker. 
+ *
+ * This is an abstract class.
+ * @author M.Kergall
+ */
 
 public class InfoWindow {
+    private Marker boundMarker;
+
+    /**
+     * @param layoutResId   the id of the view resource.
+     * @param mapView       the mapview on which is hooked the view
+     *
+     */
 
     private MapView mMapView;
     private boolean mIsVisible;
@@ -85,20 +106,20 @@ public class InfoWindow {
     }
 
     public void onOpen(Object item) {
-        ExtendedOverlayItem extendedOverlayItem = (ExtendedOverlayItem) item;
-        String title = extendedOverlayItem.getTitle();
+        Marker overlayItem = (Marker) item;
+        String title = overlayItem.getTitle();
         if (title == null) {
             title = "";
         }
         ((TextView) mView.findViewById(mTitleId /*R.id.title*/)).setText(title);
-        String snippet = extendedOverlayItem.getDescription();
+        String snippet = overlayItem.getDescription();
         if (snippet == null) {
             snippet = "";
         }
         ((TextView) mView.findViewById(mDescriptionId /*R.id.description*/)).setText(snippet);
         //handle sub-description, hidding or showing the text view:
         TextView subDescText = (TextView)mView.findViewById(mSubDescriptionId);
-        String subDesc = extendedOverlayItem.getSubDescription();
+        String subDesc = overlayItem.getSubDescription();
         if (subDesc != null && !("".equals(subDesc))){
             subDescText.setText(subDesc);
             subDescText.setVisibility(View.VISIBLE);
@@ -109,6 +130,14 @@ public class InfoWindow {
 
     public void onClose() {
         //by default, do nothing
+    }
+
+    public void setBoundMarker(Marker boundMarker) {
+        this.boundMarker = boundMarker;
+    }
+
+    public Marker getBoundMarker() {
+        return boundMarker;
     }
 }
  
