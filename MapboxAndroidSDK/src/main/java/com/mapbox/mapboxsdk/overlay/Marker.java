@@ -31,14 +31,12 @@ public class Marker {
     private boolean clustered;
 
 
-
-
     public int getGroup() {
         return group;
     }
 
     public void assignGroup(int currentGroup) {
-        if (currentGroup==0){
+        if (currentGroup == 0) {
             this.setClustered(false);
         }
         group = currentGroup;
@@ -51,9 +49,6 @@ public class Marker {
     public void setClustered(boolean clustered) {
         this.clustered = clustered;
     }
-
-
-
 
 
     /**
@@ -87,7 +82,7 @@ public class Marker {
     // ===========================================================
 
     public Marker(final String aUid, final String aTitle, final String aDescription,
-                       final LatLng aLatLng) {
+                  final LatLng aLatLng) {
         this.mTitle = aTitle;
         this.mSnippet = aDescription;
         this.mLatLng = aLatLng;
@@ -100,16 +95,17 @@ public class Marker {
 
     /**
      * Initialize a new marker object, adding it to a MapView and attaching a tooltip
-     * @param mv a mapview
-     * @param aTitle the title of the marker, in a potential tooltip
+     *
+     * @param mv           a mapview
+     * @param aTitle       the title of the marker, in a potential tooltip
      * @param aDescription the description of the marker, in a tooltip
-     * @param aLatLng the location of the marker
+     * @param aLatLng      the location of the marker
      */
     public Marker(MapView mv, String aTitle, String aDescription, LatLng aLatLng) {
         this.setTitle(aTitle);
         this.setDescription(aDescription);
         this.mLatLng = aLatLng;
-        System.out.println("markerconst"+ mv+aTitle+aDescription+aLatLng);
+        System.out.println("markerconst" + mv + aTitle + aDescription + aLatLng);
         if (mv != null) {
             context = mv.getContext();
             mapView = mv;
@@ -136,23 +132,23 @@ public class Marker {
         return mLatLng;
     }
 
-    public void setTitle(String aTitle){
+    public void setTitle(String aTitle) {
         mTitle = aTitle;
     }
 
-    public void setDescription(String aDescription){
+    public void setDescription(String aDescription) {
         mDescription = aDescription;
     }
 
-    public void setSubDescription(String aSubDescription){
+    public void setSubDescription(String aSubDescription) {
         mSubDescription = aSubDescription;
     }
 
-    public void setImage(Drawable anImage){
+    public void setImage(Drawable anImage) {
         mImage = anImage;
     }
 
-    public void setRelatedObject(Object o){
+    public void setRelatedObject(Object o) {
         mRelatedObject = o;
     }
 
@@ -168,7 +164,7 @@ public class Marker {
         return mImage;
     }
 
-    public Object getRelatedObject(){
+    public Object getRelatedObject() {
         return mRelatedObject;
     }
 
@@ -232,7 +228,7 @@ public class Marker {
     // Methods
     // ===========================================================
     /*
-	 * (copied from the Google API docs) Sets the state of a drawable to match a given state bitset.
+     * (copied from the Google API docs) Sets the state of a drawable to match a given state bitset.
 	 * This is done by converting the state bitset bits into a state set of R.attr.state_pressed,
 	 * R.attr.state_selected and R.attr.state_focused attributes, and then calling {@link
 	 * Drawable.setState(int[])}.
@@ -240,12 +236,15 @@ public class Marker {
     public static void setState(final Drawable drawable, final int stateBitset) {
         final int[] states = new int[3];
         int index = 0;
-        if ((stateBitset & ITEM_STATE_PRESSED_MASK) > 0)
+        if ((stateBitset & ITEM_STATE_PRESSED_MASK) > 0) {
             states[index++] = android.R.attr.state_pressed;
-        if ((stateBitset & ITEM_STATE_SELECTED_MASK) > 0)
+        }
+        if ((stateBitset & ITEM_STATE_SELECTED_MASK) > 0) {
             states[index++] = android.R.attr.state_selected;
-        if ((stateBitset & ITEM_STATE_FOCUSED_MASK) > 0)
+        }
+        if ((stateBitset & ITEM_STATE_FOCUSED_MASK) > 0) {
             states[index++] = android.R.attr.state_focused;
+        }
 
         drawable.setState(states);
     }
@@ -267,21 +266,21 @@ public class Marker {
     // ===========================================================
 
 
-
     /**
      * From a HotspotPlace and drawable dimensions (width, height), return the hotspot position.
      * Could be a public method of HotspotPlace or OverlayItem...
      */
-    public Point getHotspot(HotspotPlace place, int w, int h){
+    public Point getHotspot(HotspotPlace place, int w, int h) {
         Point hp = new Point();
-        if (place == null)
+        if (place == null) {
             place = HotspotPlace.BOTTOM_CENTER; //use same default than in osmdroid.
-        switch (place){
-            case NONE :
+        }
+        switch (place) {
+            case NONE:
                 hp.set(0, 0);
                 break;
             case BOTTOM_CENTER:
-                hp.set(w/2, 0);
+                hp.set(w / 2, 0);
                 break;
             case LOWER_LEFT_CORNER:
                 hp.set(0, 0);
@@ -290,16 +289,16 @@ public class Marker {
                 hp.set(w, 0);
                 break;
             case CENTER:
-                hp.set(w/2, -h/2);
+                hp.set(w / 2, -h / 2);
                 break;
             case LEFT_CENTER:
-                hp.set(0, -h/2);
+                hp.set(0, -h / 2);
                 break;
             case RIGHT_CENTER:
-                hp.set(w, -h/2);
+                hp.set(w, -h / 2);
                 break;
             case TOP_CENTER:
-                hp.set(w/2, -h);
+                hp.set(w / 2, -h);
                 break;
             case UPPER_LEFT_CORNER:
                 hp.set(0, -h);
@@ -317,11 +316,11 @@ public class Marker {
      * <ul>image and sub-description if any.</ul>
      * and centers the map view on the item if panIntoView is true. <br>
      */
-    public void showBubble(InfoWindow tooltip, MapView mapView, boolean panIntoView){
+    public void showBubble(InfoWindow tooltip, MapView mapView, boolean panIntoView) {
         //offset the tooltip to be top-centered on the marker:
         Drawable marker = getMarker(0 /*OverlayItem.ITEM_STATE_FOCUSED_MASK*/);
         int markerWidth = 0, markerHeight = 0;
-        if (marker != null){
+        if (marker != null) {
             markerWidth = marker.getIntrinsicWidth();
             markerHeight = marker.getIntrinsicHeight();
         } //else... we don't have the default marker size => don't user default markers!!!
@@ -329,8 +328,9 @@ public class Marker {
         Point tooltipH = getHotspot(HotspotPlace.TOP_CENTER, markerWidth, markerHeight);
         tooltipH.offset(-markerH.x, -markerH.y);
         tooltip.open(this, this.getPoint(), tooltipH.x, tooltipH.y);
-        if (panIntoView)
+        if (panIntoView) {
             mapView.getController().animateTo(getPoint());
+        }
 
         bubbleShowing = true;
         tooltip.setBoundMarker(this);
@@ -343,12 +343,10 @@ public class Marker {
     private Icon icon;
 
 
-
     public Marker addTo(MapView mv) {
         mapView = mv;
         context = mv.getContext();
-        if (icon == null)
-        {
+        if (icon == null) {
             // Set default icon
             setIcon(new Icon(mv.getResources(), Icon.Size.LARGE, "", "000"));
         }
