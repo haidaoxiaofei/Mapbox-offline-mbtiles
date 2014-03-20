@@ -10,9 +10,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.Scroller;
 import android.widget.Toast;
-import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
 import com.mapbox.mapboxsdk.R;
-import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
@@ -99,8 +97,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     private final MapController mController;
 
-    private final ResourceProxy mResourceProxy;
-
 	protected ScaleGestureDetector mScaleGestureDetector;
     protected float mMultiTouchScale = 1.0f;
     protected PointF mMultiTouchScalePoint = new PointF();
@@ -132,11 +128,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @param context A copy of the app context
      * @param attrs An AttributeSet object to get extra info from the XML, such as mapbox id or type of baselayer
      */
-    protected MapView(final Context context, final int tileSizePixels,
-                             final ResourceProxy resourceProxy, MapTileLayerBase tileProvider,
-                             final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
+    protected MapView(final Context context, final int tileSizePixels, MapTileLayerBase tileProvider, final Handler tileRequestCompleteHandler, final AttributeSet attrs)
+    {
         super(context, attrs);
-        mResourceProxy = resourceProxy;
         this.mController = new MapController(this);
         this.mScroller = new Scroller(context);
         TileSystem.setTileSize(tileSizePixels);
@@ -152,7 +146,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         mTileProvider = tileProvider;
         mTileProvider.setTileRequestCompleteHandler(mTileRequestCompleteHandler);
 
-        this.mMapOverlay = new TilesOverlay(mTileProvider, mResourceProxy);
+        this.mMapOverlay = new TilesOverlay(mTileProvider);
         mOverlayManager = new OverlayManager(mMapOverlay);
 
         this.mGestureDetector = new GestureDetector(context, new MapViewGestureDetectorListener(this));
@@ -178,11 +172,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public MapView(final Context context, AttributeSet attrs){
-        this(context, 256, new DefaultResourceProxyImpl(context), null, null, attrs);
+        this(context, 256, null, null, attrs);
     }
 
-    protected MapView(Context context, int tileSizePixels, ResourceProxy resourceProxy, MapTileLayerBase aTileProvider) {
-        this(context, tileSizePixels, resourceProxy, aTileProvider, null, null);
+    protected MapView(Context context, int tileSizePixels, MapTileLayerBase aTileProvider) {
+        this(context, tileSizePixels, aTileProvider, null, null);
         init(context);
     }
 
@@ -682,10 +676,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     public boolean zoomOutFixing(final ILatLng point) {
         return getController().zoomOutAbout(point);
-    }
-
-    public ResourceProxy getResourceProxy() {
-        return mResourceProxy;
     }
 
     public void setMapOrientation(float degrees) {

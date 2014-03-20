@@ -58,8 +58,8 @@ public class TilesOverlay
      */
     private int mOvershootTileCache = 0;
 
-    public TilesOverlay(final MapTileLayerBase aTileProvider, final ResourceProxy pResourceProxy) {
-        super(pResourceProxy);
+    public TilesOverlay(final MapTileLayerBase aTileProvider) {
+        super();
         if (aTileProvider == null) {
             throw new IllegalArgumentException(
                     "You must pass a valid tile provider to the tiles overlay.");
