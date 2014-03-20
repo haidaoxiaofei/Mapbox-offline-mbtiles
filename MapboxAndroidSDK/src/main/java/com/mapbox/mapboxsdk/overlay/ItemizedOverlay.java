@@ -7,8 +7,6 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
-
-import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.overlay.Marker.HotspotPlace;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;

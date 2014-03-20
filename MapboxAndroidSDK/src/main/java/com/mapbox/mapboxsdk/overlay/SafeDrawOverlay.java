@@ -1,10 +1,8 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafeTranslatedCanvas;
 import com.mapbox.mapboxsdk.views.MapView;
-
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Rect;

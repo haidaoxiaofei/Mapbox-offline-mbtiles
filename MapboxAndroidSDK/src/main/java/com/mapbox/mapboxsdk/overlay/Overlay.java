@@ -2,11 +2,7 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
-import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
-import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.views.MapView;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
