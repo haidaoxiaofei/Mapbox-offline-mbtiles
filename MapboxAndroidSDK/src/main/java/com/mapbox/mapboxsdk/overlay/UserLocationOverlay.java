@@ -1,22 +1,12 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Matrix;
+import android.graphics.*;
 import android.graphics.Paint.Style;
-import android.graphics.Point;
-import android.graphics.PointF;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.location.Location;
-import android.util.FloatMath;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
-
-import com.mapbox.mapboxsdk.DefaultResourceProxyImpl;
-import com.mapbox.mapboxsdk.ResourceProxy;
+import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
 import com.mapbox.mapboxsdk.tile.TileSystem;
@@ -27,7 +17,6 @@ import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-
 import java.util.LinkedList;
 
 /**
@@ -43,6 +32,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     protected final Bitmap mDirectionArrowBitmap;
 
     protected final MapView mMapView;
+    protected final Context mContext;
 
     private final MapController mMapController;
     public GpsLocationProvider mMyLocationProvider;
@@ -73,26 +63,18 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     private final RectF mMyLocationRect = new RectF();
     private final RectF mMyLocationPreviousRect = new RectF();
 
-    public UserLocationOverlay(Context context, MapView mapView) {
-        this(context, new GpsLocationProvider(context), mapView);
-    }
 
-    public UserLocationOverlay(Context context, GpsLocationProvider myLocationProvider,
-                               MapView mapView) {
-        this(myLocationProvider, mapView, new DefaultResourceProxyImpl(context));
-    }
-
-    public UserLocationOverlay(GpsLocationProvider myLocationProvider, MapView mapView,
-                               ResourceProxy resourceProxy) {
-        super(resourceProxy);
+    public UserLocationOverlay(GpsLocationProvider myLocationProvider, MapView mapView) {
+        super();
 
         mMapView = mapView;
         mMapController = mapView.getController();
+        mContext = mapView.getContext();
         mCirclePaint.setARGB(0, 100, 100, 255);
         mCirclePaint.setAntiAlias(true);
 
-        mPersonBitmap = mResourceProxy.getBitmap(ResourceProxy.bitmap.person);
-        mDirectionArrowBitmap = mResourceProxy.getBitmap(ResourceProxy.bitmap.direction_arrow);
+        mPersonBitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.person);
+        mDirectionArrowBitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.direction_arrow);
 
         mDirectionArrowCenterX = mDirectionArrowBitmap.getWidth() / 2.0 - 0.5;
         mDirectionArrowCenterY = mDirectionArrowBitmap.getHeight() / 2.0 - 0.5;

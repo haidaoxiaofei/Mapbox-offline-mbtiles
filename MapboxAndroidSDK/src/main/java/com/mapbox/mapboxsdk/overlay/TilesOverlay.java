@@ -1,6 +1,5 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
@@ -58,8 +57,8 @@ public class TilesOverlay
      */
     private int mOvershootTileCache = 0;
 
-    public TilesOverlay(final MapTileLayerBase aTileProvider, final ResourceProxy pResourceProxy) {
-        super(pResourceProxy);
+    public TilesOverlay(final MapTileLayerBase aTileProvider) {
+        super();
         if (aTileProvider == null) {
             throw new IllegalArgumentException(
                     "You must pass a valid tile provider to the tiles overlay.");

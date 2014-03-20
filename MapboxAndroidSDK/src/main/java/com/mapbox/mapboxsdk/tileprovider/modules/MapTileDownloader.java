@@ -18,6 +18,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.File;
+import java.security.GeneralSecurityException;
 import java.util.UUID;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -35,6 +36,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
+
+import javax.net.ssl.SSLContext;
 
 /**
  * The {@link MapTileDownloader} loads tiles from an HTTP server.
@@ -131,7 +134,17 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
             InputStream in = null;
             OutputStream out = null;
             final MapTile tile = aState.getMapTile();
+
             OkHttpClient client = new OkHttpClient();
+            SSLContext sslContext;
+            try {
+                sslContext = SSLContext.getInstance("TLS");
+                sslContext.init(null, null, null);
+            } catch (GeneralSecurityException e) {
+                throw new AssertionError(); // The system has no TLS. Just give up.
+            }
+            client.setSslSocketFactory(sslContext.getSocketFactory());
+
             if (cache != null) {
                 client.setResponseCache(cache);
             }
