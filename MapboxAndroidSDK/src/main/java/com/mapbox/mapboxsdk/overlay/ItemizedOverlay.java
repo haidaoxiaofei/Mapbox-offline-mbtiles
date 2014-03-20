@@ -7,8 +7,6 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
-
-import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.overlay.Marker.HotspotPlace;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
@@ -52,9 +50,9 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
      */
     public abstract int size();
 
-    public ItemizedOverlay(final Drawable pDefaultMarker, final ResourceProxy pResourceProxy) {
+    public ItemizedOverlay(final Drawable pDefaultMarker) {
 
-        super(pResourceProxy);
+        super();
 
         if (pDefaultMarker == null) {
             throw new IllegalArgumentException("You must pass a default marker to ItemizedOverlay.");
