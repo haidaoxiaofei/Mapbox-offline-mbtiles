@@ -44,7 +44,7 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
                            final MotionEvent e2,
                            final float velocityX,
                            final float velocityY) {
-        if (this.mapView.getOverlayManager()
+        if (this.mapView.isAnimating() || this.mapView.getOverlayManager()
                 .onFling(e1, e2, velocityX, velocityY, this.mapView)) {
             return true;
         }
