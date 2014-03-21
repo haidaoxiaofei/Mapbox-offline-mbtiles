@@ -1,5 +1,8 @@
 package com.mapbox.mapboxsdk.util;
 
+import com.mapbox.mapboxsdk.tile.TileSystem;
+import com.mapbox.mapboxsdk.views.util.Projection;
+
 import android.graphics.Rect;
 
 /**
@@ -98,5 +101,27 @@ public class GeometryMath {
     public static float rightShift(float value, float multiplier) 
     {
     	return (float) (value / Math.pow(2, multiplier));
+    }
+    
+    public static Rect viewPortRect(float zoomLevel, Projection projection, Rect reuse) {
+    	if (reuse == null)
+            reuse = new Rect();
+        // Get the area we are drawing to
+    	final Rect screenRect = projection.getScreenRect();
+        final int worldSize_2 = TileSystem.MapSize(zoomLevel) >> 1;
+        
+        //when using float zoom, the view port should be the one of the floored value
+        //this is because MapTiles are indexed around int values
+        int roundWorldSize_2 = TileSystem.MapSize((float) Math.floor(zoomLevel)) >> 1;
+        float scale  = (float)roundWorldSize_2 / worldSize_2;
+        reuse.set((int)(scale * screenRect.left), (int)(scale * screenRect.top), (int)(scale * screenRect.right), (int)(scale * screenRect.bottom));
+        
+        // Translate the Canvas coordinates into Mercator coordinates
+        reuse.offset(roundWorldSize_2, roundWorldSize_2); 
+        return reuse;
+    }
+    
+    public static Rect viewPortRect(Projection projection, Rect reuse) {
+        return viewPortRect(projection.getZoomLevel(), projection, reuse);
     }
 }

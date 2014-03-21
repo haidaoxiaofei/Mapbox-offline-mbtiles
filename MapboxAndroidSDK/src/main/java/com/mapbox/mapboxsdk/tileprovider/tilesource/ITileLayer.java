@@ -52,4 +52,12 @@ public interface ITileLayer {
      * @return the tile size in pixels
      */
     public int getTileSizePixels();
+    
+    /**
+     * Get the tile source bounding box.
+     *
+     * @return the tile source bounding box
+     */
+	public BoundingBox getBoundingBox();
+
 }

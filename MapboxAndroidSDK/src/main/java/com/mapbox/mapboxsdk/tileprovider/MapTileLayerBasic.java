@@ -35,4 +35,23 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
 
         mTileProviderList.add(downloaderProvider);
     }
+    
+    public void addTileSource(final Context pContext,
+            final ITileLayer pTileSource,
+            MapView mapView) {
+    	final MapTileDownloader downloaderProvider = new MapTileDownloader(
+                pTileSource,
+                new NetworkAvailabilityCheck(pContext),
+                mapView);
+        mTileProviderList.add(downloaderProvider);
+    }
+    
+    public void removeTileSource(final ITileLayer pTileSource) {
+    	for (MapTileModuleLayerBase provider: mTileProviderList) {
+            if (provider.getTileSource() == pTileSource) {
+                mTileProviderList.remove(provider);
+                return;
+            }
+        }
+    }
 }

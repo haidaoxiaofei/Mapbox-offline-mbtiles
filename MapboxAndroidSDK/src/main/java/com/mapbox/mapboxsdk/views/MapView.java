@@ -94,6 +94,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     protected final AtomicInteger mTargetZoomLevel = new AtomicInteger();
     protected final AtomicBoolean mIsAnimating = new AtomicBoolean(false);
+    private float mAnimationFactor = 1.0f;
 
     private final MapController mController;
 
@@ -136,8 +137,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         TileSystem.setTileSize(tileSizePixels);
 
         if (tileProvider == null) {
-            final ITileLayer tileSource = new MapboxTileLayer("examples.map-zgrqqx0w");
-            tileProvider = new MapTileLayerBasic(context, tileSource, this);
+            tileProvider = new MapTileLayerBasic(context, null, this);
         }
 
         mTileRequestCompleteHandler = tileRequestCompleteHandler == null
@@ -165,11 +165,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         {
             setTileSource(new MapboxTileLayer(mapid));
         }
-        else
-        {
-			Log.w(MapView.class.getCanonicalName(), "mapid not set.");
         }
-    }
 
     public MapView(final Context context, AttributeSet attrs){
         this(context, 256, null, null, attrs);
@@ -351,8 +347,13 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @return the current bounds of the map
      */
     public BoundingBox getBoundingBox() {
+		int w = getWidth();
+		int h = getHeight();
+		if (w > 0 && h > 0) {
         return getBoundingBox(getWidth(), getHeight());
     }
+		return mScrollableAreaBoundingBox;
+	}
 
     private BoundingBox getBoundingBox(final int pViewWidth, final int pViewHeight) {
 
@@ -432,8 +433,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public MapView setScale(float scale) {
-        mMultiTouchScale = scale;
-        invalidate();
+    	float zoomDelta = (scale < 1)?-2*(1-scale):scale-1.0f;
+    	float newZoom  = mZoomLevel + zoomDelta;
+    	if (newZoom <= mMaximumZoomLevel && newZoom >= mMinimumZoomLevel) {
+    		mMultiTouchScale = scale;
+            invalidate();
+    	}
         return this;
     }
 
@@ -495,7 +500,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             scrollTo(snapPoint.x, snapPoint.y);
         }
 
-		mTileProvider.rescaleCache(newZoomLevel, curZoomLevel, mProjection.getScreenRect());
+		mTileProvider.rescaleCache(newZoomLevel, curZoomLevel, mProjection);
 
         // do callback on listener
         if (newZoomLevel != curZoomLevel && mListener != null) {
@@ -517,6 +522,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      */
     public MapView zoomToBoundingBox(final BoundingBox boundingBox) {
         final BoundingBox currentBox = getBoundingBox();
+        if(currentBox == null) return this;
 
         // Calculated required zoom based on latitude span
         final double maxZoomLatitudeSpan = mZoomLevel == getMaxZoomLevel() ?
@@ -950,6 +956,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     public void onDetach() {
         this.getOverlayManager().onDetach(this);
+        mTileProvider.detach();
     }
 
     @Override
@@ -996,29 +1003,25 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 Log.d(TAG, "OverlayManager handled onTouchEvent");
                 return true;
             }
-
-            if (event.getPointerCount() == 1) {
-                if (mGestureDetector.onTouchEvent(rotatedEvent)) {
-                    Log.d(TAG, "GestureDetector handled onTouchEvent");
-                    return true;
-                }
-            } else {
-                // despite the docs, scalegesturedetector does not return
-                // false if it doesn't handle an event.
-                if (mScaleGestureDetector.onTouchEvent(event)) {
-                    Log.d(TAG, "ScaleDetector handled onTouchEvent");
-                    return true;
-                }
-            }
+            
+            boolean handled = mScaleGestureDetector.onTouchEvent(event);
+            if ( !mScaleGestureDetector.isInProgress() ) {
+            	if (event.getActionMasked() == MotionEvent.ACTION_POINTER_UP && event.getPointerCount() == 2) {
+                    final ILatLng center = getProjection().fromPixels(rotatedEvent.getX(), rotatedEvent.getY());
+            		mController.zoomOutAbout(center);
+            		handled = true;
+            	}
+            	else {
+            		handled |= mGestureDetector.onTouchEvent( rotatedEvent );
+            	}
+    		}
+            return handled;
 
         } finally {
             if (rotatedEvent != event) {
                 rotatedEvent.recycle();
             }
         }
-
-        Log.d(TAG, "no-one handled onTouchEvent");
-        return false;
     }
 
     @Override
@@ -1086,19 +1089,20 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     @Override
     public void scrollTo(int x, int y) {
-        final int worldSize_2 = TileSystem.MapSize(this.getZoomLevel(false)) / 2;
-        while (x < -worldSize_2) {
-            x += worldSize_2 * 2;
-        }
-        while (x > worldSize_2) {
-            x -= worldSize_2 * 2;
-        }
-        while (y < -worldSize_2) {
-            y += worldSize_2 * 2;
-        }
-        while (y > worldSize_2) {
-            y -= worldSize_2 * 2;
-        }
+		// final int worldSize_2 = TileSystem.MapSize(this.getZoomLevel(false))
+		// / 2;
+		// while (x < -worldSize_2) {
+		// x += worldSize_2 * 2;
+		// }
+		// while (x > worldSize_2) {
+		// x -= worldSize_2 * 2;
+		// }
+		// while (y < -worldSize_2) {
+		// y += worldSize_2 * 2;
+		// }
+		// while (y > worldSize_2) {
+		// y -= worldSize_2 * 2;
+		// }
 
         if (mScrollableAreaLimit != null) {
         	final float width_2 = this.getMeasuredWidth()/2;
