@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
+import com.mapbox.mapboxsdk.tileprovider.MapTileCache;
 import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
@@ -35,6 +36,7 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     private static final String TAG = "Tile downloader";
 
     private final AtomicReference<TileLayer> mTileSource = new AtomicReference<TileLayer>();
+    private final AtomicReference<MapTileCache> mTileCache = new AtomicReference<MapTileCache>();
 
     private final INetworkAvailabilityCheck mNetworkAvailablityCheck;
     private MapView mapView;
@@ -44,10 +46,12 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     ArrayList<Boolean> threadControl = new ArrayList<Boolean>();
 
     public MapTileDownloader(final ITileLayer pTileSource,
+                             final MapTileCache pTileCache,
                              final INetworkAvailabilityCheck pNetworkAvailablityCheck,
                              final MapView mapView) {
         super(NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
         this.mapView = mapView;
+        this.mTileCache.set(pTileCache);
 
         hdpi = mapView.getContext().getResources().getDisplayMetrics().densityDpi > DisplayMetrics.DENSITY_HIGH;
 
