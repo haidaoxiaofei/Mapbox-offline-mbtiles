@@ -18,6 +18,8 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
     private float lastFocusY;
     private float firstSpan;
     private final MapView mapView;
+    private boolean scaling;
+    private float currentScale;
 
     /**
      * Bind a new gesture detector to a map
@@ -32,20 +34,27 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
         lastFocusX = detector.getFocusX();
         lastFocusY = detector.getFocusY();
         firstSpan = detector.getCurrentSpan();
-        this.mapView.getController().aboutToStartAnimation(
-        		lastFocusX +  this.mapView.getScrollX() - ( this.mapView.getWidth() / 2),
-        		lastFocusY +  this.mapView.getScrollY() - ( this.mapView.getHeight() / 2));
+        currentScale = 1.0f;
+        if (!this.mapView.isAnimating()) {
+            this.mapView.mIsAnimating.set(true);
+            this.mapView.getController().aboutToStartAnimation(
+                    lastFocusX +  this.mapView.getScrollX() - ( this.mapView.getWidth() / 2),
+                    lastFocusY +  this.mapView.getScrollY() - ( this.mapView.getHeight() / 2));
+            scaling = true;
+        }
         return true;
     }
 
     @Override
-    public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
+    public boolean onScale(ScaleGestureDetector detector) {
+        if (!scaling) return true;
+        currentScale = detector.getCurrentSpan() / firstSpan;
 
-        float focusX = scaleGestureDetector.getFocusX();
-        float focusY = scaleGestureDetector.getFocusY();
+        float focusX = detector.getFocusX();
+        float focusY = detector.getFocusY();
 
         this.mapView.getController().panBy((int) (lastFocusX - focusX), (int) (lastFocusY - focusY));
-        this.mapView.setScale(scaleGestureDetector.getCurrentSpan() / firstSpan);
+        this.mapView.setScale(currentScale);
 
         lastFocusX = focusX;
         lastFocusY = focusY;
@@ -54,12 +63,12 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
 
     @Override
     public void onScaleEnd(ScaleGestureDetector scaleGestureDetector) {
-        float scale = scaleGestureDetector.getCurrentSpan() / firstSpan;
-       float preZoom = this.mapView.getZoomLevel(false);
-        float newZoom = (float)(Math.log(scale) / Math.log(2d) + preZoom);
-        this.mapView.setScale(scale);
+        if (!scaling) return;
+        float preZoom = this.mapView.getZoomLevel(false);
+        float newZoom = (float)(Math.log(currentScale) / Math.log(2d) + preZoom);
         this.mapView.mTargetZoomLevel.set(Float.floatToIntBits(newZoom));
     	this.mapView.getController().onAnimationEnd();
+        scaling = false;
     }
     private static String TAG = "detector";
 }
