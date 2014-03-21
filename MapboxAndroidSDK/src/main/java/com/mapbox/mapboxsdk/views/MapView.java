@@ -247,11 +247,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @param URL the URL from which to load the GeoJSON file
      */
     public void loadFromGeoJSONURL(String URL) {
-        if (!NetworkUtils.isNetworkAvailable(getContext())) {
-            Toast.makeText(getContext(), R.string.networkNotAvailable, Toast.LENGTH_LONG).show();
-            return;
+        if (NetworkUtils.isNetworkAvailable(getContext())) {
+            new GeoJSONLayer(this).loadURL(URL);
         }
-        new GeoJSONLayer(this).loadURL(URL);
     }
 
     /**
