@@ -3,7 +3,9 @@ package com.mapbox.mapboxsdk.overlay;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
+import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.TileLooper;
+import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
@@ -12,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
@@ -36,7 +39,7 @@ public class TilesOverlay
     protected final MapTileLayerBase mTileProvider;
 
     /* to avoid allocations during draw */
-    protected final Paint mDebugPaint = new Paint();
+    protected static Paint mDebugPaint = null;
     private final Rect mTileRect = new Rect();
     private final Rect mViewPort = new Rect();
 	float mCurrentZoomFactor = 1;
@@ -64,6 +67,14 @@ public class TilesOverlay
                     "You must pass a valid tile provider to the tiles overlay.");
         }
         this.mTileProvider = aTileProvider;
+        if (UtilConstants.DEBUGMODE) {
+        	if (mDebugPaint == null) {
+        		mDebugPaint = new Paint();
+        		mDebugPaint.setColor(Color.RED);
+        		mDebugPaint.setStyle(Style.STROKE);
+        		mDebugPaint.setStrokeWidth(2);
+        	}
+        }
     }
 
     @Override
@@ -106,20 +117,8 @@ public class TilesOverlay
         // Calculate the half-world size
         final Projection pj = mapView.getProjection();
         final float zoomLevel = pj.getZoomLevel();
-        mWorldSize_2 = TileSystem.MapSize(zoomLevel) >> 1;
-        
-        //when using float zoom, the view port should be the one of the floored value
-        //this is because MapTiles are indexed around int values
-        int roundWorldSize_2 = TileSystem.MapSize((float) Math.floor(zoomLevel)) >> 1;
-        float scale  = (float)roundWorldSize_2 / mWorldSize_2;
-
-        // Get the area we are drawing to
-        mViewPort.set(pj.getScreenRect());
-        
-        mViewPort.set((int)(scale * mViewPort.left), (int)(scale * mViewPort.top), (int)(scale * mViewPort.right), (int)(scale * mViewPort.bottom));
-        
-        // Translate the Canvas coordinates into Mercator coordinates
-        mViewPort.offset(roundWorldSize_2, roundWorldSize_2);     
+        mWorldSize_2 = pj.getHalfWorldSize();
+        GeometryMath.viewPortRect(pj, mViewPort);    
 
         // Draw the tiles!
         drawTiles(c.getSafeCanvas(), zoomLevel, TileSystem.getTileSize(), mViewPort);
@@ -137,7 +136,7 @@ public class TilesOverlay
         mTileLooper.loop(c, zoomLevel, tileSizePx, viewPort);
 
         // draw a cross at center in debug mode
-        if (DEBUGMODE) {
+        if (UtilConstants.DEBUGMODE) {
             final Point centerPoint = new Point(viewPort.centerX() - mWorldSize_2,
                     viewPort.centerY() - mWorldSize_2);
             c.drawLine(centerPoint.x, centerPoint.y - 9,
@@ -200,21 +199,14 @@ public class TilesOverlay
                         ((ReusableBitmapDrawable) currentMapTile).finishUsingDrawable();
                     }
                 }
+                if (UtilConstants.DEBUGMODE) {
+                    pCanvas.drawText(pTile.toString(), mTileRect.left + 1,
+                            mTileRect.top + mDebugPaint.getTextSize(), mDebugPaint);
+                    pCanvas.drawRect(mTileRect, mDebugPaint);
+                }
             }
 
-            if (DEBUGMODE) {
-                mTileRect.set(pX * pTileSizePx,
-                        pY * pTileSizePx,
-                        pX * pTileSizePx + pTileSizePx, pY
-                        * pTileSizePx + pTileSizePx);
-                mTileRect.offset(-mWorldSize_2, -mWorldSize_2);
-                pCanvas.drawText(pTile.toString(), mTileRect.left + 1,
-                        mTileRect.top + mDebugPaint.getTextSize(), mDebugPaint);
-                pCanvas.drawLine(mTileRect.left, mTileRect.top, mTileRect.right, mTileRect.top,
-                        mDebugPaint);
-                pCanvas.drawLine(mTileRect.left, mTileRect.top, mTileRect.left, mTileRect.bottom,
-                        mDebugPaint);
-            }
+            
         }
 
         @Override

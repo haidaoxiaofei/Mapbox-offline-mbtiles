@@ -2,7 +2,10 @@ package com.mapbox.mapboxsdk.views;
 
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+
+import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.tile.TileSystem;
+import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 
 /**
  * A custom gesture detector that processes gesture events and dispatches them
@@ -41,7 +44,7 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
                            final MotionEvent e2,
                            final float velocityX,
                            final float velocityY) {
-        if (this.mapView.getOverlayManager()
+        if (this.mapView.isAnimating() || this.mapView.getOverlayManager()
                 .onFling(e1, e2, velocityX, velocityY, this.mapView)) {
             return true;
         }
@@ -62,6 +65,10 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
 
     @Override
     public void onLongPress(final MotionEvent e) {
+    	if (UtilConstants.DEBUGMODE) {
+            final ILatLng center = this.mapView.getProjection().fromPixels(e.getX(), e.getY());
+        	this.mapView.zoomOutFixing(center);
+    	}
     }
 
     @Override

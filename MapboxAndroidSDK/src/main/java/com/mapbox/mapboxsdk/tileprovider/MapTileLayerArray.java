@@ -39,7 +39,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
      */
     protected MapTileLayerArray(final ITileLayer pTileSource,
                                 final IRegisterReceiver pRegisterReceiver) {
-        this(pTileSource, pRegisterReceiver, new MapTileModuleLayerBase[0]);
+        this(pTileSource, pRegisterReceiver, null);
     }
 
     /**
@@ -56,7 +56,9 @@ public class MapTileLayerArray extends MapTileLayerBase {
         mWorking = new HashMap<MapTile, MapTileRequestState>();
 
         mTileProviderList = new ArrayList<MapTileModuleLayerBase>();
-        Collections.addAll(mTileProviderList, pTileProviderArray);
+        if (pTileProviderArray != null) {
+            Collections.addAll(mTileProviderList, pTileProviderArray);
+        }
     }
 
     @Override
@@ -222,10 +224,11 @@ public class MapTileLayerArray extends MapTileLayerBase {
         super.setTileSource(aTileSource);
 
         synchronized (mTileProviderList) {
-            for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
-                tileProvider.setTileSource(aTileSource);
+        	if (mTileProviderList.size() != 0) {
+        		mTileProviderList.get(0).setTileSource(aTileSource);
                 clearTileCache();
-            }
+        	}
+            
         }
     }
 

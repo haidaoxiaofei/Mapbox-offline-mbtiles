@@ -300,7 +300,7 @@ public class ItemizedIconOverlay<Item extends Marker> extends ItemizedOverlay<It
                     clusterActions.onClusterTap(item);
                 } else {
                     ArrayList<LatLng> activePoints = getCoordinateList(getGroupElements((List<Marker>) mItemList, item.getGroup()));
-                    view.zoomToBoundingBox(BoundingBox.fromGeoPoints(activePoints));
+                    view.zoomToBoundingBox(BoundingBox.fromLatLngs(activePoints));
                 }
                 return false;
             }

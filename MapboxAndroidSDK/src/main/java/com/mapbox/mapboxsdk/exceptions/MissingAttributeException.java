@@ -8,7 +8,7 @@ package com.mapbox.mapboxsdk.exceptions;
 public class MissingAttributeException extends Exception
 {
     /**
-     * Default Construtor
+     * Default Constructor
      * @param detailMessage Information on missing attribute
      */
     public MissingAttributeException(final String detailMessage)
