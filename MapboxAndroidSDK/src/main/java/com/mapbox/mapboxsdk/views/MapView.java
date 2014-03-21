@@ -34,7 +34,6 @@ import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import org.json.JSONException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -165,7 +164,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         {
             setTileSource(new MapboxTileLayer(mapid));
         }
-        }
+    }
 
     public MapView(final Context context, AttributeSet attrs){
         this(context, 256, null, null, attrs);
