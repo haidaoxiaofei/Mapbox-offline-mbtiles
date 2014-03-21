@@ -160,11 +160,15 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MapView);
         String mapid = a.getString(R.styleable.MapView_mapid);
         a.recycle();
-        if (mapid != null)
-        {
-            setTileSource(new MapboxTileLayer(mapid));
-        }
-    }
+		if (mapid != null)
+		{
+			setTileSource(new MapboxTileLayer(mapid));
+		}
+		else
+		{
+			Log.w(MapView.class.getCanonicalName(), "mapid not set.");
+		}
+	}
 
     public MapView(final Context context, AttributeSet attrs){
         this(context, 256, null, null, attrs);
