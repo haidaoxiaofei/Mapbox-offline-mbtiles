@@ -7,11 +7,14 @@ import java.util.List;
 
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
+import com.mapbox.mapboxsdk.util.BitmapUtils;
 
 import android.content.Context;
 import android.util.Log;
 
 import android.graphics.drawable.Drawable;
+
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
  * This top-level tile provider allows a consumer to provide an array of modular asynchronous tile
@@ -80,9 +83,9 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
     @Override
     public Drawable getMapTile(final MapTile pTile) {
-        final Drawable tile = mTileCache.getMapTile(pTile);
-        if (tile != null && !ExpirableBitmapDrawable.isDrawableExpired(tile)) {
-            return tile;
+        final CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
+        if (tileDrawable != null && !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
+            return tileDrawable;
         } else {
             boolean alreadyInProgress = false;
             synchronized (mWorking) {
@@ -122,7 +125,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
                     mapTileRequestFailed(state);
                 }
             }
-            return tile;
+            return tileDrawable;
         }
     }
 
@@ -148,7 +151,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
     }
 
     @Override
-    public void mapTileRequestExpiredTile(MapTileRequestState aState, Drawable aDrawable) {
+    public void mapTileRequestExpiredTile(MapTileRequestState aState, CacheableBitmapDrawable aDrawable) {
         // Call through to the super first so aState.getCurrentProvider() still contains the proper
         // provider.
         super.mapTileRequestExpiredTile(aState, aDrawable);

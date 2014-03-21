@@ -10,6 +10,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
+
 /**
  * A least-recently used style cache that stores a set number of
  * tiles at a time.
@@ -61,8 +63,8 @@ public class LRUMapTileCache extends LinkedHashMap<MapTile, Drawable>
         }
         if (getTileRemovedListener() != null && aKey instanceof MapTile)
             getTileRemovedListener().onTileRemoved((MapTile) aKey);
-        if (drawable instanceof ReusableBitmapDrawable)
-            BitmapPool.getInstance().returnDrawableToPool((ReusableBitmapDrawable) drawable);
+        if (drawable instanceof CacheableBitmapDrawable)
+            BitmapPool.getInstance().returnDrawableToPool((CacheableBitmapDrawable) drawable);
         return drawable;
     }
 

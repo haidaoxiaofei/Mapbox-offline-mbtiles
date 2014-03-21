@@ -20,6 +20,7 @@ public class SimpleInvalidationHandler extends Handler {
             case MapTile.MAPTILE_SUCCESS_ID:
                 mView.invalidate();
                 break;
+
         }
     }
 }

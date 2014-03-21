@@ -29,6 +29,8 @@ import java.util.ArrayList;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
+
 /**
  * The {@link MapTileDownloader} loads tiles from an HTTP server.
  */
@@ -127,45 +129,56 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
             InputStream in = null;
             OutputStream out = null;
             final MapTile tile = aState.getMapTile();
-            OkHttpClient client = new OkHttpClient();
-            if (cache != null) {
-                client.setResponseCache(cache);
-            }
-            if (mNetworkAvailablityCheck != null
-                    && !mNetworkAvailablityCheck.getNetworkAvailable()) {
-                Log.d(TAG, "Skipping " + getName() + " due to NetworkAvailabilityCheck.");
-                return null;
-            }
-
-            String url = tileLayer.getTileURL(tile, hdpi);
-
-            if (TextUtils.isEmpty(url)) {
-                return null;
-            }
 
             try {
-                // Log.d(TAG, "getting tile " + tile.getX() + ", " + tile.getY());
-                // Log.d(TAG, "Downloading MapTile from url: " + url);
-            	TilesLoadedListener listener = mapView.getTilesLoadedListener();
-                if (listener != null) {
-                    listener.onTilesLoadStarted();
+                TilesLoadedListener listener = mapView.getTilesLoadedListener();
+                Drawable result = null;
+                if (mTileCache != null && mTileCache.get().containsTileInDiskCache(tile)) {
+                    if (listener != null) {
+                        listener.onTilesLoadStarted();
+                    }
+                    result = mTileCache.get().getMapTileFromDisk(tile);
                 }
-                HttpURLConnection connection = client.open(new URL(url));
-                in = connection.getInputStream();
+                if (result == null) {
 
-                if (in == null) {
-                    Log.d(TAG, "No content downloading MapTile: " + tile);
-                    return null;
+                    OkHttpClient client = new OkHttpClient();
+                    if (cache != null) {
+                        client.setResponseCache(cache);
+                    }
+                    if (mNetworkAvailablityCheck != null
+                            && !mNetworkAvailablityCheck.getNetworkAvailable()) {
+                        Log.d(TAG, "Skipping " + getName() + " due to NetworkAvailabilityCheck.");
+                        return null;
+                    }
+
+                    String url = tileLayer.getTileURL(tile, hdpi);
+
+                    if (TextUtils.isEmpty(url)) {
+                        return null;
+                    }
+
+                    // Log.d(TAG, "getting tile " + tile.getX() + ", " + tile.getY());
+                    // Log.d(TAG, "Downloading MapTile from url: " + url);
+                    if (listener != null) {
+                        listener.onTilesLoadStarted();
+                    }
+                    HttpURLConnection connection = client.open(new URL(url));
+                    in = connection.getInputStream();
+
+                    if (in == null) {
+                        Log.d(TAG, "No content downloading MapTile: " + tile);
+                        return null;
+                    }
+
+                    final ByteArrayOutputStream dataStream = new ByteArrayOutputStream();
+                    out = new BufferedOutputStream(dataStream, StreamUtils.IO_BUFFER_SIZE);
+                    StreamUtils.copy(in, out);
+                    out.flush();
+                    final byte[] data = dataStream.toByteArray();
+                    final ByteArrayInputStream byteStream = new ByteArrayInputStream(data);
+
+                    result = tileLayer.getDrawable((mTileCache != null)?mTileCache.get().getCacheKey(tile):null, mapView.getContext().getResources(), byteStream);
                 }
-
-                final ByteArrayOutputStream dataStream = new ByteArrayOutputStream();
-                out = new BufferedOutputStream(dataStream, StreamUtils.IO_BUFFER_SIZE);
-                StreamUtils.copy(in, out);
-                out.flush();
-                final byte[] data = dataStream.toByteArray();
-                final ByteArrayInputStream byteStream = new ByteArrayInputStream(data);
-
-                Drawable result = tileLayer.getDrawable(byteStream);
                 threadControl.set(threadIndex, true);
                 if (checkThreadControl()) {
                     if (listener != null) {

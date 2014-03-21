@@ -3,7 +3,6 @@ package com.mapbox.mapboxsdk.overlay;
 import com.mapbox.mapboxsdk.ResourceProxy;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
-import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
@@ -22,6 +21,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import com.mapbox.mapboxsdk.views.util.Projection;
+
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
  * These objects are the principle consumer of map tiles.
@@ -173,7 +174,7 @@ public class TilesOverlay
                                final int pX,
                                final int pY) {
             Drawable currentMapTile = mTileProvider.getMapTile(pTile);
-            boolean isReusable = currentMapTile instanceof ReusableBitmapDrawable;
+            boolean isReusable = currentMapTile instanceof CacheableBitmapDrawable;
             if (currentMapTile == null) {
                 currentMapTile = getLoadingTile();
             }
@@ -185,10 +186,10 @@ public class TilesOverlay
                         (int)((pX * pTileSizePx + pTileSizePx) * mCurrentZoomFactor),
                         (int)((pY * pTileSizePx + pTileSizePx) * mCurrentZoomFactor));
                 if (isReusable) {
-                    ((ReusableBitmapDrawable) currentMapTile).beginUsingDrawable();
+                    ((CacheableBitmapDrawable) currentMapTile).setBeingUsed(true);
                 }
                 try {
-                    if (isReusable && !((ReusableBitmapDrawable) currentMapTile).isBitmapValid()) {
+                    if (isReusable && !((CacheableBitmapDrawable) currentMapTile).isBitmapValid()) {
                         currentMapTile = getLoadingTile();
                         isReusable = false;
                     }
@@ -197,7 +198,7 @@ public class TilesOverlay
                     currentMapTile.draw(pCanvas);
                 } finally {
                     if (isReusable) {
-                        ((ReusableBitmapDrawable) currentMapTile).finishUsingDrawable();
+                        ((CacheableBitmapDrawable) currentMapTile).setBeingUsed(false);
                     }
                 }
                 if (UtilConstants.DEBUGMODE) {

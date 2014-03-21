@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
+
 /**
  * A pool from which to reuse bitmap instances in order to work around memory
  * allocation and deallocation. This follows the singleton pattern, so there's
@@ -24,8 +26,8 @@ public class BitmapPool {
         return sInstance;
     }
 
-    public void returnDrawableToPool(ReusableBitmapDrawable drawable) {
-        Bitmap b = drawable.tryRecycle();
+    public void returnDrawableToPool(CacheableBitmapDrawable drawable) {
+        Bitmap b = drawable.isBitmapValid()?drawable.getBitmap():null;
         if (b != null && b.isMutable())
             synchronized (mPool) {
                 mPool.addLast(b);

@@ -1,5 +1,6 @@
 package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -9,12 +10,14 @@ import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.BitmapPool;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
-import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.tileprovider.util.LowMemoryException;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
 import java.io.InputStream;
+
+import uk.co.senab.bitmapcache.BitmapLruCache;
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstants {
 
@@ -58,7 +61,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     }
 
     @Override
-    public Drawable getDrawable(final InputStream aFileInputStream) throws LowMemoryException {
+    public Drawable getDrawable(final String aKey, final Resources resources, final InputStream aFileInputStream) throws LowMemoryException {
         try {
             // default implementation will load the file as a bitmap and create
             // a BitmapDrawable from it
@@ -66,7 +69,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
             BitmapPool.getInstance().applyReusableOptions(bitmapOptions);
             final Bitmap bitmap = BitmapFactory.decodeStream(aFileInputStream, null, bitmapOptions);
             if (bitmap != null) {
-                return new ReusableBitmapDrawable(bitmap);
+                return new CacheableBitmapDrawable(aKey, resources, bitmap, BitmapLruCache.RecyclePolicy.ALWAYS, CacheableBitmapDrawable.SOURCE_NEW);
             }
         } catch (final OutOfMemoryError e) {
             Log.e(TAG, "OutOfMemoryError loading bitmap");

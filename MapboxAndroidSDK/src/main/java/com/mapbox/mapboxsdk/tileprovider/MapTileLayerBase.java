@@ -4,13 +4,12 @@ package com.mapbox.mapboxsdk.tileprovider;
 import java.util.HashMap;
 
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
-import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
+import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
-import com.mapbox.mapboxsdk.tile.TileSystem;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,8 +19,12 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
  * This is an abstract class. The tile provider is responsible for:
@@ -47,11 +50,11 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     /**
      * Attempts to get a Drawable that represents a {@link MapTile}. If the tile is not immediately
      * available this will return null and attempt to get the tile from known tile sources for
-     * subsequent future requests. Note that this may return a {@link ReusableBitmapDrawable} in
+     * subsequent future requests. Note that this may return a {@link CacheableBitmapDrawable} in
      * which case you should follow proper handling procedures for using that Drawable or it may
      * reused while you are working with it.
      *
-     * @see ReusableBitmapDrawable
+     * @see CacheableBitmapDrawable
      */
     public abstract Drawable getMapTile(MapTile pTile);
 
@@ -126,6 +129,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     @Override
     public void mapTileRequestCompleted(final MapTileRequestState pState, final Drawable pDrawable) {
         // put the tile in the cache
+        removeTileFromCache(pState); //make sure we remove it from cache first (because of expired ones)
         putTileIntoCache(pState, pDrawable);
 
         // tell our caller we've finished and it should update its view
@@ -164,9 +168,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      * @param pDrawable the Drawable of the map tile
      */
     @Override
-    public void mapTileRequestExpiredTile(MapTileRequestState pState, Drawable pDrawable) {
+    public void mapTileRequestExpiredTile(MapTileRequestState pState, CacheableBitmapDrawable pDrawable) {
         // Put the expired tile into the cache
-        putExpiredTileIntoCache(pState, pDrawable);
+        putExpiredTileIntoCache(pState.getMapTile(), pDrawable);
 
         // tell our caller we've finished and it should update its view
         if (mTileRequestCompleteHandler != null) {
@@ -178,17 +182,41 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         }
     }
 
-    protected void putTileIntoCache(MapTileRequestState pState, Drawable pDrawable) {
-        if (pDrawable != null) {
-            mTileCache.putTile(pState.getMapTile(), pDrawable);
+    private void putTileIntoCacheInternal(final MapTile pTile, final Drawable pDrawable){
+        mTileCache.putTile(pTile, pDrawable);
+    }
+
+    private class CacheTask extends AsyncTask<Object, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Object... params) {
+            putTileIntoCacheInternal((MapTile)params[0], (Drawable)params[1]);
+            return null;
         }
     }
 
-    protected void putExpiredTileIntoCache(MapTileRequestState pState, Drawable pDrawable) {
-        final MapTile tile = pState.getMapTile();
-        if (pDrawable != null && !mTileCache.containsTile(tile)) {
-            mTileCache.putTile(tile, pDrawable);
+    private void putTileIntoCache(final MapTile pTile, final Drawable pDrawable) {
+//        mTileCache.putTileInMemoryCache(pTile, pDrawable);
+        if (pDrawable != null) {
+            if (Looper.myLooper() == Looper.getMainLooper()) {
+                (new CacheTask()).execute(pTile, pDrawable);
+            }
+            else {
+                putTileIntoCacheInternal(pTile, pDrawable);
+            }
         }
+    }
+    protected void putTileIntoCache(final MapTileRequestState pState, final Drawable pDrawable) {
+        putTileIntoCache(pState.getMapTile(), pDrawable);
+    }
+
+    protected void removeTileFromCache(final MapTileRequestState pState) {
+        mTileCache.removeTileFromMemory(pState.getMapTile());
+    }
+
+    protected CacheableBitmapDrawable putExpiredTileIntoCache(final MapTile pTile, final CacheableBitmapDrawable drawable) {
+        mTileCache.removeTileFromMemory(pTile);
+        return mTileCache.putTileInMemoryCache(pTile, drawable);
     }
 
     public void setTileRequestCompleteHandler(final Handler handler) {
@@ -308,12 +336,13 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
 
                 final MapTile tile = mNewTiles.keySet().iterator().next();
                 final Bitmap bitmap = mNewTiles.remove(tile);
-                final ExpirableBitmapDrawable drawable = new ReusableBitmapDrawable(bitmap);
-                drawable.setState(new int[]{ExpirableBitmapDrawable.EXPIRED});
-                Drawable existingTile = mTileCache.getMapTile(tile);
-                if (existingTile == null || ExpirableBitmapDrawable.isDrawableExpired(existingTile)) {
-                    putExpiredTileIntoCache(new MapTileRequestState(tile,
-                            new MapTileModuleLayerBase[0], null), drawable);
+
+
+                CacheableBitmapDrawable existingTileDrawable = mTileCache.getMapTileFromMemory(tile);
+                if (existingTileDrawable == null || BitmapUtils.isCacheDrawableExpired(existingTileDrawable)) {
+                    final CacheableBitmapDrawable drawable = mTileCache.createCacheableBitmapDrawable(bitmap, tile);
+                    BitmapUtils.setCacheDrawableExpired(drawable);
+                    putExpiredTileIntoCache(tile, drawable);
                 }
 
             }
@@ -332,7 +361,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
 
             // get the correct fraction of the tile from cache and scale up
             final MapTile oldTile = new MapTile((int) Math.floor(mOldZoomLevel), (int) GeometryMath.rightShift(pX, mDiff), (int) GeometryMath.rightShift(pY, mDiff));
-            final Drawable oldDrawable = mTileCache.getMapTile(oldTile);
+            final Drawable oldDrawable = mTileCache.getMapTileFromMemory(oldTile);
 
             if (oldDrawable instanceof BitmapDrawable) {
                 final int xx = (pX % (int) GeometryMath.leftShift(1, mDiff)) * mTileSize_2;
@@ -351,13 +380,13 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                 }
 
                 final Canvas canvas = new Canvas(bitmap);
-                final boolean isReusable = oldDrawable instanceof ReusableBitmapDrawable;
+                final boolean isReusable = oldDrawable instanceof CacheableBitmapDrawable;
                 boolean success = false;
                 if (isReusable) {
-                    ((ReusableBitmapDrawable) oldDrawable).beginUsingDrawable();
+                    ((CacheableBitmapDrawable) oldDrawable).setBeingUsed(true);
                 }
                 try {
-                    if (!isReusable || ((ReusableBitmapDrawable) oldDrawable).isBitmapValid()) {
+                    if (!isReusable || ((CacheableBitmapDrawable) oldDrawable).isBitmapValid()) {
                         final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
                         canvas.drawBitmap(oldBitmap, mSrcRect, mDestRect, null);
                         success = true;
@@ -369,7 +398,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                     }
                 } finally {
                     if (isReusable)
-                        ((ReusableBitmapDrawable) oldDrawable).finishUsingDrawable();
+                        ((CacheableBitmapDrawable) oldDrawable).setBeingUsed(false);
                 }
                 if (success)
                     mNewTiles.put(pTile, bitmap);
@@ -400,7 +429,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
             for (int x = 0; x < numTiles; x++) {
                 for (int y = 0; y < numTiles; y++) {
                     final MapTile oldTile = new MapTile((int) Math.floor(mOldZoomLevel), xx + x, yy + y);
-                    final Drawable oldDrawable = mTileCache.getMapTile(oldTile);
+                    final Drawable oldDrawable = mTileCache.getMapTileFromMemory(oldTile);
                     if (oldDrawable instanceof BitmapDrawable) {
                         final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
                         if (oldBitmap != null) {
@@ -417,10 +446,8 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                             mDestRect.set(
                                     x * mTileSize_2, y * mTileSize_2,
                                     (x + 1) * mTileSize_2, (y + 1) * mTileSize_2);
-                            if (oldBitmap != null) {
-                                canvas.drawBitmap(oldBitmap, null, mDestRect, null);
-                                mTileCache.mCachedTiles.remove(oldBitmap);
-                            }
+                            canvas.drawBitmap(oldBitmap, null, mDestRect, null);
+//                            mTileCache.removeTileFromMemory(oldTile);
                         }
                     }
                 }

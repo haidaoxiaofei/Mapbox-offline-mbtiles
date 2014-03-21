@@ -6,6 +6,7 @@ import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.util.LowMemoryException;
 
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
 public interface ITileLayer {
@@ -16,7 +17,7 @@ public interface ITileLayer {
      * @param aTileInputStream an InputStream
      * @return the rendered Drawable
      */
-    Drawable getDrawable(InputStream aTileInputStream) throws LowMemoryException;
+    Drawable getDrawable(final String aKey, final Resources resources, final InputStream aTileInputStream) throws LowMemoryException;
 
     /**
      * Set the current tile url template used in this layer

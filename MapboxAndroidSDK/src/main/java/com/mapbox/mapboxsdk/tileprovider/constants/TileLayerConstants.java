@@ -8,7 +8,7 @@ package com.mapbox.mapboxsdk.tileprovider.constants;
  */
 public interface TileLayerConstants {
 
-    public static final boolean DEBUG_TILE_PROVIDERS = false;
+    public static final boolean DEBUG_TILE_PROVIDERS = true;
 
     /**
      * Minimum Zoom Level
