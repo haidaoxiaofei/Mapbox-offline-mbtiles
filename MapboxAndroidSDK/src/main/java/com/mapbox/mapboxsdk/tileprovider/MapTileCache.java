@@ -14,6 +14,7 @@ public class MapTileCache implements TileLayerConstants {
     protected final Object mCachedTilesLockObject = new Object();
     protected LRUMapTileCache mCachedTiles;
     private Context context;
+    private String mDiskCacheKey;
 
     public MapTileCache(final Context context) {
         this(context, CACHE_MAPTILECOUNT_DEFAULT);
@@ -60,4 +61,8 @@ public class MapTileCache implements TileLayerConstants {
     }
 
     final static String TAG = "MapTileCache";
+    public void setDiskCacheKey(final String key)
+    {
+        mDiskCacheKey = key;
+    }
 }
