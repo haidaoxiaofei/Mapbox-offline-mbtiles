@@ -166,7 +166,7 @@ public class ItemizedIconOverlay<Item extends Marker> extends ItemizedOverlay<It
             final Drawable marker = (item.getMarker(0) == null) ? this.mDefaultMarker : item
                     .getMarker(0);
 
-            pj.toPixels(item.getPoint(), mItemPoint);
+            pj.toMapPixels(item.getPoint(), mItemPoint);
 
             if (hitTest(item, marker, (int) (mTouchScreenPoint.x - mItemPoint.x), (int) (mTouchScreenPoint.y
                     - mItemPoint.y))) {
@@ -348,11 +348,11 @@ public class ItemizedIconOverlay<Item extends Marker> extends ItemizedOverlay<It
 
 
     private float screenX(Marker item) {
-        return view.getProjection().toPixels(item.getPoint(), null).x;
+        return view.getProjection().toMapPixels(item.getPoint(), null).x;
     }
 
     private float screenY(Marker item) {
-        return view.getProjection().toPixels(item.getPoint(), null).y;
+        return view.getProjection().toMapPixels(item.getPoint(), null).y;
     }
 
     // ===========================================================

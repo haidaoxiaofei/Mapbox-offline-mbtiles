@@ -101,7 +101,7 @@ public class Tooltip extends Overlay {
     private void calculatePoint() {
         LatLng markerCoords = item.getPoint();
         Projection projection = mapView.getProjection();
-        projection.toPixels(markerCoords, point);
+        projection.toMapPixels(markerCoords, point);
     }
 
     // Getters/setters
