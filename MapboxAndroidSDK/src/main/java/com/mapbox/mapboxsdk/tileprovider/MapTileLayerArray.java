@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
+
+import android.content.Context;
 import android.util.Log;
 
 import android.graphics.drawable.Drawable;
@@ -37,9 +39,10 @@ public class MapTileLayerArray extends MapTileLayerBase {
      *
      * @param pRegisterReceiver a {@link IRegisterReceiver}
      */
-    protected MapTileLayerArray(final ITileLayer pTileSource,
+    protected MapTileLayerArray(final Context context,
+                                final ITileLayer pTileSource,
                                 final IRegisterReceiver pRegisterReceiver) {
-        this(pTileSource, pRegisterReceiver, null);
+        this(context, pTileSource, pRegisterReceiver, null);
     }
 
     /**
@@ -48,10 +51,11 @@ public class MapTileLayerArray extends MapTileLayerBase {
      * @param aRegisterReceiver  a {@link IRegisterReceiver}
      * @param pTileProviderArray an array of {@link com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase}
      */
-    public MapTileLayerArray(final ITileLayer pTileSource,
+    public MapTileLayerArray(final Context context,
+                             final ITileLayer pTileSource,
                              final IRegisterReceiver aRegisterReceiver,
                              final MapTileModuleLayerBase[] pTileProviderArray) {
-        super(pTileSource);
+        super(context, pTileSource);
 
         mWorking = new HashMap<MapTile, MapTileRequestState>();
 

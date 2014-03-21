@@ -8,7 +8,6 @@ import com.mapbox.mapboxsdk.tileprovider.util.SimpleRegisterReceiver;
 import android.content.Context;
 
 public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProviderCallback {
-    Context context;
 
     /**
      *
@@ -19,11 +18,11 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
     public MapTileLayerBasic(final Context pContext,
                              final ITileLayer pTileSource,
                              MapView mapView) {
-        super(pTileSource, new SimpleRegisterReceiver(pContext));
-        this.context = pContext;
+        super(pContext, pTileSource, new SimpleRegisterReceiver(pContext));
 
         final MapTileDownloader downloaderProvider = new MapTileDownloader(
                 pTileSource,
+                mTileCache,
                 new NetworkAvailabilityCheck(pContext),
                 mapView);
 
@@ -41,6 +40,7 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
             MapView mapView) {
     	final MapTileDownloader downloaderProvider = new MapTileDownloader(
                 pTileSource,
+                mTileCache,
                 new NetworkAvailabilityCheck(pContext),
                 mapView);
         mTileProviderList.add(downloaderProvider);

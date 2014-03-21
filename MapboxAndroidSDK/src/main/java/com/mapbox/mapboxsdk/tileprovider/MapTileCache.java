@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk.tileprovider;
 
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 /**
@@ -12,16 +13,18 @@ public class MapTileCache implements TileLayerConstants {
 
     protected final Object mCachedTilesLockObject = new Object();
     protected LRUMapTileCache mCachedTiles;
+    private Context context;
 
-    public MapTileCache() {
-        this(CACHE_MAPTILECOUNT_DEFAULT);
+    public MapTileCache(final Context context) {
+        this(context, CACHE_MAPTILECOUNT_DEFAULT);
     }
 
     /**
      * @param aMaximumCacheSize Maximum amount of MapTiles to be hold within.
      */
-    public MapTileCache(final int aMaximumCacheSize) {
         this.mCachedTiles = new LRUMapTileCache(aMaximumCacheSize);
+    public MapTileCache(final Context context, final int aMaximumCacheSize) {
+        this.context = context;
     }
 
     public void ensureCapacity(final int aCapacity) {

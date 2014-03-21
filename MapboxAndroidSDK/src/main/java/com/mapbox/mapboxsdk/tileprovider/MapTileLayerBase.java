@@ -12,6 +12,7 @@ import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -35,7 +36,7 @@ import android.util.Log;
  */
 public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         TileLayerConstants {
-
+    protected Context context;
     protected final MapTileCache mTileCache;
     protected Handler mTileRequestCompleteHandler;
     protected boolean mUseDataConnection = true;
@@ -92,19 +93,21 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     /**
      * Creates a {@link MapTileCache} to be used to cache tiles in memory.
      */
-    public MapTileCache createTileCache() {
-        return new MapTileCache();
+    public MapTileCache createTileCache(final Context context) {
+        return new MapTileCache(context);
     }
 
-    public MapTileLayerBase(final ITileLayer pTileSource) {
-        this(pTileSource, null);
+    public MapTileLayerBase(final Context context, final ITileLayer pTileSource) {
+        this(context, pTileSource, null);
     }
 
-    public MapTileLayerBase(final ITileLayer pTileSource,
+    public MapTileLayerBase(final Context context,
+                            final ITileLayer pTileSource,
                             final Handler pDownloadFinishedListener) {
-        mTileCache = this.createTileCache();
+        this.context = context;
         mTileRequestCompleteHandler = pDownloadFinishedListener;
         mTileSource = pTileSource;
+        mTileCache = this.createTileCache(context);
     }
 
     /**
