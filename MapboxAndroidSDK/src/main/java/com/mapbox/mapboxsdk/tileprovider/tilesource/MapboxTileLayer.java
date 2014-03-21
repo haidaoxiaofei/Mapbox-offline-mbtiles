@@ -25,7 +25,8 @@ import com.squareup.okhttp.OkHttpClient;
 public class MapboxTileLayer extends TileLayer implements MapViewConstants,
 		MapboxConstants {
 	private static final String TAG = "MapboxTileLayer";
-	private JSONObject infoJSON;
+    private JSONObject infoJSON;
+    private String mId;
 
 	/**
 	 * Initialize a new tile layer, directed at a hosted Mapbox tilesource.
@@ -35,6 +36,7 @@ public class MapboxTileLayer extends TileLayer implements MapViewConstants,
 	 */
 	public MapboxTileLayer(String id) {
 		super(id);
+        this.mId = id;
 		initialize(id, false);
 	}
 
@@ -152,4 +154,9 @@ public class MapboxTileLayer extends TileLayer implements MapViewConstants,
 		return String.format("http%s://api.tiles.mapbox.com/v3/%s.json%s",
 				(enableSSL ? "s" : ""), id, (enableSSL ? "?secure" : ""));
 	}
+
+    public String getCacheKey()
+    {
+        return mId;
+    }
 }

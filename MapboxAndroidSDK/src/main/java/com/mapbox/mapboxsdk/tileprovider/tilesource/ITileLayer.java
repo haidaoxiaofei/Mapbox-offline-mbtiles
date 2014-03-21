@@ -60,4 +60,11 @@ public interface ITileLayer {
      */
 	public BoundingBox getBoundingBox();
 
+    /**
+     * Get the cache key used for the disk cache
+     *
+     * @return the cache key
+     */
+    public String getCacheKey();
+
 }

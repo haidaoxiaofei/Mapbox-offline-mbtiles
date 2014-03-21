@@ -82,4 +82,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
 	public BoundingBox getBoundingBox() {
 		return mBoundingBox;
 }
+
+    @Override
+    public String getCacheKey() { return "";}
 }
