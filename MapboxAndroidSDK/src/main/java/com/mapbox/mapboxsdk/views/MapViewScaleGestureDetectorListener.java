@@ -13,8 +13,6 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
      * This is the active focal point in terms of the viewport. Could be a local
      * variable but kept here to minimize per-frame allocations.
      */
-    private float lastSpanX;
-    private float lastSpanY;
 
     private float lastFocusX;
     private float lastFocusY;
@@ -31,8 +29,6 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
 
     @Override
     public boolean onScaleBegin(ScaleGestureDetector detector) {
-        lastSpanX = detector.getCurrentSpanX();
-        lastSpanY = detector.getCurrentSpanY();
         lastFocusX = detector.getFocusX();
         lastFocusY = detector.getFocusY();
         firstSpan = detector.getCurrentSpan();
@@ -44,8 +40,6 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
 
     @Override
     public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
-        float spanX = scaleGestureDetector.getCurrentSpanX();
-        float spanY = scaleGestureDetector.getCurrentSpanY();
 
         float focusX = scaleGestureDetector.getFocusX();
         float focusY = scaleGestureDetector.getFocusY();
@@ -53,8 +47,6 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
         this.mapView.getController().panBy((int) (lastFocusX - focusX), (int) (lastFocusY - focusY));
         this.mapView.setScale(scaleGestureDetector.getCurrentSpan() / firstSpan);
 
-        lastSpanX = spanX;
-        lastSpanY = spanY;
         lastFocusX = focusX;
         lastFocusY = focusY;
         return true;
