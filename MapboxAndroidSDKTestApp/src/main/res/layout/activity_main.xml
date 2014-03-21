@@ -8,8 +8,7 @@
     <com.mapbox.mapboxsdk.views.MapView
             android:id="@+id/mapview"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            mapbox:mapid="examples.map-zgrqqx0w">
+            android:layout_height="fill_parent">
 
     </com.mapbox.mapboxsdk.views.MapView>
     <LinearLayout

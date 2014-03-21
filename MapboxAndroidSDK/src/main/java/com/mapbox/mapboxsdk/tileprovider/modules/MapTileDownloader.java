@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.DisplayMetrics;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
@@ -25,16 +24,9 @@ import java.net.HttpURLConnection;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
-import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
-import com.squareup.okhttp.HttpResponseCache;
-import com.squareup.okhttp.OkHttpClient;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.UUID;
+
 import java.util.concurrent.atomic.AtomicReference;
 
 import javax.net.ssl.SSLContext;
@@ -163,7 +155,10 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
             try {
                 // Log.d(TAG, "getting tile " + tile.getX() + ", " + tile.getY());
                 // Log.d(TAG, "Downloading MapTile from url: " + url);
-
+            	TilesLoadedListener listener = mapView.getTilesLoadedListener();
+                if (listener != null) {
+                    listener.onTilesLoadStarted();
+                }
                 HttpURLConnection connection = client.open(new URL(url));
                 in = connection.getInputStream();
 
@@ -182,7 +177,6 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
                 Drawable result = tileLayer.getDrawable(byteStream);
                 threadControl.set(threadIndex, true);
                 if (checkThreadControl()) {
-                    TilesLoadedListener listener = mapView.getTilesLoadedListener();
                     if (listener != null) {
                         listener.onTilesLoaded();
                     }

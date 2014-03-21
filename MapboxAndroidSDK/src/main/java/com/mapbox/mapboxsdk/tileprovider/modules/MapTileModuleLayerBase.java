@@ -76,7 +76,8 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
      * @param tileSource the tile source
      */
     public abstract void setTileSource(ITileLayer tileSource);
-
+    public abstract ITileLayer getTileSource();
+    
     private final ExecutorService mExecutor;
 
     protected final Object mQueueLockObject = new Object();
