@@ -1,3 +1,6 @@
 include ':MapboxAndroidSDK', ':MapboxAndroidSDKTestApp'
 
 project(":MapboxAndroidSDK").name = "mapbox-android-sdk"
+
+include 'Android-BitmapCache'
+project(':Android-BitmapCache').projectDir = new File('/Volumes/data/dev/android/Android-BitmapCache/library')
