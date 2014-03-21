@@ -79,6 +79,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     public void setTileSource(final ITileLayer pTileSource) {
         mTileSource = pTileSource;
         clearTileCache();
+        if (mTileSource != null) {
+            mTileCache.setDiskCacheKey(mTileSource.getCacheKey());
+        }
     }
 
     /**
@@ -108,6 +111,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         mTileRequestCompleteHandler = pDownloadFinishedListener;
         mTileSource = pTileSource;
         mTileCache = this.createTileCache(context);
+        if (mTileSource != null) {
+            mTileCache.setDiskCacheKey(mTileSource.getCacheKey());
+        }
     }
 
     /**
