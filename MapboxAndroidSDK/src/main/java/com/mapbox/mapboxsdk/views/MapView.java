@@ -530,6 +530,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * Suggestion: Check getScreenRect(null).getHeight() > 0
      */
     public MapView zoomToBoundingBox(final BoundingBox boundingBox) {
+        if(boundingBox == null) return this;
         final BoundingBox currentBox = getBoundingBox();
         if(currentBox == null) return this;
 
