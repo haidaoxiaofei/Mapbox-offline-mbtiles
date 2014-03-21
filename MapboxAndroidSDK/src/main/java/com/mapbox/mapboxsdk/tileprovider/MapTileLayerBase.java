@@ -221,7 +221,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      */
     public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel, final Projection projection) {
 
-        if (Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel)) {
+        if (mTileSource == null || Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel)) {
             return;
         }
 
