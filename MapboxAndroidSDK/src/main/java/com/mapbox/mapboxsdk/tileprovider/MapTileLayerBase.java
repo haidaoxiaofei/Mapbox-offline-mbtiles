@@ -217,7 +217,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      *
      * @param pNewZoomLevel the zoom level that we need now
      * @param pOldZoomLevel the previous zoom level that we should get the tiles to rescale
-     * @param pViewPort     the view port we need tiles for
+     * @param projection     the projection to compute view port
      */
     public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel, final Projection projection) {
 
