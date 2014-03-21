@@ -194,15 +194,13 @@ public class MapController implements MapViewConstants {
     }
     
     protected void aboutToStartAnimation(final float x, final float y) {
-    	final float zoom = mMapView.getZoomLevel();
+    	final float zoom = mMapView.getZoomLevel(false);
     	final int worldSize_2 = TileSystem.MapSize(zoom) / 2;
         final ILatLng latlong = TileSystem.PixelXYToLatLong((int)(x + worldSize_2), (int)(y + worldSize_2), zoom);
         aboutToStartAnimation(latlong, x, y);
     }
     
     protected void aboutToStartAnimation(final ILatLng latlong, final float x, final float y) {
-        if (mMapView.isAnimating()) return;
-        mMapView.mIsAnimating.set(true);
         zoomOnLatLong = latlong;
         zoomDeltaScroll.set(mMapView.getScrollX() - x, mMapView.getScrollY() - y);
         mMapView.mMultiTouchScalePoint.set(x, y);

@@ -521,6 +521,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * Suggestion: Check getScreenRect(null).getHeight() > 0
      */
     public MapView zoomToBoundingBox(final BoundingBox boundingBox) {
+        if(boundingBox == null) return this;
         final BoundingBox currentBox = getBoundingBox();
         if(currentBox == null) return this;
 
@@ -985,36 +986,59 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return super.onTrackballEvent(event);
     }
 
+    private boolean canTapTwoFingers = false;
+    private int multiTouchDownCount = 0;
+    private boolean handleTwoFingersTap(MotionEvent event){
+        if (!isAnimating()) {
+            int pointerCount = event.getPointerCount();
+                for (int i = 0; i < pointerCount; i++)
+                {
+                    int action = event.getActionMasked();
+                    switch (action)
+                    {
+                        case MotionEvent.ACTION_DOWN:
+                            multiTouchDownCount = 0;
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            if (canTapTwoFingers) {
+                                canTapTwoFingers = false;
+                                final ILatLng center = getProjection().fromPixels(event.getX(), event.getY());
+                                mController.zoomOutAbout(center);
+                                return true;
+                            }
+                            break;
+                        case MotionEvent.ACTION_POINTER_DOWN:
+                            multiTouchDownCount ++;
+                            canTapTwoFingers = multiTouchDownCount > 1;
+                            break;
+                        case MotionEvent.ACTION_POINTER_UP:
+                            multiTouchDownCount --;
+                            break;
+                        default:
+                    }
+                }
+        }
+        return false;
+    }
     @Override
-    public boolean dispatchTouchEvent(final MotionEvent event) {
-
-        Log.d(TAG, "dispatchTouchEvent(" + event + ")");
-
+    public boolean onTouchEvent(MotionEvent event) {
         // Get rotated event for some touch listeners.
         MotionEvent rotatedEvent = rotateTouchEvent(event);
 
         try {
-            if (super.dispatchTouchEvent(event)) {
-                Log.d(TAG, "super handled onTouchEvent");
-                return true;
-            }
-
             if (this.getOverlayManager().onTouchEvent(rotatedEvent, this)) {
                 Log.d(TAG, "OverlayManager handled onTouchEvent");
                 return true;
             }
-            
+
             boolean handled = mScaleGestureDetector.onTouchEvent(event);
             if ( !mScaleGestureDetector.isInProgress() ) {
-            	if (event.getActionMasked() == MotionEvent.ACTION_POINTER_UP && event.getPointerCount() == 2) {
-                    final ILatLng center = getProjection().fromPixels(rotatedEvent.getX(), rotatedEvent.getY());
-            		mController.zoomOutAbout(center);
-            		handled = true;
-            	}
-            	else {
-            		handled |= mGestureDetector.onTouchEvent( rotatedEvent );
-            	}
-    		}
+                handled |= mGestureDetector.onTouchEvent( rotatedEvent );
+            }
+            if ((mScaleGestureDetector.isInProgress()) && canTapTwoFingers) {
+                canTapTwoFingers = false;
+            }
+            handleTwoFingersTap(rotatedEvent);
             return handled;
 
         } finally {
@@ -1022,11 +1046,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 rotatedEvent.recycle();
             }
         }
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return false;
     }
 
     private MotionEvent rotateTouchEvent(MotionEvent ev) {
@@ -1049,15 +1068,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                             new Class[]{Matrix.class});
                 }
                 sMotionEventTransformMethod.invoke(rotatedEvent, mRotateMatrix);
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
