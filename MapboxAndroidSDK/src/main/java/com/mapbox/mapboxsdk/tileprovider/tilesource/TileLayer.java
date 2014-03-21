@@ -8,8 +8,8 @@ import android.util.Log;
 
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.tileprovider.BitmapPool;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
+import com.mapbox.mapboxsdk.tileprovider.MapTileCache;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.tileprovider.util.LowMemoryException;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
@@ -61,22 +61,18 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     }
 
     @Override
-    public Drawable getDrawable(final String aKey, final Resources resources, final InputStream aFileInputStream) throws LowMemoryException {
+    public Drawable getDrawable(final MapTile aTile, final MapTileCache aCache, final Resources resources, final InputStream aFileInputStream) throws LowMemoryException {
         try {
             // default implementation will load the file as a bitmap and create
-            // a BitmapDrawable from it
-            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-            BitmapPool.getInstance().applyReusableOptions(bitmapOptions);
-            final Bitmap bitmap = BitmapFactory.decodeStream(aFileInputStream, null, bitmapOptions);
-            if (bitmap != null) {
-                return new CacheableBitmapDrawable(aKey, resources, bitmap, BitmapLruCache.RecyclePolicy.ALWAYS, CacheableBitmapDrawable.SOURCE_NEW);
-            }
+            // a CacheableBitmapDrawable from it
+            //also caching is handled here to be optimized
+            return aCache.putTileStream(aTile, aFileInputStream, new BitmapFactory.Options());
+
         } catch (final OutOfMemoryError e) {
             Log.e(TAG, "OutOfMemoryError loading bitmap");
             System.gc();
             throw new LowMemoryException(e);
         }
-        return null;
     }
 
     final private String TAG = "OnlineTileSource";

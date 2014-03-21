@@ -128,10 +128,6 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      */
     @Override
     public void mapTileRequestCompleted(final MapTileRequestState pState, final Drawable pDrawable) {
-        // put the tile in the cache
-        removeTileFromCache(pState); //make sure we remove it from cache first (because of expired ones)
-        putTileIntoCache(pState, pDrawable);
-
         // tell our caller we've finished and it should update its view
         if (mTileRequestCompleteHandler != null) {
             mTileRequestCompleteHandler.sendEmptyMessage(MapTile.MAPTILE_SUCCESS_ID);
@@ -370,9 +366,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                 mDestRect.set(0, 0, pTileSizePx, pTileSizePx);
 
                 // Try to get a bitmap from the pool, otherwise allocate a new one
-                Bitmap bitmap;
-                bitmap = BitmapPool.getInstance().obtainSizedBitmapFromPool(pTileSizePx,
-                        pTileSizePx);
+                Bitmap bitmap = null;
+//                bitmap = mTileCache.getBitmapFromRemoved(pTileSizePx,
+//                        pTileSizePx);
 
                 if (bitmap == null) {
                     bitmap = Bitmap.createBitmap(pTileSizePx, pTileSizePx,
@@ -435,8 +431,8 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                         if (oldBitmap != null) {
                             if (bitmap == null) {
                                 // Try to get a bitmap from the pool, otherwise allocate a new one
-                                bitmap = BitmapPool.getInstance().obtainSizedBitmapFromPool(
-                                        pTileSizePx, pTileSizePx);
+//                                bitmap = mTileCache.getBitmapFromRemoved(
+//                                        pTileSizePx, pTileSizePx);
                                 if (bitmap == null)
                                     bitmap = Bitmap.createBitmap(pTileSizePx, pTileSizePx,
                                             Bitmap.Config.ARGB_8888);

@@ -5,11 +5,13 @@ import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.Log;
 import java.io.File;
+import java.io.InputStream;
 
 import uk.co.senab.bitmapcache.BitmapLruCache;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
@@ -83,6 +85,11 @@ public class MapTileCache implements TileLayerConstants {
         return this.mCachedTiles.getFromDiskCache(getCacheKey(aTile), null);
     }
 
+    public CacheableBitmapDrawable putTileStream(final MapTile aTile, final InputStream inputStream,
+                                                 final BitmapFactory.Options decodeOpts) {
+        return this.mCachedTiles.put(getCacheKey(aTile), inputStream, decodeOpts);
+    }
+
     public CacheableBitmapDrawable putTile(final MapTile aTile, final Drawable aDrawable) {
         if (aDrawable != null && aDrawable instanceof BitmapDrawable) {
             String key = getCacheKey(aTile);
@@ -152,11 +159,7 @@ public class MapTileCache implements TileLayerConstants {
 
     public void removeTileFromMemory(final MapTile aTile) {
         String key = getCacheKey(aTile);
-//        CacheableBitmapDrawable drawable = this.mCachedTiles.getFromMemoryCache(key);
-//        if (drawable != null) {
-//            BitmapPool.getInstance().returnDrawableToPool(drawable);
-            this.mCachedTiles.removeFromMemoryCache(key);
-//        }
+        this.mCachedTiles.removeFromMemoryCache(key);
     }
 
     public void clear() {
@@ -168,6 +171,10 @@ public class MapTileCache implements TileLayerConstants {
         return this.mCachedTiles.createCacheableBitmapDrawable(bitmap, getCacheKey(aTile), CacheableBitmapDrawable.SOURCE_UNKNOWN);
     }
 
+
+    Bitmap getBitmapFromRemoved(final int width, final int height) {
+        return this.mCachedTiles.getBitmapFromRemoved(width, height);
+    }
 
     public void setDiskCacheKey(final String key)
     {

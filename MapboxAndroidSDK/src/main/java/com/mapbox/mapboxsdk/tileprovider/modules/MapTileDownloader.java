@@ -177,7 +177,8 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
                     final byte[] data = dataStream.toByteArray();
                     final ByteArrayInputStream byteStream = new ByteArrayInputStream(data);
 
-                    result = tileLayer.getDrawable((mTileCache != null)?mTileCache.get().getCacheKey(tile):null, mapView.getContext().getResources(), byteStream);
+                    mTileCache.get().removeTileFromMemory(tile); //make sure we remove it from cache first (because of expired ones)
+                    result = tileLayer.getDrawable(tile, mTileCache.get(), mapView.getContext().getResources(), byteStream);
                 }
                 threadControl.set(threadIndex, true);
                 if (checkThreadControl()) {
