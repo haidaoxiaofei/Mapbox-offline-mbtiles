@@ -6,6 +6,8 @@ import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
+
+import android.os.Process;
 import android.util.Log;
 
 import java.util.HashMap;
@@ -264,6 +266,8 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
          */
         @Override
         public void run() {
+            // Make sure we're running with a background priority
+            android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
             onTileLoaderInit();
 
