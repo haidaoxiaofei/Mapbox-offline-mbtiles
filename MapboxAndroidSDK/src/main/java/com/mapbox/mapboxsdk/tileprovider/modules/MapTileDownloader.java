@@ -114,6 +114,11 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
         }
     }
 
+    private boolean networkAvailable() {
+        return mNetworkAvailablityCheck == null
+                || mNetworkAvailablityCheck.getNetworkAvailable();
+    }
+
     protected class TileLoader extends MapTileModuleLayerBase.TileLoader {
 
         @Override
@@ -145,8 +150,7 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
                     if (cache != null) {
                         client.setResponseCache(cache);
                     }
-                    if (mNetworkAvailablityCheck != null
-                            && !mNetworkAvailablityCheck.getNetworkAvailable()) {
+                    if (!networkAvailable()) {
                         Log.d(TAG, "Skipping " + getName() + " due to NetworkAvailabilityCheck.");
                         return null;
                     }

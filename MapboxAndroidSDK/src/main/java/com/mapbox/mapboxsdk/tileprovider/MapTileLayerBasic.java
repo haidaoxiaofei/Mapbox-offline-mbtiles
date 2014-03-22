@@ -41,7 +41,7 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
     	final MapTileDownloader downloaderProvider = new MapTileDownloader(
                 pTileSource,
                 mTileCache,
-                new NetworkAvailabilityCheck(pContext),
+                mNetworkAvailablityCheck,
                 mapView);
         mTileProviderList.add(downloaderProvider);
     }

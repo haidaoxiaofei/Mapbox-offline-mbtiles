@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
+import com.mapbox.mapboxsdk.tileprovider.modules.NetworkAvailabilityCheck;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
 
@@ -37,6 +38,9 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
     protected final List<MapTileModuleLayerBase> mTileProviderList;
 
+    protected final List<MapTile> mUnaccessibleTiles;
+
+    protected final NetworkAvailabilityCheck mNetworkAvailablityCheck;
     /**
      * Creates an {@link MapTileLayerArray} with no tile providers.
      *
@@ -61,6 +65,9 @@ public class MapTileLayerArray extends MapTileLayerBase {
         super(context, pTileSource);
 
         mWorking = new HashMap<MapTile, MapTileRequestState>();
+        mUnaccessibleTiles = new ArrayList<MapTile>();
+
+        mNetworkAvailablityCheck  = new NetworkAvailabilityCheck(context);
 
         mTileProviderList = new ArrayList<MapTileModuleLayerBase>();
         if (pTileProviderArray != null) {
@@ -81,8 +88,21 @@ public class MapTileLayerArray extends MapTileLayerBase {
         }
     }
 
+    private boolean networkAvailable() {
+        return mNetworkAvailablityCheck == null
+                || mNetworkAvailablityCheck.getNetworkAvailable();
+    }
+
     @Override
     public Drawable getMapTile(final MapTile pTile) {
+        if (mUnaccessibleTiles.size() > 0) {
+            if (networkAvailable()) {
+                mUnaccessibleTiles.clear();
+            }
+            else if(mUnaccessibleTiles.contains(pTile)) {
+                return null;
+            }
+        }
         final CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
         if (tileDrawable != null && !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
             return tileDrawable;
@@ -145,6 +165,9 @@ public class MapTileLayerArray extends MapTileLayerBase {
         } else {
             synchronized (mWorking) {
                 mWorking.remove(aState.getMapTile());
+            }
+            if (!networkAvailable()) {
+                mUnaccessibleTiles.add(aState.getMapTile());
             }
             super.mapTileRequestFailed(aState);
         }
