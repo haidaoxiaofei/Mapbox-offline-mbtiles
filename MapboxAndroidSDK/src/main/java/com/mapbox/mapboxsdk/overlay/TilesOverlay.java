@@ -57,11 +57,6 @@ public class TilesOverlay
     private int mLoadingBackgroundColor = Color.rgb(216, 208, 208);
     private int mLoadingLineColor = Color.rgb(200, 192, 192);
 
-    /**
-     * For overshooting the tile cache *
-     */
-    private int mOvershootTileCache = 0;
-
     public TilesOverlay(final MapTileLayerBase aTileProvider, final ResourceProxy pResourceProxy) {
         super(pResourceProxy);
         if (aTileProvider == null) {
@@ -161,10 +156,6 @@ public class TilesOverlay
             else {
             	mCurrentZoomFactor = 1.0f;
             }
-            
-            // make sure the cache is big enough for all the tiles
-            final int numNeeded = (mLowerRight.y - mUpperLeft.y + 1) * (mLowerRight.x - mUpperLeft.x + 1);
-            mTileProvider.ensureCapacity(numNeeded + mOvershootTileCache);
         }
 
         @Override

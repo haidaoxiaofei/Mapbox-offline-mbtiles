@@ -22,7 +22,7 @@ import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 public class MapTileCache implements TileLayerConstants {
 
     protected final Object mCachedTilesLockObject = new Object();
-    protected static BitmapLruCache mCachedTiles = null;
+    protected static BitmapLruCache sCachedTiles = null;
     private Context context;
     private String mDiskCacheKey;
     final static String TAG = "MapTileCache";
@@ -32,12 +32,8 @@ public class MapTileCache implements TileLayerConstants {
         this(context, CACHE_MAPTILECOUNT_DEFAULT);
     }
 
-    /**
-     * @param aMaximumCacheSize Maximum amount of MapTiles to be hold within.
-     */
-    public MapTileCache(final Context context, final int aMaximumCacheSize) {
-        this.context = context;
-        if(mCachedTiles == null) {
+    protected BitmapLruCache getCache() {
+        if (this.sCachedTiles == null) {
             File cacheDir = getDiskCacheDir(context, DISK_CACHE_SUBDIR);
             if (!cacheDir.exists()) {
                 if (cacheDir.mkdirs()) {
@@ -53,15 +49,16 @@ public class MapTileCache implements TileLayerConstants {
                     .setDiskCacheEnabled(true)
                     .setDiskCacheMaxSize(10*1024*1024)
                     .setDiskCacheLocation(cacheDir);
-            this.mCachedTiles = builder.build();
+            this.sCachedTiles = builder.build();
         }
-
+        return this.sCachedTiles;
     }
 
-    public void ensureCapacity(final int aCapacity) {
-//        synchronized (mCachedTilesLockObject) {
-//            mCachedTiles.ensureCapacity(aCapacity);
-//        }
+    /**
+     * @param aMaximumCacheSize Maximum amount of MapTiles to be hold within.
+     */
+    public MapTileCache(final Context context, final int aMaximumCacheSize) {
+        this.context = context;
     }
 
     public String getCacheKey(MapTile aTile) {
@@ -70,39 +67,39 @@ public class MapTileCache implements TileLayerConstants {
 
     public CacheableBitmapDrawable getMapTile(final MapTile aTile) {
         String key = getCacheKey(aTile);
-        CacheableBitmapDrawable result = this.mCachedTiles.getFromMemoryCache(key);
+        CacheableBitmapDrawable result = getCache().getFromMemoryCache(key);
         if (result == null) {
-            result = this.mCachedTiles.getFromDiskCache(key, null);
+            result = getCache().getFromDiskCache(key, null);
         }
         return result;
     }
 
     public CacheableBitmapDrawable getMapTileFromMemory(final MapTile aTile) {
-        return this.mCachedTiles.getFromMemoryCache(getCacheKey(aTile));
+        return getCache().getFromMemoryCache(getCacheKey(aTile));
     }
 
     public CacheableBitmapDrawable getMapTileFromDisk(final MapTile aTile) {
-        return this.mCachedTiles.getFromDiskCache(getCacheKey(aTile), null);
+        return getCache().getFromDiskCache(getCacheKey(aTile), null);
     }
 
     public CacheableBitmapDrawable putTileStream(final MapTile aTile, final InputStream inputStream,
                                                  final BitmapFactory.Options decodeOpts) {
-        return this.mCachedTiles.put(getCacheKey(aTile), inputStream, decodeOpts);
+        return getCache().put(getCacheKey(aTile), inputStream, decodeOpts);
     }
 
     public CacheableBitmapDrawable putTile(final MapTile aTile, final Drawable aDrawable) {
         if (aDrawable != null && aDrawable instanceof BitmapDrawable) {
             String key = getCacheKey(aTile);
             CacheableBitmapDrawable drawable = null;
-            if (!this.mCachedTiles.containsInMemoryCache(key)) {
-                drawable = this.mCachedTiles.putInMemoryCache(getCacheKey(aTile), ((BitmapDrawable) aDrawable).getBitmap());
+            if (!getCache().containsInMemoryCache(key)) {
+                drawable = getCache().putInMemoryCache(getCacheKey(aTile), ((BitmapDrawable) aDrawable).getBitmap());
             }
-            if (!this.mCachedTiles.containsInDiskCache(key)) {
+            if (!getCache().containsInDiskCache(key)) {
                 if (drawable != null) {
-                    this.mCachedTiles.putInDiskCache(getCacheKey(aTile), drawable);
+                    getCache().putInDiskCache(getCacheKey(aTile), drawable);
                 }
                 else {
-                   this.mCachedTiles.putInDiskCache(getCacheKey(aTile), ((BitmapDrawable) aDrawable).getBitmap());
+                    getCache().putInDiskCache(getCacheKey(aTile), ((BitmapDrawable) aDrawable).getBitmap());
                 }
             }
             return drawable;
@@ -113,8 +110,8 @@ public class MapTileCache implements TileLayerConstants {
     public CacheableBitmapDrawable putTileInMemoryCache(final MapTile aTile, final Bitmap aBitmap) {
         if (aBitmap != null) {
             String key = getCacheKey(aTile);
-            if (!this.mCachedTiles.containsInMemoryCache(key)) {
-                return this.mCachedTiles.putInMemoryCache(getCacheKey(aTile), aBitmap);
+            if (!getCache().containsInMemoryCache(key)) {
+                return getCache().putInMemoryCache(getCacheKey(aTile), aBitmap);
             }
         }
         return null;
@@ -123,12 +120,12 @@ public class MapTileCache implements TileLayerConstants {
     public CacheableBitmapDrawable putTileInMemoryCache(final MapTile aTile, final Drawable aDrawable) {
         if (aDrawable != null && aDrawable instanceof BitmapDrawable) {
             String key = getCacheKey(aTile);
-            if (!this.mCachedTiles.containsInMemoryCache(key)) {
+            if (!getCache().containsInMemoryCache(key)) {
                 if (aDrawable instanceof CacheableBitmapDrawable) {
-                    return this.mCachedTiles.putInMemoryCache(getCacheKey(aTile), ((CacheableBitmapDrawable) aDrawable));
+                    return getCache().putInMemoryCache(getCacheKey(aTile), ((CacheableBitmapDrawable) aDrawable));
                 }
                 else {
-                    return this.mCachedTiles.putInMemoryCache(getCacheKey(aTile), ((BitmapDrawable) aDrawable).getBitmap());
+                    return getCache().putInMemoryCache(getCacheKey(aTile), ((BitmapDrawable) aDrawable).getBitmap());
                 }
             }
         }
@@ -138,42 +135,42 @@ public class MapTileCache implements TileLayerConstants {
     public CacheableBitmapDrawable putTileInDiskCache(final MapTile aTile, final Drawable aDrawable) {
         if (aDrawable != null && aDrawable instanceof BitmapDrawable) {
             String key = getCacheKey(aTile);
-            if (!this.mCachedTiles.containsInDiskCache(key)) {
-                return this.mCachedTiles.putInDiskCache(getCacheKey(aTile), ((BitmapDrawable) aDrawable).getBitmap());
+            if (!getCache().containsInDiskCache(key)) {
+                return getCache().putInDiskCache(getCacheKey(aTile), ((BitmapDrawable) aDrawable).getBitmap());
             }
         }
         return null;
     }
 
     public boolean containsTile(final MapTile aTile) {
-        return this.mCachedTiles.contains(getCacheKey(aTile));
+        return getCache().contains(getCacheKey(aTile));
     }
 
     public boolean containsTileInDiskCache(final MapTile aTile) {
-        return this.mCachedTiles.containsInDiskCache(getCacheKey(aTile));
+        return getCache().containsInDiskCache(getCacheKey(aTile));
     }
 
     public void removeTile(final MapTile aTile) {
-        this.mCachedTiles.remove(getCacheKey(aTile));
+        getCache().remove(getCacheKey(aTile));
     }
 
     public void removeTileFromMemory(final MapTile aTile) {
         String key = getCacheKey(aTile);
-        this.mCachedTiles.removeFromMemoryCache(key);
+        getCache().removeFromMemoryCache(key);
     }
 
     public void clear() {
-        this.mCachedTiles.trimMemory();
+        getCache().trimMemory();
     }
 
     public CacheableBitmapDrawable createCacheableBitmapDrawable(Bitmap bitmap, MapTile aTile)
     {
-        return this.mCachedTiles.createCacheableBitmapDrawable(bitmap, getCacheKey(aTile), CacheableBitmapDrawable.SOURCE_UNKNOWN);
+        return getCache().createCacheableBitmapDrawable(bitmap, getCacheKey(aTile), CacheableBitmapDrawable.SOURCE_UNKNOWN);
     }
 
 
     Bitmap getBitmapFromRemoved(final int width, final int height) {
-        return this.mCachedTiles.getBitmapFromRemoved(width, height);
+        return getCache().getBitmapFromRemoved(width, height);
     }
 
     public void setDiskCacheKey(final String key)

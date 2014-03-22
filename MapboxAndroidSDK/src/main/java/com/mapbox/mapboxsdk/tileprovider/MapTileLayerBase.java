@@ -219,10 +219,6 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         mTileRequestCompleteHandler = handler;
     }
 
-    public void ensureCapacity(final int pCapacity) {
-        mTileCache.ensureCapacity(pCapacity);
-    }
-
     public void clearTileCache() {
         mTileCache.clear();
     }
