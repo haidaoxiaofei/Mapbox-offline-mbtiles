@@ -355,7 +355,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 		if (w > 0 && h > 0) {
         return getBoundingBox(getWidth(), getHeight());
     }
-		return mScrollableAreaBoundingBox;
+		return null;
 	}
 
     private BoundingBox getBoundingBox(final int pViewWidth, final int pViewHeight) {
@@ -399,8 +399,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     public Rect getIntrinsicScreenRect(final Rect reuse) {
         final Rect out = reuse == null ? new Rect() : reuse;
-        out.set(getScrollX() - getWidth() / 2, getScrollY() - getHeight() / 2, getScrollX()
-                + getWidth() / 2, getScrollY() + getHeight() / 2);
+        out.set(getScrollX() - getMeasuredWidth() / 2, getScrollY() - getMeasuredHeight() / 2, getScrollX()
+                + getMeasuredWidth() / 2, getScrollY() + getMeasuredHeight() / 2);
         return out;
     }
 
@@ -517,6 +517,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return this;
     }
 
+    private BoundingBox mBoundingBoxToZoomOn = null;
     /**
      * Zoom the map to enclose the specified bounding box, as closely as possible.
      * Must be called after display layout is complete, or screen dimensions are not known, and
@@ -526,7 +527,10 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public MapView zoomToBoundingBox(final BoundingBox boundingBox) {
         if(boundingBox == null) return this;
         final BoundingBox currentBox = getBoundingBox();
-        if(currentBox == null) return this;
+        if(currentBox == null) {
+            mBoundingBoxToZoomOn = boundingBox;
+            return this;
+        }
 
         // Calculated required zoom based on latitude span
         final double maxZoomLatitudeSpan = mZoomLevel == getMaxZoomLevel() ?
@@ -551,7 +555,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         // Zoom to boundingBox center, at calculated maximum allowed zoom level
 		getController().setZoom(
 				(float) Math.max(
-						Math.max(requiredLatitudeZoom, requiredLongitudeZoom),
+						Math.min(requiredLatitudeZoom, requiredLongitudeZoom),
 						getMinZoomLevel()));
 
         getController().setCenter(
@@ -900,6 +904,10 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 			if (mZoomLevel < minZoom) {
 				setZoom(minZoom);
 			}
+            if (mBoundingBoxToZoomOn != null) {
+                zoomToBoundingBox(mBoundingBoxToZoomOn);
+                mBoundingBoxToZoomOn = null;
+            }
 		}
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
