@@ -11,6 +11,9 @@ apply plugin: 'android'
 repositories {
     mavenCentral()
     mavenLocal()
+    flatDir {
+        dirs '../libs'
+    }
 }
 
 android {
