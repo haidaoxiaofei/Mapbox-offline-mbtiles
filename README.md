@@ -2,6 +2,8 @@
 and there is zero guarantee of API stability. Kick the tires at your own
 risk, they may explode.**
 
+[![Build Status](https://travis-ci.org/mapbox/mapbox-android-sdk.png?branch=master)](https://travis-ci.org/mapbox/mapbox-android-sdk)
+
 # Mapbox Android SDK
 
 An open source alternative for native maps on Android.

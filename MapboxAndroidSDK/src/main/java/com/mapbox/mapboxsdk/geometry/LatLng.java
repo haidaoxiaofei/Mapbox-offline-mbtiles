@@ -1,20 +1,16 @@
-// Created by plusminus on 21:28:12 - 25.09.2008
 package com.mapbox.mapboxsdk.geometry;
 
 import java.io.Serializable;
-
 import com.mapbox.mapboxsdk.api.ILatLng;
-
 import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * An immutable latitude, longitude, and optionally altitude point. Coordinates are stored as WGS84 degrees.
+ * An immutable latitude, longitude, and optionally altitude point.
+ * Coordinates are stored as WGS84 degrees.
  */
-public final class LatLng implements ILatLng, GeoConstants, Parcelable, Serializable, Cloneable {
-
-    static final long serialVersionUID = 1L;
+public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     private double longitude;
     private double latitude;
@@ -59,21 +55,30 @@ public final class LatLng implements ILatLng, GeoConstants, Parcelable, Serializ
         this.altitude = aLatLng.altitude;
     }
 
+    /**
+     * Returns the longitude value of this point
+     * @return the longitude value in decimal degrees
+     */
     public double getLongitude() {
         return this.longitude;
     }
 
+    /**
+     * Returns the latitude value of this point
+     * @return the latitude value in decimal degrees
+     */
     public double getLatitude() {
         return this.latitude;
     }
 
+    /**
+     * Returns the altitude value of this point. The encoding
+     * of altitude is unspecified.
+     *
+     * @return the altitude value
+     */
     public double getAltitude() {
         return this.altitude;
-    }
-
-    @Override
-    public LatLng clone() {
-        return new LatLng(this.latitude, this.longitude);
     }
 
     @Override
