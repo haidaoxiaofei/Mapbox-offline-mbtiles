@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 import java.io.InputStream;
 
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.util.LowMemoryException;
 
@@ -59,5 +60,54 @@ public interface ITileLayer {
      * @return the tile source bounding box
      */
 	public BoundingBox getBoundingBox();
+
+    /**
+     * Get the tile source center.
+     *
+     * @return the tile source center
+     */
+    public LatLng getCenterCoordinate();
+
+    /**
+     * Get the tile source suggested starting zoom.
+     *
+     * @return the tile suggested starting zoom
+     */
+    public float getCenterZoom();
+
+    /**
+     * Get the tile source short name
+     *
+     * @return the short name
+     */
+    public String getShortName();
+
+    /**
+     * Get the tile source description
+     *
+     * @return the description
+     */
+    public String getLongDescription();
+
+    /**
+     * Get the tile source short attribution
+     *
+     * @return the short attribution
+     */
+    public String getShortAttribution();
+
+    /**
+     * Get the tile source long attribution
+     *
+     * @return the long attribution
+     */
+    public String getLongAttribution();
+
+    /**
+     * Get the tile source legend
+     *
+     * @return the legend
+     */
+    public String getLegend();
 
 }

@@ -18,7 +18,12 @@ import java.io.InputStream;
 
 public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstants {
 
-	protected String mUrl;
+    protected String mUrl;
+    protected String mName;
+    protected String mDescription;
+    protected String mShortAttribution;
+    protected String mLegend;
+
     protected float mMinimumZoomLevel = 1;
     protected float mMaximumZoomLevel = 16;
     protected BoundingBox mBoundingBox = null;
@@ -78,8 +83,33 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
 
     final private String TAG = "OnlineTileSource";
 
-	@Override
-	public BoundingBox getBoundingBox() {
-		return mBoundingBox;
-}
+    @Override
+    public BoundingBox getBoundingBox() { return mBoundingBox; }
+
+    @Override
+    public LatLng getCenterCoordinate() { return mCenter; }
+
+
+    @Override
+    public float getCenterZoom() {
+        if(mCenter != null) {
+            return (float)mCenter.getAltitude();
+        }
+        return Math.round(mMaximumZoomLevel + mMinimumZoomLevel)/2;
+    }
+
+    @Override
+    public String getShortName() { return mName; }
+
+    @Override
+    public String getLongDescription() { return mDescription; }
+
+    @Override
+    public String getShortAttribution() { return mShortAttribution; }
+
+    @Override
+    public String getLongAttribution() { return mShortAttribution; }
+
+    @Override
+    public String getLegend() { return mLegend; }
 }

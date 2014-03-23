@@ -16,6 +16,7 @@ import android.util.Log;
 
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -55,6 +56,78 @@ public class MapboxTileLayer extends TileLayer implements MapViewConstants,
 		}
 	}
 
+    private String getJSONString(JSONObject JSON, String key){
+        String defaultValue = null;
+        if (JSON.has(key)) {
+            try {
+                return JSON.getString(key);
+            } catch (JSONException e) {
+                return defaultValue;
+            }
+        }
+        return defaultValue;
+    }
+
+    private int getJSONInt(JSONObject JSON, String key){
+        int defaultValue = 0;
+        if (JSON.has(key)) {
+            try {
+                return JSON.getInt(key);
+            } catch (JSONException e) {
+                return defaultValue;
+            }
+        }
+        return defaultValue;
+    }
+
+    private float getJSONFloat(JSONObject JSON, String key){
+        float defaultValue = 0;
+        if (JSON.has(key)) {
+            try {
+                return (float)JSON.getDouble(key);
+            } catch (JSONException e) {
+                return defaultValue;
+            }
+        }
+        return defaultValue;
+    }
+
+    private double[] getJSONDoubleArray(JSONObject JSON, String key, int length) {
+        double[] defaultValue = null;
+        if (JSON.has(key)) {
+            try {
+                boolean valid = false;
+                double[] result = new double[length];
+                Object value = JSON.get(key);
+                if (value instanceof JSONArray) {
+                    JSONArray array = ((JSONArray)value);
+                    if (array.length() == length) {
+                        for (int i = 0; i < array.length(); i++) {
+                            result[i] = array.getDouble(i);
+                        }
+                        valid = true;
+                    }
+                }
+                else {
+                    String[] array = JSON.getString(key).split(",");
+                    if (array.length == length) {
+                        for (int i = 0; i < array.length; i++) {
+                            result[i] = Double.parseDouble(array[i]);
+                        }
+                        valid = true;
+                    }
+                }
+                if (valid) {
+                    return result;
+                }
+            } catch (JSONException e) {
+                return defaultValue;
+            }
+        }
+        return defaultValue;
+    }
+
+
 	private void initWithTileJSON(JSONObject tileJSON) {
 		infoJSON = (tileJSON != null) ? tileJSON : new JSONObject();
 		if (infoJSON != null) {
@@ -64,47 +137,21 @@ public class MapboxTileLayer extends TileLayer implements MapViewConstants,
 				} catch (JSONException e) {
 				}
 			}
-			if (infoJSON.has("minzoom")) {
-				try {
-					mMinimumZoomLevel = infoJSON.getInt("minzoom");
-				} catch (JSONException e) {
-				}
-			}
-			if (infoJSON.has("maxzoom")) {
-				try {
-					mMaximumZoomLevel = infoJSON.getInt("maxzoom");
-				} catch (JSONException e) {
-				}
-			}
-			if (infoJSON.has("bounds")) {
-				try {
-					boolean valid = false;
-					double[] bounds = new double[4];
-					Object value = infoJSON.get("bounds");
-					if (value instanceof JSONArray) {
-						JSONArray array = ((JSONArray)value);
-						if (array.length() == 4) {
-							for (int i = 0; i < array.length(); i++) {
-								bounds[i] = array.getDouble(i);
-							}
-							valid = true;
-						}
-					}
-					else {
-						String[] array = infoJSON.getString("bounds").split(",");
-						if (array.length == 4) {
-							for (int i = 0; i < array.length; i++) {
-								bounds[i] = Double.parseDouble(array[i]);
-							}
-							valid = true;
-						}
-					}
-					if (valid) {
-						mBoundingBox = new BoundingBox(bounds[3], bounds[2], bounds[1], bounds[0]);
-					}
-				} catch (JSONException e) {
-				}
-			}
+            mMinimumZoomLevel = getJSONFloat(infoJSON, "minzoom");
+            mMaximumZoomLevel = getJSONFloat(infoJSON, "maxzoom");
+            mName = getJSONString(infoJSON, "name");
+            mDescription = getJSONString(infoJSON, "description");
+            mShortAttribution = getJSONString(infoJSON, "attribution");
+            mLegend = getJSONString(infoJSON, "legend");
+
+            double[] center = getJSONDoubleArray(infoJSON, "center", 3);
+            if (center != null) {
+                mCenter = new LatLng(center[2], center[1], center[0]);
+            }
+            double[] bounds = getJSONDoubleArray(infoJSON, "bounds", 4);
+            if (bounds != null) {
+                mBoundingBox = new BoundingBox(bounds[3], bounds[2], bounds[1], bounds[0]);
+            }
 		}
 		Log.d(TAG, "infoJSON " + infoJSON.toString());
 	}
