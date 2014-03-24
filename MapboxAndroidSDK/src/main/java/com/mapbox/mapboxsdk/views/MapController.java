@@ -72,6 +72,7 @@ public class MapController implements MapViewConstants {
      * Set the map view to the given center. There will be no animation.
      */
     public void setCenter(final ILatLng latlng) {
+        if (latlng == null) return;
         PointF p = mMapView.getProjection().toMapPixels(latlng, null);
         this.mMapView.scrollTo((int)p.x, (int)p.y);
     }
