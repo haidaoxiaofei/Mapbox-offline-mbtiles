@@ -141,10 +141,10 @@ public class MainActivity extends ActionBarActivity {
         });
 	}
 
-    final String availableLayers[] = {"openstreetpmap", "openseapmap", "mapquestaerial", "mapquest", "opencycle", "tilemill"};
+    final String availableLayers[] = {"openstreetpmap", "openseapmap", "mapquestaerial", "mapquest", "opencycle", "tilemill", "open-streets-dc.mbtiles"};
 	protected void replaceMapView(String layer) {
         ITileLayer source;
-        if (layer.endsWith("mbtiles")) {
+        if (layer.toLowerCase().endsWith("mbtiles")) {
             source = new MBTilesLayer(this, layer);
         }
         else if (layer.equalsIgnoreCase("openstreetpmap")) {
