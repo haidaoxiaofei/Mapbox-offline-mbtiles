@@ -1,7 +1,11 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -20,11 +24,11 @@ public class OverlayManager extends AbstractList<Overlay> {
     private TilesOverlay mTilesOverlay;
     private boolean mUseSafeCanvas = true;
 
-    private final CopyOnWriteArrayList<Overlay> mOverlayList;
+    private final List<Overlay> mOverlayList;
 
     public OverlayManager(final TilesOverlay tilesOverlay) {
         setTilesOverlay(tilesOverlay);
-        mOverlayList = new CopyOnWriteArrayList<Overlay>();
+        mOverlayList = Collections.synchronizedList(new ArrayList<Overlay>());
     }
 
     @Override
@@ -39,22 +43,56 @@ public class OverlayManager extends AbstractList<Overlay> {
 
     @Override
     public void add(final int pIndex, final Overlay pElement) {
-        mOverlayList.add(pIndex, pElement);
-        if (pElement instanceof SafeDrawOverlay)
-            ((SafeDrawOverlay) pElement).setUseSafeCanvas(this.isUsingSafeCanvas());
+        try {
+            mOverlayList.add(pIndex, pElement);
+            if (pElement instanceof SafeDrawOverlay)
+                ((SafeDrawOverlay) pElement).setUseSafeCanvas(this.isUsingSafeCanvas());
+        }
+        finally {
+            sortOverlays();
+        }
     }
 
     @Override
     public Overlay remove(final int pIndex) {
-        return mOverlayList.remove(pIndex);
+        try {
+            return mOverlayList.remove(pIndex);
+        }
+        finally {
+            sortOverlays();
+        }
     }
 
     @Override
     public Overlay set(final int pIndex, final Overlay pElement) {
-        Overlay overlay = mOverlayList.set(pIndex, pElement);
-        if (pElement instanceof SafeDrawOverlay)
-            ((SafeDrawOverlay) pElement).setUseSafeCanvas(this.isUsingSafeCanvas());
-        return overlay;
+        try {
+            Overlay overlay = mOverlayList.set(pIndex, pElement);
+            if (pElement instanceof SafeDrawOverlay)
+                ((SafeDrawOverlay) pElement).setUseSafeCanvas(this.isUsingSafeCanvas());
+            return overlay;
+        }
+        finally {
+            sortOverlays();
+        }
+    }
+
+    private Integer getOverlayClassSortIndex(Overlay overlay) {
+        int result = 1;
+        if (overlay instanceof UserLocationOverlay) {
+            result  = 2;
+        }
+        else if (overlay instanceof PathOverlay) {
+            result  = 0;
+        }
+        return Integer.valueOf(result);
+    }
+
+    private void sortOverlays() {
+        Collections.sort(mOverlayList, new Comparator<Overlay>() {
+            public int compare(Overlay lhs, Overlay rhs) {
+                return (getOverlayClassSortIndex(lhs).compareTo(getOverlayClassSortIndex(rhs)));
+            }
+        });
     }
 
     public boolean isUsingSafeCanvas() {
