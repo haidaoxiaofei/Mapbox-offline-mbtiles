@@ -118,7 +118,6 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
                 //TODO: needs to be change CacheableBitmapDrawable
                 return new BitmapDrawable(mResources, stream);
             }
-
         }
         return null;
     }
