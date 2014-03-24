@@ -73,6 +73,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         mContext = mapView.getContext();
         mCirclePaint.setARGB(0, 100, 100, 255);
         mCirclePaint.setAntiAlias(true);
+        mPaint.setAntiAlias(true);
+        mPaint.setFilterBitmap(true);
 
         mPersonBitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.person);
         mDirectionArrowBitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.direction_arrow);
