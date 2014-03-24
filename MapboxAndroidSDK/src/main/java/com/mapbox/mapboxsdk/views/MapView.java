@@ -181,11 +181,38 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         init(context);
     }
 
-    public void setTileSource(final ITileLayer aTileSource) {
-        mTileProvider.setTileSource(aTileSource);
-        TileSystem.setTileSize(aTileSource.getTileSizePixels());
-        this.setZoom(mZoomLevel);
-        postInvalidate();
+    public void setTileSource(final Object value) {
+        if (value instanceof ITileLayer[]) {
+            if (mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
+                ((MapTileLayerBasic)mTileProvider).setTileSources((ITileLayer[]) value);
+                this.setZoom(mZoomLevel);
+                postInvalidate();
+            }
+        }
+        else if (value instanceof ITileLayer) {
+            ITileLayer aTileSource = (ITileLayer)value;
+            mTileProvider.setTileSource(aTileSource);
+            TileSystem.setTileSize(aTileSource.getTileSizePixels());
+            this.setZoom(mZoomLevel);
+            postInvalidate();
+        }
+
+    }
+
+    public void addTileSource(final ITileLayer aTileSource) {
+        if (mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
+            ((MapTileLayerBasic)mTileProvider).addTileSource(aTileSource);
+            this.setZoom(mZoomLevel);
+            postInvalidate();
+        }
+    }
+
+    public void removeTileSource(final ITileLayer aTileSource) {
+        if (mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
+            ((MapTileLayerBasic)mTileProvider).removeTileSource(aTileSource);
+            this.setZoom(mZoomLevel);
+            postInvalidate();
+        }
     }
 
     /**

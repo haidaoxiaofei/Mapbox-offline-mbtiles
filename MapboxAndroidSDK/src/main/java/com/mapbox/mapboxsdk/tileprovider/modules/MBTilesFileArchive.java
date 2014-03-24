@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import android.util.Log;
@@ -18,10 +19,9 @@ public class MBTilesFileArchive implements IArchiveFile {
 
     //	TABLE tiles (zoom_level INTEGER, tile_column INTEGER, tile_row INTEGER, tile_data BLOB);
     public final static String TABLE_TILES = "tiles";
-    public final static String COL_TILES_ZOOM_LEVEL = "zoom_level";
-    public final static String COL_TILES_TILE_COLUMN = "tile_column";
-    public final static String COL_TILES_TILE_ROW = "tile_row";
+    public final static String TABLE_METADATA = "metadata";
     public final static String COL_TILES_TILE_DATA = "tile_data";
+    public final static String COL_VALUE = "value";
 
     private MBTilesFileArchive(final SQLiteDatabase pDatabase) {
         mDatabase = pDatabase;
@@ -69,59 +69,89 @@ public class MBTilesFileArchive implements IArchiveFile {
         return "MBTiles [mDatabase=" + mDatabase.getPath() + "]";
     }
 
-    public int getMinZoomLevel() {
-        Cursor cursor = mDatabase.rawQuery("SELECT MIN(zoom_level) FROM tiles", null);
-        cursor.moveToFirst();
-        return cursor.getInt(0);
+
+    private String getStringValue(String key) {
+        final String[] column = {COL_VALUE};
+        final String[] query = {key};
+
+        Cursor c = this.mDatabase.query(TABLE_METADATA, column, "name = ?", query, null, null, null);
+        try {
+            c.moveToFirst();
+            return c.getString(0);
+        }
+        catch (Exception e) {
+            return null;
+        }
+        finally {
+            c.close();
+        }
     }
 
-    public int getMaxZoomLevel() {
-        Cursor cursor = mDatabase.rawQuery("SELECT MAX(zoom_level) FROM tiles", null);
-        cursor.moveToFirst();
-        return cursor.getInt(0);
+    public float getMinZoomLevel() {
+        String result = getStringValue("minzoom");
+        if (result != null) {
+            return Float.parseFloat(result);
+        }
+        return 0;
+    }
+
+    public float getMaxZoomLevel() {
+        String result = getStringValue("maxzoom");
+        if (result != null) {
+            return Float.parseFloat(result);
+        }
+        return 22;
     }
 
     public String getName() {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'name'", null);
-        cursor.moveToFirst();
-        return cursor.getString(1);
+        return getStringValue("name");
     }
 
     public String getType() {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'template'", null);
-        cursor.moveToFirst();
-        return cursor.getString(1);
+        return getStringValue("template");
     }
 
     public String getVersion() {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'version'", null);
-        cursor.moveToFirst();
-        return cursor.getString(1);
+        return getStringValue("version");
     }
 
     public String getDescription() {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'description'", null);
-        cursor.moveToFirst();
-        return cursor.getString(1);
+        return getStringValue("description");
     }
 
     public String getAttribution() {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'attribution'", null);
-        cursor.moveToFirst();
-        return cursor.getString(1);
+        return getStringValue("attribution");
     }
+
 
     public BoundingBox getBounds() {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM metadata WHERE name = 'bounds'", null);
-        cursor.moveToFirst();
-        String boundsString = cursor.getString(1);
-        String[] boundsArray = boundsString.split(",");
-        return new BoundingBox(Double.parseDouble(boundsArray[0]),
-                Double.parseDouble(boundsArray[1]),
-                Double.parseDouble(boundsArray[2]),
-                Double.parseDouble(boundsArray[3]));
+        String result = getStringValue("bounds");
+        if (result != null ) {
+            String[] boundsArray = result.split(",\\s*");
+            return new BoundingBox(Double.parseDouble(boundsArray[3]),
+                    Double.parseDouble(boundsArray[2]),
+                    Double.parseDouble(boundsArray[1]),
+                    Double.parseDouble(boundsArray[0]));
+        }
+        return null;
     }
 
+    public LatLng getCenter() {
+        String result = getStringValue("center");
+        if (result != null ) {
+            String[] centerArray = result.split(",\\s*");
+            return new LatLng(Double.parseDouble(centerArray[0]),
+                    Double.parseDouble(centerArray[1]),
+                    Double.parseDouble(centerArray[2]));
+        }
+        return null;
+    }
+
+    public void close() {
+        if (mDatabase != null) {
+            mDatabase.close();
+        }
+    }
     private static final String TAG = "MBTilesFileArchive";
 
 }

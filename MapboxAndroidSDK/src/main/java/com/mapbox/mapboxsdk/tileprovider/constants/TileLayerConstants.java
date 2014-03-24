@@ -1,6 +1,8 @@
 package com.mapbox.mapboxsdk.tileprovider.constants;
 
 
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+
 /**
  * This class contains constants used by the tile provider.
  *
@@ -9,6 +11,8 @@ package com.mapbox.mapboxsdk.tileprovider.constants;
 public interface TileLayerConstants {
 
     public static final boolean DEBUG_TILE_PROVIDERS = false;
+
+    public static final BoundingBox WORLD_BOUNDING_BOX = new BoundingBox(90, 180, -90, -180);
 
     /**
      * Minimum Zoom Level
@@ -20,6 +24,8 @@ public interface TileLayerConstants {
      * but we also have a tile size that is typically 2^8, so (32-1)-8-1 = 22
      */
     public static final int MAXIMUM_ZOOMLEVEL = 22;
+
+    public final static int DEFAULT_TILE_SIZE = 256;
 
     /**
      * Initial tile cache size. The size will be increased as required by calling {@link

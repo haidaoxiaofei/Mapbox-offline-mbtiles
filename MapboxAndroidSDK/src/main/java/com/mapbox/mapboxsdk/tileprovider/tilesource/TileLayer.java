@@ -9,8 +9,8 @@ import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.BitmapPool;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
-import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.tileprovider.util.LowMemoryException;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
@@ -22,10 +22,11 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     protected String mName;
     protected String mDescription;
     protected String mShortAttribution;
+    protected String mLongAttribution;
     protected String mLegend;
 
-    protected float mMinimumZoomLevel = 1;
-    protected float mMaximumZoomLevel = 16;
+    protected float mMinimumZoomLevel = TileLayerConstants.MINIMUM_ZOOMLEVEL;
+    protected float mMaximumZoomLevel = TileLayerConstants.MAXIMUM_ZOOMLEVEL;
     protected BoundingBox mBoundingBox = null;
     protected LatLng mCenter = new LatLng(0,0);
     private final int mTileSizePixels = DEFAULT_TILE_SIZE;
@@ -39,12 +40,14 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
         return this;
     }
 
-    public String getTileURL(final MapTile aTile, boolean hdpi) {
-        return mUrl
-                .replace("{z}", String.valueOf(aTile.getZ()))
-                .replace("{x}", String.valueOf(aTile.getX()))
-                .replace("{y}", String.valueOf(aTile.getY()))
-                .replace("{2x}", hdpi ? "@2x" : "");
+    public Drawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile, boolean hdpi) {
+        return null;
+    }
+
+    @Override
+    public void detach()
+    {
+
     }
 
     @Override
@@ -62,23 +65,18 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
         return mTileSizePixels;
     }
 
-    @Override
-    public Drawable getDrawable(final InputStream aFileInputStream) throws LowMemoryException {
+    protected Bitmap getBitmap(final InputStream aFileInputStream) throws LowMemoryException {
         try {
             // default implementation will load the file as a bitmap and create
             // a BitmapDrawable from it
             BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
             BitmapPool.getInstance().applyReusableOptions(bitmapOptions);
-            final Bitmap bitmap = BitmapFactory.decodeStream(aFileInputStream, null, bitmapOptions);
-            if (bitmap != null) {
-                return new ReusableBitmapDrawable(bitmap);
-            }
+            return BitmapFactory.decodeStream(aFileInputStream, null, bitmapOptions);
         } catch (final OutOfMemoryError e) {
             Log.e(TAG, "OutOfMemoryError loading bitmap");
             System.gc();
             throw new LowMemoryException(e);
         }
-        return null;
     }
 
     final private String TAG = "OnlineTileSource";
@@ -108,7 +106,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     public String getShortAttribution() { return mShortAttribution; }
 
     @Override
-    public String getLongAttribution() { return mShortAttribution; }
+    public String getLongAttribution() { return mLongAttribution; }
 
     @Override
     public String getLegend() { return mLegend; }

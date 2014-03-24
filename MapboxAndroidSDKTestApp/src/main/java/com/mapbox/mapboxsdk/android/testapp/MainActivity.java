@@ -1,9 +1,11 @@
 package com.mapbox.mapboxsdk.android.testapp;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Movie;
 import android.graphics.Paint;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
@@ -15,10 +17,20 @@ import android.widget.Button;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.*;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MBTilesLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MapQuestOSMLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MapQuestOpenAerialLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.OpenCycleMapLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.OpenSeaMapLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.OpenStreetMapLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.TileMillLayer;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -40,7 +52,7 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		mv = (MapView)findViewById(R.id.mapview);
 		mapController = mv.getController();
-		mv.setCenter(startingPoint).setZoom(4);
+        replaceMapView("opencycle");
 
         replaceMapView(terrain);
         addLocationOverlay();
@@ -62,24 +74,24 @@ public class MainActivity extends ActionBarActivity {
 		m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
 		mv.addMarker(m);
 
-		mv.setOnTilesLoadedListener(new TilesLoadedListener() {
-			@Override
-			public boolean onTilesLoaded() {
-				return false;
-			}
+        mv.setOnTilesLoadedListener(new TilesLoadedListener() {
+            @Override
+            public boolean onTilesLoaded() {
+                return false;
+            }
 
-			@Override
-			public boolean onTilesLoadStarted()
-			{
-				// TODO Auto-generated method stub
-				return false;
-			}
-		});
+            @Override
+            public boolean onTilesLoadStarted() {
+                // TODO Auto-generated method stub
+                return false;
+            }
+        });
 		mv.setVisibility(View.VISIBLE);
 		equator = new PathOverlay();
-		equator.addPoint(0,-89);
+		equator.addPoint(0, -89);
 		equator.addPoint(0, 89);
-		mv.getOverlays().add(equator);
+		mv.getOverlays().add(equator); 
+        addLocationOverlay();
 	}
 
 	private void setButtonListeners() {
@@ -113,10 +125,58 @@ public class MainActivity extends ActionBarActivity {
 				}
 			}
 		});
+
+        Button selectBut = changeButtonTypeface((Button)findViewById(R.id.layerselect));
+        selectBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder ab=new AlertDialog.Builder(MainActivity.this);
+                ab.setTitle("Select Layer");
+                ab.setItems(availableLayers, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface d, int choice) {
+                        replaceMapView(availableLayers[choice]);
+                    }
+                });
+                ab.show();
+            }
+        });
 	}
 
 	protected void replaceMapView(String layer) {
-		mv.setTileSource(new MapboxTileLayer(layer));
+        Object source;
+        if (layer.toLowerCase().endsWith("mbtiles")) {
+            source = new ITileLayer[]{new MBTilesLayer(this, layer), new MapQuestOSMLayer()};
+        }
+        else if (layer.equalsIgnoreCase("openstreetpmap")) {
+            source = new OpenStreetMapLayer();
+        }
+        else if (layer.equalsIgnoreCase("openseapmap")) {
+            source = new OpenSeaMapLayer();
+        }
+        else if (layer.equalsIgnoreCase("mapquestaerial")) {
+            source = new MapQuestOpenAerialLayer();
+        }
+        else if (layer.equalsIgnoreCase("mapquest")) {
+            source = new MapQuestOSMLayer();
+        }
+        else if (layer.equalsIgnoreCase("opencycle")) {
+            source = new OpenCycleMapLayer();
+        }
+        else if (layer.equalsIgnoreCase("tilemill")) {
+            //IP is set for Genymotion host
+            source = new TileMillLayer("192.168.56.1", "test");
+        }
+        else {
+            source = new MapboxTileLayer(layer);
+        }
+        mv.setScrollableAreaLimit(mv.getTileProvider().getBoundingBox());
+        mv.setMinZoomLevel(mv.getTileProvider().getMinimumZoomLevel());
+        mv.setMaxZoomLevel(mv.getTileProvider().getMaximumZoomLevel());
+        mv.setTileSource(source);
+        mv.setCenter(mv.getTileProvider().getCenterCoordinate());
+        mv.setZoom(mv.getTileProvider().getCenterZoom());
+        mv.zoomToBoundingBox(mv.getTileProvider().getBoundingBox());
 	}
 
 	private void addLocationOverlay() {

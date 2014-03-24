@@ -1,23 +1,24 @@
 package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
-import java.io.InputStream;
-
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
-import com.mapbox.mapboxsdk.tileprovider.util.LowMemoryException;
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 
 import android.graphics.drawable.Drawable;
 
 public interface ITileLayer {
 
+    public void detach();
     /**
-     * Get a rendered Drawable from the specified InputStream.
+     * Get a rendered Drawable from the specified Tile.
      *
-     * @param aTileInputStream an InputStream
+     * @param downloader reference to the downloader asking for the tile
+     * @param aTile the tile requested
+     * @param hdpi is hdpi requested?
      * @return the rendered Drawable
      */
-    Drawable getDrawable(InputStream aTileInputStream) throws LowMemoryException;
+    public Drawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile, boolean hdpi);
 
     /**
      * Set the current tile url template used in this layer
@@ -25,13 +26,6 @@ public interface ITileLayer {
      * @return the tile layer
      */
     public TileLayer setURL(final String aUrl);
-
-    /**
-     * Get the current tile url template used in this layer
-     *
-     * @return tile url string as a template string
-     */
-    public String getTileURL(final MapTile aTile, boolean hdpi);
 
     /**
      * Get the minimum zoom level this tile source can provide.

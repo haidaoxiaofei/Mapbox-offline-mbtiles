@@ -3,6 +3,8 @@ package com.mapbox.mapboxsdk.tileprovider;
 
 import java.util.HashMap;
 
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
@@ -61,14 +63,60 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      *
      * @return the minimum zoom level
      */
-    public abstract float getMinimumZoomLevel();
+    public float getMinimumZoomLevel()
+    {
+        return mTileSource.getMinimumZoomLevel();
+    }
 
     /**
-     * Gets the maximum zoom level this tile provider can provide
+     * Get the maximum zoom level this tile provider can provide.
      *
      * @return the maximum zoom level
      */
-    public abstract float getMaximumZoomLevel();
+    public float getMaximumZoomLevel()
+    {
+        return mTileSource.getMaximumZoomLevel();
+    }
+
+    /**
+     * Get the tile size in pixels this tile provider provides.
+     *
+     * @return the tile size in pixels
+     */
+    public int getTileSizePixels()
+    {
+        return mTileSource.getTileSizePixels();
+    }
+
+    /**
+     * Get the tile provider bounding box.
+     *
+     * @return the tile source bounding box
+     */
+    public BoundingBox getBoundingBox()
+    {
+        return mTileSource.getBoundingBox();
+    }
+
+    /**
+     * Get the tile provider center.
+     *
+     * @return the tile source center
+     */
+    public LatLng getCenterCoordinate()
+    {
+        return mTileSource.getCenterCoordinate();
+    }
+
+    /**
+     * Get the tile provider suggested starting zoom.
+     *
+     * @return the tile suggested starting zoom
+     */
+    public float getCenterZoom()
+    {
+        return mTileSource.getCenterZoom();
+    }
 
     /**
      * Sets the tile source for this tile provider.
@@ -76,6 +124,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      * @param pTileSource the tile source
      */
     public void setTileSource(final ITileLayer pTileSource) {
+        if (mTileSource != null) {
+            mTileSource.detach();
+        }
         mTileSource = pTileSource;
         clearTileCache();
     }
