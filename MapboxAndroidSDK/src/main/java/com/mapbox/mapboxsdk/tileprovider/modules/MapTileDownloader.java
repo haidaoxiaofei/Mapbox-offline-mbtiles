@@ -3,6 +3,9 @@ package com.mapbox.mapboxsdk.tileprovider.modules;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
+
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
@@ -85,8 +88,40 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
         return (tileLayer != null ? tileLayer.getMaximumZoomLevel() : MAXIMUM_ZOOMLEVEL);
     }
 
+
+    @Override
+    public int getTileSizePixels()
+    {
+        TileLayer tileLayer = mTileSource.get();
+        return (tileLayer != null ? tileLayer.getTileSizePixels() : DEFAULT_TILE_SIZE);
+    }
+
+    @Override
+    public BoundingBox getBoundingBox()
+    {
+        TileLayer tileLayer = mTileSource.get();
+        return (tileLayer != null ? tileLayer.getBoundingBox() : null);
+    }
+
+    @Override
+    public LatLng getCenterCoordinate()
+    {
+        TileLayer tileLayer = mTileSource.get();
+        return (tileLayer != null ? tileLayer.getCenterCoordinate() : null);
+    }
+
+    @Override
+    public float getCenterZoom()
+    {
+        TileLayer tileLayer = mTileSource.get();
+        return (tileLayer != null ? tileLayer.getCenterZoom() : (getMaximumZoomLevel() + getMinimumZoomLevel())/2);
+    }
+
     @Override
     public void setTileSource(final ITileLayer tileSource) {
+        if (mTileSource.get() != null) {
+            mTileSource.get().detach();
+        }
         // We are only interested in TileLayer tile sources
         if (tileSource instanceof TileLayer) {
             mTileSource.set((TileLayer) tileSource);
