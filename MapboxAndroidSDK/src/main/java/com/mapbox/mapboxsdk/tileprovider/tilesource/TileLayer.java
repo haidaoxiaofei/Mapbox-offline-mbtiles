@@ -11,6 +11,7 @@ import com.mapbox.mapboxsdk.tileprovider.BitmapPool;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.tileprovider.util.LowMemoryException;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
@@ -47,6 +48,10 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
                 .replace("{2x}", hdpi ? "@2x" : "");
     }
 
+    public Drawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile, boolean hdpi) {
+        return null;
+    }
+
     @Override
     public void detach()
     {
@@ -68,8 +73,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
         return mTileSizePixels;
     }
 
-    @Override
-    public Drawable getDrawable(final InputStream aFileInputStream) throws LowMemoryException {
+    protected Drawable getDrawable(final InputStream aFileInputStream) throws LowMemoryException {
         try {
             // default implementation will load the file as a bitmap and create
             // a BitmapDrawable from it

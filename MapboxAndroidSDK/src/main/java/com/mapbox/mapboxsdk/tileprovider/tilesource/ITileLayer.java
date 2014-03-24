@@ -5,6 +5,7 @@ import java.io.InputStream;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.tileprovider.util.LowMemoryException;
 
 import android.graphics.drawable.Drawable;
@@ -13,12 +14,14 @@ public interface ITileLayer {
 
     public void detach();
     /**
-     * Get a rendered Drawable from the specified InputStream.
+     * Get a rendered Drawable from the specified Tile.
      *
-     * @param aTileInputStream an InputStream
+     * @param downloader reference to the downloader asking for the tile
+     * @param aTile the tile requested
+     * @param hdpi is hdpi requested?
      * @return the rendered Drawable
      */
-    Drawable getDrawable(InputStream aTileInputStream) throws LowMemoryException;
+    public Drawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile, boolean hdpi);
 
     /**
      * Set the current tile url template used in this layer
