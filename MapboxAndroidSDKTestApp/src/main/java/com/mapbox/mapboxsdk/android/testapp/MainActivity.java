@@ -69,10 +69,6 @@ public class MainActivity extends ActionBarActivity {
 		m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
 		mv.addMarker(m);
 
-        GpsLocationProvider myLocationProvider = new GpsLocationProvider(this);
-        UserLocationOverlay userLoc = new UserLocationOverlay(myLocationProvider, mv);
-        mv.getOverlays().add(userLoc);
-        userLoc.enableMyLocation();
         mv.setOnTilesLoadedListener(new TilesLoadedListener() {
             @Override
             public boolean onTilesLoaded() {
@@ -87,9 +83,10 @@ public class MainActivity extends ActionBarActivity {
         });
 		mv.setVisibility(View.VISIBLE);
 		equator = new PathOverlay();
-		equator.addPoint(0,-89);
+		equator.addPoint(0, -89);
 		equator.addPoint(0, 89);
-		mv.getOverlays().add(equator);
+		mv.getOverlays().add(equator); 
+        addLocationOverlay();
 	}
 
 	private void setButtonListeners() {
