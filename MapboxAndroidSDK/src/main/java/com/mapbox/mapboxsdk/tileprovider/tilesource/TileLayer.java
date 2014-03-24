@@ -25,8 +25,8 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     protected String mLongAttribution;
     protected String mLegend;
 
-    protected float mMinimumZoomLevel = 1;
-    protected float mMaximumZoomLevel = 16;
+    protected float mMinimumZoomLevel = TileLayerConstants.MINIMUM_ZOOMLEVEL;
+    protected float mMaximumZoomLevel = TileLayerConstants.MAXIMUM_ZOOMLEVEL;
     protected BoundingBox mBoundingBox = null;
     protected LatLng mCenter = new LatLng(0,0);
     private final int mTileSizePixels = DEFAULT_TILE_SIZE;

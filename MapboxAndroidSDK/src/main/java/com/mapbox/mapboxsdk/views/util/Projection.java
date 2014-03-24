@@ -30,6 +30,7 @@ import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.GeoConstants;
 import com.mapbox.mapboxsdk.tile.TileSystem;
+import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.views.MapView;
 
@@ -198,7 +199,7 @@ public class Projection implements GeoConstants {
             out = new PointF();
         }
         TileSystem
-                .LatLongToPixelXY(latitude, longitude, MapView.MAXIMUM_ZOOMLEVEL, out);
+                .LatLongToPixelXY(latitude, longitude, TileLayerConstants.MAXIMUM_ZOOMLEVEL, out);
         return out;
     }
 
@@ -219,7 +220,7 @@ public class Projection implements GeoConstants {
             out = new PointF();
         }
 
-        final float zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
+        final float zoomDifference = TileLayerConstants.MAXIMUM_ZOOMLEVEL - getZoomLevel();
         out.set((int) (GeometryMath.rightShift(in.x, zoomDifference) + offsetX),
                 (int) (GeometryMath.rightShift(in.y, zoomDifference) + offsetY));
         return out;
@@ -234,7 +235,7 @@ public class Projection implements GeoConstants {
     public Rect fromPixelsToProjected(final Rect in) {
         final Rect result = new Rect();
 
-        final float zoomDifference = MapView.MAXIMUM_ZOOMLEVEL - getZoomLevel();
+        final float zoomDifference = TileLayerConstants.MAXIMUM_ZOOMLEVEL - getZoomLevel();
 
         final int x0 = (int) GeometryMath.leftShift(in.left - offsetX, zoomDifference);
         final int x1 = (int) GeometryMath.leftShift(in.right - offsetX, zoomDifference);

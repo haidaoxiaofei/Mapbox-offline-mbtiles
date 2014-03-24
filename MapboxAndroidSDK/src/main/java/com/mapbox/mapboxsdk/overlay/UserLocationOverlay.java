@@ -10,6 +10,7 @@ import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
 import com.mapbox.mapboxsdk.tile.TileSystem;
+import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import com.mapbox.mapboxsdk.views.MapController;
@@ -130,7 +131,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     protected void drawMyLocation(final ISafeCanvas canvas, final MapView mapView,
                                   final Location lastFix) {
         final Projection pj = mapView.getProjection();
-        final float zoomDiff = MapViewConstants.MAXIMUM_ZOOMLEVEL - pj.getZoomLevel();
+        final float zoomDiff = TileLayerConstants.MAXIMUM_ZOOMLEVEL - pj.getZoomLevel();
 
         if (mDrawAccuracyEnabled) {
             final float radius = lastFix.getAccuracy()
@@ -197,7 +198,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         if (reuse == null)
             reuse = new RectF();
 
-        final float zoomDiff = MapViewConstants.MAXIMUM_ZOOMLEVEL - zoomLevel;
+        final float zoomDiff = TileLayerConstants.MAXIMUM_ZOOMLEVEL - zoomLevel;
         final float posX = GeometryMath.rightShift(mMapCoords.x, zoomDiff);
         final float posY = GeometryMath.rightShift(mMapCoords.y, zoomDiff);
 
@@ -291,8 +292,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
             mLocation = mMyLocationProvider.getLastKnownLocation();
             if (mLocation != null) {
                 TileSystem.LatLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(),
-                        MapViewConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
-                final int worldSize_2 = TileSystem.MapSize(MapViewConstants.MAXIMUM_ZOOMLEVEL) / 2;
+                        TileLayerConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
+                final int worldSize_2 = TileSystem.MapSize(TileLayerConstants.MAXIMUM_ZOOMLEVEL) / 2;
                 mMapCoords.offset(-worldSize_2, -worldSize_2);
                 mMapController.animateTo(new LatLng(mLocation));
             }
@@ -334,8 +335,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
 
         if (mLocation != null) {
             TileSystem.LatLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(),
-                    MapViewConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
-            final int worldSize_2 = TileSystem.MapSize(MapViewConstants.MAXIMUM_ZOOMLEVEL) / 2;
+                    TileLayerConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
+            final int worldSize_2 = TileSystem.MapSize(TileLayerConstants.MAXIMUM_ZOOMLEVEL) / 2;
             mMapCoords.offset(-worldSize_2, -worldSize_2);
 
             if (mIsFollowing) {
@@ -392,8 +393,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
             mLocation = mMyLocationProvider.getLastKnownLocation();
             if (mLocation != null) {
                 TileSystem.LatLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(),
-                        MapViewConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
-                final int worldSize_2 = TileSystem.MapSize(MapViewConstants.MAXIMUM_ZOOMLEVEL) / 2;
+                        TileLayerConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
+                final int worldSize_2 = TileSystem.MapSize(TileLayerConstants.MAXIMUM_ZOOMLEVEL) / 2;
                 mMapCoords.offset(-worldSize_2, -worldSize_2);
                 mMapController.animateTo(new LatLng(mLocation));
             }
