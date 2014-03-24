@@ -1,9 +1,11 @@
 package com.mapbox.mapboxsdk.android.testapp;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Movie;
 import android.graphics.Paint;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
@@ -17,7 +19,13 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.*;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MBTilesLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MapQuestOSMLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MapQuestOpenAerialLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.OpenCycleMapLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.OpenSeaMapLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.OpenStreetMapLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.TileMillLayer;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
@@ -42,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		mv = (MapView)findViewById(R.id.mapview);
 		mapController = mv.getController();
-        replaceMapView("open-streets-dc.mbtiles");
+        replaceMapView("opencycle");
 
 		mv.loadFromGeoJSONURL("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
 		setButtonListeners();
@@ -61,19 +69,22 @@ public class MainActivity extends ActionBarActivity {
 		m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
 		mv.addMarker(m);
 
-		mv.setOnTilesLoadedListener(new TilesLoadedListener() {
-			@Override
-			public boolean onTilesLoaded() {
-				return false;
-			}
+        GpsLocationProvider myLocationProvider = new GpsLocationProvider(this);
+        UserLocationOverlay userLoc = new UserLocationOverlay(myLocationProvider, mv);
+        mv.getOverlays().add(userLoc);
+        userLoc.enableMyLocation();
+        mv.setOnTilesLoadedListener(new TilesLoadedListener() {
+            @Override
+            public boolean onTilesLoaded() {
+                return false;
+            }
 
-			@Override
-			public boolean onTilesLoadStarted()
-			{
-				// TODO Auto-generated method stub
-				return false;
-			}
-		});
+            @Override
+            public boolean onTilesLoadStarted() {
+                // TODO Auto-generated method stub
+                return false;
+            }
+        });
 		mv.setVisibility(View.VISIBLE);
 		equator = new PathOverlay();
 		equator.addPoint(0,-89);
@@ -112,12 +123,48 @@ public class MainActivity extends ActionBarActivity {
 				}
 			}
 		});
+
+        Button selectBut = changeButtonTypeface((Button)findViewById(R.id.layerselect));
+        selectBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder ab=new AlertDialog.Builder(MainActivity.this);
+                ab.setTitle("Select Layer");
+                ab.setItems(availableLayers, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface d, int choice) {
+                        replaceMapView(availableLayers[choice]);
+                    }
+                });
+                ab.show();
+            }
+        });
 	}
 
+    final String availableLayers[] = {"openstreetpmap", "openseapmap", "mapquestaerial", "mapquest", "opencycle", "tilemill"};
 	protected void replaceMapView(String layer) {
         ITileLayer source;
         if (layer.endsWith("mbtiles")) {
             source = new MBTilesLayer(this, layer);
+        }
+        else if (layer.equalsIgnoreCase("openstreetpmap")) {
+            source = new OpenStreetMapLayer();
+        }
+        else if (layer.equalsIgnoreCase("openseapmap")) {
+            source = new OpenSeaMapLayer();
+        }
+        else if (layer.equalsIgnoreCase("mapquestaerial")) {
+            source = new MapQuestOpenAerialLayer();
+        }
+        else if (layer.equalsIgnoreCase("mapquest")) {
+            source = new MapQuestOSMLayer();
+        }
+        else if (layer.equalsIgnoreCase("opencycle")) {
+            source = new OpenCycleMapLayer();
+        }
+        else if (layer.equalsIgnoreCase("tilemill")) {
+            //IP is set for Genymotion host
+            source = new TileMillLayer("192.168.56.1", "test");
         }
         else {
             source = new MapboxTileLayer(layer);
