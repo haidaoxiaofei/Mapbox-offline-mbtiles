@@ -146,7 +146,7 @@ public class MapboxTileLayer extends TileLayer implements MapViewConstants,
 
             double[] center = getJSONDoubleArray(infoJSON, "center", 3);
             if (center != null) {
-                mCenter = new LatLng(center[2], center[1], center[0]);
+                mCenter = new LatLng(center[0], center[1], center[2]);
             }
             double[] bounds = getJSONDoubleArray(infoJSON, "bounds", 4);
             if (bounds != null) {
