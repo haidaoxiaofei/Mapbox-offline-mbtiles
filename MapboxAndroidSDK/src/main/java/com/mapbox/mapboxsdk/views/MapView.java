@@ -74,7 +74,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * Current zoom level for map tiles.
      */
 	private float mZoomLevel = 11;
-	protected float mMinimumZoomLevel = 0;
+    protected float mRequestedMinimumZoomLevel = 0;
+    protected float mMinimumZoomLevel = 0;
 	protected float mMaximumZoomLevel = 22;
 
     private final OverlayManager mOverlayManager;
@@ -93,7 +94,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     protected final AtomicInteger mTargetZoomLevel = new AtomicInteger();
     protected final AtomicBoolean mIsAnimating = new AtomicBoolean(false);
-    private float mAnimationFactor = 1.0f;
 
     private final MapController mController;
 
@@ -635,7 +635,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * provider.
      */
 	public void setMinZoomLevel(float zoomLevel) {
-        mMinimumZoomLevel = zoomLevel;
+        mRequestedMinimumZoomLevel = mMinimumZoomLevel = zoomLevel;
+        updateMinZoomLevel();
     }
 
     /**
@@ -718,6 +719,36 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         mMapOverlay.setUseDataConnection(aMode);
     }
 
+    private void updateMinZoomLevel() {
+        if (mScrollableAreaBoundingBox == null) return;
+        final BoundingBox currentBox = getBoundingBox();
+        if(currentBox == null) {
+            return;
+        }
+        // Calculated required zoom based on latitude span
+        final double maxZoomLatitudeSpan = mZoomLevel == getMaxZoomLevel() ?
+                currentBox.getLatitudeSpan() :
+                currentBox.getLatitudeSpan() / Math.pow(2, getMaxZoomLevel() - mZoomLevel);
+
+        final double requiredLatitudeZoom =
+                getMaxZoomLevel() -
+                        Math.log(mScrollableAreaBoundingBox.getLatitudeSpan() / maxZoomLatitudeSpan) / Math.log(2);
+
+
+        // Calculated required zoom based on longitude span
+        final double maxZoomLongitudeSpan = mZoomLevel == getMaxZoomLevel() ?
+                currentBox.getLongitudeSpan() :
+                currentBox.getLongitudeSpan() / Math.pow(2, getMaxZoomLevel() - mZoomLevel);
+
+        final double requiredLongitudeZoom = getMaxZoomLevel()
+                - (Math.log(mScrollableAreaBoundingBox.getLongitudeSpan()
+                / maxZoomLongitudeSpan) / Math.log(2));
+        mMinimumZoomLevel = (float)Math.max(mRequestedMinimumZoomLevel, Math.max(requiredLatitudeZoom, requiredLongitudeZoom)) ;
+        if (mZoomLevel < mMinimumZoomLevel) {
+            setZoom(mMinimumZoomLevel);
+        }
+    }
+
     public void updateScrollableAreaLimit()
     {
     	if (mScrollableAreaBoundingBox == null) return;
@@ -757,10 +788,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
         // Clear scrollable area limit if null passed.
         if (mScrollableAreaBoundingBox == null) {
+            mMinimumZoomLevel = mRequestedMinimumZoomLevel;
             mScrollableAreaLimit = null;
             return;
         }
-
+        updateMinZoomLevel();
         updateScrollableAreaLimit();
     }
 
@@ -900,6 +932,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                             final int b) {
         final int count = getChildCount();
 		if (changed) {
+            updateMinZoomLevel();
 			float minZoom = getMinZoomLevel();
 			if (mZoomLevel < minZoom) {
 				setZoom(minZoom);
