@@ -122,6 +122,12 @@ public class MBTilesFileArchive implements IArchiveFile {
                 Double.parseDouble(boundsArray[3]));
     }
 
+
+    public void close() {
+        if (mDatabase != null) {
+            mDatabase.close();
+        }
+    }
     private static final String TAG = "MBTilesFileArchive";
 
 }

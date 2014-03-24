@@ -76,6 +76,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      * @param pTileSource the tile source
      */
     public void setTileSource(final ITileLayer pTileSource) {
+        if (mTileSource != null) {
+            mTileSource.detach();
+        }
         mTileSource = pTileSource;
         clearTileCache();
     }

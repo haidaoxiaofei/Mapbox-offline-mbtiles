@@ -48,6 +48,12 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     }
 
     @Override
+    public void detach()
+    {
+
+    }
+
+    @Override
     public float getMinimumZoomLevel() {
         return mMinimumZoomLevel;
     }

@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 
 public interface ITileLayer {
 
+    public void detach();
     /**
      * Get a rendered Drawable from the specified InputStream.
      *

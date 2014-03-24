@@ -63,6 +63,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
     @Override
     public void detach() {
+        getTileSource().detach();
         synchronized (mTileProviderList) {
             for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
                 tileProvider.detach();
