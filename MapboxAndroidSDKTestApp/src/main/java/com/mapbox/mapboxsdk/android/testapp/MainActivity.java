@@ -30,6 +30,8 @@ import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 
+import java.util.ArrayList;
+
 public class MainActivity extends ActionBarActivity {
 
 	private MapController mapController;
@@ -138,11 +140,10 @@ public class MainActivity extends ActionBarActivity {
         });
 	}
 
-    final String availableLayers[] = {"openstreetpmap", "openseapmap", "mapquestaerial", "mapquest", "opencycle", "tilemill", "open-streets-dc.mbtiles"};
 	protected void replaceMapView(String layer) {
-        ITileLayer source;
+        Object source;
         if (layer.toLowerCase().endsWith("mbtiles")) {
-            source = new MBTilesLayer(this, layer);
+            source = new ITileLayer[]{new MBTilesLayer(this, layer), new MapQuestOSMLayer()};
         }
         else if (layer.equalsIgnoreCase("openstreetpmap")) {
             source = new OpenStreetMapLayer();
@@ -166,13 +167,13 @@ public class MainActivity extends ActionBarActivity {
         else {
             source = new MapboxTileLayer(layer);
         }
-        mv.setScrollableAreaLimit(source.getBoundingBox());
-        mv.setMinZoomLevel(source.getMinimumZoomLevel());
-        mv.setMaxZoomLevel(source.getMaximumZoomLevel());
+        mv.setScrollableAreaLimit(mv.getTileProvider().getBoundingBox());
+        mv.setMinZoomLevel(mv.getTileProvider().getMinimumZoomLevel());
+        mv.setMaxZoomLevel(mv.getTileProvider().getMaximumZoomLevel());
         mv.setTileSource(source);
-        mv.setCenter(source.getCenterCoordinate());
-        mv.setZoom(source.getCenterZoom());
-        mv.zoomToBoundingBox(source.getBoundingBox());
+        mv.setCenter(mv.getTileProvider().getCenterCoordinate());
+        mv.setZoom(mv.getTileProvider().getCenterZoom());
+        mv.zoomToBoundingBox(mv.getTileProvider().getBoundingBox());
 	}
 
 	private void addLocationOverlay() {
