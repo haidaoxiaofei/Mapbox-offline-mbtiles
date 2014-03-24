@@ -15,6 +15,8 @@ import android.widget.Button;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.*;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MBTilesLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -40,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		mv = (MapView)findViewById(R.id.mapview);
 		mapController = mv.getController();
-		mv.setCenter(startingPoint).setZoom(4);
+        replaceMapView("open-streets-dc.mbtiles");
 
 		mv.loadFromGeoJSONURL("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
 		setButtonListeners();
@@ -113,7 +115,20 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	protected void replaceMapView(String layer) {
-		mv.setTileSource(new MapboxTileLayer(layer));
+        ITileLayer source;
+        if (layer.endsWith("mbtiles")) {
+            source = new MBTilesLayer(this, layer);
+        }
+        else {
+            source = new MapboxTileLayer(layer);
+        }
+        mv.setScrollableAreaLimit(source.getBoundingBox());
+        mv.setMinZoomLevel(source.getMinimumZoomLevel());
+        mv.setMaxZoomLevel(source.getMaximumZoomLevel());
+        mv.setTileSource(source);
+        mv.setCenter(source.getCenterCoordinate());
+        mv.setZoom(source.getCenterZoom());
+        mv.zoomToBoundingBox(source.getBoundingBox());
 	}
 
 	private void addLocationOverlay() {
