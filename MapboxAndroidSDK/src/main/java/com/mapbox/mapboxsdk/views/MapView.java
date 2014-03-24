@@ -111,6 +111,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     protected BoundingBox mScrollableAreaBoundingBox;
     protected RectF mScrollableAreaLimit;
 
+    private BoundingBox mBoundingBoxToZoomOn = null;
+
     // for speed (avoiding allocations)
     protected final MapTileLayerBase mTileProvider;
 
@@ -517,7 +519,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return this;
     }
 
-    private BoundingBox mBoundingBoxToZoomOn = null;
     /**
      * Zoom the map to enclose the specified bounding box, as closely as possible.
      * Must be called after display layout is complete, or screen dimensions are not known, and
