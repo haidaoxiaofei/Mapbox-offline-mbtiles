@@ -67,8 +67,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      *
      * @return the minimum zoom level
      */
-    public float getMinimumZoomLevel()
-    {
+    public float getMinimumZoomLevel() {
         return mTileSource.getMinimumZoomLevel();
     }
 
@@ -77,8 +76,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      *
      * @return the maximum zoom level
      */
-    public float getMaximumZoomLevel()
-    {
+    public float getMaximumZoomLevel() {
         return mTileSource.getMaximumZoomLevel();
     }
 
@@ -87,8 +85,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      *
      * @return the tile size in pixels
      */
-    public int getTileSizePixels()
-    {
+    public int getTileSizePixels() {
         return mTileSource.getTileSizePixels();
     }
 
@@ -97,8 +94,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      *
      * @return the tile source bounding box
      */
-    public BoundingBox getBoundingBox()
-    {
+    public BoundingBox getBoundingBox() {
         return mTileSource.getBoundingBox();
     }
 
@@ -107,8 +103,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      *
      * @return the tile source center
      */
-    public LatLng getCenterCoordinate()
-    {
+    public LatLng getCenterCoordinate() {
         return mTileSource.getCenterCoordinate();
     }
 
@@ -117,8 +112,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      *
      * @return the tile suggested starting zoom
      */
-    public float getCenterZoom()
-    {
+    public float getCenterZoom() {
         return mTileSource.getCenterZoom();
     }
 
@@ -229,7 +223,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         }
     }
 
-    private void putTileIntoCacheInternal(final MapTile pTile, final Drawable pDrawable){
+    private void putTileIntoCacheInternal(final MapTile pTile, final Drawable pDrawable) {
         mTileCache.putTile(pTile, pDrawable);
     }
 
@@ -237,7 +231,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
 
         @Override
         protected Void doInBackground(Object... params) {
-            putTileIntoCacheInternal((MapTile)params[0], (Drawable)params[1]);
+            putTileIntoCacheInternal((MapTile) params[0], (Drawable) params[1]);
             return null;
         }
     }
@@ -247,12 +241,12 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         if (pDrawable != null) {
             if (Looper.myLooper() == Looper.getMainLooper()) {
                 (new CacheTask()).execute(pTile, pDrawable);
-            }
-            else {
+            } else {
                 putTileIntoCacheInternal(pTile, pDrawable);
             }
         }
     }
+
     protected void putTileIntoCache(final MapTileRequestState pState, final Drawable pDrawable) {
         putTileIntoCache(pState.getMapTile(), pDrawable);
     }
@@ -297,7 +291,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      *
      * @param pNewZoomLevel the zoom level that we need now
      * @param pOldZoomLevel the previous zoom level that we should get the tiles to rescale
-     * @param projection     the projection to compute view port
+     * @param projection    the projection to compute view port
      */
     public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel, final Projection projection) {
 
@@ -355,7 +349,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
 
         @Override
         public void initializeLoop(final float pZoomLevel, final int pTileSizePx) {
-            mDiff = (float)Math.abs(Math.floor(pZoomLevel) - Math.floor(mOldZoomLevel));
+            mDiff = (float) Math.abs(Math.floor(pZoomLevel) - Math.floor(mOldZoomLevel));
             mTileSize_2 = (int) GeometryMath.rightShift(pTileSizePx, mDiff);
         }
 
@@ -443,11 +437,13 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                         */
                     }
                 } finally {
-                    if (isReusable)
+                    if (isReusable) {
                         ((CacheableBitmapDrawable) oldDrawable).setBeingUsed(false);
+                    }
                 }
-                if (success)
+                if (success) {
                     mNewTiles.put(pTile, bitmap);
+                }
             }
         }
     }
@@ -483,9 +479,10 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                                 // Try to get a bitmap from the pool, otherwise allocate a new one
                                 bitmap = mTileCache.getBitmapFromRemoved(
                                         pTileSizePx, pTileSizePx);
-                                if (bitmap == null)
+                                if (bitmap == null) {
                                     bitmap = Bitmap.createBitmap(pTileSizePx, pTileSizePx,
                                             Bitmap.Config.ARGB_8888);
+                                }
                                 canvas = new Canvas(bitmap);
                                 canvas.drawColor(Color.LTGRAY);
                             }

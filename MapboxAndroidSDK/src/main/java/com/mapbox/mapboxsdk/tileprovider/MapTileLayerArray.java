@@ -42,6 +42,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
     protected final List<MapTile> mUnaccessibleTiles;
 
     protected final NetworkAvailabilityCheck mNetworkAvailablityCheck;
+
     /**
      * Creates an {@link MapTileLayerArray} with no tile providers.
      *
@@ -68,7 +69,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
         mWorking = new HashMap<MapTile, MapTileRequestState>();
         mUnaccessibleTiles = new ArrayList<MapTile>();
 
-        mNetworkAvailablityCheck  = new NetworkAvailabilityCheck(context);
+        mNetworkAvailablityCheck = new NetworkAvailabilityCheck(context);
 
         mTileProviderList = new ArrayList<MapTileModuleLayerBase>();
         if (pTileProviderArray != null) {
@@ -102,8 +103,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
         if (mUnaccessibleTiles.size() > 0) {
             if (networkAvailable()) {
                 mUnaccessibleTiles.clear();
-            }
-            else if(mUnaccessibleTiles.contains(pTile)) {
+            } else if (mUnaccessibleTiles.contains(pTile)) {
                 return null;
             }
         }
@@ -229,7 +229,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
     @Override
     public float getMinimumZoomLevel() {
-    	float result = MINIMUM_ZOOMLEVEL;
+        float result = MINIMUM_ZOOMLEVEL;
         synchronized (mTileProviderList) {
             for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
                 result = Math.max(result, tileProvider.getMinimumZoomLevel());
@@ -240,7 +240,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
     @Override
     public float getMaximumZoomLevel() {
-    	float result = MAXIMUM_ZOOMLEVEL;
+        float result = MAXIMUM_ZOOMLEVEL;
         synchronized (mTileProviderList) {
             for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
                 result = Math.min(result, tileProvider.getMaximumZoomLevel());
@@ -255,11 +255,11 @@ public class MapTileLayerArray extends MapTileLayerBase {
         super.setTileSource(aTileSource);
 
         synchronized (mTileProviderList) {
-        	if (mTileProviderList.size() != 0) {
-        		mTileProviderList.get(0).setTileSource(aTileSource);
+            if (mTileProviderList.size() != 0) {
+                mTileProviderList.get(0).setTileSource(aTileSource);
                 clearTileCache();
-        	}
-            
+            }
+
         }
     }
 
@@ -290,11 +290,11 @@ public class MapTileLayerArray extends MapTileLayerBase {
                 if (providerCenter != null) {
                     latitude += providerCenter.getLatitude();
                     longitude += providerCenter.getLongitude();
-                    nb ++;
+                    nb++;
                 }
             }
         }
-        if (nb > 0 ) {
+        if (nb > 0) {
             latitude /= nb;
             longitude /= nb;
             return new LatLng(latitude, longitude);
@@ -311,10 +311,10 @@ public class MapTileLayerArray extends MapTileLayerBase {
         synchronized (mTileProviderList) {
             for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
                 centerZoom += tileProvider.getCenterZoom();
-                nb ++;
+                nb++;
             }
         }
-        if (centerZoom > 0 ) {
+        if (centerZoom > 0) {
             return centerZoom / nb;
         }
 

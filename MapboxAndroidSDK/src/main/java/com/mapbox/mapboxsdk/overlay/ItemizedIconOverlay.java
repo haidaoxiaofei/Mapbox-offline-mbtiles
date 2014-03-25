@@ -13,6 +13,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.util.Projection;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -34,8 +35,7 @@ public class ItemizedIconOverlay<Item extends Marker> extends ItemizedOverlay<It
     public ItemizedIconOverlay(
             final Context pContext,
             final List<Item> pList,
-            final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Item> pOnItemGestureListener)
-    {
+            final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Item> pOnItemGestureListener) {
         super(pContext.getResources().getDrawable(R.drawable.marker_default));
 
         this.context = pContext;

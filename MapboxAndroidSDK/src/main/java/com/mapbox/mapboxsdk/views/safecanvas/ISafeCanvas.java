@@ -107,7 +107,7 @@ public interface ISafeCanvas {
      * </p>
      *
      * @return Returns the current target density of the canvas, which is used to determine the
-     *         scaling factor when drawing a bitmap into it.
+     * scaling factor when drawing a bitmap into it.
      * @see #setDensity(int)
      * @see Bitmap#getDensity()
      */
@@ -402,7 +402,7 @@ public interface ISafeCanvas {
      * @param rect the rect to compare with the current clip
      * @param type specifies how to treat the edges (BW or antialiased)
      * @return true if the rect (transformed by the canvas' matrix) does not intersect with the
-     *         canvas' clip
+     * canvas' clip
      */
     public abstract boolean quickReject(Rect rect, EdgeType type);
 
@@ -417,7 +417,7 @@ public interface ISafeCanvas {
      * @param type true if the path should be considered antialiased, since that means it may affect
      *             a larger area (more pixels) than non-antialiased.
      * @return true if the path (transformed by the canvas' matrix) does not intersect with the
-     *         canvas' clip
+     * canvas' clip
      */
     public abstract boolean quickReject(SafeTranslatedPath path, EdgeType type);
 
@@ -433,7 +433,7 @@ public interface ISafeCanvas {
      * @param type   true if the rect should be considered antialiased, since that means it may affect
      *               a larger area (more pixels) than non-antialiased.
      * @return true if the rect (transformed by the canvas' matrix) does not intersect with the
-     *         canvas' clip
+     * canvas' clip
      */
     public abstract boolean quickReject(double left, double top, double right, double bottom,
                                         EdgeType type);

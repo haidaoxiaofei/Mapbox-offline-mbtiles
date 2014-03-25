@@ -3,9 +3,10 @@ package com.mapbox.mapboxsdk.overlay;
 import com.mapbox.mapboxsdk.api.ILatLng;
 
 /**
- * Interface for objects that need to handle map events thrown by a MapEventsOverlay. 
- * @see com.mapbox.mapboxsdk.overlay.MapEventsOverlay
+ * Interface for objects that need to handle map events thrown by a MapEventsOverlay.
+ *
  * @author M.Kergall
+ * @see com.mapbox.mapboxsdk.overlay.MapEventsOverlay
  */
 public interface MapEventsReceiver {
 

@@ -5,5 +5,6 @@ package com.mapbox.mapboxsdk.api;
  */
 public interface ILatLng {
     double getLatitude();
+
     double getLongitude();
 }

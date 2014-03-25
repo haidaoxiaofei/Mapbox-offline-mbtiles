@@ -13,6 +13,7 @@ public class TileMillLayer extends WebSourceTileLayer {
         mMinimumZoomLevel = pMinZoom;
         mMaximumZoomLevel = pMaxZoom;
     }
+
     public TileMillLayer(final String pHost, final String pMap) {
         this(pHost, pMap, TileLayerConstants.MINIMUM_ZOOMLEVEL, TileLayerConstants.MAXIMUM_ZOOMLEVEL);
     }
@@ -29,6 +30,6 @@ public class TileMillLayer extends WebSourceTileLayer {
 
     @Override
     public String getTileURL(final MapTile aTile, boolean hdpi) {
-        return String.format(mUrl, aTile.getZ(), aTile.getX(), aTile.getY(),  System.currentTimeMillis() / 1000L);
+        return String.format(mUrl, aTile.getZ(), aTile.getX(), aTile.getY(), System.currentTimeMillis() / 1000L);
     }
 }

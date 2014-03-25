@@ -23,6 +23,7 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
 
     /**
      * Bind a new gesture detector to a map
+     *
      * @param mv a map view
      */
     public MapViewScaleGestureDetectorListener(final MapView mv) {
@@ -38,8 +39,8 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
         if (!this.mapView.isAnimating()) {
             this.mapView.mIsAnimating.set(true);
             this.mapView.getController().aboutToStartAnimation(
-                    lastFocusX +  this.mapView.getScrollX() - ( this.mapView.getWidth() / 2),
-                    lastFocusY +  this.mapView.getScrollY() - ( this.mapView.getHeight() / 2));
+                    lastFocusX + this.mapView.getScrollX() - (this.mapView.getWidth() / 2),
+                    lastFocusY + this.mapView.getScrollY() - (this.mapView.getHeight() / 2));
             scaling = true;
         }
         return true;
@@ -47,7 +48,9 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
 
     @Override
     public boolean onScale(ScaleGestureDetector detector) {
-        if (!scaling) return true;
+        if (!scaling) {
+            return true;
+        }
         currentScale = detector.getCurrentSpan() / firstSpan;
 
         float focusX = detector.getFocusX();
@@ -63,12 +66,15 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
 
     @Override
     public void onScaleEnd(ScaleGestureDetector scaleGestureDetector) {
-        if (!scaling) return;
+        if (!scaling) {
+            return;
+        }
         float preZoom = this.mapView.getZoomLevel(false);
-        float newZoom = (float)(Math.log(currentScale) / Math.log(2d) + preZoom);
+        float newZoom = (float) (Math.log(currentScale) / Math.log(2d) + preZoom);
         this.mapView.mTargetZoomLevel.set(Float.floatToIntBits(newZoom));
-    	this.mapView.getController().onAnimationEnd();
+        this.mapView.getController().onAnimationEnd();
         scaling = false;
     }
+
     private static String TAG = "detector";
 }

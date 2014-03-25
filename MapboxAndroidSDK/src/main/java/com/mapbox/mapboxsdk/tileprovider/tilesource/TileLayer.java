@@ -22,7 +22,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     protected float mMinimumZoomLevel = TileLayerConstants.MINIMUM_ZOOMLEVEL;
     protected float mMaximumZoomLevel = TileLayerConstants.MAXIMUM_ZOOMLEVEL;
     protected BoundingBox mBoundingBox = null;
-    protected LatLng mCenter = new LatLng(0,0);
+    protected LatLng mCenter = new LatLng(0, 0);
     private final int mTileSizePixels = DEFAULT_TILE_SIZE;
 
     public TileLayer(final String aUrl) {
@@ -39,8 +39,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     }
 
     @Override
-    public void detach()
-    {
+    public void detach() {
 
     }
 
@@ -61,36 +60,52 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
 
     final private String TAG = "OnlineTileSource";
 
-	@Override
-    public String getCacheKey() { return "";}
+    @Override
+    public String getCacheKey() {
+        return "";
+    }
 
     @Override
-    public BoundingBox getBoundingBox() { return mBoundingBox; }
+    public BoundingBox getBoundingBox() {
+        return mBoundingBox;
+    }
 
     @Override
-    public LatLng getCenterCoordinate() { return mCenter; }
+    public LatLng getCenterCoordinate() {
+        return mCenter;
+    }
 
 
     @Override
     public float getCenterZoom() {
-        if(mCenter != null) {
-            return (float)mCenter.getAltitude();
+        if (mCenter != null) {
+            return (float) mCenter.getAltitude();
         }
-        return Math.round(mMaximumZoomLevel + mMinimumZoomLevel)/2;
+        return Math.round(mMaximumZoomLevel + mMinimumZoomLevel) / 2;
     }
 
     @Override
-    public String getShortName() { return mName; }
+    public String getShortName() {
+        return mName;
+    }
 
     @Override
-    public String getLongDescription() { return mDescription; }
+    public String getLongDescription() {
+        return mDescription;
+    }
 
     @Override
-    public String getShortAttribution() { return mShortAttribution; }
+    public String getShortAttribution() {
+        return mShortAttribution;
+    }
 
     @Override
-    public String getLongAttribution() { return mLongAttribution; }
+    public String getLongAttribution() {
+        return mLongAttribution;
+    }
 
     @Override
-    public String getLegend() { return mLegend; }
+    public String getLegend() {
+        return mLegend;
+    }
 }

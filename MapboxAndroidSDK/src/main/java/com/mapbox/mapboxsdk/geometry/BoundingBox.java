@@ -40,7 +40,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     }
 
     public BoundingBox() {
-        this(0,0,0,0);
+        this(0, 0, 0, 0);
     }
 
     /**
@@ -108,9 +108,9 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      */
     public static BoundingBox fromLatLngs(final ArrayList<? extends LatLng> latLngs) {
         double minLat = 90,
-            minLon = 180,
-            maxLat = -90,
-            maxLon = -180;
+                minLon = 180,
+                maxLat = -90,
+                maxLon = -180;
 
         for (final LatLng gp : latLngs) {
             final double latitude = gp.getLatitude();
@@ -152,24 +152,26 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
                 && ((longitude < this.mLonEast) && (longitude > this.mLonWest));
     }
 
-    public BoundingBox clone(){
+    public BoundingBox clone() {
         return new BoundingBox(mLatNorth, mLonEast, mLatSouth, mLonWest);
     }
 
     public BoundingBox union(BoundingBox box) {
-        if (box == null) return clone();
+        if (box == null) {
+            return clone();
+        }
         return union(box.getLatNorth(), box.getLatSouth(), box.getLonEast(), box.getLonWest());
     }
 
     public BoundingBox union(final double pLatNorth, final double pLatSouth,
-            final double pLonEast,
-            final double pLonWest) {
+                             final double pLonEast,
+                             final double pLonWest) {
         if ((pLonWest < pLonEast) && (pLatNorth < pLatSouth)) {
             if ((this.mLonWest < this.mLonEast) && (this.mLatNorth < this.mLatSouth)) {
-                return new BoundingBox((this.mLatNorth < pLatNorth)?pLatNorth:this.mLatNorth,
-                        (this.mLonEast < pLonEast)?pLonEast:this.mLonEast,
-                        (this.mLatSouth > pLatSouth)?pLatSouth:this.mLatSouth,
-                        (this.mLonWest > pLonWest)?pLonWest:this.mLonWest);
+                return new BoundingBox((this.mLatNorth < pLatNorth) ? pLatNorth : this.mLatNorth,
+                        (this.mLonEast < pLonEast) ? pLonEast : this.mLonEast,
+                        (this.mLatSouth > pLatSouth) ? pLatSouth : this.mLatSouth,
+                        (this.mLonWest > pLonWest) ? pLonWest : this.mLonWest);
             } else {
                 return new BoundingBox(pLatNorth, pLonEast, pLatSouth, pLonWest);
             }
@@ -192,10 +194,10 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     @Override
     public int hashCode() {
         return (int) (
-           (mLatNorth + 90)
-           + ((mLatSouth + 90) * 1000)
-           + ((mLonEast + 180) * 1000000)
-           + ((mLonEast + 180) * 1000000000));
+                (mLatNorth + 90)
+                        + ((mLatSouth + 90) * 1000)
+                        + ((mLonEast + 180) * 1000000)
+                        + ((mLonEast + 180) * 1000000000));
     }
 
     @Override

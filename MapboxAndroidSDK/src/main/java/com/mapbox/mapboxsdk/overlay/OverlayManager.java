@@ -45,10 +45,10 @@ public class OverlayManager extends AbstractList<Overlay> {
     public void add(final int pIndex, final Overlay pElement) {
         try {
             mOverlayList.add(pIndex, pElement);
-            if (pElement instanceof SafeDrawOverlay)
+            if (pElement instanceof SafeDrawOverlay) {
                 ((SafeDrawOverlay) pElement).setUseSafeCanvas(this.isUsingSafeCanvas());
-        }
-        finally {
+            }
+        } finally {
             sortOverlays();
         }
     }
@@ -57,8 +57,7 @@ public class OverlayManager extends AbstractList<Overlay> {
     public Overlay remove(final int pIndex) {
         try {
             return mOverlayList.remove(pIndex);
-        }
-        finally {
+        } finally {
             sortOverlays();
         }
     }
@@ -67,11 +66,11 @@ public class OverlayManager extends AbstractList<Overlay> {
     public Overlay set(final int pIndex, final Overlay pElement) {
         try {
             Overlay overlay = mOverlayList.set(pIndex, pElement);
-            if (pElement instanceof SafeDrawOverlay)
+            if (pElement instanceof SafeDrawOverlay) {
                 ((SafeDrawOverlay) pElement).setUseSafeCanvas(this.isUsingSafeCanvas());
+            }
             return overlay;
-        }
-        finally {
+        } finally {
             sortOverlays();
         }
     }
@@ -79,10 +78,9 @@ public class OverlayManager extends AbstractList<Overlay> {
     private Integer getOverlayClassSortIndex(Overlay overlay) {
         int result = 1;
         if (overlay instanceof UserLocationOverlay) {
-            result  = 2;
-        }
-        else if (overlay instanceof PathOverlay) {
-            result  = 0;
+            result = 2;
+        } else if (overlay instanceof PathOverlay) {
+            result = 0;
         }
         return Integer.valueOf(result);
     }
@@ -102,8 +100,9 @@ public class OverlayManager extends AbstractList<Overlay> {
     public void setUseSafeCanvas(boolean useSafeCanvas) {
         mUseSafeCanvas = useSafeCanvas;
         for (Overlay overlay : mOverlayList)
-            if (overlay instanceof SafeDrawOverlay)
+            if (overlay instanceof SafeDrawOverlay) {
                 ((SafeDrawOverlay) overlay).setUseSafeCanvas(this.isUsingSafeCanvas());
+            }
         if (mTilesOverlay != null) {
             mTilesOverlay.setUseSafeCanvas(this.isUsingSafeCanvas());
         }

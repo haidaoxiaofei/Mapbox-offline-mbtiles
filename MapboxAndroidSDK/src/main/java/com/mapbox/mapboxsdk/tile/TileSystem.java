@@ -22,7 +22,7 @@ public final class TileSystem implements GeoConstants {
     /**
      * Clips a number to the specified minimum and maximum values.
      *
-     * @param n The number to clip
+     * @param n        The number to clip
      * @param minValue Minimum allowable value
      * @param maxValue Maximum allowable value
      * @return The clipped value.
@@ -38,7 +38,7 @@ public final class TileSystem implements GeoConstants {
      * @return The map width and height in pixels
      */
     public static int MapSize(final float levelOfDetail) {
-        return (int)(GeometryMath.leftShift(mTileSize,levelOfDetail));
+        return (int) (GeometryMath.leftShift(mTileSize, levelOfDetail));
     }
 
     /**
@@ -81,7 +81,7 @@ public final class TileSystem implements GeoConstants {
      * @return Output parameter receiving the X and Y coordinates in pixels
      */
     public static PointF LatLongToPixelXY(double latitude, double longitude,
-                                         final float levelOfDetail, final PointF reuse) {
+                                          final float levelOfDetail, final PointF reuse) {
         latitude = wrap(latitude, -90, 90, 180);
         longitude = wrap(longitude, -180, 180, 360);
         final PointF out = (reuse == null ? new PointF() : reuse);
@@ -167,7 +167,7 @@ public final class TileSystem implements GeoConstants {
      * @param maxValue the maximum value
      * @param interval the interval length
      * @return a value that lies within <code>minValue</code> and <code>maxValue</code> by
-     *         subtracting/adding <code>interval</code>
+     * subtracting/adding <code>interval</code>
      */
     private static double wrap(double n, final double minValue, final double maxValue, final double interval) {
         if (minValue > maxValue) {

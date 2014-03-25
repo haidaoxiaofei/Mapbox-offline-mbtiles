@@ -2,7 +2,7 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 
-public class OpenSeaMapLayer extends WebSourceTileLayer{
+public class OpenSeaMapLayer extends WebSourceTileLayer {
 
     private static final String BASE_URL = "http://tile.openstreetmap.org/%d/%d/%d.png";
     private static final String BASE_URL_SEA = "http://tiles.openseamap.org/seamark/%d/%d/%d.png";
@@ -16,6 +16,7 @@ public class OpenSeaMapLayer extends WebSourceTileLayer{
         mMinimumZoomLevel = 1;
         mMaximumZoomLevel = 18;
     }
+
     @Override
     public String[] getTileURLs(final MapTile aTile, boolean hdpi) {
         final int x = aTile.getX();

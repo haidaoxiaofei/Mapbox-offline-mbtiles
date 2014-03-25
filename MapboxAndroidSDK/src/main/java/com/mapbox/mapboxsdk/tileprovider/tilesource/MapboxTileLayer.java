@@ -8,22 +8,22 @@ import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
  * A convenience class to initialize tile layers that use Mapbox.
  */
 public class MapboxTileLayer extends WebSourceTileLayer implements MapViewConstants,
-		MapboxConstants {
-	private static final String TAG = "MapboxTileLayer";
-    private String mId ;
+        MapboxConstants {
+    private static final String TAG = "MapboxTileLayer";
+    private String mId;
 
-	/**
-	 * Initialize a new tile layer, directed at a hosted Mapbox tilesource.
-	 * 
-	 * @param id a valid mapid, of the form account.map
-	 */
-	public MapboxTileLayer(String id) {
-		super(id);
-	}
+    /**
+     * Initialize a new tile layer, directed at a hosted Mapbox tilesource.
+     *
+     * @param id a valid mapid, of the form account.map
+     */
+    public MapboxTileLayer(String id) {
+        super(id);
+    }
 
-	public MapboxTileLayer(String id, boolean enableSSL) {
-		super(id, enableSSL);
-	}
+    public MapboxTileLayer(String id, boolean enableSSL) {
+        super(id, enableSSL);
+    }
 
     @Override
     public TileLayer setURL(final String aUrl) {
@@ -31,8 +31,7 @@ public class MapboxTileLayer extends WebSourceTileLayer implements MapViewConsta
         if (!aUrl.contains("http://") && !aUrl.contains("https://")
                 && aUrl.contains("")) {
             super.setURL(MAPBOX_BASE_URL + aUrl + "/{z}/{x}/{y}{2x}.png");
-        }
-        else {
+        } else {
             super.setURL(aUrl);
         }
         return this;
@@ -53,7 +52,7 @@ public class MapboxTileLayer extends WebSourceTileLayer implements MapViewConsta
                 (mEnableSSL ? "s" : ""), mId, (mEnableSSL ? "?secure" : ""));
     }
 
-    public String getCacheKey()
-    {
+    public String getCacheKey() {
         return mId;
-}}
+    }
+}

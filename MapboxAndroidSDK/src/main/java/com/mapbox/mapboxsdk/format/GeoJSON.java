@@ -30,7 +30,7 @@ public class GeoJSON {
      * Parse a GeoJSON object into an array of overlays.
      *
      * @param json GeoJSON
-     * @param mv a mapview for the overlays to be added to
+     * @param mv   a mapview for the overlays to be added to
      * @throws JSONException
      */
     public static void parse(JSONObject json, MapView mv) throws JSONException {

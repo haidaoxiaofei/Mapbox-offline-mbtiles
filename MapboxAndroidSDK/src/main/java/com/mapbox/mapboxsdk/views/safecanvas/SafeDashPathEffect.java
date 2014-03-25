@@ -11,8 +11,9 @@ public class SafeDashPathEffect extends PathDashPathEffect {
 
     public static Path createSafeDashedPath(float[] intervals, float phase, float strokeWidth,
                                             Path reuse) {
-        if (reuse == null)
+        if (reuse == null) {
             reuse = new Path();
+        }
 
         reuse.reset();
         reuse.moveTo(0, 0);

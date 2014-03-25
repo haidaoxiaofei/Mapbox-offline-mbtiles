@@ -100,31 +100,27 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
 
 
     @Override
-    public int getTileSizePixels()
-    {
+    public int getTileSizePixels() {
         TileLayer tileLayer = mTileSource.get();
         return (tileLayer != null ? tileLayer.getTileSizePixels() : DEFAULT_TILE_SIZE);
     }
 
     @Override
-    public BoundingBox getBoundingBox()
-    {
+    public BoundingBox getBoundingBox() {
         TileLayer tileLayer = mTileSource.get();
         return (tileLayer != null ? tileLayer.getBoundingBox() : null);
     }
 
     @Override
-    public LatLng getCenterCoordinate()
-    {
+    public LatLng getCenterCoordinate() {
         TileLayer tileLayer = mTileSource.get();
         return (tileLayer != null ? tileLayer.getCenterCoordinate() : null);
     }
 
     @Override
-    public float getCenterZoom()
-    {
+    public float getCenterZoom() {
         TileLayer tileLayer = mTileSource.get();
-        return (tileLayer != null ? tileLayer.getCenterZoom() : (getMaximumZoomLevel() + getMinimumZoomLevel())/2);
+        return (tileLayer != null ? tileLayer.getCenterZoom() : (getMaximumZoomLevel() + getMinimumZoomLevel()) / 2);
     }
 
     @Override

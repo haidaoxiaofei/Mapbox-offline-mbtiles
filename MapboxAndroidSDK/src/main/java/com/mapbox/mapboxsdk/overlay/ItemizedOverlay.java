@@ -89,8 +89,9 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
             return;
         }
 
-        if (mPendingFocusChangedEvent && mOnFocusChangeListener != null)
+        if (mPendingFocusChangedEvent && mOnFocusChangeListener != null) {
             mOnFocusChangeListener.onFocusChanged(this, mFocusedItem);
+        }
         mPendingFocusChangedEvent = false;
 
         final Projection pj = mapView.getProjection();
@@ -102,12 +103,12 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
             pj.toMapPixels(item.getPoint(), mCurScreenCoords);
             canvas.save();
 
-            canvas.scale(1/mapView.getScale(), 1/mapView.getScale(), mCurScreenCoords.x,
-            		mCurScreenCoords.y);
+            canvas.scale(1 / mapView.getScale(), 1 / mapView.getScale(), mCurScreenCoords.x,
+                    mCurScreenCoords.y);
 
             onDrawItem(canvas, item, mCurScreenCoords, mapView.getMapOrientation());
             canvas.restore();
-       }
+        }
     }
 
     /**
@@ -143,7 +144,7 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
      * @param aMapOrientation
      */
     protected void onDrawItem(ISafeCanvas canvas, final Item item, final PointF curScreenCoords, final float aMapOrientation) {
-        if(item.beingClustered()){
+        if (item.beingClustered()) {
             return;
         }
         final int state = (mDrawFocusedItem && (mFocusedItem == item) ? Marker.ITEM_STATE_FOCUSED_MASK
@@ -156,28 +157,27 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
 
         // draw it
         if (this.isUsingSafeCanvas()) {
-            Overlay.drawAt(canvas.getSafeCanvas(), marker, (int)curScreenCoords.x, (int)curScreenCoords.y, false, aMapOrientation);
+            Overlay.drawAt(canvas.getSafeCanvas(), marker, (int) curScreenCoords.x, (int) curScreenCoords.y, false, aMapOrientation);
         } else {
             canvas.getUnsafeCanvas(new UnsafeCanvasHandler() {
                 @Override
                 public void onUnsafeCanvas(Canvas canvas) {
-                    Overlay.drawAt(canvas, marker, (int)curScreenCoords.x, (int)curScreenCoords.y, false, aMapOrientation);
+                    Overlay.drawAt(canvas, marker, (int) curScreenCoords.x, (int) curScreenCoords.y, false, aMapOrientation);
                 }
             });
         }
 
-        if(item instanceof ClusterItem){
-            if(((ItemizedIconOverlay)this).getClusterActions()!=null){
-                canvas = ((ItemizedIconOverlay)this)
+        if (item instanceof ClusterItem) {
+            if (((ItemizedIconOverlay) this).getClusterActions() != null) {
+                canvas = ((ItemizedIconOverlay) this)
                         .getClusterActions()
                         .onClusterMarkerDraw((ClusterItem) item, canvas);
-            }
-            else{
+            } else {
                 SafePaint paint = new SafePaint();
                 paint.setTextAlign(Paint.Align.CENTER);
                 paint.setTextSize(30);
                 paint.setFakeBoldText(true);
-                canvas.drawText(""+((ClusterItem)item).getChildCount(),curScreenCoords.x, curScreenCoords.y+10, paint);
+                canvas.drawText("" + ((ClusterItem) item).getChildCount(), curScreenCoords.x, curScreenCoords.y + 10, paint);
             }
         }
 
@@ -220,8 +220,8 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
             final Drawable marker = (item.getMarker(state) == null) ? getDefaultMarker(state)
                     : item.getMarker(state);
             boundToHotspot(marker, item.getMarkerHotspot());
-            if (hitTest(item, marker, (int)-mCurScreenCoords.x + screenRect.left + (int) e.getX(),
-                    (int)-mCurScreenCoords.y + screenRect.top + (int) e.getY())) {
+            if (hitTest(item, marker, (int) -mCurScreenCoords.x + screenRect.left + (int) e.getX(),
+                    (int) -mCurScreenCoords.y + screenRect.top + (int) e.getY())) {
                 // We have a hit, do we get a response from onTap?
                 if (onTap(i)) {
                     // We got a response so consume the event
@@ -239,7 +239,7 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
      * nothing and returns false.
      *
      * @return true if you handled the tap, false if you want the event that generated it to pass to
-     *         other overlays.
+     * other overlays.
      */
     protected boolean onTap(int index) {
         return false;

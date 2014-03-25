@@ -19,6 +19,7 @@ import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
+
 import java.util.LinkedList;
 
 /**
@@ -142,7 +143,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
 
             mCirclePaint.setAlpha(50);
             mCirclePaint.setStyle(Style.FILL);
-            canvas.drawCircle(GeometryMath.rightShift(mMapCoords.x, zoomDiff) , GeometryMath.rightShift(mMapCoords.y, zoomDiff), radius,
+            canvas.drawCircle(GeometryMath.rightShift(mMapCoords.x, zoomDiff), GeometryMath.rightShift(mMapCoords.y, zoomDiff), radius,
                     mCirclePaint);
 
             mCirclePaint.setAlpha(150);
@@ -197,8 +198,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     }
 
     protected RectF getMyLocationDrawingBounds(float zoomLevel, Location lastFix, RectF reuse) {
-        if (reuse == null)
+        if (reuse == null) {
             reuse = new RectF();
+        }
 
         final float zoomDiff = TileLayerConstants.MAXIMUM_ZOOMLEVEL - zoomLevel;
         final float posX = GeometryMath.rightShift(mMapCoords.x, zoomDiff);
@@ -232,8 +234,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
 
     @Override
     protected void drawSafe(ISafeCanvas canvas, MapView mapView, boolean shadow) {
-        if (shadow)
+        if (shadow) {
             return;
+        }
 
         if (mLocation != null && isMyLocationEnabled()) {
             drawMyLocation(canvas, mapView, mLocation);
@@ -244,8 +247,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     public boolean onSnapToItem(final int x, final int y, final Point snapPoint,
                                 final MapView mapView) {
         if (this.mLocation != null) {
-            snapPoint.x = (int)mMapCoords.x;
-            snapPoint.y = (int)mMapCoords.y;
+            snapPoint.x = (int) mMapCoords.x;
+            snapPoint.y = (int) mMapCoords.y;
             final double xDiff = x - mMapCoords.x;
             final double yDiff = y - mMapCoords.y;
             final boolean snap = xDiff * xDiff + yDiff * yDiff < 64;
@@ -384,8 +387,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
      * updates when in the background.
      */
     public boolean enableMyLocation() {
-        if (mIsLocationEnabled)
+        if (mIsLocationEnabled) {
             mMyLocationProvider.stopLocationProvider();
+        }
 
         boolean result = mMyLocationProvider.startLocationProvider(this);
         mIsLocationEnabled = result;

@@ -111,8 +111,9 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
      * @param tileSource the tile source
      */
     public abstract void setTileSource(ITileLayer tileSource);
+
     public abstract ITileLayer getTileSource();
-    
+
     private final ExecutorService mExecutor;
 
     protected final Object mQueueLockObject = new Object();
@@ -165,10 +166,11 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
             if (DEBUG_TILE_PROVIDERS) {
                 Log.i(TAG, "MapTileModuleLayerBase.loadMaptileAsync() on provider: "
                         + getName() + " for tile: " + pState.getMapTile());
-                if (mPending.containsKey(pState.getMapTile()))
+                if (mPending.containsKey(pState.getMapTile())) {
                     Log.i(TAG, "MapTileModuleLayerBase.loadMaptileAsync() tile already exists in request queue for modular provider. Moving to front of queue.");
-                else
+                } else {
                     Log.i(TAG, "MapTileModuleLayerBase.loadMaptileAsync() adding tile to request queue for modular provider.");
+                }
             }
 
             // this will put the tile in the queue, or move it to the front of
@@ -219,7 +221,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
          *
          * @param pState
          * @return the tile if it was loaded successfully, or null if failed to
-         *         load and other tile providers need to be called
+         * load and other tile providers need to be called
          * @throws CantContinueException
          */
         protected abstract Drawable loadTile(MapTileRequestState pState)
@@ -322,7 +324,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
                 if (result == null) {
                     tileLoadedFailed(state);
                 } else if (BitmapUtils.isCacheDrawableExpired(result)) {
-                    tileLoadedExpired(state, (CacheableBitmapDrawable)result);
+                    tileLoadedExpired(state, (CacheableBitmapDrawable) result);
                 } else {
                     tileLoaded(state, result);
                 }

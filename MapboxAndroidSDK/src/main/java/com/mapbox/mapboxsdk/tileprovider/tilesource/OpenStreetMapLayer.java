@@ -2,7 +2,7 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 
-public class OpenStreetMapLayer extends WebSourceTileLayer{
+public class OpenStreetMapLayer extends WebSourceTileLayer {
     private static final String BASE_URL = "http://tile.openstreetmap.org/%d/%d/%d.png";
 
     public OpenStreetMapLayer() {

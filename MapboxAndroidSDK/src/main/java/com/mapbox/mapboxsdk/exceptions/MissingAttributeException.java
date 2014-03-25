@@ -5,14 +5,13 @@
 
 package com.mapbox.mapboxsdk.exceptions;
 
-public class MissingAttributeException extends Exception
-{
+public class MissingAttributeException extends Exception {
     /**
      * Default Constructor
+     *
      * @param detailMessage Information on missing attribute
      */
-    public MissingAttributeException(final String detailMessage)
-    {
+    public MissingAttributeException(final String detailMessage) {
         super(detailMessage);
     }
 }

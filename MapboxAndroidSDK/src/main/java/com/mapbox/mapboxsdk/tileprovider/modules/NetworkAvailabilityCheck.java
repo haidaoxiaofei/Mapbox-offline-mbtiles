@@ -12,8 +12,7 @@ import android.net.NetworkInfo;
  * @author Marc Kurtz
  */
 
-public class NetworkAvailabilityCheck implements INetworkAvailabilityCheck
-{
+public class NetworkAvailabilityCheck implements INetworkAvailabilityCheck {
 
     private final ConnectivityManager mConnectionManager;
 

@@ -10,12 +10,13 @@ import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 public interface ITileLayer {
 
     public void detach();
+
     /**
      * Get a rendered Drawable from the specified Tile.
      *
      * @param downloader reference to the downloader asking for the tile
-     * @param aTile the tile requested
-     * @param hdpi is hdpi requested?
+     * @param aTile      the tile requested
+     * @param hdpi       is hdpi requested?
      * @return the rendered Drawable
      */
     Drawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile, boolean hdpi);
@@ -47,13 +48,13 @@ public interface ITileLayer {
      * @return the tile size in pixels
      */
     public int getTileSizePixels();
-    
+
     /**
      * Get the tile source bounding box.
      *
      * @return the tile source bounding box
      */
-	public BoundingBox getBoundingBox();
+    public BoundingBox getBoundingBox();
 
     /**
      * Get the tile source center.

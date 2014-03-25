@@ -19,6 +19,7 @@ public class MapTileRequestState {
 
     /**
      * Initialize a new state to keep track of a map tile
+     *
      * @param mapTile
      * @param providers
      * @param callback
@@ -42,6 +43,7 @@ public class MapTileRequestState {
 
     /**
      * Get the map tile this class owns
+     *
      * @return this map tile
      */
     public MapTile getMapTile() {
@@ -50,6 +52,7 @@ public class MapTileRequestState {
 
     /**
      * Get the assigned callback
+     *
      * @return the assigned callback
      */
     public IMapTileProviderCallback getCallback() {

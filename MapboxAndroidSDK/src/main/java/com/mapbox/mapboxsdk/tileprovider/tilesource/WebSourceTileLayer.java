@@ -57,7 +57,7 @@ public class WebSourceTileLayer extends TileLayer {
     }
 
     private boolean checkThreadControl() {
-        for (boolean done: threadControl) {
+        for (boolean done : threadControl) {
             if (!done) {
                 return false;
             }
@@ -68,11 +68,10 @@ public class WebSourceTileLayer extends TileLayer {
 
     @Override
     public TileLayer setURL(final String aUrl) {
-        if (aUrl.contains(String.format("http%s://",(mEnableSSL ? "" : "s")))) {
+        if (aUrl.contains(String.format("http%s://", (mEnableSSL ? "" : "s")))) {
             super.setURL(aUrl.replace(String.format("http%s://", (mEnableSSL ? "" : "s")),
                     String.format("http%s://", (mEnableSSL ? "s" : ""))));
-        }
-        else {
+        } else {
             super.setURL(aUrl);
         }
         return this;
@@ -83,7 +82,7 @@ public class WebSourceTileLayer extends TileLayer {
         File cacheDir = new File(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString());
         try {
             cache = new HttpResponseCache(cacheDir, 1024);
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
 
@@ -95,7 +94,7 @@ public class WebSourceTileLayer extends TileLayer {
         }
     }
 
-    private String getJSONString(JSONObject JSON, String key){
+    private String getJSONString(JSONObject JSON, String key) {
         String defaultValue = null;
         if (JSON.has(key)) {
             try {
@@ -107,7 +106,7 @@ public class WebSourceTileLayer extends TileLayer {
         return defaultValue;
     }
 
-    private int getJSONInt(JSONObject JSON, String key){
+    private int getJSONInt(JSONObject JSON, String key) {
         int defaultValue = 0;
         if (JSON.has(key)) {
             try {
@@ -119,11 +118,11 @@ public class WebSourceTileLayer extends TileLayer {
         return defaultValue;
     }
 
-    private float getJSONFloat(JSONObject JSON, String key){
+    private float getJSONFloat(JSONObject JSON, String key) {
         float defaultValue = 0;
         if (JSON.has(key)) {
             try {
-                return (float)JSON.getDouble(key);
+                return (float) JSON.getDouble(key);
             } catch (JSONException e) {
                 return defaultValue;
             }
@@ -139,15 +138,14 @@ public class WebSourceTileLayer extends TileLayer {
                 double[] result = new double[length];
                 Object value = JSON.get(key);
                 if (value instanceof JSONArray) {
-                    JSONArray array = ((JSONArray)value);
+                    JSONArray array = ((JSONArray) value);
                     if (array.length() == length) {
                         for (int i = 0; i < array.length(); i++) {
                             result[i] = array.getDouble(i);
                         }
                         valid = true;
                     }
-                }
-                else {
+                } else {
                     String[] array = JSON.getString(key).split(",");
                     if (array.length == length) {
                         for (int i = 0; i < array.length; i++) {
@@ -198,7 +196,7 @@ public class WebSourceTileLayer extends TileLayer {
     byte[] readFully(InputStream in) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
-        for (int count; (count = in.read(buffer)) != -1;) {
+        for (int count; (count = in.read(buffer)) != -1; ) {
             out.write(buffer, 0, count);
         }
         return out.toByteArray();
@@ -251,6 +249,7 @@ public class WebSourceTileLayer extends TileLayer {
     }
 
     private static final Paint compositePaint = new Paint(Paint.FILTER_BITMAP_FLAG);
+
     private Bitmap compositeBitmaps(final Bitmap source, Bitmap dest) {
         Canvas canvas = new Canvas(dest);
         canvas.drawBitmap(source, 0, 0, compositePaint);
@@ -272,11 +271,12 @@ public class WebSourceTileLayer extends TileLayer {
                 }
                 for (final String url : urls) {
                     Bitmap bitmap = getBitmapFromURL(url, cache);
-                    if (bitmap == null) continue;
+                    if (bitmap == null) {
+                        continue;
+                    }
                     if (resultBitmap == null) {
                         resultBitmap = bitmap;
-                    }
-                    else {
+                    } else {
                         resultBitmap = compositeBitmaps(bitmap, resultBitmap);
                     }
                 }
@@ -297,8 +297,7 @@ public class WebSourceTileLayer extends TileLayer {
             }
 
             return result;
-        }
-        else {
+        } else {
             Log.d(TAG, "Skipping tile " + aTile.toString() + " due to NetworkAvailabilityCheck.");
         }
         return null;

@@ -78,11 +78,9 @@ public class MBTilesFileArchive implements IArchiveFile {
         try {
             c.moveToFirst();
             return c.getString(0);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return null;
-        }
-        finally {
+        } finally {
             c.close();
         }
     }
@@ -126,7 +124,7 @@ public class MBTilesFileArchive implements IArchiveFile {
 
     public BoundingBox getBounds() {
         String result = getStringValue("bounds");
-        if (result != null ) {
+        if (result != null) {
             String[] boundsArray = result.split(",\\s*");
             return new BoundingBox(Double.parseDouble(boundsArray[3]),
                     Double.parseDouble(boundsArray[2]),
@@ -138,7 +136,7 @@ public class MBTilesFileArchive implements IArchiveFile {
 
     public LatLng getCenter() {
         String result = getStringValue("center");
-        if (result != null ) {
+        if (result != null) {
             String[] centerArray = result.split(",\\s*");
             return new LatLng(Double.parseDouble(centerArray[0]),
                     Double.parseDouble(centerArray[1]),
@@ -152,6 +150,7 @@ public class MBTilesFileArchive implements IArchiveFile {
             mDatabase.close();
         }
     }
+
     private static final String TAG = "MBTilesFileArchive";
 
 }

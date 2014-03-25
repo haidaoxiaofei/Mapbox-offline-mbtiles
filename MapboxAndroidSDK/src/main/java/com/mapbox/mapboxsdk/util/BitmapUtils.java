@@ -36,7 +36,7 @@ public class BitmapUtils {
     }
 
     public static boolean isCacheDrawableExpired(Drawable drawable) {
-        return drawable != null && drawable instanceof CacheableBitmapDrawable && ((CacheableBitmapDrawable)drawable).isBeingDisplayed();
+        return drawable != null && drawable instanceof CacheableBitmapDrawable && ((CacheableBitmapDrawable) drawable).isBeingDisplayed();
     }
 
     public static void setCacheDrawableExpired(CacheableBitmapDrawable drawable) {

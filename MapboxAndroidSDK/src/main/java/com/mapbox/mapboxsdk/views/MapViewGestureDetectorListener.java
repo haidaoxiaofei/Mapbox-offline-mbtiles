@@ -17,6 +17,7 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
 
     /**
      * Bind a new gesture detector to a map
+     *
      * @param mv a map view
      */
     public MapViewGestureDetectorListener(final MapView mv) {
@@ -65,10 +66,10 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
 
     @Override
     public void onLongPress(final MotionEvent e) {
-    	if (UtilConstants.DEBUGMODE) {
+        if (UtilConstants.DEBUGMODE) {
             final ILatLng center = this.mapView.getProjection().fromPixels(e.getX(), e.getY());
-        	this.mapView.zoomOutFixing(center);
-    	}
+            this.mapView.zoomOutFixing(center);
+        }
     }
 
     @Override

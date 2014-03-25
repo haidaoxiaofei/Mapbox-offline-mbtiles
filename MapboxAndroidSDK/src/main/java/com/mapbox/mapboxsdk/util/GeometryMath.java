@@ -14,8 +14,9 @@ public class GeometryMath {
 
     public static final Rect getBoundingBoxForRotatedRectangle(Rect rect, int centerX,
                                                                int centerY, float angle, Rect reuse) {
-        if (reuse == null)
+        if (reuse == null) {
             reuse = new Rect();
+        }
 
         double theta = angle * DEG2RAD;
         double sinTheta = Math.sin(theta);
@@ -102,8 +103,9 @@ public class GeometryMath {
     }
 
     public static Rect viewPortRect(float zoomLevel, Projection projection, Rect reuse) {
-        if (reuse == null)
+        if (reuse == null) {
             reuse = new Rect();
+        }
         // Get the area we are drawing to
         final Rect screenRect = projection.getScreenRect();
         final int worldSize_2 = TileSystem.MapSize(zoomLevel) >> 1;

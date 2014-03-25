@@ -25,11 +25,11 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
     private static final String TAG = "MBTilesLayer";
     MBTilesFileArchive mbTilesFileArchive;
     private Resources mResources;
+
     /**
      * Initialize a new tile layer, represented by a MBTiles file.
      *
-     * @param url
-     *            path to a MBTiles file
+     * @param url path to a MBTiles file
      */
     public MBTilesLayer(final String url) {
         super(url);
@@ -48,8 +48,8 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
             byte buffer[] = new byte[1024];
             int length = 0;
 
-            while((length=inputStream.read(buffer)) > 0) {
-                outputStream.write(buffer,0,length);
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
             }
 
             outputStream.close();
@@ -69,19 +69,17 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
             //we assume asset here
             AssetManager am = context.getAssets();
             InputStream inputStream;
-            try{
+            try {
                 inputStream = am.open(url);
                 file = createFileFromInputStream(inputStream, Environment.getExternalStorageDirectory() + File.separator + url);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 Log.e(TAG, "MBTiles file not found in assets: " + e.toString());
             }
         }
         if (file == null) {
             try {
                 file = new File(url);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 Log.e(TAG, "can't load MBTiles: " + e.toString());
             }
         }
@@ -101,8 +99,7 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
     }
 
     @Override
-    public void detach()
-    {
+    public void detach() {
         if (mbTilesFileArchive != null) {
             mbTilesFileArchive.close();
             mbTilesFileArchive = null;
