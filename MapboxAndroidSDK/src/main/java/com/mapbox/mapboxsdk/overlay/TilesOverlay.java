@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
 
-import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.util.GeometryMath;
@@ -118,7 +117,7 @@ public class TilesOverlay
         GeometryMath.viewPortRect(pj, mViewPort);
 
         // Draw the tiles!
-        drawTiles(c.getSafeCanvas(), zoomLevel, TileSystem.getTileSize(), mViewPort);
+        drawTiles(c.getSafeCanvas(), zoomLevel, Projection.getTileSize(), mViewPort);
     }
 
     /**
@@ -151,7 +150,7 @@ public class TilesOverlay
             final int roundedZoom = (int) Math.floor(pZoomLevel);
             if (roundedZoom != pZoomLevel) {
                 final int mapTileUpperBound = 1 << roundedZoom;
-                mCurrentZoomFactor = (float) TileSystem.MapSize(pZoomLevel) / mapTileUpperBound / pTileSizePx;
+                mCurrentZoomFactor = (float) Projection.mapSize(pZoomLevel) / mapTileUpperBound / pTileSizePx;
             } else {
                 mCurrentZoomFactor = 1.0f;
             }

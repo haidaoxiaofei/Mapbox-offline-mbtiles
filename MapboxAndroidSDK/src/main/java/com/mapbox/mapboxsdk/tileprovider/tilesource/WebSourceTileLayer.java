@@ -97,30 +97,6 @@ public class WebSourceTileLayer extends TileLayer {
         }
     }
 
-    private String getJSONString(JSONObject JSON, String key) {
-        String defaultValue = null;
-        if (JSON.has(key)) {
-            try {
-                return JSON.getString(key);
-            } catch (JSONException e) {
-                return defaultValue;
-            }
-        }
-        return defaultValue;
-    }
-
-    private int getJSONInt(JSONObject JSON, String key) {
-        int defaultValue = 0;
-        if (JSON.has(key)) {
-            try {
-                return JSON.getInt(key);
-            } catch (JSONException e) {
-                return defaultValue;
-            }
-        }
-        return defaultValue;
-    }
-
     private float getJSONFloat(JSONObject JSON, String key) {
         float defaultValue = 0;
         if (JSON.has(key)) {
@@ -178,10 +154,10 @@ public class WebSourceTileLayer extends TileLayer {
             }
             mMinimumZoomLevel = getJSONFloat(infoJSON, "minzoom");
             mMaximumZoomLevel = getJSONFloat(infoJSON, "maxzoom");
-            mName = getJSONString(infoJSON, "name");
-            mDescription = getJSONString(infoJSON, "description");
-            mAttribution = getJSONString(infoJSON, "attribution");
-            mLegend = getJSONString(infoJSON, "legend");
+            mName = infoJSON.optString("name");
+            mDescription = infoJSON.optString("description");
+            mAttribution = infoJSON.optString("attribution");
+            mLegend = infoJSON.optString("legend");
 
             double[] center = getJSONDoubleArray(infoJSON, "center", 3);
             if (center != null) {
@@ -205,7 +181,6 @@ public class WebSourceTileLayer extends TileLayer {
     }
 
     class RetrieveJSONTask extends AsyncTask<String, Void, JSONObject> {
-
         protected JSONObject doInBackground(String... urls) {
             OkHttpClient client = new OkHttpClient();
             client.setResponseCache(null);

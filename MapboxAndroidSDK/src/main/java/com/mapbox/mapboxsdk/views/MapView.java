@@ -37,7 +37,6 @@ import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.Overlay;
 import com.mapbox.mapboxsdk.overlay.OverlayManager;
 import com.mapbox.mapboxsdk.overlay.TilesOverlay;
-import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
@@ -153,7 +152,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         super(context, attrs);
         this.mController = new MapController(this);
         this.mScroller = new Scroller(context);
-        TileSystem.setTileSize(tileSizePixels);
+        Projection.setTileSize(tileSizePixels);
 
         if (tileProvider == null) {
             tileProvider = new MapTileLayerBasic(context, null, this);
@@ -207,7 +206,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public void setTileSource(final ITileLayer value) {
         ITileLayer aTileSource = value;
         mTileProvider.setTileSource(aTileSource);
-        TileSystem.setTileSize(aTileSource.getTileSizePixels());
+        Projection.setTileSize(aTileSource.getTileSizePixels());
         this.setZoom(mZoomLevel);
         postInvalidate();
     }
@@ -407,13 +406,13 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     private BoundingBox getBoundingBox(final int pViewWidth, final int pViewHeight) {
 
-        final int world_2 = TileSystem.MapSize(mZoomLevel) / 2;
+        final int world_2 = Projection.mapSize(mZoomLevel) / 2;
         final Rect screenRect = getScreenRect(null);
         screenRect.offset(world_2, world_2);
 
-        final ILatLng neGeoPoint = TileSystem.PixelXYToLatLong(screenRect.right, screenRect.top,
+        final ILatLng neGeoPoint = Projection.pixelXYToLatLong(screenRect.right, screenRect.top,
                 mZoomLevel);
-        final ILatLng swGeoPoint = TileSystem.PixelXYToLatLong(screenRect.left,
+        final ILatLng swGeoPoint = Projection.pixelXYToLatLong(screenRect.left,
                 screenRect.bottom, mZoomLevel);
 
         return new BoundingBox(neGeoPoint.getLatitude(), neGeoPoint.getLongitude(),
@@ -536,11 +535,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         if (newZoomLevel > curZoomLevel) {
             // We are going from a lower-resolution plane to a higher-resolution plane, so we have
             // to do it the hard way.
-            final int worldSize_current_2 = TileSystem.MapSize(curZoomLevel) / 2;
-            final int worldSize_new_2 = TileSystem.MapSize(newZoomLevel) / 2;
-            final ILatLng centerGeoPoint = TileSystem.PixelXYToLatLong(getScrollX()
+            final int worldSize_current_2 = Projection.mapSize(curZoomLevel) / 2;
+            final int worldSize_new_2 = Projection.mapSize(newZoomLevel) / 2;
+            final ILatLng centerGeoPoint = Projection.pixelXYToLatLong(getScrollX()
                     + worldSize_current_2, getScrollY() + worldSize_current_2, curZoomLevel);
-            final PointF centerPoint = TileSystem.LatLongToPixelXY(
+            final PointF centerPoint = Projection.latLongToPixelXY(
                     centerGeoPoint.getLatitude(), centerGeoPoint.getLongitude(),
                     newZoomLevel, null);
             scrollTo((int) centerPoint.x - worldSize_new_2, (int) centerPoint.y - worldSize_new_2);
@@ -669,7 +668,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
         float boundingDimension = Math.max(getMeasuredWidth(),
                 getMeasuredHeight());
-        float tileSideLength = TileSystem.getTileSize();
+        float tileSideLength = Projection.getTileSize();
         if (boundingDimension > 0 && tileSideLength > 0) {
             float clampedMinZoom = (float) (Math.log(boundingDimension
                     / tileSideLength) / Math.log(2));
@@ -823,14 +822,14 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 //    	if (isAnimating()) {
 //    		zoom = mZoomLevel + (zoom - mZoomLevel);
 //    	}
-        final int worldSize_2 = TileSystem.MapSize(zoom) / 2;
+        final int worldSize_2 = Projection.mapSize(zoom) / 2;
         // Get NW/upper-left
-        final PointF upperLeft = TileSystem.LatLongToPixelXY(mScrollableAreaBoundingBox.getLatNorth(),
+        final PointF upperLeft = Projection.latLongToPixelXY(mScrollableAreaBoundingBox.getLatNorth(),
                 mScrollableAreaBoundingBox.getLonWest(), zoom, null);
         upperLeft.offset(-worldSize_2, -worldSize_2);
 
         // Get SE/lower-right
-        final PointF lowerRight = TileSystem.LatLongToPixelXY(mScrollableAreaBoundingBox.getLatSouth(),
+        final PointF lowerRight = Projection.latLongToPixelXY(mScrollableAreaBoundingBox.getLatSouth(),
                 mScrollableAreaBoundingBox.getLonEast(), zoom, null);
         lowerRight.offset(-worldSize_2, -worldSize_2);
         if (mScrollableAreaLimit == null) {
@@ -1211,21 +1210,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     @Override
     public void scrollTo(int x, int y) {
-        // final int worldSize_2 = TileSystem.MapSize(this.getZoomLevel(false))
-        // / 2;
-        // while (x < -worldSize_2) {
-        // x += worldSize_2 * 2;
-        // }
-        // while (x > worldSize_2) {
-        // x -= worldSize_2 * 2;
-        // }
-        // while (y < -worldSize_2) {
-        // y += worldSize_2 * 2;
-        // }
-        // while (y > worldSize_2) {
-        // y -= worldSize_2 * 2;
-        // }
-
         if (mScrollableAreaLimit != null) {
             final float width_2 = this.getMeasuredWidth() / 2;
             final float height_2 = this.getMeasuredHeight() / 2;

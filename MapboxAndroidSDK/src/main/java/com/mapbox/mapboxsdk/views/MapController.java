@@ -3,7 +3,6 @@ package com.mapbox.mapboxsdk.views;
 import android.graphics.PointF;
 import android.os.Handler;
 import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
@@ -199,8 +198,8 @@ public class MapController implements MapViewConstants {
 
     protected void aboutToStartAnimation(final float x, final float y) {
         final float zoom = mMapView.getZoomLevel(false);
-        final int worldSize_2 = TileSystem.MapSize(zoom) / 2;
-        final ILatLng latlong = TileSystem.PixelXYToLatLong((int) (x + worldSize_2), (int) (y + worldSize_2), zoom);
+        final int worldSize_2 = mMapView.getProjection().mapSize(zoom) / 2;
+        final ILatLng latlong = mMapView.getProjection().pixelXYToLatLong((int) (x + worldSize_2), (int) (y + worldSize_2), zoom);
         aboutToStartAnimation(latlong, x, y);
     }
 

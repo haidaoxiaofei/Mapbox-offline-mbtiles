@@ -149,7 +149,6 @@ public class MapTileLayerArray extends MapTileLayerBase {
                     if (alreadyInProgress) {
                         return null;
                     }
-
                     mWorking.put(pTile, state);
                 }
 
@@ -262,15 +261,12 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
     @Override
     public void setTileSource(final ITileLayer aTileSource) {
-
         super.setTileSource(aTileSource);
-
         synchronized (mTileProviderList) {
             if (mTileProviderList.size() != 0) {
                 mTileProviderList.get(0).setTileSource(aTileSource);
                 clearTileCache();
             }
-
         }
     }
 
@@ -310,7 +306,6 @@ public class MapTileLayerArray extends MapTileLayerBase {
             longitude /= nb;
             return new LatLng(latitude, longitude);
         }
-
         return null;
     }
 

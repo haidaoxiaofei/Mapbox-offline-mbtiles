@@ -1,6 +1,6 @@
 package com.mapbox.mapboxsdk.util;
 
-import com.mapbox.mapboxsdk.tile.TileSystem;
+import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 
 import android.graphics.Canvas;
@@ -22,9 +22,9 @@ public abstract class TileLooper {
 
     public final void loop(final Canvas pCanvas, final float pZoomLevel, final int pTileSizePx, final Rect pViewPort) {
         // Calculate the amount of tiles needed for each side around the center one.
-        TileSystem.PixelXYToTileXY(pViewPort.left, pViewPort.top, mUpperLeft);
+        Projection.pixelXYToTileXY(pViewPort.left, pViewPort.top, mUpperLeft);
         mUpperLeft.offset(-1, -1);
-        TileSystem.PixelXYToTileXY(pViewPort.right, pViewPort.bottom, mLowerRight);
+        Projection.pixelXYToTileXY(pViewPort.right, pViewPort.bottom, mLowerRight);
         mLowerRight.offset(1, 1);
         center.set((mUpperLeft.x + mLowerRight.x) / 2, (mUpperLeft.y + mLowerRight.y) / 2);
         final int roundedZoom = (int) Math.floor(pZoomLevel);

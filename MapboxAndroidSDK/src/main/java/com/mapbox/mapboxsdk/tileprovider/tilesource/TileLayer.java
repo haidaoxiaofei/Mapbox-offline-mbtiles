@@ -128,7 +128,6 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
         return mCenter;
     }
 
-
     @Override
     public float getCenterZoom() {
         if (mCenter != null) {
@@ -138,7 +137,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     }
 
     @Override
-    public String getShortName() {
+    public String getName() {
         return mName;
     }
 

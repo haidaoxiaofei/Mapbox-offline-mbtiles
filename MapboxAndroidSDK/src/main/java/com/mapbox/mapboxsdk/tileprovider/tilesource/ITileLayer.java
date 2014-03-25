@@ -75,7 +75,7 @@ public interface ITileLayer {
      *
      * @return the short name
      */
-    public String getShortName();
+    public String getName();
 
     /**
      * Get the tile source description

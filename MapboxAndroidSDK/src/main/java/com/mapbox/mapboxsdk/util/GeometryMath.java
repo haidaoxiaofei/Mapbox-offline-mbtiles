@@ -2,7 +2,6 @@ package com.mapbox.mapboxsdk.util;
 
 import android.graphics.Rect;
 
-import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
@@ -108,11 +107,11 @@ public class GeometryMath {
         }
         // Get the area we are drawing to
         final Rect screenRect = projection.getScreenRect();
-        final int worldSize_2 = TileSystem.MapSize(zoomLevel) >> 1;
+        final int worldSize_2 = projection.mapSize(zoomLevel) >> 1;
 
         //when using float zoom, the view port should be the one of the floored value
         //this is because MapTiles are indexed around int values
-        int roundWorldSize_2 = TileSystem.MapSize((float) Math.floor(zoomLevel)) >> 1;
+        int roundWorldSize_2 = projection.mapSize((float) Math.floor(zoomLevel)) >> 1;
         float scale = (float) roundWorldSize_2 / worldSize_2;
         reuse.set((int) (scale * screenRect.left),
                 (int) (scale * screenRect.top),
