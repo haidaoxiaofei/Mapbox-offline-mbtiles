@@ -15,10 +15,10 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
 
     static final long serialVersionUID = 2L;
 
-    private double mLatNorth;
-    private double mLatSouth;
-    private double mLonEast;
-    private double mLonWest;
+    private final double mLatNorth;
+    private final double mLatSouth;
+    private final double mLonEast;
+    private final double mLonWest;
 
     /**
      * Construct a new bounding box based on its corners, given in NESW
@@ -152,8 +152,12 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
                 && ((longitude < this.mLonEast) && (longitude > this.mLonWest));
     }
 
+    public BoundingBox clone(){
+        return new BoundingBox(mLatNorth, mLonEast, mLatSouth, mLonWest);
+    }
+
     public BoundingBox union(BoundingBox box) {
-        if (box == null) return this;
+        if (box == null) return clone();
         return union(box.getLatNorth(), box.getLatSouth(), box.getLonEast(), box.getLonWest());
     }
 
@@ -162,18 +166,15 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
             final double pLonWest) {
         if ((pLonWest < pLonEast) && (pLatNorth < pLatSouth)) {
             if ((this.mLonWest < this.mLonEast) && (this.mLatNorth < this.mLatSouth)) {
-                if (this.mLonWest > pLonWest) this.mLonWest = pLonWest;
-                if (this.mLatNorth < pLatNorth) this.mLatNorth = pLatNorth;
-                if (this.mLonEast < pLonEast) this.mLonEast = pLonEast;
-                if (this.mLatSouth > pLatSouth) this.mLatSouth = pLatSouth;
+                return new BoundingBox((this.mLatNorth < pLatNorth)?pLatNorth:this.mLatNorth,
+                        (this.mLonEast < pLonEast)?pLonEast:this.mLonEast,
+                        (this.mLatSouth > pLatSouth)?pLatSouth:this.mLatSouth,
+                        (this.mLonWest > pLonWest)?pLonWest:this.mLonWest);
             } else {
-                this.mLonWest = pLonWest;
-                this.mLatNorth = pLatNorth;
-                this.mLonEast = pLonEast;
-                this.mLatSouth = pLatSouth;
+                return new BoundingBox(pLatNorth, pLonEast, pLatSouth, pLonWest);
             }
         }
-        return this;
+        return clone();
     }
 
     public static final Parcelable.Creator<BoundingBox> CREATOR = new Parcelable.Creator<BoundingBox>() {
