@@ -92,6 +92,9 @@ public class PathOverlay extends Overlay {
     public void setAlpha(final int a) {
         this.mPaint.setAlpha(a);
     }
+    public void setStrokeWidth(final float width) {
+        this.mPaint.setStrokeWidth(width);
+    }
 
     public Paint getPaint() {
         return mPaint;
