@@ -25,6 +25,7 @@ public abstract class TileLooper {
         TileSystem.PixelXYToTileXY(pViewPort.left, pViewPort.top, mUpperLeft);
         mUpperLeft.offset(-1, -1);
         TileSystem.PixelXYToTileXY(pViewPort.right, pViewPort.bottom, mLowerRight);
+        mLowerRight.offset(1, 1);
         center.set((mUpperLeft.x + mLowerRight.x)/2, (mUpperLeft.y + mLowerRight.y)/2);
         final int roundedZoom = (int) Math.floor(pZoomLevel);
         final int mapTileUpperBound = 1 << roundedZoom;
