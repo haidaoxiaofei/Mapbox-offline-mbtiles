@@ -156,6 +156,12 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
         return new BoundingBox(mLatNorth, mLonEast, mLatSouth, mLonWest);
     }
 
+    /**
+     * Returns a new BoundingBox that stretches to contain both this and another BoundingBox.
+     *
+     * @param box
+     * @return
+     */
     public BoundingBox union(BoundingBox box) {
         if (box == null) {
             return clone();
@@ -163,6 +169,16 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
         return union(box.getLatNorth(), box.getLatSouth(), box.getLonEast(), box.getLonWest());
     }
 
+    /**
+     * Returns a new BoundingBox that stretches to include another bounding box,
+     * given by corner points.
+     *
+     * @param pLatNorth
+     * @param pLatSouth
+     * @param pLonEast
+     * @param pLonWest
+     * @return
+     */
     public BoundingBox union(final double pLatNorth, final double pLatSouth,
                              final double pLonEast,
                              final double pLonWest) {

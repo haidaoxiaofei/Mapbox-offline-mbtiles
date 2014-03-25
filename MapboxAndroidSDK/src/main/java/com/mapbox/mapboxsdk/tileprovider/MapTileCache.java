@@ -47,7 +47,8 @@ public class MapTileCache implements TileLayerConstants {
             builder.setMemoryCacheEnabled(true)
                     .setMemoryCacheMaxSizeUsingHeapSize()
                     .setDiskCacheEnabled(true)
-                    .setDiskCacheMaxSize(10 * 1024 * 1024)
+                    // 100MB
+                    .setDiskCacheMaxSize(100 * 1024 * 1024)
                     .setDiskCacheLocation(cacheDir);
             this.sCachedTiles = builder.build();
         }
@@ -84,7 +85,6 @@ public class MapTileCache implements TileLayerConstants {
 
     public CacheableBitmapDrawable putTileStream(final MapTile aTile, final InputStream inputStream,
                                                  final BitmapFactory.Options decodeOpts) {
-
         return getCache().put(getCacheKey(aTile), inputStream, decodeOpts);
     }
 
@@ -170,7 +170,6 @@ public class MapTileCache implements TileLayerConstants {
         return getCache().createCacheableBitmapDrawable(bitmap, getCacheKey(aTile), CacheableBitmapDrawable.SOURCE_UNKNOWN);
     }
 
-
     public Bitmap getBitmapFromRemoved(final int width, final int height) {
         return getCache().getBitmapFromRemoved(width, height);
     }
@@ -184,8 +183,10 @@ public class MapTileCache implements TileLayerConstants {
         mDiskCacheKey = key;
     }
 
-    // Creates a unique subdirectory of the designated app cache directory. Tries to use external
-    // but if not mounted, falls back on internal storage.
+    /**
+     * Creates a unique subdirectory of the designated app cache directory. Tries to use external
+     * but if not mounted, falls back on internal storage.
+     */
     public static File getDiskCacheDir(Context context, String uniqueName) {
         // Check if media is mounted or storage is built-in, if so, try and use external cache dir
         // otherwise use internal cache dir

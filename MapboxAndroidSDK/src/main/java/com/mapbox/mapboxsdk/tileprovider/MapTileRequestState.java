@@ -35,12 +35,6 @@ public class MapTileRequestState {
         mCallback = callback;
     }
 
-    public MapTileRequestState(final MapTile mapTile) {
-        mProviderQueue = new LinkedList<MapTileModuleLayerBase>();
-        mMapTile = mapTile;
-        mCallback = null;
-    }
-
     /**
      * Get the map tile this class owns
      *

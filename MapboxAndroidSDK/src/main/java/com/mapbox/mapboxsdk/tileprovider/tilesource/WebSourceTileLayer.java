@@ -39,6 +39,9 @@ import javax.net.ssl.SSLContext;
 
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
+/**
+ * An implementation of {@link TileLayer} that pulls tiles from the internet.
+ */
 public class WebSourceTileLayer extends TileLayer {
     private static final String TAG = "WebSourceTileLayer";
     HttpResponseCache cache;
@@ -164,7 +167,6 @@ public class WebSourceTileLayer extends TileLayer {
         return defaultValue;
     }
 
-
     private void initWithTileJSON(JSONObject tileJSON) {
         infoJSON = (tileJSON != null) ? tileJSON : new JSONObject();
         if (infoJSON != null) {
@@ -202,7 +204,7 @@ public class WebSourceTileLayer extends TileLayer {
         return out.toByteArray();
     }
 
-    class RetreiveJSONTask extends AsyncTask<String, Void, JSONObject> {
+    class RetrieveJSONTask extends AsyncTask<String, Void, JSONObject> {
 
         protected JSONObject doInBackground(String... urls) {
             OkHttpClient client = new OkHttpClient();
@@ -224,7 +226,7 @@ public class WebSourceTileLayer extends TileLayer {
 
     private JSONObject getBrandedJSON(String url) {
         try {
-            return new RetreiveJSONTask().execute(url).get(10000,
+            return new RetrieveJSONTask().execute(url).get(10000,
                     TimeUnit.MILLISECONDS);
         } catch (Exception e) {
             e.printStackTrace();
@@ -236,6 +238,13 @@ public class WebSourceTileLayer extends TileLayer {
         return null;
     }
 
+    /**
+     * Gets a list of Tile URLs used by this layer for a specific tile.
+     *
+     * @param aTile a map tile
+     * @param hdpi a boolean that indicates whether the tile should be at 2x or retina size
+     * @return a list of tile URLS
+     */
     public String[] getTileURLs(final MapTile aTile, boolean hdpi) {
         String url = getTileURL(aTile, hdpi);
         if (url != null) {
@@ -303,6 +312,13 @@ public class WebSourceTileLayer extends TileLayer {
         return null;
     }
 
+    /**
+     * Requests and returns a bitmap object from a given URL, using aCache to decode it.
+     *
+     * @param url the map tile url. should refer to a valid bitmap resource.
+     * @param aCache a cache, an instance of MapTileCache
+     * @return the tile if valid, otherwise null
+     */
     public Bitmap getBitmapFromURL(final String url, final MapTileCache aCache) {
         threadControl.add(false);
         int threadIndex = threadControl.size() - 1;
@@ -328,9 +344,6 @@ public class WebSourceTileLayer extends TileLayer {
         }
 
         try {
-            // Log.d(TAG, "getting tile " + tile.getX() + ", " + tile.getY());
-            // Log.d(TAG, "Downloading MapTile from url: " + url);
-
             HttpURLConnection connection = client.open(new URL(url));
             in = connection.getInputStream();
 

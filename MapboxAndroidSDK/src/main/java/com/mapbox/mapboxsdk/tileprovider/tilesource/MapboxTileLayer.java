@@ -5,7 +5,9 @@ import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
 /**
- * A convenience class to initialize tile layers that use Mapbox.
+ * A convenience class to initialize tile layers that use Mapbox services.
+ * Underneath, this initializes a WebSourceTileLayer, but provides conveniences
+ * for retina tiles, initialization by ID, and loading over SSL.
  */
 public class MapboxTileLayer extends WebSourceTileLayer implements MapViewConstants,
         MapboxConstants {
