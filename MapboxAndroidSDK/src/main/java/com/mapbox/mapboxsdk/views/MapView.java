@@ -179,21 +179,20 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         init(context);
     }
 
-    public void setTileSource(final Object value) {
-        if (value instanceof ITileLayer[]) {
-            if (mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
-                ((MapTileLayerBasic) mTileProvider).setTileSources((ITileLayer[]) value);
-                this.setZoom(mZoomLevel);
-                postInvalidate();
-            }
-        } else if (value instanceof ITileLayer) {
-            ITileLayer aTileSource = (ITileLayer) value;
-            mTileProvider.setTileSource(aTileSource);
-            TileSystem.setTileSize(aTileSource.getTileSizePixels());
+    public void setTileSource(final ITileLayer[] value) {
+        if (mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
+            ((MapTileLayerBasic) mTileProvider).setTileSources(value);
             this.setZoom(mZoomLevel);
             postInvalidate();
         }
+    }
 
+    public void setTileSource(final ITileLayer value) {
+        ITileLayer aTileSource = value;
+        mTileProvider.setTileSource(aTileSource);
+        TileSystem.setTileSize(aTileSource.getTileSizePixels());
+        this.setZoom(mZoomLevel);
+        postInvalidate();
     }
 
     public void addTileSource(final ITileLayer aTileSource) {
@@ -229,7 +228,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @param marker the marker object to be added
      * @return the marker object
      */
-    public Marker addMarker(Marker marker) {
+    public Marker addMarker(final Marker marker) {
         if (firstMarker) {
             defaultMarkerList.add(marker);
             setDefaultItemizedOverlay();
@@ -241,7 +240,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return marker;
     }
 
-    public void removeMarker(Marker marker) {
+    public void removeMarker(final Marker marker) {
         defaultMarkerList.remove(marker);
         defaultMarkerOverlay.removeItem(marker);
         this.invalidate();
@@ -320,7 +319,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @param p the position where the event occurred.
      * @return whether the event action is triggered or not
      */
-    public boolean singleTapUpHelper(ILatLng p) {
+    public boolean singleTapUpHelper(final ILatLng p) {
         if (defaultTooltip != null) {
             defaultTooltip.close();
         }
@@ -332,15 +331,15 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @param p the position where the event occurred.
      * @return whether the event action is triggered or not
      */
-    public boolean longPressHelper(ILatLng p) {
+    public boolean longPressHelper(final ILatLng p) {
         onLongPress(p);
         return false;
     }
 
-    public void onLongPress(ILatLng p) {
+    public void onLongPress(final ILatLng p) {
     }
 
-    public void onTap(ILatLng p) {
+    public void onTap(final ILatLng p) {
     }
 
     public MapController getController() {
@@ -430,7 +429,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public Rect getIntrinsicScreenRect(final Rect reuse) {
-        final Rect out = reuse == null ? new Rect() : reuse;
+        final Rect out;
+        if (reuse == null) {
+            out = new Rect();
+        } else {
+            out = reuse;
+        }
         out.set(getScrollX() - getMeasuredWidth() / 2, getScrollY() - getMeasuredHeight() / 2, getScrollX()
                 + getMeasuredWidth() / 2, getScrollY() + getMeasuredHeight() / 2);
         return out;
