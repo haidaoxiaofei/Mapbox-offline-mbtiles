@@ -185,7 +185,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         }
 
         if (DEBUG_TILE_PROVIDERS) {
-            Log.i(TAG, "MapTileLayerBase.mapTileRequestCompleted(): " + pState.getMapTile());
+            Log.d(TAG, "MapTileLayerBase.mapTileRequestCompleted(): " + pState.getMapTile());
         }
     }
 
@@ -202,7 +202,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         }
 
         if (DEBUG_TILE_PROVIDERS) {
-            Log.i(TAG, "MapTileLayerBase.mapTileRequestFailed(): " + pState.getMapTile());
+            Log.d(TAG, "MapTileLayerBase.mapTileRequestFailed(): " + pState.getMapTile());
         }
     }
 
@@ -307,7 +307,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
 
         final long startMs = System.currentTimeMillis();
 
-        Log.i(TAG, "rescale tile cache from " + pOldZoomLevel + " to " + pNewZoomLevel);
+        if (DEBUG_TILE_PROVIDERS) {
+            Log.d(TAG, "rescale tile cache from " + pOldZoomLevel + " to " + pNewZoomLevel);
+        }
 
         final int tileSize = getTileSource().getTileSizePixels();
         final Rect viewPort = GeometryMath.viewPortRect(pNewZoomLevel, projection, null);
@@ -318,7 +320,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         tileLooper.loop(null, pNewZoomLevel, tileSize, viewPort);
 
         final long endMs = System.currentTimeMillis();
-        Log.i(TAG, "Finished rescale in " + (endMs - startMs) + "ms");
+        if (DEBUG_TILE_PROVIDERS) {
+            Log.d(TAG, "Finished rescale in " + (endMs - startMs) + "ms");
+        }
     }
 
     public void setMapView(MapView mapView) {
