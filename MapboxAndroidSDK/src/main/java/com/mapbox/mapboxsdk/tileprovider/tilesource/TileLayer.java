@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
-import com.mapbox.mapboxsdk.tileprovider.MapTileCache;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
@@ -21,7 +20,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
 
     protected float mMinimumZoomLevel = TileLayerConstants.MINIMUM_ZOOMLEVEL;
     protected float mMaximumZoomLevel = TileLayerConstants.MAXIMUM_ZOOMLEVEL;
-    protected BoundingBox mBoundingBox = null;
+    protected BoundingBox mBoundingBox = WORLD_BOUNDING_BOX;
     protected LatLng mCenter = new LatLng(0,0);
     private final int mTileSizePixels = DEFAULT_TILE_SIZE;
 
