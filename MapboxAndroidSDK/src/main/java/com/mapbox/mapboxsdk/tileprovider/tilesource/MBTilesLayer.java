@@ -3,8 +3,6 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.Log;
 
@@ -14,12 +12,13 @@ import com.mapbox.mapboxsdk.tileprovider.modules.MBTilesFileArchive;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 public class MBTilesLayer extends TileLayer implements MapViewConstants,
         MapboxConstants {
@@ -111,12 +110,11 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
     }
 
     @Override
-    public Drawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile, boolean hdpi) {
+    public CacheableBitmapDrawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile, boolean hdpi) {
         if (mbTilesFileArchive != null) {
             InputStream stream = mbTilesFileArchive.getInputStream(this, aTile);
             if (stream != null) {
-                //TODO: needs to be change CacheableBitmapDrawable
-                return new BitmapDrawable(mResources, stream);
+                return downloader.getCache().putTileStream(aTile, stream, null);
             }
         }
         return null;

@@ -7,6 +7,8 @@ package com.mapbox.mapboxsdk.views.util;
 
 import android.graphics.drawable.Drawable;
 
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
+
 public interface TileLoadedListener {
-    public Drawable onTileLoaded(Drawable pDrawable);
+    public CacheableBitmapDrawable onTileLoaded(CacheableBitmapDrawable pDrawable);
 }

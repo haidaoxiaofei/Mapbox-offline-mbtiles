@@ -52,4 +52,8 @@ public class MapboxTileLayer extends WebSourceTileLayer implements MapViewConsta
         return String.format("http%s://api.tiles.mapbox.com/v3/%s.json%s",
                 (mEnableSSL ? "s" : ""), mId, (mEnableSSL ? "?secure" : ""));
     }
-}
+
+    public String getCacheKey()
+    {
+        return mId;
+}}

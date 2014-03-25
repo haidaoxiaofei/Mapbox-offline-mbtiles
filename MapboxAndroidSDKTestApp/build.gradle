@@ -11,6 +11,9 @@ apply plugin: 'android'
 repositories {
     mavenCentral()
     mavenLocal()
+    flatDir {
+        dirs '../libs'
+    }
 }
 
 android {
@@ -22,6 +25,7 @@ android {
         targetSdkVersion 19
         versionCode 1
         versionName "1.0"
+        packageName "com.mapbox.mapboxsdk.android.testapp"
     }
     buildTypes {
         release {
@@ -37,8 +41,7 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:+'
-    compile project(':mapbox-android-sdk')
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:1.0.0-SNAPSHOT@aar') {
+    compile (project(':mapbox-android-sdk')) {
         transitive = true
     }
 }

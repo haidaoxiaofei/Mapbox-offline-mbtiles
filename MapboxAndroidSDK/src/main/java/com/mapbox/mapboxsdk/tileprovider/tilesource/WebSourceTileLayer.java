@@ -3,7 +3,6 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,7 +10,7 @@ import android.util.Log;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
-import com.mapbox.mapboxsdk.tileprovider.ReusableBitmapDrawable;
+import com.mapbox.mapboxsdk.tileprovider.MapTileCache;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
@@ -24,7 +23,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -38,6 +36,8 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLContext;
+
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 public class WebSourceTileLayer extends TileLayer {
     private static final String TAG = "WebSourceTileLayer";
@@ -258,19 +258,20 @@ public class WebSourceTileLayer extends TileLayer {
     }
 
     @Override
-    public Drawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile, boolean hdpi) {
+    public CacheableBitmapDrawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile, boolean hdpi) {
         if (downloader.isNetworkAvailable()) {
             TilesLoadedListener listener = downloader.getTilesLoadedListener();
 
             String[] urls = getTileURLs(aTile, hdpi);
-            Drawable result = null;
+            CacheableBitmapDrawable result = null;
             Bitmap resultBitmap = null;
             if (urls != null) {
+                MapTileCache cache = downloader.getCache();
                 if (listener != null) {
                     listener.onTilesLoadStarted();
                 }
                 for (final String url : urls) {
-                    Bitmap bitmap = getBitmapFromURL(url);
+                    Bitmap bitmap = getBitmapFromURL(url, cache);
                     if (bitmap == null) continue;
                     if (resultBitmap == null) {
                         resultBitmap = bitmap;
@@ -280,8 +281,8 @@ public class WebSourceTileLayer extends TileLayer {
                     }
                 }
                 if (resultBitmap != null) {
-                    //TODO: needs to be change CacheableBitmapDrawable
-                    result = new ReusableBitmapDrawable(resultBitmap);
+                    //get drawable by putting it into cache (memory and disk)
+                    result = cache.putTileBitmap(aTile, resultBitmap);
                 }
                 if (checkThreadControl()) {
                     if (listener != null) {
@@ -303,7 +304,7 @@ public class WebSourceTileLayer extends TileLayer {
         return null;
     }
 
-    public Bitmap getBitmapFromURL(final String url) {
+    public Bitmap getBitmapFromURL(final String url, final MapTileCache aCache) {
         threadControl.add(false);
         int threadIndex = threadControl.size() - 1;
         InputStream in = null;
@@ -344,10 +345,7 @@ public class WebSourceTileLayer extends TileLayer {
             StreamUtils.copy(in, out);
             out.flush();
             final byte[] data = dataStream.toByteArray();
-            final ByteArrayInputStream byteStream = new ByteArrayInputStream(data);
-
-            Bitmap result = getBitmap(byteStream);
-            return result;
+            return aCache.decodeBitmap(data, null);
         } catch (final Throwable e) {
             Log.d(TAG, "Error downloading MapTile: " + url + ":" + e);
         } finally {

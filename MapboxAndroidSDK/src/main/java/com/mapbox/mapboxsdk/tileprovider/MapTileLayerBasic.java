@@ -20,14 +20,15 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
     public MapTileLayerBasic(final Context pContext,
                              final ITileLayer pTileSource,
                              MapView mapView) {
-        super(pTileSource, new SimpleRegisterReceiver(pContext));
+        super(pContext, pTileSource, new SimpleRegisterReceiver(pContext));
         this.mContext = pContext;
         this.mMapView = mapView;
 
         final MapTileDownloader downloaderProvider = new MapTileDownloader(
                 pTileSource,
-                new NetworkAvailabilityCheck(pContext),
-                mapView);
+                mTileCache,
+                mNetworkAvailablityCheck,
+                mMapView);
 
         for (MapTileModuleLayerBase provider: mTileProviderList) {
             if (provider.getClass().isInstance(MapTileDownloader.class)) {
@@ -53,7 +54,8 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
     public void addTileSource(final ITileLayer pTileSource) {
     	final MapTileDownloader downloaderProvider = new MapTileDownloader(
                 pTileSource,
-                new NetworkAvailabilityCheck(mContext),
+                mTileCache,
+                mNetworkAvailablityCheck,
                 mMapView);
         mTileProviderList.add(downloaderProvider);
     }

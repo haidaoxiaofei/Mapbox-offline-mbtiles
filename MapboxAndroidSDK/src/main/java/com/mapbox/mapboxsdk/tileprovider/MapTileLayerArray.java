@@ -1,17 +1,22 @@
 package com.mapbox.mapboxsdk.tileprovider;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
+
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
+import com.mapbox.mapboxsdk.tileprovider.modules.NetworkAvailabilityCheck;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
+import com.mapbox.mapboxsdk.util.BitmapUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import com.mapbox.mapboxsdk.geometry.BoundingBox;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
-import android.util.Log;
-
-import android.graphics.drawable.Drawable;
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
  * This top-level tile provider allows a consumer to provide an array of modular asynchronous tile
@@ -34,14 +39,18 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
     protected final List<MapTileModuleLayerBase> mTileProviderList;
 
+    protected final List<MapTile> mUnaccessibleTiles;
+
+    protected final NetworkAvailabilityCheck mNetworkAvailablityCheck;
     /**
      * Creates an {@link MapTileLayerArray} with no tile providers.
      *
      * @param pRegisterReceiver a {@link IRegisterReceiver}
      */
-    protected MapTileLayerArray(final ITileLayer pTileSource,
+    protected MapTileLayerArray(final Context context,
+                                final ITileLayer pTileSource,
                                 final IRegisterReceiver pRegisterReceiver) {
-        this(pTileSource, pRegisterReceiver, null);
+        this(context, pTileSource, pRegisterReceiver, null);
     }
 
     /**
@@ -50,12 +59,16 @@ public class MapTileLayerArray extends MapTileLayerBase {
      * @param aRegisterReceiver  a {@link IRegisterReceiver}
      * @param pTileProviderArray an array of {@link com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase}
      */
-    public MapTileLayerArray(final ITileLayer pTileSource,
+    public MapTileLayerArray(final Context context,
+                             final ITileLayer pTileSource,
                              final IRegisterReceiver aRegisterReceiver,
                              final MapTileModuleLayerBase[] pTileProviderArray) {
-        super(pTileSource);
+        super(context, pTileSource);
 
         mWorking = new HashMap<MapTile, MapTileRequestState>();
+        mUnaccessibleTiles = new ArrayList<MapTile>();
+
+        mNetworkAvailablityCheck  = new NetworkAvailabilityCheck(context);
 
         mTileProviderList = new ArrayList<MapTileModuleLayerBase>();
         if (pTileProviderArray != null) {
@@ -79,11 +92,24 @@ public class MapTileLayerArray extends MapTileLayerBase {
         }
     }
 
+    private boolean networkAvailable() {
+        return mNetworkAvailablityCheck == null
+                || mNetworkAvailablityCheck.getNetworkAvailable();
+    }
+
     @Override
     public Drawable getMapTile(final MapTile pTile) {
-        final Drawable tile = mTileCache.getMapTile(pTile);
-        if (tile != null && !ExpirableBitmapDrawable.isDrawableExpired(tile)) {
-            return tile;
+        if (mUnaccessibleTiles.size() > 0) {
+            if (networkAvailable()) {
+                mUnaccessibleTiles.clear();
+            }
+            else if(mUnaccessibleTiles.contains(pTile)) {
+                return null;
+            }
+        }
+        final CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
+        if (tileDrawable != null && !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
+            return tileDrawable;
         } else {
             boolean alreadyInProgress = false;
             synchronized (mWorking) {
@@ -123,7 +149,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
                     mapTileRequestFailed(state);
                 }
             }
-            return tile;
+            return tileDrawable;
         }
     }
 
@@ -144,12 +170,15 @@ public class MapTileLayerArray extends MapTileLayerBase {
             synchronized (mWorking) {
                 mWorking.remove(aState.getMapTile());
             }
+            if (!networkAvailable()) {
+                mUnaccessibleTiles.add(aState.getMapTile());
+            }
             super.mapTileRequestFailed(aState);
         }
     }
 
     @Override
-    public void mapTileRequestExpiredTile(MapTileRequestState aState, Drawable aDrawable) {
+    public void mapTileRequestExpiredTile(MapTileRequestState aState, CacheableBitmapDrawable aDrawable) {
         // Call through to the super first so aState.getCurrentProvider() still contains the proper
         // provider.
         super.mapTileRequestExpiredTile(aState, aDrawable);

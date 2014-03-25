@@ -1,15 +1,16 @@
 package com.mapbox.mapboxsdk.tileprovider.modules;
 
 import android.graphics.drawable.Drawable;
+import android.os.Process;
+import android.util.Log;
 
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.tileprovider.ExpirableBitmapDrawable;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
-import android.util.Log;
+import com.mapbox.mapboxsdk.util.BitmapUtils;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,6 +19,8 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
  * An abstract base class for modular tile providers
@@ -268,7 +271,9 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
          * A tile has loaded.
          */
         protected void tileLoaded(final MapTileRequestState pState, final Drawable pDrawable) {
-            Log.i(TAG, "tileloaded called");
+            if (DEBUG_TILE_PROVIDERS) {
+                Log.d(TAG, "tileloaded called");
+            }
             removeTileFromQueues(pState.getMapTile());
             pState.getCallback().mapTileRequestCompleted(pState, pDrawable);
         }
@@ -277,7 +282,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
          * A tile has loaded but it's expired.
          * Return it <b>and</b> send request to next provider.
          */
-        protected void tileLoadedExpired(final MapTileRequestState pState, final Drawable pDrawable) {
+        protected void tileLoadedExpired(final MapTileRequestState pState, final CacheableBitmapDrawable pDrawable) {
             removeTileFromQueues(pState.getMapTile());
             pState.getCallback().mapTileRequestExpiredTile(pState, pDrawable);
         }
@@ -296,6 +301,8 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
          */
         @Override
         public void run() {
+            // Make sure we're running with a background priority
+            android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
             onTileLoaderInit();
 
@@ -314,8 +321,8 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
 
                 if (result == null) {
                     tileLoadedFailed(state);
-                } else if (ExpirableBitmapDrawable.isDrawableExpired(result)) {
-                    tileLoadedExpired(state, result);
+                } else if (BitmapUtils.isCacheDrawableExpired(result)) {
+                    tileLoadedExpired(state, (CacheableBitmapDrawable)result);
                 } else {
                     tileLoaded(state, result);
                 }

@@ -27,9 +27,17 @@ public class MapTileRequestState {
                                final MapTileModuleLayerBase[] providers,
                                final IMapTileProviderCallback callback) {
         mProviderQueue = new LinkedList<MapTileModuleLayerBase>();
-        Collections.addAll(mProviderQueue, providers);
+        if (providers != null) {
+            Collections.addAll(mProviderQueue, providers);
+        }
         mMapTile = mapTile;
         mCallback = callback;
+    }
+
+    public MapTileRequestState(final MapTile mapTile) {
+        mProviderQueue = new LinkedList<MapTileModuleLayerBase>();
+        mMapTile = mapTile;
+        mCallback = null;
     }
 
     /**
