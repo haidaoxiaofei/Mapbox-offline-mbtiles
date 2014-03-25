@@ -25,6 +25,7 @@ android {
         targetSdkVersion 19
         versionCode 1
         versionName "1.0"
+        packageName "com.mapbox.mapboxsdk.android.testapp"
     }
     buildTypes {
         release {
