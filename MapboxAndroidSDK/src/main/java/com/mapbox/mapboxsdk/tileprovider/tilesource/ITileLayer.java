@@ -80,23 +80,16 @@ public interface ITileLayer {
     /**
      * Get the tile source description
      *
-     * @return the description
+     * @return the short description
      */
-    public String getLongDescription();
+    public String getDescription();
 
     /**
-     * Get the tile source short attribution
+     * Get the tile source attribution
      *
      * @return the short attribution
      */
-    public String getShortAttribution();
-
-    /**
-     * Get the tile source long attribution
-     *
-     * @return the long attribution
-     */
-    public String getLongAttribution();
+    public String getAttribution();
 
     /**
      * Get the tile source legend

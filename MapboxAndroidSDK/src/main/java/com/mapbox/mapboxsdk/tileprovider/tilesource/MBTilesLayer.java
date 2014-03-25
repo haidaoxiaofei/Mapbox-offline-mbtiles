@@ -111,7 +111,7 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
             mMinimumZoomLevel = mbTilesFileArchive.getMinZoomLevel();
             mName = mbTilesFileArchive.getName();
             mDescription = mbTilesFileArchive.getDescription();
-            mShortAttribution = mbTilesFileArchive.getAttribution();
+            mAttribution = mbTilesFileArchive.getAttribution();
             mBoundingBox = mbTilesFileArchive.getBounds();
             mCenter = mbTilesFileArchive.getCenter();
         }

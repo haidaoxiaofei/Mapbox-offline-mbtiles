@@ -27,7 +27,7 @@ repositories {
 dependencies {
 //    compile (project(':Android-BitmapCache')) {
     compile ('com.github.chrisbanes.bitmapcache:BitmapCache:2.4+@aar') {
-        transitive:true
+        transitive = true
         exclude module: 'support-v4'
     }
     compile fileTree(dir: 'libs', include: '*.jar')

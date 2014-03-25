@@ -180,7 +180,7 @@ public class WebSourceTileLayer extends TileLayer {
             mMaximumZoomLevel = getJSONFloat(infoJSON, "maxzoom");
             mName = getJSONString(infoJSON, "name");
             mDescription = getJSONString(infoJSON, "description");
-            mShortAttribution = getJSONString(infoJSON, "attribution");
+            mAttribution = getJSONString(infoJSON, "attribution");
             mLegend = getJSONString(infoJSON, "legend");
 
             double[] center = getJSONDoubleArray(infoJSON, "center", 3);

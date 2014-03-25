@@ -14,8 +14,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     protected String mUrl;
     protected String mName;
     protected String mDescription;
-    protected String mShortAttribution;
-    protected String mLongAttribution;
+    protected String mAttribution;
     protected String mLegend;
 
     protected float mMinimumZoomLevel = TileLayerConstants.MINIMUM_ZOOMLEVEL;
@@ -28,8 +27,63 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
         mUrl = aUrl;
     }
 
+    /**
+     * Sets the layer's tile URL template string.
+     * @param aUrl
+     * @return
+     */
     public TileLayer setURL(final String aUrl) {
         mUrl = aUrl;
+        return this;
+    }
+
+    /**
+     * Sets the layer's attribution string.
+     * @param aAttribution
+     * @return
+     */
+    public TileLayer setAttribution(final String aAttribution) {
+        this.mAttribution = aAttribution;
+        return this;
+    }
+
+    /**
+     * Sets the layer's description string.
+     * @param aDescription
+     * @return
+     */
+    public TileLayer setDescription(final String aDescription) {
+        this.mDescription = aDescription;
+        return this;
+    }
+
+    /**
+     * Sets the layer's name.
+     * @param aName
+     * @return
+     */
+    public TileLayer setName(final String aName) {
+        this.mName = aName;
+        return this;
+    }
+
+    /**
+     * Sets the layer's minimum zoom level.
+     * @param aMinimumZoomLevel
+     * @return
+     */
+    public TileLayer setMinimumZoomLevel(final float aMinimumZoomLevel) {
+        this.mMinimumZoomLevel = aMinimumZoomLevel;
+        return this;
+    }
+
+    /**
+     * Sets the layer's minimum zoom level.
+     * @param aMaximumZoomLevel
+     * @return
+     */
+    public TileLayer setMaximumZoomLevel(final float aMaximumZoomLevel) {
+        this.mMaximumZoomLevel = aMaximumZoomLevel;
         return this;
     }
 
@@ -89,18 +143,13 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     }
 
     @Override
-    public String getLongDescription() {
+    public String getDescription() {
         return mDescription;
     }
 
     @Override
-    public String getShortAttribution() {
-        return mShortAttribution;
-    }
-
-    @Override
-    public String getLongAttribution() {
-        return mLongAttribution;
+    public String getAttribution() {
+        return mAttribution;
     }
 
     @Override

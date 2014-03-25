@@ -20,15 +20,7 @@ import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
 import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.MBTilesLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.MapQuestOSMLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.MapQuestOpenAerialLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.OpenCycleMapLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.OpenSeaMapLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.OpenStreetMapLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.TileMillLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.*;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
@@ -144,26 +136,25 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-    final String availableLayers[] = {"openstreetpmap", "openseapmap", "mapquestaerial", "mapquest", "opencycle", "tilemill", "open-streets-dc.mbtiles"};
+    final String availableLayers[] = {"OpenStreetMap", "OpenSeaMap", "open-streets-dc.mbtiles"};
 
     protected void replaceMapView(String layer) {
         ITileLayer source;
         if (layer.toLowerCase().endsWith("mbtiles")) {
-            mv.setTileSource(new ITileLayer[]{new MBTilesLayer(this, layer), new MapQuestOSMLayer()});
+            mv.setTileSource(new ITileLayer[]{new MBTilesLayer(this, layer)});
         } else {
-            if (layer.equalsIgnoreCase("openstreetpmap")) {
-                source = new OpenStreetMapLayer();
-            } else if (layer.equalsIgnoreCase("openseapmap")) {
-                source = new OpenSeaMapLayer();
-            } else if (layer.equalsIgnoreCase("mapquestaerial")) {
-                source = new MapQuestOpenAerialLayer();
-            } else if (layer.equalsIgnoreCase("mapquest")) {
-                source = new MapQuestOSMLayer();
-            } else if (layer.equalsIgnoreCase("opencycle")) {
-                source = new OpenCycleMapLayer();
-            } else if (layer.equalsIgnoreCase("tilemill")) {
-                //IP is set for Genymotion host
-                source = new TileMillLayer("192.168.56.1", "test");
+            if (layer.equalsIgnoreCase("OpenStreetMap")) {
+                source = new WebSourceTileLayer("http://tile.openstreetmap.org/%d/%d/%d.png")
+                    .setName("OpenStreetMap")
+                    .setAttribution("© OpenStreetMap Contributors")
+                    .setMinimumZoomLevel(1)
+                    .setMaximumZoomLevel(18);
+            } else if (layer.equalsIgnoreCase("OpenSeaMap")) {
+                source = new WebSourceTileLayer("http://tile.openstreetmap.org/seamark/%d/%d/%d.png")
+                    .setName("OpenStreetMap")
+                    .setAttribution("© OpenStreetMap Contributors")
+                    .setMinimumZoomLevel(1)
+                    .setMaximumZoomLevel(18);
             } else {
                 source = new MapboxTileLayer(layer);
             }
