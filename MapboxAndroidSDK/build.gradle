@@ -25,15 +25,13 @@ repositories {
 }
 
 dependencies {
-    compile ('com.github.chrisbanes.bitmapcache:BitmapCache:2.4-SNAPSHOT@aar') {
+//    compile (project(':Android-BitmapCache')) {
+    compile ('com.github.chrisbanes.bitmapcache:BitmapCache:2.4+@aar') {
         transitive:true
         exclude module: 'support-v4'
     }
     compile fileTree(dir: 'libs', include: '*.jar')
-//    compile (project(':Android-BitmapCache')) {
-//        transitive:true
-//        exclude module: 'support-v4'
-//    }
+
     compile 'com.android.support:support-v4:19.0.+'
     compile 'com.squareup.okhttp:okhttp:1.3.0'
     compile 'com.nineoldandroids:library:2.4.0'
@@ -50,6 +48,7 @@ android {
         targetSdkVersion 19
         versionCode 1
         versionName "1.0"
+        packageName "com.mapbox.mapboxsdk"
     }
 
     sourceSets {
