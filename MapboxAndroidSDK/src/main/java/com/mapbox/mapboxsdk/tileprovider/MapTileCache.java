@@ -1,8 +1,6 @@
 // Created by plusminus on 17:58:57 - 25.09.2008
 package com.mapbox.mapboxsdk.tileprovider;
 
-import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +8,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.Log;
+
+import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
+
 import java.io.File;
 import java.io.InputStream;
 
@@ -84,7 +85,12 @@ public class MapTileCache implements TileLayerConstants {
 
     public CacheableBitmapDrawable putTileStream(final MapTile aTile, final InputStream inputStream,
                                                  final BitmapFactory.Options decodeOpts) {
+
         return getCache().put(getCacheKey(aTile), inputStream, decodeOpts);
+    }
+
+    public CacheableBitmapDrawable putTileBitmap(final MapTile aTile, final Bitmap bitmap) {
+        return getCache().put(getCacheKey(aTile), bitmap);
     }
 
     public CacheableBitmapDrawable putTile(final MapTile aTile, final Drawable aDrawable) {
@@ -169,9 +175,14 @@ public class MapTileCache implements TileLayerConstants {
     }
 
 
-    Bitmap getBitmapFromRemoved(final int width, final int height) {
+    public Bitmap getBitmapFromRemoved(final int width, final int height) {
         return getCache().getBitmapFromRemoved(width, height);
     }
+
+    public Bitmap decodeBitmap(final byte[] data, final BitmapFactory.Options opts) {
+        return getCache().decodeBitmap(new BitmapLruCache.ByteArrayInputStreamProvider(data), opts);
+    }
+
 
     public void setDiskCacheKey(final String key)
     {

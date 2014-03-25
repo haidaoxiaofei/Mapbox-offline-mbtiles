@@ -64,7 +64,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         ArrayList pts = new ArrayList();
         pts.add(new LatLng(0f, 0f));
         pts.add(new LatLng(10f, 10f));
-        Assert.assertTrue(bb.equals(BoundingBox.fromGeoPoints(pts)));
+        Assert.assertTrue(bb.equals(BoundingBox.fromLatLngs(pts)));
     }
 
     public void testTileSystem() throws Exception {

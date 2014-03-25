@@ -2,7 +2,6 @@ package com.mapbox.mapboxsdk.views;
 
 import android.graphics.PointF;
 import android.os.Handler;
-
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
@@ -21,16 +20,20 @@ public class MapController implements MapViewConstants {
     private ILatLng zoomOnLatLong = null;
     private PointF zoomDeltaScroll = new PointF();
 
-    public MapController(MapView mapView) {
-        mMapView = mapView;
+	/**
+	 * Constructor
+	 * @param mapView MapView to be controlled
+	 */
+	public MapController(MapView mapView)
+	{
+		mMapView = mapView;
+		mZoomAnimation = ValueAnimator.ofFloat(0f, 1f);
+		mZoomAnimation.addListener(new MyZoomAnimatorListener());
+		mZoomAnimation.addUpdateListener(new MyZoomAnimatorUpdateListener());
+		mZoomAnimation.setDuration(ANIMATION_DURATION_SHORT);
+	}
 
-            mZoomAnimation = ValueAnimator.ofFloat(0f, 1f);
-            mZoomAnimation.addListener(new MyZoomAnimatorListener());
-            mZoomAnimation.addUpdateListener(new MyZoomAnimatorUpdateListener());
-            mZoomAnimation.setDuration(ANIMATION_DURATION_SHORT);
-    }
-
-    /**
+	/**
      * Start animating the map towards the given point.
      */
     public void animateTo(final ILatLng point) {
@@ -69,6 +72,7 @@ public class MapController implements MapViewConstants {
      * Set the map view to the given center. There will be no animation.
      */
     public void setCenter(final ILatLng latlng) {
+        if (latlng == null) return;
         PointF p = mMapView.getProjection().toMapPixels(latlng, null);
         this.mMapView.scrollTo((int)p.x, (int)p.y);
     }
@@ -193,8 +197,7 @@ public class MapController implements MapViewConstants {
     protected void aboutToStartAnimation(final float x, final float y) {
     	final float zoom = mMapView.getZoomLevel(false);
     	final int worldSize_2 = TileSystem.MapSize(zoom) / 2;
-        final ILatLng latlong = TileSystem.PixelXYToLatLong((int)(x
-                + worldSize_2), (int)(y + worldSize_2), zoom);
+        final ILatLng latlong = TileSystem.PixelXYToLatLong((int)(x + worldSize_2), (int)(y + worldSize_2), zoom);
         aboutToStartAnimation(latlong, x, y);
     }
     

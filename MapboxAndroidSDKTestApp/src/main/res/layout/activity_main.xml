@@ -38,6 +38,14 @@
                 android:layout_height="wrap_content"
                 android:text="Streets"
                 android:layout_weight="0.3333" android:background="#3887be" android:alpha="0.8"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:id="@+id/layerselect"
+            android:alpha="0.8"
+            android:background="#3887BE" />
     </LinearLayout>
     <ImageView android:layout_width="100dp" android:layout_height="65dp" android:layout_alignParentTop="true"
                android:layout_alignParentRight="true" android:src="@drawable/mblogo" android:layout_marginTop="-10dp"/>

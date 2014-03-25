@@ -1,15 +1,16 @@
 package com.mapbox.mapboxsdk.tileprovider.modules;
 
 import android.graphics.drawable.Drawable;
+import android.os.Process;
+import android.util.Log;
 
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
-
-import android.os.Process;
-import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -74,6 +75,35 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
      * @return the maximum zoom level
      */
     public abstract float getMaximumZoomLevel();
+
+
+    /**
+     * Get the tile size in pixels this tile provider provides.
+     *
+     * @return the tile size in pixels
+     */
+    public abstract int getTileSizePixels();
+
+    /**
+     * Get the tile provider bounding box.
+     *
+     * @return the tile source bounding box
+     */
+    public abstract BoundingBox getBoundingBox();
+
+    /**
+     * Get the tile provider center.
+     *
+     * @return the tile source center
+     */
+    public abstract LatLng getCenterCoordinate();
+
+    /**
+     * Get the tile provider suggested starting zoom.
+     *
+     * @return the tile suggested starting zoom
+     */
+    public abstract float getCenterZoom();
 
     /**
      * Sets the tile source for this tile provider.
@@ -242,7 +272,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
          */
         protected void tileLoaded(final MapTileRequestState pState, final Drawable pDrawable) {
             if (DEBUG_TILE_PROVIDERS) {
-                Log.i(TAG, "tileloaded called");
+                Log.d(TAG, "tileloaded called");
             }
             removeTileFromQueues(pState.getMapTile());
             pState.getCallback().mapTileRequestCompleted(pState, pDrawable);

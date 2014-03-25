@@ -3,7 +3,6 @@ package com.mapbox.mapboxsdk.views;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import com.mapbox.mapboxsdk.api.ILatLng;
-import android.util.Log;
 
 /**
  * A custom listener for double-tap gestures that zooms in on
@@ -12,7 +11,12 @@ import android.util.Log;
 class MapViewDoubleClickListener implements GestureDetector.OnDoubleTapListener {
 
     private final MapView mapView;
-    public MapViewDoubleClickListener(MapView mv) {
+
+	/**
+	 * Constructor
+	 * @param mv MapView to listen to
+	 */
+	public MapViewDoubleClickListener(MapView mv) {
         this.mapView = mv;
     }
 

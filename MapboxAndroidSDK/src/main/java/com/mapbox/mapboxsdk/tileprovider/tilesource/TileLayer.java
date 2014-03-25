@@ -1,29 +1,26 @@
 package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileCache;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
-import com.mapbox.mapboxsdk.tileprovider.util.LowMemoryException;
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-
-import java.io.InputStream;
-
-import uk.co.senab.bitmapcache.BitmapLruCache;
-import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstants {
 
-	protected String mUrl;
-    protected float mMinimumZoomLevel = 1;
-    protected float mMaximumZoomLevel = 16;
+    protected String mUrl;
+    protected String mName;
+    protected String mDescription;
+    protected String mShortAttribution;
+    protected String mLongAttribution;
+    protected String mLegend;
+
+    protected float mMinimumZoomLevel = TileLayerConstants.MINIMUM_ZOOMLEVEL;
+    protected float mMaximumZoomLevel = TileLayerConstants.MAXIMUM_ZOOMLEVEL;
     protected BoundingBox mBoundingBox = null;
     protected LatLng mCenter = new LatLng(0,0);
     private final int mTileSizePixels = DEFAULT_TILE_SIZE;
@@ -37,12 +34,14 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
         return this;
     }
 
-    public String getTileURL(final MapTile aTile, boolean hdpi) {
-        return mUrl
-                .replace("{z}", String.valueOf(aTile.getZ()))
-                .replace("{x}", String.valueOf(aTile.getX()))
-                .replace("{y}", String.valueOf(aTile.getY()))
-                .replace("{2x}", hdpi ? "@2x" : "");
+    public Drawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile, boolean hdpi) {
+        return null;
+    }
+
+    @Override
+    public void detach()
+    {
+
     }
 
     @Override
@@ -60,28 +59,38 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
         return mTileSizePixels;
     }
 
-    @Override
-    public Drawable getDrawable(final MapTile aTile, final MapTileCache aCache, final Resources resources, final InputStream aFileInputStream) throws LowMemoryException {
-        try {
-            // default implementation will load the file as a bitmap and create
-            // a CacheableBitmapDrawable from it
-            //also caching is handled here to be optimized
-            return aCache.putTileStream(aTile, aFileInputStream, new BitmapFactory.Options());
-
-        } catch (final OutOfMemoryError e) {
-            Log.e(TAG, "OutOfMemoryError loading bitmap");
-            System.gc();
-            throw new LowMemoryException(e);
-        }
-    }
-
     final private String TAG = "OnlineTileSource";
 
 	@Override
-	public BoundingBox getBoundingBox() {
-		return mBoundingBox;
-}
+    public String getCacheKey() { return "";}
 
     @Override
-    public String getCacheKey() { return "";}
+    public BoundingBox getBoundingBox() { return mBoundingBox; }
+
+    @Override
+    public LatLng getCenterCoordinate() { return mCenter; }
+
+
+    @Override
+    public float getCenterZoom() {
+        if(mCenter != null) {
+            return (float)mCenter.getAltitude();
+        }
+        return Math.round(mMaximumZoomLevel + mMinimumZoomLevel)/2;
+    }
+
+    @Override
+    public String getShortName() { return mName; }
+
+    @Override
+    public String getLongDescription() { return mDescription; }
+
+    @Override
+    public String getShortAttribution() { return mShortAttribution; }
+
+    @Override
+    public String getLongAttribution() { return mLongAttribution; }
+
+    @Override
+    public String getLegend() { return mLegend; }
 }

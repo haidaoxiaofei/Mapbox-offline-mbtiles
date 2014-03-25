@@ -1,16 +1,6 @@
 // Created by plusminus on 21:46:22 - 25.09.2008
 package com.mapbox.mapboxsdk.tileprovider;
 
-import java.util.HashMap;
-
-import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
-import com.mapbox.mapboxsdk.util.BitmapUtils;
-import com.mapbox.mapboxsdk.util.GeometryMath;
-import com.mapbox.mapboxsdk.util.TileLooper;
-import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.views.util.Projection;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -23,6 +13,18 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
+import com.mapbox.mapboxsdk.util.BitmapUtils;
+import com.mapbox.mapboxsdk.util.GeometryMath;
+import com.mapbox.mapboxsdk.util.TileLooper;
+import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.views.util.Projection;
+
+import java.util.HashMap;
 
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
@@ -65,14 +67,60 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      *
      * @return the minimum zoom level
      */
-    public abstract float getMinimumZoomLevel();
+    public float getMinimumZoomLevel()
+    {
+        return mTileSource.getMinimumZoomLevel();
+    }
 
     /**
-     * Gets the maximum zoom level this tile provider can provide
+     * Get the maximum zoom level this tile provider can provide.
      *
      * @return the maximum zoom level
      */
-    public abstract float getMaximumZoomLevel();
+    public float getMaximumZoomLevel()
+    {
+        return mTileSource.getMaximumZoomLevel();
+    }
+
+    /**
+     * Get the tile size in pixels this tile provider provides.
+     *
+     * @return the tile size in pixels
+     */
+    public int getTileSizePixels()
+    {
+        return mTileSource.getTileSizePixels();
+    }
+
+    /**
+     * Get the tile provider bounding box.
+     *
+     * @return the tile source bounding box
+     */
+    public BoundingBox getBoundingBox()
+    {
+        return mTileSource.getBoundingBox();
+    }
+
+    /**
+     * Get the tile provider center.
+     *
+     * @return the tile source center
+     */
+    public LatLng getCenterCoordinate()
+    {
+        return mTileSource.getCenterCoordinate();
+    }
+
+    /**
+     * Get the tile provider suggested starting zoom.
+     *
+     * @return the tile suggested starting zoom
+     */
+    public float getCenterZoom()
+    {
+        return mTileSource.getCenterZoom();
+    }
 
     /**
      * Sets the tile source for this tile provider.
@@ -80,6 +128,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      * @param pTileSource the tile source
      */
     public void setTileSource(final ITileLayer pTileSource) {
+        if (mTileSource != null) {
+            mTileSource.detach();
+        }
         mTileSource = pTileSource;
         clearTileCache();
         if (mTileSource != null) {
@@ -362,9 +413,8 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                 mDestRect.set(0, 0, pTileSizePx, pTileSizePx);
 
                 // Try to get a bitmap from the pool, otherwise allocate a new one
-                Bitmap bitmap = null;
-//                bitmap = mTileCache.getBitmapFromRemoved(pTileSizePx,
-//                        pTileSizePx);
+                Bitmap bitmap = mTileCache.getBitmapFromRemoved(pTileSizePx,
+                        pTileSizePx);
 
                 if (bitmap == null) {
                     bitmap = Bitmap.createBitmap(pTileSizePx, pTileSizePx,
@@ -427,8 +477,8 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                         if (oldBitmap != null) {
                             if (bitmap == null) {
                                 // Try to get a bitmap from the pool, otherwise allocate a new one
-//                                bitmap = mTileCache.getBitmapFromRemoved(
-//                                        pTileSizePx, pTileSizePx);
+                                bitmap = mTileCache.getBitmapFromRemoved(
+                                        pTileSizePx, pTileSizePx);
                                 if (bitmap == null)
                                     bitmap = Bitmap.createBitmap(pTileSizePx, pTileSizePx,
                                             Bitmap.Config.ARGB_8888);

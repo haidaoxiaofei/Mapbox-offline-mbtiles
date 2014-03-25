@@ -25,16 +25,4 @@ public interface MapViewConstants {
 
     public static final double ZOOM_SENSITIVITY = 1.0;
     public static final double ZOOM_LOG_BASE_INV = 1.0 / Math.log(2.0 / ZOOM_SENSITIVITY);
-
-    /**
-     * Minimum Zoom Level
-     */
-    public static final int MINIMUM_ZOOMLEVEL = 0;
-
-    /**
-     * Maximum Zoom Level - we use Integers to store zoom levels so overflow happens at 2^32 - 1,
-     * but we also have a tile size that is typically 2^8, so (32-1)-8-1 = 22
-     */
-    public static final int MAXIMUM_ZOOMLEVEL = 22;
-    public final static int DEFAULT_TILE_SIZE = 256;
 }
