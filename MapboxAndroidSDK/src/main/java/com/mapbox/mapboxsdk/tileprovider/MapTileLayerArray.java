@@ -41,7 +41,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
     protected final List<MapTile> mUnaccessibleTiles;
 
-    protected final NetworkAvailabilityCheck mNetworkAvailablityCheck;
+    protected final NetworkAvailabilityCheck mNetworkAvailabilityCheck;
 
     /**
      * Creates an {@link MapTileLayerArray} with no tile providers.
@@ -69,7 +69,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
         mWorking = new HashMap<MapTile, MapTileRequestState>();
         mUnaccessibleTiles = new ArrayList<MapTile>();
 
-        mNetworkAvailablityCheck = new NetworkAvailabilityCheck(context);
+        mNetworkAvailabilityCheck = new NetworkAvailabilityCheck(context);
 
         mTileProviderList = new ArrayList<MapTileModuleLayerBase>();
         if (pTileProviderArray != null) {
@@ -82,6 +82,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
         if (getTileSource() != null) {
             getTileSource().detach();
         }
+
         synchronized (mTileProviderList) {
             for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
                 tileProvider.detach();
@@ -94,18 +95,30 @@ public class MapTileLayerArray extends MapTileLayerBase {
     }
 
     private boolean networkAvailable() {
-        return mNetworkAvailablityCheck == null
-                || mNetworkAvailablityCheck.getNetworkAvailable();
+        return mNetworkAvailabilityCheck == null
+                || mNetworkAvailabilityCheck.getNetworkAvailable();
     }
 
-    @Override
-    public Drawable getMapTile(final MapTile pTile) {
+    /**
+     * Checks whether this tile is unavailable and the system is offline.
+     * @param pTile the tile in question
+     * @return whether the tile is unavailable
+     */
+    private boolean tileUnavailable(final MapTile pTile) {
         if (mUnaccessibleTiles.size() > 0) {
             if (networkAvailable()) {
                 mUnaccessibleTiles.clear();
             } else if (mUnaccessibleTiles.contains(pTile)) {
-                return null;
+                return true;
             }
+        }
+        return false;
+    }
+
+    @Override
+    public Drawable getMapTile(final MapTile pTile) {
+        if (tileUnavailable(pTile)) {
+            return null;
         }
         final CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
         if (tileDrawable != null && !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
@@ -116,20 +129,18 @@ public class MapTileLayerArray extends MapTileLayerBase {
                 alreadyInProgress = mWorking.containsKey(pTile);
             }
 
-            if (alreadyInProgress) {
-                //
-            } else {
+            if (!alreadyInProgress) {
                 if (DEBUG_TILE_PROVIDERS) {
                     Log.i(TAG, "MapTileLayerArray.getMapTile() requested but not in cache, trying from async providers: "
                             + pTile);
                 }
 
                 final MapTileRequestState state;
+
                 synchronized (mTileProviderList) {
                     final MapTileModuleLayerBase[] providerArray =
                             new MapTileModuleLayerBase[mTileProviderList.size()];
-                    state = new MapTileRequestState(pTile,
-                            mTileProviderList.toArray(providerArray), this);
+                    state = new MapTileRequestState(pTile, mTileProviderList.toArray(providerArray), this);
                 }
 
                 synchronized (mWorking) {

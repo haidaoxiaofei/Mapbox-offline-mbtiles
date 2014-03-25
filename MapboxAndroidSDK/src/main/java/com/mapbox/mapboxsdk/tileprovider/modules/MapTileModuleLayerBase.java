@@ -13,7 +13,6 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -109,7 +108,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
 
     protected final Object mQueueLockObject = new Object();
     protected final HashMap<MapTile, MapTileRequestState> mWorking;
-        protected final LinkedHashMap<MapTile, MapTileRequestState> mPending;
+    protected final LinkedHashMap<MapTile, MapTileRequestState> mPending;
 
     /**
      * Initialize a new tile provider, given a thread pool and a pending queue size. The pending queue
@@ -244,8 +243,6 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
                 // get the most recently accessed tile
                 // - the last item in the iterator that's not already being
                 // processed
-                Iterator<MapTile> iterator = mPending.keySet().iterator();
-
                 for (MapTile tile : mPending.keySet()) {
                     if (!mWorking.containsKey(tile)) {
                         if (DEBUG_TILE_PROVIDERS) {

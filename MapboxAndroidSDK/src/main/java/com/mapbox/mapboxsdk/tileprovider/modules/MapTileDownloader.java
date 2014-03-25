@@ -26,14 +26,14 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     private final AtomicReference<TileLayer> mTileSource = new AtomicReference<TileLayer>();
     private final AtomicReference<MapTileCache> mTileCache = new AtomicReference<MapTileCache>();
 
-    private final INetworkAvailabilityCheck mNetworkAvailabilityCheck;
+    private final NetworkAvailabilityCheck mNetworkAvailabilityCheck;
     private MapView mapView;
     boolean hdpi;
 
 
     public MapTileDownloader(final ITileLayer pTileSource,
                              final MapTileCache pTileCache,
-                             final INetworkAvailabilityCheck pNetworkAvailabilityCheck,
+                             final NetworkAvailabilityCheck pNetworkAvailabilityCheck,
                              final MapView mapView) {
         super(NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
         this.mapView = mapView;
