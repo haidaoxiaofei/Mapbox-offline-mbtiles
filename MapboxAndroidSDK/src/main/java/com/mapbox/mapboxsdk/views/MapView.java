@@ -2,14 +2,23 @@ package com.mapbox.mapboxsdk.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.PointF;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.*;
+import android.view.GestureDetector;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Scroller;
-import android.widget.Toast;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
@@ -19,7 +28,15 @@ import com.mapbox.mapboxsdk.events.ZoomEvent;
 import com.mapbox.mapboxsdk.format.GeoJSON;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.*;
+import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
+import com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay;
+import com.mapbox.mapboxsdk.overlay.ItemizedOverlay;
+import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
+import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
+import com.mapbox.mapboxsdk.overlay.Marker;
+import com.mapbox.mapboxsdk.overlay.Overlay;
+import com.mapbox.mapboxsdk.overlay.OverlayManager;
+import com.mapbox.mapboxsdk.overlay.TilesOverlay;
 import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic;
@@ -76,8 +93,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      */
     private float mZoomLevel = 11;
     protected float mRequestedMinimumZoomLevel = 0;
-    protected float mMinimumZoomLevel = 0;
-    protected float mMaximumZoomLevel = 22;
+    private float mMinimumZoomLevel = 0;
+    private float mMaximumZoomLevel = 22;
 
     private final OverlayManager mOverlayManager;
 
@@ -473,7 +490,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public MapView setScale(float scale) {
-        float zoomDelta = (scale < 1) ? -2 * (1 - scale) : scale - 1.0f;
+        float zoomDelta;
+        if (scale < 1) {
+            zoomDelta = -2 * (1 - scale);
+        } else {
+            zoomDelta = scale - 1.0f;
+        }
         float newZoom = mZoomLevel + zoomDelta;
         if (newZoom <= mMaximumZoomLevel && newZoom >= mMinimumZoomLevel) {
             mMultiTouchScale = scale;
@@ -1346,7 +1368,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
          *                  in pixels
          * @param height    the height, either {@link #FILL_PARENT}, {@link #WRAP_CONTENT} or a fixed size
          *                  in pixels
-         * @param geoPoint  the location of the child within the map view
+         * @param aGeoPoint  the location of the child within the map view
          * @param alignment the alignment of the view compared to the location {@link #BOTTOM_CENTER},
          *                  {@link #BOTTOM_LEFT}, {@link #BOTTOM_RIGHT} {@link #TOP_CENTER},
          *                  {@link #TOP_LEFT}, {@link #TOP_RIGHT}
@@ -1355,11 +1377,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
          * @param offsetY   the additional Y offset from the alignment location to draw the child within
          *                  the map view
          */
-        public LayoutParams(final int width, final int height, final ILatLng geoPoint,
+        public LayoutParams(final int width, final int height, final ILatLng aGeoPoint,
                             final int alignment, final int offsetX, final int offsetY) {
             super(width, height);
-            if (geoPoint != null) {
-                this.geoPoint = geoPoint;
+            if (aGeoPoint != null) {
+                this.geoPoint = aGeoPoint;
             } else {
                 this.geoPoint = new LatLng(0, 0);
             }
