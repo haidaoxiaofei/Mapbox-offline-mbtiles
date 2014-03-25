@@ -1,22 +1,25 @@
 package com.mapbox.mapboxsdk.android.testapp;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Movie;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.*;
+import com.mapbox.mapboxsdk.overlay.GpsLocationProvider;
+import com.mapbox.mapboxsdk.overlay.Icon;
+import com.mapbox.mapboxsdk.overlay.Marker;
+import com.mapbox.mapboxsdk.overlay.PathOverlay;
+import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MBTilesLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapQuestOSMLayer;
@@ -29,8 +32,6 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.TileMillLayer;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
-
-import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -143,6 +144,7 @@ public class MainActivity extends ActionBarActivity {
         });
 	}
 
+    final String availableLayers[] = {"openstreetpmap", "openseapmap", "mapquestaerial", "mapquest", "opencycle", "tilemill", "open-streets-dc.mbtiles"};
 	protected void replaceMapView(String layer) {
         Object source;
         if (layer.toLowerCase().endsWith("mbtiles")) {
