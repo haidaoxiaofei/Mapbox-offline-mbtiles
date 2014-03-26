@@ -31,9 +31,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.net.ssl.SSLContext;
 
@@ -45,7 +45,9 @@ import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 public class WebSourceTileLayer extends TileLayer {
     private static final String TAG = "WebSourceTileLayer";
     HttpResponseCache cache;
-    ArrayList<Boolean> threadControl = new ArrayList<Boolean>();
+
+    // Tracks the number of threads active in the getBitmapFromURL method.
+    private AtomicInteger activeThreads = new AtomicInteger(0);
     protected JSONObject infoJSON;
     protected boolean mEnableSSL = false;
 
@@ -60,13 +62,7 @@ public class WebSourceTileLayer extends TileLayer {
     }
 
     private boolean checkThreadControl() {
-        for (boolean done : threadControl) {
-            if (!done) {
-                return false;
-            }
-        }
-        threadControl = new ArrayList<Boolean>();
-        return true;
+        return activeThreads.get() == 0;
     }
 
     @Override
@@ -295,8 +291,8 @@ public class WebSourceTileLayer extends TileLayer {
      * @return the tile if valid, otherwise null
      */
     public Bitmap getBitmapFromURL(final String url, final MapTileCache aCache) {
-        threadControl.add(false);
-        int threadIndex = threadControl.size() - 1;
+        // We track the active threads here, every exit point should decrement this value.
+        activeThreads.incrementAndGet();
         InputStream in = null;
         OutputStream out = null;
 
@@ -306,6 +302,7 @@ public class WebSourceTileLayer extends TileLayer {
             sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, null, null);
         } catch (GeneralSecurityException e) {
+            activeThreads.decrementAndGet();
             throw new AssertionError(); // The system has no TLS. Just give up.
         }
         client.setSslSocketFactory(sslContext.getSocketFactory());
@@ -315,6 +312,7 @@ public class WebSourceTileLayer extends TileLayer {
         }
 
         if (TextUtils.isEmpty(url)) {
+            activeThreads.decrementAndGet();
             return null;
         }
 
@@ -338,7 +336,7 @@ public class WebSourceTileLayer extends TileLayer {
         } finally {
             StreamUtils.closeStream(in);
             StreamUtils.closeStream(out);
-            threadControl.set(threadIndex, true);
+            activeThreads.decrementAndGet();
         }
         return null;
     }
