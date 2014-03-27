@@ -143,6 +143,19 @@ public class Projection implements GeoConstants {
      * @param reuse just pass null if you do not have a Point to be 'recycled'.
      * @return the Point containing the <I>screen coordinates</I> of the LatLng passed.
      */
+    public PointF toPixels(final ILatLng in, final PointF reuse) {
+        PointF result = toMapPixels(in, reuse);
+        result.offset(-mScreenRectProjection.left, (-mScreenRectProjection.top));
+        return result;
+    }
+
+    /**
+     * Converts a LatLng to its <I>Map coordinates</I> in pixels for the current zoom.
+     *
+     * @param in    the LatLng you want the <I>screen coordinates</I> of
+     * @param reuse just pass null if you do not have a Point to be 'recycled'.
+     * @return the Point containing the <I>Map coordinates</I> of the LatLng passed.
+     */
     public PointF toMapPixels(final ILatLng in, final PointF reuse) {
         return toMapPixels(in.getLatitude(), in.getLongitude(), reuse);
     }

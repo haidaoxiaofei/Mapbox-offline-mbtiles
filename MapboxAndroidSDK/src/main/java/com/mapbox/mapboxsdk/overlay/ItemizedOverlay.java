@@ -3,11 +3,13 @@ package com.mapbox.mapboxsdk.overlay;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
-import com.mapbox.mapboxsdk.overlay.Marker.HotspotPlace;
+import android.view.View;
+
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas.UnsafeCanvasHandler;
@@ -30,14 +32,15 @@ import java.util.ArrayList;
 public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverlay implements
         Overlay.Snappable {
 
-    protected final Drawable mDefaultMarker;
     private final ArrayList<Item> mInternalItemList;
-    private final Rect mRect = new Rect();
-    private final PointF mCurScreenCoords = new PointF();
+//    private final Rect mRect = new Rect();
+    protected final PointF mCurScreenCoords = new PointF();
     protected boolean mDrawFocusedItem = true;
     private Item mFocusedItem;
     private boolean mPendingFocusChangedEvent = false;
     private OnFocusChangeListener mOnFocusChangeListener;
+
+    private static SafePaint mClusterTextPaint;
 
     /**
      * Method by which subclasses create the actual Items. This will only be called from populate()
@@ -50,17 +53,30 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
      */
     public abstract int size();
 
-    public ItemizedOverlay(final Drawable pDefaultMarker) {
+    public ItemizedOverlay() {
 
         super();
 
-        if (pDefaultMarker == null) {
-            throw new IllegalArgumentException("You must pass a default marker to ItemizedOverlay.");
+        if (mClusterTextPaint == null) {
+            mClusterTextPaint = new SafePaint();
+
+            mClusterTextPaint.setTextAlign(Paint.Align.CENTER);
+            mClusterTextPaint.setTextSize(30);
+            mClusterTextPaint.setFakeBoldText(true);
         }
 
-        this.mDefaultMarker = pDefaultMarker;
 
         mInternalItemList = new ArrayList<Item>();
+    }
+
+    private Rect getBounds(View view) {
+        int[] l = new int[2];
+        view.getLocationOnScreen(l);
+        int x = l[0];
+        int y = l[1];
+        int w = view.getWidth();
+        int h = view.getHeight();
+        return new Rect(x, y, x + w, y + h);
     }
 
     /**
@@ -97,18 +113,28 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
         final Projection pj = mapView.getProjection();
         final int size = this.mInternalItemList.size() - 1;
 
+        final Rect bounds = getBounds(mapView);
+
 		/* Draw in backward cycle, so the items with the least index are on the front. */
         for (int i = size; i >= 0; i--) {
             final Item item = getItem(i);
             pj.toMapPixels(item.getPoint(), mCurScreenCoords);
+            Point roundedCoords = new Point((int)mCurScreenCoords.x, (int)mCurScreenCoords.y);
+            PointF onScreen = pj.toPixels(item.getPoint(), null);
+            Point anchor = item.getMarkerAnchor();
+            onScreen.offset(anchor.x, anchor.y);
+            if (!bounds.contains((int)onScreen.x, (int)onScreen.y)) {
+                //dont draw item if offscreen
+                continue;
+            }
             canvas.save();
 
-            canvas.scale(1 / mapView.getScale(), 1 / mapView.getScale(), mCurScreenCoords.x,
-                    mCurScreenCoords.y);
+            canvas.scale(1/mapView.getScale(), 1/mapView.getScale(), mCurScreenCoords.x,
+            		mCurScreenCoords.y);
 
-            onDrawItem(canvas, item, mCurScreenCoords, mapView.getMapOrientation());
+            onDrawItem(canvas, item, roundedCoords, mapView.getMapOrientation());
             canvas.restore();
-        }
+       }
     }
 
     /**
@@ -143,49 +169,43 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
      * @param curScreenCoords
      * @param aMapOrientation
      */
-    protected void onDrawItem(ISafeCanvas canvas, final Item item, final PointF curScreenCoords, final float aMapOrientation) {
-        if (item.beingClustered()) {
+    protected void onDrawItem(ISafeCanvas canvas, final Item item, final Point curScreenCoords, final float aMapOrientation) {
+        if(item.beingClustered()){
             return;
         }
         final int state = (mDrawFocusedItem && (mFocusedItem == item) ? Marker.ITEM_STATE_FOCUSED_MASK
                 : 0);
-        final Drawable marker = (item.getMarker(state) == null) ? getDefaultMarker(state) : item
-                .getMarker(state);
-        final HotspotPlace hotspot = item.getMarkerHotspot();
-
-        boundToHotspot(marker, hotspot);
+        final Drawable marker = item.getMarker(state);
+        if (marker == null) return;
+        final Point point = item.getMarkerAnchor();
 
         // draw it
         if (this.isUsingSafeCanvas()) {
-            Overlay.drawAt(canvas.getSafeCanvas(), marker, (int) curScreenCoords.x, (int) curScreenCoords.y, false, aMapOrientation);
+            Overlay.drawAt(canvas.getSafeCanvas(), marker, curScreenCoords, point, false, aMapOrientation);
         } else {
             canvas.getUnsafeCanvas(new UnsafeCanvasHandler() {
                 @Override
                 public void onUnsafeCanvas(Canvas canvas) {
-                    Overlay.drawAt(canvas, marker, (int) curScreenCoords.x, (int) curScreenCoords.y, false, aMapOrientation);
+                    Overlay.drawAt(canvas, marker, curScreenCoords, point, false, aMapOrientation);
                 }
             });
         }
 
-        if (item instanceof ClusterItem) {
-            if (((ItemizedIconOverlay) this).getClusterActions() != null) {
-                canvas = ((ItemizedIconOverlay) this)
+        if(item instanceof ClusterItem){
+
+            if(((ItemizedIconOverlay)this).getClusterActions()!=null){
+                canvas = ((ItemizedIconOverlay)this)
                         .getClusterActions()
                         .onClusterMarkerDraw((ClusterItem) item, canvas);
-            } else {
-                SafePaint paint = new SafePaint();
-                paint.setTextAlign(Paint.Align.CENTER);
-                paint.setTextSize(30);
-                paint.setFakeBoldText(true);
-                canvas.drawText("" + ((ClusterItem) item).getChildCount(), curScreenCoords.x, curScreenCoords.y + 10, paint);
+            }
+            else{
+                String text = String.valueOf(((ClusterItem)item).getChildCount());
+                Rect rectText = new Rect();
+                mClusterTextPaint.getTextBounds(text, 0, text.length(), rectText);
+                canvas.drawText(text,curScreenCoords.x - rectText.left, curScreenCoords.y - rectText.top - rectText.height()/2, mClusterTextPaint);
             }
         }
 
-    }
-
-    protected Drawable getDefaultMarker(final int state) {
-        Marker.setState(mDefaultMarker, state);
-        return mDefaultMarker;
     }
 
     /**
@@ -195,33 +215,25 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
      * marker.
      *
      * @param item   the item to hit test
-     * @param marker the item's marker
-     * @param hitX   x coordinate of point to check
-     * @param hitY   y coordinate of point to check
+     * @param x  x coordinates of the point to check
+     * @param y  y coordinates of the point to check
      * @return true if the hit point is within the marker
      */
-    protected boolean hitTest(final Item item, final android.graphics.drawable.Drawable marker, final int hitX,
-                              final int hitY) {
-        return marker.getBounds().contains(hitX, hitY);
+    protected boolean hitTest(final Item item, final float x, final float y) {
+        return x > mCurScreenCoords.x &&
+                x < mCurScreenCoords.x + item.getWidth() &&
+                y > mCurScreenCoords.y &&
+                y < mCurScreenCoords.y + item.getHeight();
     }
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e, MapView mapView) {
-        final Projection pj = mapView.getProjection();
-        final Rect screenRect = pj.getIntrinsicScreenRect();
         final int size = this.size();
 
         for (int i = 0; i < size; i++) {
             final Item item = getItem(i);
-            pj.toMapPixels(item.getPoint(), mCurScreenCoords);
-
-            final int state = (mDrawFocusedItem && (mFocusedItem == item) ? Marker.ITEM_STATE_FOCUSED_MASK
-                    : 0);
-            final Drawable marker = (item.getMarker(state) == null) ? getDefaultMarker(state)
-                    : item.getMarker(state);
-            boundToHotspot(marker, item.getMarkerHotspot());
-            if (hitTest(item, marker, (int) -mCurScreenCoords.x + screenRect.left + (int) e.getX(),
-                    (int) -mCurScreenCoords.y + screenRect.top + (int) e.getY())) {
+            item.getPositionOnScreen(mapView, mCurScreenCoords);
+            if (hitTest(item, e.getX(), e.getY())) {
                 // We have a hit, do we get a response from onTap?
                 if (onTap(i)) {
                     // We got a response so consume the event
@@ -239,7 +251,7 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
      * nothing and returns false.
      *
      * @return true if you handled the tap, false if you want the event that generated it to pass to
-     * other overlays.
+     *         other overlays.
      */
     protected boolean onTap(int index) {
         return false;
@@ -271,60 +283,24 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
         return mFocusedItem;
     }
 
-    /**
-     * Adjusts a drawable's bounds so that (0,0) is a pixel in the location described by the hotspot
-     * parameter. Useful for "pin"-like graphics. For convenience, returns the same drawable that
-     * was passed in.
-     *
-     * @param marker  the drawable to adjust
-     * @param hotspot the hotspot for the drawable
-     * @return the same drawable that was passed in.
-     */
-    protected synchronized Drawable boundToHotspot(final Drawable marker, HotspotPlace hotspot) {
-        final int markerWidth = marker.getIntrinsicWidth();
-        final int markerHeight = marker.getIntrinsicHeight();
-
-        mRect.set(0, 0, 0 + markerWidth, 0 + markerHeight);
-
-        if (hotspot == null) {
-            hotspot = HotspotPlace.BOTTOM_CENTER;
-        }
-
-        switch (hotspot) {
-            default:
-            case NONE:
-                break;
-            case CENTER:
-                mRect.offset(-markerWidth / 2, -markerHeight / 2);
-                break;
-            case BOTTOM_CENTER:
-                mRect.offset(-markerWidth / 2, -markerHeight);
-                break;
-            case TOP_CENTER:
-                mRect.offset(-markerWidth / 2, 0);
-                break;
-            case RIGHT_CENTER:
-                mRect.offset(-markerWidth, -markerHeight / 2);
-                break;
-            case LEFT_CENTER:
-                mRect.offset(0, -markerHeight / 2);
-                break;
-            case UPPER_RIGHT_CORNER:
-                mRect.offset(-markerWidth, 0);
-                break;
-            case LOWER_RIGHT_CORNER:
-                mRect.offset(-markerWidth, -markerHeight);
-                break;
-            case UPPER_LEFT_CORNER:
-                mRect.offset(0, 0);
-                break;
-            case LOWER_LEFT_CORNER:
-                mRect.offset(0, -markerHeight);
-                break;
-        }
-        marker.setBounds(mRect);
-        return marker;
-    }
+//    /**
+//     * Adjusts a drawable's bounds so that (0,0) is a pixel in the location described by the anchor
+//     * parameter. Useful for "pin"-like graphics. For convenience, returns the same drawable that
+//     * was passed in.
+//     *
+//     * @param marker  the drawable to adjust
+//     * @param anchor the anchor for the drawable (float between 0 and 1)
+//     * @return the same drawable that was passed in.
+//     */
+//    protected synchronized Drawable boundToHotspot(final Drawable marker, Point anchor) {
+//        final int markerWidth = marker.getIntrinsicWidth();
+//        final int markerHeight = marker.getIntrinsicHeight();
+//
+//        mRect.set(0, 0, markerWidth, markerHeight);
+//        mRect.offset(anchor.x, anchor.y);
+//        marker.setBounds(mRect);
+//        return marker;
+//    }
 
     public void setOnFocusChangeListener(OnFocusChangeListener l) {
         mOnFocusChangeListener = l;

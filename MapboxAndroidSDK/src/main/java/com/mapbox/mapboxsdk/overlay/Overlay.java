@@ -6,6 +6,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.mapbox.mapboxsdk.views.MapView;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -235,14 +237,20 @@ public abstract class Overlay {
      * @param aMapOrientation
      */
     protected synchronized static void drawAt(final Canvas canvas, final Drawable drawable,
-                                              final int x, final int y, final boolean shadow,
+                                              final Point origin, final Point offset, final boolean shadow,
                                               final float aMapOrientation) {
         canvas.save();
-        canvas.rotate(-aMapOrientation, x, y);
-        drawable.copyBounds(mRect);
-        drawable.setBounds(mRect.left + x, mRect.top + y, mRect.right + x, mRect.bottom + y);
+        canvas.rotate(-aMapOrientation, origin.x, origin.y);
+        canvas.translate(origin.x + offset.x, origin.y + offset.y);
         drawable.draw(canvas);
-        drawable.setBounds(mRect);
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
+        paint.setStrokeWidth(3);
+        canvas.drawLine(0,  - 9,
+                0, 9, paint);
+        canvas.drawLine(- 9, 0,
+                9, 0, paint);
+        canvas.drawRect(drawable.getBounds(), paint);
         canvas.restore();
     }
 

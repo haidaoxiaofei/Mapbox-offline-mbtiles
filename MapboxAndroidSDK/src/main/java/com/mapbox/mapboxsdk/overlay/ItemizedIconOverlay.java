@@ -3,16 +3,14 @@ package com.mapbox.mapboxsdk.overlay;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.drawable.Drawable;
 import android.view.Display;
-import com.mapbox.mapboxsdk.R;
 import android.view.MotionEvent;
 import android.view.WindowManager;
+
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
-import com.mapbox.mapboxsdk.views.util.Projection;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,7 +22,7 @@ public class ItemizedIconOverlay<Item extends Marker> extends ItemizedOverlay<It
     protected OnItemGestureListener<Item> mOnItemGestureListener;
     private int mDrawnItemsLimit = Integer.MAX_VALUE;
     private final Point mTouchScreenPoint = new Point();
-    private final PointF mItemPoint = new PointF();
+    private final PointF mTempItemPoint = new PointF();
     private ItemizedIconOverlay<ClusterItem> clusters;
     private MapView view;
     private Context context;
@@ -35,8 +33,9 @@ public class ItemizedIconOverlay<Item extends Marker> extends ItemizedOverlay<It
     public ItemizedIconOverlay(
             final Context pContext,
             final List<Item> pList,
-            final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Item> pOnItemGestureListener) {
-        super(pContext.getResources().getDrawable(R.drawable.marker_default));
+            final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Item> pOnItemGestureListener)
+    {
+        super();
 
         this.context = pContext;
         this.mItemList = pList;
@@ -118,7 +117,7 @@ public class ItemizedIconOverlay<Item extends Marker> extends ItemizedOverlay<It
                 }
                 return onSingleTapUpHelper(index, that.mItemList.get(index), mapView);
             }
-        })) ? true : super.onSingleTapConfirmed(event, mapView);
+        })) ;
     }
 
     protected boolean onSingleTapUpHelper(final int index, final Item item, final MapView mapView) {
@@ -136,7 +135,7 @@ public class ItemizedIconOverlay<Item extends Marker> extends ItemizedOverlay<It
                 }
                 return onLongPressHelper(index, getItem(index));
             }
-        })) ? true : super.onLongPress(event, mapView);
+        }));
     }
 
     protected boolean onLongPressHelper(final int index, final Item item) {
@@ -154,22 +153,10 @@ public class ItemizedIconOverlay<Item extends Marker> extends ItemizedOverlay<It
      */
     private boolean activateSelectedItems(final MotionEvent event, final MapView mapView,
                                           final ActiveItem task) {
-        final Projection pj = mapView.getProjection();
-        final int eventX = (int) event.getX();
-        final int eventY = (int) event.getY();
-
-		/* These objects are created to avoid construct new ones every cycle. */
-        pj.fromMapPixels(eventX, eventY, mTouchScreenPoint);
-
         for (int i = 0; i < this.mItemList.size(); ++i) {
             final Item item = getItem(i);
-            final Drawable marker = (item.getMarker(0) == null) ? this.mDefaultMarker : item
-                    .getMarker(0);
-
-            pj.toMapPixels(item.getPoint(), mItemPoint);
-
-            if (hitTest(item, marker, (int) (mTouchScreenPoint.x - mItemPoint.x), (int) (mTouchScreenPoint.y
-                    - mItemPoint.y))) {
+            item.getPositionOnScreen(mapView, mCurScreenCoords);
+            if (hitTest(item, event.getX(), event.getY())) {
                 if (task.run(i)) {
                     return true;
                 }
@@ -318,9 +305,7 @@ public class ItemizedIconOverlay<Item extends Marker> extends ItemizedOverlay<It
         ArrayList<Marker> tempList = getGroupElements(list, group);
         LatLng result = getCenter(tempList);
         ClusterItem m = new ClusterItem(view, result);
-        m.setMarker(context.getResources().getDrawable(R.drawable.clusteri));
         m.assignGroup(group);
-        m.setMarkerHotspot(Marker.HotspotPlace.CENTER);
         m.setChildCount(tempList.size());
         if (m.getChildCount() > 1) {
             clusterList.add(m);

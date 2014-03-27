@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
+
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
 
@@ -86,7 +87,8 @@ public class Icon implements MapboxConstants {
         protected void onPostExecute(Bitmap bitmap) {
             if (bitmap != null && marker != null) {
                 if (marker != null) {
-                    marker.setMarker(new BitmapDrawable(mResources, bitmap));
+                    drawable = new BitmapDrawable(mResources, bitmap);
+                    marker.setMarker(drawable);
                     Log.w(TAG, "icon loaded");
                 }
             }
