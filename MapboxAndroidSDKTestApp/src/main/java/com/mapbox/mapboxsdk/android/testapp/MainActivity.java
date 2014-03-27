@@ -92,7 +92,6 @@ public class MainActivity extends ActionBarActivity {
 		equator.addPoint(0, -89);
 		equator.addPoint(0, 89);
 		mv.getOverlays().add(equator); 
-        addLocationOverlay();
 	}
 
 	private void setButtonListeners() {
