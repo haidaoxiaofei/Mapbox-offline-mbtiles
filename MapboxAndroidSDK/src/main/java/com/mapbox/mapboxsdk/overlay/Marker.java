@@ -3,10 +3,13 @@ package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+
 import com.mapbox.mapboxsdk.views.InfoWindow;
 import com.mapbox.mapboxsdk.views.MapView;
 
@@ -29,9 +32,6 @@ public class Marker {
     protected static final Point DEFAULT_MARKER_SIZE = new Point(26, 94);
     private int group = 0;
     private boolean clustered;
-
-    // We will load a defaultIcon only once.
-    private static Icon defaultIcon;
 
     public int getGroup() {
         return group;
@@ -343,12 +343,7 @@ public class Marker {
         mapView = mv;
         context = mv.getContext();
         if (icon == null) {
-            // Note, it is ok that in a multithreading scenario the default icon gets loaded
-            // more than once..
-            if (defaultIcon == null) {
-                defaultIcon = new Icon(mv.getResources(), Icon.Size.LARGE, "", "000");
-            }
-            setIcon(defaultIcon);
+            setIcon(new Icon(mv.getContext(), Icon.Size.LARGE, "", "000"));
         }
         return this;
     }
