@@ -2,11 +2,12 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
-import android.util.Log;
-import com.mapbox.mapboxsdk.R;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
+
+import com.mapbox.mapboxsdk.R;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.InfoWindow;
 import com.mapbox.mapboxsdk.views.MapView;
 
