@@ -6,7 +6,7 @@ import com.mapbox.mapboxsdk.views.MapView;
 /**
  * Created by Francisco Dans on 06/03/14.
  */
-public class ClusterItem extends Marker{
+public class ClusterItem extends Marker {
     private int childCount = 0;
 
     public ClusterItem(MapView mv, String aTitle, String aDescription, LatLng aLatLng) {

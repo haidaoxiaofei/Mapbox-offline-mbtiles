@@ -13,7 +13,6 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -53,7 +52,6 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
      */
     protected abstract Runnable getTileLoader();
 
-
     /**
      * Returns true if implementation uses a data connection, false otherwise. This value is used to
      * determine if this provider should be skipped if there is no data connection.
@@ -75,14 +73,6 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
      * @return the maximum zoom level
      */
     public abstract float getMaximumZoomLevel();
-
-
-    /**
-     * Get the tile size in pixels this tile provider provides.
-     *
-     * @return the tile size in pixels
-     */
-    public abstract int getTileSizePixels();
 
     /**
      * Get the tile provider bounding box.
@@ -111,14 +101,22 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
      * @param tileSource the tile source
      */
     public abstract void setTileSource(ITileLayer tileSource);
+
     public abstract ITileLayer getTileSource();
-    
+
     private final ExecutorService mExecutor;
 
     protected final Object mQueueLockObject = new Object();
     protected final HashMap<MapTile, MapTileRequestState> mWorking;
     protected final LinkedHashMap<MapTile, MapTileRequestState> mPending;
 
+    /**
+     * Initialize a new tile provider, given a thread pool and a pending queue size. The pending queue
+     * size must be larger than or equal to the thread pool size.
+     *
+     * @param pThreadPoolSize
+     * @param pPendingQueueSize
+     */
     public MapTileModuleLayerBase(int pThreadPoolSize, final int pPendingQueueSize) {
         if (pPendingQueueSize < pThreadPoolSize) {
             Log.w(TAG, "The pending queue size is smaller than the thread pool size. Automatically reducing the thread pool size.");
@@ -136,23 +134,14 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
             @Override
             protected boolean removeEldestEntry(
                     final Map.Entry<MapTile, MapTileRequestState> pEldest) {
-                if (size() > pPendingQueueSize) {
-                    MapTile result = null;
-
-                    // get the oldest tile that isn't in the mWorking queue
-                    Iterator<MapTile> iterator = mPending.keySet().iterator();
-
-                    while (result == null && iterator.hasNext()) {
-                        final MapTile tile = iterator.next();
+                if (size() < pPendingQueueSize) {
+                    for (MapTile tile : mPending.keySet()) {
                         if (!mWorking.containsKey(tile)) {
-                            result = tile;
+                            MapTileRequestState state = mPending.get(tile);
+                            removeTileFromQueues(tile);
+                            state.getCallback().mapTileRequestFailed(state);
+                            break;
                         }
-                    }
-
-                    if (result != null) {
-                        MapTileRequestState state = mPending.get(result);
-                        removeTileFromQueues(result);
-                        state.getCallback().mapTileRequestFailed(state);
                     }
                 }
                 return false;
@@ -160,21 +149,26 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
         };
     }
 
+    /**
+     * Loads a map tile asynchronously, adding it to the queue and calling getTileLoader.
+     * @param pState
+     */
     public void loadMapTileAsync(final MapTileRequestState pState) {
         synchronized (mQueueLockObject) {
             if (DEBUG_TILE_PROVIDERS) {
                 Log.i(TAG, "MapTileModuleLayerBase.loadMaptileAsync() on provider: "
                         + getName() + " for tile: " + pState.getMapTile());
-                if (mPending.containsKey(pState.getMapTile()))
+                if (mPending.containsKey(pState.getMapTile())) {
                     Log.i(TAG, "MapTileModuleLayerBase.loadMaptileAsync() tile already exists in request queue for modular provider. Moving to front of queue.");
-                else
+                } else {
                     Log.i(TAG, "MapTileModuleLayerBase.loadMaptileAsync() adding tile to request queue for modular provider.");
+                }
             }
-
             // this will put the tile in the queue, or move it to the front of
             // the queue if it's already present
             mPending.put(pState.getMapTile(), pState);
         }
+
         try {
             mExecutor.execute(getTileLoader());
         } catch (final RejectedExecutionException e) {
@@ -182,6 +176,9 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
         }
     }
 
+    /**
+     * Clears both pending and working queues.
+     */
     protected void clearQueue() {
         synchronized (mQueueLockObject) {
             mPending.clear();
@@ -197,6 +194,11 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
         this.mExecutor.shutdown();
     }
 
+    /**
+     * Marks a given map tile as neither being downloaded or worked on.
+     *
+     * @param mapTile
+     */
     void removeTileFromQueues(final MapTile mapTile) {
         synchronized (mQueueLockObject) {
             if (DEBUG_TILE_PROVIDERS) {
@@ -219,7 +221,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
          *
          * @param pState
          * @return the tile if it was loaded successfully, or null if failed to
-         *         load and other tile providers need to be called
+         * load and other tile providers need to be called
          * @throws CantContinueException
          */
         protected abstract Drawable loadTile(MapTileRequestState pState)
@@ -241,11 +243,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
                 // get the most recently accessed tile
                 // - the last item in the iterator that's not already being
                 // processed
-                Iterator<MapTile> iterator = mPending.keySet().iterator();
-
-                // TODO this iterates the whole list, make this faster...
-                while (iterator.hasNext()) {
-                    final MapTile tile = iterator.next();
+                for (MapTile tile : mPending.keySet()) {
                     if (!mWorking.containsKey(tile)) {
                         if (DEBUG_TILE_PROVIDERS) {
                             Log.i(TAG, "TileLoader.nextTile() on provider: " + getName()
@@ -255,15 +253,15 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
                     }
                 }
 
-                if (result != null) {
-                    if (DEBUG_TILE_PROVIDERS) {
-                        Log.i(TAG, "TileLoader.nextTile() on provider: " + getName()
-                                + " adding tile to working queue: " + result);
-                    }
-                    mWorking.put(result, mPending.get(result));
+                if (result == null) {
+                    return null;
                 }
-
-                return (result != null ? mPending.get(result) : null);
+                if (DEBUG_TILE_PROVIDERS) {
+                    Log.i(TAG, "TileLoader.nextTile() on provider: " + getName()
+                            + " adding tile to working queue: " + result);
+                }
+                mWorking.put(result, mPending.get(result));
+                return mPending.get(result);
             }
         }
 
@@ -283,6 +281,8 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
          * Return it <b>and</b> send request to next provider.
          */
         protected void tileLoadedExpired(final MapTileRequestState pState, final CacheableBitmapDrawable pDrawable) {
+            Log.i(TAG, "TileLoader.tileLoadedExpired() on provider: " + getName()
+                    + " with tile: " + pState.getMapTile());
             removeTileFromQueues(pState.getMapTile());
             pState.getCallback().mapTileRequestExpiredTile(pState, pDrawable);
         }
@@ -322,7 +322,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
                 if (result == null) {
                     tileLoadedFailed(state);
                 } else if (BitmapUtils.isCacheDrawableExpired(result)) {
-                    tileLoadedExpired(state, (CacheableBitmapDrawable)result);
+                    tileLoadedExpired(state, (CacheableBitmapDrawable) result);
                 } else {
                     tileLoaded(state, result);
                 }

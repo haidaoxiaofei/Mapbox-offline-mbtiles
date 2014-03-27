@@ -12,11 +12,12 @@ class MapViewDoubleClickListener implements GestureDetector.OnDoubleTapListener 
 
     private final MapView mapView;
 
-	/**
-	 * Constructor
-	 * @param mv MapView to listen to
-	 */
-	public MapViewDoubleClickListener(MapView mv) {
+    /**
+     * Constructor
+     *
+     * @param mv MapView to listen to
+     */
+    public MapViewDoubleClickListener(MapView mv) {
         this.mapView = mv;
     }
 

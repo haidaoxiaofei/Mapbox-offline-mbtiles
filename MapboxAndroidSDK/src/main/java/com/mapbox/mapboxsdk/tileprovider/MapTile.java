@@ -19,10 +19,10 @@ public class MapTile {
     private final int y;
     private final int z;
 
-    public MapTile(final int z, final int x, final int y) {
-        this.z = z;
-        this.x = x;
-        this.y = y;
+    public MapTile(final int az, final int ax, final int ay) {
+        this.z = az;
+        this.x = ax;
+        this.y = ay;
     }
 
     public int getZ() {

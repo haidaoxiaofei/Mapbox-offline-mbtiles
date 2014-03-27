@@ -9,7 +9,6 @@ import android.view.MotionEvent;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
-import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
@@ -18,7 +17,7 @@ import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.Projection;
-import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
+
 import java.util.LinkedList;
 
 /**
@@ -29,6 +28,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
 
     protected final SafePaint mPaint = new SafePaint();
     protected final SafePaint mCirclePaint = new SafePaint();
+
+    private final Projection mProjection;
 
     protected final Bitmap mPersonBitmap;
     protected final Bitmap mDirectionArrowBitmap;
@@ -86,6 +87,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         // Calculate position of person icon's feet, scaled to screen density
         mPersonHotspot = new PointF(24.0f * mScale + 0.5f, 39.0f * mScale + 0.5f);
 
+        mProjection = mapView.getProjection();
         setMyLocationProvider(myLocationProvider);
     }
 
@@ -137,12 +139,12 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
 
         if (mDrawAccuracyEnabled) {
             final float radius = lastFix.getAccuracy()
-                    / (float) TileSystem.GroundResolution(lastFix.getLatitude(),
+                    / (float) mProjection.groundResolution(lastFix.getLatitude(),
                     mapView.getZoomLevel());
 
             mCirclePaint.setAlpha(50);
             mCirclePaint.setStyle(Style.FILL);
-            canvas.drawCircle(GeometryMath.rightShift(mMapCoords.x, zoomDiff) , GeometryMath.rightShift(mMapCoords.y, zoomDiff), radius,
+            canvas.drawCircle(GeometryMath.rightShift(mMapCoords.x, zoomDiff), GeometryMath.rightShift(mMapCoords.y, zoomDiff), radius,
                     mCirclePaint);
 
             mCirclePaint.setAlpha(150);
@@ -197,8 +199,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     }
 
     protected RectF getMyLocationDrawingBounds(float zoomLevel, Location lastFix, RectF reuse) {
-        if (reuse == null)
+        if (reuse == null) {
             reuse = new RectF();
+        }
 
         final float zoomDiff = TileLayerConstants.MAXIMUM_ZOOMLEVEL - zoomLevel;
         final float posX = GeometryMath.rightShift(mMapCoords.x, zoomDiff);
@@ -220,7 +223,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         // Add in the accuracy circle if enabled
         if (mDrawAccuracyEnabled) {
             final float radius = (float) Math.ceil(lastFix.getAccuracy()
-                    / (float) TileSystem.GroundResolution(lastFix.getLatitude(), zoomLevel));
+                    / (float) mProjection.groundResolution(lastFix.getLatitude(), zoomLevel));
             reuse.union(posX - radius, posY - radius, posX + radius, posY + radius);
             final float strokeWidth = (float) Math.ceil(mCirclePaint.getStrokeWidth() == 0 ? 1
                     : mCirclePaint.getStrokeWidth());
@@ -232,8 +235,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
 
     @Override
     protected void drawSafe(ISafeCanvas canvas, MapView mapView, boolean shadow) {
-        if (shadow)
+        if (shadow) {
             return;
+        }
 
         if (mLocation != null && isMyLocationEnabled()) {
             drawMyLocation(canvas, mapView, mLocation);
@@ -244,8 +248,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     public boolean onSnapToItem(final int x, final int y, final Point snapPoint,
                                 final MapView mapView) {
         if (this.mLocation != null) {
-            snapPoint.x = (int)mMapCoords.x;
-            snapPoint.y = (int)mMapCoords.y;
+            snapPoint.x = (int) mMapCoords.x;
+            snapPoint.y = (int) mMapCoords.y;
             final double xDiff = x - mMapCoords.x;
             final double yDiff = y - mMapCoords.y;
             final boolean snap = xDiff * xDiff + yDiff * yDiff < 64;
@@ -293,9 +297,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         if (isMyLocationEnabled()) {
             mLocation = mMyLocationProvider.getLastKnownLocation();
             if (mLocation != null) {
-                TileSystem.LatLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(),
+                mProjection.latLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(),
                         TileLayerConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
-                final int worldSize_2 = TileSystem.MapSize(TileLayerConstants.MAXIMUM_ZOOMLEVEL) / 2;
+                final int worldSize_2 = mProjection.mapSize(TileLayerConstants.MAXIMUM_ZOOMLEVEL) / 2;
                 mMapCoords.offset(-worldSize_2, -worldSize_2);
                 mMapController.animateTo(new LatLng(mLocation));
             }
@@ -336,9 +340,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         mMapCoords.set(0, 0);
 
         if (mLocation != null) {
-            TileSystem.LatLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(),
+            mProjection.latLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(),
                     TileLayerConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
-            final int worldSize_2 = TileSystem.MapSize(TileLayerConstants.MAXIMUM_ZOOMLEVEL) / 2;
+            final int worldSize_2 = mProjection.mapSize(TileLayerConstants.MAXIMUM_ZOOMLEVEL) / 2;
             mMapCoords.offset(-worldSize_2, -worldSize_2);
 
             if (mIsFollowing) {
@@ -384,8 +388,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
      * updates when in the background.
      */
     public boolean enableMyLocation() {
-        if (mIsLocationEnabled)
+        if (mIsLocationEnabled) {
             mMyLocationProvider.stopLocationProvider();
+        }
 
         boolean result = mMyLocationProvider.startLocationProvider(this);
         mIsLocationEnabled = result;
@@ -394,9 +399,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         if (result && isFollowLocationEnabled()) {
             mLocation = mMyLocationProvider.getLastKnownLocation();
             if (mLocation != null) {
-                TileSystem.LatLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(),
+                mProjection.latLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(),
                         TileLayerConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
-                final int worldSize_2 = TileSystem.MapSize(TileLayerConstants.MAXIMUM_ZOOMLEVEL) / 2;
+                final int worldSize_2 = mProjection.mapSize(TileLayerConstants.MAXIMUM_ZOOMLEVEL) / 2;
                 mMapCoords.offset(-worldSize_2, -worldSize_2);
                 mMapController.animateTo(new LatLng(mLocation));
             }

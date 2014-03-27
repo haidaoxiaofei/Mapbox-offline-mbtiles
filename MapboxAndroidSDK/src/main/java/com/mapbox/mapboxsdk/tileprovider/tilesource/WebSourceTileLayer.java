@@ -39,6 +39,9 @@ import javax.net.ssl.SSLContext;
 
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
+/**
+ * An implementation of {@link TileLayer} that pulls tiles from the internet.
+ */
 public class WebSourceTileLayer extends TileLayer {
     private static final String TAG = "WebSourceTileLayer";
     HttpResponseCache cache;
@@ -57,7 +60,7 @@ public class WebSourceTileLayer extends TileLayer {
     }
 
     private boolean checkThreadControl() {
-        for (boolean done: threadControl) {
+        for (boolean done : threadControl) {
             if (!done) {
                 return false;
             }
@@ -68,11 +71,10 @@ public class WebSourceTileLayer extends TileLayer {
 
     @Override
     public TileLayer setURL(final String aUrl) {
-        if (aUrl.contains(String.format("http%s://",(mEnableSSL ? "" : "s")))) {
+        if (aUrl.contains(String.format("http%s://", (mEnableSSL ? "" : "s")))) {
             super.setURL(aUrl.replace(String.format("http%s://", (mEnableSSL ? "" : "s")),
                     String.format("http%s://", (mEnableSSL ? "s" : ""))));
-        }
-        else {
+        } else {
             super.setURL(aUrl);
         }
         return this;
@@ -83,7 +85,7 @@ public class WebSourceTileLayer extends TileLayer {
         File cacheDir = new File(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString());
         try {
             cache = new HttpResponseCache(cacheDir, 1024);
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
 
@@ -95,35 +97,11 @@ public class WebSourceTileLayer extends TileLayer {
         }
     }
 
-    private String getJSONString(JSONObject JSON, String key){
-        String defaultValue = null;
-        if (JSON.has(key)) {
-            try {
-                return JSON.getString(key);
-            } catch (JSONException e) {
-                return defaultValue;
-            }
-        }
-        return defaultValue;
-    }
-
-    private int getJSONInt(JSONObject JSON, String key){
-        int defaultValue = 0;
-        if (JSON.has(key)) {
-            try {
-                return JSON.getInt(key);
-            } catch (JSONException e) {
-                return defaultValue;
-            }
-        }
-        return defaultValue;
-    }
-
-    private float getJSONFloat(JSONObject JSON, String key){
+    private float getJSONFloat(JSONObject JSON, String key) {
         float defaultValue = 0;
         if (JSON.has(key)) {
             try {
-                return (float)JSON.getDouble(key);
+                return (float) JSON.getDouble(key);
             } catch (JSONException e) {
                 return defaultValue;
             }
@@ -139,15 +117,14 @@ public class WebSourceTileLayer extends TileLayer {
                 double[] result = new double[length];
                 Object value = JSON.get(key);
                 if (value instanceof JSONArray) {
-                    JSONArray array = ((JSONArray)value);
+                    JSONArray array = ((JSONArray) value);
                     if (array.length() == length) {
                         for (int i = 0; i < array.length(); i++) {
                             result[i] = array.getDouble(i);
                         }
                         valid = true;
                     }
-                }
-                else {
+                } else {
                     String[] array = JSON.getString(key).split(",");
                     if (array.length == length) {
                         for (int i = 0; i < array.length; i++) {
@@ -166,7 +143,6 @@ public class WebSourceTileLayer extends TileLayer {
         return defaultValue;
     }
 
-
     private void initWithTileJSON(JSONObject tileJSON) {
         infoJSON = (tileJSON != null) ? tileJSON : new JSONObject();
         if (infoJSON != null) {
@@ -178,10 +154,10 @@ public class WebSourceTileLayer extends TileLayer {
             }
             mMinimumZoomLevel = getJSONFloat(infoJSON, "minzoom");
             mMaximumZoomLevel = getJSONFloat(infoJSON, "maxzoom");
-            mName = getJSONString(infoJSON, "name");
-            mDescription = getJSONString(infoJSON, "description");
-            mShortAttribution = getJSONString(infoJSON, "attribution");
-            mLegend = getJSONString(infoJSON, "legend");
+            mName = infoJSON.optString("name");
+            mDescription = infoJSON.optString("description");
+            mAttribution = infoJSON.optString("attribution");
+            mLegend = infoJSON.optString("legend");
 
             double[] center = getJSONDoubleArray(infoJSON, "center", 3);
             if (center != null) {
@@ -198,14 +174,13 @@ public class WebSourceTileLayer extends TileLayer {
     byte[] readFully(InputStream in) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
-        for (int count; (count = in.read(buffer)) != -1;) {
+        for (int count; (count = in.read(buffer)) != -1; ) {
             out.write(buffer, 0, count);
         }
         return out.toByteArray();
     }
 
-    class RetreiveJSONTask extends AsyncTask<String, Void, JSONObject> {
-
+    class RetrieveJSONTask extends AsyncTask<String, Void, JSONObject> {
         protected JSONObject doInBackground(String... urls) {
             OkHttpClient client = new OkHttpClient();
             client.setResponseCache(null);
@@ -226,7 +201,7 @@ public class WebSourceTileLayer extends TileLayer {
 
     private JSONObject getBrandedJSON(String url) {
         try {
-            return new RetreiveJSONTask().execute(url).get(10000,
+            return new RetrieveJSONTask().execute(url).get(10000,
                     TimeUnit.MILLISECONDS);
         } catch (Exception e) {
             e.printStackTrace();
@@ -238,6 +213,13 @@ public class WebSourceTileLayer extends TileLayer {
         return null;
     }
 
+    /**
+     * Gets a list of Tile URLs used by this layer for a specific tile.
+     *
+     * @param aTile a map tile
+     * @param hdpi a boolean that indicates whether the tile should be at 2x or retina size
+     * @return a list of tile URLS
+     */
     public String[] getTileURLs(final MapTile aTile, boolean hdpi) {
         String url = getTileURL(aTile, hdpi);
         if (url != null) {
@@ -251,6 +233,7 @@ public class WebSourceTileLayer extends TileLayer {
     }
 
     private static final Paint compositePaint = new Paint(Paint.FILTER_BITMAP_FLAG);
+
     private Bitmap compositeBitmaps(final Bitmap source, Bitmap dest) {
         Canvas canvas = new Canvas(dest);
         canvas.drawBitmap(source, 0, 0, compositePaint);
@@ -272,11 +255,12 @@ public class WebSourceTileLayer extends TileLayer {
                 }
                 for (final String url : urls) {
                     Bitmap bitmap = getBitmapFromURL(url, cache);
-                    if (bitmap == null) continue;
+                    if (bitmap == null) {
+                        continue;
+                    }
                     if (resultBitmap == null) {
                         resultBitmap = bitmap;
-                    }
-                    else {
+                    } else {
                         resultBitmap = compositeBitmaps(bitmap, resultBitmap);
                     }
                 }
@@ -297,13 +281,19 @@ public class WebSourceTileLayer extends TileLayer {
             }
 
             return result;
-        }
-        else {
+        } else {
             Log.d(TAG, "Skipping tile " + aTile.toString() + " due to NetworkAvailabilityCheck.");
         }
         return null;
     }
 
+    /**
+     * Requests and returns a bitmap object from a given URL, using aCache to decode it.
+     *
+     * @param url the map tile url. should refer to a valid bitmap resource.
+     * @param aCache a cache, an instance of MapTileCache
+     * @return the tile if valid, otherwise null
+     */
     public Bitmap getBitmapFromURL(final String url, final MapTileCache aCache) {
         threadControl.add(false);
         int threadIndex = threadControl.size() - 1;
@@ -329,9 +319,6 @@ public class WebSourceTileLayer extends TileLayer {
         }
 
         try {
-            // Log.d(TAG, "getting tile " + tile.getX() + ", " + tile.getY());
-            // Log.d(TAG, "Downloading MapTile from url: " + url);
-
             HttpURLConnection connection = client.open(new URL(url));
             in = connection.getInputStream();
 

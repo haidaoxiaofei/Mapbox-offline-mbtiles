@@ -89,8 +89,8 @@ public class Marker {
         this.mUid = aUid;
     }
 
-    public Marker(String title, String s, LatLng latLng) {
-        this((MapView) null, title, s, latLng);
+    public Marker(String title, String s, LatLng aLatLng) {
+        this((MapView) null, title, s, aLatLng);
     }
 
     /**
@@ -227,12 +227,6 @@ public class Marker {
     // ===========================================================
     // Methods
     // ===========================================================
-    /*
-     * (copied from the Google API docs) Sets the state of a drawable to match a given state bitset.
-	 * This is done by converting the state bitset bits into a state set of R.attr.state_pressed,
-	 * R.attr.state_selected and R.attr.state_focused attributes, and then calling {@link
-	 * Drawable.setState(int[])}.
-	 */
     public static void setState(final Drawable drawable, final int stateBitset) {
         final int[] states = new int[3];
         int index = 0;
@@ -316,7 +310,7 @@ public class Marker {
      * <ul>image and sub-description if any.</ul>
      * and centers the map view on the item if panIntoView is true. <br>
      */
-    public void showBubble(InfoWindow tooltip, MapView mapView, boolean panIntoView) {
+    public void showBubble(InfoWindow tooltip, MapView aMapView, boolean panIntoView) {
         //offset the tooltip to be top-centered on the marker:
         Drawable marker = getMarker(0 /*OverlayItem.ITEM_STATE_FOCUSED_MASK*/);
         int markerWidth = 0, markerHeight = 0;
@@ -329,7 +323,7 @@ public class Marker {
         tooltipH.offset(-markerH.x, -markerH.y);
         tooltip.open(this, this.getPoint(), tooltipH.x, tooltipH.y);
         if (panIntoView) {
-            mapView.getController().animateTo(getPoint());
+            aMapView.getController().animateTo(getPoint());
         }
 
         bubbleShowing = true;
@@ -353,9 +347,9 @@ public class Marker {
         return this;
     }
 
-    public Marker setIcon(Icon icon) {
-        this.icon = icon;
-        icon.setMarker(this);
+    public Marker setIcon(Icon aIcon) {
+        this.icon = aIcon;
+        this.icon.setMarker(this);
         this.setMarkerHotspot(HotspotPlace.CENTER);
         return this;
     }

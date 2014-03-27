@@ -12,8 +12,7 @@ import android.net.NetworkInfo;
  * @author Marc Kurtz
  */
 
-public class NetworkAvailabilityCheck implements INetworkAvailabilityCheck
-{
+public class NetworkAvailabilityCheck {
 
     private final ConnectivityManager mConnectionManager;
 
@@ -22,26 +21,22 @@ public class NetworkAvailabilityCheck implements INetworkAvailabilityCheck
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
-    @Override
     public boolean getNetworkAvailable() {
         final NetworkInfo networkInfo = mConnectionManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isAvailable();
     }
 
-    @Override
     public boolean getWiFiNetworkAvailable() {
         final NetworkInfo wifi = mConnectionManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         return wifi != null && wifi.isAvailable();
     }
 
-    @Override
     public boolean getCellularDataNetworkAvailable() {
         final NetworkInfo mobile = mConnectionManager
                 .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         return mobile != null && mobile.isAvailable();
     }
 
-    @Override
     public boolean getRouteToPathExists(final int hostAddress) {
         return (mConnectionManager.requestRouteToHost(ConnectivityManager.TYPE_WIFI, hostAddress) || mConnectionManager
                 .requestRouteToHost(ConnectivityManager.TYPE_MOBILE, hostAddress));

@@ -1,6 +1,7 @@
 package com.mapbox.mapboxsdk.geometry;
 
 import java.io.Serializable;
+
 import com.mapbox.mapboxsdk.api.ILatLng;
 import android.location.Location;
 import android.os.Parcel;
@@ -18,6 +19,7 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     /**
      * Construct a new latitude, longitude point given float arguments
+     *
      * @param aLatitude
      * @param aLongitude
      */
@@ -28,6 +30,7 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     /**
      * Construct a new latitude, longitude, altitude point given float arguments
+     *
      * @param aLatitude
      * @param aLongitude
      */
@@ -39,6 +42,7 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     /**
      * Transform a Location into a LatLng point
+     *
      * @param aLocation
      */
     public LatLng(final Location aLocation) {
@@ -47,6 +51,7 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     /**
      * Clone an existing latitude longitude point
+     *
      * @param aLatLng
      */
     public LatLng(final LatLng aLatLng) {
@@ -57,6 +62,7 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     /**
      * Returns the longitude value of this point
+     *
      * @return the longitude value in decimal degrees
      */
     public double getLongitude() {
@@ -65,6 +71,7 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     /**
      * Returns the latitude value of this point
+     *
      * @return the latitude value in decimal degrees
      */
     public double getLatitude() {
@@ -114,6 +121,7 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     /**
      * Write LatLng to parcel.
+     *
      * @param in
      */
     private LatLng(final Parcel in) {

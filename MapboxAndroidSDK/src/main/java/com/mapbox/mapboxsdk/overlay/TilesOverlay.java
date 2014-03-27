@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
 
-import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.util.GeometryMath;
@@ -44,7 +43,7 @@ public class TilesOverlay
     protected static Paint mDebugPaint = null;
     private final Rect mTileRect = new Rect();
     private final Rect mViewPort = new Rect();
-	float mCurrentZoomFactor = 1;
+    float mCurrentZoomFactor = 1;
 
     private boolean mOptionsMenuEnabled = true;
 
@@ -65,12 +64,12 @@ public class TilesOverlay
         }
         this.mTileProvider = aTileProvider;
         if (UtilConstants.DEBUGMODE) {
-        	if (mDebugPaint == null) {
-        		mDebugPaint = new Paint();
-        		mDebugPaint.setColor(Color.RED);
-        		mDebugPaint.setStyle(Style.STROKE);
-        		mDebugPaint.setStrokeWidth(2);
-        	}
+            if (mDebugPaint == null) {
+                mDebugPaint = new Paint();
+                mDebugPaint.setColor(Color.RED);
+                mDebugPaint.setStyle(Style.STROKE);
+                mDebugPaint.setStrokeWidth(2);
+            }
         }
     }
 
@@ -115,10 +114,10 @@ public class TilesOverlay
         final Projection pj = mapView.getProjection();
         final float zoomLevel = pj.getZoomLevel();
         mWorldSize_2 = pj.getHalfWorldSize();
-        GeometryMath.viewPortRect(pj, mViewPort);    
+        GeometryMath.viewPortRect(pj, mViewPort);
 
         // Draw the tiles!
-        drawTiles(c.getSafeCanvas(), zoomLevel, TileSystem.getTileSize(), mViewPort);
+        drawTiles(c.getSafeCanvas(), zoomLevel, Projection.getTileSize(), mViewPort);
     }
 
     /**
@@ -147,14 +146,13 @@ public class TilesOverlay
     private final TileLooper mTileLooper = new TileLooper() {
         @Override
         public void initializeLoop(final float pZoomLevel, final int pTileSizePx) {
-        	
-        	final int roundedZoom = (int) Math.floor(pZoomLevel);
+
+            final int roundedZoom = (int) Math.floor(pZoomLevel);
             if (roundedZoom != pZoomLevel) {
                 final int mapTileUpperBound = 1 << roundedZoom;
-                mCurrentZoomFactor = (float)TileSystem.MapSize(pZoomLevel) / mapTileUpperBound / pTileSizePx;
-            }
-            else {
-            	mCurrentZoomFactor = 1.0f;
+                mCurrentZoomFactor = (float) Projection.mapSize(pZoomLevel) / mapTileUpperBound / pTileSizePx;
+            } else {
+                mCurrentZoomFactor = 1.0f;
             }
         }
 
@@ -172,10 +170,10 @@ public class TilesOverlay
 
             if (currentMapTile != null) {
                 mTileRect.set(
-                        (int)(pX * pTileSizePx * mCurrentZoomFactor),
-                        (int)(pY * pTileSizePx * mCurrentZoomFactor),
-                        (int)((pX * pTileSizePx + pTileSizePx) * mCurrentZoomFactor),
-                        (int)((pY * pTileSizePx + pTileSizePx) * mCurrentZoomFactor));
+                        (int) (pX * pTileSizePx * mCurrentZoomFactor),
+                        (int) (pY * pTileSizePx * mCurrentZoomFactor),
+                        (int) ((pX * pTileSizePx + pTileSizePx) * mCurrentZoomFactor),
+                        (int) ((pY * pTileSizePx + pTileSizePx) * mCurrentZoomFactor));
                 if (isReusable) {
                     ((CacheableBitmapDrawable) currentMapTile).setBeingUsed(true);
                 }
@@ -199,7 +197,7 @@ public class TilesOverlay
                 }
             }
 
-            
+
         }
 
         @Override
@@ -237,6 +235,7 @@ public class TilesOverlay
 
     /**
      * Draw a 'loading' placeholder with a canvas.
+     *
      * @return
      */
     private Drawable getLoadingTile() {
@@ -244,7 +243,7 @@ public class TilesOverlay
             try {
                 final int tileSize = mTileProvider.getTileSource() != null ?
                         mTileProvider
-                        .getTileSource().getTileSizePixels() : 256;
+                                .getTileSource().getTileSizePixels() : 256;
                 final Bitmap bitmap = Bitmap.createBitmap(tileSize, tileSize,
                         Bitmap.Config.ARGB_8888);
                 final Canvas canvas = new Canvas(bitmap);

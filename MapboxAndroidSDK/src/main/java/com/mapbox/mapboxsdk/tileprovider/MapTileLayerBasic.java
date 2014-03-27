@@ -12,7 +12,6 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
     MapView mMapView;
 
     /**
-     *
      * @param pContext
      * @param pTileSource
      * @param mapView
@@ -27,10 +26,10 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
         final MapTileDownloader downloaderProvider = new MapTileDownloader(
                 pTileSource,
                 mTileCache,
-                mNetworkAvailablityCheck,
+                mNetworkAvailabilityCheck,
                 mMapView);
 
-        for (MapTileModuleLayerBase provider: mTileProviderList) {
+        for (MapTileModuleLayerBase provider : mTileProviderList) {
             if (provider.getClass().isInstance(MapTileDownloader.class)) {
                 mTileProviderList.remove(provider);
             }
@@ -44,24 +43,24 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
         super.setTileSource(null);
         synchronized (mTileProviderList) {
             mTileProviderList.clear();
-            for(ITileLayer source:aTileSources) {
+            for (ITileLayer source : aTileSources) {
                 addTileSource(source);
             }
             clearTileCache();
         }
     }
-    
+
     public void addTileSource(final ITileLayer pTileSource) {
-    	final MapTileDownloader downloaderProvider = new MapTileDownloader(
+        final MapTileDownloader downloaderProvider = new MapTileDownloader(
                 pTileSource,
                 mTileCache,
-                mNetworkAvailablityCheck,
+                mNetworkAvailabilityCheck,
                 mMapView);
         mTileProviderList.add(downloaderProvider);
     }
-    
+
     public void removeTileSource(final ITileLayer pTileSource) {
-    	for (MapTileModuleLayerBase provider: mTileProviderList) {
+        for (MapTileModuleLayerBase provider : mTileProviderList) {
             if (provider.getTileSource() == pTileSource) {
                 mTileProviderList.remove(provider);
                 return;

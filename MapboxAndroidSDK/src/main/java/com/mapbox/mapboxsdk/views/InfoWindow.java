@@ -1,4 +1,5 @@
 package com.mapbox.mapboxsdk.views;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -8,17 +9,19 @@ import android.widget.TextView;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Marker;
 
-/** View that can be displayed on an OSMDroid map, associated to a GeoPoint.
- * Typical usage: cartoon-like bubbles displayed when clicking an overlay item. 
- * It mimics the InfoWindow class of Google Maps JavaScript API V3. 
- * Main differences are: 
+/**
+ * View that can be displayed on an OSMDroid map, associated to a GeoPoint.
+ * Typical usage: cartoon-like bubbles displayed when clicking an overlay item.
+ * It mimics the InfoWindow class of Google Maps JavaScript API V3.
+ * Main differences are:
  * <ul>
  * <li>Structure and content of the view is let to the responsibility of the caller. </li>
  * <li>The same InfoWindow can be associated to many items. </li>
  * </ul>
- * Known issue: the window is displayed "above" the marker, so the queue of the bubble can hide the marker. 
- *
+ * Known issue: the window is displayed "above" the marker, so the queue of the bubble can hide the marker.
+ * <p/>
  * This is an abstract class.
+ *
  * @author M.Kergall
  */
 
@@ -28,7 +31,6 @@ public class InfoWindow {
     /**
      * @param layoutResId   the id of the view resource.
      * @param mapView       the mapview on which is hooked the view
-     *
      */
 
     private MapView mMapView;
@@ -40,7 +42,7 @@ public class InfoWindow {
             mSubDescriptionId = 0,
             mImageId = 0;
 
-    private static void setResIds(Context context){
+    private static void setResIds(Context context) {
         String packageName = context.getPackageName(); //get application package name
         mTitleId = context.getResources().getIdentifier("id/tooltip_title", null, packageName);
         mDescriptionId = context.getResources().getIdentifier("id/tooltip_description", null, packageName);
@@ -53,7 +55,7 @@ public class InfoWindow {
         mIsVisible = false;
         ViewGroup parent = (ViewGroup) mapView.getParent();
         Context context = mapView.getContext();
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mView = inflater.inflate(layoutResId, parent, false);
 
         if (mTitleId == 0) {
@@ -62,9 +64,11 @@ public class InfoWindow {
 
         // default behavior: close it when clicking on the tooltip:
         mView.setOnTouchListener(new View.OnTouchListener() {
-            @Override public boolean onTouch(View v, MotionEvent e) {
-                if (e.getAction() == MotionEvent.ACTION_UP)
+            @Override
+            public boolean onTouch(View v, MotionEvent e) {
+                if (e.getAction() == MotionEvent.ACTION_UP) {
                     close();
+                }
                 return true; //From Osmdroid 3.0.10, event is properly consumed.
             }
         });
@@ -72,10 +76,11 @@ public class InfoWindow {
 
     /**
      * open the window at the specified position.
-     * @param object the graphical object on which is hooked the view
+     *
+     * @param object   the graphical object on which is hooked the view
      * @param position to place the window on the map
-     * @param offsetX (&offsetY) the offset of the view to the position, in pixels.
-     * This allows to offset the view from the object position.
+     * @param offsetX  (&offsetY) the offset of the view to the position, in pixels.
+     *                 This allows to offset the view from the object position.
      */
     public void open(Object object, LatLng position, int offsetX, int offsetY) {
         onOpen(object);
@@ -92,17 +97,18 @@ public class InfoWindow {
     public void close() {
         if (mIsVisible) {
             mIsVisible = false;
-            ((ViewGroup)mView.getParent()).removeView(mView);
+            ((ViewGroup) mView.getParent()).removeView(mView);
             onClose();
         }
     }
 
     /**
      * Returns the Android view. This allows to set its content.
+     *
      * @return the Android view
      */
     public View getView() {
-        return(mView);
+        return (mView);
     }
 
     public void onOpen(Object item) {
@@ -118,9 +124,9 @@ public class InfoWindow {
         }
         ((TextView) mView.findViewById(mDescriptionId /*R.id.description*/)).setText(snippet);
         //handle sub-description, hidding or showing the text view:
-        TextView subDescText = (TextView)mView.findViewById(mSubDescriptionId);
+        TextView subDescText = (TextView) mView.findViewById(mSubDescriptionId);
         String subDesc = overlayItem.getSubDescription();
-        if (subDesc != null && !("".equals(subDesc))){
+        if (subDesc != null && !("".equals(subDesc))) {
             subDescText.setText(subDesc);
             subDescText.setVisibility(View.VISIBLE);
         } else {

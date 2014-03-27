@@ -2,6 +2,7 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
 import com.mapbox.mapboxsdk.views.MapView;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -26,10 +27,6 @@ import android.view.MotionEvent;
 public abstract class Overlay {
 
     private static AtomicInteger sOrdinal = new AtomicInteger();
-
-    // From Google Maps API
-    protected static final float SHADOW_X_SKEW = -0.8999999761581421f;
-    protected static final float SHADOW_Y_SCALE = 0.5f;
 
     protected float mScale;
     private static final Rect mRect = new Rect();
@@ -76,16 +73,6 @@ public abstract class Overlay {
      */
     protected final static int getSafeMenuId() {
         return sOrdinal.getAndIncrement();
-    }
-
-    /**
-     * Similar to <see cref="getSafeMenuId" />, except this reserves a sequence of IDs of length
-     * <param name="count" />. The returned number is the starting index of that sequential list.
-     *
-     * @return an integer suitable to be used as a menu identifier
-     */
-    protected final static int getSafeMenuIdSequence(final int count) {
-        return sOrdinal.getAndAdd(count);
     }
 
     // ===========================================================
@@ -280,12 +267,4 @@ public abstract class Overlay {
          */
         boolean onSnapToItem(int x, int y, Point snapPoint, MapView mapView);
     }
-
-    // ===========================================================
-    // Final Fields
-    // ===========================================================
-
-    public static final int NOT_SET = Integer.MIN_VALUE;
-
-    public static final int DEFAULT_ZOOMLEVEL_MINIMAP_DIFFERENCE = 3;
 }

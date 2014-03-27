@@ -9,7 +9,6 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.mapbox.mapboxsdk.android.testapp.MainActivity;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
-import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import junit.framework.Assert;
@@ -68,9 +67,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     public void testTileSystem() throws Exception {
-        TileSystem.setTileSize(256);
-        Assert.assertEquals(TileSystem.getTileSize(), 256);
-        Assert.assertEquals(TileSystem.MapSize(5), 8192);
+        Projection.setTileSize(256);
+        Assert.assertEquals(Projection.getTileSize(), 256);
+        Assert.assertEquals(Projection.MapSize(5), 8192);
     }
 
     public void testMapTile() throws Exception {

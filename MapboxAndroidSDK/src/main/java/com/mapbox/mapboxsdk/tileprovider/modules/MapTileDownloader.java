@@ -26,14 +26,14 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     private final AtomicReference<TileLayer> mTileSource = new AtomicReference<TileLayer>();
     private final AtomicReference<MapTileCache> mTileCache = new AtomicReference<MapTileCache>();
 
-    private final INetworkAvailabilityCheck mNetworkAvailablityCheck;
+    private final NetworkAvailabilityCheck mNetworkAvailabilityCheck;
     private MapView mapView;
     boolean hdpi;
 
 
     public MapTileDownloader(final ITileLayer pTileSource,
                              final MapTileCache pTileCache,
-                             final INetworkAvailabilityCheck pNetworkAvailablityCheck,
+                             final NetworkAvailabilityCheck pNetworkAvailabilityCheck,
                              final MapView mapView) {
         super(NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
         this.mapView = mapView;
@@ -41,7 +41,7 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
 
         hdpi = mapView.getContext().getResources().getDisplayMetrics().densityDpi > DisplayMetrics.DENSITY_HIGH;
 
-        mNetworkAvailablityCheck = pNetworkAvailablityCheck;
+        mNetworkAvailabilityCheck = pNetworkAvailabilityCheck;
         setTileSource(pTileSource);
     }
 
@@ -53,9 +53,8 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
         return mTileCache.get();
     }
 
-
     public boolean isNetworkAvailable() {
-        return (mNetworkAvailablityCheck == null || mNetworkAvailablityCheck.getNetworkAvailable());
+        return (mNetworkAvailabilityCheck == null || mNetworkAvailabilityCheck.getNetworkAvailable());
     }
 
     public TilesLoadedListener getTilesLoadedListener() {
@@ -98,33 +97,22 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
         return (tileLayer != null ? tileLayer.getMaximumZoomLevel() : MAXIMUM_ZOOMLEVEL);
     }
 
-
     @Override
-    public int getTileSizePixels()
-    {
-        TileLayer tileLayer = mTileSource.get();
-        return (tileLayer != null ? tileLayer.getTileSizePixels() : DEFAULT_TILE_SIZE);
-    }
-
-    @Override
-    public BoundingBox getBoundingBox()
-    {
+    public BoundingBox getBoundingBox() {
         TileLayer tileLayer = mTileSource.get();
         return (tileLayer != null ? tileLayer.getBoundingBox() : null);
     }
 
     @Override
-    public LatLng getCenterCoordinate()
-    {
+    public LatLng getCenterCoordinate() {
         TileLayer tileLayer = mTileSource.get();
         return (tileLayer != null ? tileLayer.getCenterCoordinate() : null);
     }
 
     @Override
-    public float getCenterZoom()
-    {
+    public float getCenterZoom() {
         TileLayer tileLayer = mTileSource.get();
-        return (tileLayer != null ? tileLayer.getCenterZoom() : (getMaximumZoomLevel() + getMinimumZoomLevel())/2);
+        return (tileLayer != null ? tileLayer.getCenterZoom() : (getMaximumZoomLevel() + getMinimumZoomLevel()) / 2);
     }
 
     @Override
@@ -141,7 +129,6 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
         }
     }
 
-
     protected class TileLoader extends MapTileModuleLayerBase.TileLoader {
 
         @Override
@@ -151,13 +138,13 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
 
             if (tileLayer == null) {
                 return null;
+            } else {
+                return tileLayer.getDrawableFromTile(MapTileDownloader.this, aState.getMapTile(), hdpi);
             }
-            return tileLayer.getDrawableFromTile(MapTileDownloader.this, aState.getMapTile(), hdpi);
         }
     }
 
     private CacheableBitmapDrawable onTileLoaded(CacheableBitmapDrawable pDrawable) {
         return mapView.getTileLoadedListener().onTileLoaded(pDrawable);
     }
-
 }

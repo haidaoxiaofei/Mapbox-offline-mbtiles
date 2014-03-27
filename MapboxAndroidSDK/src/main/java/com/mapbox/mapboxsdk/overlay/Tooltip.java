@@ -38,8 +38,9 @@ public class Tooltip extends Overlay {
 
     /**
      * Initialize a tooltip without title or description
+     *
      * @param ctx a Context object on which this tooltip is drawn.
-     * @param ot an overlay item.
+     * @param ot  an overlay item.
      */
     public Tooltip(Context ctx, Marker ot) {
         this(ctx, ot, "", "");
@@ -48,9 +49,9 @@ public class Tooltip extends Overlay {
     /**
      * Initialize a tooltip.
      *
-     * @param ctx a Context object on which this tooltip is drawn.
-     * @param ot an overlay item.
-     * @param title the title in the tooltip.
+     * @param ctx         a Context object on which this tooltip is drawn.
+     * @param ot          an overlay item.
+     * @param title       the title in the tooltip.
      * @param description the description text in the tooltip
      */
     public Tooltip(Context ctx, Marker ot, String title, String description) {
@@ -109,27 +110,29 @@ public class Tooltip extends Overlay {
 
     /**
      * Sets description to be displayed in the tooltip
+     *
      * @param description the description text
      * @return Tooltip the tooltip, for chaining.
      */
-    public Tooltip setDescription(String description)
-    {
+    public Tooltip setDescription(String description) {
         this.description = description;
         return this;
     }
 
     /**
      * Sets title to be displayed in the tooltip
+     *
      * @param title the title
      * @return Tooltip the tooltip, for chaining.
      */
     public Tooltip setTitle(String title) {
-       this.title = title;
-       return this;
+        this.title = title;
+        return this;
     }
 
     /**
      * Sets associated overlay of the tooltip
+     *
      * @param item the overlay (normally a Marker object)
      * @return Tooltip the tooltip, for chaining.
      */
@@ -140,6 +143,7 @@ public class Tooltip extends Overlay {
 
     /**
      * Is the tooltip visible?
+     *
      * @return true if it's visible, false otherwise
      */
     public boolean isVisible() {
@@ -148,6 +152,7 @@ public class Tooltip extends Overlay {
 
     /**
      * Sets visibility of the tooltip
+     *
      * @param visible whether it's visible or not
      * @return Tooltip the tooltip, for chaining.
      */
@@ -158,13 +163,14 @@ public class Tooltip extends Overlay {
 
     /**
      * Get the on-screen drawn area of this tooltip.
+     *
      * @return the on-screen dimensions of this tooltip as a Rect
      */
     public Rect getRect() {
-        return new Rect((int)point.x - TOOLTIP_WIDTH / 2,
-                (int)point.y - 200,
-                (int)point.x + TOOLTIP_WIDTH / 2,
-                (int)point.y - 100);
+        return new Rect((int) point.x - TOOLTIP_WIDTH / 2,
+                (int) point.y - 200,
+                (int) point.x + TOOLTIP_WIDTH / 2,
+                (int) point.y - 100);
     }
 
     /**

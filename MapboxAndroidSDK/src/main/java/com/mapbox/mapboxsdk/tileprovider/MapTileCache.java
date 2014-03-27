@@ -39,8 +39,7 @@ public class MapTileCache implements TileLayerConstants {
             if (!cacheDir.exists()) {
                 if (cacheDir.mkdirs()) {
                     Log.d(TAG, "creating cacheDir " + cacheDir);
-                }
-                else {
+                } else {
                     Log.e(TAG, "can't create cacheDir " + cacheDir);
                 }
             }
@@ -48,7 +47,8 @@ public class MapTileCache implements TileLayerConstants {
             builder.setMemoryCacheEnabled(true)
                     .setMemoryCacheMaxSizeUsingHeapSize()
                     .setDiskCacheEnabled(true)
-                    .setDiskCacheMaxSize(10*1024*1024)
+                    // 100MB
+                    .setDiskCacheMaxSize(100 * 1024 * 1024)
                     .setDiskCacheLocation(cacheDir);
             this.sCachedTiles = builder.build();
         }
@@ -85,7 +85,6 @@ public class MapTileCache implements TileLayerConstants {
 
     public CacheableBitmapDrawable putTileStream(final MapTile aTile, final InputStream inputStream,
                                                  final BitmapFactory.Options decodeOpts) {
-
         return getCache().put(getCacheKey(aTile), inputStream, decodeOpts);
     }
 
@@ -103,8 +102,7 @@ public class MapTileCache implements TileLayerConstants {
             if (!getCache().containsInDiskCache(key)) {
                 if (drawable != null) {
                     getCache().putInDiskCache(getCacheKey(aTile), drawable);
-                }
-                else {
+                } else {
                     getCache().putInDiskCache(getCacheKey(aTile), ((BitmapDrawable) aDrawable).getBitmap());
                 }
             }
@@ -129,8 +127,7 @@ public class MapTileCache implements TileLayerConstants {
             if (!getCache().containsInMemoryCache(key)) {
                 if (aDrawable instanceof CacheableBitmapDrawable) {
                     return getCache().putInMemoryCache(getCacheKey(aTile), ((CacheableBitmapDrawable) aDrawable));
-                }
-                else {
+                } else {
                     return getCache().putInMemoryCache(getCacheKey(aTile), ((BitmapDrawable) aDrawable).getBitmap());
                 }
             }
@@ -169,11 +166,9 @@ public class MapTileCache implements TileLayerConstants {
         getCache().trimMemory();
     }
 
-    public CacheableBitmapDrawable createCacheableBitmapDrawable(Bitmap bitmap, MapTile aTile)
-    {
+    public CacheableBitmapDrawable createCacheableBitmapDrawable(Bitmap bitmap, MapTile aTile) {
         return getCache().createCacheableBitmapDrawable(bitmap, getCacheKey(aTile), CacheableBitmapDrawable.SOURCE_UNKNOWN);
     }
-
 
     public Bitmap getBitmapFromRemoved(final int width, final int height) {
         return getCache().getBitmapFromRemoved(width, height);
@@ -183,13 +178,14 @@ public class MapTileCache implements TileLayerConstants {
         return getCache().decodeBitmap(new BitmapLruCache.ByteArrayInputStreamProvider(data), opts);
     }
 
-
-    public void setDiskCacheKey(final String key)
-    {
+    public void setDiskCacheKey(final String key) {
         mDiskCacheKey = key;
     }
-    // Creates a unique subdirectory of the designated app cache directory. Tries to use external
-    // but if not mounted, falls back on internal storage.
+
+    /**
+     * Creates a unique subdirectory of the designated app cache directory. Tries to use external
+     * but if not mounted, falls back on internal storage.
+     */
     public static File getDiskCacheDir(Context context, String uniqueName) {
         // Check if media is mounted or storage is built-in, if so, try and use external cache dir
         // otherwise use internal cache dir

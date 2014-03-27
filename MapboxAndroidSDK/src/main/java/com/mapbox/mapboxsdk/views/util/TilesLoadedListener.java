@@ -5,8 +5,8 @@
 
 package com.mapbox.mapboxsdk.views.util;
 
-public interface TilesLoadedListener
-{
+public interface TilesLoadedListener {
     public boolean onTilesLoaded();
+
     public boolean onTilesLoadStarted();
 }

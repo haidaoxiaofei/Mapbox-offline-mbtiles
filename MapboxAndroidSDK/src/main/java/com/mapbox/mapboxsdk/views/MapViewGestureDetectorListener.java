@@ -4,7 +4,6 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.tile.TileSystem;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 
 /**
@@ -17,6 +16,7 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
 
     /**
      * Bind a new gesture detector to a map
+     *
      * @param mv a map view
      */
     public MapViewGestureDetectorListener(final MapView mv) {
@@ -49,7 +49,7 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
             return true;
         }
 
-        final int worldSize = TileSystem.MapSize(this.mapView.getZoomLevel(false));
+        final int worldSize = this.mapView.getProjection().mapSize(this.mapView.getZoomLevel(false));
         this.mapView.mIsFlinging = true;
         this.mapView.mScroller.fling(
                 this.mapView.getScrollX(),
@@ -65,10 +65,10 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
 
     @Override
     public void onLongPress(final MotionEvent e) {
-    	if (UtilConstants.DEBUGMODE) {
+        if (UtilConstants.DEBUGMODE) {
             final ILatLng center = this.mapView.getProjection().fromPixels(e.getX(), e.getY());
-        	this.mapView.zoomOutFixing(center);
-    	}
+            this.mapView.zoomOutFixing(center);
+        }
     }
 
     @Override
