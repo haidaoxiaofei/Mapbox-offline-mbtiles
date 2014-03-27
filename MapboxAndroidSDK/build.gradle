@@ -19,14 +19,10 @@ version = '1.0.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    flatDir {
-        dirs '../libs'
-    }
 }
 
 dependencies {
-//    compile (project(':Android-BitmapCache')) {
-    compile ('com.github.chrisbanes.bitmapcache:BitmapCache:2.4+@aar') {
+    compile ('com.github.chrisbanes.bitmapcache:library:2.3') {
         transitive = true
         exclude module: 'support-v4'
     }
