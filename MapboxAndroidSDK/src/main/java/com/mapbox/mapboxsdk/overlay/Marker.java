@@ -30,6 +30,8 @@ public class Marker {
     private int group = 0;
     private boolean clustered;
 
+    // We will load a defaultIcon only once.
+    private static Icon defaultIcon;
 
     public int getGroup() {
         return group;
@@ -341,8 +343,12 @@ public class Marker {
         mapView = mv;
         context = mv.getContext();
         if (icon == null) {
-            // Set default icon
-            setIcon(new Icon(mv.getResources(), Icon.Size.LARGE, "", "000"));
+            // Note, it is ok that in a multithreading scenario the default icon gets loaded
+            // more than once..
+            if (defaultIcon == null) {
+                defaultIcon = new Icon(mv.getResources(), Icon.Size.LARGE, "", "000");
+            }
+            setIcon(defaultIcon);
         }
         return this;
     }
