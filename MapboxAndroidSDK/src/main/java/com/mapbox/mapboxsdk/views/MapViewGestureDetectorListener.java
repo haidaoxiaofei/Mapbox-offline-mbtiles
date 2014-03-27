@@ -89,6 +89,6 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
 
     @Override
     public boolean onSingleTapUp(final MotionEvent e) {
-        return this.mapView.getOverlayManager().onSingleTapUp(e, this.mapView);
+        return false;
     }
 }

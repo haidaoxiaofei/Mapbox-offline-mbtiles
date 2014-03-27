@@ -34,7 +34,7 @@ public class MapEventsOverlay extends Overlay {
     }
 
     @Override
-    public boolean onSingleTapUp(MotionEvent e, MapView mapView) {
+    public boolean onSingleTapConfirmed(final MotionEvent e, final MapView mapView) {
         Projection proj = mapView.getProjection();
         ILatLng p = proj.fromPixels(e.getX(), e.getY());
         return mReceiver.singleTapUpHelper(p);
