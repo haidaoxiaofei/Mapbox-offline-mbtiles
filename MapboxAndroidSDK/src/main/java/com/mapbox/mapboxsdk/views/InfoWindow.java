@@ -98,6 +98,7 @@ public class InfoWindow {
         if (mIsVisible) {
             mIsVisible = false;
             ((ViewGroup) mView.getParent()).removeView(mView);
+            setBoundMarker(null);
             onClose();
         }
     }
