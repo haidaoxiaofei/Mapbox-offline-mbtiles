@@ -52,6 +52,19 @@ public class Marker {
     }
 
 
+    protected InfoWindow createTooltip(MapView mv){
+        return new InfoWindow(R.layout.tootip, mv);
+    }
+
+    private InfoWindow mToolTip;
+    public InfoWindow getToolTip(MapView mv) {
+        if (mToolTip == null || mToolTip.getMapView() != mv) {
+            mToolTip = createTooltip(mv);
+        }
+        return mToolTip;
+    }
+
+
     /**
      * Indicates a hotspot for an area. This is where the origin (0,0) of a point will be located
      * relative to the area. In otherwords this acts as an offset. NONE indicates that no adjustment

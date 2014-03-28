@@ -74,6 +74,26 @@ public class InfoWindow {
         });
     }
 
+    public InfoWindow(View view, MapView mapView) {
+        mMapView = mapView;
+        mIsVisible = false;
+        ViewGroup parent = (ViewGroup) mapView.getParent();
+        Context context = mapView.getContext();
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mView = view;
+
+        // default behavior: close it when clicking on the tooltip:
+        mView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent e) {
+                if (e.getAction() == MotionEvent.ACTION_UP) {
+                    close();
+                }
+                return true; //From Osmdroid 3.0.10, event is properly consumed.
+            }
+        });
+    }
+
     /**
      * open the window at the specified position.
      *
@@ -109,6 +129,10 @@ public class InfoWindow {
      */
     public View getView() {
         return (mView);
+    }
+
+    public MapView getMapView() {
+        return (mMapView);
     }
 
     public void onOpen(Object item) {

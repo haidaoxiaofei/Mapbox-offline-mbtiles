@@ -141,7 +141,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
-    private InfoWindow defaultTooltip;
+    private InfoWindow currentTooltip;
 
     /**
      * Constructor for XML layout calls. Should not be used programmatically.
@@ -303,6 +303,13 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         GeoJSON.parseString(geoJSON, MapView.this);
     }
 
+    private void closeCurrentTooltip(){
+        if (currentTooltip != null) {
+            currentTooltip.close();
+            currentTooltip = null;
+        }
+    }
+
     /**
      * Sets the default itemized overlay.
      */
@@ -310,16 +317,15 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         defaultMarkerOverlay = new ItemizedIconOverlay<Marker>(getContext(), defaultMarkerList, new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
             public boolean onItemSingleTapUp(final int index,
                                              final Marker item) {
-                if (defaultTooltip == null) {
-                    defaultTooltip = new InfoWindow(R.layout.tootip, MapView.this);
-                }
+
+                InfoWindow toolTip = item.getToolTip(MapView.this);
 
                 // Hide tooltip if tapping on the same marker
-                if (defaultTooltip.getBoundMarker() == item) {
-                    defaultTooltip.close();
-                    defaultTooltip = null;
+                if (toolTip == currentTooltip) {
+                    closeCurrentTooltip();
                 } else {
-                    ((Marker) item).showBubble(defaultTooltip, MapView.this, true);
+                    currentTooltip = toolTip;
+                    item.showBubble(currentTooltip, MapView.this, true);
                 }
                 return true;
             }
@@ -337,9 +343,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @return whether the event action is triggered or not
      */
     public boolean singleTapUpHelper(final ILatLng p) {
-        if (defaultTooltip != null) {
-            defaultTooltip.close();
-        }
+        closeCurrentTooltip();
         onTap(p);
         return true;
     }
