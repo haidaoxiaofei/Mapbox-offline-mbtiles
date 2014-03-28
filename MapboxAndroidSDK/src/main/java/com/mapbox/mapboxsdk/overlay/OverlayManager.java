@@ -1,17 +1,5 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
-
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.view.KeyEvent;
@@ -19,16 +7,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 
+import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
+import com.mapbox.mapboxsdk.views.MapView;
+
+import java.util.AbstractList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class OverlayManager extends AbstractList<Overlay> {
 
     private TilesOverlay mTilesOverlay;
     private boolean mUseSafeCanvas = true;
 
-    private final List<Overlay> mOverlayList;
+    private final CopyOnWriteArrayList<Overlay> mOverlayList;
 
     public OverlayManager(final TilesOverlay tilesOverlay) {
         setTilesOverlay(tilesOverlay);
-        mOverlayList = Collections.synchronizedList(new ArrayList<Overlay>());
+        mOverlayList = new CopyOnWriteArrayList<Overlay>();
     }
 
     @Override
@@ -86,11 +84,15 @@ public class OverlayManager extends AbstractList<Overlay> {
     }
 
     private void sortOverlays() {
-        Collections.sort(mOverlayList, new Comparator<Overlay>() {
+
+        Overlay[] array = mOverlayList.toArray(new Overlay[mOverlayList.size()]);
+        Arrays.sort(array, new Comparator<Overlay>() {
             public int compare(Overlay lhs, Overlay rhs) {
                 return (getOverlayClassSortIndex(lhs).compareTo(getOverlayClassSortIndex(rhs)));
             }
         });
+        mOverlayList.clear();
+        mOverlayList.addAll(Arrays.asList(array));
     }
 
     public boolean isUsingSafeCanvas() {
