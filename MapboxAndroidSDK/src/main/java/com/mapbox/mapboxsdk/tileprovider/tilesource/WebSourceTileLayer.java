@@ -49,13 +49,12 @@ public class WebSourceTileLayer extends TileLayer {
     protected JSONObject infoJSON;
     protected boolean mEnableSSL = false;
 
-    public WebSourceTileLayer(String url) {
-        super(url);
-        initialize(url, false);
+    public WebSourceTileLayer(final String pId, final String url) {
+       this(pId, url, false);
     }
 
-    public WebSourceTileLayer(String url, boolean enableSSL) {
-        super(url);
+    public WebSourceTileLayer(final String pId, final String url, final boolean enableSSL) {
+        super(pId, url);
         initialize(url, enableSSL);
     }
 

@@ -12,6 +12,7 @@ import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstants {
 
     protected String mUrl;
+    protected String mCacheKey;
     protected String mName;
     protected String mDescription;
     protected String mAttribution;
@@ -23,8 +24,9 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
     protected LatLng mCenter = new LatLng(0, 0);
     private final int mTileSizePixels = DEFAULT_TILE_SIZE;
 
-    public TileLayer(final String aUrl) {
+    public TileLayer(final String pId, final String aUrl) {
         mUrl = aUrl;
+        mCacheKey = pId;
     }
 
     /**
@@ -115,7 +117,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
 
     @Override
     public String getCacheKey() {
-        return "";
+        return mCacheKey;
     }
 
     @Override

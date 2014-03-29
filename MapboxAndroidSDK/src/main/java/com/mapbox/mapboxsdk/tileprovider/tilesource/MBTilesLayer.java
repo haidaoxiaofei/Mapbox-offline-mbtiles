@@ -38,13 +38,12 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
      * @param url path to a MBTiles file
      */
     public MBTilesLayer(final String url) {
-        super(url);
-        initialize(url, null);
+        this(null, url);
     }
 
-    public MBTilesLayer(final Context context, final String assetUrl) {
-        super(assetUrl);
-        initialize(assetUrl, context);
+    public MBTilesLayer(final Context context, final String url) {
+        super(url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.')), url);
+        initialize(url, context);
     }
 
     /**
