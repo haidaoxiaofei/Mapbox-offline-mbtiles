@@ -143,13 +143,13 @@ public class MainActivity extends ActionBarActivity {
             mv.setTileSource(new ITileLayer[]{new MBTilesLayer(this, layer)});
         } else {
             if (layer.equalsIgnoreCase("OpenStreetMap")) {
-                source = new WebSourceTileLayer("http://tile.openstreetmap.org/%d/%d/%d.png")
+                source = new WebSourceTileLayer("openstreetmap", "http://tile.openstreetmap.org/%d/%d/%d.png")
                     .setName("OpenStreetMap")
                     .setAttribution("© OpenStreetMap Contributors")
                     .setMinimumZoomLevel(1)
                     .setMaximumZoomLevel(18);
             } else if (layer.equalsIgnoreCase("OpenSeaMap")) {
-                source = new WebSourceTileLayer("http://tile.openstreetmap.org/seamark/%d/%d/%d.png")
+                source = new WebSourceTileLayer("openstreetmap", "http://tile.openstreetmap.org/seamark/%d/%d/%d.png")
                     .setName("OpenStreetMap")
                     .setAttribution("© OpenStreetMap Contributors")
                     .setMinimumZoomLevel(1)
