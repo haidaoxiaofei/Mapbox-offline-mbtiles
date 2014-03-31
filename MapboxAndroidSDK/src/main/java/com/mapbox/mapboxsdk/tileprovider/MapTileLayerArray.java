@@ -118,10 +118,20 @@ public class MapTileLayerArray extends MapTileLayerBase {
     @Override
     public Drawable getMapTile(final MapTile pTile) {
         if (tileUnavailable(pTile)) {
+            if (DEBUG_TILE_PROVIDERS) {
+                Log.i(TAG, "MapTileLayerArray.getMapTile() tileUnavailable: "
+                        + pTile);
+            }
             return null;
         }
         final CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
-        if (tileDrawable != null && !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
+        if (tileDrawable != null &&
+                !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
+            if (DEBUG_TILE_PROVIDERS) {
+                Log.i(TAG, "MapTileLayerArray.getMapTile() already in cache: "
+                        + pTile);
+            }
+
             return tileDrawable;
         } else {
             boolean alreadyInProgress = false;
