@@ -256,8 +256,11 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     }
 
     protected CacheableBitmapDrawable putExpiredTileIntoCache(final MapTile pTile, final CacheableBitmapDrawable drawable) {
-        mTileCache.removeTileFromMemory(pTile);
-        return mTileCache.putTileInMemoryCache(pTile, drawable);
+        CacheableBitmapDrawable currentDrawable = mTileCache.getMapTileFromMemory(pTile);
+        if (drawable != null && currentDrawable == null) {
+            currentDrawable = mTileCache.putTileInMemoryCache(pTile, drawable);
+        }
+        return currentDrawable;
     }
 
     public void setTileRequestCompleteHandler(final Handler handler) {
