@@ -880,10 +880,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         if (mScrollableAreaBoundingBox == null) {
             mMinimumZoomLevel = mRequestedMinimumZoomLevel;
             mScrollableAreaLimit = null;
-            return;
         }
-        updateMinZoomLevel();
-        updateScrollableAreaLimit();
+        else {
+        	updateMinZoomLevel();
+            updateScrollableAreaLimit();
+        }
+        
     }
 
     public BoundingBox getScrollableAreaLimit() {
