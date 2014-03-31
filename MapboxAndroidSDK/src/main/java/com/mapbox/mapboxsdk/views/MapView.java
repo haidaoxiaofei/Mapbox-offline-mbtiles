@@ -131,8 +131,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private final float[] mRotatePoints = new float[2];
     private final Rect mInvalidateRect = new Rect();
 
-    protected BoundingBox mScrollableAreaBoundingBox;
-    protected RectF mScrollableAreaLimit;
+    protected BoundingBox mScrollableAreaBoundingBox = null;
+    protected RectF mScrollableAreaLimit = null;
 
     private BoundingBox mBoundingBoxToZoomOn = null;
 
