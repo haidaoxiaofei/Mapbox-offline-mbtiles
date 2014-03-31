@@ -108,6 +108,23 @@ public class GeometryMath {
         // Get the area we are drawing to
         final Rect screenRect = projection.getScreenRect();
         final int worldSize_2 = projection.mapSize(zoomLevel) >> 1;
+        reuse.set((int) (screenRect.left),
+                (int) (screenRect.top),
+                (int) (screenRect.right),
+                (int) (screenRect.bottom));
+
+        // Translate the Canvas coordinates into Mercator coordinates
+        reuse.offset(worldSize_2, worldSize_2);
+        return reuse;
+    }
+
+    public static Rect viewPortRectForTileDrawing(float zoomLevel, Projection projection, Rect reuse) {
+        if (reuse == null) {
+            reuse = new Rect();
+        }
+        // Get the area we are drawing to
+        final Rect screenRect = projection.getScreenRect();
+        final int worldSize_2 = projection.mapSize(zoomLevel) >> 1;
 
         //when using float zoom, the view port should be the one of the floored value
         //this is because MapTiles are indexed around int values
@@ -125,5 +142,8 @@ public class GeometryMath {
 
     public static Rect viewPortRect(Projection projection, Rect reuse) {
         return viewPortRect(projection.getZoomLevel(), projection, reuse);
+    }
+    public static Rect viewPortRectForTileDrawing(Projection projection, Rect reuse) {
+        return viewPortRectForTileDrawing(projection.getZoomLevel(), projection, reuse);
     }
 }

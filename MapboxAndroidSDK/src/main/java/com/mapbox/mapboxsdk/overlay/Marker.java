@@ -2,14 +2,14 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
-
 import com.mapbox.mapboxsdk.views.InfoWindow;
 import com.mapbox.mapboxsdk.views.MapView;
 
@@ -50,6 +50,19 @@ public class Marker {
 
     public void setClustered(boolean clustered) {
         this.clustered = clustered;
+    }
+
+
+    protected InfoWindow createTooltip(MapView mv){
+        return new InfoWindow(R.layout.tootip, mv);
+    }
+
+    private InfoWindow mToolTip;
+    public InfoWindow getToolTip(MapView mv) {
+        if (mToolTip == null || mToolTip.getMapView() != mv) {
+            mToolTip = createTooltip(mv);
+        }
+        return mToolTip;
     }
 
 

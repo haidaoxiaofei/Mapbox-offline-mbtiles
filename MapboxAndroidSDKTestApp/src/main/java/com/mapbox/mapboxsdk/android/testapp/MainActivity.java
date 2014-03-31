@@ -45,8 +45,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         mv = (MapView) findViewById(R.id.mapview);
         mapController = mv.getController();
-        replaceMapView("opencycle");
-
         replaceMapView(terrain);
         addLocationOverlay();
 
@@ -84,7 +82,6 @@ public class MainActivity extends ActionBarActivity {
         equator.addPoint(0, -89);
         equator.addPoint(0, 89);
         mv.getOverlays().add(equator);
-        addLocationOverlay();
     }
 
     private void setButtonListeners() {
@@ -144,13 +141,13 @@ public class MainActivity extends ActionBarActivity {
             mv.setTileSource(new ITileLayer[]{new MBTilesLayer(this, layer)});
         } else {
             if (layer.equalsIgnoreCase("OpenStreetMap")) {
-                source = new WebSourceTileLayer("http://tile.openstreetmap.org/%d/%d/%d.png")
+                source = new WebSourceTileLayer("openstreetmap", "http://tile.openstreetmap.org/%d/%d/%d.png")
                     .setName("OpenStreetMap")
                     .setAttribution("© OpenStreetMap Contributors")
                     .setMinimumZoomLevel(1)
                     .setMaximumZoomLevel(18);
             } else if (layer.equalsIgnoreCase("OpenSeaMap")) {
-                source = new WebSourceTileLayer("http://tile.openstreetmap.org/seamark/%d/%d/%d.png")
+                source = new WebSourceTileLayer("openstreetmap", "http://tile.openstreetmap.org/seamark/%d/%d/%d.png")
                     .setName("OpenStreetMap")
                     .setAttribution("© OpenStreetMap Contributors")
                     .setMinimumZoomLevel(1)

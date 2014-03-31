@@ -118,10 +118,20 @@ public class MapTileLayerArray extends MapTileLayerBase {
     @Override
     public Drawable getMapTile(final MapTile pTile) {
         if (tileUnavailable(pTile)) {
+            if (DEBUG_TILE_PROVIDERS) {
+                Log.i(TAG, "MapTileLayerArray.getMapTile() tileUnavailable: "
+                        + pTile);
+            }
             return null;
         }
         final CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
-        if (tileDrawable != null && !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
+        if (tileDrawable != null &&
+                !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
+            if (DEBUG_TILE_PROVIDERS) {
+                Log.i(TAG, "MapTileLayerArray.getMapTile() already in cache: "
+                        + pTile);
+            }
+
             return tileDrawable;
         } else {
             boolean alreadyInProgress = false;
@@ -262,12 +272,17 @@ public class MapTileLayerArray extends MapTileLayerBase {
     @Override
     public void setTileSource(final ITileLayer aTileSource) {
         super.setTileSource(aTileSource);
+        mUnaccessibleTiles.clear();
         synchronized (mTileProviderList) {
             if (mTileProviderList.size() != 0) {
                 mTileProviderList.get(0).setTileSource(aTileSource);
-                clearTileCache();
             }
         }
+    }
+
+    @Override
+    public boolean hasNoSource() {
+        return mTileProviderList.size() == 0;
     }
 
     @Override
@@ -325,6 +340,18 @@ public class MapTileLayerArray extends MapTileLayerBase {
         }
 
         return (getMaximumZoomLevel() + getMinimumZoomLevel()) / 2;
+    }
+
+    @Override
+    public int getTileSizePixels() {
+        int result = 0;
+        synchronized (mTileProviderList) {
+            for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
+                result += tileProvider.getTileSizePixels();
+                break;
+            }
+        }
+        return result;
     }
 
     private static final String TAG = "MapTileLayerArray";

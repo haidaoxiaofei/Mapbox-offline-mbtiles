@@ -2,7 +2,6 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.os.Environment;
 import android.util.Log;
 
@@ -30,7 +29,6 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
     
     private static final String TAG = "MBTilesLayer";
     MBTilesFileArchive mbTilesFileArchive;
-    private Resources mResources;
 
     /**
      * Initialize a new tile layer, represented by a MBTiles file.
@@ -38,13 +36,12 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
      * @param url path to a MBTiles file
      */
     public MBTilesLayer(final String url) {
-        super(url);
-        initialize(url, null);
+        this(null, url);
     }
 
-    public MBTilesLayer(final Context context, final String assetUrl) {
-        super(assetUrl);
-        initialize(assetUrl, context);
+    public MBTilesLayer(final Context context, final String url) {
+        super(url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.')), url);
+        initialize(url, context);
     }
 
     /**
@@ -81,11 +78,10 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
      * @param context
      */
     private void initialize(String url, final Context context) {
-        mResources = context.getResources();
 
         File file = null;
         if (context != null) {
-            //we assume asset here
+           //we assume asset here
             AssetManager am = context.getAssets();
             InputStream inputStream;
             try {
@@ -130,7 +126,11 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
         if (mbTilesFileArchive != null) {
             InputStream stream = mbTilesFileArchive.getInputStream(this, aTile);
             if (stream != null) {
-                return downloader.getCache().putTileStream(aTile, stream, null);
+                CacheableBitmapDrawable result = downloader.getCache().putTileStream(aTile, stream, null);
+                if (result == null) {
+                    Log.d(TAG, "error reading stream from mbtiles");
+                }
+                return result;
             }
         }
         return null;

@@ -62,9 +62,10 @@ public class Projection implements GeoConstants {
         offsetX = -worldSize2;
         offsetY = -worldSize2;
 
-        mBoundingBoxProjection = mapView.getBoundingBox();
-        mScreenRectProjection = mapView.getScreenRect(null);
+        //TODO: optimize because right now each line re-compute the previous value
         mIntrinsicScreenRectProjection = mapView.getIntrinsicScreenRect(null);
+        mScreenRectProjection = mapView.getScreenRect(null);
+        mBoundingBoxProjection = mapView.getBoundingBoxInternal();
         mMapOrientation = mapView.getMapOrientation();
     }
 

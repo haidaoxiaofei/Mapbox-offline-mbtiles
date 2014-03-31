@@ -96,6 +96,13 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
     public abstract float getCenterZoom();
 
     /**
+     * Get the tile provider size in pixels.
+     *
+     * @return the tile size in pixels
+     */
+    public abstract int getTileSizePixels();
+
+    /**
      * Sets the tile source for this tile provider.
      *
      * @param tileSource the tile source
@@ -109,6 +116,13 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
     protected final Object mQueueLockObject = new Object();
     protected final HashMap<MapTile, MapTileRequestState> mWorking;
     protected final LinkedHashMap<MapTile, MapTileRequestState> mPending;
+
+    public MapTileRequestState popFirstPending() {
+        for (MapTile tile : mPending.keySet()) {
+            return mPending.remove(tile);
+        }
+        return null;
+    }
 
     /**
      * Initialize a new tile provider, given a thread pool and a pending queue size. The pending queue
@@ -134,15 +148,9 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
             @Override
             protected boolean removeEldestEntry(
                     final Map.Entry<MapTile, MapTileRequestState> pEldest) {
-                if (size() < pPendingQueueSize) {
-                    for (MapTile tile : mPending.keySet()) {
-                        if (!mWorking.containsKey(tile)) {
-                            MapTileRequestState state = mPending.get(tile);
-                            removeTileFromQueues(tile);
-                            state.getCallback().mapTileRequestFailed(state);
-                            break;
-                        }
-                    }
+                while (size() > pPendingQueueSize) {
+                    MapTileRequestState state = popFirstPending();
+                    state.getCallback().mapTileRequestFailed(state);
                 }
                 return false;
             }
@@ -238,30 +246,18 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
         protected MapTileRequestState nextTile() {
 
             synchronized (mQueueLockObject) {
-                MapTile result = null;
-
                 // get the most recently accessed tile
                 // - the last item in the iterator that's not already being
                 // processed
-                for (MapTile tile : mPending.keySet()) {
-                    if (!mWorking.containsKey(tile)) {
-                        if (DEBUG_TILE_PROVIDERS) {
-                            Log.i(TAG, "TileLoader.nextTile() on provider: " + getName()
-                                    + " found tile in working queue: " + tile);
-                        }
-                        result = tile;
+                MapTileRequestState state = popFirstPending();
+                if(state != null) {
+                    mWorking.put(state.getMapTile(), state);
+                    if (DEBUG_TILE_PROVIDERS) {
+                        Log.i(TAG, "TileLoader.nextTile() on provider: " + getName()
+                                + " adding tile to working queue: " + state.getMapTile());
                     }
                 }
-
-                if (result == null) {
-                    return null;
-                }
-                if (DEBUG_TILE_PROVIDERS) {
-                    Log.i(TAG, "TileLoader.nextTile() on provider: " + getName()
-                            + " adding tile to working queue: " + result);
-                }
-                mWorking.put(result, mPending.get(result));
-                return mPending.get(result);
+                return state;
             }
         }
 

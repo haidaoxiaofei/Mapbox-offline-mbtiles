@@ -20,11 +20,11 @@ public class MapboxTileLayer extends WebSourceTileLayer implements MapViewConsta
      * @param id a valid mapid, of the form account.map
      */
     public MapboxTileLayer(String id) {
-        super(id);
+        this(id, false);
     }
 
     public MapboxTileLayer(String id, boolean enableSSL) {
-        super(id, enableSSL);
+        super(id, id, enableSSL);
     }
 
     @Override
@@ -37,15 +37,6 @@ public class MapboxTileLayer extends WebSourceTileLayer implements MapViewConsta
             super.setURL(aUrl);
         }
         return this;
-    }
-
-    @Override
-    public String getTileURL(final MapTile aTile, boolean hdpi) {
-        return mUrl
-                .replace("{z}", String.valueOf(aTile.getZ()))
-                .replace("{x}", String.valueOf(aTile.getX()))
-                .replace("{y}", String.valueOf(aTile.getY()))
-                .replace("{2x}", hdpi ? "@2x" : "");
     }
 
     @Override
