@@ -162,8 +162,8 @@ public class MapTileCache implements TileLayerConstants {
         getCache().removeFromMemoryCache(key);
     }
 
-    public void clear() {
-        getCache().trimMemory();
+    public void purgeMemoryCache() {
+        getCache().purgeMemoryCache();
     }
 
     public CacheableBitmapDrawable createCacheableBitmapDrawable(Bitmap bitmap, MapTile aTile) {
