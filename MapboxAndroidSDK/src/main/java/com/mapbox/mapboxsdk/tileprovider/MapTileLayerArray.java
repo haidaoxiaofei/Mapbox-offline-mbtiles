@@ -265,7 +265,6 @@ public class MapTileLayerArray extends MapTileLayerBase {
         synchronized (mTileProviderList) {
             if (mTileProviderList.size() != 0) {
                 mTileProviderList.get(0).setTileSource(aTileSource);
-                clearTileCache();
             }
         }
     }
