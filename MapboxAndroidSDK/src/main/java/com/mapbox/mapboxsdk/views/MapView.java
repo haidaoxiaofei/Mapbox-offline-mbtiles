@@ -312,7 +312,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         GeoJSON.parseString(geoJSON, MapView.this);
     }
 
-    private void closeCurrentTooltip(){
+    private void closeCurrentTooltip() {
         if (currentTooltip != null) {
             if (mMapViewListener != null) {
                 mMapViewListener.willHideMarker(this, currentTooltip.getBoundMarker());
@@ -429,7 +429,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public BoundingBox getBoundingBoxInternal() {
         int w = getWidth();
         int h = getHeight();
-        if (w == 0 || h == 0) return null;
+        if (w == 0 || h == 0) {
+            return null;
+        }
         final Rect screenRect = GeometryMath.viewPortRect(getProjection(), null);
         ILatLng neGeoPoint = Projection.pixelXYToLatLong(screenRect.right, screenRect.top,
                 mZoomLevel);
@@ -833,7 +835,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         final double requiredLongitudeZoom = getMaxZoomLevel()
                 - (Math.log(mScrollableAreaBoundingBox.getLongitudeSpan()
                 / maxZoomLongitudeSpan) / Math.log(2));
-        mMinimumZoomLevel = (float)Math.min(mRequestedMinimumZoomLevel, Math.max(requiredLatitudeZoom, requiredLongitudeZoom)) ;
+        mMinimumZoomLevel = (float) Math.min(mRequestedMinimumZoomLevel, Math.max(requiredLatitudeZoom, requiredLongitudeZoom));
         if (mZoomLevel < mMinimumZoomLevel) {
             setZoom(mMinimumZoomLevel);
         }
@@ -880,12 +882,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         if (mScrollableAreaBoundingBox == null) {
             mMinimumZoomLevel = mRequestedMinimumZoomLevel;
             mScrollableAreaLimit = null;
-        }
-        else {
-        	updateMinZoomLevel();
+        } else {
+            updateMinZoomLevel();
             updateScrollableAreaLimit();
         }
-        
+
     }
 
     public BoundingBox getScrollableAreaLimit() {
@@ -1379,7 +1380,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
          *                  in pixels
          * @param height    the height, either {@link #FILL_PARENT}, {@link #WRAP_CONTENT} or a fixed size
          *                  in pixels
-         * @param aGeoPoint  the location of the child within the map view
+         * @param aGeoPoint the location of the child within the map view
          * @param alignment the alignment of the view compared to the location {@link #BOTTOM_CENTER},
          *                  {@link #BOTTOM_LEFT}, {@link #BOTTOM_RIGHT} {@link #TOP_CENTER},
          *                  {@link #TOP_LEFT}, {@link #TOP_RIGHT}

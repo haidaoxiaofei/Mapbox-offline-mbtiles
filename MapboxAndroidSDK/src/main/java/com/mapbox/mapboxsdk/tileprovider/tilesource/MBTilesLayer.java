@@ -26,7 +26,7 @@ import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
  */
 public class MBTilesLayer extends TileLayer implements MapViewConstants,
         MapboxConstants {
-    
+
     private static final String TAG = "MBTilesLayer";
     MBTilesFileArchive mbTilesFileArchive;
 
@@ -40,7 +40,7 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
     }
 
     public MBTilesLayer(final Context context, final String url) {
-        super(url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.')), url);
+        super(url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.')), url);
         initialize(url, context);
     }
 
@@ -81,7 +81,7 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
 
         File file = null;
         if (context != null) {
-           //we assume asset here
+            //we assume asset here
             AssetManager am = context.getAssets();
             InputStream inputStream;
             try {

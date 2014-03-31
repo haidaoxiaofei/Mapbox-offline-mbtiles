@@ -514,9 +514,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
             }
         }
     }
-    public CacheableBitmapDrawable getMapTileFromMemory(MapTile pTile)
-    {
-        return (mTileCache != null)?mTileCache.getMapTileFromMemory(pTile):null;
+
+    public CacheableBitmapDrawable getMapTileFromMemory(MapTile pTile) {
+        return (mTileCache != null) ? mTileCache.getMapTileFromMemory(pTile) : null;
     }
 
     private static final String TAG = "MapTileLayerBase";
