@@ -368,7 +368,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
             // If it's found then no need to created scaled version.
             // If not found (null) them we've initiated a new request for it,
             // and now we'll create a scaled version until the request completes.
-            final Drawable requestedTile = getMapTile(pTile);
+            final Drawable requestedTile = getMapTileFromMemory(pTile);
             if (requestedTile == null) {
                 try {
                     handleTile(pTileSizePx, pTile, pX, pY);
@@ -410,7 +410,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
 
             // get the correct fraction of the tile from cache and scale up
             final MapTile oldTile = new MapTile((int) Math.floor(mOldZoomLevel), (int) GeometryMath.rightShift(pX, mDiff), (int) GeometryMath.rightShift(pY, mDiff));
-            final Drawable oldDrawable = mTileCache.getMapTileFromMemory(oldTile);
+            final Drawable oldDrawable = getMapTileFromMemory(oldTile);
 
             if (oldDrawable instanceof BitmapDrawable) {
                 final int xx = (pX % (int) GeometryMath.leftShift(1, mDiff)) * mTileSize_2;
@@ -498,7 +498,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                                     x * mTileSize_2, y * mTileSize_2,
                                     (x + 1) * mTileSize_2, (y + 1) * mTileSize_2);
                             canvas.drawBitmap(oldBitmap, null, mDestRect, null);
-//                            mTileCache.removeTileFromMemory(oldTile);
+                            mTileCache.removeTileFromMemory(oldTile);
                         }
                     }
                 }
@@ -513,6 +513,10 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                 */
             }
         }
+    }
+    public CacheableBitmapDrawable getMapTileFromMemory(MapTile pTile)
+    {
+        return (mTileCache != null)?mTileCache.getMapTileFromMemory(pTile):null;
     }
 
     private static final String TAG = "MapTileLayerBase";
