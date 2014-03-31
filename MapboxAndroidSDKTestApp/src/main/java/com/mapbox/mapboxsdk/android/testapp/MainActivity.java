@@ -45,8 +45,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         mv = (MapView) findViewById(R.id.mapview);
         mapController = mv.getController();
-        replaceMapView("opencycle");
-
         replaceMapView(terrain);
         addLocationOverlay();
 
