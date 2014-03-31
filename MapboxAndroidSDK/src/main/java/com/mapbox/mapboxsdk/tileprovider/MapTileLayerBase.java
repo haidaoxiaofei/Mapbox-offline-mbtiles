@@ -305,7 +305,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
             Log.d(TAG, "rescale tile cache from " + pOldZoomLevel + " to " + pNewZoomLevel);
         }
 
-        final int tileSize = getTileSource().getTileSizePixels();
+        final int tileSize = getTileSizePixels();
         final Rect viewPort = GeometryMath.viewPortRectForTileDrawing(pNewZoomLevel, projection, null);
 
         final ScaleTileLooper tileLooper = pNewZoomLevel > pOldZoomLevel

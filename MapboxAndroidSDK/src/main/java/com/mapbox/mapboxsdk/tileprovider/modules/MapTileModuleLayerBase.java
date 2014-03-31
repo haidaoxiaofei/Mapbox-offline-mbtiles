@@ -96,6 +96,13 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
     public abstract float getCenterZoom();
 
     /**
+     * Get the tile provider size in pixels.
+     *
+     * @return the tile size in pixels
+     */
+    public abstract int getTileSizePixels();
+
+    /**
      * Sets the tile source for this tile provider.
      *
      * @param tileSource the tile source

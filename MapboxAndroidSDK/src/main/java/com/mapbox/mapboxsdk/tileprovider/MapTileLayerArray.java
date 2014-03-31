@@ -327,5 +327,17 @@ public class MapTileLayerArray extends MapTileLayerBase {
         return (getMaximumZoomLevel() + getMinimumZoomLevel()) / 2;
     }
 
+    @Override
+    public int getTileSizePixels() {
+        int result = 0;
+        synchronized (mTileProviderList) {
+            for (final MapTileModuleLayerBase tileProvider : mTileProviderList) {
+                result += tileProvider.getTileSizePixels();
+                break;
+            }
+        }
+        return result;
+    }
+
     private static final String TAG = "MapTileLayerArray";
 }
