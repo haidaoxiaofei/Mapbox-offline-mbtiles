@@ -286,6 +286,11 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         mUseDataConnection = pMode;
     }
 
+
+    public boolean hasNoSource() {
+        return mTileSource == null;
+    }
+
     /**
      * Recreate the cache using scaled versions of the tiles currently in it
      *
@@ -295,7 +300,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      */
     public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel, final Projection projection) {
 
-        if (mTileSource == null || Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel)) {
+        if (hasNoSource() || Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel)) {
             return;
         }
 

@@ -271,6 +271,11 @@ public class MapTileLayerArray extends MapTileLayerBase {
     }
 
     @Override
+    public boolean hasNoSource() {
+        return mTileProviderList.size() == 0;
+    }
+
+    @Override
     public BoundingBox getBoundingBox() {
         BoundingBox result = null;
         synchronized (mTileProviderList) {
