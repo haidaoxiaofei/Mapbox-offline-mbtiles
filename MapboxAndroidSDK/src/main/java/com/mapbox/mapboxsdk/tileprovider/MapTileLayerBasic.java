@@ -46,7 +46,6 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
             for (ITileLayer source : aTileSources) {
                 addTileSource(source);
             }
-            clearTileCache();
         }
     }
 

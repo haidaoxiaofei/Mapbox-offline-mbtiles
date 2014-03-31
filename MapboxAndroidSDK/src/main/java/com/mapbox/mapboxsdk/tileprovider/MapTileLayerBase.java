@@ -126,7 +126,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
             mTileSource.detach();
         }
         mTileSource = pTileSource;
-        clearTileCache();
+        clearTileMemoryCache();
         if (mTileSource != null) {
             mTileCache.setDiskCacheKey(mTileSource.getCacheKey());
         }
@@ -256,16 +256,19 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     }
 
     protected CacheableBitmapDrawable putExpiredTileIntoCache(final MapTile pTile, final CacheableBitmapDrawable drawable) {
-        mTileCache.removeTileFromMemory(pTile);
-        return mTileCache.putTileInMemoryCache(pTile, drawable);
+        CacheableBitmapDrawable currentDrawable = mTileCache.getMapTileFromMemory(pTile);
+        if (drawable != null && currentDrawable == null) {
+            currentDrawable = mTileCache.putTileInMemoryCache(pTile, drawable);
+        }
+        return currentDrawable;
     }
 
     public void setTileRequestCompleteHandler(final Handler handler) {
         mTileRequestCompleteHandler = handler;
     }
 
-    public void clearTileCache() {
-        mTileCache.clear();
+    public void clearTileMemoryCache() {
+        mTileCache.purgeMemoryCache();
     }
 
     /**
@@ -286,6 +289,11 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         mUseDataConnection = pMode;
     }
 
+
+    public boolean hasNoSource() {
+        return mTileSource == null;
+    }
+
     /**
      * Recreate the cache using scaled versions of the tiles currently in it
      *
@@ -295,7 +303,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      */
     public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel, final Projection projection) {
 
-        if (mTileSource == null || Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel)) {
+        if (hasNoSource() || Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel)) {
             return;
         }
 
@@ -305,8 +313,8 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
             Log.d(TAG, "rescale tile cache from " + pOldZoomLevel + " to " + pNewZoomLevel);
         }
 
-        final int tileSize = getTileSource().getTileSizePixels();
-        final Rect viewPort = GeometryMath.viewPortRect(pNewZoomLevel, projection, null);
+        final int tileSize = getTileSizePixels();
+        final Rect viewPort = GeometryMath.viewPortRectForTileDrawing(pNewZoomLevel, projection, null);
 
         final ScaleTileLooper tileLooper = pNewZoomLevel > pOldZoomLevel
                 ? new ZoomInTileLooper(pOldZoomLevel)
@@ -360,7 +368,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
             // If it's found then no need to created scaled version.
             // If not found (null) them we've initiated a new request for it,
             // and now we'll create a scaled version until the request completes.
-            final Drawable requestedTile = getMapTile(pTile);
+            final Drawable requestedTile = getMapTileFromMemory(pTile);
             if (requestedTile == null) {
                 try {
                     handleTile(pTileSizePx, pTile, pX, pY);
@@ -402,7 +410,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
 
             // get the correct fraction of the tile from cache and scale up
             final MapTile oldTile = new MapTile((int) Math.floor(mOldZoomLevel), (int) GeometryMath.rightShift(pX, mDiff), (int) GeometryMath.rightShift(pY, mDiff));
-            final Drawable oldDrawable = mTileCache.getMapTileFromMemory(oldTile);
+            final Drawable oldDrawable = getMapTileFromMemory(oldTile);
 
             if (oldDrawable instanceof BitmapDrawable) {
                 final int xx = (pX % (int) GeometryMath.leftShift(1, mDiff)) * mTileSize_2;
@@ -490,7 +498,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                                     x * mTileSize_2, y * mTileSize_2,
                                     (x + 1) * mTileSize_2, (y + 1) * mTileSize_2);
                             canvas.drawBitmap(oldBitmap, null, mDestRect, null);
-//                            mTileCache.removeTileFromMemory(oldTile);
+                            mTileCache.removeTileFromMemory(oldTile);
                         }
                     }
                 }
@@ -505,6 +513,10 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
                 */
             }
         }
+    }
+    public CacheableBitmapDrawable getMapTileFromMemory(MapTile pTile)
+    {
+        return (mTileCache != null)?mTileCache.getMapTileFromMemory(pTile):null;
     }
 
     private static final String TAG = "MapTileLayerBase";

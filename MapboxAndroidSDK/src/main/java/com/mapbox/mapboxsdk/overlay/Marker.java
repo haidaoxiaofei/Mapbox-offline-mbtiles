@@ -33,7 +33,6 @@ public class Marker {
     private int group = 0;
     private boolean clustered;
 
-
     public int getGroup() {
         return group;
     }
@@ -51,6 +50,19 @@ public class Marker {
 
     public void setClustered(boolean clustered) {
         this.clustered = clustered;
+    }
+
+
+    protected InfoWindow createTooltip(MapView mv){
+        return new InfoWindow(R.layout.tootip, mv);
+    }
+
+    private InfoWindow mToolTip;
+    public InfoWindow getToolTip(MapView mv) {
+        if (mToolTip == null || mToolTip.getMapView() != mv) {
+            mToolTip = createTooltip(mv);
+        }
+        return mToolTip;
     }
 
 
@@ -362,8 +374,7 @@ public class Marker {
         mapView = mv;
         context = mv.getContext();
         if (icon == null) {
-            // Set default icon
-            setIcon(new Icon(mv.getResources(), Icon.Size.LARGE, "", "000"));
+            setIcon(new Icon(mv.getContext(), Icon.Size.LARGE, "", "000"));
         }
         return this;
     }

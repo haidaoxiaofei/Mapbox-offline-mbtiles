@@ -9,13 +9,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 
-import com.mapbox.mapboxsdk.R;
-
 import java.lang.reflect.Field;
 
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 public class BitmapUtils {
+    public static final int[] EXPIRED = new int[]{-1};
+
     public static BitmapFactory.Options getBitmapOptions(DisplayMetrics mDisplayMetrics) {
         try {
             // TODO I think this can all be done without reflection now because all these properties are SDK 4
@@ -36,14 +36,16 @@ public class BitmapUtils {
     }
 
     public static boolean isCacheDrawableExpired(Drawable drawable) {
-        return drawable != null &&
-                drawable instanceof CacheableBitmapDrawable &&
-                ((CacheableBitmapDrawable) drawable).isBeingDisplayed();
+        if (drawable != null &&
+                drawable.getState() == EXPIRED) {
+            return true;
+        }
+        return false;
     }
 
     public static void setCacheDrawableExpired(CacheableBitmapDrawable drawable) {
         if (drawable != null) {
-            drawable.setBeingUsed(true);
+            drawable.setState(EXPIRED);
         }
     }
 }

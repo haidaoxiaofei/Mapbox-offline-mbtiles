@@ -29,14 +29,27 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * @param south
      * @param west
      */
-    public BoundingBox(final double north,
-                       final double east,
-                       final double south,
-                       final double west) {
+    public BoundingBox(double north,
+                       double east,
+                       double south,
+                       double west) {
+
+        if (north == south) {
+            //boundingbox full view
+            north = 90;
+            south = -90;
+        }
+        if (east == west) {
+            //boundingbox full view
+            east = 180;
+            west = -180;
+        }
         this.mLatNorth = north;
         this.mLonEast = east;
         this.mLatSouth = south;
         this.mLonWest = west;
+
+
     }
 
     public BoundingBox() {

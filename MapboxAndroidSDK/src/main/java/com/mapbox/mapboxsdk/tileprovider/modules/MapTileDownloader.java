@@ -116,6 +116,12 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     }
 
     @Override
+    public int getTileSizePixels(){
+        TileLayer tileLayer = mTileSource.get();
+        return (tileLayer != null) ? tileLayer.getTileSizePixels() : 0;
+    }
+
+    @Override
     public void setTileSource(final ITileLayer tileSource) {
         if (mTileSource.get() != null) {
             mTileSource.get().detach();

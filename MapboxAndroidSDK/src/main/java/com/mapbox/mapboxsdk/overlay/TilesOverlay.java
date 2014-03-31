@@ -114,7 +114,7 @@ public class TilesOverlay
         final Projection pj = mapView.getProjection();
         final float zoomLevel = pj.getZoomLevel();
         mWorldSize_2 = pj.getHalfWorldSize();
-        GeometryMath.viewPortRect(pj, mViewPort);
+        GeometryMath.viewPortRectForTileDrawing(pj, mViewPort);
 
         // Draw the tiles!
         drawTiles(c.getSafeCanvas(), zoomLevel, Projection.getTileSize(), mViewPort);
@@ -196,8 +196,6 @@ public class TilesOverlay
                     pCanvas.drawRect(mTileRect, mDebugPaint);
                 }
             }
-
-
         }
 
         @Override
