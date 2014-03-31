@@ -306,7 +306,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         }
 
         final int tileSize = getTileSource().getTileSizePixels();
-        final Rect viewPort = GeometryMath.viewPortRect(pNewZoomLevel, projection, null);
+        final Rect viewPort = GeometryMath.viewPortRectForTileDrawing(pNewZoomLevel, projection, null);
 
         final ScaleTileLooper tileLooper = pNewZoomLevel > pOldZoomLevel
                 ? new ZoomInTileLooper(pOldZoomLevel)
