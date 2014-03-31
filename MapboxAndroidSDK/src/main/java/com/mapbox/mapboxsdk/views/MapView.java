@@ -203,8 +203,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     public void setTileSource(final ITileLayer[] value) {
         if (mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
+            LatLng center = getCenter();
             ((MapTileLayerBasic) mTileProvider).setTileSources(value);
+            this.setMinZoomLevel(mTileProvider.getMinimumZoomLevel());
+            this.setMaxZoomLevel(mTileProvider.getMaximumZoomLevel());
             this.setZoom(mZoomLevel);
+            this.setCenter(center);
             postInvalidate();
         }
     }
