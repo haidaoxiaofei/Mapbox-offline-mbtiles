@@ -262,6 +262,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
     @Override
     public void setTileSource(final ITileLayer aTileSource) {
         super.setTileSource(aTileSource);
+        mUnaccessibleTiles.clear();
         synchronized (mTileProviderList) {
             if (mTileProviderList.size() != 0) {
                 mTileProviderList.get(0).setTileSource(aTileSource);
