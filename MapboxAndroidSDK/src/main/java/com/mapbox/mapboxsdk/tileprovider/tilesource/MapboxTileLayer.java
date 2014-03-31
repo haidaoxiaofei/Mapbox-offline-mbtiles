@@ -40,15 +40,6 @@ public class MapboxTileLayer extends WebSourceTileLayer implements MapViewConsta
     }
 
     @Override
-    public String getTileURL(final MapTile aTile, boolean hdpi) {
-        return mUrl
-                .replace("{z}", String.valueOf(aTile.getZ()))
-                .replace("{x}", String.valueOf(aTile.getX()))
-                .replace("{y}", String.valueOf(aTile.getY()))
-                .replace("{2x}", hdpi ? "@2x" : "");
-    }
-
-    @Override
     protected String getBrandedJSONURL() {
         return String.format("http%s://api.tiles.mapbox.com/v3/%s.json%s",
                 (mEnableSSL ? "s" : ""), mId, (mEnableSSL ? "?secure" : ""));

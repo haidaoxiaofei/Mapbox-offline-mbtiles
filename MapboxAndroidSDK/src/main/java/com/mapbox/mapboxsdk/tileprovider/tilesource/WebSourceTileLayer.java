@@ -226,9 +226,17 @@ public class WebSourceTileLayer extends TileLayer {
         }
         return null;
     }
+    
+    public String parseUrlForTile(String url, final MapTile aTile, boolean hdpi) {
+   	 return url.replace("{z}", String.valueOf(aTile.getZ()))
+                .replace("{x}", String.valueOf(aTile.getX()))
+                .replace("{y}", String.valueOf(aTile.getY()))
+                .replace("{2x}", hdpi ? "@2x" : "");
+   }
+
 
     public String getTileURL(final MapTile aTile, boolean hdpi) {
-        return null;
+    	 return parseUrlForTile(mUrl, aTile, hdpi);
     }
 
     private static final Paint compositePaint = new Paint(Paint.FILTER_BITMAP_FLAG);
