@@ -422,28 +422,22 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      *
      * @return the current bounds of the map
      */
-    public BoundingBox getBoundingBox() {
+    public BoundingBox getBoundingBoxInternal() {
         int w = getWidth();
         int h = getHeight();
-        if (w > 0 && h > 0) {
-            return getBoundingBox(getWidth(), getHeight());
-        }
-        return null;
-    }
-
-    private BoundingBox getBoundingBox(final int pViewWidth, final int pViewHeight) {
-
-        final int world_2 = Projection.mapSize(mZoomLevel) / 2;
-        final Rect screenRect = getScreenRect(null);
-        screenRect.offset(world_2, world_2);
-
-        final ILatLng neGeoPoint = Projection.pixelXYToLatLong(screenRect.right, screenRect.top,
+        if (w == 0 || h == 0) return null;
+        final Rect screenRect = GeometryMath.viewPortRect(getProjection(), null);
+        ILatLng neGeoPoint = Projection.pixelXYToLatLong(screenRect.right, screenRect.top,
                 mZoomLevel);
-        final ILatLng swGeoPoint = Projection.pixelXYToLatLong(screenRect.left,
+        ILatLng swGeoPoint = Projection.pixelXYToLatLong(screenRect.left,
                 screenRect.bottom, mZoomLevel);
 
         return new BoundingBox(neGeoPoint.getLatitude(), neGeoPoint.getLongitude(),
                 swGeoPoint.getLatitude(), swGeoPoint.getLongitude());
+    }
+
+    public BoundingBox getBoundingBox() {
+        return getProjection().getBoundingBox();
     }
 
     /**
