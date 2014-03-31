@@ -639,7 +639,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         // Zoom to boundingBox center, at calculated maximum allowed zoom level
         getController().setZoom(
                 (float) Math.max(
-                        Math.min(requiredLatitudeZoom, requiredLongitudeZoom),
+                        Math.max(requiredLatitudeZoom, requiredLongitudeZoom),
                         getMinZoomLevel()));
 
         getController().setCenter(
