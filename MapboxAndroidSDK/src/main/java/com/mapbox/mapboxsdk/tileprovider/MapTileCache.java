@@ -1,11 +1,13 @@
 // Created by plusminus on 17:58:57 - 25.09.2008
 package com.mapbox.mapboxsdk.tileprovider;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
@@ -186,12 +188,13 @@ public class MapTileCache implements TileLayerConstants {
      * Creates a unique subdirectory of the designated app cache directory. Tries to use external
      * but if not mounted, falls back on internal storage.
      */
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public static File getDiskCacheDir(Context context, String uniqueName) {
         // Check if media is mounted or storage is built-in, if so, try and use external cache dir
         // otherwise use internal cache dir
         final String cachePath =
                 Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) ||
-                        !Environment.isExternalStorageRemovable() ? Environment.getExternalStorageDirectory().getPath() :
+                        (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD &&  !Environment.isExternalStorageRemovable()) ? Environment.getExternalStorageDirectory().getPath() :
                         context.getFilesDir().getPath();
 
         return new File(cachePath, uniqueName);
