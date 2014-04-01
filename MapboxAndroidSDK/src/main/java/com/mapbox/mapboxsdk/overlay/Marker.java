@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -224,22 +225,21 @@ public class Marker {
             marker.setBounds(0,0,marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
         }
 
-//        mapView.invalidateMapCoordinates(marker.getBounds());
-
-/*
-        // Determine bounding box of drawable
-        Point point = mapView.getProjection().toMapPixels(latLng, null);
-        int widthBuffer = getWidth() / 2;
-        int heightBuffer = getHeight() / 2;
-
-        // l, t, r, b
-        Rect rect = new Rect(point.x - widthBuffer, point.y + heightBuffer, point.x + widthBuffer, point.y - heightBuffer);
-
-        mapView.invalidateMapCoordinates(rect);
-*/
-
-        mapView.invalidate();
-
+        invalidate();
+    }
+    
+    public void invalidate() {
+    	if (mapView != null) {
+            // Determine bounding box of drawable
+//            PointF point = getPositionOnScreen(mapView, null);
+//            
+//
+//            // l, t, r, b
+//            Rect rect = new Rect(point.x - widthBuffer, point.y + heightBuffer, point.x + widthBuffer, point.y - heightBuffer);
+//
+//            mapView.invalidate(rect);
+    		mapView.invalidate();
+    	}
     }
 
     public void setMarkerHotspot(final HotspotPlace place) {
