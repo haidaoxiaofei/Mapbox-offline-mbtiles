@@ -179,6 +179,10 @@ public class MapTileCache implements TileLayerConstants {
     public Bitmap decodeBitmap(final byte[] data, final BitmapFactory.Options opts) {
         return getCache().decodeBitmap(new BitmapLruCache.ByteArrayInputStreamProvider(data), opts);
     }
+    
+    public Bitmap decodeBitmap(final BitmapLruCache.InputStreamProvider ip, final BitmapFactory.Options opts) {
+        return getCache().decodeBitmap(ip, opts);
+    }
 
     public void setDiskCacheKey(final String key) {
         mDiskCacheKey = key;
