@@ -2,13 +2,16 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.mapbox.mapboxsdk.views.InfoWindow;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
@@ -92,6 +95,7 @@ public class Marker {
     //private GeoPoint mGeoPoint //unfortunately, this is not so simple...
     private Object mRelatedObject; //reference to an object (of any kind) linked to this item.
     private boolean bubbleShowing;
+    static Drawable defaultPinDrawable;
 
     // ===========================================================
     // Constructors
@@ -117,8 +121,12 @@ public class Marker {
         if (mv != null) {
             context = mv.getContext();
             mapView = mv;
-            this.setMarker(context.getResources().getDrawable(R.drawable.defpin));
+            if (defaultPinDrawable == null) {
+                BitmapFactory.Options opts = BitmapUtils.getBitmapOptions(context.getResources().getDisplayMetrics());
+                defaultPinDrawable = new BitmapDrawable(BitmapFactory.decodeResource(context.getResources(), R.drawable.defpin, opts));
+            }
         }
+        this.setMarker(defaultPinDrawable);
         mHotspotPlace = HotspotPlace.BOTTOM_CENTER;
     }
 
