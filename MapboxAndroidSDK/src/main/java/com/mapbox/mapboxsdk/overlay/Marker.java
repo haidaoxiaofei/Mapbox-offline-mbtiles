@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
@@ -10,6 +11,7 @@ import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.InfoWindow;
 import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
  * Immutable class describing a LatLng with a Title and a Description.
@@ -30,7 +32,6 @@ public class Marker {
     protected static final Point DEFAULT_MARKER_SIZE = new Point(26, 94);
     private int group = 0;
     private boolean clustered;
-
 
     public int getGroup() {
         return group;
@@ -83,6 +84,7 @@ public class Marker {
     protected LatLng mLatLng;
     protected Drawable mMarker;
     protected HotspotPlace mHotspotPlace;
+    protected Point mAnchor = null;
 
     private String mTitle, mDescription; // now, they are modifiable
     private String mSubDescription; //a third field that can be displayed in the infowindow, on a third line
@@ -95,16 +97,8 @@ public class Marker {
     // Constructors
     // ===========================================================
 
-    public Marker(final String aUid, final String aTitle, final String aDescription,
-                  final LatLng aLatLng) {
-        this.mTitle = aTitle;
-        this.mSnippet = aDescription;
-        this.mLatLng = aLatLng;
-        this.mUid = aUid;
-    }
-
-    public Marker(String title, String s, LatLng aLatLng) {
-        this((MapView) null, title, s, aLatLng);
+    public Marker(String title, String description, LatLng latLng) {
+        this(null, title, description, latLng);
     }
 
     /**
@@ -125,6 +119,7 @@ public class Marker {
             mapView = mv;
             this.setMarker(context.getResources().getDrawable(R.drawable.defpin));
         }
+        mHotspotPlace = HotspotPlace.BOTTOM_CENTER;
     }
 
     // ===========================================================
@@ -206,6 +201,7 @@ public class Marker {
     }
 
     public void setMarker(final Drawable marker) {
+        marker.setBounds(0,0,marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
         this.mMarker = marker;
 
 //        mapView.invalidateMapCoordinates(marker.getBounds());
@@ -232,6 +228,23 @@ public class Marker {
 
     public HotspotPlace getMarkerHotspot() {
         return this.mHotspotPlace;
+    }
+
+    public Point getMarkerAnchor() {
+        if (mAnchor != null) {
+            int markerWidth = getWidth(), markerHeight = getHeight();
+            return new Point(mAnchor.x*markerWidth, mAnchor.y*markerHeight);
+        }
+        return getMarkerAnchor(getMarkerHotspot());
+    }
+
+    public Point getMarkerAnchor(HotspotPlace place) {
+        int markerWidth = getWidth(), markerHeight = getHeight();
+        return getHotspot(place, markerWidth, markerHeight);
+    }
+
+    public void setMarkerAnchorPoint(final Point anchor) {
+        this.mAnchor = anchor;
     }
 
     // ===========================================================
@@ -266,7 +279,18 @@ public class Marker {
     }
 
     public int getHeight() {
-        return this.mMarker.getIntrinsicHeight();
+        return this.mMarker.getIntrinsicHeight()/2;
+    }
+
+    public PointF getPositionOnScreen(MapView mv, PointF reuse) {
+        if (reuse == null) {
+            reuse = new PointF();
+        }
+        final Projection pj = mapView.getProjection();
+        pj.toPixels(mLatLng, reuse);
+        Point point = getMarkerAnchor();
+        reuse.offset(point.x, point.y);
+        return reuse;
     }
 
     // ===========================================================
@@ -288,31 +312,31 @@ public class Marker {
                 hp.set(0, 0);
                 break;
             case BOTTOM_CENTER:
-                hp.set(w / 2, 0);
+                hp.set(-w / 2, -h);
                 break;
             case LOWER_LEFT_CORNER:
-                hp.set(0, 0);
+                hp.set(0, -h);
                 break;
             case LOWER_RIGHT_CORNER:
-                hp.set(w, 0);
+                hp.set(-w, -h);
                 break;
             case CENTER:
-                hp.set(w / 2, -h / 2);
+                hp.set(-w / 2, -h / 2);
                 break;
             case LEFT_CENTER:
                 hp.set(0, -h / 2);
                 break;
             case RIGHT_CENTER:
-                hp.set(w, -h / 2);
+                hp.set(-w, -h / 2);
                 break;
             case TOP_CENTER:
-                hp.set(w / 2, -h);
+                hp.set(-w / 2, 0);
                 break;
             case UPPER_LEFT_CORNER:
-                hp.set(0, -h);
+                hp.set(0, 0);
                 break;
             case UPPER_RIGHT_CORNER:
-                hp.set(w, -h);
+                hp.set(-w, 0);
                 break;
         }
         return hp;
@@ -326,16 +350,11 @@ public class Marker {
      */
     public void showBubble(InfoWindow tooltip, MapView aMapView, boolean panIntoView) {
         //offset the tooltip to be top-centered on the marker:
-        Drawable marker = getMarker(0 /*OverlayItem.ITEM_STATE_FOCUSED_MASK*/);
-        int markerWidth = 0, markerHeight = 0;
-        if (marker != null) {
-            markerWidth = marker.getIntrinsicWidth();
-            markerHeight = marker.getIntrinsicHeight();
-        } //else... we don't have the default marker size => don't user default markers!!!
-        Point markerH = getHotspot(getMarkerHotspot(), markerWidth, markerHeight);
-        Point tooltipH = getHotspot(HotspotPlace.TOP_CENTER, markerWidth, markerHeight);
-        tooltipH.offset(-markerH.x, -markerH.y);
-        tooltip.open(this, this.getPoint(), tooltipH.x, tooltipH.y);
+//        Drawable marker = getMarker(0 /*OverlayItem.ITEM_STATE_FOCUSED_MASK*/);
+        Point markerH = getMarkerAnchor();
+        Point tooltipH = getMarkerAnchor(HotspotPlace.TOP_CENTER);
+        markerH.offset(-tooltipH.x, tooltipH.y);
+        tooltip.open(this, this.getPoint(), markerH.x, markerH.y);
         if (panIntoView) {
             aMapView.getController().animateTo(getPoint());
         }
@@ -355,16 +374,14 @@ public class Marker {
         mapView = mv;
         context = mv.getContext();
         if (icon == null) {
-            // Set default icon
-            setIcon(new Icon(mv.getResources(), Icon.Size.LARGE, "", "000"));
+            setIcon(new Icon(mv.getContext(), Icon.Size.LARGE, "", "000"));
         }
         return this;
     }
 
-    public Marker setIcon(Icon aIcon) {
-        this.icon = aIcon;
-        this.icon.setMarker(this);
-        this.setMarkerHotspot(HotspotPlace.CENTER);
+    public Marker setIcon(Icon icon) {
+        this.icon = icon;
+        icon.setMarker(this);
         return this;
     }
 }

@@ -368,10 +368,12 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
             }
         }
 
-        for (final Runnable runnable : mRunOnFirstFix) {
-            new Thread(runnable).start();
+        synchronized (mRunOnFirstFix) {
+            for (final Runnable runnable : mRunOnFirstFix) {
+                new Thread(runnable).start();
+            }
+            mRunOnFirstFix.clear();
         }
-        mRunOnFirstFix.clear();
     }
 
     public boolean enableMyLocation(GpsLocationProvider myLocationProvider) {
@@ -445,7 +447,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
             new Thread(runnable).start();
             return true;
         } else {
-            mRunOnFirstFix.addLast(runnable);
+            synchronized (mRunOnFirstFix) {
+                mRunOnFirstFix.addLast(runnable);
+            }
             return false;
         }
     }

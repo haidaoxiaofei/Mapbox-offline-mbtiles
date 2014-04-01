@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk.format;
 import android.graphics.Paint;
 
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -60,23 +61,51 @@ public class GeoJSON {
 
         JSONObject properties = (JSONObject) feature.get("properties");
         String title = properties.optString("title");
-
         JSONObject geometry = (JSONObject) feature.get("geometry");
         String type = geometry.optString("type");
+
+
         int j;
+
+        // Extract the marker style properties from the GeoJSON
+        // (See: https://www.mapbox.com/developers/simplestyle/)
+        Icon markerIcon = null;
+        String markerColor = properties.optString("marker-color");
+        String markerSize = properties.optString("marker-size");
+        String markerSymbol = properties.optString("marker-symbol");
+
+        if (!"".equals(markerColor) || !"".equals(markerSize) || !"".equals(markerSymbol)) {
+            // Who knows what kind of stuff we are getting in
+            Icon.Size size = Icon.Size.LARGE;
+            try {
+                size = Icon.Size.valueOf(markerSize.toUpperCase());
+            } catch (IllegalArgumentException iae) {
+                // Fine, we will just assume you meant large..
+            }
+
+            markerIcon = new Icon(mv.getContext(), size, markerSymbol, markerColor);
+        }
 
         if (type.equals("Point")) {
             JSONArray coordinates = (JSONArray) geometry.get("coordinates");
             double lon = (Double) coordinates.get(0);
             double lat = (Double) coordinates.get(1);
-            mv.addMarker(new Marker(mv, title, "", new LatLng(lat, lon)));
+            Marker marker = new Marker(mv, title, "", new LatLng(lat, lon));
+            if (markerIcon != null)
+                marker.setIcon(markerIcon);
+
+            mv.addMarker(marker);
         } else if (type.equals("MultiPoint")) {
             JSONArray points = (JSONArray) geometry.get("coordinates");
             for (j = 0; j < points.length(); j++) {
                 JSONArray coordinates = (JSONArray) points.get(j);
                 double lon = (Double) coordinates.get(0);
                 double lat = (Double) coordinates.get(1);
-                mv.addMarker(new Marker(mv, title, "", new LatLng(lat, lon)));
+                Marker marker = new Marker(mv, title, "", new LatLng(lat, lon));
+                if (markerIcon != null)
+                    marker.setIcon(markerIcon);
+
+                mv.addMarker(marker);
             }
         } else if (type.equals("LineString")) {
             PathOverlay path = new PathOverlay();

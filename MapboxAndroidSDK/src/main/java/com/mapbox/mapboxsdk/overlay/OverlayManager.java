@@ -74,11 +74,15 @@ public class OverlayManager extends AbstractList<Overlay> {
     }
 
     private Integer getOverlayClassSortIndex(Overlay overlay) {
-        int result = 1;
-        if (overlay instanceof UserLocationOverlay) {
-            result = 2;
-        } else if (overlay instanceof PathOverlay) {
-            result = 0;
+        int result = 2;
+        if (overlay instanceof MapEventsOverlay) {
+            result  = 0;
+        }
+        else if (overlay instanceof UserLocationOverlay) {
+            result  = 3;
+        }
+        else if (overlay instanceof PathOverlay) {
+            result  = 1;
         }
         return Integer.valueOf(result);
     }
