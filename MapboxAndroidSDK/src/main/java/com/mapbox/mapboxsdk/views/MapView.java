@@ -428,11 +428,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @return the current bounds of the map
      */
     public BoundingBox getBoundingBoxInternal() {
-        int w = getWidth();
-        int h = getHeight();
-        if (w == 0 || h == 0) {
-            return null;
-        }
+    	if (getMeasuredWidth() == 0 || getMeasuredHeight() == 0) return null;
         final Rect screenRect = GeometryMath.viewPortRect(getProjection(), null);
         ILatLng neGeoPoint = Projection.pixelXYToLatLong(screenRect.right, screenRect.top,
                 mZoomLevel);

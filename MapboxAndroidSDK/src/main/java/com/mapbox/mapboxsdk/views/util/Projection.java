@@ -54,8 +54,8 @@ public class Projection implements GeoConstants {
         super();
         this.mapView = mv;
 
-        viewWidth2 = mapView.getWidth() >> 1;
-        viewHeight2 = mapView.getHeight() >> 1;
+        viewWidth2 = mapView.getMeasuredWidth() >> 1;
+        viewHeight2 = mapView.getMeasuredHeight() >> 1;
         mZoomLevelProjection = mapView.getZoomLevel(false);
         worldSize2 = this.mapSize(mZoomLevelProjection) >> 1;
 
