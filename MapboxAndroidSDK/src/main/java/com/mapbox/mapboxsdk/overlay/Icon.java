@@ -122,7 +122,8 @@ public class Icon implements MapboxConstants {
 
         // Cache hit! We're done..
         if (bitmap != null) {
-            marker.setMarker(bitmap);
+        	drawable = bitmap;
+            if (marker != null) marker.setMarker(drawable);
             return;
         }
 
@@ -155,7 +156,8 @@ public class Icon implements MapboxConstants {
             if (list == null) {
                 // Note, there is an extremely unlikely chance we are immediately kicked
                 // out of the cache...
-                marker.setMarker(sIconCache.get(url));
+            	drawable = sIconCache.get(url);
+                if (marker != null) marker.setMarker(drawable);
                 return;
             }
 
@@ -164,7 +166,8 @@ public class Icon implements MapboxConstants {
                 // The downloader thread just released the lock, the list is empty.
                 // The cache has our icon..
                 if (list.isEmpty()) {
-                    marker.setMarker(sIconCache.get(url));
+                	drawable = sIconCache.get(url);
+                    if (marker != null) marker.setMarker(drawable);
                     return;
                 }
 
