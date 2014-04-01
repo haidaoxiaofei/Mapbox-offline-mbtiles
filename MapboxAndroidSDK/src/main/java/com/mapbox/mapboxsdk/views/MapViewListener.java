@@ -4,11 +4,11 @@ import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.overlay.Marker;
 
 
-public class MapViewListener {
-    public void willShowMarker(final MapView pMapView, final Marker pMarker){};
-    public void willHideMarker(final MapView pMapView, final Marker pMarker){};
-    public void tapOnMarker(final MapView pMapView, final Marker pMarker){};
-    public void longpressOnMarker(final MapView pMapView, final Marker pMarker){};
-    public void tapOnMap(final MapView pMapView, final ILatLng pPosition){};
-    public void longpressOnMap(final MapView pMapView, final ILatLng pPosition){};
+public interface MapViewListener {
+    public void onShowMarker(final MapView pMapView, final Marker pMarker);
+    public void onHidemarker(final MapView pMapView, final Marker pMarker);
+    public void onTapMarker(final MapView pMapView, final Marker pMarker);
+    public void onLongPressMarker(final MapView pMapView, final Marker pMarker);
+    public void onTapMap(final MapView pMapView, final ILatLng pPosition);
+    public void onLongPressMap(final MapView pMapView, final ILatLng pPosition);
 }

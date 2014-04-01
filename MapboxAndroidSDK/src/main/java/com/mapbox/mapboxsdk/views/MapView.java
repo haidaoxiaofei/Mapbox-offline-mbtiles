@@ -315,7 +315,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private void closeCurrentTooltip(){
         if (currentTooltip != null) {
             if (mMapViewListener != null) {
-                mMapViewListener.willHideMarker(this, currentTooltip.getBoundMarker());
+                mMapViewListener.onHidemarker(this, currentTooltip.getBoundMarker());
             }
             currentTooltip.close();
             currentTooltip = null;
@@ -332,14 +332,14 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
                 InfoWindow toolTip = item.getToolTip(MapView.this);
                 if (mMapViewListener != null) {
-                    mMapViewListener.tapOnMarker(MapView.this, item);
+                    mMapViewListener.onTapMarker(MapView.this, item);
                 }
                 // Hide tooltip if tapping on the same marker
                 if (toolTip == currentTooltip) {
                     closeCurrentTooltip();
                 } else {
                     if (mMapViewListener != null) {
-                        mMapViewListener.willShowMarker(MapView.this, item);
+                        mMapViewListener.onShowMarker(MapView.this, item);
                     }
                     currentTooltip = toolTip;
                     item.showBubble(currentTooltip, MapView.this, true);
@@ -350,7 +350,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             public boolean onItemLongPress(final int index,
                                            final Marker item) {
                 if (mMapViewListener != null) {
-                    mMapViewListener.longpressOnMarker(MapView.this, item);
+                    mMapViewListener.onLongPressMarker(MapView.this, item);
                 }
                 return true;
             }
@@ -379,13 +379,13 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     public void onLongPress(final ILatLng p) {
         if (mMapViewListener != null) {
-            mMapViewListener.longpressOnMap(MapView.this, p);
+            mMapViewListener.onLongPressMap(MapView.this, p);
         }
     }
 
     public void onTap(final ILatLng p) {
         if (mMapViewListener != null) {
-            mMapViewListener.tapOnMap(MapView.this, p);
+            mMapViewListener.onTapMap(MapView.this, p);
         }
     }
 
@@ -1420,7 +1420,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
     }
 
-    public void setmMapViewListener(MapViewListener listener) {
+    public void setMapViewListener(MapViewListener listener) {
         this.mMapViewListener = listener;
     }
 
