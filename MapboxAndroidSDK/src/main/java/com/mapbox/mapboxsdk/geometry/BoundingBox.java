@@ -203,8 +203,8 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     public BoundingBox union(final double pLatNorth, final double pLatSouth,
                              final double pLonEast,
                              final double pLonWest) {
-        if ((pLonWest < pLonEast) && (pLatNorth < pLatSouth)) {
-            if ((this.mLonWest < this.mLonEast) && (this.mLatNorth < this.mLatSouth)) {
+        if ((pLonWest < pLonEast) && (pLatNorth > pLatSouth)) {
+            if ((this.mLonWest < this.mLonEast) && (this.mLatNorth > this.mLatSouth)) {
                 return new BoundingBox((this.mLatNorth < pLatNorth) ? pLatNorth : this.mLatNorth,
                         (this.mLonEast < pLonEast) ? pLonEast : this.mLonEast,
                         (this.mLatSouth > pLatSouth) ? pLatSouth : this.mLatSouth,
