@@ -854,7 +854,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         final double requiredLongitudeZoom = getMaxZoomLevel()
                 - (Math.log(mScrollableAreaBoundingBox.getLongitudeSpan()
                 / maxZoomLongitudeSpan) / Math.log(2));
-        mMinimumZoomLevel = (float) Math.max(mRequestedMinimumZoomLevel, Math.max(requiredLatitudeZoom, requiredLongitudeZoom));
+        mMinimumZoomLevel = (float) Math.max(mRequestedMinimumZoomLevel, Math.min(requiredLatitudeZoom, requiredLongitudeZoom));
         if (mZoomLevel < mMinimumZoomLevel) {
             setZoom(mMinimumZoomLevel);
         }
