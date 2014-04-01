@@ -7,6 +7,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
@@ -144,7 +145,16 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     }
 
     protected boolean onSingleTapUpHelper(final int index, final Marker item, final MapView mapView) {
-        return this.mOnItemGestureListener.onItemSingleTapUp(index, item);
+        if (item instanceof ClusterItem) {
+            if (clusterActions != null) {
+                clusterActions.onClusterTap((ClusterItem)item);
+            } else {
+                ArrayList<LatLng> activePoints = getCoordinateList(getGroupElements(mItemList, item.getGroup()));
+                view.zoomToBoundingBox(BoundingBox.fromLatLngs(activePoints));
+            }
+            return false;
+        }
+        else return this.mOnItemGestureListener.onItemSingleTapUp(index, item);
     }
 
     @Override
@@ -178,6 +188,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
                                           final ActiveItem task) {
         for (int i = 0; i < this.mItemList.size(); ++i) {
             final Marker item = getItem(i);
+            if (item.beingClustered()) continue;
             item.getPositionOnScreen(mapView, mCurScreenCoords);
             if (hitTest(item, event.getX(), event.getY())) {
                 if (task.run(i)) {
@@ -303,29 +314,6 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
         return new LatLng(Lat * 180 / Math.PI, Lon * 180 / Math.PI);
     }
 
-
-    private void initClusterOverlay() {
-
-//        clusters = new ItemizedIconOverlay(context, clusterList, new ItemizedIconOverlay.OnItemGestureListener<ClusterItem>() {
-//            @Override
-//            public boolean onItemSingleTapUp(int index, ClusterItem item) {
-//                if (clusterActions != null) {
-//                    clusterActions.onClusterTap(item);
-//                } else {
-//                    ArrayList<LatLng> activePoints = getCoordinateList(getGroupElements((List<Marker>) mItemList, item.getGroup()));
-//                    view.zoomToBoundingBox(BoundingBox.fromLatLngs(activePoints));
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onItemLongPress(int index, ClusterItem item) {
-//                return false;
-//            }
-//        });
-//        clusters.setCluster(true);
-    }
-
     private LatLng generateCenterByGroup(ArrayList<Marker> list, int group) {
         int sumlon = 0, sumlat = 0, count = 0;
         ArrayList<Marker> tempList = getGroupElements(list, group);
@@ -342,7 +330,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     private ArrayList<Marker> getGroupElements(List<Marker> list, int group) {
         ArrayList<Marker> tempList = new ArrayList<Marker>();
         for (Marker element : list) {
-            if (element.getGroup() == group) {
+            if (!(element instanceof ClusterItem) && element.getGroup() == group) {
                 tempList.add(element);
             }
         }
