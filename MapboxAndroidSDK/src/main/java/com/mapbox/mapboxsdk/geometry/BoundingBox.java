@@ -135,6 +135,14 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
             maxLon = Math.max(maxLon, longitude);
         }
 
+        if (minLon == maxLon) {
+            minLon -= 0.05;
+            maxLon += 0.05;
+        }
+        if (minLat == maxLat) {
+            minLat -= 0.05;
+            maxLat += 0.05;
+        }
         return new BoundingBox(maxLat, maxLon, minLat, minLon);
     }
 
