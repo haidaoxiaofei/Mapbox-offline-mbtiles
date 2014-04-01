@@ -132,6 +132,10 @@ public class PathOverlay extends Overlay {
             addPoint(point);
         }
     }
+    
+    public void removeAllPoints() {
+    	mPoints.clear();
+    }
 
     public int getNumberOfPoints() {
         return this.mPoints.size();
