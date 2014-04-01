@@ -219,8 +219,10 @@ public class Marker {
     }
 
     public void setMarker(final Drawable marker) {
-        marker.setBounds(0,0,marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
         this.mMarker = marker;
+        if (marker != null) {
+            marker.setBounds(0,0,marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
+        }
 
 //        mapView.invalidateMapCoordinates(marker.getBounds());
 
