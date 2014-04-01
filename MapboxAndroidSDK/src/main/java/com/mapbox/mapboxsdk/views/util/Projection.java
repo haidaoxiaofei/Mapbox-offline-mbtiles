@@ -43,7 +43,7 @@ public class Projection implements GeoConstants {
     private final int offsetX;
     private final int offsetY;
 
-    private final BoundingBox mBoundingBoxProjection;
+    private BoundingBox mBoundingBoxProjection;
     private final float mZoomLevelProjection;
     private final Rect mScreenRectProjection;
     private final Rect mIntrinsicScreenRectProjection;
@@ -65,7 +65,6 @@ public class Projection implements GeoConstants {
         //TODO: optimize because right now each line re-compute the previous value
         mIntrinsicScreenRectProjection = mapView.getIntrinsicScreenRect(null);
         mScreenRectProjection = mapView.getScreenRect(null);
-        mBoundingBoxProjection = mapView.getBoundingBoxInternal();
         mMapOrientation = mapView.getMapOrientation();
     }
 
@@ -78,6 +77,9 @@ public class Projection implements GeoConstants {
     }
 
     public BoundingBox getBoundingBox() {
+    	if (mBoundingBoxProjection == null) {
+    		mBoundingBoxProjection = mapView.getBoundingBoxInternal();
+    	}
         return mBoundingBoxProjection;
     }
 
