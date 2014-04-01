@@ -178,7 +178,9 @@ public class WebSourceTileLayer extends TileLayer {
     class RetrieveJSONTask extends AsyncTask<String, Void, JSONObject> {
         protected JSONObject doInBackground(String... urls) {
             OkHttpClient client = new OkHttpClient();
-            client.setResponseCache(null);
+            if (cache != null) {
+                client.setResponseCache(cache);
+            }
             InputStream in = null;
             try {
                 URL url = new URL(urls[0]);
@@ -314,9 +316,7 @@ public class WebSourceTileLayer extends TileLayer {
         }
         client.setSslSocketFactory(sslContext.getSocketFactory());
 
-        if (cache != null) {
-            client.setResponseCache(cache);
-        }
+        client.setResponseCache(null);
 
         if (TextUtils.isEmpty(url)) {
             activeThreads.decrementAndGet();
