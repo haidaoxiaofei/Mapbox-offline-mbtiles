@@ -965,7 +965,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
         // Find out how big everyone wants to be
         measureChildren(widthMeasureSpec, heightMeasureSpec);
-
+        final Projection projection = getProjection();
         // Find rightmost and bottom-most child
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
@@ -974,7 +974,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 final MapView.LayoutParams lp = (MapView.LayoutParams) child.getLayoutParams();
                 final int childHeight = child.getMeasuredHeight();
                 final int childWidth = child.getMeasuredWidth();
-                getProjection().toMapPixels(lp.geoPoint, mPoint);
+                projection.toMapPixels(lp.geoPoint, mPoint);
                 final int x = (int) mPoint.x + getWidth() / 2;
                 final int y = (int) mPoint.y + getHeight() / 2;
                 int childRight = x;
@@ -1052,6 +1052,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 mBoundingBoxToZoomOn = null;
             }
         }
+        final Projection projection = getProjection();
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
             if (child.getVisibility() != GONE) {
@@ -1059,7 +1060,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 final MapView.LayoutParams lp = (MapView.LayoutParams) child.getLayoutParams();
                 final int childHeight = child.getMeasuredHeight();
                 final int childWidth = child.getMeasuredWidth();
-                getProjection().toMapPixels(lp.geoPoint, mPoint);
+                projection.toMapPixels(lp.geoPoint, mPoint);
                 final int x = (int) mPoint.x + getWidth() / 2;
                 final int y = (int) mPoint.y + getHeight() / 2;
                 int childLeft = x;
