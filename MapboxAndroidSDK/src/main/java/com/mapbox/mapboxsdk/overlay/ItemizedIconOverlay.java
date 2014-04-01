@@ -204,11 +204,15 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
         this.clusterActions = clusterActions;
     }
 
-    public void cluster(MapView view, Context context) {
+    public void clearCluster() {
         if (clusterList.size() > 0) {
             removeItems(clusterList);
             clusterList.clear();
         }
+    }
+
+    public void cluster(MapView view, Context context) {
+        clearCluster();
         if (!isClusteringOn()) {
             return;
         }
