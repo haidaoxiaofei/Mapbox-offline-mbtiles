@@ -1,5 +1,6 @@
 package com.mapbox.mapboxsdk.views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -49,9 +50,7 @@ import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
-
 import org.json.JSONException;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +62,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * state of a single map, including layers, markers,
  * and interaction code.
  */
+@SuppressLint("WrongCall")
 public class MapView extends ViewGroup implements MapViewConstants, MapEventsReceiver, MapboxConstants {
     /**
      * The default marker Overlay, automatically added to the view to add markers directly.
@@ -453,7 +453,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @return centerpoint
      */
     public LatLng getCenter() {
-        return getBoundingBox().getCenter();
+    	BoundingBox box = getBoundingBox();
+    	return (box != null)? box.getCenter():null;
     }
 
     /**
