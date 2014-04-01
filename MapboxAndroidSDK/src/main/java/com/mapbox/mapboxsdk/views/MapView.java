@@ -67,7 +67,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     /**
      * The default marker Overlay, automatically added to the view to add markers directly.
      */
-    private ItemizedIconOverlay<Marker> defaultMarkerOverlay;
+    private ItemizedIconOverlay defaultMarkerOverlay;
     /**
      * List linked to the default marker overlay.
      */
