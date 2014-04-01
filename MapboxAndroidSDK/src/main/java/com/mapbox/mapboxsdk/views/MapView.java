@@ -900,6 +900,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         } else {
             updateMinZoomLevel();
             updateScrollableAreaLimit();
+            setZoomInternal(mZoomLevel); //this it zoom if necessary
         }
 
     }
