@@ -334,10 +334,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 if (mMapViewListener != null) {
                     mMapViewListener.onTapMarker(MapView.this, item);
                 }
-                // Hide tooltip if tapping on the same marker
-                if (toolTip == currentTooltip) {
-                    closeCurrentTooltip();
-                } else {
+                closeCurrentTooltip();
+                if (toolTip != currentTooltip) {
                     if (mMapViewListener != null) {
                         mMapViewListener.onShowMarker(MapView.this, item);
                     }
