@@ -23,20 +23,19 @@ import java.util.ArrayList;
  * as last and therefore the 'topmost' marker. It also gets checked for onTap first. This class is
  * generic, because you then you get your custom item-class passed back in onTap().
  *
- * @param <Item>
  * @author Marc Kurtz
  * @author Nicolas Gramlich
  * @author Theodore Hong
  * @author Fred Eisele
  */
-public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverlay implements
+public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         Overlay.Snappable {
 
-    private final ArrayList<Item> mInternalItemList;
+    private final ArrayList<Marker> mInternalItemList;
 //    private final Rect mRect = new Rect();
     protected final PointF mCurScreenCoords = new PointF();
     protected boolean mDrawFocusedItem = true;
-    private Item mFocusedItem;
+    private Marker mFocusedItem;
     private boolean mPendingFocusChangedEvent = false;
     private OnFocusChangeListener mOnFocusChangeListener;
 
@@ -46,7 +45,7 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
      * Method by which subclasses create the actual Items. This will only be called from populate()
      * we'll cache them for later use.
      */
-    protected abstract Item createItem(int i);
+    protected abstract Marker createItem(int i);
 
     /**
      * The number of items in this overlay.
@@ -66,7 +65,7 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
         }
 
 
-        mInternalItemList = new ArrayList<Item>();
+        mInternalItemList = new ArrayList<Marker>();
     }
 
     private Rect getBounds(View view) {
@@ -114,27 +113,17 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
         final int size = this.mInternalItemList.size() - 1;
 
         final Rect bounds = getBounds(mapView);
+        final float mapScale = 1/mapView.getScale();
 
 		/* Draw in backward cycle, so the items with the least index are on the front. */
         for (int i = size; i >= 0; i--) {
-            final Item item = getItem(i);
-            pj.toMapPixels(item.getPoint(), mCurScreenCoords);
-            Point roundedCoords = new Point((int)mCurScreenCoords.x, (int)mCurScreenCoords.y);
-            PointF onScreen = pj.toPixels(item.getPoint(), null);
-            Point anchor = item.getMarkerAnchor();
-            onScreen.offset(anchor.x, anchor.y);
-            if (!bounds.contains((int)onScreen.x, (int)onScreen.y)) {
-                //dont draw item if offscreen
-                continue;
-            }
-            canvas.save();
-
-            canvas.scale(1/mapView.getScale(), 1/mapView.getScale(), mCurScreenCoords.x,
-            		mCurScreenCoords.y);
-
-            onDrawItem(canvas, item, roundedCoords, mapView.getMapOrientation());
-            canvas.restore();
-       }
+            final Marker item = getItem(i);
+            if (item == mFocusedItem) continue;
+            onDrawItem(canvas, item, pj, mapView.getMapOrientation(), bounds, mapScale);
+        }
+        if (mFocusedItem != null) {
+            onDrawItem(canvas, mFocusedItem, pj, mapView.getMapOrientation(), bounds, mapScale);
+        }
     }
 
     /**
@@ -157,7 +146,7 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
      * @param position the position of the item to return
      * @return the Item of the given index.
      */
-    public final Item getItem(final int position) {
+    public final Marker getItem(final int position) {
         return mInternalItemList.get(position);
     }
 
@@ -166,13 +155,27 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
      *
      * @param canvas          what the item is drawn upon
      * @param item            the item to be drawn
-     * @param curScreenCoords
+     * @param projection
      * @param aMapOrientation
      */
-    protected void onDrawItem(ISafeCanvas canvas, final Item item, final Point curScreenCoords, final float aMapOrientation) {
+    protected void onDrawItem(ISafeCanvas canvas, final Marker item, final Projection projection, final float aMapOrientation, final Rect mapBounds, final float mapScale) {
         if(item.beingClustered()){
             return;
         }
+        projection.toMapPixels(item.getPoint(), mCurScreenCoords);
+        final Point roundedCoords = new Point((int)mCurScreenCoords.x, (int)mCurScreenCoords.y);
+        PointF onScreen = projection.toPixels(item.getPoint(), null);
+        Point anchor = item.getMarkerAnchor();
+        onScreen.offset(anchor.x, anchor.y);
+        if (!mapBounds.contains((int)onScreen.x, (int)onScreen.y)) {
+            //dont draw item if offscreen
+            return;
+        }
+
+        canvas.save();
+
+        canvas.scale(mapScale, mapScale, mCurScreenCoords.x,
+                mCurScreenCoords.y);
         final int state = (mDrawFocusedItem && (mFocusedItem == item) ? Marker.ITEM_STATE_FOCUSED_MASK
                 : 0);
         final Drawable marker = item.getMarker(state);
@@ -181,12 +184,12 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
 
         // draw it
         if (this.isUsingSafeCanvas()) {
-            Overlay.drawAt(canvas.getSafeCanvas(), marker, curScreenCoords, point, false, aMapOrientation);
+            Overlay.drawAt(canvas.getSafeCanvas(), marker, roundedCoords, point, false, aMapOrientation);
         } else {
             canvas.getUnsafeCanvas(new UnsafeCanvasHandler() {
                 @Override
                 public void onUnsafeCanvas(Canvas canvas) {
-                    Overlay.drawAt(canvas, marker, curScreenCoords, point, false, aMapOrientation);
+                    Overlay.drawAt(canvas, marker, roundedCoords, point, false, aMapOrientation);
                 }
             });
         }
@@ -202,10 +205,10 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
                 String text = String.valueOf(((ClusterItem)item).getChildCount());
                 Rect rectText = new Rect();
                 mClusterTextPaint.getTextBounds(text, 0, text.length(), rectText);
-                canvas.drawText(text,curScreenCoords.x - rectText.left, curScreenCoords.y - rectText.top - rectText.height()/2, mClusterTextPaint);
+                canvas.drawText(text,roundedCoords.x - rectText.left, roundedCoords.y - rectText.top - rectText.height()/2, mClusterTextPaint);
             }
         }
-
+        canvas.restore();
     }
 
     /**
@@ -219,7 +222,7 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
      * @param y  y coordinates of the point to check
      * @return true if the hit point is within the marker
      */
-    protected boolean hitTest(final Item item, final float x, final float y) {
+    protected boolean hitTest(final Marker item, final float x, final float y) {
         return x > mCurScreenCoords.x &&
                 x < mCurScreenCoords.x + item.getWidth() &&
                 y > mCurScreenCoords.y &&
@@ -231,7 +234,7 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
         final int size = this.size();
 
         for (int i = 0; i < size; i++) {
-            final Item item = getItem(i);
+            final Marker item = getItem(i);
             item.getPositionOnScreen(mapView, mCurScreenCoords);
             if (hitTest(item, e.getX(), e.getY())) {
                 // We have a hit, do we get a response from onTap?
@@ -271,7 +274,7 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
      * the map, so if the Item isn't already centered, the user may get confused. If the Item is not
      * found, this is a no-op. You can also pass null to remove focus.
      */
-    public void setFocus(final Item item) {
+    public void setFocus(final Marker item) {
         mPendingFocusChangedEvent = item != mFocusedItem;
         mFocusedItem = item;
     }
@@ -279,8 +282,17 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
     /**
      * @return the currently-focused item, or null if no item is currently focused.
      */
-    public Item getFocus() {
+    public Marker getFocus() {
         return mFocusedItem;
+    }
+
+    /**
+     * an item want's to be blured, if it is the focused one, blur it
+     */
+    public void blurItem(final Marker item) {
+        if (mFocusedItem == item) {
+            setFocus(null);
+        }
     }
 
 //    /**
@@ -307,6 +319,6 @@ public abstract class ItemizedOverlay<Item extends Marker> extends SafeDrawOverl
     }
 
     public static interface OnFocusChangeListener {
-        void onFocusChanged(ItemizedOverlay<?> overlay, Marker newFocus);
+        void onFocusChanged(ItemizedOverlay overlay, Marker newFocus);
     }
 }

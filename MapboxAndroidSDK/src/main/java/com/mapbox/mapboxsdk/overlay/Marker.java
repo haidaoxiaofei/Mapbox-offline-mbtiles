@@ -41,7 +41,7 @@ public class Marker {
     }
 
     public void assignGroup(int currentGroup) {
-        if (currentGroup == 0) {
+        if (currentGroup == -1) {
             this.setClustered(false);
         }
         group = currentGroup;

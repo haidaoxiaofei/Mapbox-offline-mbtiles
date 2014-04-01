@@ -277,7 +277,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      *
      * @param itemizedOverlay the itemized overlay
      */
-    public void addItemizedOverlay(ItemizedOverlay<Marker> itemizedOverlay) {
+    public void addItemizedOverlay(ItemizedOverlay itemizedOverlay) {
         this.getOverlays().add(itemizedOverlay);
 
     }
@@ -326,7 +326,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * Sets the default itemized overlay.
      */
     private void setDefaultItemizedOverlay() {
-        defaultMarkerOverlay = new ItemizedIconOverlay<Marker>(getContext(), defaultMarkerList, new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
+        defaultMarkerOverlay = new ItemizedIconOverlay(getContext(), defaultMarkerList, new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
             public boolean onItemSingleTapUp(final int index,
                                              final Marker item) {
 
@@ -1344,9 +1344,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     public void cluster() {
         for (ItemizedIconOverlay overlay : getItemizedOverlays()) {
-            if (!overlay.isClusterOverlay()) {
-                overlay.cluster(this, context);
-            }
+            overlay.cluster(this, context);
         }
     }
 
