@@ -68,6 +68,12 @@ public class Marker {
         return mToolTip;
     }
 
+    public void blur() {
+        if (mParentHolder != null)  {
+            mParentHolder.blurItem(this);
+        }
+    }
+
 
     /**
      * Indicates a hotspot for an area. This is where the origin (0,0) of a point will be located
@@ -95,6 +101,8 @@ public class Marker {
     //private GeoPoint mGeoPoint //unfortunately, this is not so simple...
     private Object mRelatedObject; //reference to an object (of any kind) linked to this item.
     private boolean bubbleShowing;
+    private ItemizedOverlay mParentHolder;
+
     static Drawable defaultPinDrawable;
 
     // ===========================================================
@@ -128,6 +136,7 @@ public class Marker {
         }
         this.setMarker(defaultPinDrawable);
         mHotspotPlace = HotspotPlace.BOTTOM_CENTER;
+        mParentHolder = null;
     }
 
     // ===========================================================
@@ -181,10 +190,11 @@ public class Marker {
         return mImage;
     }
 
-    public Object getRelatedObject() {
-        return mRelatedObject;
+    public Object getRelatedObject() { return mRelatedObject; }
+    public ItemizedOverlay getParentHolder() {
+        return mParentHolder;
     }
-
+    public void setParentHolder(ItemizedOverlay o) {  mParentHolder = o; }
     /*
      * (copied from Google API docs) Returns the marker that should be used when drawing this item
      * on the map. A null value means that the default marker should be drawn. Different markers can
