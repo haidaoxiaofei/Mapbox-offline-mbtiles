@@ -197,6 +197,10 @@ public class TilesOverlay
                 }
             }
         }
+
+        @Override
+        public void finalizeLoop() {
+        }
     };
 
     public int getLoadingBackgroundColor() {

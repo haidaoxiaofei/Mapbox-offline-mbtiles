@@ -215,7 +215,9 @@ public class MapTileLayerArray extends MapTileLayerBase {
      */
     protected MapTileModuleLayerBase findNextAppropriateProvider(final MapTileRequestState aState) {
         MapTileModuleLayerBase provider = null;
-        boolean providerDoesntExist = false, providerCantGetDataConnection = false, providerCantServiceZoomlevel = false;
+        boolean providerDoesntExist = false,
+                providerCantGetDataConnection = false,
+                providerCantServiceZoomlevel = false;
         // The logic of the while statement is
         // "Keep looping until you get null, or a provider that still exists
         // and has a data connection if it needs one and can service the zoom level,"

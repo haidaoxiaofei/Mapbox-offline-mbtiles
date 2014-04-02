@@ -49,4 +49,6 @@ public abstract class TileLooper {
     public abstract void initializeLoop(float pZoomLevel, int pTileSizePx);
 
     public abstract void handleTile(Canvas pCanvas, int pTileSizePx, MapTile pTile, int pX, int pY);
+
+    public abstract void finalizeLoop();
 }
