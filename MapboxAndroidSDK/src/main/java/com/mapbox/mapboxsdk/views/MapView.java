@@ -450,7 +450,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      */
     public LatLng getCenter() {
     	BoundingBox box = getBoundingBox();
-    	return (box != null)? box.getCenter():null;
+    	return (box != null)? box.getCenter() : null;
     }
 
     /**
@@ -813,12 +813,13 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @param shouldCluster if true the map view will cluster closest markers together.
      */
     public void setShouldCluster(final boolean shouldCluster) {
-        if (shouldCluster == mShouldCluster) return;
+        if (shouldCluster == mShouldCluster) {
+            return;
+        }
         mShouldCluster = shouldCluster;
         if (mShouldCluster == false) {
             clearCluster();
-        }
-        else {
+        } else {
             cluster();
         }
         invalidate();

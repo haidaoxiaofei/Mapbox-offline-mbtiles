@@ -7,6 +7,9 @@ import com.mapbox.mapboxsdk.tileprovider.util.SimpleRegisterReceiver;
 
 import android.content.Context;
 
+/**
+ * A base class for tile layers to built, this is a simple collection of tile sources.
+ */
 public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProviderCallback {
     Context mContext;
     MapView mMapView;

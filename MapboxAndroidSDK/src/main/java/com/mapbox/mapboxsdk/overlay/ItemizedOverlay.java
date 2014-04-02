@@ -32,7 +32,6 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         Overlay.Snappable {
 
     private final ArrayList<Marker> mInternalItemList;
-//    private final Rect mRect = new Rect();
     protected final PointF mCurScreenCoords = new PointF();
     protected boolean mDrawFocusedItem = true;
     private Marker mFocusedItem;
@@ -63,7 +62,6 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
             mClusterTextPaint.setTextSize(30);
             mClusterTextPaint.setFakeBoldText(true);
         }
-
 
         mInternalItemList = new ArrayList<Marker>();
     }
@@ -102,13 +100,15 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         final Projection pj = mapView.getProjection();
         final int size = this.mInternalItemList.size() - 1;
 
-        final Rect bounds = new Rect(0,0, mapView.getMeasuredWidth(), mapView.getMeasuredHeight());
-        final float mapScale = 1/mapView.getScale();
+        final Rect bounds = new Rect(0, 0, mapView.getMeasuredWidth(), mapView.getMeasuredHeight());
+        final float mapScale = 1 / mapView.getScale();
 
 		/* Draw in backward cycle, so the items with the least index are on the front. */
         for (int i = size; i >= 0; i--) {
             final Marker item = getItem(i);
-            if (item == mFocusedItem) continue;
+            if (item == mFocusedItem) {
+                continue;
+            }
             onDrawItem(canvas, item, pj, mapView.getMapOrientation(), bounds, mapScale);
         }
         if (mFocusedItem != null) {
@@ -149,11 +149,11 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
      * @param aMapOrientation
      */
     protected void onDrawItem(ISafeCanvas canvas, final Marker item, final Projection projection, final float aMapOrientation, final Rect mapBounds, final float mapScale) {
-        if(item.beingClustered()){
+        if (item.beingClustered()) {
             return;
         }
         projection.toMapPixels(item.getPoint(), mCurScreenCoords);
-        final Point roundedCoords = new Point((int)mCurScreenCoords.x, (int)mCurScreenCoords.y);
+        final Point roundedCoords = new Point((int) mCurScreenCoords.x, (int) mCurScreenCoords.y);
         Rect rect = new Rect();
         item.getDrawingBounds(projection, null).round(rect);
         if (!Rect.intersects(mapBounds, rect)) {
@@ -168,7 +168,9 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         final int state = (mDrawFocusedItem && (mFocusedItem == item) ? Marker.ITEM_STATE_FOCUSED_MASK
                 : 0);
         final Drawable marker = item.getMarker(state);
-        if (marker == null) return;
+        if (marker == null) {
+            return;
+        }
         final Point point = item.getMarkerAnchor();
 
         // draw it
@@ -183,18 +185,17 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
             });
         }
 
-        if(item instanceof ClusterItem){
+        if (item instanceof ClusterItem) {
 
-            if(((ItemizedIconOverlay)this).getClusterActions()!=null){
-                canvas = ((ItemizedIconOverlay)this)
+            if (((ItemizedIconOverlay) this).getClusterActions() != null) {
+                canvas = ((ItemizedIconOverlay) this)
                         .getClusterActions()
                         .onClusterMarkerDraw((ClusterItem) item, canvas);
-            }
-            else{
-                String text = String.valueOf(((ClusterItem)item).getChildCount());
+            } else {
+                String text = String.valueOf(((ClusterItem) item).getChildCount());
                 Rect rectText = new Rect();
                 mClusterTextPaint.getTextBounds(text, 0, text.length(), rectText);
-                canvas.drawText(text,roundedCoords.x - rectText.left, roundedCoords.y - rectText.top - rectText.height()/2, mClusterTextPaint);
+                canvas.drawText(text, roundedCoords.x - rectText.left, roundedCoords.y - rectText.top - rectText.height() / 2, mClusterTextPaint);
             }
         }
         canvas.restore();
@@ -225,7 +226,7 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
      * nothing and returns false.
      *
      * @return true if you handled the tap, false if you want the event that generated it to pass to
-     *         other overlays.
+     * other overlays.
      */
     protected boolean onTap(int index) {
         return false;

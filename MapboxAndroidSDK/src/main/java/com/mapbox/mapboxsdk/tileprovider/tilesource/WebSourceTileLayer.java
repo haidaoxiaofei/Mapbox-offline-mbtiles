@@ -52,7 +52,7 @@ public class WebSourceTileLayer extends TileLayer {
     protected boolean mEnableSSL = false;
 
     public WebSourceTileLayer(final String pId, final String url) {
-       this(pId, url, false);
+        this(pId, url, false);
     }
 
     public WebSourceTileLayer(final String pId, final String url, final boolean enableSSL) {
@@ -214,7 +214,7 @@ public class WebSourceTileLayer extends TileLayer {
      * Gets a list of Tile URLs used by this layer for a specific tile.
      *
      * @param aTile a map tile
-     * @param hdpi a boolean that indicates whether the tile should be at 2x or retina size
+     * @param hdpi  a boolean that indicates whether the tile should be at 2x or retina size
      * @return a list of tile URLS
      */
     public String[] getTileURLs(final MapTile aTile, boolean hdpi) {
@@ -224,17 +224,17 @@ public class WebSourceTileLayer extends TileLayer {
         }
         return null;
     }
-    
+
     public String parseUrlForTile(String url, final MapTile aTile, boolean hdpi) {
-   	 return url.replace("{z}", String.valueOf(aTile.getZ()))
+        return url.replace("{z}", String.valueOf(aTile.getZ()))
                 .replace("{x}", String.valueOf(aTile.getX()))
                 .replace("{y}", String.valueOf(aTile.getY()))
                 .replace("{2x}", hdpi ? "@2x" : "");
-   }
+    }
 
 
     public String getTileURL(final MapTile aTile, boolean hdpi) {
-    	 return parseUrlForTile(mUrl, aTile, hdpi);
+        return parseUrlForTile(mUrl, aTile, hdpi);
     }
 
     private static final Paint compositePaint = new Paint(Paint.FILTER_BITMAP_FLAG);
@@ -295,7 +295,7 @@ public class WebSourceTileLayer extends TileLayer {
     /**
      * Requests and returns a bitmap object from a given URL, using aCache to decode it.
      *
-     * @param url the map tile url. should refer to a valid bitmap resource.
+     * @param url    the map tile url. should refer to a valid bitmap resource.
      * @param aCache a cache, an instance of MapTileCache
      * @return the tile if valid, otherwise null
      */
