@@ -424,22 +424,18 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         mIsLocationEnabled = result;
 
         // set initial location when enabled
-        if (result && isFollowLocationEnabled()) {
+        if (result) {
             mLocation = mMyLocationProvider.getLastKnownLocation();
             if (mLocation != null) {
-                mProjection.latLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(),
-                        TileLayerConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
-                final int worldSize_2 = mProjection.mapSize(TileLayerConstants.MAXIMUM_ZOOMLEVEL) / 2;
-                mMapCoords.offset(-worldSize_2, -worldSize_2);
-                mMapController.animateTo(new LatLng(mLocation));
+                mLatLng = new LatLng(mLocation);
+                if (mIsFollowing) {
+                    mMapController.animateTo(mLatLng);
+                }
+                else {
+                    invalidate();
+                }
             }
         }
-
-        // Update the screen to see changes take effect
-        if (mMapView != null) {
-            mMapView.postInvalidate();
-        }
-
         return result;
     }
 
