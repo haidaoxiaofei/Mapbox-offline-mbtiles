@@ -146,5 +146,6 @@ public class GeoJSON {
             }
             mv.getOverlays().add(path);
         }
+        mv.invalidate();
     }
 }
