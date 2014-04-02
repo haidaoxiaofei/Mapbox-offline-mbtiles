@@ -30,8 +30,8 @@ import java.util.LinkedList;
  */
 public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
 
-    protected final SafePaint mPaint = new SafePaint();
-    protected final SafePaint mCirclePaint = new SafePaint();
+    private final SafePaint mPaint = new SafePaint();
+    private final SafePaint mCirclePaint = new SafePaint();
 
     private final Projection mProjection;
 
@@ -47,17 +47,13 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     private Location mLocation;
     private LatLng mLatLng;
     private boolean mIsLocationEnabled = false;
-    protected boolean mIsFollowing = false; // follow location updates
-    protected boolean mDrawAccuracyEnabled = true;
+    private boolean mIsFollowing = false; // follow location updates
+    private boolean mDrawAccuracyEnabled = true;
 
     /**
      * Coordinates the feet of the person are located scaled for display density.
      */
     
-
-    public static final int MENU_MY_LOCATION = getSafeMenuId();
-
-    private boolean mOptionsMenuEnabled = true;
 
     // to avoid allocations during onDraw
     private final RectF mMyLocationRect = new RectF();
@@ -154,7 +150,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     protected void drawMyLocation(final ISafeCanvas canvas, final MapView mapView,
                                   final Location lastFix) {
 
-        final Rect mapBounds = new Rect(0,0, mapView.getMeasuredWidth(), mapView.getMeasuredHeight());
+        final Rect mapBounds = new Rect(0, 0, mapView.getMeasuredWidth(), mapView.getMeasuredHeight());
         final Projection projection = mapView.getProjection();
         Rect rect = new Rect();
         getDrawingBounds(projection, lastFix, null).round(rect);
@@ -163,7 +159,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
             return;
         }
         projection.toMapPixels(mLatLng, mMapCoords);
-        final float mapScale = 1/mapView.getScale();
+        final float mapScale = 1 / mapView.getScale();
 
         canvas.save();
 
@@ -206,7 +202,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
             // Rotate the icon
             canvas.rotate(lastFix.getBearing(), mMapCoords.x, mMapCoords.y);
             // Draw the bitmap
-            canvas.translate(- mDirectionArrowBitmap.getWidth() * mDirectionHotspot.x, - mDirectionArrowBitmap.getHeight() * mDirectionHotspot.y);
+            canvas.translate(-mDirectionArrowBitmap.getWidth() * mDirectionHotspot.x, -mDirectionArrowBitmap.getHeight() * mDirectionHotspot.y);
 
             canvas.drawBitmap(mDirectionArrowBitmap, mMapCoords.x, mMapCoords.y, mPaint);
             canvas.restore();
@@ -215,7 +211,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
             // Unrotate the icon if the maps are rotated so the little man stays upright
             canvas.rotate(-mMapView.getMapOrientation(), mMapCoords.x, mMapCoords.y);
             // Counteract any scaling that may be happening so the icon stays the same size
-            canvas.translate(- mPersonBitmap.getWidth() * mPersonHotspot.x, - mPersonBitmap.getHeight() * mPersonHotspot.y);
+            canvas.translate(-mPersonBitmap.getWidth() * mPersonHotspot.x, -mPersonBitmap.getHeight() * mPersonHotspot.y);
             // Draw the bitmap
             canvas.drawBitmap(mPersonBitmap, mMapCoords.x, mMapCoords.y, mPaint);
             canvas.restore();
@@ -246,14 +242,15 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         PointF positionOnScreen = getPositionOnScreen(projection, null);
         return getDrawingBounds(positionOnScreen, lastFix, reuse);
     }
+
     protected RectF getDrawingBounds(PointF positionOnScreen, Location lastFix, RectF reuse) {
         if (reuse == null) {
             reuse = new RectF();
         }
-        final Bitmap bitmap = lastFix.hasBearing()?mDirectionArrowBitmap:mPersonBitmap;
-        final PointF scale = lastFix.hasBearing()?mDirectionHotspot:mPersonHotspot;
+        final Bitmap bitmap = lastFix.hasBearing() ? mDirectionArrowBitmap : mPersonBitmap;
+        final PointF scale = lastFix.hasBearing() ? mDirectionHotspot : mPersonHotspot;
         //because of bearing and rotation
-        final int w = (int)(Math.sqrt(2) * Math.max(bitmap.getWidth(), bitmap.getHeight()));
+        final int w = (int) (Math.sqrt(2) * Math.max(bitmap.getWidth(), bitmap.getHeight()));
         final float x = positionOnScreen.x - scale.x * w;
         final float y = positionOnScreen.y - scale.y * w;
         reuse.set(x, y, x + w, y + w);
@@ -328,7 +325,6 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     }
 
 
-
     /**
      * Enables "follow" functionality. The map will center on your current location and
      * automatically scroll as you move. Scrolling the map in the UI will disable.
@@ -343,8 +339,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
                 mLatLng = new LatLng(mLocation);
                 if (mIsFollowing) {
                     mMapController.animateTo(mLatLng);
-                }
-                else {
+                } else {
                     updateDrawingPositionRect();
                     mMapView.post(new Runnable() {
                         @Override
@@ -353,8 +348,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
                         }
                     });
                 }
-            }
-            else {
+            } else {
                 mLatLng = null;
             }
         }
@@ -378,16 +372,19 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     }
 
 
-    private void updateDrawingPositionRect(){
+    private void updateDrawingPositionRect() {
         getMyLocationMapDrawingBounds(mMapView, mLocation, mMyLocationRect);
     }
-    private void invalidate(){
-        if (mMapView == null) return; //not on map yet
+
+    private void invalidate() {
+        if (mMapView == null) {
+            return; //not on map yet
+        }
         // Get new drawing bounds
         mMyLocationPreviousRect.set(mMyLocationRect);
         updateDrawingPositionRect();
         final RectF newRect = new RectF(mMyLocationRect);
-                // If we had a previous location, merge in those bounds too
+        // If we had a previous location, merge in those bounds too
         newRect.union(mMyLocationPreviousRect);
         // Invalidate the bounds
         mMapView.post(new Runnable() {

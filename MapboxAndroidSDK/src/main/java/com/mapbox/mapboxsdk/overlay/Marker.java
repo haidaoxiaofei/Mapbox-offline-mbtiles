@@ -22,15 +22,10 @@ import com.mapbox.mapboxsdk.views.util.Projection;
  * @author Fred Eisele
  */
 public class Marker {
-
-    // ===========================================================
-    // Constants
-    // ===========================================================
     public static final int ITEM_STATE_FOCUSED_MASK = 4;
     public static final int ITEM_STATE_PRESSED_MASK = 1;
     public static final int ITEM_STATE_SELECTED_MASK = 2;
 
-    protected static final Point DEFAULT_MARKER_SIZE = new Point(26, 94);
     private int group = 0;
     private boolean clustered;
 
@@ -58,11 +53,12 @@ public class Marker {
     }
 
 
-    protected InfoWindow createTooltip(MapView mv){
+    protected InfoWindow createTooltip(MapView mv) {
         return new InfoWindow(R.layout.tootip, mv);
     }
 
     private InfoWindow mToolTip;
+
     public InfoWindow getToolTip(MapView mv) {
         if (mToolTip == null || mToolTip.getMapView() != mv) {
             mToolTip = createTooltip(mv);
@@ -71,7 +67,7 @@ public class Marker {
     }
 
     public void blur() {
-        if (mParentHolder != null)  {
+        if (mParentHolder != null) {
             mParentHolder.blurItem(this);
         }
     }
@@ -104,6 +100,8 @@ public class Marker {
     private boolean bubbleShowing;
     private ItemizedOverlay mParentHolder;
 
+    static Drawable defaultPinDrawable;
+
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -131,9 +129,6 @@ public class Marker {
         mParentHolder = null;
     }
 
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
     public String getUid() {
         return mUid;
     }
@@ -182,11 +177,18 @@ public class Marker {
         return mImage;
     }
 
-    public Object getRelatedObject() { return mRelatedObject; }
+    public Object getRelatedObject() {
+        return mRelatedObject;
+    }
+
     public ItemizedOverlay getParentHolder() {
         return mParentHolder;
     }
-    public void setParentHolder(ItemizedOverlay o) {  mParentHolder = o; }
+
+    public void setParentHolder(ItemizedOverlay o) {
+        mParentHolder = o;
+    }
+
     /*
      * (copied from Google API docs) Returns the marker that should be used when drawing this item
      * on the map. A null value means that the default marker should be drawn. Different markers can
@@ -213,7 +215,7 @@ public class Marker {
     public void setMarker(final Drawable marker) {
         this.mMarker = marker;
         if (marker != null) {
-            marker.setBounds(0,0,marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
+            marker.setBounds(0, 0, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
         }
         invalidate();
     }
@@ -256,8 +258,11 @@ public class Marker {
     }
 
     public Point getMarkerAnchor() {
-        int markerWidth = getWidth(), markerHeight = getHeight();
-        return new Point((int)(-mAnchor.x*markerWidth), (int)(-mAnchor.y*markerHeight));
+        if (mAnchor != null) {
+            int markerWidth = getWidth(), markerHeight = getHeight();
+            return new Point((int) (-mAnchor.x * markerWidth), (int) (-mAnchor.y * markerHeight));
+        }
+        return new Point(0, 0);
     }
 
     public Point getMarkerAnchor(HotspotPlace place) {
@@ -270,13 +275,6 @@ public class Marker {
         invalidate();
     }
 
-    // ===========================================================
-    // Methods from SuperClass/Interfaces
-    // ===========================================================
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
     public static void setState(final Drawable drawable, final int stateBitset) {
         final int[] states = new int[3];
         int index = 0;
@@ -302,7 +300,7 @@ public class Marker {
     }
 
     public int getHeight() {
-        return this.mMarker.getIntrinsicHeight()/2;
+        return this.mMarker.getIntrinsicHeight() / 2;
     }
 
     public PointF getPositionOnScreen(final Projection projection, PointF reuse) {
@@ -389,13 +387,14 @@ public class Marker {
         }
         return reuse;
     }
+
     /**
      * From a HotspotPlace and drawable dimensions (width, height), return the hotspot position.
      * Could be a public method of HotspotPlace or OverlayItem...
      */
     public Point getHotspot(HotspotPlace place, int w, int h) {
         PointF scale = getHotspotScale(place, null);
-        return new Point((int)(-w * scale.x), (int)(-h * scale.y));
+        return new Point((int) (-w * scale.x), (int) (-h * scale.y));
     }
 
     /**
@@ -452,8 +451,11 @@ public class Marker {
     public void updateDrawingPosition(){
         getMapDrawingBounds(mapView.getProjection(), mMyLocationRect);
     }
-    private void invalidate(){
-        if (mapView == null) return; //not on map yet
+
+    public void invalidate() {
+        if (mapView == null) {
+            return; //not on map yet
+        }
         // Get new drawing bounds
         mMyLocationPreviousRect.set(mMyLocationRect);
         updateDrawingPosition();

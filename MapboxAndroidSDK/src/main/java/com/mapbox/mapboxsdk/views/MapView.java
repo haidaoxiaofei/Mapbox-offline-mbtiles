@@ -829,12 +829,13 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @param shouldCluster if true the map view will cluster closest markers together.
      */
     public void setShouldCluster(final boolean shouldCluster) {
-        if (shouldCluster == mShouldCluster) return;
+        if (shouldCluster == mShouldCluster) {
+            return;
+        }
         mShouldCluster = shouldCluster;
         if (mShouldCluster == false) {
             clearCluster();
-        }
-        else {
+        } else {
             cluster();
         }
         invalidate();
@@ -1397,7 +1398,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public void cluster() {
-        if (mShouldCluster == false) return;
+        if (mShouldCluster == false) {
+            return;
+        }
         for (ItemizedIconOverlay overlay : getItemizedOverlays()) {
             overlay.cluster(this, context);
         }
