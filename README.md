@@ -8,6 +8,8 @@ risk, they may explode.**
 
 An open source alternative for native maps on Android.
 
+![](screenshot.png)
+
 ## Including the library in your project
 
 The development of the SDK is on its very earliest stage, so many of its elements
