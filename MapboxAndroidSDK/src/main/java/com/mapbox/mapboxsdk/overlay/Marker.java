@@ -96,8 +96,7 @@ public class Marker {
     protected String mSnippet;
     protected LatLng mLatLng;
     protected Drawable mMarker;
-    protected HotspotPlace mHotspotPlace;
-    protected Point mAnchor = null;
+    protected PointF mAnchor = null;
 
     private String mTitle, mDescription; // now, they are modifiable
     private String mSubDescription; //a third field that can be displayed in the infowindow, on a third line
@@ -137,9 +136,8 @@ public class Marker {
                 BitmapFactory.Options opts = BitmapUtils.getBitmapOptions(context.getResources().getDisplayMetrics());
                 defaultPinDrawable = new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(context.getResources(), R.drawable.defpin, opts));
             }
+            mAnchor = mv.getDefaultPinAnchor();
         }
-        this.setMarker(defaultPinDrawable);
-        mHotspotPlace = HotspotPlace.BOTTOM_CENTER;
         mParentHolder = null;
     }
 
@@ -230,21 +228,46 @@ public class Marker {
         invalidate();
     }
 
-    public void setMarkerHotspot(final HotspotPlace place) {
-        this.mHotspotPlace = (place == null) ? HotspotPlace.BOTTOM_CENTER : place;
+    public void setMarkerHotspot(HotspotPlace place) {
+        if (place == null) {
+            place = HotspotPlace.BOTTOM_CENTER; //use same default than in osmdroid.
+        }
+        switch (place) {
+            case NONE:
+            case UPPER_LEFT_CORNER:
+                mAnchor.set(0, 0);
+                break;
+            case BOTTOM_CENTER:
+                mAnchor.set(0.5f, 1f);
+                break;
+            case LOWER_LEFT_CORNER:
+                mAnchor.set(0, 1);
+                break;
+            case LOWER_RIGHT_CORNER:
+                mAnchor.set(1, 1);
+                break;
+            case CENTER:
+                mAnchor.set(0.5f, 0.5f);
+                break;
+            case LEFT_CENTER:
+                mAnchor.set(0, 0.5f);
+                break;
+            case RIGHT_CENTER:
+                mAnchor.set(1, 0.5f);
+                break;
+            case TOP_CENTER:
+                mAnchor.set(0.5f, 0);
+                break;
+            case UPPER_RIGHT_CORNER:
+                mAnchor.set(1, 0);
+                break;
+        }
         invalidate();
     }
 
-    public HotspotPlace getMarkerHotspot() {
-        return this.mHotspotPlace;
-    }
-
     public Point getMarkerAnchor() {
-        if (mAnchor != null) {
-            int markerWidth = getWidth(), markerHeight = getHeight();
-            return new Point(mAnchor.x*markerWidth, mAnchor.y*markerHeight);
-        }
-        return getMarkerAnchor(getMarkerHotspot());
+        int markerWidth = getWidth(), markerHeight = getHeight();
+        return new Point((int)(-mAnchor.x*markerWidth), (int)(-mAnchor.y*markerHeight));
     }
 
     public Point getMarkerAnchor(HotspotPlace place) {
@@ -252,7 +275,7 @@ public class Marker {
         return getHotspot(place, markerWidth, markerHeight);
     }
 
-    public void setMarkerAnchorPoint(final Point anchor) {
+    public void setMarkerAnchorPoint(final PointF anchor) {
         this.mAnchor = anchor;
     }
 
@@ -310,13 +333,12 @@ public class Marker {
         if (reuse == null) {
             reuse = new RectF();
         }
-        final PointF scale = getHotspotScale(getMarkerHotspot());
         final PointF position = getPositionOnScreen(projection, null);
         final int w = getWidth();
         final int h = getHeight();
-        final float x = position.x - scale.x * w;
-        final float y = position.y - scale.y * h;
-        reuse.set(x, y, x + w, y + h);
+        final float x = position.x - mAnchor.x * w;
+        final float y = position.y - mAnchor.y * h;
+        reuse.set(x, y, x + w, y + h*2);
         return reuse;
     }
 
@@ -324,13 +346,12 @@ public class Marker {
         if (reuse == null) {
             reuse = new RectF();
         }
-        final PointF scale = getHotspotScale(getMarkerHotspot());
-        final PointF position = projection.toMapPixels(mLatLng, null);
+        projection.toMapPixels(mLatLng, mCurScreenCoords);
         final int w = getWidth();
         final int h = getHeight();
-        final float x = position.x - scale.x * w;
-        final float y = position.y - scale.y * h;
-        reuse.set(x, y, x + w, y + h);
+        final float x = mCurScreenCoords.x - mAnchor.x * w;
+        final float y = mCurScreenCoords.y - mAnchor.y * h;
+        reuse.set(x, y, x + w, y + h*2);
         return reuse;
     }
 
@@ -338,48 +359,51 @@ public class Marker {
     // Inner and Anonymous Classes
     // ===========================================================
 
-    public PointF getHotspotScale(HotspotPlace place) {
-        PointF hp = new PointF(0,0);
+    public PointF getHotspotScale(HotspotPlace place, PointF reuse) {
+        if (reuse == null) {
+            reuse = new PointF();
+        }
         if (place == null) {
             place = HotspotPlace.BOTTOM_CENTER; //use same default than in osmdroid.
         }
         switch (place) {
             case NONE:
             case UPPER_LEFT_CORNER:
+                reuse.set(0, 0);
                 break;
             case BOTTOM_CENTER:
-                hp.set(0.5f, 1f);
+                reuse.set(0.5f, 1f);
                 break;
             case LOWER_LEFT_CORNER:
-                hp.set(0, 1);
+                reuse.set(0, 1);
                 break;
             case LOWER_RIGHT_CORNER:
-                hp.set(1, 1);
+                reuse.set(1, 1);
                 break;
             case CENTER:
-                hp.set(0.5f, 0.5f);
+                reuse.set(0.5f, 0.5f);
                 break;
             case LEFT_CENTER:
-                hp.set(0, 0.5f);
+                reuse.set(0, 0.5f);
                 break;
             case RIGHT_CENTER:
-                hp.set(1, 0.5f);
+                reuse.set(1, 0.5f);
                 break;
             case TOP_CENTER:
-                hp.set(0.5f, 0);
+                reuse.set(0.5f, 0);
                 break;
             case UPPER_RIGHT_CORNER:
-                hp.set(1, 0);
+                reuse.set(1, 0);
                 break;
         }
-        return hp;
+        return reuse;
     }
     /**
      * From a HotspotPlace and drawable dimensions (width, height), return the hotspot position.
      * Could be a public method of HotspotPlace or OverlayItem...
      */
     public Point getHotspot(HotspotPlace place, int w, int h) {
-        PointF scale = getHotspotScale(place);
+        PointF scale = getHotspotScale(place, null);
         return new Point((int)(-w * scale.x), (int)(-h * scale.y));
     }
 
@@ -391,7 +415,6 @@ public class Marker {
      */
     public void showBubble(InfoWindow tooltip, MapView aMapView, boolean panIntoView) {
         //offset the tooltip to be top-centered on the marker:
-//        Drawable marker = getMarker(0 /*OverlayItem.ITEM_STATE_FOCUSED_MASK*/);
         Point markerH = getMarkerAnchor();
         Point tooltipH = getMarkerAnchor(HotspotPlace.TOP_CENTER);
         markerH.offset(-tooltipH.x, tooltipH.y);
@@ -416,6 +439,8 @@ public class Marker {
         context = mv.getContext();
         if (icon == null) {
             setIcon(new Icon(mv.getContext(), Icon.Size.LARGE, "", "000"));
+        if (mAnchor == null) {
+            mAnchor = mv.getDefaultPinAnchor();
         }
         return this;
     }

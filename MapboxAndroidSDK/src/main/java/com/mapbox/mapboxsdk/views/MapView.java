@@ -149,6 +149,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
     private InfoWindow currentTooltip;
+    private PointF mDefaultPinAnchor = DEFAULT_PIN_ANCHOR;
 
     /**
      * Constructor for XML layout calls. Should not be used programmatically.
@@ -1486,5 +1487,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     @Override
     public String toString() {
         return "MapView {" + getTileProvider() + "}";
+    }
+    public void setDefaultPinAnchor(PointF point) {
+        mDefaultPinAnchor = point;
+    }
+
+    public PointF getDefaultPinAnchor() {
+        return mDefaultPinAnchor;
     }
 }
