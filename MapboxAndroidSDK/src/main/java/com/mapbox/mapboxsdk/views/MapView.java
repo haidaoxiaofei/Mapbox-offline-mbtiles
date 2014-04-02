@@ -3,12 +3,15 @@ package com.mapbox.mapboxsdk.views;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -20,6 +23,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
+
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
@@ -43,6 +47,7 @@ import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
+import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.mapbox.mapboxsdk.views.util.Projection;
@@ -50,7 +55,9 @@ import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
+
 import org.json.JSONException;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -149,6 +156,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
     private InfoWindow currentTooltip;
+    
+    private int mDefaultPinRes = R.drawable.defpin;
+    private Drawable mDefaultPinDrawable;
     private PointF mDefaultPinAnchor = DEFAULT_PIN_ANCHOR;
 
     /**
@@ -1488,6 +1498,23 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public String toString() {
         return "MapView {" + getTileProvider() + "}";
     }
+    
+    public void setDefaultPinRes(int res) {
+    	mDefaultPinRes = res;
+    }
+    
+    public void setDefaultPinDrawable(Drawable drawable) {
+    	mDefaultPinDrawable = drawable;
+    }
+    
+    public Drawable getDefaultPinDrawable() {
+    	if (mDefaultPinDrawable == null && mDefaultPinRes != 0) {
+    		BitmapFactory.Options opts = BitmapUtils.getBitmapOptions(getResources().getDisplayMetrics());
+    		mDefaultPinDrawable = new BitmapDrawable(getResources(), BitmapFactory.decodeResource(context.getResources(), mDefaultPinRes, opts));
+    	}
+    	return mDefaultPinDrawable;
+    }
+
     public void setDefaultPinAnchor(PointF point) {
         mDefaultPinAnchor = point;
     }
