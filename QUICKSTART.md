@@ -119,3 +119,13 @@ By default, every time the screen is rotated, Android will call ```onCreate``` a
 	android:configChanges="orientation|screenSize|uiMode"
 
 Alternatively you can override the methods ```onSaveInstanceState()``` and ```onRestoreInstanceState()``` to have broader control of the saved states in the app. See this [StackOverflow question](http://stackoverflow.com/questions/4096169/onsaveinstancestate-and-onrestoreinstancestate) for more information on these methods
+
+### Generating API Documentation (aka JavaDoc)
+
+```
+cd <PROJECT_HOME>/MapboxAndroidSDK/
+../gradlew clean assembleRelease generatereleaseJavadoc
+cd build/docs/javadoc
+open index.html
+```
+
