@@ -2,13 +2,9 @@ package com.mapbox.mapboxsdk.overlay;
 
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.format.GeoJSON;
-
-import android.annotation.TargetApi;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.util.Log;
 import org.json.JSONException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +28,6 @@ public class GeoJSONLayer {
     /**
      * Class that generates markers from formats such as GeoJSON
      */
-    @TargetApi(Build.VERSION_CODES.CUPCAKE)
     public class Getter extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
