@@ -127,11 +127,6 @@ public class MapTileLayerArray extends MapTileLayerBase {
         final CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
         if (tileDrawable != null &&
                 !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
-            if (DEBUG_TILE_PROVIDERS) {
-                Log.i(TAG, "MapTileLayerArray.getMapTile() already in cache: "
-                        + pTile);
-            }
-
             return tileDrawable;
         } else {
             boolean alreadyInProgress = false;
