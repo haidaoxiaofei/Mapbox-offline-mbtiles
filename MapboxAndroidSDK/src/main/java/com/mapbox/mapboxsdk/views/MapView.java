@@ -275,6 +275,23 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this.invalidate();
     }
 
+    public void selectMarker(final Marker marker) {
+        InfoWindow toolTip = marker.getToolTip(MapView.this);
+
+        if (mMapViewListener != null) {
+            mMapViewListener.onTapMarker(MapView.this, marker);
+        }
+        closeCurrentTooltip();
+        if (toolTip != currentTooltip) {
+            if (mMapViewListener != null) {
+                mMapViewListener.onShowMarker(MapView.this, marker);
+            }
+            currentTooltip = toolTip;
+            marker.showBubble(currentTooltip, MapView.this, true);
+        }
+    }
+
+
     /**
      * Adds a new ItemizedOverlay to the MapView
      *
@@ -332,19 +349,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         defaultMarkerOverlay = new ItemizedIconOverlay(getContext(), defaultMarkerList, new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
             public boolean onItemSingleTapUp(final int index,
                                              final Marker item) {
-
-                InfoWindow toolTip = item.getToolTip(MapView.this);
-                if (mMapViewListener != null) {
-                    mMapViewListener.onTapMarker(MapView.this, item);
-                }
-                closeCurrentTooltip();
-                if (toolTip != currentTooltip) {
-                    if (mMapViewListener != null) {
-                        mMapViewListener.onShowMarker(MapView.this, item);
-                    }
-                    currentTooltip = toolTip;
-                    item.showBubble(currentTooltip, MapView.this, true);
-                }
+                selectMarker(item);
                 return true;
             }
 
