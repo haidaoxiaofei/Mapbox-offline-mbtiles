@@ -15,8 +15,6 @@ import android.view.MotionEvent;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
-import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
-import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -37,11 +35,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
 
     private final Projection mProjection;
 
-    private final Bitmap mPersonBitmap;
-    private final Bitmap mDirectionArrowBitmap;
-
-    private final MapView mMapView;
-    private final Context mContext;
+    protected final MapView mMapView;
+    protected final Context mContext;
 
     private final MapController mMapController;
     public GpsLocationProvider mMyLocationProvider;
@@ -58,17 +53,37 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     /**
      * Coordinates the feet of the person are located scaled for display density.
      */
-    private final PointF mPersonHotspot;
-    private final PointF mDirectionHotspot;
+    
 
     // to avoid allocations during onDraw
     private final RectF mMyLocationRect = new RectF();
     private final RectF mMyLocationPreviousRect = new RectF();
+    
+    private Bitmap mPersonBitmap;
+    private Bitmap mDirectionArrowBitmap;
+    
+    private PointF mPersonHotspot;
+    private PointF mDirectionHotspot;
+    
+    public void setDirectionArrowBitmap(Bitmap bitmap) {
+    	mDirectionArrowBitmap = bitmap;
+    }
+
+    public void setPersonBitmap(Bitmap bitmap) {
+    	mPersonBitmap = bitmap;
+    }
+    
+    public void setDirectionArrowHotspot(PointF point) {
+    	mDirectionHotspot = point;
+    }
+
+    public  void setPersonHotspot(PointF point) {
+    	mPersonHotspot = point;
+    }
 
 
-    public UserLocationOverlay(GpsLocationProvider myLocationProvider, MapView mapView) {
-        super();
 
+    public UserLocationOverlay(GpsLocationProvider myLocationProvider, MapView mapView, int arrowId, int personId) {
         mMapView = mapView;
         mMapController = mapView.getController();
         mContext = mapView.getContext();
@@ -77,15 +92,22 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         mPaint.setAntiAlias(true);
         mPaint.setFilterBitmap(true);
 
-        BitmapFactory.Options opts = BitmapUtils.getBitmapOptions(mContext.getResources().getDisplayMetrics());
-        mPersonBitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.person);
-        mDirectionArrowBitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.direction_arrow);
+    	mPersonHotspot = new PointF( 0.5f, 1.0f);
+    	mDirectionHotspot = new PointF( 0.5f, 0.5f);
 
-        mPersonHotspot = new PointF(0.5f, 1.0f);
-        mDirectionHotspot = new PointF(0.5f, 0.5f);
+        if (personId != 0) {
+            mPersonBitmap = BitmapFactory.decodeResource(mContext.getResources(), personId);
+        }
+        if (arrowId != 0) {
+            mDirectionArrowBitmap = BitmapFactory.decodeResource(mContext.getResources(), arrowId);
+        }
 
         mProjection = mapView.getProjection();
         setMyLocationProvider(myLocationProvider);
+    }
+    
+    public UserLocationOverlay(GpsLocationProvider myLocationProvider, MapView mapView) {
+        this(myLocationProvider, mapView, R.drawable.direction_arrow, R.drawable.person);
     }
 
     @Override
@@ -123,10 +145,6 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         }
 
         mMyLocationProvider = myLocationProvider;
-    }
-
-    public void setPersonHotspot(float x, float y) {
-        mPersonHotspot.set(x, y);
     }
 
     protected void drawMyLocation(final ISafeCanvas canvas, final MapView mapView,
@@ -421,22 +439,18 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         mIsLocationEnabled = result;
 
         // set initial location when enabled
-        if (result && isFollowLocationEnabled()) {
+        if (result) {
             mLocation = mMyLocationProvider.getLastKnownLocation();
             if (mLocation != null) {
-                mProjection.latLongToPixelXY(mLocation.getLatitude(), mLocation.getLongitude(),
-                        TileLayerConstants.MAXIMUM_ZOOMLEVEL, mMapCoords);
-                final int worldSize_2 = mProjection.mapSize(TileLayerConstants.MAXIMUM_ZOOMLEVEL) / 2;
-                mMapCoords.offset(-worldSize_2, -worldSize_2);
-                mMapController.animateTo(new LatLng(mLocation));
+                mLatLng = new LatLng(mLocation);
+                if (mIsFollowing) {
+                    mMapController.animateTo(mLatLng);
+                }
+                else {
+                    invalidate();
+                }
             }
         }
-
-        // Update the screen to see changes take effect
-        if (mMapView != null) {
-            mMapView.postInvalidate();
-        }
-
         return result;
     }
 

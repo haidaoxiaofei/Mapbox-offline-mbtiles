@@ -32,7 +32,6 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         Overlay.Snappable {
 
     private final ArrayList<Marker> mInternalItemList;
-    protected final PointF mCurScreenCoords = new PointF();
     protected boolean mDrawFocusedItem = true;
     private Marker mFocusedItem;
     private boolean mPendingFocusChangedEvent = false;
@@ -152,8 +151,9 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         if (item.beingClustered()) {
             return;
         }
-        projection.toMapPixels(item.getPoint(), mCurScreenCoords);
-        final Point roundedCoords = new Point((int) mCurScreenCoords.x, (int) mCurScreenCoords.y);
+        item.updateDrawingPosition();
+        final PointF position = item.getPositionOnMap();
+        final Point roundedCoords = new Point((int) position.x, (int) position.y);
         Rect rect = new Rect();
         item.getDrawingBounds(projection, null).round(rect);
         if (!Rect.intersects(mapBounds, rect)) {
@@ -163,8 +163,8 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
 
         canvas.save();
 
-        canvas.scale(mapScale, mapScale, mCurScreenCoords.x,
-                mCurScreenCoords.y);
+        canvas.scale(mapScale, mapScale, position.x,
+                position.y);
         final int state = (mDrawFocusedItem && (mFocusedItem == item) ? Marker.ITEM_STATE_FOCUSED_MASK
                 : 0);
         final Drawable marker = item.getMarker(state);
