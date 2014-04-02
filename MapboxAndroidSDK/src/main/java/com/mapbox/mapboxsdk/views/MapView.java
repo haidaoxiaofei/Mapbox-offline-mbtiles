@@ -928,6 +928,25 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         super.invalidate(mInvalidateRect);
     }
 
+    public void invalidateMapCoordinates(final RectF dirty) {
+        dirty.roundOut(mInvalidateRect);
+        final int width_2 = this.getWidth() / 2;
+        final int height_2 = this.getHeight() / 2;
+
+        // Since the canvas is shifted by getWidth/2, we can just return our natural scrollX/Y value
+        // since that is the same as the shifted center.
+        int centerX = this.getScrollX();
+        int centerY = this.getScrollY();
+
+        if (this.getMapOrientation() != 0) {
+            GeometryMath.getBoundingBoxForRotatedRectangle(mInvalidateRect, centerX, centerY,
+                    this.getMapOrientation() + 180, mInvalidateRect);
+        }
+        mInvalidateRect.offset(width_2, height_2);
+
+        super.invalidate(mInvalidateRect);
+    }
+
     /**
      * Returns a set of layout parameters with a width of
      * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}, a height of
