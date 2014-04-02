@@ -36,6 +36,7 @@ public class Marker {
 
     private final RectF mMyLocationRect = new RectF(0, 0, 0, 0);
     private final RectF mMyLocationPreviousRect = new RectF(0, 0, 0, 0);
+    protected final PointF mCurScreenCoords = new PointF();
 
     public int getGroup() {
         return group;
@@ -266,6 +267,7 @@ public class Marker {
 
     public void setMarkerAnchorPoint(final PointF anchor) {
         this.mAnchor = anchor;
+        invalidate();
     }
 
     // ===========================================================
@@ -443,15 +445,18 @@ public class Marker {
         return this;
     }
 
+    public PointF getPositionOnMap(){
+        return mCurScreenCoords;
+    }
 
-    private void updateDrawingPositionRect(){
+    public void updateDrawingPosition(){
         getMapDrawingBounds(mapView.getProjection(), mMyLocationRect);
     }
     private void invalidate(){
         if (mapView == null) return; //not on map yet
         // Get new drawing bounds
         mMyLocationPreviousRect.set(mMyLocationRect);
-        updateDrawingPositionRect();
+        updateDrawingPosition();
         final RectF newRect = new RectF(mMyLocationRect);
         // If we had a previous location, merge in those bounds too
         newRect.union(mMyLocationPreviousRect);
