@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk.overlay;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
@@ -189,8 +190,8 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
         for (int i = 0; i < this.mItemList.size(); ++i) {
             final Marker item = getItem(i);
             if (item.beingClustered()) continue;
-            item.getPositionOnScreen(mapView, mCurScreenCoords);
-            if (hitTest(item, event.getX(), event.getY())) {
+            RectF rect = item.getDrawingBounds(mapView.getProjection(), null);
+            if (rect.contains(event.getX(), event.getY())) {
                 if (task.run(i)) {
                     this.setFocus(item);
                     return true;

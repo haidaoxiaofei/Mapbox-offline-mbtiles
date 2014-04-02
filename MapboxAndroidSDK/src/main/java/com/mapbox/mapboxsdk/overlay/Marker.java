@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -36,6 +36,9 @@ public class Marker {
     protected static final Point DEFAULT_MARKER_SIZE = new Point(26, 94);
     private int group = 0;
     private boolean clustered;
+
+    private final RectF mMyLocationRect = new RectF(0, 0, 0, 0);
+    private final RectF mMyLocationPreviousRect = new RectF(0, 0, 0, 0);
 
     public int getGroup() {
         return group;
@@ -132,7 +135,7 @@ public class Marker {
             mapView = mv;
             if (defaultPinDrawable == null) {
                 BitmapFactory.Options opts = BitmapUtils.getBitmapOptions(context.getResources().getDisplayMetrics());
-                defaultPinDrawable = new BitmapDrawable(BitmapFactory.decodeResource(context.getResources(), R.drawable.defpin, opts));
+                defaultPinDrawable = new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(context.getResources(), R.drawable.defpin, opts));
             }
         }
         this.setMarker(defaultPinDrawable);
@@ -224,26 +227,12 @@ public class Marker {
         if (marker != null) {
             marker.setBounds(0,0,marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
         }
-
         invalidate();
-    }
-    
-    public void invalidate() {
-    	if (mapView != null) {
-            // Determine bounding box of drawable
-//            PointF point = getPositionOnScreen(mapView, null);
-//            
-//
-//            // l, t, r, b
-//            Rect rect = new Rect(point.x - widthBuffer, point.y + heightBuffer, point.x + widthBuffer, point.y - heightBuffer);
-//
-//            mapView.invalidate(rect);
-    		mapView.invalidate();
-    	}
     }
 
     public void setMarkerHotspot(final HotspotPlace place) {
         this.mHotspotPlace = (place == null) ? HotspotPlace.BOTTOM_CENTER : place;
+        invalidate();
     }
 
     public HotspotPlace getMarkerHotspot() {
@@ -302,14 +291,46 @@ public class Marker {
         return this.mMarker.getIntrinsicHeight()/2;
     }
 
-    public PointF getPositionOnScreen(MapView mv, PointF reuse) {
+    public PointF getPositionOnScreen(final Projection projection, PointF reuse) {
         if (reuse == null) {
             reuse = new PointF();
         }
-        final Projection pj = mapView.getProjection();
-        pj.toPixels(mLatLng, reuse);
+        projection.toPixels(mLatLng, reuse);
+        return reuse;
+    }
+
+    public PointF getDrawingPositionOnScreen(final Projection projection, PointF reuse) {
+        reuse = getPositionOnScreen(projection, reuse);
         Point point = getMarkerAnchor();
         reuse.offset(point.x, point.y);
+        return reuse;
+    }
+
+    protected RectF getDrawingBounds(final Projection projection, RectF reuse) {
+        if (reuse == null) {
+            reuse = new RectF();
+        }
+        final PointF scale = getHotspotScale(getMarkerHotspot());
+        final PointF position = getPositionOnScreen(projection, null);
+        final int w = getWidth();
+        final int h = getHeight();
+        final float x = position.x - scale.x * w;
+        final float y = position.y - scale.y * h;
+        reuse.set(x, y, x + w, y + h);
+        return reuse;
+    }
+
+    protected RectF getMapDrawingBounds(final Projection projection, RectF reuse) {
+        if (reuse == null) {
+            reuse = new RectF();
+        }
+        final PointF scale = getHotspotScale(getMarkerHotspot());
+        final PointF position = projection.toMapPixels(mLatLng, null);
+        final int w = getWidth();
+        final int h = getHeight();
+        final float x = position.x - scale.x * w;
+        final float y = position.y - scale.y * h;
+        reuse.set(x, y, x + w, y + h);
         return reuse;
     }
 
@@ -317,49 +338,49 @@ public class Marker {
     // Inner and Anonymous Classes
     // ===========================================================
 
-
-    /**
-     * From a HotspotPlace and drawable dimensions (width, height), return the hotspot position.
-     * Could be a public method of HotspotPlace or OverlayItem...
-     */
-    public Point getHotspot(HotspotPlace place, int w, int h) {
-        Point hp = new Point();
+    public PointF getHotspotScale(HotspotPlace place) {
+        PointF hp = new PointF(0,0);
         if (place == null) {
             place = HotspotPlace.BOTTOM_CENTER; //use same default than in osmdroid.
         }
         switch (place) {
             case NONE:
-                hp.set(0, 0);
+            case UPPER_LEFT_CORNER:
                 break;
             case BOTTOM_CENTER:
-                hp.set(-w / 2, -h);
+                hp.set(0.5f, 1f);
                 break;
             case LOWER_LEFT_CORNER:
-                hp.set(0, -h);
+                hp.set(0, 1);
                 break;
             case LOWER_RIGHT_CORNER:
-                hp.set(-w, -h);
+                hp.set(1, 1);
                 break;
             case CENTER:
-                hp.set(-w / 2, -h / 2);
+                hp.set(0.5f, 0.5f);
                 break;
             case LEFT_CENTER:
-                hp.set(0, -h / 2);
+                hp.set(0, 0.5f);
                 break;
             case RIGHT_CENTER:
-                hp.set(-w, -h / 2);
+                hp.set(1, 0.5f);
                 break;
             case TOP_CENTER:
-                hp.set(-w / 2, 0);
-                break;
-            case UPPER_LEFT_CORNER:
-                hp.set(0, 0);
+                hp.set(0.5f, 0);
                 break;
             case UPPER_RIGHT_CORNER:
-                hp.set(-w, 0);
+                hp.set(1, 0);
                 break;
         }
         return hp;
+    }
+    /**
+     * From a HotspotPlace and drawable dimensions (width, height), return the hotspot position.
+     * Could be a public method of HotspotPlace or OverlayItem...
+     */
+    public Point getHotspot(HotspotPlace place, int w, int h) {
+        PointF scale = getHotspotScale(place);
+        return new Point((int)(-w * scale.x), (int)(-h * scale.y));
     }
 
     /**
@@ -403,5 +424,26 @@ public class Marker {
         this.icon = icon;
         icon.setMarker(this);
         return this;
+    }
+
+
+    private void updateDrawingPositionRect(){
+        getMapDrawingBounds(mapView.getProjection(), mMyLocationRect);
+    }
+    private void invalidate(){
+        if (mapView == null) return; //not on map yet
+        // Get new drawing bounds
+        mMyLocationPreviousRect.set(mMyLocationRect);
+        updateDrawingPositionRect();
+        final RectF newRect = new RectF(mMyLocationRect);
+        // If we had a previous location, merge in those bounds too
+        newRect.union(mMyLocationPreviousRect);
+        // Invalidate the bounds
+        mapView.post(new Runnable() {
+            @Override
+            public void run() {
+                mapView.invalidateMapCoordinates(newRect);
+            }
+        });
     }
 }

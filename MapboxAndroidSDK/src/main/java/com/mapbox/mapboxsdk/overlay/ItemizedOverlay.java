@@ -6,9 +6,9 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
-import android.view.View;
 
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
@@ -68,16 +68,6 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         mInternalItemList = new ArrayList<Marker>();
     }
 
-    private Rect getBounds(View view) {
-        int[] l = new int[2];
-        view.getLocationOnScreen(l);
-        int x = l[0];
-        int y = l[1];
-        int w = view.getWidth();
-        int h = view.getHeight();
-        return new Rect(x, y, x + w, y + h);
-    }
-
     /**
      * Draw a marker on each of our items. populate() must have been called first.<br/>
      * <br/>
@@ -112,7 +102,7 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         final Projection pj = mapView.getProjection();
         final int size = this.mInternalItemList.size() - 1;
 
-        final Rect bounds = getBounds(mapView);
+        final Rect bounds = new Rect(0,0, mapView.getMeasuredWidth(), mapView.getMeasuredHeight());
         final float mapScale = 1/mapView.getScale();
 
 		/* Draw in backward cycle, so the items with the least index are on the front. */
@@ -164,10 +154,9 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         }
         projection.toMapPixels(item.getPoint(), mCurScreenCoords);
         final Point roundedCoords = new Point((int)mCurScreenCoords.x, (int)mCurScreenCoords.y);
-        PointF onScreen = projection.toPixels(item.getPoint(), null);
-        Point anchor = item.getMarkerAnchor();
-        onScreen.offset(anchor.x, anchor.y);
-        if (!mapBounds.contains((int)onScreen.x, (int)onScreen.y)) {
+        Rect rect = new Rect();
+        item.getDrawingBounds(projection, null).round(rect);
+        if (!Rect.intersects(mapBounds, rect)) {
             //dont draw item if offscreen
             return;
         }
@@ -211,32 +200,14 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         canvas.restore();
     }
 
-    /**
-     * See if a given hit point is within the bounds of an item's marker. Override to modify the way
-     * an item is hit tested. The hit point is relative to the marker's bounds. The default
-     * implementation just checks to see if the hit point is within the touchable bounds of the
-     * marker.
-     *
-     * @param item   the item to hit test
-     * @param x  x coordinates of the point to check
-     * @param y  y coordinates of the point to check
-     * @return true if the hit point is within the marker
-     */
-    protected boolean hitTest(final Marker item, final float x, final float y) {
-        return x > mCurScreenCoords.x &&
-                x < mCurScreenCoords.x + item.getWidth() &&
-                y > mCurScreenCoords.y &&
-                y < mCurScreenCoords.y + item.getHeight();
-    }
-
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e, MapView mapView) {
         final int size = this.size();
 
         for (int i = 0; i < size; i++) {
             final Marker item = getItem(i);
-            item.getPositionOnScreen(mapView, mCurScreenCoords);
-            if (hitTest(item, e.getX(), e.getY())) {
+            RectF rect = item.getDrawingBounds(mapView.getProjection(), null);
+            if (rect.contains(e.getX(), e.getY())) {
                 // We have a hit, do we get a response from onTap?
                 if (onTap(i)) {
                     // We got a response so consume the event
