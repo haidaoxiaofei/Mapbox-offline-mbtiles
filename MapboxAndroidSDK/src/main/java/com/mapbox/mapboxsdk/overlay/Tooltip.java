@@ -17,14 +17,14 @@ import com.mapbox.mapboxsdk.views.util.Projection;
 
 public class Tooltip extends Overlay {
 
-    private Marker item;
-    private Paint paint = new Paint();
-    private PointF point = new PointF();
-    private Context context;
-    private String title;
-    private String description;
+    private Marker mItem;
+    private Paint mPaint = new Paint();
+    private PointF mPoint = new PointF();
+    private Context mContext;
+    private String mTitle;
+    private String mDescription;
     private MapView mapView;
-    private Canvas canvas;
+    private Canvas mCanvas;
 
     /**
      * Is this tooltip currently visible.
@@ -32,15 +32,15 @@ public class Tooltip extends Overlay {
     private boolean visible;
 
     /**
-     * A paint style used for tooltip contents.
+     * A mPaint style used for tooltip contents.
      */
     private TextPaint textPaint;
 
     /**
-     * Initialize a tooltip without title or description
+     * Initialize a tooltip without mTitle or mDescription
      *
      * @param ctx a Context object on which this tooltip is drawn.
-     * @param ot  an overlay item.
+     * @param ot  an overlay mItem.
      */
     public Tooltip(Context ctx, Marker ot) {
         this(ctx, ot, "", "");
@@ -50,13 +50,13 @@ public class Tooltip extends Overlay {
      * Initialize a tooltip.
      *
      * @param ctx         a Context object on which this tooltip is drawn.
-     * @param ot          an overlay item.
-     * @param title       the title in the tooltip.
-     * @param description the description text in the tooltip
+     * @param ot          an overlay mItem.
+     * @param title       the mTitle in the tooltip.
+     * @param description the mDescription text in the tooltip
      */
     public Tooltip(Context ctx, Marker ot, String title, String description) {
         super(ctx);
-        this.context = ctx;
+        this.mContext = ctx;
         setItem(ot);
         initTextPaint();
         setTitle(title);
@@ -66,7 +66,7 @@ public class Tooltip extends Overlay {
 
     private void initTextPaint() {
         textPaint = new TextPaint();
-        textPaint.setColor(context.getResources().getColor(R.color.toolTipText));
+        textPaint.setColor(mContext.getResources().getColor(R.color.toolTipText));
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(DEFAULT_TEXT_SIZE);
     }
@@ -74,59 +74,59 @@ public class Tooltip extends Overlay {
     @Override
     protected void draw(Canvas canvas, MapView mapView, boolean shadow) {
         if (this.isVisible()) {
-            StaticLayout sl = new StaticLayout(title, textPaint, 400, Layout.Alignment.ALIGN_CENTER, 1, 1, false);
+            StaticLayout sl = new StaticLayout(mTitle, textPaint, 400, Layout.Alignment.ALIGN_CENTER, 1, 1, false);
             sl.draw(canvas);
-            if (description != null) {
-                StaticLayout sd = new StaticLayout(description, textPaint, 400, Layout.Alignment.ALIGN_CENTER, 1, 1, false);
+            if (mDescription != null) {
+                StaticLayout sd = new StaticLayout(mDescription, textPaint, 400, Layout.Alignment.ALIGN_CENTER, 1, 1, false);
                 sd.draw(canvas);
             }
             this.mapView = mapView;
-            this.canvas = canvas;
-            paint.setColor(Color.WHITE);
+            this.mCanvas = canvas;
+            mPaint.setColor(Color.WHITE);
             this.setTooltipShape();
         }
     }
 
     private void setTooltipShape() {
-        canvas.drawRect(getRect(), paint);
-        canvas.save();
-        canvas.rotate((float) 45, point.x, point.y - 100);
-        canvas.drawRect(point.x - 20,
-                point.y - 120,
-                point.x + 20,
-                point.y - 80,
-                paint);
-        canvas.restore();
+        mCanvas.drawRect(getRect(), mPaint);
+        mCanvas.save();
+        mCanvas.rotate((float) 45, mPoint.x, mPoint.y - 100);
+        mCanvas.drawRect(mPoint.x - 20,
+                mPoint.y - 120,
+                mPoint.x + 20,
+                mPoint.y - 80,
+                mPaint);
+        mCanvas.restore();
     }
 
     private void calculatePoint() {
-        LatLng markerCoords = item.getPoint();
+        LatLng markerCoords = mItem.getPoint();
         Projection projection = mapView.getProjection();
-        projection.toMapPixels(markerCoords, point);
+        projection.toMapPixels(markerCoords, mPoint);
     }
 
     // Getters/setters
 
 
     /**
-     * Sets description to be displayed in the tooltip
+     * Sets mDescription to be displayed in the tooltip
      *
-     * @param description the description text
+     * @param description the mDescription text
      * @return Tooltip the tooltip, for chaining.
      */
     public Tooltip setDescription(String description) {
-        this.description = description;
+        this.mDescription = description;
         return this;
     }
 
     /**
-     * Sets title to be displayed in the tooltip
+     * Sets mTitle to be displayed in the tooltip
      *
-     * @param title the title
+     * @param title the mTitle
      * @return Tooltip the tooltip, for chaining.
      */
     public Tooltip setTitle(String title) {
-        this.title = title;
+        this.mTitle = title;
         return this;
     }
 
@@ -137,7 +137,7 @@ public class Tooltip extends Overlay {
      * @return Tooltip the tooltip, for chaining.
      */
     public Tooltip setItem(Marker item) {
-        this.item = item;
+        this.mItem = item;
         return this;
     }
 
@@ -167,10 +167,10 @@ public class Tooltip extends Overlay {
      * @return the on-screen dimensions of this tooltip as a Rect
      */
     public Rect getRect() {
-        return new Rect((int) point.x - TOOLTIP_WIDTH / 2,
-                (int) point.y - 200,
-                (int) point.x + TOOLTIP_WIDTH / 2,
-                (int) point.y - 100);
+        return new Rect((int) mPoint.x - TOOLTIP_WIDTH / 2,
+                (int) mPoint.y - 200,
+                (int) mPoint.x + TOOLTIP_WIDTH / 2,
+                (int) mPoint.y - 100);
     }
 
     /**
@@ -178,7 +178,7 @@ public class Tooltip extends Overlay {
      */
     public static final int TOOLTIP_WIDTH = 480;
     /**
-     * Default title size, in points.
+     * Default mTitle size, in points.
      */
     public static final float DEFAULT_TEXT_SIZE = 40f;
 }

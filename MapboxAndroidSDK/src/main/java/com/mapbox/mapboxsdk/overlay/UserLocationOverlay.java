@@ -32,16 +32,16 @@ import java.util.LinkedList;
  */
 public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
 
-    protected final SafePaint mPaint = new SafePaint();
-    protected final SafePaint mCirclePaint = new SafePaint();
+    private final SafePaint mPaint = new SafePaint();
+    private final SafePaint mCirclePaint = new SafePaint();
 
     private final Projection mProjection;
 
-    protected final Bitmap mPersonBitmap;
-    protected final Bitmap mDirectionArrowBitmap;
+    private final Bitmap mPersonBitmap;
+    private final Bitmap mDirectionArrowBitmap;
 
-    protected final MapView mMapView;
-    protected final Context mContext;
+    private final MapView mMapView;
+    private final Context mContext;
 
     private final MapController mMapController;
     public GpsLocationProvider mMyLocationProvider;
@@ -52,18 +52,14 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     private Location mLocation;
     private LatLng mLatLng;
     private boolean mIsLocationEnabled = false;
-    protected boolean mIsFollowing = false; // follow location updates
-    protected boolean mDrawAccuracyEnabled = true;
+    private boolean mIsFollowing = false; // follow location updates
+    private boolean mDrawAccuracyEnabled = true;
 
     /**
      * Coordinates the feet of the person are located scaled for display density.
      */
-    protected final PointF mPersonHotspot;
-    protected final PointF mDirectionHotspot;
-
-    public static final int MENU_MY_LOCATION = getSafeMenuId();
-
-    private boolean mOptionsMenuEnabled = true;
+    private final PointF mPersonHotspot;
+    private final PointF mDirectionHotspot;
 
     // to avoid allocations during onDraw
     private final RectF mMyLocationRect = new RectF();

@@ -48,7 +48,7 @@ public class WebSourceTileLayer extends TileLayer {
 
     // Tracks the number of threads active in the getBitmapFromURL method.
     private AtomicInteger activeThreads = new AtomicInteger(0);
-    protected JSONObject infoJSON;
+    protected JSONObject tileJSON;
     protected boolean mEnableSSL = false;
 
     public WebSourceTileLayer(final String pId, final String url) {
@@ -139,31 +139,31 @@ public class WebSourceTileLayer extends TileLayer {
     }
 
     private void initWithTileJSON(JSONObject tileJSON) {
-        infoJSON = (tileJSON != null) ? tileJSON : new JSONObject();
-        if (infoJSON != null) {
-            if (infoJSON.has("tiles")) {
+        this.tileJSON = (tileJSON != null) ? tileJSON : new JSONObject();
+        if (this.tileJSON != null) {
+            if (this.tileJSON.has("tiles")) {
                 try {
-                    this.setURL(infoJSON.getJSONArray("tiles").getString(0).replace(".png", "{2x}.png"));
+                    this.setURL(this.tileJSON.getJSONArray("tiles").getString(0).replace(".png", "{2x}.png"));
                 } catch (JSONException e) {
                 }
             }
-            mMinimumZoomLevel = getJSONFloat(infoJSON, "minzoom");
-            mMaximumZoomLevel = getJSONFloat(infoJSON, "maxzoom");
-            mName = infoJSON.optString("name");
-            mDescription = infoJSON.optString("description");
-            mAttribution = infoJSON.optString("attribution");
-            mLegend = infoJSON.optString("legend");
+            mMinimumZoomLevel = getJSONFloat(this.tileJSON, "minzoom");
+            mMaximumZoomLevel = getJSONFloat(this.tileJSON, "maxzoom");
+            mName = this.tileJSON.optString("name");
+            mDescription = this.tileJSON.optString("description");
+            mAttribution = this.tileJSON.optString("attribution");
+            mLegend = this.tileJSON.optString("legend");
 
-            double[] center = getJSONDoubleArray(infoJSON, "center", 3);
+            double[] center = getJSONDoubleArray(this.tileJSON, "center", 3);
             if (center != null) {
                 mCenter = new LatLng(center[0], center[1], center[2]);
             }
-            double[] bounds = getJSONDoubleArray(infoJSON, "bounds", 4);
+            double[] bounds = getJSONDoubleArray(this.tileJSON, "bounds", 4);
             if (bounds != null) {
                 mBoundingBox = new BoundingBox(bounds[3], bounds[2], bounds[1], bounds[0]);
             }
         }
-        Log.d(TAG, "infoJSON " + infoJSON.toString());
+        Log.d(TAG, "TileJSON " + tileJSON.toString());
     }
 
     byte[] readFully(InputStream in) throws IOException {
@@ -225,16 +225,21 @@ public class WebSourceTileLayer extends TileLayer {
         return null;
     }
 
-    public String parseUrlForTile(String url, final MapTile aTile, boolean hdpi) {
+    /**
+     * Get a single Tile URL for a single tile.
+     * @param aTile a map tile
+     * @param hdpi a boolean that indicates whether the tile should be at 2x or retina size
+     * @return a list of tile URLs
+     */
+    public String getTileURL(final MapTile aTile, boolean hdpi) {
+        return parseUrlForTile(mUrl, aTile, hdpi);
+    }
+
+    private String parseUrlForTile(String url, final MapTile aTile, boolean hdpi) {
         return url.replace("{z}", String.valueOf(aTile.getZ()))
                 .replace("{x}", String.valueOf(aTile.getX()))
                 .replace("{y}", String.valueOf(aTile.getY()))
                 .replace("{2x}", hdpi ? "@2x" : "");
-    }
-
-
-    public String getTileURL(final MapTile aTile, boolean hdpi) {
-        return parseUrlForTile(mUrl, aTile, hdpi);
     }
 
     private static final Paint compositePaint = new Paint(Paint.FILTER_BITMAP_FLAG);

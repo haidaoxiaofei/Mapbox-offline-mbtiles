@@ -64,7 +64,7 @@ public class Icon implements MapboxConstants {
             builder.setMemoryCacheEnabled(true)
                     .setMemoryCacheMaxSizeUsingHeapSize()
                     .setDiskCacheEnabled(true)
-                            // 1 MB (a marker image is around 1kb)
+                    // 1 MB (a marker image is around 1kb)
                     .setDiskCacheMaxSize(1024 * 1024)
                     .setDiskCacheLocation(cacheDir);
             sIconCache = builder.build();
@@ -110,7 +110,6 @@ public class Icon implements MapboxConstants {
         downloadBitmap(context, url);
     }
 
-
     private void downloadBitmap(Context context, String url) {
         CacheableBitmapDrawable bitmap = getCache(context).get(url);
 
@@ -129,8 +128,6 @@ public class Icon implements MapboxConstants {
         // any incoming requests that resulted in a cache miss with the downloader active
         // will be added to the list.
         // Once the downloader finishes, it will notify every icon that the image is there.
-
-
         if (Icon.downloadQueue.putIfAbsent(url, new ArrayList<Icon>()) == null) {
             // We just placed a new list in the queue, so we will be responsible for
             // kicking off the downloader..
@@ -171,7 +168,6 @@ public class Icon implements MapboxConstants {
             }
         }
     }
-
 
     public Icon setMarker(Marker marker) {
         this.marker = marker;

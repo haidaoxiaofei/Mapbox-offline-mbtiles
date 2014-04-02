@@ -30,15 +30,13 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
     private static final String TAG = "MBTilesLayer";
     MBTilesFileArchive mbTilesFileArchive;
 
+
     /**
      * Initialize a new tile layer, represented by a MBTiles file.
      *
      * @param url path to a MBTiles file
+     * @param context the graphics drawing context
      */
-    public MBTilesLayer(final String url) {
-        this(null, url);
-    }
-
     public MBTilesLayer(final Context context, final String url) {
         super(url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.')), url);
         initialize(url, context);
@@ -78,26 +76,8 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
      * @param context
      */
     private void initialize(String url, final Context context) {
+        File file = getFile(url, context);
 
-        File file = null;
-        if (context != null) {
-            //we assume asset here
-            AssetManager am = context.getAssets();
-            InputStream inputStream;
-            try {
-                inputStream = am.open(url);
-                file = createFileFromInputStream(inputStream, Environment.getExternalStorageDirectory() + File.separator + url);
-            } catch (IOException e) {
-                Log.e(TAG, "MBTiles file not found in assets: " + e.toString());
-            }
-        }
-        if (file == null) {
-            try {
-                file = new File(url);
-            } catch (Exception e) {
-                Log.e(TAG, "can't load MBTiles: " + e.toString());
-            }
-        }
         if (file != null) {
             mbTilesFileArchive = MBTilesFileArchive.getDatabaseFileArchive(file);
         }
@@ -110,6 +90,27 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
             mAttribution = mbTilesFileArchive.getAttribution();
             mBoundingBox = mbTilesFileArchive.getBounds();
             mCenter = mbTilesFileArchive.getCenter();
+        }
+    }
+
+    private File getFile(String url, final Context context) {
+        if (context != null) {
+            //we assume asset here
+            AssetManager am = context.getAssets();
+            InputStream inputStream;
+            try {
+                inputStream = am.open(url);
+                return createFileFromInputStream(inputStream, Environment.getExternalStorageDirectory() + File.separator + url);
+            } catch (IOException e) {
+                Log.e(TAG, "MBTiles file not found in assets: " + e.toString());
+                return null;
+            }
+        }
+        try {
+            return new File(url);
+        } catch (Exception e) {
+            Log.e(TAG, "can't load MBTiles: " + e.toString());
+            return null;
         }
     }
 

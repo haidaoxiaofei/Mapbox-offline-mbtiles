@@ -43,11 +43,11 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         TileLayerConstants {
     protected Context context;
     protected final MapTileCache mTileCache;
-    protected Handler mTileRequestCompleteHandler;
-    protected boolean mUseDataConnection = true;
+    private Handler mTileRequestCompleteHandler;
+    private boolean mUseDataConnection = true;
 
     private ITileLayer mTileSource;
-    protected MapView mapView;
+    private MapView mapView;
 
     /**
      * Attempts to get a Drawable that represents a {@link MapTile}. If the tile is not immediately

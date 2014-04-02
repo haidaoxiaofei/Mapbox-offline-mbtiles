@@ -450,7 +450,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      */
     public LatLng getCenter() {
     	BoundingBox box = getBoundingBox();
-    	return (box != null)? box.getCenter() : null;
+    	return (box != null)? box.getCenter():null;
     }
 
     /**
@@ -1382,7 +1382,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public void cluster() {
-        if (mShouldCluster == false) return;
+        if (mShouldCluster == false) {
+            return;
+        }
         for (ItemizedIconOverlay overlay : getItemizedOverlays()) {
             overlay.cluster(this, context);
         }
