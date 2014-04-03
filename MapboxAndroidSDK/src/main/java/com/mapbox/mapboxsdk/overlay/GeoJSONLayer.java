@@ -31,7 +31,7 @@ public class GeoJSONLayer {
     public class Getter extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            InputStream is = null;
+            InputStream is;
             String jsonText = null;
             try {
                 is = new URL(params[0]).openStream();

@@ -48,7 +48,7 @@ public class MainActivity extends ActionBarActivity {
         replaceMapView(terrain);
         addLocationOverlay();
 
-        mv.loadFromGeoJSONURL("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
+        mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/4a6f5fa40ab9a6b2f163/raw/b1ee1e445225fc0a397e2605feda7da74c36161b/map.geojson");
         setButtonListeners();
         Marker m = new Marker(mv, "Edinburgh", "Scotland", new LatLng(55.94629, -3.20777));
         m.setIcon(new Icon(this, Icon.Size.SMALL, "marker-stroked", "FF0000"));
@@ -183,12 +183,13 @@ public class MainActivity extends ActionBarActivity {
 
     private void addLine() {
         // Configures a line
-        PathOverlay po = new PathOverlay(Color.RED, this);
         Paint linePaint = new Paint();
         linePaint.setStyle(Paint.Style.STROKE);
         linePaint.setColor(Color.BLUE);
         linePaint.setStrokeWidth(5);
-        po.setPaint(linePaint);
+
+        PathOverlay po = new PathOverlay().setPaint(linePaint);
+
         po.addPoint(startingPoint);
         po.addPoint(new LatLng(51.7, 0.3));
         po.addPoint(new LatLng(51.2, 0));

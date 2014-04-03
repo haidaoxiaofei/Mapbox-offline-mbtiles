@@ -43,8 +43,17 @@ public class GeoJSON {
         }
     }
 
+    /**
+     * Given a <a href='http://geojson.org/geojson-spec.html#feature-collection-objects'>GeoJSON FeatureCollection</a>,
+     * parse each feature and create layers on the given map
+     *
+     * @param featureCollection a json object representing a featurecollection
+     * @param mv a mapview
+     * @throws JSONException
+     */
     public static void featureCollectionToLayers(JSONObject featureCollection, MapView mv) throws JSONException {
         JSONArray features = (JSONArray) featureCollection.get("features");
+        // foreach is not usable for JSONArray, so longform
         for (int i = 0; i < features.length(); i++) {
             featureToLayer((JSONObject) features.get(i), mv);
         }
@@ -64,7 +73,6 @@ public class GeoJSON {
         JSONObject geometry = (JSONObject) feature.get("geometry");
         String type = geometry.optString("type");
 
-
         int j;
 
         // Extract the marker style properties from the GeoJSON
@@ -76,11 +84,13 @@ public class GeoJSON {
 
         if (!"".equals(markerColor) || !"".equals(markerSize) || !"".equals(markerSymbol)) {
             // Who knows what kind of stuff we are getting in
-            Icon.Size size = Icon.Size.LARGE;
+            Icon.Size size;
+
             try {
                 size = Icon.Size.valueOf(markerSize.toUpperCase());
             } catch (IllegalArgumentException iae) {
                 // Fine, we will just assume you meant large..
+                size = Icon.Size.LARGE;
             }
 
             markerIcon = new Icon(mv.getContext(), size, markerSymbol, markerColor);
@@ -91,8 +101,9 @@ public class GeoJSON {
             double lon = (Double) coordinates.get(0);
             double lat = (Double) coordinates.get(1);
             Marker marker = new Marker(mv, title, "", new LatLng(lat, lon));
-            if (markerIcon != null)
+            if (markerIcon != null) {
                 marker.setIcon(markerIcon);
+            }
 
             mv.addMarker(marker);
         } else if (type.equals("MultiPoint")) {
@@ -102,8 +113,9 @@ public class GeoJSON {
                 double lon = (Double) coordinates.get(0);
                 double lat = (Double) coordinates.get(1);
                 Marker marker = new Marker(mv, title, "", new LatLng(lat, lon));
-                if (markerIcon != null)
+                if (markerIcon != null) {
                     marker.setIcon(markerIcon);
+                }
 
                 mv.addMarker(marker);
             }
@@ -136,16 +148,54 @@ public class GeoJSON {
             PathOverlay path = new PathOverlay();
             path.getPaint().setStyle(Paint.Style.FILL);
             JSONArray points = (JSONArray) geometry.get("coordinates");
-            JSONArray outerRing = (JSONArray) points.get(0);
-            JSONArray coordinates;
-            for (j = 0; j < outerRing.length(); j++) {
-                coordinates = (JSONArray) outerRing.get(j);
-                double lon = (Double) coordinates.get(0);
-                double lat = (Double) coordinates.get(1);
-                path.addPoint(new LatLng(lat, lon));
+
+            for (int r = 0; r < points.length(); r++) {
+                JSONArray ring = (JSONArray) points.get(r);
+                JSONArray coordinates;
+
+                // we re-wind inner rings of GeoJSON polygons in order
+                // to render them as transparent in the canvas layer.
+
+                // first ring should have windingOrder = true,
+                // all others should have winding order == false
+                if ((r == 0 && windingOrder(ring) == false) ||
+                        (r != 0 && windingOrder(ring) == true)) {
+                    for (j = 0; j < ring.length(); j++) {
+                        coordinates = (JSONArray) ring.get(j);
+                        double lon = (Double) coordinates.get(0);
+                        double lat = (Double) coordinates.get(1);
+                        path.addPoint(new LatLng(lat, lon));
+                    }
+                } else {
+                    for (j = ring.length() - 1; j >= 0; j--) {
+                        coordinates = (JSONArray) ring.get(j);
+                        double lon = (Double) coordinates.get(0);
+                        double lat = (Double) coordinates.get(1);
+                        path.addPoint(new LatLng(lat, lon));
+                    }
+                }
+
+                mv.getOverlays().add(path);
             }
-            mv.getOverlays().add(path);
         }
         mv.invalidate();
+    }
+
+    private static boolean windingOrder(JSONArray ring) throws JSONException {
+        float area = 0;
+
+        if (ring.length() > 2) {
+            for (int i = 0; i < ring.length() - 1; i++) {
+                JSONArray p1 = (JSONArray) ring.get(i);
+                JSONArray p2 = (JSONArray) ring.get(i +1);
+                area += rad((Double) p2.get(0) - (Double) p1.get(0)) * (2 + Math.sin(rad((Double) p1.get(1))) + Math.sin(rad((Double) p2.get(1))));
+            }
+        }
+
+        return area > 0;
+    }
+
+    private static double rad(double _) {
+        return _ * Math.PI / 180f;
     }
 }
