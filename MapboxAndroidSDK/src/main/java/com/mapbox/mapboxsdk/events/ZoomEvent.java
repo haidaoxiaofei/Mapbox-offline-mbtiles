@@ -2,10 +2,8 @@ package com.mapbox.mapboxsdk.events;
 
 import com.mapbox.mapboxsdk.views.MapView;
 
-/*
- * The event generated when a map has finished zooming to the level <code>zoomLevel</code>.
- *
- * @author Theodore Hong
+/**
+ * The event generated when a map has finished zooming to the level zoomLevel
  */
 public class ZoomEvent implements MapEvent {
     protected MapView source;
@@ -16,14 +14,14 @@ public class ZoomEvent implements MapEvent {
         this.zoomLevel = zoomLevel;
     }
 
-    /*
+    /**
      * Return the map which generated this event.
      */
     public MapView getSource() {
         return source;
     }
 
-    /*
+    /**
      * Return the zoom level zoomed to.
      */
     public float getZoomLevel() {

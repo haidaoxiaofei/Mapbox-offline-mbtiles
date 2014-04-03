@@ -156,7 +156,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
     private InfoWindow currentTooltip;
-    
+
     private int mDefaultPinRes = R.drawable.defpin;
     private Drawable mDefaultPinDrawable;
     private PointF mDefaultPinAnchor = DEFAULT_PIN_ANCHOR;
@@ -164,18 +164,18 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     /**
      * Constructor for XML layout calls. Should not be used programmatically.
      *
-     * @param context A copy of the app context
+     * @param aContext A copy of the app context
      * @param attrs   An AttributeSet object to get extra info from the XML, such as mapbox id or type of baselayer
      */
-    protected MapView(final Context context, final int tileSizePixels, MapTileLayerBase tileProvider, final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
-        super(context, attrs);
+    protected MapView(final Context aContext, final int tileSizePixels, MapTileLayerBase tileProvider, final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
+        super(aContext, attrs);
         mShouldCluster = false;
         this.mController = new MapController(this);
-        this.mScroller = new Scroller(context);
+        this.mScroller = new Scroller(aContext);
         Projection.setTileSize(tileSizePixels);
 
         if (tileProvider == null) {
-            tileProvider = new MapTileLayerBasic(context, null, this);
+            tileProvider = new MapTileLayerBasic(aContext, null, this);
         }
 
         mTileRequestCompleteHandler = tileRequestCompleteHandler == null
@@ -187,16 +187,16 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this.mMapOverlay = new TilesOverlay(mTileProvider);
         mOverlayManager = new OverlayManager(mMapOverlay);
 
-        this.mGestureDetector = new GestureDetector(context, new MapViewGestureDetectorListener(this));
+        this.mGestureDetector = new GestureDetector(aContext, new MapViewGestureDetectorListener(this));
         mGestureDetector.setOnDoubleTapListener(new MapViewDoubleClickListener(this));
 
-        mScaleGestureDetector = new ScaleGestureDetector(context, new MapViewScaleGestureDetectorListener(this));
+        mScaleGestureDetector = new ScaleGestureDetector(aContext, new MapViewScaleGestureDetectorListener(this));
 
-        this.context = context;
-        eventsOverlay = new MapEventsOverlay(context, this);
+        this.context = aContext;
+        eventsOverlay = new MapEventsOverlay(aContext, this);
         this.getOverlays().add(eventsOverlay);
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MapView);
+        TypedArray a = aContext.obtainStyledAttributes(attrs, R.styleable.MapView);
         String mapid = a.getString(R.styleable.MapView_mapid);
         a.recycle();
         if (mapid != null) {
@@ -431,7 +431,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @return the current bounds of the map
      */
     public BoundingBox getBoundingBoxInternal() {
-    	if (getMeasuredWidth() == 0 || getMeasuredHeight() == 0) return null;
+        if (getMeasuredWidth() == 0 || getMeasuredHeight() == 0) {
+            return null;
+        }
         final Rect screenRect = GeometryMath.viewPortRect(getProjection(), null);
         ILatLng neGeoPoint = Projection.pixelXYToLatLong(screenRect.right, screenRect.top,
                 mZoomLevel);
@@ -452,8 +454,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @return centerpoint
      */
     public LatLng getCenter() {
-    	BoundingBox box = getBoundingBox();
-    	return (box != null)? box.getCenter():null;
+        BoundingBox box = getBoundingBox();
+        return (box != null) ? box.getCenter() : null;
     }
 
     /**
@@ -786,6 +788,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     /**
      * Set the rotation of the map, in degrees. A value of 0, meaning straight up, is default.
+     *
      * @param degrees the angle of the map
      */
     public void setMapOrientation(float degrees) {
@@ -795,6 +798,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     /**
      * Gets the current angle of rotation of the map
+     *
      * @return the current angle in degrees.
      */
     public float getMapOrientation() {
@@ -1504,21 +1508,21 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public String toString() {
         return "MapView {" + getTileProvider() + "}";
     }
-    
+
     public void setDefaultPinRes(int res) {
-    	mDefaultPinRes = res;
+        mDefaultPinRes = res;
     }
-    
+
     public void setDefaultPinDrawable(Drawable drawable) {
-    	mDefaultPinDrawable = drawable;
+        mDefaultPinDrawable = drawable;
     }
-    
+
     public Drawable getDefaultPinDrawable() {
-    	if (mDefaultPinDrawable == null && mDefaultPinRes != 0) {
-    		BitmapFactory.Options opts = BitmapUtils.getBitmapOptions(getResources().getDisplayMetrics());
-    		mDefaultPinDrawable = new BitmapDrawable(getResources(), BitmapFactory.decodeResource(context.getResources(), mDefaultPinRes, opts));
-    	}
-    	return mDefaultPinDrawable;
+        if (mDefaultPinDrawable == null && mDefaultPinRes != 0) {
+            BitmapFactory.Options opts = BitmapUtils.getBitmapOptions(getResources().getDisplayMetrics());
+            mDefaultPinDrawable = new BitmapDrawable(getResources(), BitmapFactory.decodeResource(context.getResources(), mDefaultPinRes, opts));
+        }
+        return mDefaultPinDrawable;
     }
 
     public void setDefaultPinAnchor(PointF point) {

@@ -12,15 +12,14 @@ import com.mapbox.mapboxsdk.overlay.Marker;
 /**
  * A tooltip view
  */
-
 public class InfoWindow {
+
     private Marker boundMarker;
 
     /**
      * @param layoutResId   the id of the view resource.
      * @param mapView       the mapview on which is hooked the view
      */
-
     private MapView mMapView;
     private boolean mIsVisible;
     private View mView;
@@ -29,14 +28,6 @@ public class InfoWindow {
     static int mDescriptionId = 0;
     static int mSubDescriptionId = 0;
     static int mImageId = 0;
-
-    private static void setResIds(Context context) {
-        String packageName = context.getPackageName(); //get application package name
-        mTitleId = context.getResources().getIdentifier("id/tooltip_title", null, packageName);
-        mDescriptionId = context.getResources().getIdentifier("id/tooltip_description", null, packageName);
-        mSubDescriptionId = context.getResources().getIdentifier("id/tooltip_subdescription", null, packageName);
-        mImageId = context.getResources().getIdentifier("id/tooltip_image", null, packageName);
-    }
 
     public InfoWindow(int layoutResId, MapView mapView) {
         mMapView = mapView;
@@ -126,10 +117,19 @@ public class InfoWindow {
         return mView;
     }
 
+    /**
+     * Returns the mapView this InfoWindow is bound to
+     * @return the mapView
+     */
     public MapView getMapView() {
         return mMapView;
     }
 
+    /**
+     * Constructs the view that is displayed when the InfoWindow opens.
+     * This retrieves data from overlayItem and shows it in the tooltip.
+     * @param overlayItem the tapped overlay item
+     */
     public void onOpen(Marker overlayItem) {
         String title = overlayItem.getTitle();
         ((TextView) mView.findViewById(mTitleId /*R.id.title*/)).setText(title);
@@ -159,5 +159,12 @@ public class InfoWindow {
     public Marker getBoundMarker() {
         return boundMarker;
     }
+
+    private static void setResIds(Context context) {
+        String packageName = context.getPackageName(); //get application package name
+        mTitleId = context.getResources().getIdentifier("id/tooltip_title", null, packageName);
+        mDescriptionId = context.getResources().getIdentifier("id/tooltip_description", null, packageName);
+        mSubDescriptionId = context.getResources().getIdentifier("id/tooltip_subdescription", null, packageName);
+        mImageId = context.getResources().getIdentifier("id/tooltip_image", null, packageName);
+    }
 }
- 

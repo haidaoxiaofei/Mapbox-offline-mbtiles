@@ -48,7 +48,7 @@ public class GeoJSON {
      * parse each feature and create layers on the given map
      *
      * @param featureCollection a json object representing a featurecollection
-     * @param mv a mapview
+     * @param mv                a mapview
      * @throws JSONException
      */
     public static void featureCollectionToLayers(JSONObject featureCollection, MapView mv) throws JSONException {
@@ -158,8 +158,8 @@ public class GeoJSON {
 
                 // first ring should have windingOrder = true,
                 // all others should have winding order == false
-                if ((r == 0 && windingOrder(ring) == false) ||
-                        (r != 0 && windingOrder(ring) == true)) {
+                if ((r == 0 && !windingOrder(ring)) ||
+                        (r != 0 && windingOrder(ring))) {
                     for (j = 0; j < ring.length(); j++) {
                         coordinates = (JSONArray) ring.get(j);
                         double lon = (Double) coordinates.get(0);
@@ -187,7 +187,7 @@ public class GeoJSON {
         if (ring.length() > 2) {
             for (int i = 0; i < ring.length() - 1; i++) {
                 JSONArray p1 = (JSONArray) ring.get(i);
-                JSONArray p2 = (JSONArray) ring.get(i +1);
+                JSONArray p2 = (JSONArray) ring.get(i + 1);
                 area += rad((Double) p2.get(0) - (Double) p1.get(0)) * (2 + Math.sin(rad((Double) p1.get(1))) + Math.sin(rad((Double) p2.get(1))));
             }
         }

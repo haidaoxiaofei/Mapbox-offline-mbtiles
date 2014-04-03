@@ -107,6 +107,19 @@ public class Icon implements MapboxConstants {
         downloadBitmap(context, url);
     }
 
+    /**
+     * Set the marker that this icon belongs to, calling the same method on the other side
+     * @param marker the marker to be added to
+     * @return this icon
+     */
+    public Icon setMarker(Marker marker) {
+        this.marker = marker;
+        if (drawable != null) {
+            this.marker.setMarker(drawable);
+        }
+        return this;
+    }
+
     private void downloadBitmap(Context context, String url) {
         CacheableBitmapDrawable bitmap = getCache(context).get(url);
 
@@ -166,13 +179,6 @@ public class Icon implements MapboxConstants {
         }
     }
 
-    public Icon setMarker(Marker marker) {
-        this.marker = marker;
-        if (drawable != null) {
-            this.marker.setMarker(drawable);
-        }
-        return this;
-    }
 
     class BitmapLoader extends AsyncTask<String, Void, CacheableBitmapDrawable> {
 

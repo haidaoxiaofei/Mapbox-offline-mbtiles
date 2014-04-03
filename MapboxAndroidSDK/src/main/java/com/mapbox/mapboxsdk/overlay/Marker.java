@@ -417,8 +417,8 @@ public class Marker {
     }
 
 
-    public Marker setIcon(Icon icon) {
-        this.icon = icon;
+    public Marker setIcon(Icon aIcon) {
+        this.icon = aIcon;
         icon.setMarker(this);
         return this;
     }

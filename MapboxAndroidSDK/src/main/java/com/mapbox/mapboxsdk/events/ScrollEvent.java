@@ -2,10 +2,8 @@ package com.mapbox.mapboxsdk.events;
 
 import com.mapbox.mapboxsdk.views.MapView;
 
-/*
+/**
  * The event generated when a map has finished scrolling to the coordinates (<code>x</code>,<code>y</code>).
- *
- * @author Theodore Hong
  */
 public class ScrollEvent implements MapEvent {
     protected MapView source;
@@ -18,21 +16,21 @@ public class ScrollEvent implements MapEvent {
         this.y = y;
     }
 
-    /*
+    /**
      * Return the map which generated this event.
      */
     public MapView getSource() {
         return source;
     }
 
-    /*
+    /**
      * Return the x-coordinate scrolled to.
      */
     public int getX() {
         return x;
     }
 
-    /*
+    /**
      * Return the y-coordinate scrolled to.
      */
     public int getY() {

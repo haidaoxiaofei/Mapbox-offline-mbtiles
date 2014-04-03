@@ -4,13 +4,11 @@ import android.util.Log;
 
 import android.os.Handler;
 
-/*
+/**
  * A MapListener that aggregates multiple events called in quick succession.
  * After an event arrives, if another event arrives within <code>delay</code> milliseconds,
  * the original event is discarded.  Otherwise, the event is propagated to the wrapped
- * MapListener.  Note: This class is not thread-safe.
- *
- * @author Theodore Hong
+ * MapListener.  Note: This class is not thread-safe.]
  */
 public class DelayedMapListener implements MapListener {
 
@@ -32,9 +30,8 @@ public class DelayedMapListener implements MapListener {
     protected Handler handler;
     protected CallbackTask callback;
 
-    /*
+    /**
      * @param wrappedListener The wrapped MapListener
-     *
      * @param delay Listening delay, in milliseconds
      */
     public DelayedMapListener(final MapListener wrappedListener, final long delay) {
@@ -44,7 +41,7 @@ public class DelayedMapListener implements MapListener {
         this.callback = null;
     }
 
-    /*
+    /**
      * Constructor with default delay.
      *
      * @param wrappedListener The wrapped MapListener

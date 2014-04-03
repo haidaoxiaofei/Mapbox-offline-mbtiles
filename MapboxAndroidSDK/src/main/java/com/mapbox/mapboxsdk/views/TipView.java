@@ -9,6 +9,10 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 
+/**
+ * This is a custom view that does something very simple: it draws the tips of
+ * InfoWindow views.
+ */
 public class TipView extends View {
 
     private Paint mPaint;
