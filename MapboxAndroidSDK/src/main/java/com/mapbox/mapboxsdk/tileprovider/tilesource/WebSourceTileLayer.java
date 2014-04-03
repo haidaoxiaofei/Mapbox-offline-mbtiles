@@ -140,7 +140,7 @@ public class WebSourceTileLayer extends TileLayer {
 
     private void initWithTileJSON(JSONObject tileJSON) {
         this.tileJSON = (tileJSON != null) ? tileJSON : new JSONObject();
-        if (this.tileJSON != null) {
+        if (tileJSON != null) {
             if (this.tileJSON.has("tiles")) {
                 try {
                     this.setURL(this.tileJSON.getJSONArray("tiles").getString(0).replace(".png", "{2x}.png"));
@@ -163,7 +163,7 @@ public class WebSourceTileLayer extends TileLayer {
                 mBoundingBox = new BoundingBox(bounds[3], bounds[2], bounds[1], bounds[0]);
             }
         }
-        Log.d(TAG, "TileJSON " + tileJSON.toString());
+        Log.d(TAG, "TileJSON " + this.tileJSON.toString());
     }
 
     byte[] readFully(InputStream in) throws IOException {
