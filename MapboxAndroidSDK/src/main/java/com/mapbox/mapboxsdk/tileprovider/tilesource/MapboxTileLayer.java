@@ -8,7 +8,7 @@ import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
  * Underneath, this initializes a WebSourceTileLayer, but provides conveniences
  * for retina tiles, initialization by ID, and loading over SSL.
  */
-public class MapboxTileLayer extends WebSourceTileLayer implements MapViewConstants,
+public class MapboxTileLayer extends TileJsonTileLayer implements MapViewConstants,
         MapboxConstants {
     private static final String TAG = "MapboxTileLayer";
     private String mId;

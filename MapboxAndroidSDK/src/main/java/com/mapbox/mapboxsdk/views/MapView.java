@@ -784,11 +784,19 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return getController().zoomOutAbout(point);
     }
 
+    /**
+     * Set the rotation of the map, in degrees. A value of 0, meaning straight up, is default.
+     * @param degrees the angle of the map
+     */
     public void setMapOrientation(float degrees) {
         this.mapOrientation = degrees % 360.0f;
         this.invalidate();
     }
 
+    /**
+     * Gets the current angle of rotation of the map
+     * @return the current angle in degrees.
+     */
     public float getMapOrientation() {
         return mapOrientation;
     }

@@ -113,8 +113,6 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
         return mTileSizePixels;
     }
 
-    final private String TAG = "OnlineTileSource";
-
     @Override
     public String getCacheKey() {
         return mCacheKey;
