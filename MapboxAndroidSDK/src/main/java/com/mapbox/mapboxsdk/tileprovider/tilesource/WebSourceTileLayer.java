@@ -12,19 +12,16 @@ import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
-import com.squareup.okhttp.HttpResponseCache;
 import com.squareup.okhttp.OkHttpClient;
 
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.GeneralSecurityException;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.net.ssl.SSLContext;
@@ -36,7 +33,6 @@ import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
  */
 public class WebSourceTileLayer extends TileLayer {
     private static final String TAG = "WebSourceTileLayer";
-    HttpResponseCache cache;
 
     // Tracks the number of threads active in the getBitmapFromURL method.
     private AtomicInteger activeThreads = new AtomicInteger(0);
@@ -84,12 +80,6 @@ public class WebSourceTileLayer extends TileLayer {
 
     protected void initialize(String pId, String aUrl, boolean enableSSL) {
         mEnableSSL = enableSSL;
-        File cacheDir = new File(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString());
-        try {
-            cache = new HttpResponseCache(cacheDir, 1024);
-        } catch (Exception e) {
-
-        }
         this.setURL(aUrl);
         Log.d(TAG, "initialize " + aUrl);
     }

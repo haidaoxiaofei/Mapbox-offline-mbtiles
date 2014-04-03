@@ -4,16 +4,19 @@ import android.os.AsyncTask;
 import android.util.Log;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.squareup.okhttp.HttpResponseCache;
 import com.squareup.okhttp.OkHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,9 +26,19 @@ import java.util.concurrent.TimeUnit;
 public class TileJsonTileLayer extends WebSourceTileLayer {
 
     private JSONObject tileJSON;
+    HttpResponseCache cache;
+    OkHttpClient client;
 
     public TileJsonTileLayer(final String pId, final String url, final boolean enableSSL) {
         super(pId, url, enableSSL);
+
+        client = new OkHttpClient();
+        File cacheDir = new File(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString());
+        try {
+            cache = new HttpResponseCache(cacheDir, 1024);
+            client.setResponseCache(cache);
+        } catch (Exception e) { }
+
         String jsonURL = this.getBrandedJSONURL();
         if (jsonURL != null) {
             initWithTileJSON(this.getBrandedJSON(jsonURL));
@@ -142,11 +155,7 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
 
     class RetrieveJSONTask extends AsyncTask<String, Void, JSONObject> {
         protected JSONObject doInBackground(String... urls) {
-            OkHttpClient client = new OkHttpClient();
-            if (cache != null) {
-                client.setResponseCache(cache);
-            }
-            InputStream in = null;
+            InputStream in;
             try {
                 URL url = new URL(urls[0]);
                 HttpURLConnection connection = client.open(url);
