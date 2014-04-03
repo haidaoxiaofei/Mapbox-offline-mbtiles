@@ -13,6 +13,10 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 
+/**
+ * An access layer to the MBTiles format. This is useful for offline tiles
+ * that one would pre-package with an app.
+ */
 public class MBTilesFileArchive implements IArchiveFile {
 
     private final SQLiteDatabase mDatabase;
@@ -69,7 +73,6 @@ public class MBTilesFileArchive implements IArchiveFile {
         return "MBTiles [mDatabase=" + mDatabase.getPath() + "]";
     }
 
-
     private String getStringValue(String key) {
         final String[] column = {COL_VALUE};
         final String[] query = {key};
@@ -121,7 +124,6 @@ public class MBTilesFileArchive implements IArchiveFile {
         return getStringValue("attribution");
     }
 
-
     public BoundingBox getBounds() {
         String result = getStringValue("bounds");
         if (result != null) {
@@ -152,5 +154,4 @@ public class MBTilesFileArchive implements IArchiveFile {
     }
 
     private static final String TAG = "MBTilesFileArchive";
-
 }

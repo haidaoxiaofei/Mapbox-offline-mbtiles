@@ -45,7 +45,7 @@
 
     <!-- Checks whether files end with a new line.                        -->
     <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
-    <module name="NewlineAtEndOfFile"/>
+    <!-- <module name="NewlineAtEndOfFile"/> -->
 
     <!-- Checks that property files contain the same keys.         -->
     <!-- See http://checkstyle.sf.net/config_misc.html#Translation -->
@@ -114,7 +114,7 @@
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
         <!-- <module name="LineLength"/> -->
         <module name="MethodLength"/>
-        <module name="ParameterNumber"/>
+        <!-- <module name="ParameterNumber"/> -->
 
 
         <!-- Checks for whitespace                               -->
@@ -165,7 +165,7 @@
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
-        <module name="VisibilityModifier"/>
+        <!-- <module name="VisibilityModifier"/> -->
 
 
         <!-- Miscellaneous other checks.                   -->

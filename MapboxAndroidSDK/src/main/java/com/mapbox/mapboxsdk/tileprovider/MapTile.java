@@ -18,11 +18,16 @@ public class MapTile {
     private final int x;
     private final int y;
     private final int z;
+    private final String path;
+    private final int code;
 
     public MapTile(final int az, final int ax, final int ay) {
         this.z = az;
         this.x = ax;
         this.y = ay;
+
+        this.path = "/" + z + "/" + x + "/" + y;
+        this.code = ((17 * (37 + z)) * (37 * x)) * (37 + y);
     }
 
     public int getZ() {
@@ -39,7 +44,7 @@ public class MapTile {
 
     @Override
     public String toString() {
-        return "/" + z + "/" + x + "/" + y;
+        return path;
     }
 
     @Override
@@ -59,10 +64,6 @@ public class MapTile {
 
     @Override
     public int hashCode() {
-        int code = 17;
-        code *= 37 + z;
-        code *= 37 + x;
-        code *= 37 + y;
-        return code;
+        return this.code;
     }
 }

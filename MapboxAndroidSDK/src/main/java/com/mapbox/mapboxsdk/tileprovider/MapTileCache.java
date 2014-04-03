@@ -16,7 +16,8 @@ import uk.co.senab.bitmapcache.BitmapLruCache;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
- * @author Nicolas Gramlich
+ * A wrapper around a BitmapLruCache that stores tiles on disk in order
+ * to improve performance and provide offline content.
  */
 public class MapTileCache implements TileLayerConstants {
 
@@ -31,6 +32,11 @@ public class MapTileCache implements TileLayerConstants {
         this(context, CACHE_MAPTILECOUNT_DEFAULT);
     }
 
+    /**
+     * Get the BitmapLruCache that belongs to this tile cache, creating it first
+     * if there isn't one yet.
+     * @return BitmapLruCache the cache
+     */
     protected BitmapLruCache getCache() {
         if (this.sCachedTiles == null) {
             File cacheDir = getDiskCacheDir(context, DISK_CACHE_SUBDIR);
@@ -60,6 +66,11 @@ public class MapTileCache implements TileLayerConstants {
         this.context = context;
     }
 
+    /**
+     * Computes a prefixed key for a tile.
+     * @param aTile the tile
+     * @return the key
+     */
     public String getCacheKey(MapTile aTile) {
         return mDiskCacheKey + aTile.toString();
     }
@@ -187,6 +198,9 @@ public class MapTileCache implements TileLayerConstants {
     /**
      * Creates a unique subdirectory of the designated app cache directory. Tries to use external
      * but if not mounted, falls back on internal storage.
+     * @param context
+     * @param uniqueName
+     * @return
      */
     public static File getDiskCacheDir(Context context, String uniqueName) {
         // Check if media is mounted or storage is built-in, if so, try and use external cache dir

@@ -3,12 +3,15 @@ package com.mapbox.mapboxsdk.views;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -20,6 +23,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
+
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
@@ -43,6 +47,7 @@ import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
+import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.mapbox.mapboxsdk.views.util.Projection;
@@ -50,7 +55,9 @@ import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
+
 import org.json.JSONException;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -149,6 +156,10 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private TilesLoadedListener tilesLoadedListener;
     TileLoadedListener tileLoadedListener;
     private InfoWindow currentTooltip;
+    
+    private int mDefaultPinRes = R.drawable.defpin;
+    private Drawable mDefaultPinDrawable;
+    private PointF mDefaultPinAnchor = DEFAULT_PIN_ANCHOR;
 
     /**
      * Constructor for XML layout calls. Should not be used programmatically.
@@ -275,6 +286,23 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this.invalidate();
     }
 
+    public void selectMarker(final Marker marker) {
+        InfoWindow toolTip = marker.getToolTip(MapView.this);
+
+        if (mMapViewListener != null) {
+            mMapViewListener.onTapMarker(MapView.this, marker);
+        }
+        closeCurrentTooltip();
+        if (toolTip != currentTooltip) {
+            if (mMapViewListener != null) {
+                mMapViewListener.onShowMarker(MapView.this, marker);
+            }
+            currentTooltip = toolTip;
+            marker.showBubble(currentTooltip, MapView.this, true);
+        }
+    }
+
+
     /**
      * Adds a new ItemizedOverlay to the MapView
      *
@@ -332,19 +360,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         defaultMarkerOverlay = new ItemizedIconOverlay(getContext(), defaultMarkerList, new ItemizedIconOverlay.OnItemGestureListener<Marker>() {
             public boolean onItemSingleTapUp(final int index,
                                              final Marker item) {
-
-                InfoWindow toolTip = item.getToolTip(MapView.this);
-                if (mMapViewListener != null) {
-                    mMapViewListener.onTapMarker(MapView.this, item);
-                }
-                closeCurrentTooltip();
-                if (toolTip != currentTooltip) {
-                    if (mMapViewListener != null) {
-                        mMapViewListener.onShowMarker(MapView.this, item);
-                    }
-                    currentTooltip = toolTip;
-                    item.showBubble(currentTooltip, MapView.this, true);
-                }
+                selectMarker(item);
                 return true;
             }
 
@@ -813,12 +829,13 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @param shouldCluster if true the map view will cluster closest markers together.
      */
     public void setShouldCluster(final boolean shouldCluster) {
-        if (shouldCluster == mShouldCluster) return;
+        if (shouldCluster == mShouldCluster) {
+            return;
+        }
         mShouldCluster = shouldCluster;
         if (mShouldCluster == false) {
             clearCluster();
-        }
-        else {
+        } else {
             cluster();
         }
         invalidate();
@@ -911,6 +928,25 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     public void invalidateMapCoordinates(final Rect dirty) {
         mInvalidateRect.set(dirty);
+        final int width_2 = this.getWidth() / 2;
+        final int height_2 = this.getHeight() / 2;
+
+        // Since the canvas is shifted by getWidth/2, we can just return our natural scrollX/Y value
+        // since that is the same as the shifted center.
+        int centerX = this.getScrollX();
+        int centerY = this.getScrollY();
+
+        if (this.getMapOrientation() != 0) {
+            GeometryMath.getBoundingBoxForRotatedRectangle(mInvalidateRect, centerX, centerY,
+                    this.getMapOrientation() + 180, mInvalidateRect);
+        }
+        mInvalidateRect.offset(width_2, height_2);
+
+        super.invalidate(mInvalidateRect);
+    }
+
+    public void invalidateMapCoordinates(final RectF dirty) {
+        dirty.roundOut(mInvalidateRect);
         final int width_2 = this.getWidth() / 2;
         final int height_2 = this.getHeight() / 2;
 
@@ -1362,7 +1398,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public void cluster() {
-        if (mShouldCluster == false) return;
+        if (mShouldCluster == false) {
+            return;
+        }
         for (ItemizedIconOverlay overlay : getItemizedOverlays()) {
             overlay.cluster(this, context);
         }
@@ -1462,5 +1500,29 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     @Override
     public String toString() {
         return "MapView {" + getTileProvider() + "}";
+    }
+    
+    public void setDefaultPinRes(int res) {
+    	mDefaultPinRes = res;
+    }
+    
+    public void setDefaultPinDrawable(Drawable drawable) {
+    	mDefaultPinDrawable = drawable;
+    }
+    
+    public Drawable getDefaultPinDrawable() {
+    	if (mDefaultPinDrawable == null && mDefaultPinRes != 0) {
+    		BitmapFactory.Options opts = BitmapUtils.getBitmapOptions(getResources().getDisplayMetrics());
+    		mDefaultPinDrawable = new BitmapDrawable(getResources(), BitmapFactory.decodeResource(context.getResources(), mDefaultPinRes, opts));
+    	}
+    	return mDefaultPinDrawable;
+    }
+
+    public void setDefaultPinAnchor(PointF point) {
+        mDefaultPinAnchor = point;
+    }
+
+    public PointF getDefaultPinAnchor() {
+        return mDefaultPinAnchor;
     }
 }

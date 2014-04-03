@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk.overlay;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
@@ -29,8 +30,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     public ItemizedIconOverlay(
             final Context pContext,
             final List<Marker> pList,
-            final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Marker> pOnItemGestureListener)
-    {
+            final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Marker> pOnItemGestureListener) {
         super();
         this.context = pContext;
         this.mItemList = pList;
@@ -68,9 +68,9 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     }
 
     public boolean addItems(final List items) {
-        for(Object item:items) {
+        for (Object item : items) {
             if (item instanceof Marker) {
-                ((Marker)item).setParentHolder(this);
+                ((Marker) item).setParentHolder(this);
             }
         }
         final boolean result = mItemList.addAll(items);
@@ -83,7 +83,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     }
 
     public void removeAllItems(final boolean withPopulate) {
-        for(Marker item:mItemList) {
+        for (Marker item : mItemList) {
             item.setParentHolder(null);
         }
         mItemList.clear();
@@ -111,11 +111,11 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     }
 
     public void removeItems(final List items) {
-        for(Object item:items) {
+        for (Object item : items) {
             if (item instanceof Marker) {
                 final boolean result = mItemList.remove(item);
                 if (result) {
-                    ((Marker)item).setParentHolder(null);
+                    ((Marker) item).setParentHolder(null);
                 }
             }
 
@@ -141,20 +141,21 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
                 }
                 return onSingleTapUpHelper(index, that.mItemList.get(index), mapView);
             }
-        })) ;
+        }));
     }
 
     protected boolean onSingleTapUpHelper(final int index, final Marker item, final MapView mapView) {
         if (item instanceof ClusterItem) {
             if (clusterActions != null) {
-                clusterActions.onClusterTap((ClusterItem)item);
+                clusterActions.onClusterTap((ClusterItem) item);
             } else {
                 ArrayList<LatLng> activePoints = getCoordinateList(getGroupElements(mItemList, item.getGroup()));
                 view.zoomToBoundingBox(BoundingBox.fromLatLngs(activePoints));
             }
             return false;
+        } else {
+            return this.mOnItemGestureListener.onItemSingleTapUp(index, item);
         }
-        else return this.mOnItemGestureListener.onItemSingleTapUp(index, item);
     }
 
     @Override
@@ -188,9 +189,11 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
                                           final ActiveItem task) {
         for (int i = 0; i < this.mItemList.size(); ++i) {
             final Marker item = getItem(i);
-            if (item.beingClustered()) continue;
-            item.getPositionOnScreen(mapView, mCurScreenCoords);
-            if (hitTest(item, event.getX(), event.getY())) {
+            if (item.beingClustered()) {
+                continue;
+            }
+            RectF rect = item.getDrawingBounds(mapView.getProjection(), null);
+            if (rect.contains(event.getX(), event.getY())) {
                 if (task.run(i)) {
                     this.setFocus(item);
                     return true;
@@ -228,7 +231,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
             if (!item.beingClustered()) {
                 int counter = 0;
                 for (Marker item2 : this.mItemList) {
-                    if ( item2 != item && !item.beingClustered() && PointF.length(screenX(item) - screenX(item2), screenY(item) - screenY(item2)) <= CLUSTERING_THRESHOLD) {
+                    if (item2 != item && !item.beingClustered() && PointF.length(screenX(item) - screenX(item2), screenY(item) - screenY(item2)) <= CLUSTERING_THRESHOLD) {
                         item2.assignGroup(currentGroup);
                         item2.setClustered(true);
                         counter++;

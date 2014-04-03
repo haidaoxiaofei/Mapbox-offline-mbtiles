@@ -21,10 +21,6 @@ public class GpsLocationProvider implements LocationListener {
         mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
-
     public long getLocationUpdateMinTime() {
         return mLocationUpdateMinTime;
     }

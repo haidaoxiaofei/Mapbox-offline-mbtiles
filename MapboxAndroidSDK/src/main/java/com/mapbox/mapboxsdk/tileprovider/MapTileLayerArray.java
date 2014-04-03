@@ -127,11 +127,6 @@ public class MapTileLayerArray extends MapTileLayerBase {
         final CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
         if (tileDrawable != null &&
                 !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
-            if (DEBUG_TILE_PROVIDERS) {
-                Log.i(TAG, "MapTileLayerArray.getMapTile() already in cache: "
-                        + pTile);
-            }
-
             return tileDrawable;
         } else {
             boolean alreadyInProgress = false;
@@ -220,7 +215,9 @@ public class MapTileLayerArray extends MapTileLayerBase {
      */
     protected MapTileModuleLayerBase findNextAppropriateProvider(final MapTileRequestState aState) {
         MapTileModuleLayerBase provider = null;
-        boolean providerDoesntExist = false, providerCantGetDataConnection = false, providerCantServiceZoomlevel = false;
+        boolean providerDoesntExist = false,
+                providerCantGetDataConnection = false,
+                providerCantServiceZoomlevel = false;
         // The logic of the while statement is
         // "Keep looping until you get null, or a provider that still exists
         // and has a data connection if it needs one and can service the zoom level,"
