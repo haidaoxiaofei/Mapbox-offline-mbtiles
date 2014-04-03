@@ -840,33 +840,43 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         invalidate();
     }
 
+    /**
+     * Updates the internal minimum zoom level to reflect either the user-requested value
+     * or the lowest value that should be possible given bounding-box restrictions.
+     */
     private void updateMinZoomLevel() {
+        // if the scrollable area isn't restricted, the user default is the value
         if (mScrollableAreaBoundingBox == null) {
             return;
         }
+
         final BoundingBox currentBox = getBoundingBox();
         if (currentBox == null) {
             return;
         }
-        // Calculated required zoom based on latitude span
-        final double maxZoomLatitudeSpan = mZoomLevel == getMaxZoomLevel() ?
-                currentBox.getLatitudeSpan() :
-                currentBox.getLatitudeSpan() / Math.pow(2, getMaxZoomLevel() - mZoomLevel);
 
-        final double requiredLatitudeZoom =
-                getMaxZoomLevel() -
-                        Math.log(mScrollableAreaBoundingBox.getLatitudeSpan() / maxZoomLatitudeSpan) / Math.log(2);
+        final Projection pj = getProjection();
+        float z = 10f;
+
+        PointF br = pj.latLongToPixelXY(
+                mScrollableAreaBoundingBox.getLatNorth(),
+                mScrollableAreaBoundingBox.getLonWest(), z, null);
+
+        PointF tl = pj.latLongToPixelXY(
+                mScrollableAreaBoundingBox.getLatSouth(),
+                mScrollableAreaBoundingBox.getLonEast(), z, null);
 
 
-        // Calculated required zoom based on longitude span
-        final double maxZoomLongitudeSpan = mZoomLevel == getMaxZoomLevel() ?
-                currentBox.getLongitudeSpan() :
-                currentBox.getLongitudeSpan() / Math.pow(2, getMaxZoomLevel() - mZoomLevel);
+        float sizeX = tl.x - br.x;
+        float sizeY = tl.y - br.y;
+        float w = getWidth();
+        float h = getHeight();
 
-        final double requiredLongitudeZoom = getMaxZoomLevel()
-                - (Math.log(mScrollableAreaBoundingBox.getLongitudeSpan()
-                / maxZoomLongitudeSpan) / Math.log(2));
-        mMinimumZoomLevel = (float) Math.max(mRequestedMinimumZoomLevel, Math.min(requiredLatitudeZoom, requiredLongitudeZoom));
+        mMinimumZoomLevel = (float) Math.max(mRequestedMinimumZoomLevel,
+                Math.floor((float) Math.min(
+                        Math.pow((double) z, Math.log(w) / Math.log(sizeX)),
+                        Math.pow((double) z, Math.log(h) / Math.log(sizeY)))));
+
         if (mZoomLevel < mMinimumZoomLevel) {
             setZoom(mMinimumZoomLevel);
         }
