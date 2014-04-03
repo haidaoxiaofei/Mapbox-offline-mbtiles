@@ -3,7 +3,6 @@ package com.mapbox.mapboxsdk.overlay;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
@@ -80,10 +79,8 @@ public class Icon implements MapboxConstants {
         // Check if media is mounted or storage is built-in, if so, try and use external cache dir
         // otherwise use internal cache dir
         final String cachePath =
-                Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) ||
-                        (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD &&  !Environment.isExternalStorageRemovable()) ? Environment.getExternalStorageDirectory().getPath() :
-                        context.getFilesDir().getPath();
-
+                Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) || (!Environment.isExternalStorageRemovable())
+                        ? Environment.getExternalStorageDirectory().getPath() : context.getFilesDir().getPath();
         return new File(cachePath, uniqueName);
     }
 
