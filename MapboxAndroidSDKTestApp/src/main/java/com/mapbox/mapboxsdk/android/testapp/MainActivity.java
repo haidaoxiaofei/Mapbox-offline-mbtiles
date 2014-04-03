@@ -116,6 +116,14 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+        Button spinButton = changeButtonTypeface((Button) findViewById(R.id.spinButton));
+        spinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mv.setMapOrientation(mv.getMapOrientation() + 45f);
+            }
+        });
+
         Button selectBut = changeButtonTypeface((Button) findViewById(R.id.layerselect));
         selectBut.setOnClickListener(new View.OnClickListener() {
             @Override

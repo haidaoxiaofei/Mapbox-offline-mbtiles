@@ -23,31 +23,42 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Satellite"
-                android:layout_weight="0.3333" android:layout_margin="-5dp" android:background="#3887be"
-                android:alpha="0.8"/>
+                android:layout_weight="0.3333" android:layout_margin="-5dp"
+                />
         <Button
                 android:id="@+id/terbut"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Terrain"
-                android:layout_weight="0.33333" android:layout_margin="-5dp" android:background="#3887be"
-                android:alpha="0.8"/>
+                android:layout_weight="0.33333" android:layout_margin="-5dp"
+                />
         <Button
                 android:id="@+id/strbut"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Streets"
-                android:layout_weight="0.3333" android:background="#3887be" android:alpha="0.8"/>
+                android:layout_weight="0.3333"
+                />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
             android:id="@+id/layerselect"
-            android:alpha="0.8"
-            android:background="#3887BE" />
+                />
     </LinearLayout>
     <ImageView android:layout_width="100dp" android:layout_height="65dp" android:layout_alignParentTop="true"
-               android:layout_alignParentRight="true" android:src="@drawable/mblogo" android:layout_marginTop="-10dp"/>
+               android:layout_alignParentRight="true" android:src="@drawable/mblogo" android:layout_marginTop="-10dp"
+               android:id="@+id/imageView"/>
+
+    <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="spin"
+            android:id="@+id/spinButton"
+            android:layout_above="@+id/buttonsrow"
+            android:layout_alignRight="@+id/imageView"
+            android:layout_alignEnd="@+id/imageView"/>
 
 </RelativeLayout>
