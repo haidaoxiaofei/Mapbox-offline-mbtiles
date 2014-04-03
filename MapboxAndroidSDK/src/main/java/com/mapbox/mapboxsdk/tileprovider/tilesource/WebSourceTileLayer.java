@@ -41,6 +41,8 @@ public class WebSourceTileLayer extends TileLayer {
     // Tracks the number of threads active in the getBitmapFromURL method.
     private AtomicInteger activeThreads = new AtomicInteger(0);
     protected boolean mEnableSSL = false;
+    OkHttpClient client;
+    SSLContext sslContext;
 
     public WebSourceTileLayer(final String pId, final String url) {
         this(pId, url, false);
@@ -48,6 +50,20 @@ public class WebSourceTileLayer extends TileLayer {
 
     public WebSourceTileLayer(final String pId, final String url, final boolean enableSSL) {
         super(pId, url);
+
+        this.client = new OkHttpClient();
+
+        try {
+            sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, null, null);
+        } catch (GeneralSecurityException e) {
+            activeThreads.decrementAndGet();
+            throw new AssertionError(); // The system has no TLS. Just give up.
+        }
+
+        client.setSslSocketFactory(sslContext.getSocketFactory());
+        client.setResponseCache(null);
+
         initialize(pId, url, enableSSL);
     }
 
@@ -177,19 +193,6 @@ public class WebSourceTileLayer extends TileLayer {
         activeThreads.incrementAndGet();
         InputStream in = null;
         OutputStream out = null;
-
-        OkHttpClient client = new OkHttpClient();
-        SSLContext sslContext;
-        try {
-            sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, null, null);
-        } catch (GeneralSecurityException e) {
-            activeThreads.decrementAndGet();
-            throw new AssertionError(); // The system has no TLS. Just give up.
-        }
-        client.setSslSocketFactory(sslContext.getSocketFactory());
-
-        client.setResponseCache(null);
 
         if (TextUtils.isEmpty(url)) {
             activeThreads.decrementAndGet();
