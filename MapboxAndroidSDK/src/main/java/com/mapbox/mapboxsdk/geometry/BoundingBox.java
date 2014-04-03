@@ -48,10 +48,23 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
         this.mLonEast = east;
         this.mLatSouth = south;
         this.mLonWest = west;
-
-
     }
 
+    /**
+     * Create a bounding box from another bounding box
+     *
+     * @param other the other bounding box
+     */
+    public BoundingBox(BoundingBox other) {
+        this.mLatNorth = other.getLatNorth();
+        this.mLonEast = other.getLonEast();
+        this.mLatSouth = other.getLatSouth();
+        this.mLonWest = other.getLonWest();
+    }
+
+    /**
+     * Create a new BoundingBox with no size centered at 0, 0, also known as null island
+     */
     public BoundingBox() {
         this(0, 0, 0, 0);
     }
@@ -173,9 +186,6 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
                 && ((longitude < this.mLonEast) && (longitude > this.mLonWest));
     }
 
-    public BoundingBox clone() {
-        return new BoundingBox(mLatNorth, mLonEast, mLatSouth, mLonWest);
-    }
 
     /**
      * Returns a new BoundingBox that stretches to contain both this and another BoundingBox.
@@ -184,9 +194,6 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * @return
      */
     public BoundingBox union(BoundingBox box) {
-        if (box == null) {
-            return clone();
-        }
         return union(box.getLatNorth(), box.getLatSouth(), box.getLonEast(), box.getLonWest());
     }
 
@@ -212,8 +219,9 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
             } else {
                 return new BoundingBox(pLatNorth, pLonEast, pLatSouth, pLonWest);
             }
+        } else {
+            return new BoundingBox(this);
         }
-        return clone();
     }
 
     public static final Parcelable.Creator<BoundingBox> CREATOR = new Parcelable.Creator<BoundingBox>() {

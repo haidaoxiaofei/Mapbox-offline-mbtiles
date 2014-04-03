@@ -27,7 +27,7 @@ public class Marker {
     public static final int ITEM_STATE_SELECTED_MASK = 2;
 
     private int group = 0;
-    private boolean clustered;
+    private boolean mClustered;
 
     private final RectF mMyLocationRect = new RectF(0, 0, 0, 0);
     private final RectF mMyLocationPreviousRect = new RectF(0, 0, 0, 0);
@@ -45,11 +45,11 @@ public class Marker {
     }
 
     public boolean beingClustered() {
-        return clustered;
+        return mClustered;
     }
 
-    public void setClustered(boolean clustered) {
-        this.clustered = clustered;
+    public void setClustered(boolean aClustered) {
+        this.mClustered = aClustered;
     }
 
 
@@ -327,7 +327,7 @@ public class Marker {
         final int h = getHeight();
         final float x = position.x - mAnchor.x * w;
         final float y = position.y - mAnchor.y * h;
-        reuse.set(x, y, x + w, y + h*2);
+        reuse.set(x, y, x + w, y + h * 2);
         return reuse;
     }
 
@@ -340,7 +340,7 @@ public class Marker {
         final int h = getHeight();
         final float x = mCurScreenCoords.x - mAnchor.x * w;
         final float y = mCurScreenCoords.y - mAnchor.y * h;
-        reuse.set(x, y, x + w, y + h*2);
+        reuse.set(x, y, x + w, y + h * 2);
         return reuse;
     }
 
@@ -425,7 +425,7 @@ public class Marker {
 
 
     public Marker addTo(MapView mv) {
-        if (mMarker == null ) {
+        if (mMarker == null) {
             //if there is an icon it means it's not loaded yet
             //thus change the drawable while waiting
             setMarker(mv.getDefaultPinDrawable());
@@ -444,11 +444,11 @@ public class Marker {
         return this;
     }
 
-    public PointF getPositionOnMap(){
+    public PointF getPositionOnMap() {
         return mCurScreenCoords;
     }
 
-    public void updateDrawingPosition(){
+    public void updateDrawingPosition() {
         getMapDrawingBounds(mapView.getProjection(), mMyLocationRect);
     }
 

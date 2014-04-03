@@ -29,14 +29,22 @@ public class MapTileCache implements TileLayerConstants {
     private String mDiskCacheKey;
     final static String TAG = "MapTileCache";
     private static final String DISK_CACHE_SUBDIR = "mapbox_tiles_cache";
+    private int mMaximumCacheSize;
+
 
     public MapTileCache(final Context context) {
         this(context, CACHE_MAPTILECOUNT_DEFAULT);
     }
 
+    public MapTileCache(final Context context, int aMaximumCacheSize) {
+        this.context = context;
+        this.mMaximumCacheSize = aMaximumCacheSize;
+    }
+
     /**
      * Get the BitmapLruCache that belongs to this tile cache, creating it first
      * if there isn't one yet.
+     *
      * @return BitmapLruCache the cache
      */
     protected BitmapLruCache getCache() {
@@ -53,8 +61,8 @@ public class MapTileCache implements TileLayerConstants {
             builder.setMemoryCacheEnabled(true)
                     .setMemoryCacheMaxSizeUsingHeapSize()
                     .setDiskCacheEnabled(true)
-                    // 100MB
-                    .setDiskCacheMaxSize(100 * 1024 * 1024)
+                            // 100MB
+                    .setDiskCacheMaxSize(this.mMaximumCacheSize)
                     .setDiskCacheLocation(cacheDir);
             this.sCachedTiles = builder.build();
         }
@@ -62,14 +70,8 @@ public class MapTileCache implements TileLayerConstants {
     }
 
     /**
-     * @param aMaximumCacheSize Maximum amount of MapTiles to be hold within.
-     */
-    public MapTileCache(final Context context, final int aMaximumCacheSize) {
-        this.context = context;
-    }
-
-    /**
      * Computes a prefixed key for a tile.
+     *
      * @param aTile the tile
      * @return the key
      */
@@ -192,7 +194,7 @@ public class MapTileCache implements TileLayerConstants {
     public Bitmap decodeBitmap(final byte[] data, final BitmapFactory.Options opts) {
         return getCache().decodeBitmap(new BitmapLruCache.ByteArrayInputStreamProvider(data), opts);
     }
-    
+
     public Bitmap decodeBitmap(final BitmapLruCache.InputStreamProvider ip, final BitmapFactory.Options opts) {
         return getCache().decodeBitmap(ip, opts);
     }
@@ -204,6 +206,7 @@ public class MapTileCache implements TileLayerConstants {
     /**
      * Creates a unique subdirectory of the designated app cache directory. Tries to use external
      * but if not mounted, falls back on internal storage.
+     *
      * @param context
      * @param uniqueName
      * @return

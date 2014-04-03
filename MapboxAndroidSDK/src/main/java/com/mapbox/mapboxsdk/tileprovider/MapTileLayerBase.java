@@ -21,7 +21,6 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.TileLooper;
-import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
 
 import java.util.HashMap;
@@ -47,7 +46,6 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     private boolean mUseDataConnection = true;
 
     private ITileLayer mTileSource;
-    private MapView mapView;
     protected String mCacheKey = "";
 
     /**
@@ -339,10 +337,6 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         if (DEBUG_TILE_PROVIDERS) {
             Log.d(TAG, "Finished rescale in " + (endMs - startMs) + "ms");
         }
-    }
-
-    public void setMapView(MapView mapView) {
-        this.mapView = mapView;
     }
 
     private abstract class ScaleTileLooper extends TileLooper {
