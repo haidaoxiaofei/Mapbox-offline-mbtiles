@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,6 +18,7 @@ import com.mapbox.mapboxsdk.util.TileLooper;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
+import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.Projection;
 
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
@@ -40,7 +40,7 @@ public class TilesOverlay
     protected final MapTileLayerBase mTileProvider;
 
     /* to avoid allocations during draw */
-    protected static Paint mDebugPaint = null;
+    protected static SafePaint mDebugPaint = null;
     protected Paint mLoadingPaint = null;
     private final Rect mTileRect = new Rect();
     private final Rect mViewPort = new Rect();
@@ -66,10 +66,11 @@ public class TilesOverlay
         this.mTileProvider = aTileProvider;
         if (UtilConstants.DEBUGMODE) {
             if (mDebugPaint == null) {
-                mDebugPaint = new Paint();
+                mDebugPaint = new SafePaint();
+                mDebugPaint.setAntiAlias(true);
+                mDebugPaint.setFilterBitmap(true);
                 mDebugPaint.setColor(Color.RED);
-                mDebugPaint.setStyle(Style.STROKE);
-                mDebugPaint.setStrokeWidth(2);
+                mDebugPaint.setStyle(Paint.Style.STROKE);
             }
         }
 
@@ -140,11 +141,12 @@ public class TilesOverlay
 
         // draw a cross at center in debug mode
         if (UtilConstants.DEBUGMODE) {
+            ISafeCanvas canvas = (ISafeCanvas)c;
             final Point centerPoint = new Point(viewPort.centerX() - mWorldSize_2,
                     viewPort.centerY() - mWorldSize_2);
-            c.drawLine(centerPoint.x, centerPoint.y - 9,
+            canvas.drawLine(centerPoint.x, centerPoint.y - 9,
                     centerPoint.x, centerPoint.y + 9, mDebugPaint);
-            c.drawLine(centerPoint.x - 9, centerPoint.y,
+            canvas.drawLine(centerPoint.x - 9, centerPoint.y,
                     centerPoint.x + 9, centerPoint.y, mDebugPaint);
         }
 
@@ -176,11 +178,10 @@ public class TilesOverlay
             boolean isReusable = currentMapTile instanceof CacheableBitmapDrawable;
 
             if (currentMapTile != null) {
-                mTileRect.set(
-                        (int) (pX * pTileSizePx * mCurrentZoomFactor),
-                        (int) (pY * pTileSizePx * mCurrentZoomFactor),
-                        (int) ((pX * pTileSizePx + pTileSizePx) * mCurrentZoomFactor),
-                        (int) ((pY * pTileSizePx + pTileSizePx) * mCurrentZoomFactor));
+                final float x = pX * pTileSizePx * mCurrentZoomFactor - mWorldSize_2;
+                final float y = pY * pTileSizePx * mCurrentZoomFactor - mWorldSize_2;
+                final float w = pTileSizePx * mCurrentZoomFactor;
+                mTileRect.set((int) x, (int) y, (int) (x + w), (int) (y + w));
                 if (isReusable) {
                     ((CacheableBitmapDrawable) currentMapTile).setBeingUsed(true);
                 }
@@ -189,7 +190,6 @@ public class TilesOverlay
                         currentMapTile = getLoadingTile();
                         isReusable = false;
                     }
-                    mTileRect.offset(-mWorldSize_2, -mWorldSize_2);
                     currentMapTile.setBounds(mTileRect);
                     currentMapTile.draw(pCanvas);
                 } finally {
@@ -198,9 +198,10 @@ public class TilesOverlay
                     }
                 }
                 if (UtilConstants.DEBUGMODE) {
-                    pCanvas.drawText(pTile.toString(), mTileRect.left + 1,
+                    ISafeCanvas canvas = (ISafeCanvas)pCanvas;
+                    canvas.drawText(pTile.toString(), mTileRect.left + 1,
                             mTileRect.top + mDebugPaint.getTextSize(), mDebugPaint);
-                    pCanvas.drawRect(mTileRect, mDebugPaint);
+                    canvas.drawRect(mTileRect, mDebugPaint);
                 }
             }
         }
