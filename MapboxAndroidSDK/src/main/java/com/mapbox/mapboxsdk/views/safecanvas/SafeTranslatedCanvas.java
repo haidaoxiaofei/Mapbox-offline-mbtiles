@@ -529,13 +529,6 @@ public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        SafeTranslatedCanvas c = new SafeTranslatedCanvas();
-        c.setCanvas(mCanvas);
-        return c;
-    }
-
-    @Override
     public boolean equals(Object o) {
         return getWrappedCanvas().equals(o);
     }

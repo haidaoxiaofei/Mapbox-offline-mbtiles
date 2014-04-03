@@ -16,9 +16,12 @@ import android.view.View;
 public class TipView extends View {
 
     private Paint mPaint;
+    private Path mPath;
 
     public TipView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        mPath = new Path();
 
         this.mPaint = new Paint();
         this.mPaint.setColor(Color.WHITE);
@@ -32,11 +35,11 @@ public class TipView extends View {
         int height = getMeasuredHeight();
         int width = getMeasuredWidth();
 
-        Path path = new Path();
-        path.moveTo(0, 0);
-        path.lineTo(width, 0);
-        path.lineTo(width / 2, height);
-        path.lineTo(0, 0);
-        canvas.drawPath(path, this.mPaint);
+        mPath.rewind();
+        mPath.moveTo(0, 0);
+        mPath.lineTo(width, 0);
+        mPath.lineTo(width / 2, height);
+        mPath.lineTo(0, 0);
+        canvas.drawPath(mPath, this.mPaint);
     }
 }
