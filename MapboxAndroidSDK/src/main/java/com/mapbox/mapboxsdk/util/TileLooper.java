@@ -1,15 +1,11 @@
 package com.mapbox.mapboxsdk.util;
 
-import com.mapbox.mapboxsdk.views.util.Projection;
-import com.mapbox.mapboxsdk.tileprovider.MapTile;
-
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import com.mapbox.mapboxsdk.tileprovider.MapTile;
+import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
  * A class that will loop around all the map tiles in the given viewport.
@@ -44,6 +40,7 @@ public abstract class TileLooper {
                 handleTile(pCanvas, pTileSizePx, tile, x, y);
             }
         }
+        finalizeLoop();
     }
 
     public abstract void initializeLoop(float pZoomLevel, int pTileSizePx);
