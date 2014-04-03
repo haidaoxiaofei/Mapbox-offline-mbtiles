@@ -43,6 +43,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
     protected final NetworkAvailabilityCheck mNetworkAvailabilityCheck;
 
+
     /**
      * Creates an {@link MapTileLayerArray} with no tile providers.
      *
@@ -73,6 +74,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
         mTileProviderList = new ArrayList<MapTileModuleLayerBase>();
         if (pTileProviderArray != null) {
+            mCacheKey = pTileProviderArray[0].getCacheKey();
             Collections.addAll(mTileProviderList, pTileProviderArray);
         }
     }
@@ -271,15 +273,15 @@ public class MapTileLayerArray extends MapTileLayerBase {
         super.setTileSource(aTileSource);
         mUnaccessibleTiles.clear();
         synchronized (mTileProviderList) {
-            if (mTileProviderList.size() != 0) {
-                mTileProviderList.get(0).setTileSource(aTileSource);
-            }
+            mTileProviderList.clear();
         }
     }
 
     @Override
     public boolean hasNoSource() {
-        return mTileProviderList.size() == 0;
+        synchronized (mTileProviderList) {
+            return mTileProviderList.size() == 0;
+        }
     }
 
     @Override

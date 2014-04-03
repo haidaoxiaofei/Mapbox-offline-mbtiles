@@ -48,6 +48,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
 
     private ITileLayer mTileSource;
     private MapView mapView;
+    protected String mCacheKey = "";
 
     /**
      * Attempts to get a Drawable that represents a {@link MapTile}. If the tile is not immediately
@@ -128,7 +129,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         mTileSource = pTileSource;
         clearTileMemoryCache();
         if (mTileSource != null) {
-            mTileCache.setDiskCacheKey(mTileSource.getCacheKey());
+            mCacheKey = mTileSource.getCacheKey();
         }
     }
 
@@ -139,6 +140,15 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      */
     public ITileLayer getTileSource() {
         return mTileSource;
+    }
+
+    /**
+     * Gets the cache key for that layer
+     *
+     * @return the cache key
+     */
+    public String getCacheKey() {
+        return mCacheKey;
     }
 
     /**
@@ -319,7 +329,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         final ScaleTileLooper tileLooper = pNewZoomLevel > pOldZoomLevel
                 ? new ZoomInTileLooper(pOldZoomLevel)
                 : new ZoomOutTileLooper(pOldZoomLevel);
-        tileLooper.loop(null, pNewZoomLevel, tileSize, viewPort);
+        tileLooper.loop(null, this, pNewZoomLevel, tileSize, viewPort);
 
         final long endMs = System.currentTimeMillis();
         if (DEBUG_TILE_PROVIDERS) {

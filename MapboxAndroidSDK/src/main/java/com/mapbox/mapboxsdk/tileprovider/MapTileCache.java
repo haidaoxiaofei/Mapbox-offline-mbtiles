@@ -6,12 +6,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
+
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
+
 import java.io.File;
 import java.io.InputStream;
+
 import uk.co.senab.bitmapcache.BitmapLruCache;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
@@ -72,7 +74,7 @@ public class MapTileCache implements TileLayerConstants {
      * @return the key
      */
     public String getCacheKey(MapTile aTile) {
-        return mDiskCacheKey + aTile.toString();
+        return aTile.getCacheKey();
     }
 
     public CacheableBitmapDrawable getMapTile(final MapTile aTile) {

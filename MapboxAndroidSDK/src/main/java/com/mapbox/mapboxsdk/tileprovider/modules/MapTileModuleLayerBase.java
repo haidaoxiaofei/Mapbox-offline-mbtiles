@@ -110,6 +110,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
     public abstract void setTileSource(ITileLayer tileSource);
 
     public abstract ITileLayer getTileSource();
+    public abstract String getCacheKey();
 
     private final ExecutorService mExecutor;
 

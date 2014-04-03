@@ -137,7 +137,7 @@ public class TilesOverlay
     public void drawTiles(final Canvas c, final float zoomLevel, final int tileSizePx,
                           final Rect viewPort) {
 
-        mTileLooper.loop(c, zoomLevel, tileSizePx, viewPort);
+        mTileLooper.loop(c, mTileProvider, zoomLevel, tileSizePx, viewPort);
 
         // draw a cross at center in debug mode
         if (UtilConstants.DEBUGMODE) {

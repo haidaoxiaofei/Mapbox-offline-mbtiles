@@ -5,6 +5,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
+import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
@@ -16,7 +17,7 @@ public abstract class TileLooper {
     protected final Point mLowerRight = new Point();
     protected final Point center = new Point();
 
-    public final void loop(final Canvas pCanvas, final float pZoomLevel, final int pTileSizePx, final Rect pViewPort) {
+    public final void loop(final Canvas pCanvas, final MapTileLayerBase pProvider, final float pZoomLevel, final int pTileSizePx, final Rect pViewPort) {
         // Calculate the amount of tiles needed for each side around the center one.
         Projection.pixelXYToTileXY(pViewPort.left, pViewPort.top, mUpperLeft);
         mUpperLeft.offset(-1, -1);
@@ -36,7 +37,7 @@ public abstract class TileLooper {
             for (int x = mUpperLeft.x; x <= mLowerRight.x; x++) {
                 tileY = GeometryMath.mod(y, mapTileUpperBound);
                 tileX = GeometryMath.mod(x, mapTileUpperBound);
-                final MapTile tile = new MapTile(roundedZoom, tileX, tileY);
+                final MapTile tile = new MapTile(pProvider.getCacheKey(), roundedZoom, tileX, tileY);
                 handleTile(pCanvas, pTileSizePx, tile, x, y);
             }
         }

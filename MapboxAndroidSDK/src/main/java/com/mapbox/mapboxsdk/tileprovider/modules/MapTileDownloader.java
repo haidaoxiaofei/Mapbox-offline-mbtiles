@@ -135,6 +135,13 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
         }
     }
 
+    @Override
+    public String getCacheKey()
+    {
+        TileLayer tileLayer = mTileSource.get();
+        return (tileLayer != null) ? tileLayer.getCacheKey() : "";
+    }
+
     protected class TileLoader extends MapTileModuleLayerBase.TileLoader {
 
         @Override
