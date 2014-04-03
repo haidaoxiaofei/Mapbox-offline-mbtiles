@@ -177,6 +177,10 @@ public class MapTileCache implements TileLayerConstants {
         getCache().purgeMemoryCache();
     }
 
+    public void purgeDiskCache() {
+        getCache().purgeDiskCache();
+    }
+
     public CacheableBitmapDrawable createCacheableBitmapDrawable(Bitmap bitmap, MapTile aTile) {
         return getCache().createCacheableBitmapDrawable(bitmap, getCacheKey(aTile), CacheableBitmapDrawable.SOURCE_UNKNOWN);
     }
