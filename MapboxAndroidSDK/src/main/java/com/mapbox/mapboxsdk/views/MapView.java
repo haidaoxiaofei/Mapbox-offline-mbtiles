@@ -226,8 +226,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
     }
 
-    public void setTileSource(final ITileLayer value) {
-        ITileLayer aTileSource = value;
+    public void setTileSource(final ITileLayer aTileSource) {
         mTileProvider.setTileSource(aTileSource);
         Projection.setTileSize(aTileSource.getTileSizePixels());
         this.setZoom(mZoomLevel);
