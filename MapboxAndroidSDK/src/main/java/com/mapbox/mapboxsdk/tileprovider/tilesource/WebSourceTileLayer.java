@@ -57,7 +57,7 @@ public class WebSourceTileLayer extends TileLayer {
 
     public WebSourceTileLayer(final String pId, final String url, final boolean enableSSL) {
         super(pId, url);
-        initialize(url, enableSSL);
+        initialize(pId, url, enableSSL);
     }
 
     private boolean checkThreadControl() {
@@ -75,7 +75,7 @@ public class WebSourceTileLayer extends TileLayer {
         return this;
     }
 
-    protected void initialize(String aUrl, boolean enableSSL) {
+    protected void initialize(String pId, String aUrl, boolean enableSSL) {
         mEnableSSL = enableSSL;
         File cacheDir = new File(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString());
         try {
