@@ -40,7 +40,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         Assert.assertTrue(ll.equals(llb));
         Assert.assertFalse(ll.equals(llc));
-        Assert.assertTrue(ll.equals(ll.clone()));
         Assert.assertTrue(ll.equals(new LatLng(ll)));
     }
 
@@ -66,12 +65,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         Assert.assertTrue(bb.equals(BoundingBox.fromLatLngs(pts)));
     }
 
-    public void testTileSystem() throws Exception {
-        Projection.setTileSize(256);
-        Assert.assertEquals(Projection.getTileSize(), 256);
-        Assert.assertEquals(Projection.MapSize(5), 8192);
-    }
-
     public void testMapTile() throws Exception {
         MapTile tile = new MapTile(1, 2, 3);
         MapTile tileB = new MapTile(1, 2, 3);
@@ -84,13 +77,5 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         Assert.assertTrue(tile.equals(tileB));
         Assert.assertFalse(tile.equals(tileC));
-    }
-
-    public void testTileLayer() throws Exception {
-        TileLayer tl = new TileLayer("http://hi.com/{z}/{x}/{y}{2x}.png");
-        MapTile tile = new MapTile(0, 0, 0);
-        Assert.assertEquals(tl.getTileURL(tile, true), "http://hi.com/0/0/0@2x.png");
-        Assert.assertEquals(tl.setURL("http://hello.com/{z}/{x}/{y}{2x}.png"), tl);
-        Assert.assertEquals(tl.getTileURL(tile, true), "http://hello.com/0/0/0@2x.png");
     }
 }
