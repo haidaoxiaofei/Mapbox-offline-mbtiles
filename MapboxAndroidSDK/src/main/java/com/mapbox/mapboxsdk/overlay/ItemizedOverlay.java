@@ -171,7 +171,7 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         if (marker == null) {
             return;
         }
-        final Point point = item.getMarkerAnchor();
+        final Point point = item.getAnchor();
 
         // draw it
         if (this.isUsingSafeCanvas()) {

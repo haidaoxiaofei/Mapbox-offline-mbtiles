@@ -10,19 +10,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Marker;
 
 /**
- * View that can be displayed on an OSMDroid map, associated to a GeoPoint.
- * Typical usage: cartoon-like bubbles displayed when clicking an overlay item.
- * It mimics the InfoWindow class of Google Maps JavaScript API V3.
- * Main differences are:
- * <ul>
- * <li>Structure and content of the view is let to the responsibility of the caller. </li>
- * <li>The same InfoWindow can be associated to many items. </li>
- * </ul>
- * Known issue: the window is displayed "above" the marker, so the queue of the bubble can hide the marker.
- * <p/>
- * This is an abstract class.
- *
- * @author M.Kergall
+ * A tooltip view
  */
 
 public class InfoWindow {
@@ -37,10 +25,10 @@ public class InfoWindow {
     private boolean mIsVisible;
     private View mView;
 
-    static int mTitleId = 0,
-            mDescriptionId = 0,
-            mSubDescriptionId = 0,
-            mImageId = 0;
+    static int mTitleId = 0;
+    static int mDescriptionId = 0;
+    static int mSubDescriptionId = 0;
+    static int mImageId = 0;
 
     private static void setResIds(Context context) {
         String packageName = context.getPackageName(); //get application package name
@@ -69,7 +57,7 @@ public class InfoWindow {
                 if (e.getAction() == MotionEvent.ACTION_UP) {
                     close();
                 }
-                return true; //From Osmdroid 3.0.10, event is properly consumed.
+                return true;
             }
         });
     }
@@ -89,7 +77,7 @@ public class InfoWindow {
                 if (e.getAction() == MotionEvent.ACTION_UP) {
                     close();
                 }
-                return true; //From Osmdroid 3.0.10, event is properly consumed.
+                return true;
             }
         });
     }
@@ -102,7 +90,7 @@ public class InfoWindow {
      * @param offsetX  (&offsetY) the offset of the view to the position, in pixels.
      *                 This allows to offset the view from the object position.
      */
-    public void open(Object object, LatLng position, int offsetX, int offsetY) {
+    public InfoWindow open(Marker object, LatLng position, int offsetX, int offsetY) {
         onOpen(object);
         MapView.LayoutParams lp = new MapView.LayoutParams(
                 MapView.LayoutParams.WRAP_CONTENT,
@@ -112,9 +100,13 @@ public class InfoWindow {
         close(); //if it was already opened
         mMapView.addView(mView, lp);
         mIsVisible = true;
+        return this;
     }
 
-    public void close() {
+    /**
+     * Close this InfoWindow if it is visible, otherwise don't do anything.
+     */
+    public InfoWindow close() {
         if (mIsVisible) {
             mIsVisible = false;
             ((ViewGroup) mView.getParent()).removeView(mView);
@@ -122,6 +114,7 @@ public class InfoWindow {
             setBoundMarker(null);
             onClose();
         }
+        return this;
     }
 
     /**
@@ -130,33 +123,27 @@ public class InfoWindow {
      * @return the Android view
      */
     public View getView() {
-        return (mView);
+        return mView;
     }
 
     public MapView getMapView() {
-        return (mMapView);
+        return mMapView;
     }
 
-    public void onOpen(Object item) {
-        Marker overlayItem = (Marker) item;
+    public void onOpen(Marker overlayItem) {
         String title = overlayItem.getTitle();
-        if (title == null) {
-            title = "";
-        }
         ((TextView) mView.findViewById(mTitleId /*R.id.title*/)).setText(title);
         String snippet = overlayItem.getDescription();
-        if (snippet == null) {
-            snippet = "";
-        }
         ((TextView) mView.findViewById(mDescriptionId /*R.id.description*/)).setText(snippet);
-        //handle sub-description, hidding or showing the text view:
+
+        //handle sub-description, hiding or showing the text view:
         TextView subDescText = (TextView) mView.findViewById(mSubDescriptionId);
         String subDesc = overlayItem.getSubDescription();
-        if (subDesc != null && !("".equals(subDesc))) {
+        if ("".equals(subDesc)) {
+            subDescText.setVisibility(View.GONE);
+        } else {
             subDescText.setText(subDesc);
             subDescText.setVisibility(View.VISIBLE);
-        } else {
-            subDescText.setVisibility(View.GONE);
         }
     }
 
@@ -164,8 +151,9 @@ public class InfoWindow {
         //by default, do nothing
     }
 
-    public void setBoundMarker(Marker boundMarker) {
+    public InfoWindow setBoundMarker(Marker boundMarker) {
         this.boundMarker = boundMarker;
+        return this;
     }
 
     public Marker getBoundMarker() {

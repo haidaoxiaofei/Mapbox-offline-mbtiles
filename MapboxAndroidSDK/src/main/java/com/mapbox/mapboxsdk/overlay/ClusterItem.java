@@ -15,7 +15,7 @@ public class ClusterItem extends Marker {
 
     public ClusterItem(MapView mv, String aTitle, String aDescription, LatLng aLatLng) {
         super(mv, aTitle, aDescription, aLatLng);
-        setMarkerHotspot(HotspotPlace.CENTER);
+        setHotspot(HotspotPlace.CENTER);
         if (mv != null) {
             if (mDrawable == null) {
                 mDrawable = mv.getResources().getDrawable(R.drawable.clusteri);

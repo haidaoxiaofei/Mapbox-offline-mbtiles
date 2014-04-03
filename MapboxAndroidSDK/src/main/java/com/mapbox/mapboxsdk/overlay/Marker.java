@@ -33,58 +33,9 @@ public class Marker {
     private final RectF mMyLocationPreviousRect = new RectF(0, 0, 0, 0);
     protected final PointF mCurScreenCoords = new PointF();
 
-    public int getGroup() {
-        return group;
-    }
-
-    public void assignGroup(int currentGroup) {
-        if (currentGroup == -1) {
-            this.setClustered(false);
-        }
-        group = currentGroup;
-    }
-
-    public boolean beingClustered() {
-        return mClustered;
-    }
-
-    public void setClustered(boolean aClustered) {
-        this.mClustered = aClustered;
-    }
-
-
-    protected InfoWindow createTooltip(MapView mv) {
-        return new InfoWindow(R.layout.tootip, mv);
-    }
-
-    private InfoWindow mToolTip;
-
-    public InfoWindow getToolTip(MapView mv) {
-        if (mToolTip == null || mToolTip.getMapView() != mv) {
-            mToolTip = createTooltip(mv);
-        }
-        return mToolTip;
-    }
-
-    public void blur() {
-        if (mParentHolder != null) {
-            mParentHolder.blurItem(this);
-        }
-    }
-
-
-    /**
-     * Indicates a hotspot for an area. This is where the origin (0,0) of a point will be located
-     * relative to the area. In otherwords this acts as an offset. NONE indicates that no adjustment
-     * should be made.
-     */
-    public enum HotspotPlace {
-        NONE, CENTER, BOTTOM_CENTER, TOP_CENTER, RIGHT_CENTER, LEFT_CENTER, UPPER_RIGHT_CORNER, LOWER_RIGHT_CORNER, UPPER_LEFT_CORNER, LOWER_LEFT_CORNER
-    }
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
+    private Context context;
+    private MapView mapView;
+    private Icon icon;
 
     protected String mUid;
     protected String mSnippet;
@@ -92,20 +43,21 @@ public class Marker {
     protected Drawable mMarker;
     protected PointF mAnchor = null;
 
-    private String mTitle, mDescription; // now, they are modifiable
-    private String mSubDescription; //a third field that can be displayed in the infowindow, on a third line
+    private String mTitle = "";
+    private String mDescription = "";
+    private String mSubDescription = ""; //a third field that can be displayed in the infowindow, on a third line
     private Drawable mImage; //that will be shown in the infowindow.
     //private GeoPoint mGeoPoint //unfortunately, this is not so simple...
     private Object mRelatedObject; //reference to an object (of any kind) linked to this item.
     private boolean bubbleShowing;
     private ItemizedOverlay mParentHolder;
 
-    static Drawable defaultPinDrawable;
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
-
+    /**
+     * Construct a new Marker, given title, description, and place
+     * @param title
+     * @param description
+     * @param latLng
+     */
     public Marker(String title, String description, LatLng latLng) {
         this(null, title, description, latLng);
     }
@@ -127,6 +79,69 @@ public class Marker {
             mAnchor = mv.getDefaultPinAnchor();
         }
         mParentHolder = null;
+    }
+
+    public Marker addTo(MapView mv) {
+        if (mMarker == null) {
+            //if there is an icon it means it's not loaded yet
+            //thus change the drawable while waiting
+            setMarker(mv.getDefaultPinDrawable());
+        }
+        mapView = mv;
+        context = mv.getContext();
+        if (mAnchor == null) {
+            mAnchor = mv.getDefaultPinAnchor();
+        }
+        return this;
+    }
+
+    public int getGroup() {
+        return group;
+    }
+
+    public void assignGroup(int currentGroup) {
+        if (currentGroup == -1) {
+            this.setClustered(false);
+        }
+        group = currentGroup;
+    }
+
+    public boolean beingClustered() {
+        return mClustered;
+    }
+
+    public void setClustered(boolean aClustered) {
+        this.mClustered = aClustered;
+    }
+
+    protected InfoWindow createTooltip(MapView mv) {
+        return new InfoWindow(R.layout.tooltip, mv);
+    }
+
+    private InfoWindow mToolTip;
+
+    public InfoWindow getToolTip(MapView mv) {
+        if (mToolTip == null || mToolTip.getMapView() != mv) {
+            mToolTip = createTooltip(mv);
+        }
+        return mToolTip;
+    }
+
+    public void blur() {
+        if (mParentHolder != null) {
+            mParentHolder.blurItem(this);
+        }
+    }
+
+    /**
+     * Indicates a hotspot for an area. This is where the origin (0,0)of a point will be located
+     * relative to the area. In otherwords this acts as an offset. NONE indicates that no adjustment
+     * should be made.
+     */
+    public enum HotspotPlace {
+        NONE, CENTER, BOTTOM_CENTER, TOP_CENTER, RIGHT_CENTER,
+        LEFT_CENTER, UPPER_RIGHT_CORNER, LOWER_RIGHT_CORNER,
+        UPPER_LEFT_CORNER, LOWER_LEFT_CORNER
     }
 
     public String getUid() {
@@ -189,18 +204,6 @@ public class Marker {
         mParentHolder = o;
     }
 
-    /*
-     * (copied from Google API docs) Returns the marker that should be used when drawing this item
-     * on the map. A null value means that the default marker should be drawn. Different markers can
-     * be returned for different states. The different markers can have different bounds. The
-     * default behavior is to call {@link setState(android.graphics.drawable.Drawable, int)} on the
-     * overlay item's marker, if it exists, and then return it.
-     *
-     * @param stateBitset The current state.
-     *
-     * @return The marker for the current state, or null if the default marker for the overlay
-     * should be used.
-     */
     public Drawable getMarker(final int stateBitset) {
         // marker not specified
         if (mMarker == null) {
@@ -220,7 +223,7 @@ public class Marker {
         invalidate();
     }
 
-    public void setMarkerHotspot(HotspotPlace place) {
+    public void setHotspot(HotspotPlace place) {
         if (place == null) {
             place = HotspotPlace.BOTTOM_CENTER; //use same default than in osmdroid.
         }
@@ -257,7 +260,7 @@ public class Marker {
         invalidate();
     }
 
-    public Point getMarkerAnchor() {
+    public Point getAnchor() {
         if (mAnchor != null) {
             int markerWidth = getWidth(), markerHeight = getHeight();
             return new Point((int) (-mAnchor.x * markerWidth), (int) (-mAnchor.y * markerHeight));
@@ -265,12 +268,12 @@ public class Marker {
         return new Point(0, 0);
     }
 
-    public Point getMarkerAnchor(HotspotPlace place) {
+    public Point getAnchor(HotspotPlace place) {
         int markerWidth = getWidth(), markerHeight = getHeight();
         return getHotspot(place, markerWidth, markerHeight);
     }
 
-    public void setMarkerAnchorPoint(final PointF anchor) {
+    public void setAnchor(final PointF anchor) {
         this.mAnchor = anchor;
         invalidate();
     }
@@ -313,7 +316,7 @@ public class Marker {
 
     public PointF getDrawingPositionOnScreen(final Projection projection, PointF reuse) {
         reuse = getPositionOnScreen(projection, reuse);
-        Point point = getMarkerAnchor();
+        Point point = getAnchor();
         reuse.offset(point.x, point.y);
         return reuse;
     }
@@ -343,10 +346,6 @@ public class Marker {
         reuse.set(x, y, x + w, y + h * 2);
         return reuse;
     }
-
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
 
     public PointF getHotspotScale(HotspotPlace place, PointF reuse) {
         if (reuse == null) {
@@ -405,8 +404,8 @@ public class Marker {
      */
     public void showBubble(InfoWindow tooltip, MapView aMapView, boolean panIntoView) {
         //offset the tooltip to be top-centered on the marker:
-        Point markerH = getMarkerAnchor();
-        Point tooltipH = getMarkerAnchor(HotspotPlace.TOP_CENTER);
+        Point markerH = getAnchor();
+        Point tooltipH = getAnchor(HotspotPlace.TOP_CENTER);
         markerH.offset(-tooltipH.x, tooltipH.y);
         tooltip.open(this, this.getPoint(), markerH.x, markerH.y);
         if (panIntoView) {
@@ -417,26 +416,6 @@ public class Marker {
         tooltip.setBoundMarker(this);
     }
 
-    private Context context;
-    private Tooltip tooltip;
-    private MapView mapView;
-    private LatLng latLng;
-    private Icon icon;
-
-
-    public Marker addTo(MapView mv) {
-        if (mMarker == null) {
-            //if there is an icon it means it's not loaded yet
-            //thus change the drawable while waiting
-            setMarker(mv.getDefaultPinDrawable());
-        }
-        mapView = mv;
-        context = mv.getContext();
-        if (mAnchor == null) {
-            mAnchor = mv.getDefaultPinAnchor();
-        }
-        return this;
-    }
 
     public Marker setIcon(Icon icon) {
         this.icon = icon;
