@@ -170,10 +170,10 @@ public class TilesOverlay
                                final int pX,
                                final int pY) {
             Drawable currentMapTile = mTileProvider.getMapTile(pTile);
-            boolean isReusable = currentMapTile instanceof CacheableBitmapDrawable;
             if (currentMapTile == null) {
                 currentMapTile = getLoadingTile();
             }
+            boolean isReusable = currentMapTile instanceof CacheableBitmapDrawable;
 
             if (currentMapTile != null) {
                 mTileRect.set(
