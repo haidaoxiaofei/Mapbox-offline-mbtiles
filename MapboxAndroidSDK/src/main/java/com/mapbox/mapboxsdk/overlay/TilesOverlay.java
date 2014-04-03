@@ -41,6 +41,7 @@ public class TilesOverlay
 
     /* to avoid allocations during draw */
     protected static Paint mDebugPaint = null;
+    protected Paint mLoadingPaint = null;
     private final Rect mTileRect = new Rect();
     private final Rect mViewPort = new Rect();
     float mCurrentZoomFactor = 1;
@@ -71,6 +72,12 @@ public class TilesOverlay
                 mDebugPaint.setStrokeWidth(2);
             }
         }
+
+        mLoadingPaint = new Paint();
+        mLoadingPaint.setAntiAlias(true);
+        mLoadingPaint.setFilterBitmap(true);
+        mLoadingPaint.setColor(mLoadingLineColor);
+        mLoadingPaint.setStrokeWidth(0);
     }
 
     @Override
@@ -227,6 +234,7 @@ public class TilesOverlay
     public void setLoadingLineColor(final int pLoadingLineColor) {
         if (mLoadingLineColor != pLoadingLineColor) {
             mLoadingLineColor = pLoadingLineColor;
+            mLoadingPaint.setColor(mLoadingLineColor);
             clearLoadingTile();
         }
     }
@@ -245,14 +253,11 @@ public class TilesOverlay
                 final Bitmap bitmap = Bitmap.createBitmap(tileSize, tileSize,
                         Bitmap.Config.ARGB_8888);
                 final Canvas canvas = new Canvas(bitmap);
-                final Paint paint = new Paint();
                 canvas.drawColor(mLoadingBackgroundColor);
-                paint.setColor(mLoadingLineColor);
-                paint.setStrokeWidth(0);
                 final int lineSize = tileSize / 16;
                 for (int a = 0; a < tileSize; a += lineSize) {
-                    canvas.drawLine(0, a, tileSize, a, paint);
-                    canvas.drawLine(a, 0, a, tileSize, paint);
+                    canvas.drawLine(0, a, tileSize, a, mLoadingPaint);
+                    canvas.drawLine(a, 0, a, tileSize, mLoadingPaint);
                 }
                 mLoadingTile = new BitmapDrawable(bitmap);
             } catch (final OutOfMemoryError e) {
