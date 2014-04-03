@@ -212,7 +212,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     protected MapView(Context context, int tileSizePixels, MapTileLayerBase aTileProvider) {
         this(context, tileSizePixels, aTileProvider, null, null);
-        init(context);
     }
 
     public void setTileSource(final ITileLayer[] value) {
@@ -249,17 +248,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             this.setZoom(mZoomLevel);
             postInvalidate();
         }
-    }
-
-    /**
-     * Method that constructs the view. used in lieu of a constructor.
-     *
-     * @param context a copy of the app context
-     */
-    private void init(Context context) {
-        this.context = context;
-        eventsOverlay = new MapEventsOverlay(context, this);
-        this.getOverlays().add(eventsOverlay);
     }
 
     /**
