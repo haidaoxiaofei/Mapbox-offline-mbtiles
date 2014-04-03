@@ -1062,10 +1062,10 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     @Override
-    protected void onLayout(final boolean changed, final int l, final int t, final int r,
-                            final int b) {
-        final int count = getChildCount();
-        if (changed) {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        if (w != 0 && h != 0) {
+            mProjection = null;
             updateMinZoomLevel();
             float minZoom = getMinZoomLevel();
             if (mZoomLevel < minZoom) {
@@ -1076,6 +1076,14 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 mBoundingBoxToZoomOn = null;
             }
         }
+
+    }
+
+    @Override
+    protected void onLayout(final boolean changed, final int l, final int t, final int r,
+                            final int b) {
+        final int count = getChildCount();
+
         final Projection projection = getProjection();
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
