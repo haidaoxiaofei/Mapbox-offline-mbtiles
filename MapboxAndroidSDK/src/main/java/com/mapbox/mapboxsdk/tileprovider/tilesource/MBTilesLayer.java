@@ -41,6 +41,16 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
         super(url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.')), url);
         initialize(url, context);
     }
+    
+    /**
+     * Initialize a new tile layer, represented by a MBTiles file.
+     *
+     * @param url path to a MBTiles file
+     */
+    public MBTilesLayer(final String url) {
+        this(null, url);
+    }
+
 
     /**
      * Creates a file from an input stream by reading it byte by byte.
