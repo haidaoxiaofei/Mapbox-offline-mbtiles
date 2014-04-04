@@ -3,4 +3,7 @@
     <string name="networkNotAvailable">Network Not Available</string>
 	<string name="missingAttributeMapIdMessage">No mapid was set for the MapView.</string>
 	<string name="closeText">Close</string>
+	<string name="toolTipTitle">Title</string>
+	<string name="toolTipDescription">Description</string>
+	<string name="toolTipAddress">Address</string>
 </resources>
