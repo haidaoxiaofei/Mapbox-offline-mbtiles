@@ -207,8 +207,8 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     public BoundingBox intersect(BoundingBox box) {
         double maxLonWest = Math.max(this.mLonWest, box.getLonWest());
         double minLonEast = Math.min(this.mLonEast, box.getLonEast());
-        double maxLatNorth = Math.max(this.mLatNorth, box.getLatNorth());
-        double minLatSouth = Math.min(this.mLatSouth, box.getLatSouth());
+        double maxLatNorth = Math.min(this.mLatNorth, box.getLatNorth());
+        double minLatSouth = Math.max(this.mLatSouth, box.getLatSouth());
         return new BoundingBox(maxLatNorth, minLonEast, minLatSouth, maxLonWest);
     }
     

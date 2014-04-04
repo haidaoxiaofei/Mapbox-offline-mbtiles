@@ -9,7 +9,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.mapbox.mapboxsdk.android.testapp.MainActivity;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer;
+import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import junit.framework.Assert;
 import java.util.ArrayList;
@@ -23,7 +23,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         LatLng center = new LatLng(43.07472, -89.38421);
         MainActivity activity = getActivity();
         activity.setMapCenter(center);
-        // Assert.assertEquals(center, activity.getMapCenter());
     }
 
     public void testLatLng() throws Exception {
@@ -63,6 +62,12 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         pts.add(new LatLng(0f, 0f));
         pts.add(new LatLng(10f, 10f));
         Assert.assertTrue(bb.equals(BoundingBox.fromLatLngs(pts)));
+
+        BoundingBox bb2 = new BoundingBox(0d, 0d, -10d, -10d);
+
+        Assert.assertTrue(bb.union(bb2).equals(new BoundingBox(10d, 10d, -10d, -10d)));
+
+        Assert.assertEquals(new BoundingBox(0d, 0d, 0d, 0d).toString(), bb.intersect(bb2).toString());
     }
 
     public void testMapTile() throws Exception {
@@ -73,9 +78,16 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         Assert.assertEquals(tile.getZ(), 1);
         Assert.assertEquals(tile.getX(), 2);
         Assert.assertEquals(tile.getY(), 3);
-        Assert.assertEquals(tile.toString(), "/1/2/3");
+        Assert.assertEquals(tile.toString(), "1/2/3");
 
         Assert.assertTrue(tile.equals(tileB));
         Assert.assertFalse(tile.equals(tileC));
+    }
+
+
+    public void testProjection() throws Exception {
+        Assert.assertEquals(256, Projection.mapSize(0f));
+        Assert.assertEquals(512, Projection.mapSize(1f));
+        Assert.assertEquals(256, Projection.getTileSize());
     }
 }
