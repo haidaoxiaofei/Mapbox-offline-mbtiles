@@ -123,6 +123,17 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+        Button altBut = changeButtonTypeface((Button) findViewById(R.id.strAltMap));
+        altBut.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent altMapActivity = new Intent(MainActivity.this, AlternateMapTestActivity.class);
+                startActivity(altMapActivity);
+            }
+        });
+
         Button spinButton = changeButtonTypeface((Button) findViewById(R.id.spinButton));
         spinButton.setOnClickListener(new View.OnClickListener() {
             @Override
