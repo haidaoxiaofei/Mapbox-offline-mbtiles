@@ -557,12 +557,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         final float curZoomLevel = this.mZoomLevel;
 
         if (newZoomLevel != curZoomLevel) {
+            this.mZoomLevel = newZoomLevel;
             mScroller.forceFinished(true);
             mIsFlinging = false;
+            updateScrollableAreaLimit();
         }
 
-        this.mZoomLevel = newZoomLevel;
-        updateScrollableAreaLimit();
 
         if (newZoomLevel > curZoomLevel) {
             // We are going from a lower-resolution plane to a higher-resolution plane, so we have
