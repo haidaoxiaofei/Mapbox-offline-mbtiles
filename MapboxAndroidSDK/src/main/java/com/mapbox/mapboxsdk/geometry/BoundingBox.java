@@ -32,9 +32,16 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     public BoundingBox(double north,
                        double east,
                        double south,
-                       double west) throws IllegalArgumentException {
-        if (north < south || east < west) {
-            throw new IllegalArgumentException("Bounding box coordinates must be given in NESW order").
+                       double west) {
+        if (north < south) {
+            double swap = north;
+            north = south;
+            south = swap;
+        }
+        if (east < west) {
+            double swap = west;
+            west = east;
+            east = swap;
         }
         if (north == south) {
             //boundingbox full view
