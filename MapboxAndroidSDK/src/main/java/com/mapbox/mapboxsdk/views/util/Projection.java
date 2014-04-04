@@ -25,6 +25,7 @@ package com.mapbox.mapboxsdk.views.util;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.RectF;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
@@ -195,6 +196,28 @@ public class Projection implements GeoConstants {
                 > Math.abs(out.y + mapSize - scrollY)) {
             out.y += mapSize;
         }
+        return out;
+    }
+
+    public RectF toMapPixels(final BoundingBox box, final RectF reuse) {
+        final RectF out;
+        if (reuse != null) {
+            out = reuse;
+        } else {
+            out = new RectF();
+        }
+        final float zoom = getZoomLevel();
+        final int mapSize = this.mapSize(zoom);
+        PointF nw = this.latLongToPixelXY(
+                box.getLatNorth(),
+                box.getLonWest(),
+                zoom, null);
+        PointF se = this.latLongToPixelXY(
+                box.getLatSouth(),
+                box.getLonEast(),
+                zoom, null);
+        out.set(nw.x, nw.y, se.x, se.y);
+        out.offset(offsetX, offsetY);
         return out;
     }
 
