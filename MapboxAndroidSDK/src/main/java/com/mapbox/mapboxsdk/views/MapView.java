@@ -631,19 +631,20 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * Suggestion: Check getScreenRect(null).getHeight() > 0
      */
     public MapView zoomToBoundingBox(final BoundingBox boundingBox) {
-        if (boundingBox == null) {
+        BoundingBox inter = (mScrollableAreaBoundingBox != null)?mScrollableAreaBoundingBox.intersect(boundingBox):boundingBox;
+        if (inter == null) {
             return this;
         }
         if (mReadyToComputeProjection == false) {
-            mBoundingBoxToZoomOn = boundingBox;
+            mBoundingBoxToZoomOn = inter;
             return this;
         }
 
         // Zoom to boundingBox center, at calculated maximum allowed zoom level
-        getController().setZoom(minimumZoomForBoundingBox(boundingBox));
+        getController().setZoom(minimumZoomForBoundingBox(inter));
 
         getController().setCenter(
-                new LatLng(boundingBox.getCenter().getLatitude(), boundingBox.getCenter()
+                new LatLng(inter.getCenter().getLatitude(), inter.getCenter()
                         .getLongitude()));
 
         return this;
