@@ -120,7 +120,7 @@ public class PathOverlay extends Overlay {
         final Projection pj = mapView.getProjection();
 
         // precompute new points to the intermediate projection.
-        for (;this.mPointsPrecomputed < size; this.mPointsPrecomputed++) {
+        for (; this.mPointsPrecomputed < size; this.mPointsPrecomputed++) {
             final PointF pt = this.mPoints.get(this.mPointsPrecomputed);
             pj.toMapPixelsProjected((double) pt.x, (double) pt.y, pt);
         }

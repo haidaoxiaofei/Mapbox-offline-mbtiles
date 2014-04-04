@@ -168,7 +168,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * Constructor for XML layout calls. Should not be used programmatically.
      *
      * @param aContext A copy of the app context
-     * @param attrs   An AttributeSet object to get extra info from the XML, such as mapbox id or type of baselayer
+     * @param attrs    An AttributeSet object to get extra info from the XML, such as mapbox id or type of baselayer
      */
     protected MapView(final Context aContext, final int tileSizePixels, MapTileLayerBase tileProvider, final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
         super(aContext, attrs);
@@ -607,16 +607,16 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this.requestLayout();
         return this;
     }
-    
+
     /**
      * compute the minimum zoom necessary to show a BoundingBox
-     * 
+     *
      * @param boundingBox the box to compute the zoom for
-     * @param reuse an optional RectF to reuse for computation
+     * @param reuse       an optional RectF to reuse for computation
      * @return the minimum zoom necessary to show the bounding box
      */
     private float minimumZoomForBoundingBox(final BoundingBox boundingBox) {
-    	final RectF rect = Projection.toMapPixels(boundingBox, TileLayerConstants.MAXIMUM_ZOOMLEVEL, mTempRect);
+        final RectF rect = Projection.toMapPixels(boundingBox, TileLayerConstants.MAXIMUM_ZOOMLEVEL, mTempRect);
         final float requiredLatitudeZoom = TileLayerConstants.MAXIMUM_ZOOMLEVEL
                 - (float) ((Math.log(rect.height() / getMeasuredHeight()) / Math.log(2)));
         final float requiredLongitudeZoom = TileLayerConstants.MAXIMUM_ZOOMLEVEL
@@ -810,7 +810,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             return;
         }
         mShouldCluster = shouldCluster;
-        if (mShouldCluster == false) {
+        if (!mShouldCluster) {
             clearCluster();
         } else {
             cluster();
@@ -819,11 +819,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     private void updateMinZoomLevel() {
-        if (mScrollableAreaBoundingBox  == null || mReadyToComputeProjection == false) {
+        if (mScrollableAreaBoundingBox == null || !mReadyToComputeProjection) {
             return;
         }
-        mMinimumZoomLevel = (float) Math.max(mRequestedMinimumZoomLevel, 
-        		minimumZoomForBoundingBox(mScrollableAreaBoundingBox));
+        mMinimumZoomLevel = (float) Math.max(mRequestedMinimumZoomLevel,
+                minimumZoomForBoundingBox(mScrollableAreaBoundingBox));
         if (mZoomLevel < mMinimumZoomLevel) {
             setZoom(mMinimumZoomLevel);
         }
@@ -1351,7 +1351,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     public void cluster() {
-        if (mShouldCluster == false) {
+        if (!mShouldCluster) {
             return;
         }
         for (ItemizedIconOverlay overlay : getItemizedOverlays()) {
