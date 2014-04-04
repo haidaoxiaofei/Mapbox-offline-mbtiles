@@ -23,10 +23,8 @@ import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
  */
 public class MapTileCache implements TileLayerConstants {
 
-    protected final Object mCachedTilesLockObject = new Object();
     protected static BitmapLruCache sCachedTiles = null;
     private Context context;
-    private String mDiskCacheKey;
     final static String TAG = "MapTileCache";
     private static final String DISK_CACHE_SUBDIR = "mapbox_tiles_cache";
     private int mMaximumCacheSize;
@@ -197,10 +195,6 @@ public class MapTileCache implements TileLayerConstants {
 
     public Bitmap decodeBitmap(final BitmapLruCache.InputStreamProvider ip, final BitmapFactory.Options opts) {
         return getCache().decodeBitmap(ip, opts);
-    }
-
-    public void setDiskCacheKey(final String key) {
-        mDiskCacheKey = key;
     }
 
     /**
