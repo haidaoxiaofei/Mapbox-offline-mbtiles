@@ -30,7 +30,6 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
     private static final String TAG = "MBTilesLayer";
     MBTilesFileArchive mbTilesFileArchive;
 
-
     /**
      * Initialize a new tile layer, represented by a MBTiles file.
      *
@@ -52,7 +51,6 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
     public MBTilesLayer(final String url) {
         this(null, url);
     }
-
 
     /**
      * Creates a file from an input stream by reading it byte by byte.

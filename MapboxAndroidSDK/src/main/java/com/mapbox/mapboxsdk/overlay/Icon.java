@@ -65,7 +65,7 @@ public class Icon implements MapboxConstants {
             builder.setMemoryCacheEnabled(true)
                     .setMemoryCacheMaxSizeUsingHeapSize()
                     .setDiskCacheEnabled(true)
-                            // 1 MB (a marker image is around 1kb)
+                    // 1 MB (a marker image is around 1kb)
                     .setDiskCacheMaxSize(1024 * 1024)
                     .setDiskCacheLocation(cacheDir);
             sIconCache = builder.build();
@@ -95,16 +95,12 @@ public class Icon implements MapboxConstants {
      * @param symbol  Maki Symbol
      * @param color   Color of Icon
      */
-    public Icon(Context context, Size size, String symbol, String color) {
+    public Icon(Context context, Size size, String symbol, String aColor) {
         String url = MAPBOX_BASE_URL + "marker/pin-" + size.getApiString();
-        String colr = color;
-        if (color.startsWith("#")) {
-            colr = color.substring(1);
-        }
         if (!symbol.equals("")) {
-            url += "-" + symbol + "+" + colr + ".png";
+            url += "-" + symbol + "+" + aColor.replace("#", "") + "@2x.png";
         } else {
-            url += "+" + colr + ".png";
+            url += "+" + aColor.replace("#", "") + "@2x.png";
         }
         downloadBitmap(context, url);
     }
@@ -112,11 +108,11 @@ public class Icon implements MapboxConstants {
     /**
      * Set the marker that this icon belongs to, calling the same method on the other side
      *
-     * @param marker the marker to be added to
+     * @param aMarker the marker to be added to
      * @return this icon
      */
-    public Icon setMarker(Marker marker) {
-        this.marker = marker;
+    public Icon setMarker(Marker aMarker) {
+        this.marker = aMarker;
         if (drawable != null) {
             this.marker.setMarker(drawable);
         }
