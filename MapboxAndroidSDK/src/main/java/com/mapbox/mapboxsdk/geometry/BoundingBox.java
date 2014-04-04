@@ -175,7 +175,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * @return
      */
     public BoundingBox union(BoundingBox box) {
-        return union(box.getLatNorth(), box.getLatSouth(), box.getLonEast(), box.getLonWest());
+        return union(box.getLatNorth(), box.getLonEast(), box.getLatSouth(), box.getLonWest());
     }
 
     /**
