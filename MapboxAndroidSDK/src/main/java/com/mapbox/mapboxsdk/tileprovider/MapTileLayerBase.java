@@ -417,7 +417,10 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         public void handleTile(final int pTileSizePx, final MapTile pTile, final int pX, final int pY) {
 
             // get the correct fraction of the tile from cache and scale up
-            final MapTile oldTile = new MapTile((int) Math.floor(mOldZoomLevel), (int) GeometryMath.rightShift(pX, mDiff), (int) GeometryMath.rightShift(pY, mDiff));
+            final MapTile oldTile = new MapTile(MapTileLayerBase.this.getCacheKey(),
+                    (int) Math.floor(mOldZoomLevel),
+                    (int) GeometryMath.rightShift(pX, mDiff),
+                    (int) GeometryMath.rightShift(pY, mDiff));
             final Drawable oldDrawable = getMapTileFromMemory(oldTile);
 
             if (oldDrawable instanceof BitmapDrawable) {
@@ -486,7 +489,10 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
             Canvas canvas = null;
             for (int x = 0; x < numTiles; x++) {
                 for (int y = 0; y < numTiles; y++) {
-                    final MapTile oldTile = new MapTile((int) Math.floor(mOldZoomLevel), xx + x, yy + y);
+                    final MapTile oldTile = new MapTile(MapTileLayerBase.this.getCacheKey(),
+                            (int) Math.floor(mOldZoomLevel),
+                            xx + x,
+                            yy + y);
                     final Drawable oldDrawable = mTileCache.getMapTileFromMemory(oldTile);
                     if (oldDrawable instanceof BitmapDrawable) {
                         final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
