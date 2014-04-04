@@ -562,7 +562,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
 
         this.mZoomLevel = newZoomLevel;
-        mProjection = new Projection(this);
         updateScrollableAreaLimit();
 
         if (newZoomLevel > curZoomLevel) {
@@ -586,6 +585,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                             - newZoomLevel)));
         }
 
+        mProjection = new Projection(this);
         // snap for all snappables
         final Point snapPoint = new Point();
         if (this.getOverlayManager().onSnapToItem(getScrollX(), getScrollY(), snapPoint, this)) {
@@ -860,14 +860,13 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * limit in pixels
      */
     public void updateScrollableAreaLimit() {
-        if (mScrollableAreaBoundingBox == null || mReadyToComputeProjection == false) {
+        if (mScrollableAreaBoundingBox == null) {
             return;
         }
         if (mScrollableAreaLimit == null) {
             mScrollableAreaLimit = new RectF();
         }
-        final Projection projection = getProjection();
-        projection.toMapPixels(mScrollableAreaBoundingBox, mScrollableAreaLimit);
+        Projection.toMapPixels(mScrollableAreaBoundingBox, getZoomLevel(), mScrollableAreaLimit);
 
         //now that real scrollable area limit is computed we must update the min Zoom level
         //to make sure we don't zoom "out" of the scrollable area limit
@@ -1056,7 +1055,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 mReadyToComputeProjection = true;
 
             }
-            updateScrollableAreaLimit();
+            updateMinZoomLevel();
 
             if (mBoundingBoxToZoomOn != null) {
                 zoomToBoundingBox(mBoundingBoxToZoomOn);
