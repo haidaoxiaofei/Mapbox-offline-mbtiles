@@ -125,7 +125,6 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
             mTileSource.detach();
         }
         mTileSource = pTileSource;
-        clearTileMemoryCache();
         if (mTileSource != null) {
             mCacheKey = mTileSource.getCacheKey();
         }
