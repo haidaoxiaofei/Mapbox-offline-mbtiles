@@ -78,9 +78,9 @@ public class Projection implements GeoConstants {
     }
 
     public BoundingBox getBoundingBox() {
-    	if (mBoundingBoxProjection == null) {
-    		mBoundingBoxProjection = mapView.getBoundingBoxInternal();
-    	}
+        if (mBoundingBoxProjection == null) {
+            mBoundingBoxProjection = mapView.getBoundingBoxInternal();
+        }
         return mBoundingBoxProjection;
     }
 
@@ -206,7 +206,7 @@ public class Projection implements GeoConstants {
         } else {
             out = new RectF();
         }
-        final int mapSize_2 = mapSize(zoom)/2;
+        final int mapSize_2 = mapSize(zoom) / 2;
         PointF nw = latLongToPixelXY(
                 box.getLatNorth(),
                 box.getLonWest(),
@@ -460,7 +460,6 @@ public class Projection implements GeoConstants {
         }
         return n;
     }
-
 
 
     private static final String TAG = "Projection";
