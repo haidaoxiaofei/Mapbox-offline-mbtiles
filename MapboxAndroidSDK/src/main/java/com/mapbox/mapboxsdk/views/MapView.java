@@ -113,6 +113,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private final OverlayManager mOverlayManager;
 
     private Projection mProjection;
+    private boolean mReadyToComputeProjection;
 
     private final TilesOverlay mMapOverlay;
 
@@ -170,6 +171,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     protected MapView(final Context aContext, final int tileSizePixels, MapTileLayerBase tileProvider, final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
         super(aContext, attrs);
         mShouldCluster = false;
+        mReadyToComputeProjection = false;
         this.mController = new MapController(this);
         this.mScroller = new Scroller(aContext);
         Projection.setTileSize(tileSizePixels);
@@ -560,6 +562,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
 
         this.mZoomLevel = newZoomLevel;
+        mProjection = new Projection(this);
         updateScrollableAreaLimit();
 
         if (newZoomLevel > curZoomLevel) {
@@ -582,11 +585,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                     (int) (GeometryMath.rightShift(getScrollY(), curZoomLevel
                             - newZoomLevel)));
         }
-//        scrollTo(getScrollX(), getScrollY());
 
         // snap for all snappables
         final Point snapPoint = new Point();
-        mProjection = new Projection(this);
         if (this.getOverlayManager().onSnapToItem(getScrollX(), getScrollY(), snapPoint, this)) {
             scrollTo(snapPoint.x, snapPoint.y);
         }
@@ -840,71 +841,37 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         invalidate();
     }
 
-    /**
-     * Updates the internal minimum zoom level to reflect either the user-requested value
-     * or the lowest value that should be possible given bounding-box restrictions.
-     */
     private void updateMinZoomLevel() {
-        // if the scrollable area isn't restricted, the user default is the value
-        if (mScrollableAreaBoundingBox == null) {
+        if (mScrollableAreaLimit  == null || mReadyToComputeProjection == false) {
             return;
         }
-
-        final BoundingBox currentBox = getBoundingBox();
-        if (currentBox == null) {
-            return;
-        }
-
-        final Projection pj = getProjection();
-        float z = 10f;
-
-        PointF br = pj.latLongToPixelXY(
-                mScrollableAreaBoundingBox.getLatNorth(),
-                mScrollableAreaBoundingBox.getLonWest(), z, null);
-
-        PointF tl = pj.latLongToPixelXY(
-                mScrollableAreaBoundingBox.getLatSouth(),
-                mScrollableAreaBoundingBox.getLonEast(), z, null);
-
-
-        float sizeX = tl.x - br.x;
-        float sizeY = tl.y - br.y;
-        float w = getWidth();
-        float h = getHeight();
-
-        mMinimumZoomLevel = (float) Math.max(mRequestedMinimumZoomLevel,
-                Math.floor((float) Math.min(
-                        Math.pow((double) z, Math.log(w) / Math.log(sizeX)),
-                        Math.pow((double) z, Math.log(h) / Math.log(sizeY)))));
-
+        final double requiredLatitudeZoom = mZoomLevel
+                - (Math.log(mScrollableAreaLimit.height() / getMeasuredHeight()) / Math.log(2));
+        final double requiredLongitudeZoom = mZoomLevel
+                - (Math.log(mScrollableAreaLimit.width() / getMeasuredWidth()) / Math.log(2));
+        mMinimumZoomLevel = (float) Math.max(mRequestedMinimumZoomLevel, Math.min(requiredLatitudeZoom, requiredLongitudeZoom));
         if (mZoomLevel < mMinimumZoomLevel) {
             setZoom(mMinimumZoomLevel);
         }
     }
 
+    /**
+     * Everytime we update the zoom or the view size we must re compute the real scrollable area
+     * limit in pixels
+     */
     public void updateScrollableAreaLimit() {
-        if (mScrollableAreaBoundingBox == null) {
+        if (mScrollableAreaBoundingBox == null || mReadyToComputeProjection == false) {
             return;
         }
-        float zoom = getZoomLevel();
-//    	if (isAnimating()) {
-//    		zoom = mZoomLevel + (zoom - mZoomLevel);
-//    	}
-        final int worldSize_2 = Projection.mapSize(zoom) / 2;
-        // Get NW/upper-left
-        final PointF upperLeft = Projection.latLongToPixelXY(mScrollableAreaBoundingBox.getLatNorth(),
-                mScrollableAreaBoundingBox.getLonWest(), zoom, null);
-        upperLeft.offset(-worldSize_2, -worldSize_2);
-
-        // Get SE/lower-right
-        final PointF lowerRight = Projection.latLongToPixelXY(mScrollableAreaBoundingBox.getLatSouth(),
-                mScrollableAreaBoundingBox.getLonEast(), zoom, null);
-        lowerRight.offset(-worldSize_2, -worldSize_2);
         if (mScrollableAreaLimit == null) {
-            mScrollableAreaLimit = new RectF(upperLeft.x, upperLeft.y, lowerRight.x, lowerRight.y);
-        } else {
-            mScrollableAreaLimit.set(upperLeft.x, upperLeft.y, lowerRight.x, lowerRight.y);
+            mScrollableAreaLimit = new RectF();
         }
+        final Projection projection = getProjection();
+        projection.toMapPixels(mScrollableAreaBoundingBox, mScrollableAreaLimit);
+
+        //now that real scrollable area limit is computed we must update the min Zoom level
+        //to make sure we don't zoom "out" of the scrollable area limit
+        updateMinZoomLevel();
     }
 
     /**
@@ -924,9 +891,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             mMinimumZoomLevel = mRequestedMinimumZoomLevel;
             mScrollableAreaLimit = null;
         } else {
-            updateMinZoomLevel();
             updateScrollableAreaLimit();
-            setZoomInternal(mZoomLevel); //this it zoom if necessary
         }
 
     }
@@ -1087,11 +1052,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         super.onSizeChanged(w, h, oldw, oldh);
         if (w != 0 && h != 0) {
             mProjection = null;
-            updateMinZoomLevel();
-            float minZoom = getMinZoomLevel();
-            if (mZoomLevel < minZoom) {
-                setZoom(minZoom);
+            if (mReadyToComputeProjection == false) {
+                mReadyToComputeProjection = true;
+
             }
+            updateScrollableAreaLimit();
+
             if (mBoundingBoxToZoomOn != null) {
                 zoomToBoundingBox(mBoundingBoxToZoomOn);
                 mBoundingBoxToZoomOn = null;
