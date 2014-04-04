@@ -201,14 +201,26 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         canvas.restore();
     }
 
+    protected boolean markerHitTest(final Marker pMarker, final Projection pProjection, final float pX, final float pY)
+    {
+        RectF rect = pMarker.getDrawingBounds(pProjection, null);
+        rect.bottom -= rect.height()/2;
+        return rect.contains(pX, pY);
+    }
+
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e, MapView mapView) {
         final int size = this.size();
+        final Projection projection = mapView.getProjection();
+        final float x = e.getX();
+        final float y = e.getY();
 
         for (int i = 0; i < size; i++) {
             final Marker item = getItem(i);
-            RectF rect = item.getDrawingBounds(mapView.getProjection(), null);
-            if (rect.contains(e.getX(), e.getY())) {
+            if (item.beingClustered()) {
+                continue;
+            }
+            if (markerHitTest(item, projection, x, y)) {
                 // We have a hit, do we get a response from onTap?
                 if (onTap(i)) {
                     // We got a response so consume the event
