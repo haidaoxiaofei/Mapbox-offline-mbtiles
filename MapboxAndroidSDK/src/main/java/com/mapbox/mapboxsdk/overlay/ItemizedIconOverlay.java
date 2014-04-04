@@ -4,15 +4,13 @@ import android.content.Context;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.view.Display;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.WindowManager;
-
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,8 +24,9 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     private Context context;
     private ClusterActions clusterActions;
     private boolean clusteringOn = true;
+	private List<ClusterItem> clusterList = new ArrayList<ClusterItem>();
 
-    public ItemizedIconOverlay(
+	public ItemizedIconOverlay(
             final Context pContext,
             final List<Marker> pList,
             final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Marker> pOnItemGestureListener) {
@@ -260,21 +259,12 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
 
     }
 
-
-    private List<ClusterItem> clusterList = new ArrayList<ClusterItem>();
-
-
     private double getThreshold() {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        if (android.os.Build.VERSION.SDK_INT >= 13) {
-            display.getSize(size);
-            return size.x / 10;
-        } else {
-            return display.getWidth();
-        }
-    }
+		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics dm = new DisplayMetrics();
+		wm.getDefaultDisplay().getMetrics(dm);
+		return (double)dm.widthPixels;
+	}
 
     private HashSet<Integer> getGroupSet() {
         HashSet<Integer> set = new HashSet<Integer>();
