@@ -33,26 +33,6 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
                        double east,
                        double south,
                        double west) {
-        if (north < south) {
-            double swap = north;
-            north = south;
-            south = swap;
-        }
-        if (east < west) {
-            double swap = west;
-            west = east;
-            east = swap;
-        }
-        if (north == south) {
-            //boundingbox full view
-            north = 90;
-            south = -90;
-        }
-        if (east == west) {
-            //boundingbox full view
-            east = 180;
-            west = -180;
-        }
         this.mLatNorth = north;
         this.mLonEast = east;
         this.mLatSouth = south;
@@ -157,14 +137,6 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
             maxLon = Math.max(maxLon, longitude);
         }
 
-        if (minLon == maxLon) {
-            minLon -= 0.05;
-            maxLon += 0.05;
-        }
-        if (minLat == maxLat) {
-            minLat -= 0.05;
-            maxLat += 0.05;
-        }
         return new BoundingBox(maxLat, maxLon, minLat, minLon);
     }
 
@@ -216,21 +188,14 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * @param pLonWest
      * @return
      */
-    public BoundingBox union(final double pLatNorth, final double pLatSouth,
+    public BoundingBox union(final double pLatNorth,
                              final double pLonEast,
+                             final double pLatSouth,
                              final double pLonWest) {
-        if ((pLonWest < pLonEast) && (pLatNorth > pLatSouth)) {
-            if ((this.mLonWest < this.mLonEast) && (this.mLatNorth > this.mLatSouth)) {
-                return new BoundingBox((this.mLatNorth < pLatNorth) ? pLatNorth : this.mLatNorth,
-                        (this.mLonEast < pLonEast) ? pLonEast : this.mLonEast,
-                        (this.mLatSouth > pLatSouth) ? pLatSouth : this.mLatSouth,
-                        (this.mLonWest > pLonWest) ? pLonWest : this.mLonWest);
-            } else {
-                return new BoundingBox(pLatNorth, pLonEast, pLatSouth, pLonWest);
-            }
-        } else {
-            return new BoundingBox(this);
-        }
+        return new BoundingBox((this.mLatNorth < pLatNorth) ? pLatNorth : this.mLatNorth,
+                (this.mLonEast < pLonEast) ? pLonEast : this.mLonEast,
+                (this.mLatSouth > pLatSouth) ? pLatSouth : this.mLatSouth,
+                (this.mLonWest > pLonWest) ? pLonWest : this.mLonWest);
     }
     
     /**
