@@ -345,8 +345,8 @@ public class Projection implements GeoConstants {
         final double y = 0.5 - Math.log((1 + sinLatitude) / (1 - sinLatitude)) / (4 * Math.PI);
 
         final int mapSize = mapSize(levelOfDetail);
-        out.x = (int) clip(x * mapSize + 0.5, 0, mapSize - 1);
-        out.y = (int) clip(y * mapSize + 0.5, 0, mapSize - 1);
+        out.x = (float) clip(x * mapSize + 0.5, 0, mapSize - 1);
+        out.y = (float) clip(y * mapSize + 0.5, 0, mapSize - 1);
         return out;
     }
 
