@@ -44,6 +44,7 @@ import com.mapbox.mapboxsdk.overlay.OverlayManager;
 import com.mapbox.mapboxsdk.overlay.TilesOverlay;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic;
+import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
@@ -143,6 +144,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     protected BoundingBox mScrollableAreaBoundingBox = null;
     protected RectF mScrollableAreaLimit = null;
+    protected RectF mTempRect = new RectF();
 
     private BoundingBox mBoundingBoxToZoomOn = null;
 
@@ -605,6 +607,22 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this.requestLayout();
         return this;
     }
+    
+    /**
+     * compute the minimum zoom necessary to show a BoundingBox
+     * 
+     * @param boundingBox the box to compute the zoom for
+     * @param reuse an optional RectF to reuse for computation
+     * @return the minimum zoom necessary to show the bounding box
+     */
+    private float minimumZoomForBoundingBox(final BoundingBox boundingBox) {
+    	final RectF rect = Projection.toMapPixels(boundingBox, TileLayerConstants.MAXIMUM_ZOOMLEVEL, mTempRect);
+        final float requiredLatitudeZoom = TileLayerConstants.MAXIMUM_ZOOMLEVEL
+                - (float) ((Math.log(rect.height() / getMeasuredHeight()) / Math.log(2)));
+        final float requiredLongitudeZoom = TileLayerConstants.MAXIMUM_ZOOMLEVEL
+                - (float) ((Math.log(rect.width() / getMeasuredWidth()) / Math.log(2)));
+        return Math.min(requiredLatitudeZoom, requiredLongitudeZoom);
+    }
 
     /**
      * Zoom the map to enclose the specified bounding box, as closely as possible.
@@ -616,37 +634,13 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         if (boundingBox == null) {
             return this;
         }
-        final BoundingBox currentBox = getBoundingBox();
-        if (currentBox == null) {
+        if (mReadyToComputeProjection == false) {
             mBoundingBoxToZoomOn = boundingBox;
             return this;
         }
 
-        // Calculated required zoom based on latitude span
-        final double maxZoomLatitudeSpan = mZoomLevel == getMaxZoomLevel() ?
-                currentBox.getLatitudeSpan() :
-                currentBox.getLatitudeSpan() / Math.pow(2, getMaxZoomLevel() - mZoomLevel);
-
-        final double requiredLatitudeZoom =
-                getMaxZoomLevel() -
-                        Math.ceil(Math.log(boundingBox.getLatitudeSpan() / maxZoomLatitudeSpan) / Math.log(2));
-
-
-        // Calculated required zoom based on longitude span
-        final double maxZoomLongitudeSpan = mZoomLevel == getMaxZoomLevel() ?
-                currentBox.getLongitudeSpan() :
-                currentBox.getLongitudeSpan() / Math.pow(2, getMaxZoomLevel() - mZoomLevel);
-
-        final double requiredLongitudeZoom = getMaxZoomLevel()
-                - (Math.log(boundingBox.getLongitudeSpan()
-                / maxZoomLongitudeSpan) / Math.log(2));
-
-
         // Zoom to boundingBox center, at calculated maximum allowed zoom level
-        getController().setZoom(
-                (float) Math.max(
-                        Math.max(requiredLatitudeZoom, requiredLongitudeZoom),
-                        getMinZoomLevel()));
+        getController().setZoom(minimumZoomForBoundingBox(boundingBox));
 
         getController().setCenter(
                 new LatLng(boundingBox.getCenter().getLatitude(), boundingBox.getCenter()
@@ -695,24 +689,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * Get the minimum allowed zoom level for the maps.
      */
     public float getMinZoomLevel() {
-        float newMinZoom = mMinimumZoomLevel;
-
-        float boundingDimension = Math.max(getMeasuredWidth(),
-                getMeasuredHeight());
-        float tileSideLength = Projection.getTileSize();
-        if (boundingDimension > 0 && tileSideLength > 0) {
-            float clampedMinZoom = (float) (Math.log(boundingDimension
-                    / tileSideLength) / Math.log(2));
-            if (newMinZoom < clampedMinZoom) {
-                newMinZoom = clampedMinZoom;
-            }
-
-        }
-        if (newMinZoom < 0) {
-            newMinZoom = 0;
-        }
-
-        return newMinZoom;
+        return Math.max(mMinimumZoomLevel, 0);
     }
 
     /**
@@ -842,14 +819,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     private void updateMinZoomLevel() {
-        if (mScrollableAreaLimit  == null || mReadyToComputeProjection == false) {
+        if (mScrollableAreaBoundingBox  == null || mReadyToComputeProjection == false) {
             return;
         }
-        final double requiredLatitudeZoom = mZoomLevel
-                - (Math.log(mScrollableAreaLimit.height() / getMeasuredHeight()) / Math.log(2));
-        final double requiredLongitudeZoom = mZoomLevel
-                - (Math.log(mScrollableAreaLimit.width() / getMeasuredWidth()) / Math.log(2));
-        mMinimumZoomLevel = (float) Math.max(mRequestedMinimumZoomLevel, Math.min(requiredLatitudeZoom, requiredLongitudeZoom));
+        mMinimumZoomLevel = (float) Math.max(mRequestedMinimumZoomLevel, 
+        		minimumZoomForBoundingBox(mScrollableAreaBoundingBox));
         if (mZoomLevel < mMinimumZoomLevel) {
             setZoom(mMinimumZoomLevel);
         }
@@ -867,10 +841,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             mScrollableAreaLimit = new RectF();
         }
         Projection.toMapPixels(mScrollableAreaBoundingBox, getZoomLevel(), mScrollableAreaLimit);
-
-        //now that real scrollable area limit is computed we must update the min Zoom level
-        //to make sure we don't zoom "out" of the scrollable area limit
-        updateMinZoomLevel();
     }
 
     /**
@@ -891,6 +861,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             mScrollableAreaLimit = null;
         } else {
             updateScrollableAreaLimit();
+            updateMinZoomLevel();
         }
 
     }
