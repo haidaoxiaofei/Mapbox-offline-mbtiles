@@ -11,6 +11,7 @@ import com.mapbox.mapboxsdk.views.MapView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.Locale;
 
 /**
  * A GeoJSON parser.
@@ -87,7 +88,7 @@ public class GeoJSON {
             Icon.Size size;
 
             try {
-                size = Icon.Size.valueOf(markerSize.toUpperCase());
+                size = Icon.Size.valueOf(markerSize.toUpperCase(Locale.US));
             } catch (IllegalArgumentException iae) {
                 // Fine, we will just assume you meant large..
                 size = Icon.Size.LARGE;
