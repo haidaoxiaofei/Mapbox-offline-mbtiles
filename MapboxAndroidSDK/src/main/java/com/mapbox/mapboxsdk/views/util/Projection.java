@@ -199,25 +199,24 @@ public class Projection implements GeoConstants {
         return out;
     }
 
-    public RectF toMapPixels(final BoundingBox box, final RectF reuse) {
+    public static RectF toMapPixels(final BoundingBox box, final float zoom, final RectF reuse) {
         final RectF out;
         if (reuse != null) {
             out = reuse;
         } else {
             out = new RectF();
         }
-        final float zoom = getZoomLevel();
-        final int mapSize = this.mapSize(zoom);
-        PointF nw = this.latLongToPixelXY(
+        final int mapSize_2 = mapSize(zoom)/2;
+        PointF nw = latLongToPixelXY(
                 box.getLatNorth(),
                 box.getLonWest(),
                 zoom, null);
-        PointF se = this.latLongToPixelXY(
+        PointF se = latLongToPixelXY(
                 box.getLatSouth(),
                 box.getLonEast(),
                 zoom, null);
         out.set(nw.x, nw.y, se.x, se.y);
-        out.offset(offsetX, offsetY);
+        out.offset(-mapSize_2, -mapSize_2);
         return out;
     }
 
