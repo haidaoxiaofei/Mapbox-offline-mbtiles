@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.util.Log;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.squareup.okhttp.OkHttpClient;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
+
 import uk.co.senab.bitmapcache.BitmapLruCache;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
@@ -63,7 +65,7 @@ public class Icon implements MapboxConstants {
             builder.setMemoryCacheEnabled(true)
                     .setMemoryCacheMaxSizeUsingHeapSize()
                     .setDiskCacheEnabled(true)
-                    // 1 MB (a marker image is around 1kb)
+                            // 1 MB (a marker image is around 1kb)
                     .setDiskCacheMaxSize(1024 * 1024)
                     .setDiskCacheLocation(cacheDir);
             sIconCache = builder.build();
@@ -109,6 +111,7 @@ public class Icon implements MapboxConstants {
 
     /**
      * Set the marker that this icon belongs to, calling the same method on the other side
+     *
      * @param marker the marker to be added to
      * @return this icon
      */
@@ -125,8 +128,10 @@ public class Icon implements MapboxConstants {
 
         // Cache hit! We're done..
         if (bitmap != null) {
-        	drawable = bitmap;
-            if (marker != null) marker.setMarker(drawable);
+            drawable = bitmap;
+            if (marker != null) {
+                marker.setMarker(drawable);
+            }
             return;
         }
 
@@ -157,8 +162,10 @@ public class Icon implements MapboxConstants {
             if (list == null) {
                 // Note, there is an extremely unlikely chance we are immediately kicked
                 // out of the cache...
-            	drawable = sIconCache.get(url);
-                if (marker != null) marker.setMarker(drawable);
+                drawable = sIconCache.get(url);
+                if (marker != null) {
+                    marker.setMarker(drawable);
+                }
                 return;
             }
 
@@ -167,8 +174,10 @@ public class Icon implements MapboxConstants {
                 // The downloader thread just released the lock, the list is empty.
                 // The cache has our icon..
                 if (list.isEmpty()) {
-                	drawable = sIconCache.get(url);
-                    if (marker != null) marker.setMarker(drawable);
+                    drawable = sIconCache.get(url);
+                    if (marker != null) {
+                        marker.setMarker(drawable);
+                    }
                     return;
                 }
 
@@ -211,10 +220,11 @@ public class Icon implements MapboxConstants {
             if (bitmap != null && marker != null) {
                 ArrayList<Icon> list = Icon.downloadQueue.get(url);
                 synchronized (list) {
-                    for (Icon icon : list)
+                    for (Icon icon : list) {
                         if (icon.marker != null) {
                             icon.marker.setMarker(bitmap);
                         }
+                    }
                     Log.w(TAG, "Loaded:" + url);
                     Icon.downloadQueue.remove(url);
                 }

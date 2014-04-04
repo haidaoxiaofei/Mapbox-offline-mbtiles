@@ -246,9 +246,9 @@ public abstract class Overlay {
         Paint paint = new Paint();
         paint.setColor(Color.RED);
         paint.setStrokeWidth(3);
-        canvas.drawLine(0,  - 9,
+        canvas.drawLine(0, -9,
                 0, 9, paint);
-        canvas.drawLine(- 9, 0,
+        canvas.drawLine(-9, 0,
                 9, 0, paint);
         canvas.drawRect(drawable.getBounds(), paint);
         canvas.restore();

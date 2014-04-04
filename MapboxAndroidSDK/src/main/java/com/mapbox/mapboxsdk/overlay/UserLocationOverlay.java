@@ -53,35 +53,33 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     /**
      * Coordinates the feet of the person are located scaled for display density.
      */
-    
+
 
     // to avoid allocations during onDraw
     private final RectF mMyLocationRect = new RectF();
     private final RectF mMyLocationPreviousRect = new RectF();
-    
+
     private Bitmap mPersonBitmap;
     private Bitmap mDirectionArrowBitmap;
-    
+
     private PointF mPersonHotspot;
     private PointF mDirectionHotspot;
-    
+
     public void setDirectionArrowBitmap(Bitmap bitmap) {
-    	mDirectionArrowBitmap = bitmap;
+        mDirectionArrowBitmap = bitmap;
     }
 
     public void setPersonBitmap(Bitmap bitmap) {
-    	mPersonBitmap = bitmap;
+        mPersonBitmap = bitmap;
     }
-    
+
     public void setDirectionArrowHotspot(PointF point) {
-    	mDirectionHotspot = point;
+        mDirectionHotspot = point;
     }
 
-    public  void setPersonHotspot(PointF point) {
-    	mPersonHotspot = point;
+    public void setPersonHotspot(PointF point) {
+        mPersonHotspot = point;
     }
-
-
 
     public UserLocationOverlay(GpsLocationProvider myLocationProvider, MapView mapView, int arrowId, int personId) {
         mMapView = mapView;
@@ -92,8 +90,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         mPaint.setAntiAlias(true);
         mPaint.setFilterBitmap(true);
 
-    	mPersonHotspot = new PointF( 0.5f, 1.0f);
-    	mDirectionHotspot = new PointF( 0.5f, 0.5f);
+        mPersonHotspot = new PointF(0.5f, 1.0f);
+        mDirectionHotspot = new PointF(0.5f, 0.5f);
 
         if (personId != 0) {
             mPersonBitmap = BitmapFactory.decodeResource(mContext.getResources(), personId);
@@ -105,7 +103,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
         mProjection = mapView.getProjection();
         setMyLocationProvider(myLocationProvider);
     }
-    
+
     public UserLocationOverlay(GpsLocationProvider myLocationProvider, MapView mapView) {
         this(myLocationProvider, mapView, R.drawable.direction_arrow, R.drawable.person);
     }
@@ -445,8 +443,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
                 mLatLng = new LatLng(mLocation);
                 if (mIsFollowing) {
                     mMapController.animateTo(mLatLng);
-                }
-                else {
+                } else {
                     invalidate();
                 }
             }

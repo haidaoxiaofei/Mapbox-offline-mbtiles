@@ -141,7 +141,7 @@ public class TilesOverlay
 
         // draw a cross at center in debug mode
         if (UtilConstants.DEBUGMODE) {
-            ISafeCanvas canvas = (ISafeCanvas)c;
+            ISafeCanvas canvas = (ISafeCanvas) c;
             final Point centerPoint = new Point(viewPort.centerX() - mWorldSize_2,
                     viewPort.centerY() - mWorldSize_2);
             canvas.drawLine(centerPoint.x, centerPoint.y - 9,
@@ -198,7 +198,7 @@ public class TilesOverlay
                     }
                 }
                 if (UtilConstants.DEBUGMODE) {
-                    ISafeCanvas canvas = (ISafeCanvas)pCanvas;
+                    ISafeCanvas canvas = (ISafeCanvas) pCanvas;
                     canvas.drawText(pTile.toString(), mTileRect.left + 1,
                             mTileRect.top + mDebugPaint.getTextSize(), mDebugPaint);
                     canvas.drawRect(mTileRect, mDebugPaint);

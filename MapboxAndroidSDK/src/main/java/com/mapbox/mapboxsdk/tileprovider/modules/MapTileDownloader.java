@@ -116,7 +116,7 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     }
 
     @Override
-    public int getTileSizePixels(){
+    public int getTileSizePixels() {
         TileLayer tileLayer = mTileSource.get();
         return (tileLayer != null) ? tileLayer.getTileSizePixels() : 0;
     }
@@ -136,8 +136,7 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     }
 
     @Override
-    public String getCacheKey()
-    {
+    public String getCacheKey() {
         TileLayer tileLayer = mTileSource.get();
         return (tileLayer != null) ? tileLayer.getCacheKey() : "";
     }
@@ -151,7 +150,7 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
             Drawable result = getCache().getMapTileFromDisk(aState.getMapTile());
 
             if (result == null && tileLayer != null) {
-                result  = tileLayer.getDrawableFromTile(MapTileDownloader.this, aState.getMapTile(), hdpi);
+                result = tileLayer.getDrawableFromTile(MapTileDownloader.this, aState.getMapTile(), hdpi);
             }
             return result;
         }

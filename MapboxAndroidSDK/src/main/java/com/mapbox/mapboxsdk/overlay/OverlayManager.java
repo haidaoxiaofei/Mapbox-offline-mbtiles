@@ -76,13 +76,11 @@ public class OverlayManager extends AbstractList<Overlay> {
     private Integer getOverlayClassSortIndex(Overlay overlay) {
         int result = 2;
         if (overlay instanceof MapEventsOverlay) {
-            result  = 0;
-        }
-        else if (overlay instanceof UserLocationOverlay) {
-            result  = 3;
-        }
-        else if (overlay instanceof PathOverlay) {
-            result  = 1;
+            result = 0;
+        } else if (overlay instanceof UserLocationOverlay) {
+            result = 3;
+        } else if (overlay instanceof PathOverlay) {
+            result = 1;
         }
         return Integer.valueOf(result);
     }
@@ -105,10 +103,11 @@ public class OverlayManager extends AbstractList<Overlay> {
 
     public void setUseSafeCanvas(boolean useSafeCanvas) {
         mUseSafeCanvas = useSafeCanvas;
-        for (Overlay overlay : mOverlayList)
+        for (Overlay overlay : mOverlayList) {
             if (overlay instanceof SafeDrawOverlay) {
                 ((SafeDrawOverlay) overlay).setUseSafeCanvas(this.isUsingSafeCanvas());
             }
+        }
         if (mTilesOverlay != null) {
             mTilesOverlay.setUseSafeCanvas(this.isUsingSafeCanvas());
         }
