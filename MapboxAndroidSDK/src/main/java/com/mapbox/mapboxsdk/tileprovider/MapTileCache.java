@@ -58,7 +58,7 @@ public class MapTileCache implements TileLayerConstants {
             BitmapLruCache.Builder builder = new BitmapLruCache.Builder(context);
             builder.setMemoryCacheEnabled(true)
                     .setMemoryCacheMaxSizeUsingHeapSize()
-                    .setDiskCacheEnabled(true)
+                    .setDiskCacheEnabled(false)
                             // 100MB
                     .setDiskCacheMaxSize(this.mMaximumCacheSize)
                     .setDiskCacheLocation(cacheDir);
