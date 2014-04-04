@@ -22,21 +22,21 @@
                 android:id="@+id/satbut"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Satellite"
+                android:text="Sat"
                 android:layout_weight="0.25" android:layout_margin="-5dp"
                 />
         <Button
                 android:id="@+id/terbut"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Terrain"
+                android:text="Terr"
                 android:layout_weight="0.25" android:layout_margin="-5dp"
                 />
         <Button
                 android:id="@+id/strbut"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Streets"
+                android:text="Street"
                 android:layout_weight="0.25"
                 />
 
@@ -44,7 +44,7 @@
                 android:id="@+id/strAltMap"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Alt Map"
+                android:text="Alt"
                 android:layout_weight="0.25"
                 />
 

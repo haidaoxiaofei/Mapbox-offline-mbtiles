@@ -6,7 +6,7 @@
               android:layout_height="match_parent">
 
     <com.mapbox.mapboxsdk.views.MapView
-            android:id="@+id/mapview"
+            android:id="@+id/altMapView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             mapbox:mapid="examples.map-vyofok3q"/>
