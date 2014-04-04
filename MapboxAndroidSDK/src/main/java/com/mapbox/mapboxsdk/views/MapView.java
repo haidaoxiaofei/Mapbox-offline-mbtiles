@@ -170,7 +170,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @param aContext A copy of the app context
      * @param attrs    An AttributeSet object to get extra info from the XML, such as mapbox id or type of baselayer
      */
-    protected MapView(final Context aContext, final int tileSizePixels, MapTileLayerBase tileProvider, final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
+    protected MapView(final Context aContext,
+                      final int tileSizePixels,
+                      MapTileLayerBase tileProvider,
+                      final Handler tileRequestCompleteHandler,
+                      final AttributeSet attrs) {
         super(aContext, attrs);
         mShouldCluster = false;
         mReadyToComputeProjection = false;
