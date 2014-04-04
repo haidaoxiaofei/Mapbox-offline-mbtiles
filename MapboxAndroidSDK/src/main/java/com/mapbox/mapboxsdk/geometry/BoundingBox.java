@@ -194,7 +194,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * @return
      */
     public BoundingBox union(BoundingBox box) {
-        return union(box.getLatNorth(), box.getLatSouth(), box.getLonEast(), box.getLonWest());
+        return (box != null)?union(box.getLatNorth(), box.getLatSouth(), box.getLonEast(), box.getLonWest()):null;
     }
 
     /**
@@ -216,6 +216,46 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
                         (this.mLonEast < pLonEast) ? pLonEast : this.mLonEast,
                         (this.mLatSouth > pLatSouth) ? pLatSouth : this.mLatSouth,
                         (this.mLonWest > pLonWest) ? pLonWest : this.mLonWest);
+            } else {
+                return new BoundingBox(pLatNorth, pLonEast, pLatSouth, pLonWest);
+            }
+        } else {
+            return new BoundingBox(this);
+        }
+    }
+    
+    /**
+     * Returns a new BoundingBox that is the intersection of this with another box
+     *
+     * @param box
+     * @return
+     */
+    public BoundingBox intersect(BoundingBox box) {
+        return (box != null)?intersect(box.getLatNorth(), box.getLatSouth(), box.getLonEast(), box.getLonWest()):null;
+    }
+    
+    /**
+     * Returns a new BoundingBox that is the intersection of this with another box
+     *
+     * @param pLatNorth
+     * @param pLatSouth
+     * @param pLonEast
+     * @param pLonWest
+     * @return
+     */
+    public BoundingBox intersect(final double pLatNorth, final double pLatSouth,
+                             final double pLonEast,
+                             final double pLonWest) {
+        if ((pLonWest < pLonEast) && (pLatNorth > pLatSouth)) {
+            if ((this.mLonWest < this.mLonEast) && (this.mLatNorth > this.mLatSouth)) {
+            	double maxLonWest = Math.max(this.mLonWest, pLonWest);
+            	double minLonEast = Math.min(this.mLonEast, pLonEast);
+            	double maxLatNorth = Math.max(this.mLatNorth, pLatNorth);
+            	double minLatSouth = Math.min(this.mLatSouth, pLatSouth);
+            	if (maxLonWest < minLonEast && maxLatNorth < minLatSouth) {
+            		return new BoundingBox(maxLatNorth, minLonEast, minLatSouth, maxLonWest);
+            	}
+                return null;
             } else {
                 return new BoundingBox(pLatNorth, pLonEast, pLatSouth, pLonWest);
             }
