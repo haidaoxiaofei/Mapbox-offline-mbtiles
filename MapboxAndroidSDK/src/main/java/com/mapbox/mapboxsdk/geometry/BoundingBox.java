@@ -32,8 +32,10 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     public BoundingBox(double north,
                        double east,
                        double south,
-                       double west) {
-
+                       double west) throws IllegalArgumentException {
+        if (north < south || east < west) {
+            throw new IllegalArgumentException("Bounding box coordinates must be given in NESW order").
+        }
         if (north == south) {
             //boundingbox full view
             north = 90;
@@ -194,7 +196,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * @return
      */
     public BoundingBox union(BoundingBox box) {
-        return (box != null)?union(box.getLatNorth(), box.getLatSouth(), box.getLonEast(), box.getLonWest()):null;
+        return union(box.getLatNorth(), box.getLatSouth(), box.getLonEast(), box.getLonWest());
     }
 
     /**
@@ -231,37 +233,24 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * @return
      */
     public BoundingBox intersect(BoundingBox box) {
-        return (box != null)?intersect(box.getLatNorth(), box.getLatSouth(), box.getLonEast(), box.getLonWest()):null;
+        double maxLonWest = Math.max(this.mLonWest, box.getLonWest());
+        double minLonEast = Math.min(this.mLonEast, box.getLonEast());
+        double maxLatNorth = Math.max(this.mLatNorth, box.getLatNorth());
+        double minLatSouth = Math.min(this.mLatSouth, box.getLatSouth());
+        return new BoundingBox(maxLatNorth, minLonEast, minLatSouth, maxLonWest);
     }
     
     /**
      * Returns a new BoundingBox that is the intersection of this with another box
      *
-     * @param pLatNorth
-     * @param pLatSouth
-     * @param pLonEast
-     * @param pLonWest
+     * @param north
+     * @param east
+     * @param south
+     * @param west
      * @return
      */
-    public BoundingBox intersect(final double pLatNorth, final double pLatSouth,
-                             final double pLonEast,
-                             final double pLonWest) {
-        if ((pLonWest < pLonEast) && (pLatNorth > pLatSouth)) {
-            if ((this.mLonWest < this.mLonEast) && (this.mLatNorth > this.mLatSouth)) {
-            	double maxLonWest = Math.max(this.mLonWest, pLonWest);
-            	double minLonEast = Math.min(this.mLonEast, pLonEast);
-            	double maxLatNorth = Math.max(this.mLatNorth, pLatNorth);
-            	double minLatSouth = Math.min(this.mLatSouth, pLatSouth);
-            	if (maxLonWest < minLonEast && maxLatNorth < minLatSouth) {
-            		return new BoundingBox(maxLatNorth, minLonEast, minLatSouth, maxLonWest);
-            	}
-                return null;
-            } else {
-                return new BoundingBox(pLatNorth, pLonEast, pLatSouth, pLonWest);
-            }
-        } else {
-            return new BoundingBox(this);
-        }
+    public BoundingBox intersect(double north, double east, double south, double west) {
+        return intersect(new BoundingBox(north, east, south, west));
     }
 
     public static final Parcelable.Creator<BoundingBox> CREATOR = new Parcelable.Creator<BoundingBox>() {
