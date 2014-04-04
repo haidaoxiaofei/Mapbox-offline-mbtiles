@@ -19,20 +19,11 @@ public class MapTile {
     private final int y;
     private final int z;
     private final String path;
-    private String cacheKey;
+    private final String cacheKey;
     private final int code;
 
     public MapTile(final int az, final int ax, final int ay) {
-        this.z = az;
-        this.x = ax;
-        this.y = ay;
-
-        this.path = this.cacheKey = "/" +
-                String.valueOf(z) + "/" +
-                String.valueOf(x) + "/" +
-                String.valueOf(y);
-        this.cacheKey = this.path;
-        this.code = ((17 * (37 + z)) * (37 * x)) * (37 + y);
+        this("", az, ax, ay);
     }
 
     public MapTile(final String aCacheKey, final int az, final int ax, final int ay) {
@@ -40,11 +31,8 @@ public class MapTile {
         this.x = ax;
         this.y = ay;
 
-        this.path = aCacheKey + "/" +
-                String.valueOf(z) + "/" +
-                String.valueOf(x) + "/" +
-                String.valueOf(y);
-        this.cacheKey = this.path;
+        this.path = String.format("%d/%d/%d", z, x, y);
+        this.cacheKey = String.format("%s/%s", aCacheKey, path);
         this.code = ((17 * (37 + z)) * (37 * x)) * (37 + y);
     }
 
