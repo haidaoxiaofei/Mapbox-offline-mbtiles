@@ -206,7 +206,7 @@ public class Projection implements GeoConstants {
         } else {
             out = new RectF();
         }
-        final int mapSize_2 = mapSize(zoom) / 2;
+        final int mapSize_2 = mapSize(zoom) >> 1;
         PointF nw = latLongToPixelXY(
                 box.getLatNorth(),
                 box.getLonWest(),
