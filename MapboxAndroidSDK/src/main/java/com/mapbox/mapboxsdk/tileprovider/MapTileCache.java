@@ -35,7 +35,7 @@ public class MapTileCache implements TileLayerConstants {
 
 
     public MapTileCache(final Context context) {
-        this(context, CACHE_MAPTILECOUNT_DEFAULT);
+        this(context, CACHE_MAPTILEDISKSIZE_DEFAULT);
     }
 
     public MapTileCache(final Context context, int aMaximumCacheSize) {
