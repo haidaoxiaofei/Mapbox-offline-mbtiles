@@ -40,6 +40,47 @@ public class GeometryMath {
                 (int) Max4(newX1, newX2, newX3, newX4), (int) Max4(newY1, newY2, newY3, newY4));
 
         return reuse;
+
+    public static final PointF reusable(PointF reuse) {
+        final PointF out;
+        if (reuse != null) {
+            out = reuse;
+        } else {
+            out = new PointF();
+        }
+        return out;
+    }
+
+    public static final Point reusable(Point reuse) {
+        final Point out;
+        if (reuse != null) {
+            out = reuse;
+        } else {
+            out = new Point();
+        }
+        return out;
+    }
+
+    public static final RectF reusable(RectF reuse) {
+        final RectF out;
+        if (reuse != null) {
+            out = reuse;
+        } else {
+            out = new RectF();
+        }
+        return out;
+    }
+
+    public static final Rect reusable(Rect reuse) {
+        final Rect out;
+        if (reuse != null) {
+            out = reuse;
+        } else {
+            out = new Rect();
+        }
+        return out;
+    }
+
     }
 
     private static double Min4(double a, double b, double c, double d) {
