@@ -6,6 +6,7 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+
 import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -26,7 +27,7 @@ public class Marker {
 
     private final RectF mMyLocationRect = new RectF(0, 0, 0, 0);
     private final RectF mMyLocationPreviousRect = new RectF(0, 0, 0, 0);
-    protected final PointF mCurScreenCoords = new PointF();
+    protected final PointF mCurMapCoords = new PointF();
 
     private Context context;
     private MapView mapView;
@@ -313,12 +314,8 @@ public class Marker {
      * @param reuse
      * @return
      */
-    public PointF getPositionOnScreen(final Projection projection, PointF reuse) {
-        if (reuse == null) {
-            reuse = new PointF();
-        }
-        projection.toPixels(mLatLng, reuse);
-        return reuse;
+    public PointF getPositionOnScreen(final Projection projection, final PointF reuse) {
+        return projection.toPixels(mCurMapCoords, reuse);
     }
 
     public PointF getDrawingPositionOnScreen(final Projection projection, PointF reuse) {
@@ -345,11 +342,11 @@ public class Marker {
         if (reuse == null) {
             reuse = new RectF();
         }
-        projection.toMapPixels(mLatLng, mCurScreenCoords);
+        projection.toMapPixels(mLatLng, mCurMapCoords);
         final int w = getWidth();
         final int h = getHeight();
-        final float x = mCurScreenCoords.x - mAnchor.x * w;
-        final float y = mCurScreenCoords.y - mAnchor.y * h;
+        final float x = mCurMapCoords.x - mAnchor.x * w;
+        final float y = mCurMapCoords.y - mAnchor.y * h;
         reuse.set(x, y, x + w, y + h * 2);
         return reuse;
     }
@@ -435,7 +432,7 @@ public class Marker {
     }
 
     public PointF getPositionOnMap() {
-        return mCurScreenCoords;
+        return mCurMapCoords;
     }
 
     public void updateDrawingPosition() {
