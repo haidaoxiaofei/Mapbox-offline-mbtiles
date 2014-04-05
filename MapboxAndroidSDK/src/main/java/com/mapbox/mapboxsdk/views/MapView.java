@@ -138,7 +138,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     protected MapListener mListener;
 
     private float mapOrientation = 0;
-    private final Matrix mRotateMatrix = new Matrix();
     private final float[] mRotatePoints = new float[2];
     private final Rect mInvalidateRect = new Rect();
 
@@ -493,7 +492,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      */
     public Rect getScreenRect(final Rect reuse) {
         final Rect out = getIntrinsicScreenRect(reuse);
-        if (this.getMapOrientation() != 0 && this.getMapOrientation() != 180) {
+        if (this.getMapOrientation() % 180 != 0) {
             // Since the canvas is shifted by getWidth/2, we can just return our natural scrollX/Y
             // value since that is the same as the shifted center.
             int centerX = this.getScrollX();
@@ -504,16 +503,16 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return out;
     }
 
-    public Rect getIntrinsicScreenRect(final Rect reuse) {
-        final Rect out;
+    public Rect getIntrinsicScreenRect(Rect reuse) {
         if (reuse == null) {
-            out = new Rect();
-        } else {
-            out = reuse;
+            reuse = new Rect();
         }
-        out.set(getScrollX() - getMeasuredWidth() / 2, getScrollY() - getMeasuredHeight() / 2, getScrollX()
-                + getMeasuredWidth() / 2, getScrollY() + getMeasuredHeight() / 2);
-        return out;
+        final int width_2 = getMeasuredWidth() >> 1;
+        final int height_2 = getMeasuredHeight() >> 1;
+        final int scrollX = getScrollX();
+        final int scrollY = getScrollY();
+        reuse.set(scrollX - width_2, scrollY - height_2, scrollX + width_2, scrollY + height_2);
+        return reuse;
     }
 
     /**
@@ -600,8 +599,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         if (newZoomLevel > curZoomLevel) {
             // We are going from a lower-resolution plane to a higher-resolution plane, so we have
             // to do it the hard way.
-            final int worldSize_current_2 = Projection.mapSize(curZoomLevel) / 2;
-            final int worldSize_new_2 = Projection.mapSize(newZoomLevel) / 2;
+            final int worldSize_current_2 = Projection.mapSize(curZoomLevel) >> 1;
+            final int worldSize_new_2 = Projection.mapSize(newZoomLevel) >> 1;
             final ILatLng centerGeoPoint = Projection.pixelXYToLatLong(getScrollX()
                     + worldSize_current_2, getScrollY() + worldSize_current_2, curZoomLevel);
             final PointF centerPoint = Projection.latLongToPixelXY(
@@ -802,6 +801,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      */
     public void setMapOrientation(float degrees) {
         this.mapOrientation = degrees % 360.0f;
+        this.mProjection = null;
         this.invalidate();
     }
 
@@ -1206,7 +1206,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 return true;
             }
 
-            boolean handled = mScaleGestureDetector.onTouchEvent(event);
+            boolean handled = mScaleGestureDetector.onTouchEvent(rotatedEvent);
             if (!mScaleGestureDetector.isInProgress()) {
                 handled |= mGestureDetector.onTouchEvent(rotatedEvent);
             }
@@ -1227,14 +1227,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         if (this.getMapOrientation() == 0) {
             return ev;
         }
-
-        mRotateMatrix.setRotate(-getMapOrientation(), this.getWidth() / 2, this.getHeight() / 2);
-
         MotionEvent rotatedEvent = MotionEvent.obtain(ev);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             mRotatePoints[0] = ev.getX();
             mRotatePoints[1] = ev.getY();
-            mRotateMatrix.mapPoints(mRotatePoints);
+            getProjection().rotatePoints(mRotatePoints);
             rotatedEvent.setLocation(mRotatePoints[0], mRotatePoints[1]);
         } else {
             // This method is preferred since it will rotate historical touch events too
@@ -1243,7 +1240,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                     sMotionEventTransformMethod = MotionEvent.class.getDeclaredMethod("transform",
                             new Class[]{Matrix.class});
                 }
-                sMotionEventTransformMethod.invoke(rotatedEvent, mRotateMatrix);
+                sMotionEventTransformMethod.invoke(rotatedEvent, getProjection().getRotationMatrix());
             } catch (Exception e) {
                 e.printStackTrace();
             }
