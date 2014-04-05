@@ -87,6 +87,25 @@ public class GeometryMath {
         return out;
     }
 
+
+    public static PointF rotatePoint(float centerX, float centerY, PointF point, float angle, PointF reuse)
+    {
+        final PointF out = GeometryMath.reusable(reuse);
+        double rotationRadians = angle * DEG2RAD;
+        //calculate new x coord
+        double sin = Math.sin(rotationRadians);
+        //calculate new y coord
+        double cos = Math.cos(rotationRadians);
+
+        // translate point back to origin:
+        double x = point.x - centerX;
+        double y = point.y - centerY;
+        // rotate point
+        double xnew = x * cos - y * sin + centerX;
+        double ynew = x * sin + y * cos + centerY;
+        // translate point back to global coords:
+        out.set((float)(xnew + centerX), (float)(ynew + centerY));
+        return out;
     }
 
     private static double Min4(double a, double b, double c, double d) {
