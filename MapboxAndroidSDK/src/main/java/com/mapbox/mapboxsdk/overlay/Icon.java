@@ -120,7 +120,7 @@ public class Icon implements MapboxConstants {
     }
 
     private void downloadBitmap(Context context, String url) {
-        CacheableBitmapDrawable bitmap = getCache(context).get(url);
+        CacheableBitmapDrawable bitmap = getCache(context).getFromMemoryCache(url);
 
         // Cache hit! We're done..
         if (bitmap != null) {
