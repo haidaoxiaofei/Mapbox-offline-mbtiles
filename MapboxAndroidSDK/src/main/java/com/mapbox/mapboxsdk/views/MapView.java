@@ -170,7 +170,11 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @param aContext A copy of the app context
      * @param attrs    An AttributeSet object to get extra info from the XML, such as mapbox id or type of baselayer
      */
-    protected MapView(final Context aContext, final int tileSizePixels, MapTileLayerBase tileProvider, final Handler tileRequestCompleteHandler, final AttributeSet attrs) {
+    protected MapView(final Context aContext,
+                      final int tileSizePixels,
+                      MapTileLayerBase tileProvider,
+                      final Handler tileRequestCompleteHandler,
+                      final AttributeSet attrs) {
         super(aContext, attrs);
         mShouldCluster = false;
         mReadyToComputeProjection = false;
@@ -254,7 +258,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     /**
-     * Adds a marker to the default marker overlay
+     * Adds a marker to the default marker overlay.
      *
      * @param marker the marker object to be added
      * @return the marker object
@@ -271,12 +275,20 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return marker;
     }
 
+    /**
+     * Remove a marker from the map's display.
+     * @param marker
+     */
     public void removeMarker(final Marker marker) {
         defaultMarkerList.remove(marker);
         defaultMarkerOverlay.removeItem(marker);
         this.invalidate();
     }
 
+    /**
+     * Select a marker, showing a tooltip if the marker has content that would appear within it.
+     * @param marker
+     */
     public void selectMarker(final Marker marker) {
         InfoWindow toolTip = marker.getToolTip(MapView.this);
 
@@ -284,7 +296,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             mMapViewListener.onTapMarker(MapView.this, marker);
         }
         closeCurrentTooltip();
-        if (toolTip != currentTooltip) {
+        if (toolTip != currentTooltip && marker.hasContent()) {
             if (mMapViewListener != null) {
                 mMapViewListener.onShowMarker(MapView.this, marker);
             }
@@ -334,6 +346,9 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         GeoJSON.parseString(geoJSON, MapView.this);
     }
 
+    /**
+     * Close the currently-displayed tooltip, if any.
+     */
     private void closeCurrentTooltip() {
         if (currentTooltip != null) {
             if (mMapViewListener != null) {
@@ -397,10 +412,18 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
     }
 
+    /**
+     * Returns the map's controller
+     * @return
+     */
     public MapController getController() {
         return this.mController;
     }
 
+    /**
+     * Returns the map's overlay
+     * @return
+     */
     public TilesOverlay getMapOverlay() {
         return mMapOverlay;
     }
@@ -421,6 +444,10 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return mTileProvider;
     }
 
+    /**
+     * Returns the map's scroller
+     * @return
+     */
     public Scroller getScroller() {
         return mScroller;
     }
@@ -429,11 +456,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return mTileRequestCompleteHandler;
     }
 
-    /**
-     * Compute the current geographical bounding box for this map.
-     *
-     * @return the current bounds of the map
-     */
     public BoundingBox getBoundingBoxInternal() {
         if (getMeasuredWidth() == 0 || getMeasuredHeight() == 0) {
             return null;
@@ -448,6 +470,10 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 swGeoPoint.getLatitude(), swGeoPoint.getLongitude());
     }
 
+    /**
+     * Returns the current bounding box of the map.
+     * @return
+     */
     public BoundingBox getBoundingBox() {
         return getProjection().getBoundingBox();
     }
@@ -517,6 +543,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         return this;
     }
 
+    /**
+     * Pan the map by a given number of pixels in the x and y dimensions.
+     * @param x
+     * @param y
+     * @return
+     */
     public MapView panBy(int x, int y) {
         scrollBy(x, y);
         return this;
@@ -548,7 +580,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public MapView setZoom(final float aZoomLevel) {
         return this.mController.setZoom(aZoomLevel);
     }
-
 
     protected MapView setZoomInternal(final float aZoomLevel) {
         final float minZoomLevel = getMinZoomLevel();
