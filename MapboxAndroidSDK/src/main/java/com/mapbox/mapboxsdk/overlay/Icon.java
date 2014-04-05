@@ -93,7 +93,7 @@ public class Icon implements MapboxConstants {
      * @param context Android context - Used for proper Bitmap Density generation
      * @param size    Size of Icon
      * @param symbol  Maki Symbol
-     * @param color   Color of Icon
+     * @param aColor   Color of Icon
      */
     public Icon(Context context, Size size, String symbol, String aColor) {
         String url = MAPBOX_BASE_URL + "marker/pin-" + size.getApiString();

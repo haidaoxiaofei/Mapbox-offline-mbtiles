@@ -643,7 +643,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * compute the minimum zoom necessary to show a BoundingBox
      *
      * @param boundingBox the box to compute the zoom for
-     * @param reuse       an optional RectF to reuse for computation
      * @return the minimum zoom necessary to show the bounding box
      */
     private float minimumZoomForBoundingBox(final BoundingBox boundingBox) {
