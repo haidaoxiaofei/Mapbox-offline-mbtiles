@@ -871,7 +871,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         if (mScrollableAreaLimit == null) {
             mScrollableAreaLimit = new RectF();
         }
-        Projection.toMapPixels(mScrollableAreaBoundingBox, getZoomLevel(), mScrollableAreaLimit);
+        Projection.toMapPixels(mScrollableAreaBoundingBox, getZoomLevel(false), mScrollableAreaLimit);
     }
 
     /**
