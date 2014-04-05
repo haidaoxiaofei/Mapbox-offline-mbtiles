@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
+import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.io.File;
@@ -48,11 +49,14 @@ public class Icon implements MapboxConstants {
             return apiString;
         }
     }
+    protected BitmapLruCache getCache() {
+        return getCache(null);
+    }
 
     // TODO: This is common code from MapTileCache, ideally this would be extracted
     // and used by both classes.
     protected BitmapLruCache getCache(Context context) {
-        if (sIconCache == null) {
+        if (sIconCache == null && context != null) {
             File cacheDir = getDiskCacheDir(context, DISK_CACHE_SUBDIR);
             if (!cacheDir.exists()) {
                 if (cacheDir.mkdirs()) {
@@ -61,14 +65,11 @@ public class Icon implements MapboxConstants {
                     Log.e(TAG, "can't create cacheDir " + cacheDir);
                 }
             }
-            BitmapLruCache.Builder builder = new BitmapLruCache.Builder(context);
-            builder.setMemoryCacheEnabled(true)
-                    .setMemoryCacheMaxSizeUsingHeapSize()
+            sIconCache = (new BitmapLruCache.Builder(context)).setMemoryCacheEnabled(true)
+                    .setMemoryCacheMaxSize(BitmapUtils.calculateMemoryCacheSize(context))
                     .setDiskCacheEnabled(true)
                     // 1 MB (a marker image is around 1kb)
-                    .setDiskCacheMaxSize(1024 * 1024)
-                    .setDiskCacheLocation(cacheDir);
-            sIconCache = builder.build();
+                    .setDiskCacheMaxSize(1024 * 1024).build();
         }
         return sIconCache;
     }
@@ -192,37 +193,40 @@ public class Icon implements MapboxConstants {
         @Override
         protected CacheableBitmapDrawable doInBackground(String... src) {
             this.url = src[0];
-            OkHttpClient client = new OkHttpClient();
-            InputStream in = null;
-            try {
+            CacheableBitmapDrawable result = getCache().getFromDiskCache(this.url, null);
+            if (result == null) {
+                OkHttpClient client = new OkHttpClient();
+                InputStream in = null;
                 try {
-                    Log.d(TAG, "Maki url to load = '" + url + "'");
-                    HttpURLConnection connection = client.open(new URL(url));
-                    // Note, sIconCache cannot be null..
-                    return sIconCache.put(src[0], connection.getInputStream());
-                } finally {
-                    if (in != null) {
-                        in.close();
+                    try {
+                        Log.d(TAG, "Maki url to load = '" + this.url + "'");
+                        HttpURLConnection connection = client.open(new URL(this.url));
+                        // Note, sIconCache cannot be null..
+                        result = sIconCache.put(this.url, connection.getInputStream());
+                    } finally {
+                        if (in != null) {
+                            in.close();
+                        }
                     }
+                } catch (IOException e) {
+                    Log.e(TAG, "doInBackground: Unable to fetch icon from: " + this.url);
                 }
-            } catch (IOException e) {
-                Log.e(TAG, "doInBackground: Unable to fetch icon from: " + src[0]);
             }
-            return null;
+            return result;
         }
 
         @Override
         protected void onPostExecute(CacheableBitmapDrawable bitmap) {
             if (bitmap != null && marker != null) {
-                ArrayList<Icon> list = Icon.downloadQueue.get(url);
+                ArrayList<Icon> list = Icon.downloadQueue.get(this.url);
                 synchronized (list) {
                     for (Icon icon : list) {
                         if (icon.marker != null) {
                             icon.marker.setMarker(bitmap);
                         }
                     }
-                    Log.w(TAG, "Loaded:" + url);
-                    Icon.downloadQueue.remove(url);
+                    Log.w(TAG, "Loaded:" + this.url);
+                    Icon.downloadQueue.remove(this.url);
                 }
             }
         }
