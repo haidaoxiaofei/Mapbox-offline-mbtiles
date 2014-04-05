@@ -897,7 +897,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     }
 
-    public BoundingBox getScrollableAreaLimit() {
+    public BoundingBox getScrollableAreaBoundingBox() {
         return mScrollableAreaBoundingBox;
     }
 
