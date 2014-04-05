@@ -651,7 +651,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 - (float) ((Math.log(rect.height() / getMeasuredHeight()) / Math.log(2)));
         final float requiredLongitudeZoom = TileLayerConstants.MAXIMUM_ZOOMLEVEL
                 - (float) ((Math.log(rect.width() / getMeasuredWidth()) / Math.log(2)));
-        return Math.min(requiredLatitudeZoom, requiredLongitudeZoom);
+        return Math.max(requiredLatitudeZoom, requiredLongitudeZoom);
     }
 
     /**
