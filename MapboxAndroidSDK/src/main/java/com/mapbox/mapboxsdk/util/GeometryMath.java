@@ -1,6 +1,9 @@
 package com.mapbox.mapboxsdk.util;
 
+import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.RectF;
 
 import com.mapbox.mapboxsdk.views.util.Projection;
 
@@ -12,9 +15,11 @@ public class GeometryMath {
     public static final double RAD2DEG = (180.0 / Math.PI);
 
     public static final Rect getBoundingBoxForRotatedRectangle(Rect rect, int centerX,
-                                                               int centerY, float angle, Rect reuse) {
-        if (reuse == null) {
-            reuse = new Rect();
+                                                               int centerY, float angle, final Rect reuse) {
+        final Rect out = GeometryMath.reusable(reuse);
+        if (angle % 360 == 0) {
+            out.set(rect);
+            return out;
         }
 
         double theta = angle * DEG2RAD;
@@ -36,10 +41,11 @@ public class GeometryMath {
         double dy4 = rect.bottom - centerY;
         double newX4 = centerX - dx4 * cosTheta + dy4 * sinTheta;
         double newY4 = centerY - dx4 * sinTheta - dy4 * cosTheta;
-        reuse.set((int) Min4(newX1, newX2, newX3, newX4), (int) Min4(newY1, newY2, newY3, newY4),
+        out.set((int) Min4(newX1, newX2, newX3, newX4), (int) Min4(newY1, newY2, newY3, newY4),
                 (int) Max4(newX1, newX2, newX3, newX4), (int) Max4(newY1, newY2, newY3, newY4));
 
-        return reuse;
+        return out;
+    }
 
     public static final PointF reusable(PointF reuse) {
         final PointF out;
