@@ -550,7 +550,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * @return
      */
     public MapView panBy(int x, int y) {
-        scrollBy(x, y);
+        this.mController.panBy(x, y);
         return this;
     }
 
