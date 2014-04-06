@@ -123,10 +123,7 @@ public class MapTileCache implements TileLayerConstants {
 
     public CacheableBitmapDrawable putTileInMemoryCache(final MapTile aTile, final Bitmap aBitmap) {
         if (aBitmap != null) {
-            String key = getCacheKey(aTile);
-            if (!getCache().containsInMemoryCache(key)) {
-                return getCache().putInMemoryCache(getCacheKey(aTile), aBitmap);
-            }
+        return getCache().putInMemoryCache(getCacheKey(aTile), aBitmap);
         }
         return null;
     }
@@ -134,12 +131,10 @@ public class MapTileCache implements TileLayerConstants {
     public CacheableBitmapDrawable putTileInMemoryCache(final MapTile aTile, final Drawable aDrawable) {
         if (aDrawable != null && aDrawable instanceof BitmapDrawable) {
             String key = getCacheKey(aTile);
-            if (!getCache().containsInMemoryCache(key)) {
-                if (aDrawable instanceof CacheableBitmapDrawable) {
-                    return getCache().putInMemoryCache(getCacheKey(aTile), ((CacheableBitmapDrawable) aDrawable));
-                } else {
-                    return getCache().putInMemoryCache(getCacheKey(aTile), ((BitmapDrawable) aDrawable).getBitmap());
-                }
+            if (aDrawable instanceof CacheableBitmapDrawable) {
+                return getCache().putInMemoryCache(key, ((CacheableBitmapDrawable) aDrawable));
+            } else {
+                return getCache().putInMemoryCache(key, ((BitmapDrawable) aDrawable).getBitmap());
             }
         }
         return null;
