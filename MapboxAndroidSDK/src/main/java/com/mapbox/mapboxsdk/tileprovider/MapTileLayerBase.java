@@ -219,7 +219,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     @Override
     public void mapTileRequestExpiredTile(MapTileRequestState pState, CacheableBitmapDrawable pDrawable) {
         // Put the expired tile into the cache
-        putExpiredTileIntoCache(pState.getMapTile(), pDrawable);
+        putExpiredTileIntoCache(pState.getMapTile(), pDrawable.getBitmap());
 
         // tell our caller we've finished and it should update its view
         if (mTileRequestCompleteHandler != null) {
@@ -263,12 +263,13 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         mTileCache.removeTileFromMemory(pState.getMapTile());
     }
 
-    protected CacheableBitmapDrawable putExpiredTileIntoCache(final MapTile pTile, final CacheableBitmapDrawable drawable) {
-        CacheableBitmapDrawable currentDrawable = mTileCache.getMapTileFromMemory(pTile);
-        if (drawable != null && currentDrawable == null) {
-            currentDrawable = mTileCache.putTileInMemoryCache(pTile, drawable);
+    public void putExpiredTileIntoCache(final MapTile pTile, final Bitmap bitmap) {
+        if (bitmap == null) return;
+        CacheableBitmapDrawable drawable = mTileCache.getMapTileFromMemory(pTile);
+        if (drawable == null || BitmapUtils.isCacheDrawableExpired(drawable)) {
+            drawable = mTileCache.putTileInMemoryCache(pTile, bitmap);
+            BitmapUtils.setCacheDrawableExpired(drawable);
         }
-        return currentDrawable;
     }
 
     public void setTileRequestCompleteHandler(final Handler handler) {
