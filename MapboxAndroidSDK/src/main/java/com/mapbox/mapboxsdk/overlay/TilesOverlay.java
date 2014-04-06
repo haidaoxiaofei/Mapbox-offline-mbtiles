@@ -194,7 +194,7 @@ public class TilesOverlay
 
             if (drawable != null) {
                 if (isReusable) {
-                    mBeeingUsedDrawables.add((CacheableBitmapDrawable) drawable);
+                    mBeingUsedDrawables.add((CacheableBitmapDrawable) drawable);
                 }
                 drawable.setBounds(mTileRect);
                 drawable.draw(pCanvas);
@@ -388,6 +388,9 @@ public class TilesOverlay
             final Drawable oldDrawable = mTileProvider.getMapTileFromMemory(oldTile);
 
             if (oldDrawable instanceof BitmapDrawable) {
+                if (oldDrawable instanceof CacheableBitmapDrawable) {
+                    mBeingUsedDrawables.add((CacheableBitmapDrawable) oldDrawable);
+                }
                 final int xx = (pX % (int) GeometryMath.leftShift(1, mDiff)) * mTileSize_2;
                 final int yy = (pY % (int) GeometryMath.leftShift(1, mDiff)) * mTileSize_2;
                 mSrcRect.set(xx, yy, xx + mTileSize_2, yy + mTileSize_2);
@@ -405,21 +408,15 @@ public class TilesOverlay
                 final Canvas canvas = new Canvas(bitmap);
                 final boolean isReusable = oldDrawable instanceof CacheableBitmapDrawable;
                 boolean success = false;
-                try {
-                    if (!isReusable || ((CacheableBitmapDrawable) oldDrawable).isBitmapValid()) {
-                        final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
-                        canvas.drawBitmap(oldBitmap, mSrcRect, mDestRect, null);
-                        success = true;
-                        /*
-                            Log.i(TAG, "Created scaled tile: " + pTile);
-                            mDebugPaint.setTextSize(40);
-                            canvas.drawText("scaled", 50, 50, mDebugPaint);
-                        */
-                    }
-                } finally {
-                    if (isReusable) {
-                        ((CacheableBitmapDrawable) oldDrawable).setBeingUsed(false);
-                    }
+                if (!isReusable || ((CacheableBitmapDrawable) oldDrawable).isBitmapValid()) {
+                    final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
+                    canvas.drawBitmap(oldBitmap, mSrcRect, mDestRect, null);
+                    success = true;
+                    /*
+                        Log.i(TAG, "Created scaled tile: " + pTile);
+                        mDebugPaint.setTextSize(40);
+                        canvas.drawText("scaled", 50, 50, mDebugPaint);
+                    */
                 }
                 if (success) {
                     mNewTiles.put(pTile, bitmap);
@@ -460,6 +457,9 @@ public class TilesOverlay
                     }
 
                     if (oldDrawable instanceof BitmapDrawable) {
+                        if (oldDrawable instanceof CacheableBitmapDrawable) {
+                            mBeingUsedDrawables.add((CacheableBitmapDrawable) oldDrawable);
+                        }
                         final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
                         if (oldBitmap != null) {
                             if (bitmap == null) {
@@ -479,9 +479,6 @@ public class TilesOverlay
                             canvas.drawBitmap(oldBitmap, null, mDestRect, null);
                             mTileProvider.removeTileFromMemory(oldTile);
                         }
-                    }
-                    if (oldDrawable instanceof CacheableBitmapDrawable) {
-                        ((CacheableBitmapDrawable) oldDrawable).setBeingUsed(false);
                     }
                 }
             }

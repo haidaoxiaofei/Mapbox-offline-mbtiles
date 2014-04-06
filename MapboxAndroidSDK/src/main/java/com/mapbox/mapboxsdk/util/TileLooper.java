@@ -21,7 +21,7 @@ public abstract class TileLooper {
     protected final Point mUpperLeft = new Point();
     protected final Point mLowerRight = new Point();
     protected final Point center = new Point();
-    protected List<CacheableBitmapDrawable> mBeeingUsedDrawables = new ArrayList<CacheableBitmapDrawable>();
+    protected List<CacheableBitmapDrawable> mBeingUsedDrawables = new ArrayList<CacheableBitmapDrawable>();
 
     public final void loop(final Canvas pCanvas, final String pCacheKey, final float pZoomLevel, final int pTileSizePx, final Rect pViewPort, final Rect pClipRect) {
         // Calculate the amount of tiles needed for each side around the center one.
@@ -59,10 +59,10 @@ public abstract class TileLooper {
         (new Handler()).postDelayed(new Runnable() {
             @Override
             public void run() {
-            for (CacheableBitmapDrawable drawable:mBeeingUsedDrawables) {
+            for (CacheableBitmapDrawable drawable: mBeingUsedDrawables) {
                 drawable.setBeingUsed(false);
             }
-            mBeeingUsedDrawables.clear();
+            mBeingUsedDrawables.clear();
             }
         }, 1);
 
