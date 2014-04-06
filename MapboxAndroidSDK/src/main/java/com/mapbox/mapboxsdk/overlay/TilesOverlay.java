@@ -350,7 +350,7 @@ public class TilesOverlay
             // If it's found then no need to created scaled version.
             // If not found (null) them we've initiated a new request for it,
             // and now we'll create a scaled version until the request completes.
-            final Drawable requestedTile = mTileProvider.getMapTileFromMemory(pTile);
+            final Drawable requestedTile = mTileProvider.getMapTile(pTile);
             if (requestedTile == null) {
                 try {
                     handleScaleTile(pCacheKey, pTileSizePx, pTile, pX, pY);
