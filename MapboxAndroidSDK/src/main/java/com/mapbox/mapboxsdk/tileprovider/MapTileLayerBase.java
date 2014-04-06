@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
@@ -179,7 +180,10 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     public void mapTileRequestCompleted(final MapTileRequestState pState, final Drawable pDrawable) {
         // tell our caller we've finished and it should update its view
         if (mTileRequestCompleteHandler != null) {
-            mTileRequestCompleteHandler.sendEmptyMessage(MapTile.MAPTILE_SUCCESS_ID);
+            Message msg = new Message();
+            msg.obj = pState.getMapTile().getTileRect();
+            msg.what = MapTile.MAPTILE_SUCCESS_ID;
+            mTileRequestCompleteHandler.sendMessage(msg);
         }
 
         if (DEBUG_TILE_PROVIDERS) {
