@@ -175,6 +175,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                       final Handler tileRequestCompleteHandler,
                       final AttributeSet attrs) {
         super(aContext, attrs);
+        setWillNotDraw(false);
         mShouldCluster = false;
         mReadyToComputeProjection = false;
         this.mController = new MapController(this);
@@ -1316,8 +1317,8 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     }
 
     @Override
-    protected void dispatchDraw(final Canvas c) {
-
+    protected void onDraw(final Canvas c) {
+        super.onDraw(c);
         mProjection = new Projection(this);
 
         // Save the current canvas matrix
@@ -1336,8 +1337,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this.getOverlayManager().onDraw(c, this);
 
         c.restore();
-
-        super.dispatchDraw(c);
     }
 
     /**
