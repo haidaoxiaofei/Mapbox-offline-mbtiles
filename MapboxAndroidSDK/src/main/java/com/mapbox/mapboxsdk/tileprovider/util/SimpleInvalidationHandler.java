@@ -1,15 +1,15 @@
 package com.mapbox.mapboxsdk.tileprovider.util;
 
-import com.mapbox.mapboxsdk.tileprovider.MapTile;
-
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
+
+import com.mapbox.mapboxsdk.tileprovider.MapTile;
+import com.mapbox.mapboxsdk.views.MapView;
 
 public class SimpleInvalidationHandler extends Handler {
-    private final View mView;
+    private final MapView mView;
 
-    public SimpleInvalidationHandler(final View pView) {
+    public SimpleInvalidationHandler(final MapView pView) {
         super();
         mView = pView;
     }
@@ -19,6 +19,7 @@ public class SimpleInvalidationHandler extends Handler {
         switch (msg.what) {
             case MapTile.MAPTILE_SUCCESS_ID:
                 mView.invalidate();
+//                mView.invalidate((Rect) msg.obj);
                 break;
 
         }
