@@ -14,8 +14,8 @@ public class GeometryMath {
     public static final double DEG2RAD = (Math.PI / 180.0);
     public static final double RAD2DEG = (180.0 / Math.PI);
 
-    public static final Rect getBoundingBoxForRotatedRectangle(Rect rect, int centerX,
-                                                               int centerY, float angle, final Rect reuse) {
+    public static final Rect getBoundingBoxForRotatedRectangle(final Rect rect, final int centerX,
+                                                               final int centerY, final float angle, final Rect reuse) {
         final Rect out = GeometryMath.reusable(reuse);
         if (angle % 360 == 0) {
             out.set(rect);
@@ -47,7 +47,7 @@ public class GeometryMath {
         return out;
     }
 
-    public static final PointF reusable(PointF reuse) {
+    public static final PointF reusable(final PointF reuse) {
         final PointF out;
         if (reuse != null) {
             out = reuse;
@@ -67,7 +67,7 @@ public class GeometryMath {
         return out;
     }
 
-    public static final RectF reusable(RectF reuse) {
+    public static final RectF reusable(final RectF reuse) {
         final RectF out;
         if (reuse != null) {
             out = reuse;
@@ -77,7 +77,7 @@ public class GeometryMath {
         return out;
     }
 
-    public static final Rect reusable(Rect reuse) {
+    public static final Rect reusable(final Rect reuse) {
         final Rect out;
         if (reuse != null) {
             out = reuse;
@@ -88,7 +88,7 @@ public class GeometryMath {
     }
 
 
-    public static PointF rotatePoint(float centerX, float centerY, PointF point, float angle, PointF reuse)
+    public static PointF rotatePoint(final float centerX, final float centerY, final PointF point, final float angle, final PointF reuse)
     {
         final PointF out = GeometryMath.reusable(reuse);
         double rotationRadians = angle * DEG2RAD;
@@ -108,11 +108,11 @@ public class GeometryMath {
         return out;
     }
 
-    private static double Min4(double a, double b, double c, double d) {
+    private static double Min4(final double a, final double b, final double c, final double d) {
         return Math.floor(Math.min(Math.min(a, b), Math.min(c, d)));
     }
 
-    private static double Max4(double a, double b, double c, double d) {
+    private static double Max4(final double a, final double b, final double c, final double d) {
         return Math.ceil(Math.max(Math.max(a, b), Math.max(c, d)));
     }
 
@@ -159,35 +159,28 @@ public class GeometryMath {
         return number;
     }
 
-    public static float leftShift(float value, float multiplier) {
+    public static float leftShift(final float value, final float multiplier) {
         return (float) (value * Math.pow(2, multiplier));
     }
 
-    public static float rightShift(float value, float multiplier) {
+    public static float rightShift(final float value, final float multiplier) {
         return (float) (value / Math.pow(2, multiplier));
     }
 
-    public static Rect viewPortRect(float zoomLevel, Projection projection, Rect reuse) {
-        if (reuse == null) {
-            reuse = new Rect();
-        }
+    public static Rect viewPortRect(final float zoomLevel, final Projection projection, final Rect reuse) {
+        final Rect out = GeometryMath.reusable(reuse);
         // Get the area we are drawing to
         final Rect screenRect = projection.getScreenRect();
         final int worldSize_2 = projection.mapSize(zoomLevel) >> 1;
-        reuse.set((int) (screenRect.left),
-                (int) (screenRect.top),
-                (int) (screenRect.right),
-                (int) (screenRect.bottom));
+        out.set(screenRect);
 
         // Translate the Canvas coordinates into Mercator coordinates
-        reuse.offset(worldSize_2, worldSize_2);
-        return reuse;
+        out.offset(worldSize_2, worldSize_2);
+        return out;
     }
 
-    public static Rect viewPortRectForTileDrawing(float zoomLevel, Projection projection, Rect reuse) {
-        if (reuse == null) {
-            reuse = new Rect();
-        }
+    public static Rect viewPortRectForTileDrawing(final float zoomLevel, final Projection projection, final Rect reuse) {
+        final Rect out = GeometryMath.reusable(reuse);
         // Get the area we are drawing to
         final Rect screenRect = projection.getScreenRect();
         final int worldSize_2 = projection.mapSize(zoomLevel) >> 1;
@@ -196,20 +189,20 @@ public class GeometryMath {
         //this is because MapTiles are indexed around int values
         int roundWorldSize_2 = projection.mapSize((float) Math.floor(zoomLevel)) >> 1;
         float scale = (float) roundWorldSize_2 / worldSize_2;
-        reuse.set((int) (scale * screenRect.left),
+        out.set((int) (scale * screenRect.left),
                 (int) (scale * screenRect.top),
                 (int) (scale * screenRect.right),
                 (int) (scale * screenRect.bottom));
 
         // Translate the Canvas coordinates into Mercator coordinates
-        reuse.offset(roundWorldSize_2, roundWorldSize_2);
-        return reuse;
+        out.offset(roundWorldSize_2, roundWorldSize_2);
+        return out;
     }
 
-    public static Rect viewPortRect(Projection projection, Rect reuse) {
+    public static Rect viewPortRect(final Projection projection, final Rect reuse) {
         return viewPortRect(projection.getZoomLevel(), projection, reuse);
     }
-    public static Rect viewPortRectForTileDrawing(Projection projection, Rect reuse) {
+    public static Rect viewPortRectForTileDrawing(final Projection projection, final Rect reuse) {
         return viewPortRectForTileDrawing(projection.getZoomLevel(), projection, reuse);
     }
 }
