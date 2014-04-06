@@ -389,6 +389,7 @@ public class TilesOverlay
 
             if (oldDrawable instanceof BitmapDrawable) {
                 if (oldDrawable instanceof CacheableBitmapDrawable) {
+                    ((CacheableBitmapDrawable) oldDrawable).setBeingUsed(true);
                     mBeingUsedDrawables.add((CacheableBitmapDrawable) oldDrawable);
                 }
                 final int xx = (pX % (int) GeometryMath.leftShift(1, mDiff)) * mTileSize_2;
@@ -458,6 +459,7 @@ public class TilesOverlay
 
                     if (oldDrawable instanceof BitmapDrawable) {
                         if (oldDrawable instanceof CacheableBitmapDrawable) {
+                            ((CacheableBitmapDrawable) oldDrawable).setBeingUsed(true);
                             mBeingUsedDrawables.add((CacheableBitmapDrawable) oldDrawable);
                         }
                         final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
