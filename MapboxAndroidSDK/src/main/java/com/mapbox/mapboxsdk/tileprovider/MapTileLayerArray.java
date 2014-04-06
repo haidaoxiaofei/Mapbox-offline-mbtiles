@@ -127,8 +127,9 @@ public class MapTileLayerArray extends MapTileLayerBase {
             return null;
         }
         final CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
-        if (tileDrawable != null &&
+        if (tileDrawable != null && tileDrawable.isBitmapValid() &&
                 !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
+            tileDrawable.setBeingUsed(true);
             return tileDrawable;
         } else {
             boolean alreadyInProgress = false;
