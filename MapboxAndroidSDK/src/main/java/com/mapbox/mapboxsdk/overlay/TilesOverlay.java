@@ -184,6 +184,7 @@ public class TilesOverlay
             mTileRect.set((int) x, (int) y, (int) (x + w), (int) (y + w));
             if (!Rect.intersects(mTileRect, pClipRect)) {
                 Log.d(TAG, "not drawing  " + pTile.toString() + "//" + mTileRect.toString());
+                return;
             }
             Log.d(TAG, "handleTile " + pTile.toString());
             pTile.setTileRect(mTileRect);
