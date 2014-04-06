@@ -183,10 +183,8 @@ public class TilesOverlay
             final float w = pTileSizePx * mCurrentZoomFactor;
             mTileRect.set((int) x, (int) y, (int) (x + w), (int) (y + w));
             if (!Rect.intersects(mTileRect, pClipRect)) {
-                Log.d(TAG, "not drawing  " + pTile.toString() + "//" + mTileRect.toString());
                 return;
             }
-            Log.d(TAG, "handleTile " + pTile.toString());
             pTile.setTileRect(mTileRect);
             Drawable drawable = mTileProvider.getMapTile(pTile);
             if (drawable == null) {
@@ -196,7 +194,6 @@ public class TilesOverlay
 
             if (drawable != null) {
                 if (isReusable) {
-                    Log.d(TAG, "about to draw " + ((CacheableBitmapDrawable) drawable).getUrl());
                     mBeeingUsedDrawables.add((CacheableBitmapDrawable) drawable);
                 }
                 drawable.setBounds(mTileRect);
