@@ -5,4 +5,5 @@ build/
 src/main/.classpath
 src/main/.externalToolBuilders/
 src/main/.project
+src/main/build.xml
 
