@@ -1,5 +1,7 @@
 package com.mapbox.mapboxsdk.tileprovider;
 
+import android.graphics.Rect;
+
 import com.mapbox.mapboxsdk.overlay.TilesOverlay;
 
 /**
@@ -21,6 +23,7 @@ public class MapTile {
     private final String path;
     private final String cacheKey;
     private final int code;
+    private Rect mTileRect;
 
     public MapTile(final int az, final int ax, final int ay) {
         this("", az, ax, ay);
@@ -73,5 +76,13 @@ public class MapTile {
     @Override
     public int hashCode() {
         return this.code;
+    }
+
+    public void setTileRect(final Rect rect) {
+        mTileRect = rect;
+    }
+
+    public final Rect getTileRect() {
+        return mTileRect;
     }
 }
