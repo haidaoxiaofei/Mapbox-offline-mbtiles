@@ -197,13 +197,10 @@ public class TilesOverlay
             if (drawable != null) {
                 if (isReusable) {
                     Log.d(TAG, "about to draw " + ((CacheableBitmapDrawable) drawable).getUrl());
+                    mBeeingUsedDrawables.add((CacheableBitmapDrawable) drawable);
                 }
                 drawable.setBounds(mTileRect);
                 drawable.draw(pCanvas);
-                if (isReusable) {
-                    Log.d(TAG, "finished drawing " + ((CacheableBitmapDrawable) drawable).getUrl());
-                    ((CacheableBitmapDrawable) drawable).setBeingUsed(false);
-                }
                 if (UtilConstants.DEBUGMODE) {
                     ISafeCanvas canvas = (ISafeCanvas) pCanvas;
                     canvas.drawText(pTile.toString(), mTileRect.left + 1,
@@ -211,10 +208,6 @@ public class TilesOverlay
                     canvas.drawRect(mTileRect, mDebugPaint);
                 }
             }
-        }
-
-        @Override
-        public void finalizeLoop() {
         }
     };
 
@@ -369,6 +362,7 @@ public class TilesOverlay
 
         @Override
         public void finalizeLoop() {
+            super.finalizeLoop();
             // now add the new ones, pushing out the old ones
             while (!mNewTiles.isEmpty()) {
 

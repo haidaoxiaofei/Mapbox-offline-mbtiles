@@ -3,9 +3,15 @@ package com.mapbox.mapboxsdk.util;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.os.Handler;
 
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.views.util.Projection;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
  * A class that will loop around all the map tiles in the given viewport.
@@ -15,6 +21,7 @@ public abstract class TileLooper {
     protected final Point mUpperLeft = new Point();
     protected final Point mLowerRight = new Point();
     protected final Point center = new Point();
+    protected List<CacheableBitmapDrawable> mBeeingUsedDrawables = new ArrayList<CacheableBitmapDrawable>();
 
     public final void loop(final Canvas pCanvas, final String pCacheKey, final float pZoomLevel, final int pTileSizePx, final Rect pViewPort, final Rect pClipRect) {
         // Calculate the amount of tiles needed for each side around the center one.
@@ -47,5 +54,17 @@ public abstract class TileLooper {
 
     public abstract void handleTile(Canvas pCanvas, final String pCacheKey, int pTileSizePx, MapTile pTile, int pX, int pY, final Rect pClipRect);
 
-    public abstract void finalizeLoop();
+    public void finalizeLoop() {
+        //we delay just to make sure drawable bitmaps are not reused while being drawn.
+        (new Handler()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+            for (CacheableBitmapDrawable drawable:mBeeingUsedDrawables) {
+                drawable.setBeingUsed(false);
+            }
+            mBeeingUsedDrawables.clear();
+            }
+        }, 1);
+
+    };
 }
