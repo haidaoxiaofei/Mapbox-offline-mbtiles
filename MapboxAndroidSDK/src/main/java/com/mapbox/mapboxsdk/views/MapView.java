@@ -898,6 +898,25 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     }
 
+    /**
+     * Returns if the map can go to a specified geo point
+     */
+    public boolean canGoTo(ILatLng point) {
+        return (mScrollableAreaBoundingBox == null ||
+                mScrollableAreaBoundingBox.contains(point));
+    }
+
+    /**
+     * Returns if the map can go to a specified point (in map coordinates)
+     */
+    public boolean canGoTo(final float x, final float y) {
+        return (mScrollableAreaLimit == null ||
+                mScrollableAreaLimit.contains(x, y));
+    }
+
+    /**
+     * Returns the map current scrollable bounding box
+     */
     public BoundingBox getScrollableAreaBoundingBox() {
         return mScrollableAreaBoundingBox;
     }
