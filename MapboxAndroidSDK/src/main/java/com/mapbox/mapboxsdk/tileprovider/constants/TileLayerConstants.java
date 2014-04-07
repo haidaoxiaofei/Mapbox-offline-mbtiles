@@ -10,7 +10,7 @@ import com.mapbox.mapboxsdk.geometry.BoundingBox;
  */
 public interface TileLayerConstants {
 
-    public static final boolean DEBUG_TILE_PROVIDERS = true;
+    public static final boolean DEBUG_TILE_PROVIDERS = false;
 
     public static final BoundingBox WORLD_BOUNDING_BOX = new BoundingBox(90, 180, -90, -180);
 
@@ -33,6 +33,7 @@ public interface TileLayerConstants {
      */
     public static final int CACHE_MAPTILECOUNT_DEFAULT = 9;
 
+    public static final int CACHE_MAPTILEDISKSIZE_DEFAULT = 100 * 1024 * 1024;
     /**
      * number of tile download threads, conforming to OSM policy:
      * http://wiki.openstreetmap.org/wiki/Tile_usage_policy

@@ -5,8 +5,13 @@
 
 package com.mapbox.mapboxsdk.util;
 
+import android.annotation.TargetApi;
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.DisplayMetrics;
 
 import java.lang.reflect.Field;
@@ -48,4 +53,23 @@ public class BitmapUtils {
             drawable.setState(EXPIRED);
         }
     }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private static class ActivityManagerHoneycomb {
+        static int getLargeMemoryClass(ActivityManager activityManager) {
+            return activityManager.getLargeMemoryClass();
+        }
+    }
+
+    public static int calculateMemoryCacheSize(Context context) {
+        ActivityManager am = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+        boolean largeHeap = (context.getApplicationInfo().flags & ApplicationInfo.FLAG_LARGE_HEAP) != 0;
+        int memoryClass = am.getMemoryClass();
+        if (largeHeap && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            memoryClass = ActivityManagerHoneycomb.getLargeMemoryClass(am);
+        }
+        // Target ~15% of the available heap.
+        return 1024 * 1024 * memoryClass / 7;
+    }
+
 }

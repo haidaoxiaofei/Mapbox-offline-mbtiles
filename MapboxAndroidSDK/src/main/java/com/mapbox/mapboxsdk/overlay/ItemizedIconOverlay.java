@@ -3,14 +3,16 @@ package com.mapbox.mapboxsdk.overlay;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.WindowManager;
+
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
+import com.mapbox.mapboxsdk.views.util.Projection;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -175,6 +177,8 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
         return this.mOnItemGestureListener.onItemLongPress(index, item);
     }
 
+
+
     /**
      * When a content sensitive action is performed the content item needs to be identified. This
      * method does that and then performs the assigned task on that item.
@@ -186,13 +190,15 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
      */
     private boolean activateSelectedItems(final MotionEvent event, final MapView mapView,
                                           final ActiveItem task) {
+        final Projection projection = mapView.getProjection();
+        final float x = event.getX();
+        final float y = event.getY();
         for (int i = 0; i < this.mItemList.size(); ++i) {
             final Marker item = getItem(i);
             if (item.beingClustered()) {
                 continue;
             }
-            RectF rect = item.getDrawingBounds(mapView.getProjection(), null);
-            if (rect.contains(event.getX(), event.getY())) {
+            if (markerHitTest(item, projection, x, y)) {
                 if (task.run(i)) {
                     this.setFocus(item);
                     return true;

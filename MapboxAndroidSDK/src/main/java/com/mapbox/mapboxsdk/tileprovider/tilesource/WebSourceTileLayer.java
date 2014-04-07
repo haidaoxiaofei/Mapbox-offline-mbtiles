@@ -109,7 +109,7 @@ public class WebSourceTileLayer extends TileLayer {
         return parseUrlForTile(mUrl, aTile, hdpi);
     }
 
-    private String parseUrlForTile(String url, final MapTile aTile, boolean hdpi) {
+    protected String parseUrlForTile(String url, final MapTile aTile, boolean hdpi) {
         return url.replace("{z}", String.valueOf(aTile.getZ()))
                 .replace("{x}", String.valueOf(aTile.getX()))
                 .replace("{y}", String.valueOf(aTile.getY()))

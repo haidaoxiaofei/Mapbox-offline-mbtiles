@@ -99,7 +99,8 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         final Projection pj = mapView.getProjection();
         final int size = this.mInternalItemList.size() - 1;
 
-        final Rect bounds = new Rect(0, 0, mapView.getMeasuredWidth(), mapView.getMeasuredHeight());
+        final RectF bounds = new RectF(0, 0, mapView.getMeasuredWidth(), mapView.getMeasuredHeight());
+        pj.rotateRect(bounds);
         final float mapScale = 1 / mapView.getScale();
 
 		/* Draw in backward cycle, so the items with the least index are on the front. */
@@ -147,16 +148,14 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
      * @param projection
      * @param aMapOrientation
      */
-    protected void onDrawItem(ISafeCanvas canvas, final Marker item, final Projection projection, final float aMapOrientation, final Rect mapBounds, final float mapScale) {
+    protected void onDrawItem(ISafeCanvas canvas, final Marker item, final Projection projection, final float aMapOrientation, final RectF mapBounds, final float mapScale) {
         if (item.beingClustered()) {
             return;
         }
         item.updateDrawingPosition();
         final PointF position = item.getPositionOnMap();
         final Point roundedCoords = new Point((int) position.x, (int) position.y);
-        Rect rect = new Rect();
-        item.getDrawingBounds(projection, null).round(rect);
-        if (!Rect.intersects(mapBounds, rect)) {
+        if (!RectF.intersects(mapBounds, item.getDrawingBounds(projection, null))) {
             //dont draw item if offscreen
             return;
         }
@@ -201,14 +200,25 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         canvas.restore();
     }
 
+    protected boolean markerHitTest(final Marker pMarker, final Projection pProjection, final float pX, final float pY) {
+        RectF rect = pMarker.getDrawingBounds(pProjection, null);
+        rect.bottom -= rect.height() / 2; //a marker drawing bounds is twice the actual size of the marker
+        return rect.contains(pX, pY);
+    }
+
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e, MapView mapView) {
         final int size = this.size();
+        final Projection projection = mapView.getProjection();
+        final float x = e.getX();
+        final float y = e.getY();
 
         for (int i = 0; i < size; i++) {
             final Marker item = getItem(i);
-            RectF rect = item.getDrawingBounds(mapView.getProjection(), null);
-            if (rect.contains(e.getX(), e.getY())) {
+            if (item.beingClustered()) {
+                continue;
+            }
+            if (markerHitTest(item, projection, x, y)) {
                 // We have a hit, do we get a response from onTap?
                 if (onTap(i)) {
                     // We got a response so consume the event

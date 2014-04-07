@@ -58,7 +58,9 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
     }
 
     public void addTileSource(final ITileLayer pTileSource) {
-        if (pTileSource == null) return;
+        if (pTileSource == null) {
+            return;
+        }
         final MapTileDownloader downloaderProvider = new MapTileDownloader(
                 pTileSource,
                 mTileCache,

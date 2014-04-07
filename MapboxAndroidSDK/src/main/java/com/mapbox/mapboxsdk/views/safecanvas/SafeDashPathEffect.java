@@ -34,8 +34,9 @@ public class SafeDashPathEffect extends PathDashPathEffect {
 
     private static float floatSum(float[] array) {
         float result = 0;
-        for (int a = 0; a < array.length; a++)
+        for (int a = 0; a < array.length; a++) {
             result += array[a];
+        }
         return result;
     }
 }

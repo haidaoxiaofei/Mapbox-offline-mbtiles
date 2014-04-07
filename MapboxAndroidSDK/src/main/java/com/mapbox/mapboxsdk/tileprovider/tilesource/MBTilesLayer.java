@@ -30,7 +30,6 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
     private static final String TAG = "MBTilesLayer";
     MBTilesFileArchive mbTilesFileArchive;
 
-
     /**
      * Initialize a new tile layer, represented by a MBTiles file.
      *
@@ -40,6 +39,17 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
     public MBTilesLayer(final Context context, final String url) {
         super(url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.')), url);
         initialize(url, context);
+    }
+    
+    /**
+     * Initialize a new tile layer, represented by a MBTiles file.
+     * This constructor does need a context but as a consequence won't look
+     * for an asset mbtiles
+     *
+     * @param url path to a MBTiles file
+     */
+    public MBTilesLayer(final String url) {
+        this(null, url);
     }
 
     /**

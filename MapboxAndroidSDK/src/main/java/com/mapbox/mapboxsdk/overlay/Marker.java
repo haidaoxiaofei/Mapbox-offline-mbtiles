@@ -1,4 +1,3 @@
-// Created by plusminus on 00:02:58 - 03.10.2008
 package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
@@ -8,6 +7,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
+import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.InfoWindow;
@@ -16,10 +16,6 @@ import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
  * Immutable class describing a LatLng with a Title and a Description.
- *
- * @author Nicolas Gramlich
- * @author Theodore Hong
- * @author Fred Eisele
  */
 public class Marker {
     public static final int ITEM_STATE_FOCUSED_MASK = 4;
@@ -31,14 +27,13 @@ public class Marker {
 
     private final RectF mMyLocationRect = new RectF(0, 0, 0, 0);
     private final RectF mMyLocationPreviousRect = new RectF(0, 0, 0, 0);
-    protected final PointF mCurScreenCoords = new PointF();
+    protected final PointF mCurMapCoords = new PointF();
 
     private Context context;
     private MapView mapView;
     private Icon icon;
 
     protected String mUid;
-    protected String mSnippet;
     protected LatLng mLatLng;
     protected Drawable mMarker;
     protected PointF mAnchor = null;
@@ -93,6 +88,13 @@ public class Marker {
             mAnchor = mv.getDefaultPinAnchor();
         }
         return this;
+    }
+
+    public boolean hasContent() {
+        return !Strings.isNullOrEmpty(this.mTitle) ||
+                !Strings.isNullOrEmpty(this.mDescription) ||
+                !Strings.isNullOrEmpty(this.mSubDescription) ||
+                this.mImage != null;
     }
 
     public int getGroup() {
@@ -150,10 +152,6 @@ public class Marker {
 
     public String getTitle() {
         return mTitle;
-    }
-
-    public String getSnippet() {
-        return mSnippet;
     }
 
     public LatLng getPoint() {
@@ -298,6 +296,10 @@ public class Marker {
         return this.mMarker;
     }
 
+    /**
+     * Get the width of the marker, based on the width of the image backing it.
+     * @return
+     */
     public int getWidth() {
         return this.mMarker.getIntrinsicWidth();
     }
@@ -306,12 +308,14 @@ public class Marker {
         return this.mMarker.getIntrinsicHeight() / 2;
     }
 
-    public PointF getPositionOnScreen(final Projection projection, PointF reuse) {
-        if (reuse == null) {
-            reuse = new PointF();
-        }
-        projection.toPixels(mLatLng, reuse);
-        return reuse;
+    /**
+     * Get the current position of the marker in pixels
+     * @param projection
+     * @param reuse
+     * @return
+     */
+    public PointF getPositionOnScreen(final Projection projection, final PointF reuse) {
+        return projection.toPixels(mCurMapCoords, reuse);
     }
 
     public PointF getDrawingPositionOnScreen(final Projection projection, PointF reuse) {
@@ -338,11 +342,11 @@ public class Marker {
         if (reuse == null) {
             reuse = new RectF();
         }
-        projection.toMapPixels(mLatLng, mCurScreenCoords);
+        projection.toMapPixels(mLatLng, mCurMapCoords);
         final int w = getWidth();
         final int h = getHeight();
-        final float x = mCurScreenCoords.x - mAnchor.x * w;
-        final float y = mCurScreenCoords.y - mAnchor.y * h;
+        final float x = mCurMapCoords.x - mAnchor.x * w;
+        final float y = mCurMapCoords.y - mAnchor.y * h;
         reuse.set(x, y, x + w, y + h * 2);
         return reuse;
     }
@@ -416,7 +420,11 @@ public class Marker {
         tooltip.setBoundMarker(this);
     }
 
-
+    /**
+     * Sets the Icon image that represents this marker on screen.
+     * @param aIcon
+     * @return
+     */
     public Marker setIcon(Icon aIcon) {
         this.icon = aIcon;
         icon.setMarker(this);
@@ -424,13 +432,16 @@ public class Marker {
     }
 
     public PointF getPositionOnMap() {
-        return mCurScreenCoords;
+        return mCurMapCoords;
     }
 
     public void updateDrawingPosition() {
         getMapDrawingBounds(mapView.getProjection(), mMyLocationRect);
     }
 
+    /**
+     * Sets the marker to be redrawn.
+     */
     public void invalidate() {
         if (mapView == null) {
             return; //not on map yet

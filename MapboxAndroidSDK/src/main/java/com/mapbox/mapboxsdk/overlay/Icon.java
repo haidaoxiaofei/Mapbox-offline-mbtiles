@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
+import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.squareup.okhttp.OkHttpClient;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
+
 import uk.co.senab.bitmapcache.BitmapLruCache;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
@@ -46,11 +49,14 @@ public class Icon implements MapboxConstants {
             return apiString;
         }
     }
+    protected BitmapLruCache getCache() {
+        return getCache(null);
+    }
 
     // TODO: This is common code from MapTileCache, ideally this would be extracted
     // and used by both classes.
     protected BitmapLruCache getCache(Context context) {
-        if (sIconCache == null) {
+        if (sIconCache == null && context != null) {
             File cacheDir = getDiskCacheDir(context, DISK_CACHE_SUBDIR);
             if (!cacheDir.exists()) {
                 if (cacheDir.mkdirs()) {
@@ -59,14 +65,11 @@ public class Icon implements MapboxConstants {
                     Log.e(TAG, "can't create cacheDir " + cacheDir);
                 }
             }
-            BitmapLruCache.Builder builder = new BitmapLruCache.Builder(context);
-            builder.setMemoryCacheEnabled(true)
-                    .setMemoryCacheMaxSizeUsingHeapSize()
+            sIconCache = (new BitmapLruCache.Builder(context)).setMemoryCacheEnabled(true)
+                    .setMemoryCacheMaxSize(BitmapUtils.calculateMemoryCacheSize(context))
                     .setDiskCacheEnabled(true)
                     // 1 MB (a marker image is around 1kb)
-                    .setDiskCacheMaxSize(1024 * 1024)
-                    .setDiskCacheLocation(cacheDir);
-            sIconCache = builder.build();
+                    .setDiskCacheMaxSize(1024 * 1024).build();
         }
         return sIconCache;
     }
@@ -91,29 +94,26 @@ public class Icon implements MapboxConstants {
      * @param context Android context - Used for proper Bitmap Density generation
      * @param size    Size of Icon
      * @param symbol  Maki Symbol
-     * @param color   Color of Icon
+     * @param aColor   Color of Icon
      */
-    public Icon(Context context, Size size, String symbol, String color) {
+    public Icon(Context context, Size size, String symbol, String aColor) {
         String url = MAPBOX_BASE_URL + "marker/pin-" + size.getApiString();
-        String colr = color;
-        if (color.startsWith("#")) {
-            colr = color.substring(1);
-        }
         if (!symbol.equals("")) {
-            url += "-" + symbol + "+" + colr + ".png";
+            url += "-" + symbol + "+" + aColor.replace("#", "") + "@2x.png";
         } else {
-            url += "+" + colr + ".png";
+            url += "+" + aColor.replace("#", "") + "@2x.png";
         }
         downloadBitmap(context, url);
     }
 
     /**
      * Set the marker that this icon belongs to, calling the same method on the other side
-     * @param marker the marker to be added to
+     *
+     * @param aMarker the marker to be added to
      * @return this icon
      */
-    public Icon setMarker(Marker marker) {
-        this.marker = marker;
+    public Icon setMarker(Marker aMarker) {
+        this.marker = aMarker;
         if (drawable != null) {
             this.marker.setMarker(drawable);
         }
@@ -121,12 +121,14 @@ public class Icon implements MapboxConstants {
     }
 
     private void downloadBitmap(Context context, String url) {
-        CacheableBitmapDrawable bitmap = getCache(context).get(url);
+        CacheableBitmapDrawable bitmap = getCache(context).getFromMemoryCache(url);
 
         // Cache hit! We're done..
         if (bitmap != null) {
-        	drawable = bitmap;
-            if (marker != null) marker.setMarker(drawable);
+            drawable = bitmap;
+            if (marker != null) {
+                marker.setMarker(drawable);
+            }
             return;
         }
 
@@ -157,8 +159,10 @@ public class Icon implements MapboxConstants {
             if (list == null) {
                 // Note, there is an extremely unlikely chance we are immediately kicked
                 // out of the cache...
-            	drawable = sIconCache.get(url);
-                if (marker != null) marker.setMarker(drawable);
+                drawable = sIconCache.get(url);
+                if (marker != null) {
+                    marker.setMarker(drawable);
+                }
                 return;
             }
 
@@ -167,8 +171,10 @@ public class Icon implements MapboxConstants {
                 // The downloader thread just released the lock, the list is empty.
                 // The cache has our icon..
                 if (list.isEmpty()) {
-                	drawable = sIconCache.get(url);
-                    if (marker != null) marker.setMarker(drawable);
+                    drawable = sIconCache.get(url);
+                    if (marker != null) {
+                        marker.setMarker(drawable);
+                    }
                     return;
                 }
 
@@ -187,36 +193,40 @@ public class Icon implements MapboxConstants {
         @Override
         protected CacheableBitmapDrawable doInBackground(String... src) {
             this.url = src[0];
-            OkHttpClient client = new OkHttpClient();
-            InputStream in = null;
-            try {
+            CacheableBitmapDrawable result = getCache().getFromDiskCache(this.url, null);
+            if (result == null) {
+                OkHttpClient client = new OkHttpClient();
+                InputStream in = null;
                 try {
-                    Log.d(TAG, "Maki url to load = '" + url + "'");
-                    HttpURLConnection connection = client.open(new URL(url));
-                    // Note, sIconCache cannot be null..
-                    return sIconCache.put(src[0], connection.getInputStream());
-                } finally {
-                    if (in != null) {
-                        in.close();
+                    try {
+                        Log.d(TAG, "Maki url to load = '" + this.url + "'");
+                        HttpURLConnection connection = client.open(new URL(this.url));
+                        // Note, sIconCache cannot be null..
+                        result = sIconCache.put(this.url, connection.getInputStream());
+                    } finally {
+                        if (in != null) {
+                            in.close();
+                        }
                     }
+                } catch (IOException e) {
+                    Log.e(TAG, "doInBackground: Unable to fetch icon from: " + this.url);
                 }
-            } catch (IOException e) {
-                Log.e(TAG, "doInBackground: Unable to fetch icon from: " + src[0]);
             }
-            return null;
+            return result;
         }
 
         @Override
         protected void onPostExecute(CacheableBitmapDrawable bitmap) {
             if (bitmap != null && marker != null) {
-                ArrayList<Icon> list = Icon.downloadQueue.get(url);
+                ArrayList<Icon> list = Icon.downloadQueue.get(this.url);
                 synchronized (list) {
-                    for (Icon icon : list)
+                    for (Icon icon : list) {
                         if (icon.marker != null) {
                             icon.marker.setMarker(bitmap);
                         }
-                    Log.w(TAG, "Loaded:" + url);
-                    Icon.downloadQueue.remove(url);
+                    }
+                    Log.w(TAG, "Loaded:" + this.url);
+                    Icon.downloadQueue.remove(this.url);
                 }
             }
         }

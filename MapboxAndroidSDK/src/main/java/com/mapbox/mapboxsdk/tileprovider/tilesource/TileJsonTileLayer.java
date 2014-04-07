@@ -37,7 +37,8 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
         try {
             cache = new HttpResponseCache(cacheDir, 1024);
             client.setResponseCache(cache);
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
 
         String jsonURL = this.getBrandedJSONURL();
         if (jsonURL != null) {
@@ -45,9 +46,9 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
         }
     }
 
-    private void initWithTileJSON(JSONObject tileJSON) {
-        this.setTileJSON((tileJSON != null) ? tileJSON : new JSONObject());
-        if (tileJSON != null) {
+    private void initWithTileJSON(JSONObject aTileJSON) {
+        this.setTileJSON((aTileJSON != null) ? aTileJSON : new JSONObject());
+        if (aTileJSON != null) {
             if (this.tileJSON.has("tiles")) {
                 try {
                     this.setURL(this.tileJSON
@@ -80,8 +81,8 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
         return tileJSON;
     }
 
-    public void setTileJSON(JSONObject tileJSON) {
-        this.tileJSON = tileJSON;
+    public void setTileJSON(JSONObject aTileJSON) {
+        this.tileJSON = aTileJSON;
     }
 
     private float getJSONFloat(JSONObject JSON, String key) {
@@ -133,7 +134,7 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
     byte[] readFully(InputStream in) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
-        for (int count; (count = in.read(buffer)) != -1; ) {
+        for (int count; (count = in.read(buffer)) != -1;) {
             out.write(buffer, 0, count);
         }
         return out.toByteArray();

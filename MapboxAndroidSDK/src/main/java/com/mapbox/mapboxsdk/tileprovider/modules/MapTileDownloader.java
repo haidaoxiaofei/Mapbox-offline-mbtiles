@@ -5,6 +5,7 @@ import android.util.DisplayMetrics;
 
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileCache;
 import com.mapbox.mapboxsdk.tileprovider.MapTileRequestState;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
@@ -116,7 +117,7 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     }
 
     @Override
-    public int getTileSizePixels(){
+    public int getTileSizePixels() {
         TileLayer tileLayer = mTileSource.get();
         return (tileLayer != null) ? tileLayer.getTileSizePixels() : 0;
     }
@@ -136,8 +137,7 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     }
 
     @Override
-    public String getCacheKey()
-    {
+    public String getCacheKey() {
         TileLayer tileLayer = mTileSource.get();
         return (tileLayer != null) ? tileLayer.getCacheKey() : "";
     }
@@ -148,11 +148,12 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {
 
             TileLayer tileLayer = mTileSource.get();
-            Drawable result = getCache().getMapTileFromDisk(aState.getMapTile());
-
-            if (result == null && tileLayer != null) {
-                result  = tileLayer.getDrawableFromTile(MapTileDownloader.this, aState.getMapTile(), hdpi);
-            }
+            final MapTile tile = aState.getMapTile();
+            Drawable result = (tileLayer != null) ? tileLayer.getDrawableFromTile(MapTileDownloader.this, tile, hdpi) : null;
+//            Drawable result = getCache().getMapTileFromDisk(tile);
+//            if (result == null && tileLayer != null) {
+//                result = tileLayer.getDrawableFromTile(MapTileDownloader.this, tile, hdpi);
+//            }
             return result;
         }
     }

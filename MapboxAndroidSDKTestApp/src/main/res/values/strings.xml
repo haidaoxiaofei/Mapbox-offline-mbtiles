@@ -3,5 +3,7 @@
 
     <string name="app_name">Mapbox Android SDK Test App</string>
     <string name="action_settings">Settings</string>
+    <string name="alternateTestMapActivity">Alternate Test Map</string>
+    <string name="mapbox_id">examples.map-vyofok3q</string>
 
 </resources>

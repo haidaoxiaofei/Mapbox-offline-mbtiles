@@ -2,7 +2,9 @@ package com.mapbox.mapboxsdk.views;
 
 import android.graphics.PointF;
 import android.os.Handler;
+
 import com.mapbox.mapboxsdk.api.ILatLng;
+import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
@@ -36,16 +38,18 @@ public class MapController implements MapViewConstants {
      * Start animating the map towards the given point.
      */
     public void animateTo(final ILatLng point) {
+        if (!mMapView.canGoTo(point)) return;
         PointF p = mMapView.getProjection().toMapPixels(point, null);
         animateTo((int) p.x, (int) p.y);
     }
 
     /**
-     * Start animating the map towards the given point.
+     * Go to a given point (not animated)
      */
     public void goTo(final ILatLng point, PointF delta) {
-        PointF p = mMapView.getProjection().toMapPixels(point, null);
-        mMapView.scrollTo((int) (p.x + delta.x), (int) (p.y + delta.y));
+        final Projection projection = mMapView.getProjection();
+        PointF p = projection.toPixels(point, null);
+        mMapView.scrollBy((int) (p.x - delta.x), (int) (p.y - delta.y));
     }
 
     /**
@@ -187,26 +191,27 @@ public class MapController implements MapViewConstants {
         mMapView.mIsAnimating.set(true);
     }
 
-    protected void aboutToStartAnimation(final ILatLng latlong) {
-        PointF coords = mMapView.getProjection().toMapPixels(latlong, null);
-        aboutToStartAnimation(latlong, coords.x, coords.y);
+    protected void aboutToStartAnimation(final ILatLng latlong, final PointF mapCoords) {
+        zoomOnLatLong = latlong;
+        mMapView.mMultiTouchScalePoint.set(mapCoords.x, mapCoords.y);
+        mMapView.getProjection().toPixels(mapCoords, mapCoords);
+        zoomDeltaScroll.set(mapCoords.x, mapCoords.y);
     }
 
-    protected void aboutToStartAnimation(final PointF coords) {
-        aboutToStartAnimation(coords.x, coords.y);
+    protected void aboutToStartAnimation(final ILatLng latlong) {
+        PointF mapCoords = mMapView.getProjection().toMapPixels(latlong, null);
+        aboutToStartAnimation(latlong, mapCoords);
+    }
+
+    protected void aboutToStartAnimation(final PointF mapCoords) {
+        final float zoom = mMapView.getZoomLevel(false);
+        final int worldSize_2 = mMapView.getProjection().mapSize(zoom) >> 1;
+        final ILatLng latlong = mMapView.getProjection().pixelXYToLatLong((int) (mapCoords.x + worldSize_2), (int) (mapCoords.y + worldSize_2), zoom);
+        aboutToStartAnimation(latlong, mapCoords);
     }
 
     protected void aboutToStartAnimation(final float x, final float y) {
-        final float zoom = mMapView.getZoomLevel(false);
-        final int worldSize_2 = mMapView.getProjection().mapSize(zoom) / 2;
-        final ILatLng latlong = mMapView.getProjection().pixelXYToLatLong((int) (x + worldSize_2), (int) (y + worldSize_2), zoom);
-        aboutToStartAnimation(latlong, x, y);
-    }
-
-    protected void aboutToStartAnimation(final ILatLng latlong, final float x, final float y) {
-        zoomOnLatLong = latlong;
-        zoomDeltaScroll.set(mMapView.getScrollX() - x, mMapView.getScrollY() - y);
-        mMapView.mMultiTouchScalePoint.set(x, y);
+        aboutToStartAnimation(new PointF(x, y));
     }
 
     public void onAnimationEnd() {
