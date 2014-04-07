@@ -196,7 +196,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         mOverlayManager = new OverlayManager(mMapOverlay);
 
         this.mGestureDetector = new GestureDetector(aContext, new MapViewGestureDetectorListener(this));
-        mGestureDetector.setOnDoubleTapListener(new MapViewDoubleClickListener(this));
 
         mScaleGestureDetector = new ScaleGestureDetector(aContext, new MapViewScaleGestureDetectorListener(this));
 
@@ -1225,17 +1224,16 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 Log.d(TAG, "OverlayManager handled onTouchEvent");
                 return true;
             }
+        	mScaleGestureDetector.onTouchEvent(rotatedEvent);
+    		// can't use the scale detector's onTouchEvent() result as it always returns true (Android issue #42591)
+    		boolean result = mScaleGestureDetector.isInProgress();
+    		if (!result)
+    		{
+    			result = mGestureDetector.onTouchEvent(rotatedEvent);
+                handleTwoFingersTap(rotatedEvent);
+    		}
 
-            boolean handled = mScaleGestureDetector.onTouchEvent(rotatedEvent);
-            if (!mScaleGestureDetector.isInProgress()) {
-                handled |= mGestureDetector.onTouchEvent(rotatedEvent);
-            }
-            if ((mScaleGestureDetector.isInProgress()) && canTapTwoFingers) {
-                canTapTwoFingers = false;
-            }
-            handleTwoFingersTap(rotatedEvent);
-            return handled;
-
+    		return result;
         } finally {
             if (rotatedEvent != event) {
                 rotatedEvent.recycle();

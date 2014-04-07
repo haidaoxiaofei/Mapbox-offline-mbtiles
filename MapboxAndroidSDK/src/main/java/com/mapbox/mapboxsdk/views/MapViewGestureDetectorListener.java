@@ -1,6 +1,6 @@
 package com.mapbox.mapboxsdk.views;
 
-import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
@@ -10,7 +10,7 @@ import com.mapbox.mapboxsdk.util.constants.UtilConstants;
  * A custom gesture detector that processes gesture events and dispatches them
  * to the map's overlay system.
  */
-public class MapViewGestureDetectorListener implements GestureDetector.OnGestureListener {
+public class MapViewGestureDetectorListener extends SimpleOnGestureListener {
 
     private final MapView mapView;
 
@@ -65,6 +65,9 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
 
     @Override
     public void onLongPress(final MotionEvent e) {
+    	if (this.mapView.getOverlayManager().onLongPress(e, this.mapView)) {
+            return;
+        }
         if (UtilConstants.DEBUGMODE) {
             final ILatLng center = this.mapView.getProjection().fromPixels(e.getX(), e.getY());
             this.mapView.zoomOutFixing(center);
@@ -90,5 +93,20 @@ public class MapViewGestureDetectorListener implements GestureDetector.OnGesture
     @Override
     public boolean onSingleTapUp(final MotionEvent e) {
         return false;
+    }
+    
+    @Override
+    public boolean onSingleTapConfirmed(final MotionEvent e) {
+        return this.mapView.getOverlayManager().onSingleTapConfirmed(e, this.mapView);
+    }
+
+    
+    @Override
+    public boolean onDoubleTap(final MotionEvent e) {
+        if (this.mapView.getOverlayManager().onDoubleTap(e, this.mapView)) {
+            return true;
+        }
+        final ILatLng center = this.mapView.getProjection().fromPixels(e.getX(), e.getY());
+        return this.mapView.zoomInFixing(center);
     }
 }
