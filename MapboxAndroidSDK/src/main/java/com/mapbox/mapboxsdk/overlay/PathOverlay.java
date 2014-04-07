@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
+
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
@@ -21,6 +22,7 @@ import java.util.List;
  */
 public class PathOverlay extends Overlay {
 
+    private static final String TAG = "PathOverlay";
     /**
      * Stores points, converted to the map projection.
      */
@@ -134,7 +136,6 @@ public class PathOverlay extends Overlay {
         final Rect clipBounds = pj.fromPixelsToProjected(pj.getScreenRect());
 
         mPath.rewind();
-        boolean needsDrawing = false;
         projectedPoint0 = this.mPoints.get(size - 1);
         mLineBounds.set((int) projectedPoint0.x,
                 (int) projectedPoint0.y,
@@ -145,13 +146,6 @@ public class PathOverlay extends Overlay {
             // compute next points
             projectedPoint1 = this.mPoints.get(i);
             mLineBounds.union((int) projectedPoint1.x, (int) projectedPoint1.y);
-
-            if (!Rect.intersects(clipBounds, mLineBounds)) {
-                // skip this line, move to next point
-                projectedPoint0 = projectedPoint1;
-                screenPoint0 = null;
-                continue;
-            }
 
             // the starting point may be not calculated, because previous segment was out of clip
             // bounds
@@ -168,15 +162,13 @@ public class PathOverlay extends Overlay {
             }
 
             mPath.lineTo(screenPoint1.x, screenPoint1.y);
-            needsDrawing = true;
             // update starting point to next position
             projectedPoint0 = projectedPoint1;
             screenPoint0.x = screenPoint1.x;
             screenPoint0.y = screenPoint1.y;
-            mLineBounds.set((int) projectedPoint0.x, (int) projectedPoint0.y, (int) projectedPoint0.x, (int) projectedPoint0.y);
         }
 
-        if (needsDrawing) {
+        if (Rect.intersects(clipBounds, mLineBounds)) {
             final float realWidth = this.mPaint.getStrokeWidth();
             this.mPaint.setStrokeWidth(realWidth / mapView.getScale());
             canvas.drawPath(mPath, this.mPaint);
