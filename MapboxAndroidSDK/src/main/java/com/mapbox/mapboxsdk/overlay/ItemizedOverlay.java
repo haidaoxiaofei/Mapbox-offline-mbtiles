@@ -149,9 +149,7 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
      * @param aMapOrientation
      */
     protected void onDrawItem(ISafeCanvas canvas, final Marker item, final Projection projection, final float aMapOrientation, final RectF mapBounds, final float mapScale) {
-        if (item.beingClustered()) {
-            return;
-        }
+
         item.updateDrawingPosition();
         final PointF position = item.getPositionOnMap();
         final Point roundedCoords = new Point((int) position.x, (int) position.y);
@@ -184,19 +182,6 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
             });
         }
 
-        if (item instanceof ClusterItem) {
-
-            if (((ItemizedIconOverlay) this).getClusterActions() != null) {
-                canvas = ((ItemizedIconOverlay) this)
-                        .getClusterActions()
-                        .onClusterMarkerDraw((ClusterItem) item, canvas);
-            } else {
-                String text = String.valueOf(((ClusterItem) item).getChildCount());
-                Rect rectText = new Rect();
-                mClusterTextPaint.getTextBounds(text, 0, text.length(), rectText);
-                canvas.drawText(text, roundedCoords.x - rectText.left, roundedCoords.y - rectText.top - rectText.height() / 2, mClusterTextPaint);
-            }
-        }
         canvas.restore();
     }
 
@@ -215,9 +200,6 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
 
         for (int i = 0; i < size; i++) {
             final Marker item = getItem(i);
-            if (item.beingClustered()) {
-                continue;
-            }
             if (markerHitTest(item, projection, x, y)) {
                 // We have a hit, do we get a response from onTap?
                 if (onTap(i)) {
