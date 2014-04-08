@@ -201,6 +201,7 @@ public class Icon implements MapboxConstants {
                     try {
                         Log.d(TAG, "Maki url to load = '" + this.url + "'");
                         HttpURLConnection connection = client.open(new URL(this.url));
+                        connection.setRequestProperty("User-Agent", MapboxConstants.USER_AGENT);
                         // Note, sIconCache cannot be null..
                         result = sIconCache.put(this.url, connection.getInputStream());
                     } finally {

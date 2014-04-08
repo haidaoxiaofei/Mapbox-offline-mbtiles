@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileCache;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
@@ -191,6 +192,7 @@ public class WebSourceTileLayer extends TileLayer {
 
         try {
             HttpURLConnection connection = client.open(new URL(url));
+            connection.setRequestProperty("User-Agent", MapboxConstants.USER_AGENT);
             in = connection.getInputStream();
 
             if (in == null) {
