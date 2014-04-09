@@ -166,7 +166,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     }
 
     protected boolean onSingleTapUpHelper(final int index, final Marker item, final MapView mapView) {
-            return this.mOnItemGestureListener.onItemSingleTapUp(index, item);
+        return this.mOnItemGestureListener.onItemSingleTapUp(index, item);
     }
 
     @Override

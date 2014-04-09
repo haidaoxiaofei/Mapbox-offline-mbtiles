@@ -103,6 +103,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
     /**
      * Checks whether this tile is unavailable and the system is offline.
+     *
      * @param pTile the tile in question
      * @return whether the tile is unavailable
      */

@@ -142,21 +142,21 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     /**
      * Creates a {@link MapTileCache} to be used to cache tiles in memory.
      */
-    public MapTileCache createTileCache(final Context context) {
-        return new MapTileCache(context);
+    public MapTileCache createTileCache(final Context aContext) {
+        return new MapTileCache(aContext);
     }
 
-    public MapTileLayerBase(final Context context, final ITileLayer pTileSource) {
-        this(context, pTileSource, null);
+    public MapTileLayerBase(final Context aContext, final ITileLayer pTileSource) {
+        this(aContext, pTileSource, null);
     }
 
-    public MapTileLayerBase(final Context context,
+    public MapTileLayerBase(final Context aContext,
                             final ITileLayer pTileSource,
                             final Handler pDownloadFinishedListener) {
-        this.context = context;
+        this.context = aContext;
         mTileRequestCompleteHandler = pDownloadFinishedListener;
         mTileSource = pTileSource;
-        mTileCache = this.createTileCache(context);
+        mTileCache = this.createTileCache(aContext);
     }
 
     /**
@@ -235,7 +235,6 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     }
 
     private void putTileIntoCache(final MapTile pTile, final Drawable pDrawable) {
-//        mTileCache.putTileInMemoryCache(pTile, pDrawable);
         if (pDrawable != null) {
             if (Looper.myLooper() == Looper.getMainLooper()) {
                 (new CacheTask()).execute(pTile, pDrawable);
@@ -254,7 +253,9 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     }
 
     public void putExpiredTileIntoCache(final MapTile pTile, final Bitmap bitmap) {
-        if (bitmap == null) return;
+        if (bitmap == null) {
+            return;
+        }
         CacheableBitmapDrawable drawable = mTileCache.getMapTileFromMemory(pTile);
         if (drawable == null || BitmapUtils.isCacheDrawableExpired(drawable)) {
             drawable = mTileCache.putTileInMemoryCache(pTile, bitmap);
@@ -298,13 +299,11 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
     }
 
 
-
     public CacheableBitmapDrawable getMapTileFromMemory(MapTile pTile) {
         return (mTileCache != null) ? mTileCache.getMapTileFromMemory(pTile) : null;
     }
 
-    public CacheableBitmapDrawable createCacheableBitmapDrawable(Bitmap bitmap, MapTile aTile)
-    {
+    public CacheableBitmapDrawable createCacheableBitmapDrawable(Bitmap bitmap, MapTile aTile) {
         return (mTileCache != null) ? mTileCache.createCacheableBitmapDrawable(bitmap, aTile) : null;
     }
 

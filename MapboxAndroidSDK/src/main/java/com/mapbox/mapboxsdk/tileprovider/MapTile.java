@@ -34,8 +34,8 @@ public class MapTile {
         this.x = ax;
         this.y = ay;
         this.path = String.valueOf(z) + "/" +
-            String.valueOf(x) + "/" +
-            String.valueOf(y);
+                String.valueOf(x) + "/" +
+                String.valueOf(y);
         this.cacheKey = aCacheKey + "/" + path;
         this.code = ((17 * (37 + z)) * (37 * x)) * (37 + y);
     }
@@ -52,7 +52,9 @@ public class MapTile {
         return y;
     }
 
-    public String getCacheKey() { return cacheKey; }
+    public String getCacheKey() {
+        return cacheKey;
+    }
 
     @Override
     public String toString() {

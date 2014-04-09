@@ -102,8 +102,9 @@ public class WebSourceTileLayer extends TileLayer {
 
     /**
      * Get a single Tile URL for a single tile.
+     *
      * @param aTile a map tile
-     * @param hdpi a boolean that indicates whether the tile should be at 2x or retina size
+     * @param hdpi  a boolean that indicates whether the tile should be at 2x or retina size
      * @return a list of tile URLs
      */
     public String getTileURL(final MapTile aTile, boolean hdpi) {

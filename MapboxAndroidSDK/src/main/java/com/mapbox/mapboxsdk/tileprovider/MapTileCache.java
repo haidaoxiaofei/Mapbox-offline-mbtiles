@@ -31,12 +31,12 @@ public class MapTileCache implements TileLayerConstants {
     private int mMaximumCacheSize;
 
 
-    public MapTileCache(final Context context) {
-        this(context, CACHE_MAPTILEDISKSIZE_DEFAULT);
+    public MapTileCache(final Context aContext) {
+        this(aContext, CACHE_MAPTILEDISKSIZE_DEFAULT);
     }
 
-    public MapTileCache(final Context context, int aMaximumCacheSize) {
-        this.context = context;
+    public MapTileCache(final Context aContext, int aMaximumCacheSize) {
+        this.context = aContext;
         this.mMaximumCacheSize = aMaximumCacheSize;
     }
 
@@ -123,7 +123,7 @@ public class MapTileCache implements TileLayerConstants {
 
     public CacheableBitmapDrawable putTileInMemoryCache(final MapTile aTile, final Bitmap aBitmap) {
         if (aBitmap != null) {
-        return getCache().putInMemoryCache(getCacheKey(aTile), aBitmap);
+            return getCache().putInMemoryCache(getCacheKey(aTile), aBitmap);
         }
         return null;
     }

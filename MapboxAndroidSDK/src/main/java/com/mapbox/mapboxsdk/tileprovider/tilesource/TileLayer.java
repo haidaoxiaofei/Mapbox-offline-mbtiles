@@ -31,6 +31,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
 
     /**
      * Sets the layer's tile URL template string.
+     *
      * @param aUrl
      * @return
      */
@@ -41,6 +42,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
 
     /**
      * Sets the layer's attribution string.
+     *
      * @param aAttribution
      * @return
      */
@@ -51,6 +53,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
 
     /**
      * Sets the layer's description string.
+     *
      * @param aDescription
      * @return
      */
@@ -61,6 +64,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
 
     /**
      * Sets the layer's name.
+     *
      * @param aName
      * @return
      */
@@ -71,6 +75,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
 
     /**
      * Sets the layer's minimum zoom level.
+     *
      * @param aMinimumZoomLevel
      * @return
      */
@@ -81,6 +86,7 @@ public class TileLayer implements ITileLayer, TileLayerConstants, MapViewConstan
 
     /**
      * Sets the layer's minimum zoom level.
+     *
      * @param aMaximumZoomLevel
      * @return
      */

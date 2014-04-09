@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * @param north Northern Coordinate
      * @param east  Eastern Coordinate
      * @param south Southern Coordinate
-     * @param west Western Coordinate
+     * @param west  Western Coordinate
      */
     public BoundingBox(double north,
                        double east,
@@ -146,12 +147,10 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      */
     public boolean equals(final BoundingBox other) {
 
-        if (other == null)
-        {
+        if (other == null) {
             return false;
         }
-        if (other == this)
-        {
+        if (other == this) {
             return true;
         }
 
@@ -193,7 +192,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * @param pLatNorth Northern Coordinate
      * @param pLonEast  Eastern Coordinate
      * @param pLatSouth Southern Coordinate
-     * @param pLonWest Western Coordinate
+     * @param pLonWest  Western Coordinate
      * @return BoundingBox
      */
     public BoundingBox union(final double pLatNorth,
@@ -205,7 +204,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
                 (this.mLatSouth > pLatSouth) ? pLatSouth : this.mLatSouth,
                 (this.mLonWest > pLonWest) ? pLonWest : this.mLonWest);
     }
-    
+
     /**
      * Returns a new BoundingBox that is the intersection of this with another box
      *
@@ -219,14 +218,14 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
         double minLatSouth = Math.max(this.mLatSouth, box.getLatSouth());
         return new BoundingBox(maxLatNorth, minLonEast, minLatSouth, maxLonWest);
     }
-    
+
     /**
      * Returns a new BoundingBox that is the intersection of this with another box
      *
      * @param north Northern Coordinate
      * @param east  Eastern Coordinate
      * @param south Southern Coordinate
-     * @param west Western Coordinate
+     * @param west  Western Coordinate
      * @return BoundingBox
      */
     public BoundingBox intersect(double north, double east, double south, double west) {

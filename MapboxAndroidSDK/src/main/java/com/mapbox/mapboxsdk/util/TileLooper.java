@@ -59,12 +59,14 @@ public abstract class TileLooper {
         (new Handler()).postDelayed(new Runnable() {
             @Override
             public void run() {
-            for (CacheableBitmapDrawable drawable: mBeingUsedDrawables) {
-                drawable.setBeingUsed(false);
-            }
-            mBeingUsedDrawables.clear();
+                for (CacheableBitmapDrawable drawable : mBeingUsedDrawables) {
+                    drawable.setBeingUsed(false);
+                }
+                mBeingUsedDrawables.clear();
             }
         }, 1);
 
-    };
+    }
+
+    ;
 }

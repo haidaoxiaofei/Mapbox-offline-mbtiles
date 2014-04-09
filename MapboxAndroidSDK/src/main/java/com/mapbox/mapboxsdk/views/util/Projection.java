@@ -173,8 +173,8 @@ public class Projection implements GeoConstants {
     /**
      * Converts a map position in pixel to its <I>screen coordinates</I>.
      *
-     * @param mapPos    the map point you want the <I>screen coordinates</I> of
-     * @param reuse just pass null if you do not have a Point to be 'recycled'.
+     * @param mapPos the map point you want the <I>screen coordinates</I> of
+     * @param reuse  just pass null if you do not have a Point to be 'recycled'.
      * @return the Point containing the <I>screen coordinates</I> of the point passed.
      */
     public PointF toPixels(final PointF mapPos, final PointF reuse) {
@@ -496,7 +496,6 @@ public class Projection implements GeoConstants {
     public final Matrix getRotationMatrix() {
         return mRotateMatrix;
     }
-
 
 
     private static final String TAG = "Projection";

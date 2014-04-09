@@ -119,6 +119,7 @@ public class InfoWindow {
 
     /**
      * Returns the mapView this InfoWindow is bound to
+     *
      * @return the mapView
      */
     public MapView getMapView() {
@@ -128,6 +129,7 @@ public class InfoWindow {
     /**
      * Constructs the view that is displayed when the InfoWindow opens.
      * This retrieves data from overlayItem and shows it in the tooltip.
+     *
      * @param overlayItem the tapped overlay item
      */
     public void onOpen(Marker overlayItem) {
@@ -151,8 +153,8 @@ public class InfoWindow {
         //by default, do nothing
     }
 
-    public InfoWindow setBoundMarker(Marker boundMarker) {
-        this.boundMarker = boundMarker;
+    public InfoWindow setBoundMarker(Marker aBoundMarker) {
+        this.boundMarker = aBoundMarker;
         return this;
     }
 

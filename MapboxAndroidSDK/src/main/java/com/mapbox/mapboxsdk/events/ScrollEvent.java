@@ -10,10 +10,10 @@ public class ScrollEvent implements MapEvent {
     protected int x;
     protected int y;
 
-    public ScrollEvent(final MapView source, final int x, final int y) {
-        this.source = source;
-        this.x = x;
-        this.y = y;
+    public ScrollEvent(final MapView aSource, final int ax, final int ay) {
+        this.source = aSource;
+        this.x = ax;
+        this.y = ay;
     }
 
     /**

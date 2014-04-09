@@ -49,6 +49,7 @@ public class Marker {
 
     /**
      * Construct a new Marker, given title, description, and place
+     *
      * @param title
      * @param description
      * @param latLng
@@ -279,6 +280,7 @@ public class Marker {
 
     /**
      * Get the width of the marker, based on the width of the image backing it.
+     *
      * @return
      */
     public int getWidth() {
@@ -291,6 +293,7 @@ public class Marker {
 
     /**
      * Get the current position of the marker in pixels
+     *
      * @param projection
      * @param reuse
      * @return
@@ -403,6 +406,7 @@ public class Marker {
 
     /**
      * Sets the Icon image that represents this marker on screen.
+     *
      * @param aIcon
      * @return
      */

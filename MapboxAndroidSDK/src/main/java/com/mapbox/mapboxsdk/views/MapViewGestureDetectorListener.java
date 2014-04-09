@@ -65,7 +65,7 @@ public class MapViewGestureDetectorListener extends SimpleOnGestureListener {
 
     @Override
     public void onLongPress(final MotionEvent e) {
-    	if (this.mapView.getOverlayManager().onLongPress(e, this.mapView)) {
+        if (this.mapView.getOverlayManager().onLongPress(e, this.mapView)) {
             return;
         }
         if (UtilConstants.DEBUGMODE) {
@@ -94,13 +94,13 @@ public class MapViewGestureDetectorListener extends SimpleOnGestureListener {
     public boolean onSingleTapUp(final MotionEvent e) {
         return false;
     }
-    
+
     @Override
     public boolean onSingleTapConfirmed(final MotionEvent e) {
         return this.mapView.getOverlayManager().onSingleTapConfirmed(e, this.mapView);
     }
 
-    
+
     @Override
     public boolean onDoubleTap(final MotionEvent e) {
         if (this.mapView.getOverlayManager().onDoubleTap(e, this.mapView)) {

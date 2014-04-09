@@ -38,7 +38,9 @@ public class MapController implements MapViewConstants {
      * Start animating the map towards the given point.
      */
     public void animateTo(final ILatLng point) {
-        if (!mMapView.canGoTo(point)) return;
+        if (!mMapView.canGoTo(point)) {
+            return;
+        }
         PointF p = mMapView.getProjection().toMapPixels(point, null);
         animateTo((int) p.x, (int) p.y);
     }

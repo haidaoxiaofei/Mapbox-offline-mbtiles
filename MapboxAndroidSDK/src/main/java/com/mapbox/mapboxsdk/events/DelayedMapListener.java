@@ -31,12 +31,12 @@ public class DelayedMapListener implements MapListener {
     protected CallbackTask callback;
 
     /**
-     * @param wrappedListener The wrapped MapListener
-     * @param delay Listening delay, in milliseconds
+     * @param aWrappedListener The wrapped MapListener
+     * @param aDelay           Listening delay, in milliseconds
      */
-    public DelayedMapListener(final MapListener wrappedListener, final long delay) {
-        this.wrappedListener = wrappedListener;
-        this.delay = delay;
+    public DelayedMapListener(final MapListener aWrappedListener, final long aDelay) {
+        this.wrappedListener = aWrappedListener;
+        this.delay = aDelay;
         this.handler = new Handler();
         this.callback = null;
     }
@@ -44,10 +44,10 @@ public class DelayedMapListener implements MapListener {
     /**
      * Constructor with default delay.
      *
-     * @param wrappedListener The wrapped MapListener
+     * @param aWrappedListener The wrapped MapListener
      */
-    public DelayedMapListener(final MapListener wrappedListener) {
-        this(wrappedListener, DEFAULT_DELAY);
+    public DelayedMapListener(final MapListener aWrappedListener) {
+        this(aWrappedListener, DEFAULT_DELAY);
     }
 
     @Override

@@ -9,9 +9,9 @@ public class ZoomEvent implements MapEvent {
     protected MapView source;
     protected float zoomLevel;
 
-    public ZoomEvent(final MapView source, final float zoomLevel) {
-        this.source = source;
-        this.zoomLevel = zoomLevel;
+    public ZoomEvent(final MapView aSource, final float aZoomLevel) {
+        this.source = aSource;
+        this.zoomLevel = aZoomLevel;
     }
 
     /**

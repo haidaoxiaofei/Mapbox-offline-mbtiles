@@ -49,6 +49,7 @@ public class Icon implements MapboxConstants {
             return apiString;
         }
     }
+
     protected BitmapLruCache getCache() {
         return getCache(null);
     }
@@ -68,7 +69,7 @@ public class Icon implements MapboxConstants {
             sIconCache = (new BitmapLruCache.Builder(context)).setMemoryCacheEnabled(true)
                     .setMemoryCacheMaxSize(BitmapUtils.calculateMemoryCacheSize(context))
                     .setDiskCacheEnabled(true)
-                    // 1 MB (a marker image is around 1kb)
+                            // 1 MB (a marker image is around 1kb)
                     .setDiskCacheMaxSize(1024 * 1024).build();
         }
         return sIconCache;
@@ -94,7 +95,7 @@ public class Icon implements MapboxConstants {
      * @param context Android context - Used for proper Bitmap Density generation
      * @param size    Size of Icon
      * @param symbol  Maki Symbol
-     * @param aColor   Color of Icon
+     * @param aColor  Color of Icon
      */
     public Icon(Context context, Size size, String symbol, String aColor) {
         String url = MAPBOX_BASE_URL + "marker/pin-" + size.getApiString();

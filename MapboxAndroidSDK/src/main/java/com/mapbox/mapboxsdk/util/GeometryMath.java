@@ -88,8 +88,7 @@ public class GeometryMath {
     }
 
 
-    public static PointF rotatePoint(final float centerX, final float centerY, final PointF point, final float angle, final PointF reuse)
-    {
+    public static PointF rotatePoint(final float centerX, final float centerY, final PointF point, final float angle, final PointF reuse) {
         final PointF out = GeometryMath.reusable(reuse);
         double rotationRadians = angle * DEG2RAD;
         //calculate new x coord
@@ -104,7 +103,7 @@ public class GeometryMath {
         double xnew = x * cos - y * sin + centerX;
         double ynew = x * sin + y * cos + centerY;
         // translate point back to global coords:
-        out.set((float)(xnew + centerX), (float)(ynew + centerY));
+        out.set((float) (xnew + centerX), (float) (ynew + centerY));
         return out;
     }
 
@@ -202,6 +201,7 @@ public class GeometryMath {
     public static Rect viewPortRect(final Projection projection, final Rect reuse) {
         return viewPortRect(projection.getZoomLevel(), projection, reuse);
     }
+
     public static Rect viewPortRectForTileDrawing(final Projection projection, final Rect reuse) {
         return viewPortRectForTileDrawing(projection.getZoomLevel(), projection, reuse);
     }

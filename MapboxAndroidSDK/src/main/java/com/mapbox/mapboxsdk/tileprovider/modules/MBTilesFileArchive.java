@@ -22,10 +22,10 @@ public class MBTilesFileArchive implements IArchiveFile {
     private final SQLiteDatabase mDatabase;
 
     //	TABLE tiles (zoom_level INTEGER, tile_column INTEGER, tile_row INTEGER, tile_data BLOB);
-    public final static String TABLE_TILES = "tiles";
-    public final static String TABLE_METADATA = "metadata";
-    public final static String COL_TILES_TILE_DATA = "tile_data";
-    public final static String COL_VALUE = "value";
+    public static final String TABLE_TILES = "tiles";
+    public static final String TABLE_METADATA = "metadata";
+    public static final String COL_TILES_TILE_DATA = "tile_data";
+    public static final String COL_VALUE = "value";
 
     private MBTilesFileArchive(final SQLiteDatabase pDatabase) {
         mDatabase = pDatabase;

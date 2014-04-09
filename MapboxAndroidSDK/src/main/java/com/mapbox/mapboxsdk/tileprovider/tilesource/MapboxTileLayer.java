@@ -25,11 +25,13 @@ public class MapboxTileLayer extends TileJsonTileLayer implements MapViewConstan
     public MapboxTileLayer(String pId, boolean enableSSL) {
         super(pId, pId, enableSSL);
     }
+
     @Override
     protected void initialize(String pId, String aUrl, boolean enableSSL) {
         mId = pId;
         super.initialize(pId, aUrl, enableSSL);
     }
+
     @Override
     public TileLayer setURL(final String aUrl) {
         if (!aUrl.contains("http://") && !aUrl.contains("https://")

@@ -110,6 +110,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
     public abstract void setTileSource(ITileLayer tileSource);
 
     public abstract ITileLayer getTileSource();
+
     public abstract String getCacheKey();
 
     private final ExecutorService mExecutor;
@@ -160,6 +161,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
 
     /**
      * Loads a map tile asynchronously, adding it to the queue and calling getTileLoader.
+     *
      * @param pState
      */
     public void loadMapTileAsync(final MapTileRequestState pState) {
@@ -251,7 +253,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
                 // - the last item in the iterator that's not already being
                 // processed
                 MapTileRequestState state = popFirstPending();
-                if(state != null) {
+                if (state != null) {
                     mWorking.put(state.getMapTile(), state);
                     if (DEBUG_TILE_PROVIDERS) {
                         Log.i(TAG, "TileLoader.nextTile() on provider: " + getName()

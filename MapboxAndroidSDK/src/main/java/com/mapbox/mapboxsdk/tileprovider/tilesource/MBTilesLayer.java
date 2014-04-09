@@ -33,14 +33,14 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants,
     /**
      * Initialize a new tile layer, represented by a MBTiles file.
      *
-     * @param url path to a MBTiles file
+     * @param url     path to a MBTiles file
      * @param context the graphics drawing context
      */
     public MBTilesLayer(final Context context, final String url) {
         super(url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.')), url);
         initialize(url, context);
     }
-    
+
     /**
      * Initialize a new tile layer, represented by a MBTiles file.
      * This constructor does need a context but as a consequence won't look

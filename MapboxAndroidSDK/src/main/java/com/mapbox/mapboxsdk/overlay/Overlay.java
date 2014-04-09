@@ -73,7 +73,7 @@ public abstract class Overlay {
      *
      * @return an integer suitable to be used as a menu identifier
      */
-    protected final static int getSafeMenuId() {
+    protected static final int getSafeMenuId() {
         return sOrdinal.getAndIncrement();
     }
 
@@ -236,7 +236,7 @@ public abstract class Overlay {
      * @param shadow          If true, draw only the drawable's shadow. Otherwise, draw the drawable itself.
      * @param aMapOrientation
      */
-    protected synchronized static void drawAt(final Canvas canvas, final Drawable drawable,
+    protected static synchronized void drawAt(final Canvas canvas, final Drawable drawable,
                                               final Point origin, final Point offset, final boolean shadow,
                                               final float aMapOrientation) {
         canvas.save();

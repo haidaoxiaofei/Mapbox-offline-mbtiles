@@ -210,12 +210,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
     }
 
-    public MapView(final Context context, AttributeSet attrs) {
-        this(context, 256, null, null, attrs);
+    public MapView(final Context aContext, AttributeSet attrs) {
+        this(aContext, 256, null, null, attrs);
     }
 
-    protected MapView(Context context, int tileSizePixels, MapTileLayerBase aTileProvider) {
-        this(context, tileSizePixels, aTileProvider, null, null);
+    protected MapView(Context aContext, int tileSizePixels, MapTileLayerBase aTileProvider) {
+        this(aContext, tileSizePixels, aTileProvider, null, null);
     }
 
     public void setTileSource(final ITileLayer[] value) {
@@ -273,6 +273,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     /**
      * Remove a marker from the map's display.
+     *
      * @param marker
      */
     public void removeMarker(final Marker marker) {
@@ -283,6 +284,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     /**
      * Select a marker, showing a tooltip if the marker has content that would appear within it.
+     *
      * @param marker
      */
     public void selectMarker(final Marker marker) {
@@ -410,6 +412,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     /**
      * Returns the map's controller
+     *
      * @return
      */
     public MapController getController() {
@@ -418,6 +421,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     /**
      * Returns the map's overlay
+     *
      * @return
      */
     public TilesOverlay getMapOverlay() {
@@ -442,6 +446,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     /**
      * Returns the map's scroller
+     *
      * @return
      */
     public Scroller getScroller() {
@@ -468,6 +473,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     /**
      * Returns the current bounding box of the map.
+     *
      * @return
      */
     public BoundingBox getBoundingBox() {
@@ -541,6 +547,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
 
     /**
      * Pan the map by a given number of pixels in the x and y dimensions.
+     *
      * @param x
      * @param y
      * @return
@@ -656,7 +663,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * Suggestion: Check getScreenRect(null).getHeight() > 0
      */
     public MapView zoomToBoundingBox(final BoundingBox boundingBox) {
-        BoundingBox inter = (mScrollableAreaBoundingBox != null)?mScrollableAreaBoundingBox.intersect(boundingBox):boundingBox;
+        BoundingBox inter = (mScrollableAreaBoundingBox != null) ? mScrollableAreaBoundingBox.intersect(boundingBox) : boundingBox;
         if (inter == null) {
             return this;
         }
@@ -1202,16 +1209,15 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                 Log.d(TAG, "OverlayManager handled onTouchEvent");
                 return true;
             }
-        	mScaleGestureDetector.onTouchEvent(rotatedEvent);
-    		// can't use the scale detector's onTouchEvent() result as it always returns true (Android issue #42591)
-    		boolean result = mScaleGestureDetector.isInProgress();
-    		if (!result)
-    		{
-    			result = mGestureDetector.onTouchEvent(rotatedEvent);
+            mScaleGestureDetector.onTouchEvent(rotatedEvent);
+            // can't use the scale detector's onTouchEvent() result as it always returns true (Android issue #42591)
+            boolean result = mScaleGestureDetector.isInProgress();
+            if (!result) {
+                result = mGestureDetector.onTouchEvent(rotatedEvent);
                 handleTwoFingersTap(rotatedEvent);
-    		}
+            }
 
-    		return result;
+            return result;
         } finally {
             if (rotatedEvent != event) {
                 rotatedEvent.recycle();
@@ -1397,25 +1403,25 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
          * @param height    the height, either {@link #FILL_PARENT}, {@link #WRAP_CONTENT} or a fixed size
          *                  in pixels
          * @param aGeoPoint the location of the child within the map view
-         * @param alignment the alignment of the view compared to the location {@link #BOTTOM_CENTER},
+         * @param aAlignment the alignment of the view compared to the location {@link #BOTTOM_CENTER},
          *                  {@link #BOTTOM_LEFT}, {@link #BOTTOM_RIGHT} {@link #TOP_CENTER},
          *                  {@link #TOP_LEFT}, {@link #TOP_RIGHT}
-         * @param offsetX   the additional X offset from the alignment location to draw the child within
+         * @param aOffsetX   the additional X offset from the alignment location to draw the child within
          *                  the map view
-         * @param offsetY   the additional Y offset from the alignment location to draw the child within
+         * @param aOffsetY   the additional Y offset from the alignment location to draw the child within
          *                  the map view
          */
         public LayoutParams(final int width, final int height, final ILatLng aGeoPoint,
-                            final int alignment, final int offsetX, final int offsetY) {
+                            final int aAlignment, final int aOffsetX, final int aOffsetY) {
             super(width, height);
             if (aGeoPoint != null) {
                 this.geoPoint = aGeoPoint;
             } else {
                 this.geoPoint = new LatLng(0, 0);
             }
-            this.alignment = alignment;
-            this.offsetX = offsetX;
-            this.offsetY = offsetY;
+            this.alignment = aAlignment;
+            this.offsetX = aOffsetX;
+            this.offsetY = aOffsetY;
         }
 
         /**
@@ -1441,12 +1447,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this.mMapViewListener = listener;
     }
 
-    public void setOnTileLoadedListener(TileLoadedListener tileLoadedListener) {
-        this.tileLoadedListener = tileLoadedListener;
+    public void setOnTileLoadedListener(TileLoadedListener aTileLoadedListener) {
+        this.tileLoadedListener = aTileLoadedListener;
     }
 
-    public void setOnTilesLoadedListener(TilesLoadedListener tilesLoadedListener) {
-        this.tilesLoadedListener = tilesLoadedListener;
+    public void setOnTilesLoadedListener(TilesLoadedListener aTilesLoadedListener) {
+        this.tilesLoadedListener = aTilesLoadedListener;
     }
 
     public TilesLoadedListener getTilesLoadedListener() {
