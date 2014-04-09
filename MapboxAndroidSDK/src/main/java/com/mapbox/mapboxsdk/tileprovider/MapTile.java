@@ -33,9 +33,10 @@ public class MapTile {
         this.z = az;
         this.x = ax;
         this.y = ay;
-
-        this.path = String.format("%d/%d/%d", z, x, y);
-        this.cacheKey = String.format("%s/%s", aCacheKey, path);
+        this.path = String.valueOf(z) + "/" +
+            String.valueOf(x) + "/" +
+            String.valueOf(y);
+        this.cacheKey = aCacheKey + "/" + path;
         this.code = ((17 * (37 + z)) * (37 * x)) * (37 + y);
     }
 

@@ -32,7 +32,7 @@ public abstract class SafeDrawOverlay extends Overlay {
 
         sSafeCanvas.setCanvas(c);
 
-        if (this.isUsingSafeCanvas()) {
+        if (this.mUseSafeCanvas) {
 
             // Find the screen offset
             Rect screenRect = mapView.getProjection().getScreenRect();
@@ -69,9 +69,10 @@ public abstract class SafeDrawOverlay extends Overlay {
             sSafeCanvas.xOffset = 0;
             sSafeCanvas.yOffset = 0;
         }
+
         this.drawSafe(sSafeCanvas, mapView, shadow);
 
-        if (this.isUsingSafeCanvas()) {
+        if (this.mUseSafeCanvas) {
             c.restore();
         }
     }
