@@ -104,8 +104,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private float mMinimumZoomLevel = 0;
     private float mMaximumZoomLevel = 22;
 
-    private boolean mShouldCluster;
-
     /**
      * The MapView listener
      */
@@ -176,7 +174,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
                       final AttributeSet attrs) {
         super(aContext, attrs);
         setWillNotDraw(false);
-        mShouldCluster = false;
         mReadyToComputeProjection = false;
         this.mController = new MapController(this);
         this.mScroller = new Scroller(aContext);
@@ -632,7 +629,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             mListener.onZoom(event);
         }
 
-        cluster();
         // Allows any views fixed to a Location in the MapView to adjust
         this.requestLayout();
         return this;
@@ -829,24 +825,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      */
     public void setUseDataConnection(final boolean aMode) {
         mMapOverlay.setUseDataConnection(aMode);
-    }
-
-    /**
-     * Set whether the map should cluster markers
-     *
-     * @param shouldCluster if true the map view will cluster closest markers together.
-     */
-    public void setShouldCluster(final boolean shouldCluster) {
-        if (shouldCluster == mShouldCluster) {
-            return;
-        }
-        mShouldCluster = shouldCluster;
-        if (!mShouldCluster) {
-            clearCluster();
-        } else {
-            cluster();
-        }
-        invalidate();
     }
 
     private void updateMinZoomLevel() {
@@ -1393,25 +1371,6 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     public TileLoadedListener getTileLoadedListener() {
         return tileLoadedListener;
     }
-
-    public void cluster() {
-        if (!mShouldCluster) {
-            return;
-        }
-        for (ItemizedIconOverlay overlay : getItemizedOverlays()) {
-            overlay.cluster(this, context);
-        }
-    }
-
-    public void clearCluster() {
-        for (ItemizedIconOverlay overlay : getItemizedOverlays()) {
-            overlay.clearCluster();
-        }
-    }
-
-    // ===========================================================
-    // Public Classes
-    // ===========================================================
 
     /**
      * Per-child layout information associated with OpenStreetMapView.

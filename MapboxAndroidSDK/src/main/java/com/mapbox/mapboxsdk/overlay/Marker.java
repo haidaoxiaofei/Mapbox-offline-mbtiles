@@ -97,25 +97,6 @@ public class Marker {
                 this.mImage != null;
     }
 
-    public int getGroup() {
-        return group;
-    }
-
-    public void assignGroup(int currentGroup) {
-        if (currentGroup == -1) {
-            this.setClustered(false);
-        }
-        group = currentGroup;
-    }
-
-    public boolean beingClustered() {
-        return mClustered;
-    }
-
-    public void setClustered(boolean aClustered) {
-        this.mClustered = aClustered;
-    }
-
     protected InfoWindow createTooltip(MapView mv) {
         return new InfoWindow(R.layout.tooltip, mv);
     }

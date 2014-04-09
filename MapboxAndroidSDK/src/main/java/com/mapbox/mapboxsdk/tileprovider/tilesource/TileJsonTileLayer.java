@@ -2,6 +2,7 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.squareup.okhttp.HttpResponseCache;
@@ -160,6 +161,7 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
             try {
                 URL url = new URL(urls[0]);
                 HttpURLConnection connection = client.open(url);
+                connection.setRequestProperty("User-Agent", MapboxConstants.USER_AGENT);
                 in = connection.getInputStream();
                 byte[] response = readFully(in);
                 String result = new String(response, "UTF-8");

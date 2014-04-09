@@ -19,7 +19,7 @@ public class MapboxTileLayer extends TileJsonTileLayer implements MapViewConstan
      * @param pId a valid mapid, of the form account.map
      */
     public MapboxTileLayer(String pId) {
-        this(pId, false);
+        this(pId, true);
     }
 
     public MapboxTileLayer(String pId, boolean enableSSL) {

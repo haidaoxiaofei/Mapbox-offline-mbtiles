@@ -36,10 +36,10 @@ public class TipView extends View {
         int width = getMeasuredWidth();
 
         mPath.rewind();
-        mPath.moveTo(0, 0);
-        mPath.lineTo(width, 0);
-        mPath.lineTo(width / 2, height);
-        mPath.lineTo(0, 0);
+        mPath.moveTo((width / 2) - height, 0);
+        mPath.lineTo((width / 2) + height, 0);
+        mPath.lineTo((width / 2), height);
+        mPath.lineTo((width / 2) - height, 0);
         canvas.drawPath(mPath, this.mPaint);
     }
 }

@@ -10,4 +10,6 @@ public interface MapboxConstants {
      * This bakes in a CNAME and version number.
      */
     public static final String MAPBOX_BASE_URL = "https://a.tiles.mapbox.com/v3/";
+
+    public static final String USER_AGENT = "Mapbox Android SDK/0.2.0";
 }
