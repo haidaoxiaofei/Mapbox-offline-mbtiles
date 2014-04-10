@@ -16,6 +16,22 @@ The development of the SDK is on its very earliest stage, so many of its element
 will be unstable and not fully tested. Otherwise you can build the library from
 source, and experiment with the latest additions to the project.
 
+### With Gradle
+
+Add this to your `dependencies { }` statment of `build.gradle`:
+
+```groovy
+compile ('com.github.chrisbanes.bitmapcache:BitmapCache:2.4+@aar') {
+    transitive = true
+    exclude module: 'support-v4'
+}
+compile 'com.mapbox.mapboxsdk:library:0.2.2@aar'
+compile 'com.nineoldandroids:library:2.4.0'
+compile 'com.jakewharton:disklrucache:2.0.1'
+compile 'com.google.guava:guava:16.0.1'
+compile 'com.squareup.okhttp:okhttp:1.3.0'
+```
+
 ### Building from source
 
 **With Gradle** *(recommended)*
