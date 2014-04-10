@@ -1169,31 +1169,31 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     private int multiTouchDownCount = 0;
 
     private boolean handleTwoFingersTap(MotionEvent event) {
-        if (!isAnimating()) {
-            int pointerCount = event.getPointerCount();
-            for (int i = 0; i < pointerCount; i++) {
-                int action = event.getActionMasked();
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                        multiTouchDownCount = 0;
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        if (canTapTwoFingers) {
-                            canTapTwoFingers = false;
-                            final ILatLng center = getProjection().fromPixels(event.getX(), event.getY());
-                            mController.zoomOutAbout(center);
-                            return true;
-                        }
-                        break;
-                    case MotionEvent.ACTION_POINTER_DOWN:
-                        multiTouchDownCount++;
-                        canTapTwoFingers = multiTouchDownCount > 1;
-                        break;
-                    case MotionEvent.ACTION_POINTER_UP:
-                        multiTouchDownCount--;
-                        break;
-                    default:
-                }
+        int pointerCount = event.getPointerCount();
+        for (int i = 0; i < pointerCount; i++) {
+            int action = event.getActionMasked();
+            switch (action) {
+                case MotionEvent.ACTION_DOWN:
+                    multiTouchDownCount = 0;
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (!isAnimating() && canTapTwoFingers) {
+                        final ILatLng center = getProjection().fromPixels(event.getX(), event.getY());
+                        mController.zoomOutAbout(center);
+                        return true;
+                    }
+                    canTapTwoFingers = false;
+                    multiTouchDownCount = 0;
+                    break;
+                case MotionEvent.ACTION_POINTER_DOWN:
+                    multiTouchDownCount++;
+                    canTapTwoFingers = multiTouchDownCount > 1;
+                    break;
+                case MotionEvent.ACTION_POINTER_UP:
+                    multiTouchDownCount--;
+//                    canTapTwoFingers = multiTouchDownCount > 1;
+                    break;
+                default:
             }
         }
         return false;
@@ -1214,8 +1214,13 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             boolean result = mScaleGestureDetector.isInProgress();
             if (!result) {
                 result = mGestureDetector.onTouchEvent(rotatedEvent);
-                handleTwoFingersTap(rotatedEvent);
             }
+            else {
+                //needs to cancel two fingers tap
+                canTapTwoFingers = false;
+            }
+            //handleTwoFingersTap should always be called because it counts pointers up/down
+            result |= handleTwoFingersTap(rotatedEvent);
 
             return result;
         } finally {
