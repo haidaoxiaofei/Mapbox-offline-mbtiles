@@ -80,5 +80,14 @@ android.libraryVariants.all { variant ->
     }
 }
 
-apply from: 'https://raw.github.com/mcxiaoke/gradle-mvn-push/master/jar.gradle'
+android.libraryVariants.all { variant ->
+    def jarTask = project.tasks.create(name:"jar${variant.name.capitalize()}", type: Jar) {
+        from            variant.javaCompile.destinationDir
+        exclude         "**/R.class"
+        exclude          "**/BuildConfig.class"
+    }
+    jarTask.dependsOn variant.javaCompile
+    artifacts.add('archives', jarTask);
+}
+
 apply from: 'https://raw.github.com/mcxiaoke/gradle-mvn-push/master/gradle-mvn-push.gradle'
