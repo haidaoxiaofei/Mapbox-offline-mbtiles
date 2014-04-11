@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-../gradlew -b deploy.gradle clean build uploadArchives
+../gradlew -b build.gradle clean build uploadArchives
