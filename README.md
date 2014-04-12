@@ -18,18 +18,20 @@ source, and experiment with the latest additions to the project.
 
 ### With Gradle
 
-Add this to your `dependencies { }` statment of `build.gradle`:
+Add this to your to your `build.gradle`:
 
 ```groovy
-compile ('com.github.chrisbanes.bitmapcache:BitmapCache:2.4+@aar') {
-    transitive = true
-    exclude module: 'support-v4'
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots'}
 }
-compile 'com.mapbox.mapboxsdk:library:0.2.2@aar'
-compile 'com.nineoldandroids:library:2.4.0'
-compile 'com.jakewharton:disklrucache:2.0.1'
-compile 'com.google.guava:guava:16.0.1'
-compile 'com.squareup.okhttp:okhttp:1.3.0'
+
+dependencies {
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.2.3-SNAPSHOT@aar'){
+        transitive=true
+    }
+}
+
 ```
 
 ### Building from source
