@@ -217,7 +217,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         } else {
             Log.d(MapView.class.getCanonicalName(), "centerLatLng is not specified in XML.");
         }
-        String zoomLvl = a.getString(R.styleable.MapView_zoomLvl);
+        String zoomLvl = a.getString(R.styleable.MapView_zoomLevel);
         if (zoomLvl != null) {
             float lvl = Float.parseFloat(zoomLvl);
             this.setZoom(lvl);
