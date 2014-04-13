@@ -4,7 +4,7 @@
         <attr name="mapid" format="string"/>
         <attr name="centerLat" format="string"/>
         <attr name="centerLng" format="string"/>
-        <attr name="zoomLvl" format="string"/>
+        <attr name="zoomLevel" format="string"/>
         <attr name="uiControls" format="string"/>
     </declare-styleable>
 </resources>
