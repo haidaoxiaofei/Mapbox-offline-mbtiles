@@ -12,6 +12,6 @@
             mapbox:mapid="@string/mapbox_id"
             mapbox:centerLat="44.98777915289962"
             mapbox:centerLng="38.93113195896149"
-            mapbox:zoomLvl="11"/>
+            mapbox:zoomLevel="11"/>
 
 </FrameLayout>
