@@ -25,7 +25,6 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.MBTilesLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.WebSourceTileLayer;
-import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 
@@ -63,17 +62,14 @@ public class MainActivity extends ActionBarActivity {
     m.setIcon(new Icon(this, Icon.Size.LARGE, "land-use", "00FFFF"));
     mv.addMarker(m);
 
-        m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
-        mv.addMarker(m);
+    m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
+    mv.addMarker(m);
 
 /*
         m = new Marker(mv, "Prague2", "Czech Republic", new LatLng(50.0875, 14.42112));
         m.setIcon(new Icon(getBaseContext(), Icon.Size.LARGE, "land-use", "00FF00"));
         mv.addMarker(m);
 */
-
-        m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
-        mv.addMarker(m);
 
     mv.setOnTilesLoadedListener(new TilesLoadedListener() {
       @Override
