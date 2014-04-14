@@ -45,10 +45,10 @@ public class MainActivity extends ActionBarActivity {
         mv = (MapView) findViewById(R.id.mapview);
 
         mapController = mv.getController();
-        replaceMapView("test.MBTiles");
-        addLocationOverlay();
+//        replaceMapView("test.MBTiles");
+//        addLocationOverlay();
 
-        mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/4a6f5fa40ab9a6b2f163/raw/b1ee1e445225fc0a397e2605feda7da74c36161b/map.geojson");
+//        mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/4a6f5fa40ab9a6b2f163/raw/b1ee1e445225fc0a397e2605feda7da74c36161b/map.geojson");
         setButtonListeners();
         Marker m = new Marker(mv, "Edinburgh", "Scotland", new LatLng(55.94629, -3.20777));
         m.setIcon(new Icon(this, Icon.Size.SMALL, "marker-stroked", "FF0000"));
@@ -62,9 +62,11 @@ public class MainActivity extends ActionBarActivity {
         m.setIcon(new Icon(this, Icon.Size.LARGE, "land-use", "00FFFF"));
         mv.addMarker(m);
 
+/*
         m = new Marker(mv, "Prague2", "Czech Republic", new LatLng(50.0875, 14.42112));
         m.setIcon(new Icon(getBaseContext(), Icon.Size.LARGE, "land-use", "00FF00"));
         mv.addMarker(m);
+*/
 
         m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
         mv.addMarker(m);
