@@ -1,17 +1,16 @@
 package com.mapbox.mapboxsdk.format;
 
 import android.graphics.Paint;
-
+import android.util.Log;
+import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
 import com.mapbox.mapboxsdk.views.MapView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Locale;
 
 /**
@@ -38,12 +37,18 @@ public class GeoJSON {
      */
     public static void parse(JSONObject json, MapView mv) throws JSONException {
         String type = json.optString("type");
-        if (type.equals("FeatureCollection")) {
+		if (Strings.isNullOrEmpty(type)) {
+			Log.w(GeoJSON.class.getCanonicalName(), "type is null, so returning.");
+			return;
+		}
+        if (type.equalsIgnoreCase("FeatureCollection")) {
             featureCollectionToLayers(json, mv);
-        } else if (type.equals("Feature")) {
+        } else if (type.equalsIgnoreCase("Feature")) {
             featureToLayer(json, mv);
         }
-    }
+		// Refresh Map Once To Update Changes From Parsing and Adding
+		mv.invalidate();
+	}
 
     /**
      * Given a <a href='http://geojson.org/geojson-spec.html#feature-collection-objects'>GeoJSON FeatureCollection</a>,
@@ -84,7 +89,7 @@ public class GeoJSON {
         String markerSize = properties.optString("marker-size");
         String markerSymbol = properties.optString("marker-symbol");
 
-        if (!"".equals(markerColor) || !"".equals(markerSize) || !"".equals(markerSymbol)) {
+        if (!Strings.isNullOrEmpty(markerColor) || !Strings.isNullOrEmpty(markerSize) || !Strings.isNullOrEmpty(markerSymbol)) {
             // Who knows what kind of stuff we are getting in
             Icon.Size size;
 
@@ -180,7 +185,6 @@ public class GeoJSON {
                 mv.getOverlays().add(path);
             }
         }
-        mv.invalidate();
     }
 
     private static boolean windingOrder(JSONArray ring) throws JSONException {
