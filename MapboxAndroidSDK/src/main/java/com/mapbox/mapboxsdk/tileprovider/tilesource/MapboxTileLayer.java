@@ -1,7 +1,9 @@
 package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
+import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
+import java.util.Locale;
 
 /**
  * A convenience class to initialize tile layers that use Mapbox services.
@@ -34,8 +36,7 @@ public class MapboxTileLayer extends TileJsonTileLayer implements MapViewConstan
 
     @Override
     public TileLayer setURL(final String aUrl) {
-        if (!aUrl.contains("http://") && !aUrl.contains("https://")
-                && aUrl.contains("")) {
+        if (!aUrl.toLowerCase(Locale.US).contains("http://") && !aUrl.toLowerCase(Locale.US).contains("https://") && Strings.isNullOrEmpty(aUrl)) {
             super.setURL(MAPBOX_BASE_URL + aUrl + "/{z}/{x}/{y}{2x}.png");
         } else {
             super.setURL(aUrl);
