@@ -21,22 +21,17 @@ import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
 import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.*;
-import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 
 public class MainActivity extends ActionBarActivity {
 
-    private MapController mapController;
     private LatLng startingPoint = new LatLng(51f, 0f);
     private MapView mv;
-    private UserLocationOverlay myLocationOverlay;
-    private Paint paint;
     private String satellite = "brunosan.map-cyglrrfu";
     private String street = "examples.map-vyofok3q";
     private String terrain = "examples.map-zgrqqx0w";
     private String currentLayer = "terrain";
-    private PathOverlay equator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +39,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         mv = (MapView) findViewById(R.id.mapview);
 
-        mapController = mv.getController();
 //        replaceMapView("test.MBTiles");
 //        addLocationOverlay();
 
@@ -84,7 +78,8 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         mv.setVisibility(View.VISIBLE);
-        equator = new PathOverlay();
+
+		PathOverlay equator = new PathOverlay();
         equator.addPoint(0, -89);
         equator.addPoint(0, 89);
         mv.getOverlays().add(equator);
@@ -209,7 +204,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void addLocationOverlay() {
         // Adds an icon that shows location
-        myLocationOverlay = new UserLocationOverlay(new GpsLocationProvider(this), mv);
+		UserLocationOverlay myLocationOverlay = new UserLocationOverlay(new GpsLocationProvider(this), mv);
         myLocationOverlay.enableMyLocation();
         myLocationOverlay.setDrawAccuracyEnabled(true);
         mv.getOverlays().add(myLocationOverlay);
