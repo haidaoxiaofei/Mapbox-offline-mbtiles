@@ -1,7 +1,6 @@
 package com.mapbox.mapboxsdk.tileprovider;
 
 import android.content.Context;
-
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
@@ -20,18 +19,14 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
      * @param pTileSource
      * @param mapView
      */
-    public MapTileLayerBasic(final Context pContext,
-                             final ITileLayer pTileSource,
-                             MapView mapView) {
+    public MapTileLayerBasic(final Context pContext, final ITileLayer pTileSource,
+            MapView mapView) {
         super(pContext, pTileSource, new SimpleRegisterReceiver(pContext));
         this.mContext = pContext;
         this.mMapView = mapView;
 
-        final MapTileDownloader downloaderProvider = new MapTileDownloader(
-                pTileSource,
-                mTileCache,
-                mNetworkAvailabilityCheck,
-                mMapView);
+        final MapTileDownloader downloaderProvider =
+                new MapTileDownloader(pTileSource, mTileCache, mNetworkAvailabilityCheck, mMapView);
 
         for (MapTileModuleLayerBase provider : mTileProviderList) {
             if (provider.getClass().isInstance(MapTileDownloader.class)) {
@@ -61,11 +56,8 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
         if (pTileSource == null) {
             return;
         }
-        final MapTileDownloader downloaderProvider = new MapTileDownloader(
-                pTileSource,
-                mTileCache,
-                mNetworkAvailabilityCheck,
-                mMapView);
+        final MapTileDownloader downloaderProvider =
+                new MapTileDownloader(pTileSource, mTileCache, mNetworkAvailabilityCheck, mMapView);
         if (hasNoSource()) {
             mCacheKey = pTileSource.getCacheKey();
         }

@@ -1,11 +1,10 @@
 package com.mapbox.mapboxsdk.geometry;
 
-import java.io.Serializable;
-
-import com.mapbox.mapboxsdk.api.ILatLng;
 import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
+import com.mapbox.mapboxsdk.api.ILatLng;
+import java.io.Serializable;
 
 /**
  * An immutable latitude, longitude, and optionally altitude point.
@@ -19,9 +18,6 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     /**
      * Construct a new latitude, longitude point given float arguments
-     *
-     * @param aLatitude
-     * @param aLongitude
      */
     public LatLng(final double aLatitude, final double aLongitude) {
         this.latitude = aLatitude;
@@ -30,9 +26,6 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     /**
      * Construct a new latitude, longitude, altitude point given float arguments
-     *
-     * @param aLatitude
-     * @param aLongitude
      */
     public LatLng(final double aLatitude, final double aLongitude, final double aAltitude) {
         this.latitude = aLatitude;
@@ -42,8 +35,6 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     /**
      * Transform a Location into a LatLng point
-     *
-     * @param aLocation
      */
     public LatLng(final Location aLocation) {
         this(aLocation.getLatitude(), aLocation.getLongitude(), aLocation.getAltitude());
@@ -51,8 +42,6 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     /**
      * Clone an existing latitude longitude point
-     *
-     * @param aLatLng
      */
     public LatLng(final LatLng aLatLng) {
         this.latitude = aLatLng.latitude;
@@ -90,8 +79,7 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append(this.latitude)
+        return new StringBuilder().append(this.latitude)
                 .append(",")
                 .append(this.longitude)
                 .append(",")
@@ -111,7 +99,9 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
             return false;
         }
         final LatLng rhs = (LatLng) obj;
-        return rhs.latitude == this.latitude && rhs.longitude == this.longitude && rhs.altitude == this.altitude;
+        return rhs.latitude == this.latitude
+                && rhs.longitude == this.longitude
+                && rhs.altitude == this.altitude;
     }
 
     @Override
@@ -121,8 +111,6 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
 
     /**
      * Write LatLng to parcel.
-     *
-     * @param in
      */
     private LatLng(final Parcel in) {
         this.latitude = in.readDouble();

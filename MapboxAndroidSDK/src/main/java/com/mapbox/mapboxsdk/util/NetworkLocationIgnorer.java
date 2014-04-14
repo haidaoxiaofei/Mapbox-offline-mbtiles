@@ -1,8 +1,7 @@
 package com.mapbox.mapboxsdk.util;
 
-import com.mapbox.mapboxsdk.util.constants.UtilConstants;
-
 import android.location.LocationManager;
+import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 
 /**
  * A class to check whether we want to use a location. If there are multiple location providers,
@@ -22,7 +21,7 @@ public class NetworkLocationIgnorer implements UtilConstants {
      * Whether we should ignore this location.
      *
      * @param pProvider the provider that provided the location
-     * @param pTime     the time of the location
+     * @param pTime the time of the location
      * @return true if we should ignore this location, false if not
      */
     public boolean shouldIgnore(final String pProvider, final long pTime) {

@@ -2,7 +2,6 @@ package com.mapbox.mapboxsdk.tileprovider.modules;
 
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
-
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
@@ -13,9 +12,7 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
-
 import java.util.concurrent.atomic.AtomicReference;
-
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
@@ -31,16 +28,14 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     private MapView mapView;
     boolean hdpi;
 
-
-    public MapTileDownloader(final ITileLayer pTileSource,
-                             final MapTileCache pTileCache,
-                             final NetworkAvailabilityCheck pNetworkAvailabilityCheck,
-                             final MapView mapView) {
+    public MapTileDownloader(final ITileLayer pTileSource, final MapTileCache pTileCache,
+            final NetworkAvailabilityCheck pNetworkAvailabilityCheck, final MapView mapView) {
         super(NUMBER_OF_TILE_DOWNLOAD_THREADS, TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE);
         this.mapView = mapView;
         this.mTileCache.set(pTileCache);
 
-        hdpi = mapView.getContext().getResources().getDisplayMetrics().densityDpi > DisplayMetrics.DENSITY_HIGH;
+        hdpi = mapView.getContext().getResources().getDisplayMetrics().densityDpi
+                > DisplayMetrics.DENSITY_HIGH;
 
         mNetworkAvailabilityCheck = pNetworkAvailabilityCheck;
         setTileSource(pTileSource);
@@ -55,7 +50,8 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     }
 
     public boolean isNetworkAvailable() {
-        return (mNetworkAvailabilityCheck == null || mNetworkAvailabilityCheck.getNetworkAvailable());
+        return (mNetworkAvailabilityCheck == null
+                || mNetworkAvailabilityCheck.getNetworkAvailable());
     }
 
     public TilesLoadedListener getTilesLoadedListener() {
@@ -113,7 +109,8 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     @Override
     public float getCenterZoom() {
         TileLayer tileLayer = mTileSource.get();
-        return (tileLayer != null ? tileLayer.getCenterZoom() : (getMaximumZoomLevel() + getMinimumZoomLevel()) / 2);
+        return (tileLayer != null ? tileLayer.getCenterZoom()
+                : (getMaximumZoomLevel() + getMinimumZoomLevel()) / 2);
     }
 
     @Override
@@ -149,11 +146,13 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
 
             TileLayer tileLayer = mTileSource.get();
             final MapTile tile = aState.getMapTile();
-            Drawable result = (tileLayer != null) ? tileLayer.getDrawableFromTile(MapTileDownloader.this, tile, hdpi) : null;
-//            Drawable result = getCache().getMapTileFromDisk(tile);
-//            if (result == null && tileLayer != null) {
-//                result = tileLayer.getDrawableFromTile(MapTileDownloader.this, tile, hdpi);
-//            }
+            Drawable result =
+                    (tileLayer != null) ? tileLayer.getDrawableFromTile(MapTileDownloader.this,
+                            tile, hdpi) : null;
+            //            Drawable result = getCache().getMapTileFromDisk(tile);
+            //            if (result == null && tileLayer != null) {
+            //                result = tileLayer.getDrawableFromTile(MapTileDownloader.this, tile, hdpi);
+            //            }
             return result;
         }
     }

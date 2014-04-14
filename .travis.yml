@@ -1,5 +1,10 @@
-install:
-- sudo apt-get update -qq
-- sudo apt-get install checkstyle
-script:
-- checkstyle -c checks.xml -r MapboxAndroidSDK/src/main/java/
+language: java
+
+jdk: oraclejdk7
+
+before_install:
+  - export TERM=dumb
+  - sudo apt-get install -qq libstdc++6:i386 lib32z1
+
+notifications:
+  email: false

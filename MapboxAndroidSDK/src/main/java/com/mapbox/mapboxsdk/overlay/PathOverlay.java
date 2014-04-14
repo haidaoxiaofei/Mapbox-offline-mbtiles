@@ -6,11 +6,9 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
-
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,9 +135,7 @@ public class PathOverlay extends Overlay {
 
         mPath.rewind();
         projectedPoint0 = this.mPoints.get(size - 1);
-        mLineBounds.set((int) projectedPoint0.x,
-                (int) projectedPoint0.y,
-                (int) projectedPoint0.x,
+        mLineBounds.set((int) projectedPoint0.x, (int) projectedPoint0.y, (int) projectedPoint0.x,
                 (int) projectedPoint0.y);
 
         for (int i = size - 2; i >= 0; i--) {
@@ -157,7 +153,8 @@ public class PathOverlay extends Overlay {
             screenPoint1 = pj.toMapPixelsTranslated(projectedPoint1, this.mTempPoint2);
 
             // skip this point, too close to previous point
-            if (Math.abs(screenPoint1.x - screenPoint0.x) + Math.abs(screenPoint1.y - screenPoint0.y) <= 1) {
+            if (Math.abs(screenPoint1.x - screenPoint0.x) + Math.abs(
+                    screenPoint1.y - screenPoint0.y) <= 1) {
                 continue;
             }
 

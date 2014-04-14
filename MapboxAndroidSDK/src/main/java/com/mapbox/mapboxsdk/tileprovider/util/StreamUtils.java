@@ -1,15 +1,13 @@
 // Created by plusminus on 19:14:08 - 20.10.2008
 package com.mapbox.mapboxsdk.tileprovider.util;
 
+import android.util.Log;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import android.util.Log;
-
 public class StreamUtils {
-
 
     public static final int IO_BUFFER_SIZE = 8 * 1024;
 
@@ -23,7 +21,7 @@ public class StreamUtils {
      * Copy the content of the input stream into the output stream, using a temporary byte array
      * buffer whose size is defined by {@link #IO_BUFFER_SIZE}.
      *
-     * @param in  The input stream to copy from.
+     * @param in The input stream to copy from.
      * @param out The output stream to copy to.
      * @return the total length copied
      * @throws IOException If any error occurs during the copy.

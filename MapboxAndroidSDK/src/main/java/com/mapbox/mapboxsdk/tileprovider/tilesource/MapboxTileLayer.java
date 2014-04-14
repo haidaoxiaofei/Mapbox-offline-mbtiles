@@ -8,8 +8,8 @@ import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
  * Underneath, this initializes a WebSourceTileLayer, but provides conveniences
  * for retina tiles, initialization by ID, and loading over SSL.
  */
-public class MapboxTileLayer extends TileJsonTileLayer implements MapViewConstants,
-        MapboxConstants {
+public class MapboxTileLayer extends TileJsonTileLayer
+        implements MapViewConstants, MapboxConstants {
     private static final String TAG = "MapboxTileLayer";
     private String mId;
 
@@ -34,8 +34,7 @@ public class MapboxTileLayer extends TileJsonTileLayer implements MapViewConstan
 
     @Override
     public TileLayer setURL(final String aUrl) {
-        if (!aUrl.contains("http://") && !aUrl.contains("https://")
-                && aUrl.contains("")) {
+        if (!aUrl.contains("http://") && !aUrl.contains("https://") && aUrl.contains("")) {
             super.setURL(MAPBOX_BASE_URL + aUrl + "/{z}/{x}/{y}{2x}.png");
         } else {
             super.setURL(aUrl);
@@ -45,8 +44,8 @@ public class MapboxTileLayer extends TileJsonTileLayer implements MapViewConstan
 
     @Override
     protected String getBrandedJSONURL() {
-        return String.format("http%s://api.tiles.mapbox.com/v3/%s.json%s",
-                (mEnableSSL ? "s" : ""), mId, (mEnableSSL ? "?secure" : ""));
+        return String.format("http%s://api.tiles.mapbox.com/v3/%s.json%s", (mEnableSSL ? "s" : ""),
+                mId, (mEnableSSL ? "?secure" : ""));
     }
 
     public String getCacheKey() {

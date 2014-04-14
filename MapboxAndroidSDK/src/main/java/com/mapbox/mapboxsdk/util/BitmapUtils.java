@@ -13,36 +13,36 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.DisplayMetrics;
-
+import android.util.Log;
 import java.lang.reflect.Field;
-
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 public class BitmapUtils {
-    public static final int[] EXPIRED = new int[]{-1};
+    private static final String TAG = "BitmapUtils";
+    public static final int[] EXPIRED = new int[] { -1 };
 
     public static BitmapFactory.Options getBitmapOptions(DisplayMetrics mDisplayMetrics) {
         try {
             // TODO I think this can all be done without reflection now because all these properties are SDK 4
             final Field density = DisplayMetrics.class.getDeclaredField("DENSITY_DEFAULT");
             final Field inDensity = BitmapFactory.Options.class.getDeclaredField("inDensity");
-            final Field inTargetDensity = BitmapFactory.Options.class.getDeclaredField("inTargetDensity");
+            final Field inTargetDensity =
+                    BitmapFactory.Options.class.getDeclaredField("inTargetDensity");
             final Field targetDensity = DisplayMetrics.class.getDeclaredField("densityDpi");
             final BitmapFactory.Options options = new BitmapFactory.Options();
             inDensity.setInt(options, density.getInt(null));
             inTargetDensity.setInt(options, targetDensity.getInt(mDisplayMetrics));
             return options;
         } catch (final IllegalAccessException ex) {
-            // ignore
+            Log.d(TAG, "Couldn't access fields.", ex);
         } catch (final NoSuchFieldException ex) {
-            // ignore
+            Log.d(TAG, "Couldn't find fields.", ex);
         }
         return null;
     }
 
     public static boolean isCacheDrawableExpired(Drawable drawable) {
-        if (drawable != null &&
-                drawable.getState() == EXPIRED) {
+        if (drawable != null && drawable.getState() == EXPIRED) {
             return true;
         }
         return false;
@@ -63,7 +63,8 @@ public class BitmapUtils {
 
     public static int calculateMemoryCacheSize(Context context) {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        boolean largeHeap = (context.getApplicationInfo().flags & ApplicationInfo.FLAG_LARGE_HEAP) != 0;
+        boolean largeHeap =
+                (context.getApplicationInfo().flags & ApplicationInfo.FLAG_LARGE_HEAP) != 0;
         int memoryClass = am.getMemoryClass();
         if (largeHeap && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             memoryClass = ActivityManagerHoneycomb.getLargeMemoryClass(am);
@@ -71,5 +72,4 @@ public class BitmapUtils {
         // Target ~15% of the available heap.
         return 1024 * 1024 * memoryClass / 7;
     }
-
 }

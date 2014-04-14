@@ -7,5 +7,4 @@ public interface UtilConstants {
      */
     public static final long GPS_WAIT_TIME = 20000; // 20 seconds
     public static final boolean DEBUGMODE = false;
-
 }

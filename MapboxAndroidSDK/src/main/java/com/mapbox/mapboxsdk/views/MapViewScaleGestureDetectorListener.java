@@ -1,14 +1,14 @@
 package com.mapbox.mapboxsdk.views;
 
 import android.view.ScaleGestureDetector;
-import android.util.Log;
 
 /**
  * https://developer.android.com/training/gestures/scale.html
  * A custom gesture detector that processes gesture events and dispatches them
  * to the map's overlay system.
  */
-public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector.OnScaleGestureListener {
+public class MapViewScaleGestureDetectorListener
+        implements ScaleGestureDetector.OnScaleGestureListener {
     /**
      * This is the active focal point in terms of the viewport. Could be a local
      * variable but kept here to minimize per-frame allocations.
@@ -38,9 +38,11 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
         currentScale = 1.0f;
         if (!this.mapView.isAnimating()) {
             this.mapView.mIsAnimating.set(true);
-            this.mapView.getController().aboutToStartAnimation(
-                    lastFocusX + this.mapView.getScrollX() - (this.mapView.getWidth() / 2),
-                    lastFocusY + this.mapView.getScrollY() - (this.mapView.getHeight() / 2));
+            this.mapView.getController()
+                    .aboutToStartAnimation(
+                            lastFocusX + this.mapView.getScrollX() - (this.mapView.getWidth() / 2),
+                            lastFocusY + this.mapView.getScrollY() - (this.mapView.getHeight()
+                                    / 2));
             scaling = true;
         }
         return true;
@@ -56,7 +58,8 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
         float focusX = detector.getFocusX();
         float focusY = detector.getFocusY();
 
-        this.mapView.getController().panBy((int) (lastFocusX - focusX), (int) (lastFocusY - focusY));
+        this.mapView.getController()
+                .panBy((int) (lastFocusX - focusX), (int) (lastFocusY - focusY));
         this.mapView.setScale(currentScale);
 
         lastFocusX = focusX;

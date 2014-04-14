@@ -1,11 +1,9 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.format.GeoJSON;
 import android.os.AsyncTask;
 import android.util.Log;
-import org.json.JSONException;
-
+import com.mapbox.mapboxsdk.format.GeoJSON;
+import com.mapbox.mapboxsdk.views.MapView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,10 +11,11 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import org.json.JSONException;
 
 public class GeoJSONLayer {
 
-    private MapView mapView;
+    private final MapView mapView;
 
     public GeoJSONLayer(final MapView mapView) {
         this.mapView = mapView;
@@ -36,11 +35,10 @@ public class GeoJSONLayer {
             String jsonText = null;
             try {
                 is = new URL(params[0]).openStream();
-                BufferedReader rd = new BufferedReader(new InputStreamReader(is,
-                        Charset.forName("UTF-8")));
+                BufferedReader rd =
+                        new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 
                 jsonText = readAll(rd);
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

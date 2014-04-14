@@ -1,8 +1,7 @@
 package com.mapbox.mapboxsdk.events;
 
-import android.util.Log;
-
 import android.os.Handler;
+import android.util.Log;
 
 /**
  * A MapListener that aggregates multiple events called in quick succession.
@@ -32,7 +31,7 @@ public class DelayedMapListener implements MapListener {
 
     /**
      * @param aWrappedListener The wrapped MapListener
-     * @param aDelay           Listening delay, in milliseconds
+     * @param aDelay Listening delay, in milliseconds
      */
     public DelayedMapListener(final MapListener aWrappedListener, final long aDelay) {
         this.wrappedListener = aWrappedListener;

@@ -34,7 +34,8 @@ public class InfoWindow {
         mIsVisible = false;
         ViewGroup parent = (ViewGroup) mapView.getParent();
         Context context = mapView.getContext();
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater =
+                (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mView = inflater.inflate(layoutResId, parent, false);
 
         if (mTitleId == 0) {
@@ -58,7 +59,8 @@ public class InfoWindow {
         mIsVisible = false;
         ViewGroup parent = (ViewGroup) mapView.getParent();
         Context context = mapView.getContext();
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater =
+                (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mView = view;
 
         // default behavior: close it when clicking on the tooltip:
@@ -76,17 +78,15 @@ public class InfoWindow {
     /**
      * open the window at the specified position.
      *
-     * @param object   the graphical object on which is hooked the view
+     * @param object the graphical object on which is hooked the view
      * @param position to place the window on the map
-     * @param offsetX  (&offsetY) the offset of the view to the position, in pixels.
-     *                 This allows to offset the view from the object position.
+     * @param offsetX (&offsetY) the offset of the view to the position, in pixels.
+     * This allows to offset the view from the object position.
      */
     public InfoWindow open(Marker object, LatLng position, int offsetX, int offsetY) {
         onOpen(object);
-        MapView.LayoutParams lp = new MapView.LayoutParams(
-                MapView.LayoutParams.WRAP_CONTENT,
-                MapView.LayoutParams.WRAP_CONTENT,
-                position, MapView.LayoutParams.BOTTOM_CENTER,
+        MapView.LayoutParams lp = new MapView.LayoutParams(MapView.LayoutParams.WRAP_CONTENT,
+                MapView.LayoutParams.WRAP_CONTENT, position, MapView.LayoutParams.BOTTOM_CENTER,
                 offsetX, offsetY);
         close(); //if it was already opened
         mMapView.addView(mView, lp);
@@ -165,8 +165,10 @@ public class InfoWindow {
     private static void setResIds(Context context) {
         String packageName = context.getPackageName(); //get application package name
         mTitleId = context.getResources().getIdentifier("id/tooltip_title", null, packageName);
-        mDescriptionId = context.getResources().getIdentifier("id/tooltip_description", null, packageName);
-        mSubDescriptionId = context.getResources().getIdentifier("id/tooltip_subdescription", null, packageName);
+        mDescriptionId =
+                context.getResources().getIdentifier("id/tooltip_description", null, packageName);
+        mSubDescriptionId = context.getResources()
+                .getIdentifier("id/tooltip_subdescription", null, packageName);
         mImageId = context.getResources().getIdentifier("id/tooltip_image", null, packageName);
     }
 }

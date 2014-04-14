@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileCache;
@@ -14,8 +13,6 @@ import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.squareup.okhttp.OkHttpClient;
-
-
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -24,9 +21,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.net.ssl.SSLContext;
-
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
@@ -89,13 +84,13 @@ public class WebSourceTileLayer extends TileLayer {
      * Gets a list of Tile URLs used by this layer for a specific tile.
      *
      * @param aTile a map tile
-     * @param hdpi  a boolean that indicates whether the tile should be at 2x or retina size
+     * @param hdpi a boolean that indicates whether the tile should be at 2x or retina size
      * @return a list of tile URLS
      */
     public String[] getTileURLs(final MapTile aTile, boolean hdpi) {
         String url = getTileURL(aTile, hdpi);
         if (url != null) {
-            return new String[]{url};
+            return new String[] { url };
         }
         return null;
     }
@@ -104,7 +99,7 @@ public class WebSourceTileLayer extends TileLayer {
      * Get a single Tile URL for a single tile.
      *
      * @param aTile a map tile
-     * @param hdpi  a boolean that indicates whether the tile should be at 2x or retina size
+     * @param hdpi a boolean that indicates whether the tile should be at 2x or retina size
      * @return a list of tile URLs
      */
     public String getTileURL(final MapTile aTile, boolean hdpi) {
@@ -127,7 +122,8 @@ public class WebSourceTileLayer extends TileLayer {
     }
 
     @Override
-    public CacheableBitmapDrawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile, boolean hdpi) {
+    public CacheableBitmapDrawable getDrawableFromTile(final MapTileDownloader downloader,
+            final MapTile aTile, boolean hdpi) {
         if (downloader.isNetworkAvailable()) {
             TilesLoadedListener listener = downloader.getTilesLoadedListener();
 
@@ -176,7 +172,7 @@ public class WebSourceTileLayer extends TileLayer {
     /**
      * Requests and returns a bitmap object from a given URL, using aCache to decode it.
      *
-     * @param url    the map tile url. should refer to a valid bitmap resource.
+     * @param url the map tile url. should refer to a valid bitmap resource.
      * @param aCache a cache, an instance of MapTileCache
      * @return the tile if valid, otherwise null
      */

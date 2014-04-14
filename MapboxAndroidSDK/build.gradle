@@ -1,192 +1,211 @@
 buildscript {
-
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
-    }
-
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:0.9.+'
+    classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.9.+'
+  }
 }
 
+apply plugin: 'android-sdk-manager'
 apply plugin: 'android-library'
+apply plugin: 'checkstyle'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
 allprojects {
-    group project.GROUP
-    version project.VERSION_NAME
+  group project.GROUP
+  version project.VERSION_NAME
 
-    repositories {
-        mavenCentral()
-    }
+  repositories {
+    mavenCentral()
+  }
 
-    tasks.withType(Compile) {
-        options.encoding = 'UTF-8'
-    }
+  tasks.withType(Compile) {
+    options.encoding = 'UTF-8'
+  }
 }
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.+'
-    compile 'com.squareup.okhttp:okhttp:1.3.0'
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.jakewharton:disklrucache:2.0.1'
-    compile 'com.google.guava:guava:16.0.1'
+  compile 'com.android.support:support-v4:19.1.+'
+  compile 'com.squareup.okhttp:okhttp:1.3.0'
+  compile 'com.nineoldandroids:library:2.4.0'
+  compile 'com.jakewharton:disklrucache:2.0.1'
+  compile 'com.google.guava:guava:16.0.1'
 }
 
 android {
-    compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
-    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+  compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
+  buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
 
-    defaultConfig {
-        minSdkVersion Integer.parseInt(project.ANDROID_MIN_SDK)
-        targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
+  defaultConfig {
+    minSdkVersion Integer.parseInt(project.ANDROID_MIN_SDK)
+    targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
+  }
+
+  sourceSets {
+
+    main {
+      manifest.srcFile 'src/main/AndroidManifest.xml'
+
+      java.srcDirs = ['src/main/java']
+
+      res.srcDirs = ['src/main/res']
+
+      assets {
+        srcDir 'assets'
+      }
     }
+  }
 
-    sourceSets {
-
-        main {
-            manifest.srcFile 'src/main/AndroidManifest.xml'
-
-            java.srcDirs = ['src/main/java']
-
-            res.srcDirs = ['src/main/res']
-
-            assets {
-                srcDir 'assets'
-            }
-        }
-    }
-
-    lintOptions {
-        abortOnError false
-    }
+  lintOptions {
+    abortOnError false
+  }
 }
 
 android.libraryVariants.all { variant ->
-    def name = variant.name
-    task "javadoc$name"(type: Javadoc) {
-        description = "Generates javadoc for build $name"
-        failOnError = false
-        destinationDir = new File(destinationDir, variant.baseName)
-        source = files(variant.javaCompile.source)
-        classpath = files(android.plugin.runtimeJarList, variant.javaCompile.classpath)
-        options.links("http://docs.oracle.com/javase/7/docs/api/")
-        options.links("http://d.android.com/reference/")
-        exclude '**/R.html', '**/R.*.html'
-    }
+  def name = variant.name
+  task "javadoc$name"(type: Javadoc) {
+    description = "Generates javadoc for build $name"
+    failOnError = false
+    destinationDir = new File(destinationDir, variant.baseName)
+    source = files(variant.javaCompile.source)
+    classpath = files(android.plugin.runtimeJarList, variant.javaCompile.classpath)
+    options.links("http://docs.oracle.com/javase/7/docs/api/")
+    options.links("http://d.android.com/reference/")
+    exclude '**/R.html', '**/R.*.html'
+  }
+}
+
+checkstyle {
+  configFile project.file('../checks.xml')
+  showViolations true
+}
+
+android.libraryVariants.all { variant ->
+  def name = variant.buildType.name
+  def checkstyle = project.tasks.create "checkstyle${name.capitalize()}", Checkstyle
+  checkstyle.dependsOn variant.javaCompile
+  checkstyle.source variant.javaCompile.source
+  checkstyle.classpath = project.fileTree(variant.javaCompile.destinationDir)
+  checkstyle.exclude('**/BuildConfig.java')
+  checkstyle.exclude('**/R.java')
+  checkstyle.exclude('**/uk/co/senab/bitmapcache/*')
+  project.tasks.getByName("check").dependsOn checkstyle
 }
 
 // From https://raw.github.com/mcxiaoke/gradle-mvn-push/master/jar.gradle
 android.libraryVariants.all { variant ->
-    def jarTask = project.tasks.create(name:"jar${variant.name.capitalize()}", type: Jar) {
-        from            variant.javaCompile.destinationDir
-        exclude         "**/R.class"
-        exclude          "**/BuildConfig.class"
-    }
-    jarTask.dependsOn variant.javaCompile
-    artifacts.add('archives', jarTask);
+  def jarTask = project.tasks.create(name: "jar${variant.name.capitalize()}", type: Jar) {
+    from variant.javaCompile.destinationDir
+    exclude "**/R.class"
+    exclude "**/BuildConfig.class"
+  }
+  jarTask.dependsOn variant.javaCompile
+  artifacts.add('archives', jarTask);
 }
 
 // From https://raw.github.com/mcxiaoke/gradle-mvn-push/master/gradle-mvn-push.gradle
 def isReleaseBuild() {
-    return VERSION_NAME.contains("SNAPSHOT") == false
+  return VERSION_NAME.contains("SNAPSHOT") == false
 }
 
 def getReleaseRepositoryUrl() {
-    return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL
-            : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+  return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL :
+      "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
 }
 
 def getSnapshotRepositoryUrl() {
-    return hasProperty('SNAPSHOT_REPOSITORY_URL') ? SNAPSHOT_REPOSITORY_URL
-            : "https://oss.sonatype.org/content/repositories/snapshots/"
+  return hasProperty('SNAPSHOT_REPOSITORY_URL') ? SNAPSHOT_REPOSITORY_URL :
+      "https://oss.sonatype.org/content/repositories/snapshots/"
 }
 
 def getRepositoryUsername() {
-    return hasProperty('USERNAME') ? USERNAME : (hasProperty('NEXUS_USERNAME')?NEXUS_USERNAME:"")
+  return hasProperty('USERNAME') ? USERNAME : (hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : "")
 }
 
 def getRepositoryPassword() {
-    return hasProperty('PASSWORD') ? PASSWORD : (hasProperty('NEXUS_PASSWORD')?NEXUS_PASSWORD:"")
+  return hasProperty('PASSWORD') ? PASSWORD : (hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : "")
 }
 
 afterEvaluate { project ->
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+  uploadArchives {
+    repositories {
+      mavenDeployer {
+        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-                pom.groupId = GROUP
-                pom.artifactId = POM_ARTIFACT_ID
-                pom.version = VERSION_NAME
+        pom.groupId = GROUP
+        pom.artifactId = POM_ARTIFACT_ID
+        pom.version = VERSION_NAME
 
-                repository(url: getReleaseRepositoryUrl()) {
-                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-                }
-                snapshotRepository(url: getSnapshotRepositoryUrl()) {
-                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-                }
-
-                pom.project {
-                    name POM_NAME
-                    packaging POM_PACKAGING
-                    description POM_DESCRIPTION
-                    url POM_URL
-
-                    scm {
-                        url POM_SCM_URL
-                        connection POM_SCM_CONNECTION
-                        developerConnection POM_SCM_DEV_CONNECTION
-                    }
-
-                    licenses {
-                        license {
-                            name POM_LICENCE_NAME
-                            url POM_LICENCE_URL
-                            distribution POM_LICENCE_DIST
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id POM_DEVELOPER_ID
-                            name POM_DEVELOPER_NAME
-                        }
-                    }
-                }
-            }
+        repository(url: getReleaseRepositoryUrl()) {
+          authentication(userName: getRepositoryUsername(),
+              password: getRepositoryPassword())
         }
-    }
+        snapshotRepository(url: getSnapshotRepositoryUrl()) {
+          authentication(userName: getRepositoryUsername(),
+              password: getRepositoryPassword())
+        }
 
-    signing {
-        required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
-        sign configurations.archives
-    }
+        pom.project {
+          name POM_NAME
+          packaging POM_PACKAGING
+          description POM_DESCRIPTION
+          url POM_URL
 
-    task androidJavadocs(type: Javadoc) {
-        failOnError false
-        source = android.sourceSets.main.allJava
-        classpath += project.files(android.plugin.getRuntimeJarList().join(File.pathSeparator))
-    }
+          scm {
+            url POM_SCM_URL
+            connection POM_SCM_CONNECTION
+            developerConnection POM_SCM_DEV_CONNECTION
+          }
 
-    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-        classifier = 'javadoc'
-        from androidJavadocs.destinationDir
-    }
+          licenses {
+            license {
+              name POM_LICENCE_NAME
+              url POM_LICENCE_URL
+              distribution POM_LICENCE_DIST
+            }
+          }
 
-    task androidSourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.allSource
+          developers {
+            developer {
+              id POM_DEVELOPER_ID
+              name POM_DEVELOPER_NAME
+            }
+          }
+        }
+      }
     }
+  }
 
-    artifacts {
-        archives androidSourcesJar
-        archives androidJavadocsJar
-    }
+  signing {
+    required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+  }
+
+  task androidJavadocs(type: Javadoc) {
+    failOnError false
+    source = android.sourceSets.main.allJava
+    classpath += project.files(android.plugin.getRuntimeJarList().join(File.pathSeparator))
+  }
+
+  task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+  }
+
+  task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.allSource
+  }
+
+  artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+  }
 }

@@ -1,11 +1,10 @@
 package com.mapbox.mapboxsdk.tileprovider.util;
 
-import com.mapbox.mapboxsdk.tileprovider.IRegisterReceiver;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import com.mapbox.mapboxsdk.tileprovider.IRegisterReceiver;
 
 public class SimpleRegisterReceiver implements IRegisterReceiver {
 

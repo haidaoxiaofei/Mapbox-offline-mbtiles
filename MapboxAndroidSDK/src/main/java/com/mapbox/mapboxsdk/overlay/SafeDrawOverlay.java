@@ -1,12 +1,11 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
-import com.mapbox.mapboxsdk.views.safecanvas.SafeTranslatedCanvas;
-import com.mapbox.mapboxsdk.views.MapView;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Rect;
-import android.os.Build;
+import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
+import com.mapbox.mapboxsdk.views.safecanvas.SafeTranslatedCanvas;
 import com.nineoldandroids.view.ViewHelper;
 
 /**
@@ -21,7 +20,8 @@ public abstract class SafeDrawOverlay extends Overlay {
     private static final Matrix sMatrix = new Matrix();
     private boolean mUseSafeCanvas = true;
 
-    protected abstract void drawSafe(final ISafeCanvas c, final MapView mapView, final boolean shadow);
+    protected abstract void drawSafe(final ISafeCanvas c, final MapView mapView,
+            final boolean shadow);
 
     public SafeDrawOverlay() {
         super();
@@ -64,7 +64,6 @@ public abstract class SafeDrawOverlay extends Overlay {
                 sSafeCanvas.rotate(mapView.getMapOrientation(), (double) screenRect.exactCenterX(),
                         (double) screenRect.exactCenterY());
             }
-
         } else {
             sSafeCanvas.xOffset = 0;
             sSafeCanvas.yOffset = 0;

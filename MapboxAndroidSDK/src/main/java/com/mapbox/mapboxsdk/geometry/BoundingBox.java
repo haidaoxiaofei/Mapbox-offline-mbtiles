@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -25,14 +24,11 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * order.
      *
      * @param north Northern Coordinate
-     * @param east  Eastern Coordinate
+     * @param east Eastern Coordinate
      * @param south Southern Coordinate
-     * @param west  Western Coordinate
+     * @param west Western Coordinate
      */
-    public BoundingBox(double north,
-                       double east,
-                       double south,
-                       double west) {
+    public BoundingBox(double north, double east, double south, double west) {
         this.mLatNorth = north;
         this.mLonEast = east;
         this.mLatSouth = south;
@@ -65,7 +61,8 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * @return LatLng center of this BoundingBox
      */
     public LatLng getCenter() {
-        return new LatLng((this.mLatNorth + this.mLatSouth) / 2, (this.mLonEast + this.mLonWest) / 2);
+        return new LatLng((this.mLatNorth + this.mLatSouth) / 2,
+                (this.mLonEast + this.mLonWest) / 2);
     }
 
     public double getLatNorth() {
@@ -107,10 +104,14 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     @Override
     public String toString() {
         return new StringBuffer().append("N:")
-                .append(this.mLatNorth).append("; E:")
-                .append(this.mLonEast).append("; S:")
-                .append(this.mLatSouth).append("; W:")
-                .append(this.mLonWest).toString();
+                .append(this.mLatNorth)
+                .append("; E:")
+                .append(this.mLonEast)
+                .append("; S:")
+                .append(this.mLatSouth)
+                .append("; W:")
+                .append(this.mLonWest)
+                .toString();
     }
 
     /**
@@ -170,10 +171,9 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     public boolean contains(final ILatLng pGeoPoint) {
         final double latitude = pGeoPoint.getLatitude();
         final double longitude = pGeoPoint.getLongitude();
-        return ((latitude < this.mLatNorth) && (latitude > this.mLatSouth))
-                && ((longitude < this.mLonEast) && (longitude > this.mLonWest));
+        return ((latitude < this.mLatNorth) && (latitude > this.mLatSouth)) && ((longitude
+                < this.mLonEast) && (longitude > this.mLonWest));
     }
-
 
     /**
      * Returns a new BoundingBox that stretches to contain both this and another BoundingBox.
@@ -190,15 +190,13 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * given by corner points.
      *
      * @param pLatNorth Northern Coordinate
-     * @param pLonEast  Eastern Coordinate
+     * @param pLonEast Eastern Coordinate
      * @param pLatSouth Southern Coordinate
-     * @param pLonWest  Western Coordinate
+     * @param pLonWest Western Coordinate
      * @return BoundingBox
      */
-    public BoundingBox union(final double pLatNorth,
-                             final double pLonEast,
-                             final double pLatSouth,
-                             final double pLonWest) {
+    public BoundingBox union(final double pLatNorth, final double pLonEast, final double pLatSouth,
+            final double pLonWest) {
         return new BoundingBox((this.mLatNorth < pLatNorth) ? pLatNorth : this.mLatNorth,
                 (this.mLonEast < pLonEast) ? pLonEast : this.mLonEast,
                 (this.mLatSouth > pLatSouth) ? pLatSouth : this.mLatSouth,
@@ -223,34 +221,34 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
      * Returns a new BoundingBox that is the intersection of this with another box
      *
      * @param north Northern Coordinate
-     * @param east  Eastern Coordinate
+     * @param east Eastern Coordinate
      * @param south Southern Coordinate
-     * @param west  Western Coordinate
+     * @param west Western Coordinate
      * @return BoundingBox
      */
     public BoundingBox intersect(double north, double east, double south, double west) {
         return intersect(new BoundingBox(north, east, south, west));
     }
 
-    public static final Parcelable.Creator<BoundingBox> CREATOR = new Parcelable.Creator<BoundingBox>() {
-        @Override
-        public BoundingBox createFromParcel(final Parcel in) {
-            return readFromParcel(in);
-        }
+    public static final Parcelable.Creator<BoundingBox> CREATOR =
+            new Parcelable.Creator<BoundingBox>() {
+                @Override
+                public BoundingBox createFromParcel(final Parcel in) {
+                    return readFromParcel(in);
+                }
 
-        @Override
-        public BoundingBox[] newArray(final int size) {
-            return new BoundingBox[size];
-        }
-    };
+                @Override
+                public BoundingBox[] newArray(final int size) {
+                    return new BoundingBox[size];
+                }
+            };
 
     @Override
     public int hashCode() {
-        return (int) (
-                (mLatNorth + 90)
-                        + ((mLatSouth + 90) * 1000)
-                        + ((mLonEast + 180) * 1000000)
-                        + ((mLonEast + 180) * 1000000000));
+        return (int) ((mLatNorth + 90)
+                + ((mLatSouth + 90) * 1000)
+                + ((mLonEast + 180) * 1000000)
+                + ((mLonEast + 180) * 1000000000));
     }
 
     @Override

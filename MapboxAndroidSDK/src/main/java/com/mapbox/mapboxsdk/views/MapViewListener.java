@@ -3,7 +3,6 @@ package com.mapbox.mapboxsdk.views;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.overlay.Marker;
 
-
 public interface MapViewListener {
     public void onShowMarker(final MapView pMapView, final Marker pMarker);
 

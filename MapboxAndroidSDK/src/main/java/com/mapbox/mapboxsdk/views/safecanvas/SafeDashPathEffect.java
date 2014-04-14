@@ -5,12 +5,12 @@ import android.graphics.PathDashPathEffect;
 
 public class SafeDashPathEffect extends PathDashPathEffect {
     public SafeDashPathEffect(float[] intervals, float phase, float strokeWidth) {
-        super(createSafeDashedPath(intervals, phase, strokeWidth, null), floatSum(intervals),
-                phase, PathDashPathEffect.Style.MORPH);
+        super(createSafeDashedPath(intervals, phase, strokeWidth, null), floatSum(intervals), phase,
+                PathDashPathEffect.Style.MORPH);
     }
 
     public static Path createSafeDashedPath(float[] intervals, float phase, float strokeWidth,
-                                            Path reuse) {
+            Path reuse) {
         if (reuse == null) {
             reuse = new Path();
         }

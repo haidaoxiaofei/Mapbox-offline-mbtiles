@@ -5,17 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
-
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas.UnsafeCanvasHandler;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.Projection;
-
 import java.util.ArrayList;
 
 /**
@@ -28,8 +25,7 @@ import java.util.ArrayList;
  * @author Theodore Hong
  * @author Fred Eisele
  */
-public abstract class ItemizedOverlay extends SafeDrawOverlay implements
-        Overlay.Snappable {
+public abstract class ItemizedOverlay extends SafeDrawOverlay implements Overlay.Snappable {
 
     private final ArrayList<Marker> mInternalItemList;
     protected boolean mDrawFocusedItem = true;
@@ -68,21 +64,25 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
     /**
      * Draw a marker on each of our items. populate() must have been called first.<br/>
      * <br/>
-     * The marker will be drawn twice for each Item in the Overlay--once in the shadow phase, skewed
+     * The marker will be drawn twice for each Item in the Overlay--once in the shadow phase,
+     * skewed
      * and darkened, then again in the non-shadow phase. The bottom-center of the marker will be
      * aligned with the geographical coordinates of the Item.<br/>
      * <br/>
-     * The order of drawing may be changed by overriding the getIndexToDraw(int) method. An item may
+     * The order of drawing may be changed by overriding the getIndexToDraw(int) method. An item
+     * may
      * provide an alternate marker via its Marker.getMarker(int) method. If that method returns
      * null, the default marker is used.<br/>
      * <br/>
-     * The focused item is always drawn last, which puts it visually on top of the other items.<br/>
+     * The focused item is always drawn last, which puts it visually on top of the other
+     * items.<br/>
      *
-     * @param canvas  the Canvas upon which to draw. Note that this may already have a transformation
-     *                applied, so be sure to leave it the way you found it
+     * @param canvas the Canvas upon which to draw. Note that this may already have a
+     * transformation
+     * applied, so be sure to leave it the way you found it
      * @param mapView the MapView that requested the draw. Use MapView.getProjection() to convert
-     *                between on-screen pixels and latitude/longitude pairs
-     * @param shadow  if true, draw the shadow layer. If false, draw the overlay contents.
+     * between on-screen pixels and latitude/longitude pairs
+     * @param shadow if true, draw the shadow layer. If false, draw the overlay contents.
      */
     @Override
     protected void drawSafe(ISafeCanvas canvas, MapView mapView, boolean shadow) {
@@ -99,11 +99,12 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         final Projection pj = mapView.getProjection();
         final int size = this.mInternalItemList.size() - 1;
 
-        final RectF bounds = new RectF(0, 0, mapView.getMeasuredWidth(), mapView.getMeasuredHeight());
+        final RectF bounds =
+                new RectF(0, 0, mapView.getMeasuredWidth(), mapView.getMeasuredHeight());
         pj.rotateRect(bounds);
         final float mapScale = 1 / mapView.getScale();
 
-		/* Draw in backward cycle, so the items with the least index are on the front. */
+    /* Draw in backward cycle, so the items with the least index are on the front. */
         for (int i = size; i >= 0; i--) {
             final Marker item = getItem(i);
             if (item == mFocusedItem) {
@@ -143,12 +144,11 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
     /**
      * Draws an item located at the provided screen coordinates to the canvas.
      *
-     * @param canvas          what the item is drawn upon
-     * @param item            the item to be drawn
-     * @param projection
-     * @param aMapOrientation
+     * @param canvas what the item is drawn upon
+     * @param item the item to be drawn
      */
-    protected void onDrawItem(ISafeCanvas canvas, final Marker item, final Projection projection, final float aMapOrientation, final RectF mapBounds, final float mapScale) {
+    protected void onDrawItem(ISafeCanvas canvas, final Marker item, final Projection projection,
+            final float aMapOrientation, final RectF mapBounds, final float mapScale) {
 
         item.updateDrawingPosition();
         final PointF position = item.getPositionOnMap();
@@ -160,10 +160,9 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
 
         canvas.save();
 
-        canvas.scale(mapScale, mapScale, position.x,
-                position.y);
-        final int state = (mDrawFocusedItem && (mFocusedItem == item) ? Marker.ITEM_STATE_FOCUSED_MASK
-                : 0);
+        canvas.scale(mapScale, mapScale, position.x, position.y);
+        final int state =
+                (mDrawFocusedItem && (mFocusedItem == item) ? Marker.ITEM_STATE_FOCUSED_MASK : 0);
         final Drawable marker = item.getMarker(state);
         if (marker == null) {
             return;
@@ -172,7 +171,8 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
 
         // draw it
         if (this.isUsingSafeCanvas()) {
-            Overlay.drawAt(canvas.getSafeCanvas(), marker, roundedCoords, point, false, aMapOrientation);
+            Overlay.drawAt(canvas.getSafeCanvas(), marker, roundedCoords, point, false,
+                    aMapOrientation);
         } else {
             canvas.getUnsafeCanvas(new UnsafeCanvasHandler() {
                 @Override
@@ -185,9 +185,11 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         canvas.restore();
     }
 
-    protected boolean markerHitTest(final Marker pMarker, final Projection pProjection, final float pX, final float pY) {
+    protected boolean markerHitTest(final Marker pMarker, final Projection pProjection,
+            final float pX, final float pY) {
         RectF rect = pMarker.getDrawingBounds(pProjection, null);
-        rect.bottom -= rect.height() / 2; //a marker drawing bounds is twice the actual size of the marker
+        rect.bottom -=
+                rect.height() / 2; //a marker drawing bounds is twice the actual size of the marker
         return rect.contains(pX, pY);
     }
 
@@ -213,7 +215,8 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
     }
 
     /**
-     * Override this method to handle a "tap" on an item. This could be from a touchscreen tap on an
+     * Override this method to handle a "tap" on an item. This could be from a touchscreen tap on
+     * an
      * onscreen Item, or from a trackball click on a centered, selected Item. By default, does
      * nothing and returns false.
      *
@@ -235,7 +238,8 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
     /**
      * If the given Item is found in the overlay, force it to be the current focus-bearer. Any
      * registered {@link ItemizedOverlay} will be notified. This does not move
-     * the map, so if the Item isn't already centered, the user may get confused. If the Item is not
+     * the map, so if the Item isn't already centered, the user may get confused. If the Item is
+     * not
      * found, this is a no-op. You can also pass null to remove focus.
      */
     public void setFocus(final Marker item) {
@@ -259,24 +263,24 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements
         }
     }
 
-//    /**
-//     * Adjusts a drawable's bounds so that (0,0) is a pixel in the location described by the anchor
-//     * parameter. Useful for "pin"-like graphics. For convenience, returns the same drawable that
-//     * was passed in.
-//     *
-//     * @param marker  the drawable to adjust
-//     * @param anchor the anchor for the drawable (float between 0 and 1)
-//     * @return the same drawable that was passed in.
-//     */
-//    protected synchronized Drawable boundToHotspot(final Drawable marker, Point anchor) {
-//        final int markerWidth = marker.getIntrinsicWidth();
-//        final int markerHeight = marker.getIntrinsicHeight();
-//
-//        mRect.set(0, 0, markerWidth, markerHeight);
-//        mRect.offset(anchor.x, anchor.y);
-//        marker.setBounds(mRect);
-//        return marker;
-//    }
+    //    /**
+    //     * Adjusts a drawable's bounds so that (0,0) is a pixel in the location described by the anchor
+    //     * parameter. Useful for "pin"-like graphics. For convenience, returns the same drawable that
+    //     * was passed in.
+    //     *
+    //     * @param marker  the drawable to adjust
+    //     * @param anchor the anchor for the drawable (float between 0 and 1)
+    //     * @return the same drawable that was passed in.
+    //     */
+    //    protected synchronized Drawable boundToHotspot(final Drawable marker, Point anchor) {
+    //        final int markerWidth = marker.getIntrinsicWidth();
+    //        final int markerHeight = marker.getIntrinsicHeight();
+    //
+    //        mRect.set(0, 0, markerWidth, markerHeight);
+    //        mRect.offset(anchor.x, anchor.y);
+    //        marker.setBounds(mRect);
+    //        return marker;
+    //    }
 
     public void setOnFocusChangeListener(OnFocusChangeListener l) {
         mOnFocusChangeListener = l;
