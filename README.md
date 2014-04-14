@@ -1,22 +1,23 @@
-**This is pre-alpha software. It may be broken at any time in development,
-and there is zero guarantee of API stability. Kick the tires at your own
-risk, they may explode.**
-
 [![Build Status](https://travis-ci.org/mapbox/mapbox-android-sdk.png?branch=master)](https://travis-ci.org/mapbox/mapbox-android-sdk)
 
 # Mapbox Android SDK
 
-An open source alternative for native maps on Android.
+An open source alternative for native maps on Android. This library lets
+you use [Mapbox](https://www.mapbox.com/), [OpenStreetMap](http://www.openstreetmap.org/),
+and other tile sources in your app, as well as overlays like [GeoJSON](http://geojson.org/)
+data and interactive tooltips.
 
-![](screenshot.png)
+This is a fork of [osmdroid](http://code.google.com/p/osmdroid/), so the entire
+core is open source: it doesn't depend on the Google Maps SDK or any components
+outside of AOSP that would require the Play Store.
 
-## Including the library in your project
+## Installation
 
-The development of the SDK is on its very earliest stage, so many of its elements
-will be unstable and not fully tested. Otherwise you can build the library from
-source, and experiment with the latest additions to the project.
+We recommend using the Android SDK with [gradle](http://www.gradle.org/):
+this will automatically install the necessary dependencies and pull the SDK
+source code from the central Maven repository.
 
-### With Gradle (Android Studio, IntelliJ, etc) - Recommended
+### With Gradle (Android Studio, IntelliJ, etc)
 
 Add this to your to your `build.gradle`:
 
@@ -31,12 +32,13 @@ dependencies {
         transitive=true
     }
 }
-
 ```
 
 ### Manually / Hardcoding In Project
 
-You'll need to download and include the mapbox-android-sdk.aar file and all artifacts (.aar and .jar files listed) listed in `MapboxAndroidSDK / build.gradle`.  These **WILL** change over time so please check back regularly.
+Download and include the mapbox-android-sdk.aar file and all
+artifacts (.aar and .jar files listed) listed in `MapboxAndroidSDK / build.gradle`.
+These **will** change over time so please check back regularly.
 
 *Example:*
 
@@ -47,22 +49,26 @@ You'll need to download and include the mapbox-android-sdk.aar file and all arti
 * DiskLRUCache - 2.0.1
 * Guava - 16.0.1
 
-
 ### Building From Source
 
-Building from source means you get the very latest version of our code. The first step is to clone the repository to a directory in your system
+Building from source means you get the very latest version of our code.
+The first step is to clone the repository to a directory in your system
 
-```git clone https://github.com/mapbox/mapbox-android-sdk.git ```
+    git clone https://github.com/mapbox/mapbox-android-sdk.git
 
-We use Gradle to generate a built version of our latest code in a matter of seconds.
-To use it with your IDE, make sure that to import the project by selecting `build.gradle` (in the project root directory) as the project file.
+We use Gradle as a configuration and build tool: to use it with your IDE,
+import the project by selecting `build.gradle` in the project root directory
+as the project file.
 
-Don't worry about installing Gradle on your system if you don't already have it (in fact it's easier if you don't).  The project makes use of Gradle Wrapper, which means that the correct / current project version of Gradle will automatically be installed and used to run the builds.  To use the Gradle wrapper just look for `gradlew` (UN*X) or `gradlew.bat` (Windows) in the project's main directory.  For example:
+Don't worry about installing Gradle on your system if you don't already have
+it:  the project makes use of Gradle Wrapper, so a correct & current project
+version of Gradle will automatically be installed and used to run the builds.
+To use the Gradle wrapper just look for `gradlew`  or `gradlew.bat` (Windows)
+in the project's main directory.  For example:
 
-```
-cd <PROJECT_ROOT>
- ./gradlew --version
-```
+    cd <PROJECT_ROOT>
+     ./gradlew --version
+
 which will produce something like:
 
 ```
@@ -81,11 +87,9 @@ JVM:          1.7.0_40 (Oracle Corporation 24.0-b56)
 OS:           Mac OS X 10.9.2 x86_64
 ```
 
-For more information:
+See the [Gradle Wrapper documentation for more details](http://www.gradle.org/docs/current/userguide/gradle_wrapper.html).
 
-http://www.gradle.org/docs/current/userguide/gradle_wrapper.html
-
-From there, to build an archive:
+Then you can build an archive:
 
 ```sh
 ./gradlew clean assembleRelease
