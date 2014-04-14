@@ -200,14 +200,31 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         eventsOverlay = new MapEventsOverlay(aContext, this);
         this.getOverlays().add(eventsOverlay);
 
-        TypedArray a = aContext.obtainStyledAttributes(attrs, R.styleable.MapView);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MapView);
         String mapid = a.getString(R.styleable.MapView_mapid);
-        a.recycle();
         if (mapid != null) {
             setTileSource(new MapboxTileLayer(mapid));
         } else {
             Log.w(MapView.class.getCanonicalName(), "mapid not set.");
         }
+        String centerLat = a.getString(R.styleable.MapView_centerLat);
+        String centerLng = a.getString(R.styleable.MapView_centerLng);
+        if (centerLat != null && centerLng != null) {
+            double lat, lng;
+            lat = Double.parseDouble(centerLat);
+            lng = Double.parseDouble(centerLng);
+            this.setCenter(new LatLng(lat, lng));
+        } else {
+            Log.d(MapView.class.getCanonicalName(), "centerLatLng is not specified in XML.");
+        }
+        String zoomLvl = a.getString(R.styleable.MapView_zoomLevel);
+        if (zoomLvl != null) {
+            float lvl = Float.parseFloat(zoomLvl);
+            this.setZoom(lvl);
+        } else {
+            Log.d(MapView.class.getCanonicalName(), "zoomLevel is not specified in XML.");
+        }
+        a.recycle();
     }
 
     public MapView(final Context aContext, AttributeSet attrs) {
