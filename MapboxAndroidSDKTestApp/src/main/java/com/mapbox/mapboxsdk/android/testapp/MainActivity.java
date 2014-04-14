@@ -40,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
         mv = (MapView) findViewById(R.id.mapview);
 
 //        replaceMapView("test.MBTiles");
-//        addLocationOverlay();
+        addLocationOverlay();
 
 //        mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/4a6f5fa40ab9a6b2f163/raw/b1ee1e445225fc0a397e2605feda7da74c36161b/map.geojson");
         setButtonListeners();
