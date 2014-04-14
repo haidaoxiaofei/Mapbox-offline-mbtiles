@@ -8,7 +8,6 @@ import android.util.Log;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.squareup.okhttp.OkHttpClient;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +15,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
-
 import uk.co.senab.bitmapcache.BitmapLruCache;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
@@ -34,7 +32,8 @@ public class Icon implements MapboxConstants {
 
     // Well, we only want to download the same URL once. If we request the same url rapidly
     // We place it in this queue..
-    private static ConcurrentHashMap<String, ArrayList<Icon>> downloadQueue = new ConcurrentHashMap<String, ArrayList<Icon>>();
+    private static ConcurrentHashMap<String, ArrayList<Icon>> downloadQueue =
+            new ConcurrentHashMap<String, ArrayList<Icon>>();
 
     public enum Size {
         LARGE("l"), MEDIUM("m"), SMALL("s");
@@ -67,8 +66,8 @@ public class Icon implements MapboxConstants {
                 }
             }
             sIconCache = (new BitmapLruCache.Builder(context)).setMemoryCacheEnabled(true)
-                    .setMemoryCacheMaxSize(BitmapUtils.calculateMemoryCacheSize(context))
-                    .setDiskCacheEnabled(true)
+                    .setMemoryCacheMaxSize(
+                            BitmapUtils.calculateMemoryCacheSize(context)).setDiskCacheEnabled(true)
                             // 1 MB (a marker image is around 1kb)
                     .setDiskCacheMaxSize(1024 * 1024).build();
         }
@@ -83,8 +82,10 @@ public class Icon implements MapboxConstants {
         // Check if media is mounted or storage is built-in, if so, try and use external cache dir
         // otherwise use internal cache dir
         final String cachePath =
-                Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) || (!Environment.isExternalStorageRemovable())
-                        ? Environment.getExternalStorageDirectory().getPath() : context.getFilesDir().getPath();
+                Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                        || (!Environment.isExternalStorageRemovable())
+                        ? Environment.getExternalStorageDirectory().getPath()
+                        : context.getFilesDir().getPath();
         return new File(cachePath, uniqueName);
     }
 
@@ -93,9 +94,9 @@ public class Icon implements MapboxConstants {
      * download process to load it from the API.
      *
      * @param context Android context - Used for proper Bitmap Density generation
-     * @param size    Size of Icon
-     * @param symbol  Maki Symbol
-     * @param aColor  Color of Icon
+     * @param size Size of Icon
+     * @param symbol Maki Symbol
+     * @param aColor Color of Icon
      */
     public Icon(Context context, Size size, String symbol, String aColor) {
         String url = MAPBOX_BASE_URL + "marker/pin-" + size.getApiString();
@@ -186,7 +187,6 @@ public class Icon implements MapboxConstants {
         }
     }
 
-
     class BitmapLoader extends AsyncTask<String, Void, CacheableBitmapDrawable> {
 
         private String url;
@@ -232,7 +232,6 @@ public class Icon implements MapboxConstants {
                 }
             }
         }
-
     }
 
     private static final String TAG = "Icon";

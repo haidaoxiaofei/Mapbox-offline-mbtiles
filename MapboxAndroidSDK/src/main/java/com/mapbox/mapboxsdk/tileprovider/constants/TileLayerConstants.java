@@ -1,6 +1,5 @@
 package com.mapbox.mapboxsdk.tileprovider.constants;
 
-
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 
 /**
@@ -25,7 +24,7 @@ public interface TileLayerConstants {
      */
     public static final int MAXIMUM_ZOOMLEVEL = 22;
 
-    public final static int DEFAULT_TILE_SIZE = 256;
+    public static final  int DEFAULT_TILE_SIZE = 256;
 
     /**
      * Initial tile cache size. The size will be increased as required by calling {@link
@@ -41,5 +40,4 @@ public interface TileLayerConstants {
     public static final int NUMBER_OF_TILE_DOWNLOAD_THREADS = 8;
 
     public static final int TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE = 40;
-
 }

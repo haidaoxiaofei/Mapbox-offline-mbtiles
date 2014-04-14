@@ -1,5 +1,6 @@
 package com.mapbox.mapboxsdk.views;
 
+import android.util.Log;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,11 +8,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class MapViewFactory {
+    private static final String TAG = "MapViewFactory";
+
     private static File createFileFromInputStream(InputStream inputStream, String URL) {
         try {
             File f = new File(URL);
             OutputStream outputStream = new FileOutputStream(f);
-            byte buffer[] = new byte[1024];
+            byte[] buffer = new byte[1024];
             int length = 0;
 
             while ((length = inputStream.read(buffer)) > 0) {
@@ -23,6 +26,7 @@ public class MapViewFactory {
 
             return f;
         } catch (IOException e) {
+            Log.e(TAG, "Could not create file.", e);
         }
         return null;
     }

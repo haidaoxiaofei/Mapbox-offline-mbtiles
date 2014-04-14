@@ -4,7 +4,6 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-
 import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
@@ -15,7 +14,7 @@ public class GeometryMath {
     public static final double RAD2DEG = (180.0 / Math.PI);
 
     public static final Rect getBoundingBoxForRotatedRectangle(final Rect rect, final int centerX,
-                                                               final int centerY, final float angle, final Rect reuse) {
+            final int centerY, final float angle, final Rect reuse) {
         final Rect out = GeometryMath.reusable(reuse);
         if (angle % 360 == 0) {
             out.set(rect);
@@ -87,8 +86,8 @@ public class GeometryMath {
         return out;
     }
 
-
-    public static PointF rotatePoint(final float centerX, final float centerY, final PointF point, final float angle, final PointF reuse) {
+    public static PointF rotatePoint(final float centerX, final float centerY, final PointF point,
+            final float angle, final PointF reuse) {
         final PointF out = GeometryMath.reusable(reuse);
         double rotationRadians = angle * DEG2RAD;
         //calculate new x coord
@@ -116,7 +115,8 @@ public class GeometryMath {
     }
 
     /**
-     * Calculates i.e. the increase of zoomlevel needed when the visible latitude needs to be bigger
+     * Calculates i.e. the increase of zoomlevel needed when the visible latitude needs to be
+     * bigger
      * by <code>factor</code>.
      * <p/>
      * Assert.assertEquals(1, getNextSquareNumberAbove(1.1f)); Assert.assertEquals(2,
@@ -127,9 +127,6 @@ public class GeometryMath {
      * <p/>
      * Assert.assertEquals(-1, - getNextSquareNumberAbove(1 / 0.4f) + 1); Assert.assertEquals(-2, -
      * getNextSquareNumberAbove(1 / 0.24f) + 1);
-     *
-     * @param factor
-     * @return
      */
     public static int getNextSquareNumberAbove(final float factor) {
         int out = 0;
@@ -166,7 +163,8 @@ public class GeometryMath {
         return (float) (value / Math.pow(2, multiplier));
     }
 
-    public static Rect viewPortRect(final float zoomLevel, final Projection projection, final Rect reuse) {
+    public static Rect viewPortRect(final float zoomLevel, final Projection projection,
+            final Rect reuse) {
         final Rect out = GeometryMath.reusable(reuse);
         // Get the area we are drawing to
         final Rect screenRect = projection.getScreenRect();
@@ -178,7 +176,8 @@ public class GeometryMath {
         return out;
     }
 
-    public static Rect viewPortRectForTileDrawing(final float zoomLevel, final Projection projection, final Rect reuse) {
+    public static Rect viewPortRectForTileDrawing(final float zoomLevel,
+            final Projection projection, final Rect reuse) {
         final Rect out = GeometryMath.reusable(reuse);
         // Get the area we are drawing to
         final Rect screenRect = projection.getScreenRect();
@@ -188,10 +187,8 @@ public class GeometryMath {
         //this is because MapTiles are indexed around int values
         int roundWorldSize_2 = projection.mapSize((float) Math.floor(zoomLevel)) >> 1;
         float scale = (float) roundWorldSize_2 / worldSize_2;
-        out.set((int) (scale * screenRect.left),
-                (int) (scale * screenRect.top),
-                (int) (scale * screenRect.right),
-                (int) (scale * screenRect.bottom));
+        out.set((int) (scale * screenRect.left), (int) (scale * screenRect.top),
+                (int) (scale * screenRect.right), (int) (scale * screenRect.bottom));
 
         // Translate the Canvas coordinates into Mercator coordinates
         out.offset(roundWorldSize_2, roundWorldSize_2);

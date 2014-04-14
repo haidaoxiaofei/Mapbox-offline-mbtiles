@@ -1,6 +1,5 @@
 package com.mapbox.mapboxsdk.views;
 
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;

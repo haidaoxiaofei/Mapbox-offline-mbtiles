@@ -1,7 +1,6 @@
 package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
 import android.graphics.drawable.Drawable;
-
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
@@ -15,11 +14,12 @@ public interface ITileLayer {
      * Get a rendered Drawable from the specified Tile.
      *
      * @param downloader reference to the downloader asking for the tile
-     * @param aTile      the tile requested
-     * @param hdpi       is hdpi requested?
+     * @param aTile the tile requested
+     * @param hdpi is hdpi requested?
      * @return the rendered Drawable
      */
-    Drawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile, boolean hdpi);
+    Drawable getDrawableFromTile(final MapTileDownloader downloader, final MapTile aTile,
+            boolean hdpi);
 
     /**
      * Set the current tile url template used in this layer
@@ -104,5 +104,4 @@ public interface ITileLayer {
      * @return the cache key
      */
     public String getCacheKey();
-
 }

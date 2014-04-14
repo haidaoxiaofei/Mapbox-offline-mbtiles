@@ -9,13 +9,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
-
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
@@ -29,8 +27,7 @@ import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
  * @author Marc Kurtz
  * @author Nicolas Gramlich
  */
-public abstract class MapTileLayerBase implements IMapTileProviderCallback,
-        TileLayerConstants {
+public abstract class MapTileLayerBase implements IMapTileProviderCallback, TileLayerConstants {
     protected Context context;
     protected final MapTileCache mTileCache;
     private Handler mTileRequestCompleteHandler;
@@ -150,9 +147,8 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         this(aContext, pTileSource, null);
     }
 
-    public MapTileLayerBase(final Context aContext,
-                            final ITileLayer pTileSource,
-                            final Handler pDownloadFinishedListener) {
+    public MapTileLayerBase(final Context aContext, final ITileLayer pTileSource,
+            final Handler pDownloadFinishedListener) {
         this.context = aContext;
         mTileRequestCompleteHandler = pDownloadFinishedListener;
         mTileSource = pTileSource;
@@ -163,11 +159,12 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      * Called by implementation class methods indicating that they have completed the request as
      * best it can. The tile is added to the cache, and a MAPTILE_SUCCESS_ID message is sent.
      *
-     * @param pState    the map tile request state object
+     * @param pState the map tile request state object
      * @param pDrawable the Drawable of the map tile
      */
     @Override
-    public void mapTileRequestCompleted(final MapTileRequestState pState, final Drawable pDrawable) {
+    public void mapTileRequestCompleted(final MapTileRequestState pState,
+            final Drawable pDrawable) {
         // tell our caller we've finished and it should update its view
         if (mTileRequestCompleteHandler != null) {
             Message msg = new Message();
@@ -203,11 +200,12 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      * that can be used but better results may be delivered later. The tile is added to the cache,
      * and a MAPTILE_SUCCESS_ID message is sent.
      *
-     * @param pState    the map tile request state object
+     * @param pState the map tile request state object
      * @param pDrawable the Drawable of the map tile
      */
     @Override
-    public void mapTileRequestExpiredTile(MapTileRequestState pState, CacheableBitmapDrawable pDrawable) {
+    public void mapTileRequestExpiredTile(MapTileRequestState pState,
+            CacheableBitmapDrawable pDrawable) {
         // Put the expired tile into the cache
         putExpiredTileIntoCache(pState.getMapTile(), pDrawable.getBitmap());
 
@@ -287,24 +285,23 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
      * Set whether to use the network connection if it's available.
      *
      * @param pMode if true use the network connection if it's available. if false don't use the
-     *              network connection even if it's available.
+     * network connection even if it's available.
      */
     public void setUseDataConnection(final boolean pMode) {
         mUseDataConnection = pMode;
     }
 
-
     public boolean hasNoSource() {
         return mTileSource == null;
     }
-
 
     public CacheableBitmapDrawable getMapTileFromMemory(MapTile pTile) {
         return (mTileCache != null) ? mTileCache.getMapTileFromMemory(pTile) : null;
     }
 
     public CacheableBitmapDrawable createCacheableBitmapDrawable(Bitmap bitmap, MapTile aTile) {
-        return (mTileCache != null) ? mTileCache.createCacheableBitmapDrawable(bitmap, aTile) : null;
+        return (mTileCache != null) ? mTileCache.createCacheableBitmapDrawable(bitmap, aTile)
+                : null;
     }
 
     public Bitmap getBitmapFromRemoved(final int width, final int height) {
@@ -317,7 +314,5 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback,
         }
     }
 
-
     private static final String TAG = "MapTileLayerBase";
-
 }

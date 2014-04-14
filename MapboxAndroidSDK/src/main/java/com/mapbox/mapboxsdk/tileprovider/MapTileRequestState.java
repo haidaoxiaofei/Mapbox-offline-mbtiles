@@ -1,10 +1,9 @@
 package com.mapbox.mapboxsdk.tileprovider;
 
+import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
-
-import com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase;
 
 /**
  * Track the status of a single map tile given a list of providers that could
@@ -19,14 +18,9 @@ public class MapTileRequestState {
 
     /**
      * Initialize a new state to keep track of a map tile
-     *
-     * @param mapTile
-     * @param providers
-     * @param callback
      */
-    public MapTileRequestState(final MapTile mapTile,
-                               final MapTileModuleLayerBase[] providers,
-                               final IMapTileProviderCallback callback) {
+    public MapTileRequestState(final MapTile mapTile, final MapTileModuleLayerBase[] providers,
+            final IMapTileProviderCallback callback) {
         mProviderQueue = new LinkedList<MapTileModuleLayerBase>();
         if (providers != null) {
             Collections.addAll(mProviderQueue, providers);

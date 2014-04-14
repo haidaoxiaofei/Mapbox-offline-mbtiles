@@ -3,7 +3,8 @@ package com.mapbox.mapboxsdk.events;
 import com.mapbox.mapboxsdk.views.MapView;
 
 /**
- * The event generated when a map has finished scrolling to the coordinates (<code>x</code>,<code>y</code>).
+ * The event generated when a map has finished scrolling to the coordinates
+ * (<code>x</code>,<code>y</code>).
  */
 public class ScrollEvent implements MapEvent {
     protected MapView source;

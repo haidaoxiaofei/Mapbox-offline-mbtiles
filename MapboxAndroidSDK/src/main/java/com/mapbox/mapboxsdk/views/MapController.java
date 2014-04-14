@@ -2,7 +2,6 @@ package com.mapbox.mapboxsdk.views;
 
 import android.graphics.PointF;
 import android.os.Handler;
-
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
@@ -62,8 +61,9 @@ public class MapController implements MapViewConstants {
             mMapView.mIsFlinging = false;
             final int xStart = mMapView.getScrollX();
             final int yStart = mMapView.getScrollY();
-            mMapView.getScroller().startScroll(xStart, yStart, x - xStart, y - yStart,
-                    ANIMATION_DURATION_DEFAULT);
+            mMapView.getScroller()
+                    .startScroll(xStart, yStart, x - xStart, y - yStart,
+                            ANIMATION_DURATION_DEFAULT);
             mMapView.postInvalidate();
         }
     }
@@ -91,8 +91,6 @@ public class MapController implements MapViewConstants {
 
     /**
      * Stops a running animation.
-     *
-     * @param jumpToTarget
      */
     public void stopAnimation(final boolean jumpToTarget) {
 
@@ -113,7 +111,6 @@ public class MapController implements MapViewConstants {
         }
     }
 
-
     public MapView setZoom(final float zoomlevel) {
         mMapView.setZoomInternal(zoomlevel);
         mMapView.setScale(1.0f);
@@ -132,7 +129,6 @@ public class MapController implements MapViewConstants {
         if (!mMapView.canZoomIn()) {
             return false;
         }
-
 
         if (mMapView.isAnimating()) {
             // TODO extend zoom (and return true)
@@ -208,7 +204,9 @@ public class MapController implements MapViewConstants {
     protected void aboutToStartAnimation(final PointF mapCoords) {
         final float zoom = mMapView.getZoomLevel(false);
         final int worldSize_2 = mMapView.getProjection().mapSize(zoom) >> 1;
-        final ILatLng latlong = mMapView.getProjection().pixelXYToLatLong((int) (mapCoords.x + worldSize_2), (int) (mapCoords.y + worldSize_2), zoom);
+        final ILatLng latlong = mMapView.getProjection()
+                .pixelXYToLatLong((int) (mapCoords.x + worldSize_2),
+                        (int) (mapCoords.y + worldSize_2), zoom);
         aboutToStartAnimation(latlong, mapCoords);
     }
 
@@ -225,7 +223,6 @@ public class MapController implements MapViewConstants {
                 mMapView.mIsAnimating.set(false);
             }
         }, 100);
-
     }
 
     protected class MyZoomAnimatorListener extends AnimatorListenerAdapter {

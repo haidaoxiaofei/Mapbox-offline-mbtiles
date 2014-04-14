@@ -17,8 +17,8 @@ public class NetworkAvailabilityCheck {
     private final ConnectivityManager mConnectionManager;
 
     public NetworkAvailabilityCheck(final Context aContext) {
-        mConnectionManager = (ConnectivityManager) aContext
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        mConnectionManager =
+                (ConnectivityManager) aContext.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
     public boolean getNetworkAvailable() {
@@ -32,14 +32,14 @@ public class NetworkAvailabilityCheck {
     }
 
     public boolean getCellularDataNetworkAvailable() {
-        final NetworkInfo mobile = mConnectionManager
-                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        final NetworkInfo mobile =
+                mConnectionManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         return mobile != null && mobile.isAvailable();
     }
 
     public boolean getRouteToPathExists(final int hostAddress) {
-        return (mConnectionManager.requestRouteToHost(ConnectivityManager.TYPE_WIFI, hostAddress) || mConnectionManager
-                .requestRouteToHost(ConnectivityManager.TYPE_MOBILE, hostAddress));
+        return (mConnectionManager.requestRouteToHost(ConnectivityManager.TYPE_WIFI, hostAddress)
+                || mConnectionManager.requestRouteToHost(ConnectivityManager.TYPE_MOBILE,
+                hostAddress));
     }
-
 }

@@ -8,12 +8,14 @@ import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
 import com.mapbox.mapboxsdk.views.MapView;
+import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
 
 /**
  * A GeoJSON parser.
@@ -34,7 +36,7 @@ public class GeoJSON {
      * Parse a GeoJSON object into an array of overlays.
      *
      * @param json GeoJSON
-     * @param mv   a mapview for the overlays to be added to
+     * @param mv a mapview for the overlays to be added to
      * @throws JSONException
      */
     public static List<Object> parse(JSONObject json, MapView mv) throws JSONException {
@@ -57,11 +59,12 @@ public class GeoJSON {
 	}
 
     /**
-     * Given a <a href='http://geojson.org/geojson-spec.html#feature-collection-objects'>GeoJSON FeatureCollection</a>,
+     * Given a <a href='http://geojson.org/geojson-spec.html#feature-collection-objects'>GeoJSON
+     * FeatureCollection</a>,
      * parse each feature and create layers on the given map
      *
      * @param featureCollection a json object representing a featurecollection
-     * @param mv                a mapview
+     * @param mv a mapview
      * @throws JSONException
      */
     public static ArrayList<Object> featureCollectionToLayers(JSONObject featureCollection, MapView mv) throws JSONException {
@@ -181,8 +184,7 @@ public class GeoJSON {
 
                 // first ring should have windingOrder = true,
                 // all others should have winding order == false
-                if ((r == 0 && !windingOrder(ring)) ||
-                        (r != 0 && windingOrder(ring))) {
+                if ((r == 0 && !windingOrder(ring)) || (r != 0 && windingOrder(ring))) {
                     for (j = 0; j < ring.length(); j++) {
                         coordinates = (JSONArray) ring.get(j);
                         double lon = (Double) coordinates.get(0);
@@ -211,7 +213,8 @@ public class GeoJSON {
             for (int i = 0; i < ring.length() - 1; i++) {
                 JSONArray p1 = (JSONArray) ring.get(i);
                 JSONArray p2 = (JSONArray) ring.get(i + 1);
-                area += rad((Double) p2.get(0) - (Double) p1.get(0)) * (2 + Math.sin(rad((Double) p1.get(1))) + Math.sin(rad((Double) p2.get(1))));
+                area += rad((Double) p2.get(0) - (Double) p1.get(0)) * (2 + Math.sin(
+                        rad((Double) p1.get(1))) + Math.sin(rad((Double) p2.get(1))));
             }
         }
 

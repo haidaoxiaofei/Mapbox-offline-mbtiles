@@ -1,10 +1,10 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.views.MapView;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
+import com.mapbox.mapboxsdk.api.ILatLng;
+import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
 
 /**
@@ -19,9 +19,9 @@ public class MapEventsOverlay extends Overlay {
     private MapEventsReceiver mReceiver;
 
     /**
-     * @param ctx      the context
+     * @param ctx the context
      * @param receiver the object that will receive/handle the events.
-     *                 It must implement MapEventsReceiver interface.
+     * It must implement MapEventsReceiver interface.
      */
     public MapEventsOverlay(Context ctx, MapEventsReceiver receiver) {
         super(ctx);
@@ -47,5 +47,4 @@ public class MapEventsOverlay extends Overlay {
         //throw event to the receiver:
         return mReceiver.longPressHelper(p);
     }
-
 }

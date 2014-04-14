@@ -1,12 +1,11 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import com.mapbox.mapboxsdk.util.NetworkLocationIgnorer;
-
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import com.mapbox.mapboxsdk.util.NetworkLocationIgnorer;
 
 public class GpsLocationProvider implements LocationListener {
     private final LocationManager mLocationManager;
@@ -27,10 +26,9 @@ public class GpsLocationProvider implements LocationListener {
 
     /**
      * Set the minimum interval for location updates. See {@link
-     * LocationManager.requestLocationUpdates(String, long, float, LocationListener)}. Note that you
+     * LocationManager.requestLocationUpdates(String, long, float, LocationListener)}. Note that
+     * you
      * should call this before calling {@link enableMyLocation()}.
-     *
-     * @param milliSeconds
      */
     public void setLocationUpdateMinTime(final long milliSeconds) {
         mLocationUpdateMinTime = milliSeconds;
@@ -42,10 +40,9 @@ public class GpsLocationProvider implements LocationListener {
 
     /**
      * Set the minimum distance for location updates. See
-     * {@link LocationManager.requestLocationUpdates}. Note that you should call this before calling
+     * {@link LocationManager.requestLocationUpdates}. Note that you should call this before
+     * calling
      * {@link enableMyLocation()}.
-     *
-     * @param meters
      */
     public void setLocationUpdateMinDistance(final float meters) {
         mLocationUpdateMinDistance = meters;

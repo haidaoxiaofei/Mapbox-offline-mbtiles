@@ -1,6 +1,5 @@
 package com.mapbox.mapboxsdk.views.safecanvas;
 
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.DrawFilter;
@@ -14,7 +13,8 @@ import android.graphics.Region;
 import android.graphics.Region.Op;
 
 /**
- * An implementation of {@link ISafeCanvas} that wraps a {@link Canvas} and adjusts drawing calls to
+ * An implementation of {@link ISafeCanvas} that wraps a {@link Canvas} and adjusts drawing calls
+ * to
  * the wrapped Canvas so that they are relative to an origin that is always at the center of the
  * screen.<br />
  * <br />
@@ -23,8 +23,8 @@ import android.graphics.Region.Op;
  * @author Marc Kurtz
  */
 public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
-    private final static Matrix sMatrix = new Matrix();
-    private final static RectF sRectF = new RectF();
+    private static final Matrix sMatrix = new Matrix();
+    private static final RectF sRectF = new RectF();
     private static float[] sFloatAry = new float[0];
     private Canvas mCanvas;
     private final Matrix mMatrix = new Matrix();
@@ -85,13 +85,15 @@ public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
     }
 
     @Override
-    public boolean clipRect(final double left, final double top, final double right, final double bottom, final Op op) {
+    public boolean clipRect(final double left, final double top, final double right,
+            final double bottom, final Op op) {
         return getWrappedCanvas().clipRect((float) (left + xOffset), (float) (top + yOffset),
                 (float) (right + xOffset), (float) (bottom + yOffset), op);
     }
 
     @Override
-    public boolean clipRect(final double left, final double top, final double right, final double bottom) {
+    public boolean clipRect(final double left, final double top, final double right,
+            final double bottom) {
         return getWrappedCanvas().clipRect((float) (left + xOffset), (float) (top + yOffset),
                 (float) (right + xOffset), (float) (bottom + yOffset));
     }
@@ -137,14 +139,15 @@ public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
     }
 
     @Override
-    public void drawArc(final Rect oval, final float startAngle, final float sweepAngle, final boolean useCenter,
-                        final SafePaint paint) {
+    public void drawArc(final Rect oval, final float startAngle, final float sweepAngle,
+            final boolean useCenter, final SafePaint paint) {
         getWrappedCanvas().drawArc(this.toOffsetRectF(oval, sRectF), startAngle, sweepAngle,
                 useCenter, paint);
     }
 
     @Override
-    public void drawBitmap(final Bitmap bitmap, final double left, final double top, final SafePaint paint) {
+    public void drawBitmap(final Bitmap bitmap, final double left, final double top,
+            final SafePaint paint) {
         getWrappedCanvas().drawBitmap(bitmap, (float) (left + xOffset), (float) (top + yOffset),
                 paint);
     }
@@ -157,7 +160,8 @@ public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
     }
 
     @Override
-    public void drawBitmap(final Bitmap bitmap, final Rect src, final Rect dst, final SafePaint paint) {
+    public void drawBitmap(final Bitmap bitmap, final Rect src, final Rect dst,
+            final SafePaint paint) {
         dst.offset(xOffset, yOffset);
         getWrappedCanvas().drawBitmap(bitmap, src, dst, paint);
         dst.offset(-xOffset, -yOffset);
@@ -172,30 +176,34 @@ public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
     }
 
     @Override
-    public void drawBitmap(final int[] colors, final int offset, final int stride, final double x, final double y, final int width,
-                           final int height, final boolean hasAlpha, final SafePaint paint) {
+    public void drawBitmap(final int[] colors, final int offset, final int stride, final double x,
+            final double y, final int width, final int height, final boolean hasAlpha,
+            final SafePaint paint) {
         getWrappedCanvas().drawBitmap(colors, offset, stride, (float) (x + xOffset),
                 (float) (y + yOffset), width, height, hasAlpha, paint);
     }
 
     @Override
-    public void drawBitmap(final int[] colors, final int offset, final int stride, final int x, final int y, final int width,
-                           final int height, final boolean hasAlpha, final SafePaint paint) {
-        getWrappedCanvas().drawBitmap(colors, offset, stride, x + offset, y + offset, width,
-                height, hasAlpha, paint);
+    public void drawBitmap(final int[] colors, final int offset, final int stride, final int x,
+            final int y, final int width, final int height, final boolean hasAlpha,
+            final SafePaint paint) {
+        getWrappedCanvas().drawBitmap(colors, offset, stride, x + offset, y + offset, width, height,
+                hasAlpha, paint);
     }
 
     @Override
-    public void drawBitmapMesh(final Bitmap bitmap, final int meshWidth, final int meshHeight, final double[] verts,
-                               final int vertOffset, final int[] colors, final int colorOffset, final SafePaint paint) {
+    public void drawBitmapMesh(final Bitmap bitmap, final int meshWidth, final int meshHeight,
+            final double[] verts, final int vertOffset, final int[] colors, final int colorOffset,
+            final SafePaint paint) {
         getWrappedCanvas().drawBitmapMesh(bitmap, meshWidth, meshHeight,
                 this.toOffsetFloatAry(verts, sFloatAry), vertOffset, colors, colorOffset, paint);
     }
 
     @Override
-    public void drawCircle(final double cx, final double cy, final float radius, final SafePaint paint) {
-        getWrappedCanvas()
-                .drawCircle((float) (cx + xOffset), (float) (cy + yOffset), radius, paint);
+    public void drawCircle(final double cx, final double cy, final float radius,
+            final SafePaint paint) {
+        getWrappedCanvas().drawCircle((float) (cx + xOffset), (float) (cy + yOffset), radius,
+                paint);
     }
 
     @Override
@@ -211,7 +219,8 @@ public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
     }
 
     @Override
-    public void drawLine(double startX, double startY, double stopX, double stopY, final SafePaint paint) {
+    public void drawLine(double startX, double startY, double stopX, double stopY,
+            final SafePaint paint) {
         startX += xOffset;
         startY += yOffset;
         stopX += xOffset;
@@ -275,7 +284,8 @@ public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
     }
 
     @Override
-    public void drawPosText(char[] text, int index, int count, double[] pos, final SafePaint paint) {
+    public void drawPosText(char[] text, int index, int count, double[] pos,
+            final SafePaint paint) {
         getWrappedCanvas().drawPosText(text, index, count, this.toOffsetFloatAry(pos, sFloatAry),
                 paint);
     }
@@ -291,13 +301,14 @@ public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
     }
 
     @Override
-    public void drawRect(double left, double top, double right, double bottom, final SafePaint paint) {
+    public void drawRect(double left, double top, double right, double bottom,
+            final SafePaint paint) {
         left += xOffset;
         right += xOffset;
         top += yOffset;
         bottom += yOffset;
-        getWrappedCanvas()
-                .drawRect((float) left, (float) top, (float) right, (float) bottom, paint);
+        getWrappedCanvas().drawRect((float) left, (float) top, (float) right, (float) bottom,
+                paint);
     }
 
     @Override
@@ -318,39 +329,42 @@ public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
     }
 
     @Override
-    public void drawText(char[] text, int index, int count, double x, double y, final SafePaint paint) {
+    public void drawText(char[] text, int index, int count, double x, double y,
+            final SafePaint paint) {
         getWrappedCanvas().drawText(text, index, count, (float) (x + xOffset),
                 (float) (y + yOffset), paint);
     }
 
     @Override
-    public void drawText(CharSequence text, int start, int end, double x, double y, final SafePaint paint) {
+    public void drawText(CharSequence text, int start, int end, double x, double y,
+            final SafePaint paint) {
         getWrappedCanvas().drawText(text, start, end, (float) (x + xOffset), (float) (y + yOffset),
                 paint);
     }
 
     @Override
-    public void drawText(String text, int start, int end, double x, double y, final SafePaint paint) {
+    public void drawText(String text, int start, int end, double x, double y,
+            final SafePaint paint) {
         getWrappedCanvas().drawText(text, start, end, (float) (x + xOffset), (float) (y + yOffset),
                 paint);
     }
 
     @Override
     public void drawTextOnPath(char[] text, int index, int count, final SafeTranslatedPath path,
-                               float hOffset, float vOffset, final SafePaint paint) {
+            float hOffset, float vOffset, final SafePaint paint) {
         getWrappedCanvas().drawTextOnPath(text, index, count, path, hOffset, vOffset, paint);
     }
 
     @Override
     public void drawTextOnPath(String text, SafeTranslatedPath path, float hOffset, float vOffset,
-                               final SafePaint paint) {
+            final SafePaint paint) {
         getWrappedCanvas().drawTextOnPath(text, path, hOffset, vOffset, paint);
     }
 
     @Override
     public void drawVertices(VertexMode mode, int vertexCount, double[] verts, int vertOffset,
-                             float[] texs, int texOffset, int[] colors, int colorOffset, short[] indices,
-                             int indexOffset, int indexCount, final SafePaint paint) {
+            float[] texs, int texOffset, int[] colors, int colorOffset, short[] indices,
+            int indexOffset, int indexCount, final SafePaint paint) {
         getWrappedCanvas().drawVertices(mode, vertexCount, this.toOffsetFloatAry(verts, sFloatAry),
                 vertOffset, texs, texOffset, colors, colorOffset, indices, indexOffset, indexCount,
                 paint);
@@ -406,7 +420,8 @@ public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
     }
 
     @Override
-    public boolean quickReject(double left, double top, double right, double bottom, final EdgeType type) {
+    public boolean quickReject(double left, double top, double right, double bottom,
+            final EdgeType type) {
         left += xOffset;
         right += xOffset;
         top += yOffset;
@@ -463,21 +478,21 @@ public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
 
     @Override
     public int saveLayer(double left, double top, double right, double bottom, SafePaint paint,
-                         int saveFlags) {
+            int saveFlags) {
         return getWrappedCanvas().saveLayer((float) (left + xOffset), (float) (top + yOffset),
                 (float) (right + xOffset), (float) (bottom + yOffset), paint, saveFlags);
     }
 
     @Override
     public int saveLayer(Rect bounds, SafePaint paint, int saveFlags) {
-        int result = getWrappedCanvas().saveLayer(this.toOffsetRectF(bounds, sRectF), paint,
-                saveFlags);
+        int result =
+                getWrappedCanvas().saveLayer(this.toOffsetRectF(bounds, sRectF), paint, saveFlags);
         return result;
     }
 
     @Override
     public int saveLayerAlpha(double left, double top, double right, double bottom, int alpha,
-                              int saveFlags) {
+            int saveFlags) {
         return getWrappedCanvas().saveLayerAlpha((float) (left + xOffset), (float) (top + yOffset),
                 (float) (right + xOffset), (float) (bottom + yOffset), alpha, saveFlags);
     }
@@ -551,8 +566,8 @@ public class SafeTranslatedCanvas extends Canvas implements ISafeCanvas {
             reuse = new RectF();
         }
 
-        reuse.set(rect.left + xOffset, rect.top + yOffset, rect.right + xOffset, rect.bottom
-                + yOffset);
+        reuse.set(rect.left + xOffset, rect.top + yOffset, rect.right + xOffset,
+                rect.bottom + yOffset);
         return reuse;
     }
 

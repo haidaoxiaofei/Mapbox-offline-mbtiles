@@ -1,7 +1,5 @@
 package com.mapbox.mapboxsdk.views.safecanvas;
 
-import com.mapbox.mapboxsdk.overlay.Overlay;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Matrix;
@@ -9,9 +7,11 @@ import android.graphics.Matrix;
 /**
  * The SafeBitmapShader class is designed to work in conjunction with {@link SafeTranslatedCanvas}
  * to work around various Android issues with large canvases. For the two classes to work together,
- * call {@link #onDrawCycleStart} at the start of the {@link Overlay#drawSafe} method of your
- * {@link Overlay}. This will set the adjustment needed to draw your BitmapShader safely on the
- * canvas without any drawing distortion at high zoom levels and without any scrolling issues.
+ * call {@link #onDrawCycleStart} at the start of the
+ * {@link com.mapbox.mapboxsdk.overlay.OverlayOverlay#drawSafe}
+ * method of your {@link com.mapbox.mapboxsdk.overlay.OverlayOverlay}. This will set the adjustment
+ * needed to draw your BitmapShader safely on the canvas without any drawing distortion at high zoom
+ * levels and without any scrolling issues.
  *
  * @author Marc Kurtz
  * @see {@link ISafeCanvas}
@@ -34,7 +34,8 @@ public class SafeBitmapShader extends BitmapShader {
      * passed to it.
      */
     public void onDrawCycleStart(ISafeCanvas canvas) {
-        mMatrix.setTranslate(canvas.getXOffset() % mBitmapWidth, canvas.getYOffset() % mBitmapHeight);
+        mMatrix.setTranslate(canvas.getXOffset() % mBitmapWidth,
+                canvas.getYOffset() % mBitmapHeight);
         this.setLocalMatrix(mMatrix);
     }
 }

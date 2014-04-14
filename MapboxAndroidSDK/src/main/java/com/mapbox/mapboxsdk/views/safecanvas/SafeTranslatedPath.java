@@ -1,17 +1,19 @@
 package com.mapbox.mapboxsdk.views.safecanvas;
 
-import com.mapbox.mapboxsdk.overlay.Overlay;
-
 import android.graphics.Matrix;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
 /**
- * The SafeTranslatedPath class is designed to work in conjunction with {@link SafeTranslatedCanvas}
+ * The SafeTranslatedPath class is designed to work in conjunction with {@link
+ * SafeTranslatedCanvas}
  * to work around various Android issues with large canvases. For the two classes to work together,
- * call {@link #onDrawCycleStart} at the start of the {@link Overlay#drawSafe} method of your
- * {@link Overlay}. This will set the adjustment needed to draw your Path safely on the canvas
+ * call {@link #onDrawCycleStart} at the start of the
+ * {@link com.mapbox.mapboxsdk.overlay.Overlay.Overlay#drawSafe}
+ * method of your
+ * {@link com.mapbox.mapboxsdk.overlay.Overlay.Overlay}. This will set the adjustment needed to draw
+ * your Path safely on the canvas
  * without any drawing distortion at high zoom levels. Methods of the {@link Path} class that use
  * unsafe float types have been deprecated in favor of replacement methods that use doubles.
  *
@@ -20,7 +22,7 @@ import android.graphics.RectF;
  */
 public class SafeTranslatedPath extends Path {
 
-    private final static RectF sRectF = new RectF();
+    private static final RectF sRectF = new RectF();
 
     public int xOffset = 0;
     public int yOffset = 0;
@@ -317,8 +319,8 @@ public class SafeTranslatedPath extends Path {
             reuse = new RectF();
         }
 
-        reuse.set(rect.left + xOffset, rect.top + yOffset, rect.right + xOffset, rect.bottom
-                + yOffset);
+        reuse.set(rect.left + xOffset, rect.top + yOffset, rect.right + xOffset,
+                rect.bottom + yOffset);
         return reuse;
     }
 }

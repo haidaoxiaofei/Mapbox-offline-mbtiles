@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class GeoJSONLayer {
 
-    private MapView mapView;
+    private final MapView mapView;
 
     public GeoJSONLayer(final MapView mapView) {
         this.mapView = mapView;

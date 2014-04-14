@@ -10,8 +10,8 @@ import java.util.Locale;
  * Underneath, this initializes a WebSourceTileLayer, but provides conveniences
  * for retina tiles, initialization by ID, and loading over SSL.
  */
-public class MapboxTileLayer extends TileJsonTileLayer implements MapViewConstants,
-        MapboxConstants {
+public class MapboxTileLayer extends TileJsonTileLayer
+        implements MapViewConstants, MapboxConstants {
     private static final String TAG = "MapboxTileLayer";
     private String mId;
 
@@ -46,8 +46,8 @@ public class MapboxTileLayer extends TileJsonTileLayer implements MapViewConstan
 
     @Override
     protected String getBrandedJSONURL() {
-        return String.format("http%s://api.tiles.mapbox.com/v3/%s.json%s",
-                (mEnableSSL ? "s" : ""), mId, (mEnableSSL ? "?secure" : ""));
+        return String.format("http%s://api.tiles.mapbox.com/v3/%s.json%s", (mEnableSSL ? "s" : ""),
+                mId, (mEnableSSL ? "?secure" : ""));
     }
 
     public String getCacheKey() {

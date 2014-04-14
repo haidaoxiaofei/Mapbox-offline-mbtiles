@@ -1,8 +1,8 @@
 package com.mapbox.mapboxsdk.events;
 
 /**
- * The listener interface for receiving map movement events. To process a map event, either implement
- * this interface or extend MapAdapter, then register with the MapView using
+ * The listener interface for receiving map movement events. To process a map event, either
+ * implement this interface or extend MapAdapter, then register with the MapView using
  * setMapListener.
  *
  * @author Theodore Hong

@@ -6,7 +6,6 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
-
 import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -40,7 +39,8 @@ public class Marker {
 
     private String mTitle = "";
     private String mDescription = "";
-    private String mSubDescription = ""; //a third field that can be displayed in the infowindow, on a third line
+    private String mSubDescription = "";
+    //a third field that can be displayed in the infowindow, on a third line
     private Drawable mImage; //that will be shown in the infowindow.
     //private GeoPoint mGeoPoint //unfortunately, this is not so simple...
     private Object mRelatedObject; //reference to an object (of any kind) linked to this item.
@@ -49,10 +49,6 @@ public class Marker {
 
     /**
      * Construct a new Marker, given title, description, and place
-     *
-     * @param title
-     * @param description
-     * @param latLng
      */
     public Marker(String title, String description, LatLng latLng) {
         this(null, title, description, latLng);
@@ -61,10 +57,10 @@ public class Marker {
     /**
      * Initialize a new marker object, adding it to a MapView and attaching a tooltip
      *
-     * @param mv           a mapview
-     * @param aTitle       the title of the marker, in a potential tooltip
+     * @param mv a mapview
+     * @param aTitle the title of the marker, in a potential tooltip
      * @param aDescription the description of the marker, in a tooltip
-     * @param aLatLng      the location of the marker
+     * @param aLatLng the location of the marker
      */
     public Marker(MapView mv, String aTitle, String aDescription, LatLng aLatLng) {
         this.setTitle(aTitle);
@@ -119,7 +115,8 @@ public class Marker {
 
     /**
      * Indicates a hotspot for an area. This is where the origin (0,0)of a point will be located
-     * relative to the area. In otherwords this acts as an offset. NONE indicates that no adjustment
+     * relative to the area. In otherwords this acts as an offset. NONE indicates that no
+     * adjustment
      * should be made.
      */
     public enum HotspotPlace {
@@ -280,8 +277,6 @@ public class Marker {
 
     /**
      * Get the width of the marker, based on the width of the image backing it.
-     *
-     * @return
      */
     public int getWidth() {
         return this.mMarker.getIntrinsicWidth();
@@ -293,10 +288,6 @@ public class Marker {
 
     /**
      * Get the current position of the marker in pixels
-     *
-     * @param projection
-     * @param reuse
-     * @return
      */
     public PointF getPositionOnScreen(final Projection projection, final PointF reuse) {
         return projection.toPixels(mCurMapCoords, reuse);
@@ -406,9 +397,6 @@ public class Marker {
 
     /**
      * Sets the Icon image that represents this marker on screen.
-     *
-     * @param aIcon
-     * @return
      */
     public Marker setIcon(Icon aIcon) {
         this.icon = aIcon;

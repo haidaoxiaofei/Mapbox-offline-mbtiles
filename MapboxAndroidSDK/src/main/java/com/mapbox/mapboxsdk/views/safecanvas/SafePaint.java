@@ -1,6 +1,5 @@
 package com.mapbox.mapboxsdk.views.safecanvas;
 
-
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
@@ -17,7 +16,8 @@ public class SafePaint extends Paint {
     @Override
     public PathEffect setPathEffect(PathEffect effect) {
         if (effect instanceof DashPathEffect) {
-            throw new RuntimeException("Do not use DashPathEffect. Use SafeDashPathEffect instead.");
+            throw new RuntimeException(
+                    "Do not use DashPathEffect. Use SafeDashPathEffect instead.");
         }
         return super.setPathEffect(effect);
     }
