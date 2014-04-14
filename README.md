@@ -16,25 +16,43 @@ The development of the SDK is on its very earliest stage, so many of its element
 will be unstable and not fully tested. Otherwise you can build the library from
 source, and experiment with the latest additions to the project.
 
-### With Gradle
+### With Gradle (Android Studio, IntelliJ, etc) - Recommended
 
-Add this to your `dependencies { }` statment of `build.gradle`:
+Add this to your to your `build.gradle`:
 
 ```groovy
-compile ('com.github.chrisbanes.bitmapcache:BitmapCache:2.4+@aar') {
-    transitive = true
-    exclude module: 'support-v4'
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots'}
 }
-compile 'com.mapbox.mapboxsdk:library:0.2.2@aar'
-compile 'com.nineoldandroids:library:2.4.0'
-compile 'com.jakewharton:disklrucache:2.0.1'
-compile 'com.google.guava:guava:16.0.1'
-compile 'com.squareup.okhttp:okhttp:1.3.0'
+
+dependencies {
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.2.3-SNAPSHOT@aar'){
+        transitive=true
+    }
+}
+
 ```
 
-### Building from source
+### Manually / Hardcoding In Project
 
-**With Gradle** *(recommended)*
+You'll need to download and include the mapbox-android-sdk.aar file and all artifacts (.aar and .jar files listed) listed in `MapboxAndroidSDK / build.gradle`.  These **WILL** change over time so please check back regularly.
+
+*Example:*
+
+* Mapbox Android SDK (.aar) - 0.2.3-SNAPSHOT
+* Android Support V4 - 19.1
+* OkHttp - 1.3.0
+* NineOldAndroids - 2.4.0
+* DiskLRUCache - 2.0.1
+* Guava - 16.0.1
+
+
+### Building From Source
+
+Building from source means you get the very latest version of our code. The first step is to clone the repository to a directory in your system
+
+```git clone https://github.com/mapbox/mapbox-android-sdk.git ```
 
 We use Gradle to generate a built version of our latest code in a matter of seconds.
 To use it with your IDE, make sure that to import the project by selecting `build.gradle` (in the project root directory) as the project file.
@@ -67,17 +85,15 @@ For more information:
 
 http://www.gradle.org/docs/current/userguide/gradle_wrapper.html
 
-**Manually**
+From there, to build an archive:
 
-Building from source means you get the very latest version of our code. The first step is to clone the repository to a directory in your system
+```sh
+./gradlew clean assembleRelease
 
-```git clone https://github.com/mapbox/mapbox-android-sdk.git ```
+# The archive (mapbox-android-sdk-<VERSION>.aar) will be found in
+<PROJECTHOME>/MapboxAndroidSDK/build/libs
+```
 
-#### Building in IntelliJ IDEA or Android Studio
-
-* Created an Android project in IDEA
-* Go to Import Module... and select the OSMDroid folder
-* Repeat the step with the SDK
-* Go to File-Project Structure-Modules, and add both projects as module dependencies of your app project.
+**Don't forget to then also include the dependencies from `MapboxAndroidSDK / build.gradle` in your classpath!**
 
 ## [Quick-start Guide](https://github.com/mapbox/mapbox-android-sdk/blob/master/QUICKSTART.md)
