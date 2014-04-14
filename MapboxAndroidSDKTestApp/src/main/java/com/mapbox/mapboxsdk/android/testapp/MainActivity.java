@@ -42,9 +42,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mv = (MapView) findViewById(R.id.mapview);
-		replaceMapView(street);
-
-//        replaceMapView("test.MBTiles");
+        replaceMapView("test.MBTiles");
         addLocationOverlay();
 
     mv.loadFromGeoJSONURL(
