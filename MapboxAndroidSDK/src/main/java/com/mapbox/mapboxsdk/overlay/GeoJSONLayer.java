@@ -5,7 +5,7 @@ import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.format.GeoJSON;
 import android.os.AsyncTask;
 import android.util.Log;
-import org.json.JSONException;
+import com.squareup.okhttp.OkHttpClient;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 public class GeoJSONLayer {
 
@@ -33,35 +34,49 @@ public class GeoJSONLayer {
     /**
      * Class that generates markers from formats such as GeoJSON
      */
-    private class Getter extends AsyncTask<String, Void, String> {
+    private class Getter extends AsyncTask<String, Void, ArrayList<Object>> {
         @Override
-        protected String doInBackground(String... params) {
+        protected ArrayList<Object> doInBackground(String... params) {
             InputStream is;
             String jsonText = null;
-            try {
+            ArrayList<Object> uiObjects = new ArrayList<Object>();
+			try {
+				OkHttpClient okHttpClient = new OkHttpClient();
+				URL.setURLStreamHandlerFactory(okHttpClient);
                 is = new URL(params[0]).openStream();
                 BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
                 jsonText = readAll(rd);
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return jsonText;
-        }
-
-        @Override
-        protected void onPostExecute(String jsonString) {
-            try {
-				// TODO Move to doInBackground
-                GeoJSON.parseString(jsonString, mapView);
-            } catch (JSONException e) {
-                Log.w(TAG, "JSON parsed was invalid. Continuing without it");
+				uiObjects.addAll(GeoJSON.parseString(jsonText, mapView));
             } catch (Exception e) {
-                Log.e(TAG, "Other exception returned from async geojson load " + e.getMessage());
+                Log.e(TAG, "Error loading / parsing GeoJSON: " + e.toString());
+				e.printStackTrace();
             }
+            return uiObjects;
         }
 
-        private String readAll(Reader rd) throws IOException {
+		@Override
+		protected void onPostExecute(ArrayList<Object> objects)
+		{
+			// Back on the Main Thread so add new UI Objects and refresh map
+			for (Object obj: objects)
+			{
+				if (obj instanceof Marker)
+				{
+					mapView.addMarker((Marker)obj);
+				}
+				else if (obj instanceof PathOverlay)
+				{
+					mapView.getOverlays().add((PathOverlay)obj);
+				}
+			}
+			if (objects.size() > 0)
+			{
+				mapView.invalidate();
+			}
+		}
+
+		private String readAll(Reader rd) throws IOException {
             StringBuilder sb = new StringBuilder();
             int cp;
             while ((cp = rd.read()) != -1) {
