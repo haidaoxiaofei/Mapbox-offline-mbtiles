@@ -41,8 +41,7 @@ public class GeoJSONLayer {
             String jsonText = null;
             ArrayList<Object> uiObjects = new ArrayList<Object>();
 			try {
-				OkHttpClient okHttpClient = new OkHttpClient();
-				URL.setURLStreamHandlerFactory(okHttpClient);
+				Log.w(TAG, "Mapbox SDK downloading GeoJSON URL: " + params[0]);
                 is = new URL(params[0]).openStream();
                 BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
                 jsonText = readAll(rd);
