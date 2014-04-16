@@ -14,7 +14,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 
 /**
@@ -41,22 +40,22 @@ public class GeoJSON {
      */
     public static List<Object> parse(JSONObject json, MapView mv) throws JSONException {
         ArrayList<Object> uiObjects = new ArrayList<Object>();
-		String type = json.optString("type");
-		if (Strings.isNullOrEmpty(type)) {
-			Log.w(GeoJSON.class.getCanonicalName(), "type is null, so returning.");
-			return uiObjects;
-		}
+        String type = json.optString("type");
+        if (Strings.isNullOrEmpty(type)) {
+            Log.w(GeoJSON.class.getCanonicalName(), "type is null, so returning.");
+            return uiObjects;
+        }
         if (type.equalsIgnoreCase("FeatureCollection")) {
-			uiObjects.addAll(featureCollectionToLayers(json, mv));
+            uiObjects.addAll(featureCollectionToLayers(json, mv));
         } else if (type.equalsIgnoreCase("Feature")) {
             uiObjects.addAll(featureToLayer(json, mv));
         }
 /*
-		// Refresh Map Once To Update Changes From Parsing and Adding
-		mv.invalidate();
+        // Refresh Map Once To Update Changes From Parsing and Adding
+        mv.invalidate();
 */
- 		return uiObjects;
-	}
+        return uiObjects;
+    }
 
     /**
      * Given a <a href='http://geojson.org/geojson-spec.html#feature-collection-objects'>GeoJSON
@@ -70,12 +69,12 @@ public class GeoJSON {
     public static ArrayList<Object> featureCollectionToLayers(JSONObject featureCollection, MapView mv) throws JSONException {
         ArrayList<Object> uiObjects = new ArrayList<Object>();
 
-		JSONArray features = (JSONArray) featureCollection.get("features");
+        JSONArray features = (JSONArray) featureCollection.get("features");
         // foreach is not usable for JSONArray, so longform
         for (int i = 0; i < features.length(); i++) {
             uiObjects.addAll(featureToLayer((JSONObject) features.get(i), mv));
         }
-		return uiObjects;
+        return uiObjects;
     }
 
     /**
@@ -87,17 +86,17 @@ public class GeoJSON {
      */
     public static List<Object> featureToLayer(JSONObject feature, MapView mv) throws JSONException {
 
-		ArrayList<Object> uiObjects = new ArrayList<Object>();
+        ArrayList<Object> uiObjects = new ArrayList<Object>();
 
         JSONObject properties = (JSONObject) feature.get("properties");
         String title = properties.optString("title");
         JSONObject geometry = (JSONObject) feature.get("geometry");
         String type = geometry.optString("type");
 
-		if (Strings.isNullOrEmpty(type)) {
-			Log.w(GeoJSON.class.getCanonicalName(), "type is null, so can't parse anything.");
-			return uiObjects;
-		}
+        if (Strings.isNullOrEmpty(type)) {
+            Log.w(GeoJSON.class.getCanonicalName(), "type is null, so can't parse anything.");
+            return uiObjects;
+        }
 
         int j;
 
@@ -132,7 +131,7 @@ public class GeoJSON {
             }
 
             uiObjects.add(marker);
-//			mv.addMarker(marker);
+//          mv.addMarker(marker);
         } else if (type.equalsIgnoreCase("MultiPoint")) {
             JSONArray points = (JSONArray) geometry.get("coordinates");
             for (j = 0; j < points.length(); j++) {
@@ -143,7 +142,7 @@ public class GeoJSON {
                 if (markerIcon != null) {
                     marker.setIcon(markerIcon);
                 }
-				uiObjects.add(marker);
+                uiObjects.add(marker);
             }
         } else if (type.equalsIgnoreCase("LineString")) {
             PathOverlay path = new PathOverlay();
@@ -155,7 +154,7 @@ public class GeoJSON {
                 double lat = (Double) coordinates.get(1);
                 path.addPoint(new LatLng(lat, lon));
             }
- 			uiObjects.add(path);
+            uiObjects.add(path);
         } else if (type.equalsIgnoreCase("MultiLineString")) {
             JSONArray lines = (JSONArray) geometry.get("coordinates");
             for (int k = 0; k < lines.length(); k++) {
@@ -168,8 +167,8 @@ public class GeoJSON {
                     double lat = (Double) coordinates.get(1);
                     path.addPoint(new LatLng(lat, lon));
                 }
-				uiObjects.add(path);
-			}
+                uiObjects.add(path);
+            }
         } else if (type.equalsIgnoreCase("Polygon")) {
             PathOverlay path = new PathOverlay();
             path.getPaint().setStyle(Paint.Style.FILL);
@@ -199,11 +198,11 @@ public class GeoJSON {
                         path.addPoint(new LatLng(lat, lon));
                     }
                 }
-				uiObjects.add(path);
-			}
+                uiObjects.add(path);
+            }
         }
-		Log.i(GeoJSON.class.getCanonicalName(), "Returning " + uiObjects.size() + " UI objects");
- 		return uiObjects;
+        Log.i(GeoJSON.class.getCanonicalName(), "Returning " + uiObjects.size() + " UI objects");
+        return uiObjects;
     }
 
     private static boolean windingOrder(JSONArray ring) throws JSONException {
