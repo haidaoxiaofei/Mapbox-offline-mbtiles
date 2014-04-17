@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.ArrayList;
 
 public class GeoJSONLayer {
@@ -45,7 +46,10 @@ public class GeoJSONLayer {
                 BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
                 jsonText = readAll(rd);
 
-                uiObjects.addAll(GeoJSON.parseString(jsonText, mapView));
+                List<Object> parsed = GeoJSON.parseString(jsonText, mapView);
+                Log.i(TAG, "Parsed GeoJSON with " + parsed.size() + " features.");
+
+                uiObjects.addAll(parsed);
             } catch (Exception e) {
                 Log.e(TAG, "Error loading / parsing GeoJSON: " + e.toString());
                 e.printStackTrace();
