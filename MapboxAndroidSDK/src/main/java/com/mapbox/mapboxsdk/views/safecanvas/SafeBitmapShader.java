@@ -10,7 +10,8 @@ import android.graphics.Matrix;
  * call {@link #onDrawCycleStart} at the start of the
  * {@link com.mapbox.mapboxsdk.overlay.OverlayOverlay#drawSafe}
  * method of your {@link com.mapbox.mapboxsdk.overlay.OverlayOverlay}. This will set the adjustment
- * needed to draw your BitmapShader safely on the canvas without any drawing distortion at high zoom
+ * needed to draw your BitmapShader safely on the canvas without any drawing distortion at high
+ * zoom
  * levels and without any scrolling issues.
  *
  * @author Marc Kurtz

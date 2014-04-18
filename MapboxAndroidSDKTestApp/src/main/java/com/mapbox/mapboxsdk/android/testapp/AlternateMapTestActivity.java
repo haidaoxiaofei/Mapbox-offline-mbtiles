@@ -11,12 +11,12 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 
 public class AlternateMapTestActivity extends ActionBarActivity {
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_alternatemap);
-    MapView mv = (MapView) findViewById(R.id.altMapView);
-    mv.setCenter(new LatLng(43.07472, -89.38421));
-    mv.setZoom(14);
-  }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_alternatemap);
+        MapView mv = (MapView) findViewById(R.id.altMapView);
+        mv.setCenter(new LatLng(43.07472, -89.38421));
+        mv.setZoom(14);
+    }
 }

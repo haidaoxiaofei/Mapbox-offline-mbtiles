@@ -1,10 +1,10 @@
 package com.mapbox.mapboxsdk.overlay;
 
-import com.google.common.base.Strings;
-import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.format.GeoJSON;
 import android.os.AsyncTask;
 import android.util.Log;
+import com.google.common.base.Strings;
+import com.mapbox.mapboxsdk.format.GeoJSON;
+import com.mapbox.mapboxsdk.views.MapView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,8 +12,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GeoJSONLayer {
 
@@ -43,7 +43,8 @@ public class GeoJSONLayer {
             try {
                 Log.w(TAG, "Mapbox SDK downloading GeoJSON URL: " + params[0]);
                 is = new URL(params[0]).openStream();
-                BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+                BufferedReader rd =
+                        new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
                 jsonText = readAll(rd);
 
                 List<Object> parsed = GeoJSON.parseString(jsonText, mapView);
@@ -60,7 +61,7 @@ public class GeoJSONLayer {
         @Override
         protected void onPostExecute(ArrayList<Object> objects) {
             // Back on the Main Thread so add new UI Objects and refresh map
-            for (Object obj: objects) {
+            for (Object obj : objects) {
                 if (obj instanceof Marker) {
                     mapView.addMarker((Marker) obj);
                 } else if (obj instanceof PathOverlay) {

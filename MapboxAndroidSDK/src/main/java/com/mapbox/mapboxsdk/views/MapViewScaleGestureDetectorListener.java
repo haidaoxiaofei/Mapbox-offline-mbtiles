@@ -41,8 +41,8 @@ public class MapViewScaleGestureDetectorListener
             this.mapView.getController()
                     .aboutToStartAnimation(
                             lastFocusX + this.mapView.getScrollX() - (this.mapView.getWidth() / 2),
-                            lastFocusY + this.mapView.getScrollY() - (this.mapView.getHeight()
-                                    / 2));
+                            lastFocusY + this.mapView.getScrollY() - (this.mapView.getHeight() / 2)
+                    );
             scaling = true;
         }
         return true;

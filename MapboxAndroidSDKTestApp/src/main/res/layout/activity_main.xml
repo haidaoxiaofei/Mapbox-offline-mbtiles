@@ -1,73 +1,73 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-
-
-  <com.mapbox.mapboxsdk.views.MapView
-      android:id="@+id/mapview"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent">
-
-  </com.mapbox.mapboxsdk.views.MapView>
-  <LinearLayout
-      android:id="@+id/buttonsrow"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:orientation="horizontal"
-      android:weightSum="1">
-    <Button
-        android:id="@+id/satbut"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Sat"
-        android:layout_weight="0.25" android:layout_margin="-5dp"
-        />
-    <Button
-        android:id="@+id/terbut"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Terr"
-        android:layout_weight="0.25" android:layout_margin="-5dp"
-        />
-    <Button
-        android:id="@+id/strbut"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Street"
-        android:layout_weight="0.25"
-        />
+        android:layout_height="fill_parent">
+
+
+    <com.mapbox.mapboxsdk.views.MapView
+            android:id="@+id/mapview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+    </com.mapbox.mapboxsdk.views.MapView>
+    <LinearLayout
+            android:id="@+id/buttonsrow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="1">
+        <Button
+                android:id="@+id/satbut"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Sat"
+                android:layout_weight="0.25" android:layout_margin="-5dp"
+                />
+        <Button
+                android:id="@+id/terbut"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Terr"
+                android:layout_weight="0.25" android:layout_margin="-5dp"
+                />
+        <Button
+                android:id="@+id/strbut"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Street"
+                android:layout_weight="0.25"
+                />
+
+        <Button
+                android:id="@+id/strAltMap"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Alt"
+                android:layout_weight="0.25"
+                />
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:id="@+id/layerselect"
+                />
+    </LinearLayout>
+    <ImageView android:layout_width="100dp" android:layout_height="65dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true" android:src="@drawable/mblogo"
+            android:layout_marginTop="-10dp"
+            android:id="@+id/imageView"/>
 
     <Button
-        android:id="@+id/strAltMap"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Alt"
-        android:layout_weight="0.25"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:id="@+id/layerselect"
-        />
-  </LinearLayout>
-  <ImageView android:layout_width="100dp" android:layout_height="65dp"
-      android:layout_alignParentTop="true"
-      android:layout_alignParentRight="true" android:src="@drawable/mblogo"
-      android:layout_marginTop="-10dp"
-      android:id="@+id/imageView"/>
-
-  <Button
-      style="?android:attr/buttonStyleSmall"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="spin"
-      android:id="@+id/spinButton"
-      android:layout_above="@+id/buttonsrow"
-      android:layout_alignRight="@+id/imageView"
-      android:layout_alignEnd="@+id/imageView"/>
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="spin"
+            android:id="@+id/spinButton"
+            android:layout_above="@+id/buttonsrow"
+            android:layout_alignRight="@+id/imageView"
+            android:layout_alignEnd="@+id/imageView"/>
 
 </RelativeLayout>
