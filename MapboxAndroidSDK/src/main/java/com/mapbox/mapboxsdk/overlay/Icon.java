@@ -7,10 +7,9 @@ import android.os.Environment;
 import android.util.Log;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
-import com.squareup.okhttp.OkHttpClient;
+import com.mapbox.mapboxsdk.util.NetworkUtils;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -196,21 +195,12 @@ public class Icon implements MapboxConstants {
             this.url = src[0];
             CacheableBitmapDrawable result = getCache().getFromDiskCache(this.url, null);
             if (result == null) {
-                OkHttpClient client = new OkHttpClient();
-                InputStream in = null;
                 try {
-                    try {
-                        Log.d(TAG, "Maki url to load = '" + this.url + "'");
-                        HttpURLConnection connection = client.open(new URL(this.url));
-                        connection.setRequestProperty("User-Agent", MapboxConstants.USER_AGENT);
-                        // Note, sIconCache cannot be null..
-                        result = sIconCache.put(this.url, connection.getInputStream());
-                    } finally {
-                        if (in != null) {
-                            in.close();
-                        }
-                    }
-                } catch (IOException e) {
+					Log.d(TAG, "Maki url to load = '" + this.url + "'");
+					HttpURLConnection connection = NetworkUtils.getHttpURLConnection(new URL(url));
+					// Note, sIconCache cannot be null..
+					result = sIconCache.put(this.url, connection.getInputStream());
+				} catch (IOException e) {
                     Log.e(TAG, "doInBackground: Unable to fetch icon from: " + this.url);
                 }
             }

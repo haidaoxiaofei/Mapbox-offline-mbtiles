@@ -2,9 +2,9 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.squareup.okhttp.HttpResponseCache;
 import com.squareup.okhttp.OkHttpClient;
 import java.io.ByteArrayOutputStream;
@@ -157,11 +157,10 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
 
     class RetrieveJSONTask extends AsyncTask<String, Void, JSONObject> {
         protected JSONObject doInBackground(String... urls) {
-            InputStream in;
+            InputStream in = null;
             try {
                 URL url = new URL(urls[0]);
-                HttpURLConnection connection = client.open(url);
-                connection.setRequestProperty("User-Agent", MapboxConstants.USER_AGENT);
+                HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
                 in = connection.getInputStream();
                 byte[] response = readFully(in);
                 String result = new String(response, "UTF-8");
@@ -169,8 +168,19 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
-            }
-        }
+            } finally {
+				try
+				{
+					if (in != null) {
+						in.close();
+					}
+				}
+				catch (IOException e)
+				{
+					Log.e(TAG, "Error closing InputStream: " + e.toString());
+				}
+			}
+		}
     }
 
     private static final String TAG = "TileJsonTileLayer";
