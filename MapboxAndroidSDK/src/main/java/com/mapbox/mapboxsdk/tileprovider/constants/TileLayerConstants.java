@@ -24,7 +24,7 @@ public interface TileLayerConstants {
      */
     public static final int MAXIMUM_ZOOMLEVEL = 22;
 
-    public static final  int DEFAULT_TILE_SIZE = 256;
+    public static final int DEFAULT_TILE_SIZE = 256;
 
     /**
      * Initial tile cache size. The size will be increased as required by calling {@link

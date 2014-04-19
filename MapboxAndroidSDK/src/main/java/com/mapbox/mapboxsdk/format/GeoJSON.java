@@ -8,13 +8,12 @@ import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
 import com.mapbox.mapboxsdk.views.MapView;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * A GeoJSON parser.
@@ -66,7 +65,8 @@ public class GeoJSON {
      * @param mv a mapview
      * @throws JSONException
      */
-    public static ArrayList<Object> featureCollectionToLayers(JSONObject featureCollection, MapView mv) throws JSONException {
+    public static ArrayList<Object> featureCollectionToLayers(JSONObject featureCollection,
+            MapView mv) throws JSONException {
         ArrayList<Object> uiObjects = new ArrayList<Object>();
 
         JSONArray features = (JSONArray) featureCollection.get("features");
@@ -107,7 +107,9 @@ public class GeoJSON {
         String markerSize = properties.optString("marker-size");
         String markerSymbol = properties.optString("marker-symbol");
 
-        if (!Strings.isNullOrEmpty(markerColor) || !Strings.isNullOrEmpty(markerSize) || !Strings.isNullOrEmpty(markerSymbol)) {
+        if (!Strings.isNullOrEmpty(markerColor)
+                || !Strings.isNullOrEmpty(markerSize)
+                || !Strings.isNullOrEmpty(markerSymbol)) {
             // Who knows what kind of stuff we are getting in
             Icon.Size size;
 
@@ -131,7 +133,7 @@ public class GeoJSON {
             }
 
             uiObjects.add(marker);
-//          mv.addMarker(marker);
+            //          mv.addMarker(marker);
         } else if (type.equalsIgnoreCase("MultiPoint")) {
             JSONArray points = (JSONArray) geometry.get("coordinates");
             for (j = 0; j < points.length(); j++) {

@@ -12,7 +12,8 @@ import android.graphics.RectF;
  * call {@link #onDrawCycleStart} at the start of the
  * {@link com.mapbox.mapboxsdk.overlay.Overlay.Overlay#drawSafe}
  * method of your
- * {@link com.mapbox.mapboxsdk.overlay.Overlay.Overlay}. This will set the adjustment needed to draw
+ * {@link com.mapbox.mapboxsdk.overlay.Overlay.Overlay}. This will set the adjustment needed to
+ * draw
  * your Path safely on the canvas
  * without any drawing distortion at high zoom levels. Methods of the {@link Path} class that use
  * unsafe float types have been deprecated in favor of replacement methods that use doubles.
