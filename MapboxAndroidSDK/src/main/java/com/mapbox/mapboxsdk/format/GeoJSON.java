@@ -40,19 +40,27 @@ public class GeoJSON {
     public static List<Object> parse(JSONObject json, MapView mv) throws JSONException {
         ArrayList<Object> uiObjects = new ArrayList<Object>();
         String type = json.optString("type");
+
         if (Strings.isNullOrEmpty(type)) {
             Log.w(GeoJSON.class.getCanonicalName(), "type is null, so returning.");
             return uiObjects;
         }
-        if (type.equalsIgnoreCase("FeatureCollection")) {
+
+        if (type.equals("FeatureCollection")) {
             uiObjects.addAll(featureCollectionToLayers(json, mv));
-        } else if (type.equalsIgnoreCase("Feature")) {
+        } else if (type.equals("Feature")) {
             uiObjects.addAll(featureToLayer(json, mv));
+        } else if (
+                type.equals("Polygon") ||
+                type.equals("MultiPolygon") ||
+                type.equals("Point") ||
+                type.equals("MultiPoint") ||
+                type.equals("LineString") ||
+                type.equals("MultiLineString") ||
+                type.equals("GeometryCollection")) {
+            uiObjects.addAll(parseGeometry(json, null, mv, ""));
         }
-/*
-        // Refresh Map Once To Update Changes From Parsing and Adding
-        mv.invalidate();
-*/
+
         return uiObjects;
     }
 
@@ -70,7 +78,7 @@ public class GeoJSON {
         ArrayList<Object> uiObjects = new ArrayList<Object>();
 
         JSONArray features = (JSONArray) featureCollection.get("features");
-        // foreach is not usable for JSONArray, so longform
+        // foreach is not usable for JSONArray, so long-form
         for (int i = 0; i < features.length(); i++) {
             uiObjects.addAll(featureToLayer((JSONObject) features.get(i), mv));
         }
@@ -91,14 +99,12 @@ public class GeoJSON {
         JSONObject properties = (JSONObject) feature.get("properties");
         String title = properties.optString("title");
         JSONObject geometry = (JSONObject) feature.get("geometry");
-        String type = geometry.optString("type");
 
-        if (Strings.isNullOrEmpty(type)) {
+        if (Strings.isNullOrEmpty(geometry.optString("type"))) {
             Log.w(GeoJSON.class.getCanonicalName(), "type is null, so can't parse anything.");
             return uiObjects;
         }
 
-        int j;
 
         // Extract the marker style properties from the GeoJSON
         // (See: https://www.mapbox.com/developers/simplestyle/)
@@ -119,11 +125,19 @@ public class GeoJSON {
                 // Fine, we will just assume you meant large..
                 size = Icon.Size.LARGE;
             }
-
             markerIcon = new Icon(mv.getContext(), size, markerSymbol, markerColor);
         }
 
-        if (type.equalsIgnoreCase("Point")) {
+        return parseGeometry(geometry, markerIcon, mv, title);
+    }
+
+    private static ArrayList<Object> parseGeometry(JSONObject geometry, Icon markerIcon, MapView mv, String title)
+            throws JSONException {
+        String type = geometry.optString("type");
+        ArrayList<Object> uiObjects = new ArrayList<Object>();
+        int j;
+
+        if (type.equals("Point")) {
             JSONArray coordinates = (JSONArray) geometry.get("coordinates");
             double lon = (Double) coordinates.get(0);
             double lat = (Double) coordinates.get(1);
@@ -131,10 +145,8 @@ public class GeoJSON {
             if (markerIcon != null) {
                 marker.setIcon(markerIcon);
             }
-
             uiObjects.add(marker);
-            //          mv.addMarker(marker);
-        } else if (type.equalsIgnoreCase("MultiPoint")) {
+        } else if (type.equals("MultiPoint")) {
             JSONArray points = (JSONArray) geometry.get("coordinates");
             for (j = 0; j < points.length(); j++) {
                 JSONArray coordinates = (JSONArray) points.get(j);
@@ -146,7 +158,7 @@ public class GeoJSON {
                 }
                 uiObjects.add(marker);
             }
-        } else if (type.equalsIgnoreCase("LineString")) {
+        } else if (type.equals("LineString")) {
             PathOverlay path = new PathOverlay();
             JSONArray points = (JSONArray) geometry.get("coordinates");
             JSONArray coordinates;
@@ -157,7 +169,7 @@ public class GeoJSON {
                 path.addPoint(new LatLng(lat, lon));
             }
             uiObjects.add(path);
-        } else if (type.equalsIgnoreCase("MultiLineString")) {
+        } else if (type.equals("MultiLineString")) {
             JSONArray lines = (JSONArray) geometry.get("coordinates");
             for (int k = 0; k < lines.length(); k++) {
                 PathOverlay path = new PathOverlay();
@@ -171,7 +183,7 @@ public class GeoJSON {
                 }
                 uiObjects.add(path);
             }
-        } else if (type.equalsIgnoreCase("Polygon")) {
+        } else if (type.equals("Polygon")) {
             PathOverlay path = new PathOverlay();
             path.getPaint().setStyle(Paint.Style.FILL);
             JSONArray points = (JSONArray) geometry.get("coordinates");
@@ -203,7 +215,6 @@ public class GeoJSON {
                 uiObjects.add(path);
             }
         }
-        Log.i(GeoJSON.class.getCanonicalName(), "Returning " + uiObjects.size() + " UI objects");
         return uiObjects;
     }
 
