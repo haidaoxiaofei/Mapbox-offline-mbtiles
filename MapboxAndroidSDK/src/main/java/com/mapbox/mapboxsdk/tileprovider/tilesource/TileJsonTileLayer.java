@@ -7,6 +7,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.squareup.okhttp.HttpResponseCache;
 import com.squareup.okhttp.OkHttpClient;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -169,18 +171,15 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
                 e.printStackTrace();
                 return null;
             } finally {
-				try
-				{
-					if (in != null) {
-						in.close();
-					}
-				}
-				catch (IOException e)
-				{
-					Log.e(TAG, "Error closing InputStream: " + e.toString());
-				}
-			}
-		}
+                try {
+                    if (in != null) {
+                        in.close();
+                    }
+                } catch (IOException e) {
+                    Log.e(TAG, "Error closing InputStream: " + e.toString());
+                }
+            }
+        }
     }
 
     private static final String TAG = "TileJsonTileLayer";

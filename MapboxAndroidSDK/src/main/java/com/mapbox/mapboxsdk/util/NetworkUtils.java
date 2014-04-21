@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.squareup.okhttp.OkHttpClient;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -21,10 +22,10 @@ public class NetworkUtils {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-	public static HttpURLConnection getHttpURLConnection(final URL url) {
-		OkHttpClient client = new OkHttpClient();
-		HttpURLConnection connection = client.open(url);
-		connection.setRequestProperty("User-Agent", MapboxConstants.USER_AGENT);
-		return connection;
-	}
+    public static HttpURLConnection getHttpURLConnection(final URL url) {
+        OkHttpClient client = new OkHttpClient();
+        HttpURLConnection connection = client.open(url);
+        connection.setRequestProperty("User-Agent", MapboxConstants.USER_AGENT);
+        return connection;
+    }
 }
