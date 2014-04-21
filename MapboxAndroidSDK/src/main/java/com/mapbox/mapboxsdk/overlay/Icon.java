@@ -8,12 +8,14 @@ import android.util.Log;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
+
 import uk.co.senab.bitmapcache.BitmapLruCache;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
@@ -93,9 +95,9 @@ public class Icon implements MapboxConstants {
      * download process to load it from the API.
      *
      * @param context Android context - Used for proper Bitmap Density generation
-     * @param size Size of Icon
-     * @param symbol Maki Symbol
-     * @param aColor Color of Icon
+     * @param size    Size of Icon
+     * @param symbol  Maki Symbol
+     * @param aColor  Color of Icon
      */
     public Icon(Context context, Size size, String symbol, String aColor) {
         String url = MAPBOX_BASE_URL + "marker/pin-" + size.getApiString();
@@ -196,11 +198,11 @@ public class Icon implements MapboxConstants {
             CacheableBitmapDrawable result = getCache().getFromDiskCache(this.url, null);
             if (result == null) {
                 try {
-					Log.d(TAG, "Maki url to load = '" + this.url + "'");
-					HttpURLConnection connection = NetworkUtils.getHttpURLConnection(new URL(url));
-					// Note, sIconCache cannot be null..
-					result = sIconCache.put(this.url, connection.getInputStream());
-				} catch (IOException e) {
+                    Log.d(TAG, "Maki url to load = '" + this.url + "'");
+                    HttpURLConnection connection = NetworkUtils.getHttpURLConnection(new URL(url));
+                    // Note, sIconCache cannot be null..
+                    result = sIconCache.put(this.url, connection.getInputStream());
+                } catch (IOException e) {
                     Log.e(TAG, "doInBackground: Unable to fetch icon from: " + this.url);
                 }
             }
