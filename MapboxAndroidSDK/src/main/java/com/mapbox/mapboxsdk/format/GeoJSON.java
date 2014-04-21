@@ -214,6 +214,40 @@ public class GeoJSON {
                 }
                 uiObjects.add(path);
             }
+        } else if (type.equals("MultiPolygon")) {
+            PathOverlay path = new PathOverlay();
+            path.getPaint().setStyle(Paint.Style.FILL);
+            JSONArray polygons = (JSONArray) geometry.get("coordinates");
+
+            for (int p = 0; p < polygons.length(); p++) {
+                JSONArray points = (JSONArray) polygons.get(p);
+                for (int r = 0; r < points.length(); r++) {
+                    JSONArray ring = (JSONArray) points.get(r);
+                    JSONArray coordinates;
+
+                    // we re-wind inner rings of GeoJSON polygons in order
+                    // to render them as transparent in the canvas layer.
+
+                    // first ring should have windingOrder = true,
+                    // all others should have winding order == false
+                    if ((r == 0 && !windingOrder(ring)) || (r != 0 && windingOrder(ring))) {
+                        for (j = 0; j < ring.length(); j++) {
+                            coordinates = (JSONArray) ring.get(j);
+                            double lon = (Double) coordinates.get(0);
+                            double lat = (Double) coordinates.get(1);
+                            path.addPoint(new LatLng(lat, lon));
+                        }
+                    } else {
+                        for (j = ring.length() - 1; j >= 0; j--) {
+                            coordinates = (JSONArray) ring.get(j);
+                            double lon = (Double) coordinates.get(0);
+                            double lat = (Double) coordinates.get(1);
+                            path.addPoint(new LatLng(lat, lon));
+                        }
+                    }
+                    uiObjects.add(path);
+                }
+            }
         }
         return uiObjects;
     }
