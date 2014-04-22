@@ -149,10 +149,6 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
             Drawable result =
                     (tileLayer != null) ? tileLayer.getDrawableFromTile(MapTileDownloader.this,
                             tile, hdpi) : null;
-            //            Drawable result = getCache().getMapTileFromDisk(tile);
-            //            if (result == null && tileLayer != null) {
-            //                result = tileLayer.getDrawableFromTile(MapTileDownloader.this, tile, hdpi);
-            //            }
             return result;
         }
     }

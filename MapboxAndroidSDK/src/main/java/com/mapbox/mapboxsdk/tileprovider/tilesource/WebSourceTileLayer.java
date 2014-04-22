@@ -34,7 +34,6 @@ public class WebSourceTileLayer extends TileLayer {
     private AtomicInteger activeThreads = new AtomicInteger(0);
     protected boolean mEnableSSL = false;
     OkHttpClient client;
-    SSLContext sslContext;
 
     public WebSourceTileLayer(final String pId, final String url) {
         this(pId, url, false);
@@ -44,16 +43,6 @@ public class WebSourceTileLayer extends TileLayer {
         super(pId, url);
 
         this.client = new OkHttpClient();
-
-        try {
-            sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, null, null);
-        } catch (GeneralSecurityException e) {
-            activeThreads.decrementAndGet();
-            throw new AssertionError(); // The system has no TLS. Just give up.
-        }
-
-        client.setSslSocketFactory(sslContext.getSocketFactory());
         client.setResponseCache(null);
 
         initialize(pId, url, enableSSL);
