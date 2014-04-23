@@ -12,7 +12,6 @@ import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
-import com.squareup.okhttp.OkHttpClient;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -31,7 +30,6 @@ public class WebSourceTileLayer extends TileLayer {
     // Tracks the number of threads active in the getBitmapFromURL method.
     private AtomicInteger activeThreads = new AtomicInteger(0);
     protected boolean mEnableSSL = false;
-    OkHttpClient client;
 
     public WebSourceTileLayer(final String pId, final String url) {
         this(pId, url, false);
@@ -39,10 +37,6 @@ public class WebSourceTileLayer extends TileLayer {
 
     public WebSourceTileLayer(final String pId, final String url, final boolean enableSSL) {
         super(pId, url);
-
-        this.client = new OkHttpClient();
-        client.setResponseCache(null);
-
         initialize(pId, url, enableSSL);
     }
 
