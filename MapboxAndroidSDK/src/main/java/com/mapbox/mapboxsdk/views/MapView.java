@@ -1,6 +1,5 @@
 package com.mapbox.mapboxsdk.views;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.BitmapFactory;
@@ -67,7 +66,6 @@ import org.json.JSONException;
  * state of a single map, including layers, markers,
  * and interaction code.
  */
-@SuppressLint("WrongCall")
 public class MapView extends ViewGroup
         implements MapViewConstants, MapEventsReceiver, MapboxConstants {
     /**
@@ -171,7 +169,7 @@ public class MapView extends ViewGroup
             MapTileLayerBase tileProvider, final Handler tileRequestCompleteHandler,
             final AttributeSet attrs) {
         super(aContext, attrs);
-        setWillNotDraw(false);
+		setWillNotDraw(false);
         mReadyToComputeProjection = false;
         this.mController = new MapController(this);
         this.mScroller = new Scroller(aContext);
@@ -1326,9 +1324,10 @@ public class MapView extends ViewGroup
     @Override
     protected void onDraw(final Canvas c) {
         super.onDraw(c);
-        mProjection = new Projection(this);
 
-        // Save the current canvas matrix
+		mProjection = updateProjection();
+
+		// Save the current canvas matrix
         c.save();
 
         c.translate(getWidth() / 2, getHeight() / 2);
@@ -1344,6 +1343,15 @@ public class MapView extends ViewGroup
 
         c.restore();
     }
+
+	/**
+	 * Private Helper Method for onDraw().
+	 * @return New Projection object
+	 */
+	private Projection updateProjection()
+	{
+		return new Projection(this);
+	}
 
     /**
      * Returns true if the safe drawing canvas is being used.
