@@ -35,7 +35,7 @@ public class MainActivity extends ActionBarActivity {
     private String satellite = "brunosan.map-cyglrrfu";
     private String street = "examples.map-vyofok3q";
     private String terrain = "examples.map-zgrqqx0w";
-    private String currentLayer = "terrain";
+    private String currentLayer = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
