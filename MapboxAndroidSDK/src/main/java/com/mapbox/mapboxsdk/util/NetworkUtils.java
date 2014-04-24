@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.squareup.okhttp.HttpResponseCache;
 import com.squareup.okhttp.OkHttpClient;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -26,13 +27,20 @@ public class NetworkUtils {
     }
 
     public static HttpURLConnection getHttpURLConnection(final URL url) {
-		return getHttpURLConnection(url, null);
+		return getHttpURLConnection(url, null, null);
     }
 
 	public static HttpURLConnection getHttpURLConnection(final URL url, final ResponseCache cache) {
+		return getHttpURLConnection(url, cache, null);
+	}
+
+	public static HttpURLConnection getHttpURLConnection(final URL url, final ResponseCache cache, final SSLSocketFactory sslSocketFactory) {
 		OkHttpClient client = new OkHttpClient();
 		if (cache != null) {
 			client.setResponseCache(cache);
+		}
+		if (sslSocketFactory != null) {
+			client.setSslSocketFactory(sslSocketFactory);
 		}
 		HttpURLConnection connection = client.open(url);
 		connection.setRequestProperty("User-Agent", MapboxConstants.USER_AGENT);
