@@ -6,8 +6,6 @@ import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.squareup.okhttp.HttpResponseCache;
-import com.squareup.okhttp.OkHttpClient;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +14,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,18 +25,15 @@ import org.json.JSONObject;
 public class TileJsonTileLayer extends WebSourceTileLayer {
 
     private JSONObject tileJSON;
-    HttpResponseCache cache;
-    OkHttpClient client;
+    private HttpResponseCache cache;
 
     public TileJsonTileLayer(final String pId, final String url, final boolean enableSSL) {
         super(pId, url, enableSSL);
 
-        client = new OkHttpClient();
         File cacheDir =
                 new File(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString());
         try {
             cache = new HttpResponseCache(cacheDir, 1024);
-            client.setResponseCache(cache);
         } catch (Exception e) {
             Log.e(TAG, "Cache creation failed.", e);
         }
@@ -162,7 +156,7 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
             InputStream in = null;
             try {
                 URL url = new URL(urls[0]);
-                HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
+                HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url, cache);
                 in = connection.getInputStream();
                 byte[] response = readFully(in);
                 String result = new String(response, "UTF-8");
