@@ -9,7 +9,10 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
+import com.squareup.okhttp.HttpResponseCache;
 import com.squareup.okhttp.OkHttpClient;
+import java.io.File;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.ResponseCache;
 import java.net.URL;
@@ -34,5 +37,9 @@ public class NetworkUtils {
 		HttpURLConnection connection = client.open(url);
 		connection.setRequestProperty("User-Agent", MapboxConstants.USER_AGENT);
 		return connection;
+	}
+
+	public static ResponseCache getResponseCache(final File cacheDir, final int maxSize) throws IOException {
+		return new HttpResponseCache(cacheDir, maxSize);
 	}
 }

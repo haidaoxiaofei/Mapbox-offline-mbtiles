@@ -5,12 +5,12 @@ import android.util.Log;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
-import com.squareup.okhttp.HttpResponseCache;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.ResponseCache;
 import java.net.URL;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +25,7 @@ import org.json.JSONObject;
 public class TileJsonTileLayer extends WebSourceTileLayer {
 
     private JSONObject tileJSON;
-    private HttpResponseCache cache;
+    private ResponseCache cache;
 
     public TileJsonTileLayer(final String pId, final String url, final boolean enableSSL) {
         super(pId, url, enableSSL);
@@ -33,7 +33,7 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
         File cacheDir =
                 new File(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString());
         try {
-            cache = new HttpResponseCache(cacheDir, 1024);
+            cache = NetworkUtils.getResponseCache(cacheDir, 1024);
         } catch (Exception e) {
             Log.e(TAG, "Cache creation failed.", e);
         }
