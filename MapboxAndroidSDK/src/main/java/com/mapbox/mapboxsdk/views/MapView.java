@@ -670,7 +670,7 @@ public class MapView extends ViewGroup
      * @param boundingBox the box to compute the zoom for
      * @return the minimum zoom necessary to show the bounding box
      */
-    private float minimumZoomForBoundingBox(final BoundingBox boundingBox, final boolean regionFits) {
+    private float minimumZoomForBoundingBox(final BoundingBox boundingBox, final boolean regionFit) {
         final RectF rect = Projection.toMapPixels(boundingBox, TileLayerConstants.MAXIMUM_ZOOMLEVEL,
                 mTempRect);
         final float requiredLatitudeZoom =
@@ -679,7 +679,7 @@ public class MapView extends ViewGroup
         final float requiredLongitudeZoom =
                 TileLayerConstants.MAXIMUM_ZOOMLEVEL - (float) ((Math.log(
                         rect.width() / getMeasuredWidth()) / Math.log(2)));
-        return regionFits?Math.min(requiredLatitudeZoom, requiredLongitudeZoom):Math.max(requiredLatitudeZoom, requiredLongitudeZoom);
+        return regionFit?Math.min(requiredLatitudeZoom, requiredLongitudeZoom):Math.max(requiredLatitudeZoom, requiredLongitudeZoom);
     }
 
     /**
@@ -688,7 +688,7 @@ public class MapView extends ViewGroup
      * will always zoom to center of zoom  level 0.
      * Suggestion: Check getScreenRect(null).getHeight() > 0
      */
-    public MapView zoomToBoundingBox(final BoundingBox boundingBox, final boolean regionFits) {
+    public MapView zoomToBoundingBox(final BoundingBox boundingBox, final boolean regionFit) {
         BoundingBox inter =
                 (mScrollableAreaBoundingBox != null) ? mScrollableAreaBoundingBox.intersect(
                         boundingBox) : boundingBox;
@@ -701,7 +701,7 @@ public class MapView extends ViewGroup
         }
 
         // Zoom to boundingBox center, at calculated maximum allowed zoom level
-        getController().setZoom(minimumZoomForBoundingBox(inter, regionFits));
+        getController().setZoom(minimumZoomForBoundingBox(inter, regionFit));
 
         getController().setCenter(
                 new LatLng(inter.getCenter().getLatitude(), inter.getCenter().getLongitude()));
