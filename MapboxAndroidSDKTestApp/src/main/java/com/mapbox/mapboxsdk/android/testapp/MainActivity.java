@@ -45,8 +45,14 @@ public class MainActivity extends ActionBarActivity {
         replaceMapView("test.MBTiles");
         addLocationOverlay();
 
-        mv.loadFromGeoJSONURL(
-                "https://gist.githubusercontent.com/tmcw/4a6f5fa40ab9a6b2f163/raw/b1ee1e445225fc0a397e2605feda7da74c36161b/map.geojson");
+
+/*
+		// Original GeoJSON Test that causes crash when Hardware Acceleration when enabled in TestApp
+        mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/4a6f5fa40ab9a6b2f163/raw/b1ee1e445225fc0a397e2605feda7da74c36161b/map.geojson");
+*/
+
+		// Smaller GeoJSON Test
+		mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/bleege/133920f60eb7a334430f/raw/5392bad4e09015d3995d6153db21869b02f34d27/map.geojson");
         setButtonListeners();
         Marker m = new Marker(mv, "Edinburgh", "Scotland", new LatLng(55.94629, -3.20777));
         m.setIcon(new Icon(this, Icon.Size.SMALL, "marker-stroked", "FF0000"));
