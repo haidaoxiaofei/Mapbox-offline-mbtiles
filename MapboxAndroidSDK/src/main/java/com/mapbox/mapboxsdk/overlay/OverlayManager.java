@@ -160,7 +160,7 @@ public class OverlayManager extends AbstractList<Overlay> {
         };
     }
 
-    public void onDraw(final Canvas c, final MapView pMapView) {
+    public void draw(final Canvas c, final MapView pMapView) {
         if (mTilesOverlay != null && mTilesOverlay.isEnabled()) {
             mTilesOverlay.draw(c, pMapView, true);
         }

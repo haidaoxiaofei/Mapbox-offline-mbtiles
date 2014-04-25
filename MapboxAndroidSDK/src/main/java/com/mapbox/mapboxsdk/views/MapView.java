@@ -1369,7 +1369,7 @@ public class MapView extends ViewGroup
                 mProjection.getScreenRect().exactCenterY());
 
         // Draw all Overlays.
-        this.getOverlayManager().onDraw(c, this);
+        this.getOverlayManager().draw(c, this);
 
         c.restore();
     }
