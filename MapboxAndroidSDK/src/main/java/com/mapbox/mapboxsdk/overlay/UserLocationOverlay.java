@@ -11,7 +11,11 @@ import android.graphics.RectF;
 import android.location.Location;
 import android.util.Log;
 import android.view.MotionEvent;
+
 import com.mapbox.mapboxsdk.R;
+import com.mapbox.mapboxsdk.events.MapListener;
+import com.mapbox.mapboxsdk.events.ScrollEvent;
+import com.mapbox.mapboxsdk.events.ZoomEvent;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
@@ -20,13 +24,14 @@ import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.Projection;
+
 import java.util.LinkedList;
 
 /**
  * @author Marc Kurtz
  * @author Manuel Stahl
  */
-public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
+public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, MapListener {
 
     private final SafePaint mPaint = new SafePaint();
     private final SafePaint mCirclePaint = new SafePaint();
@@ -489,4 +494,13 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable {
     }
 
     private static final String TAG = "UserLocationOverlay";
+
+	@Override
+	public void onScroll(ScrollEvent event) {
+	}
+
+	@Override
+	public void onZoom(ZoomEvent event) {
+		mIsFollowing = false;
+	}
 }

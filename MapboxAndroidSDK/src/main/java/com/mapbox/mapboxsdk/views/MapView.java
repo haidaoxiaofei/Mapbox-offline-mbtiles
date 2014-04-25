@@ -129,7 +129,7 @@ public class MapView extends ViewGroup
     protected float mMultiTouchScale = 1.0f;
     protected PointF mMultiTouchScalePoint = new PointF();
 
-    protected MapListener mListener;
+    protected List<MapListener> mListeners = new ArrayList<MapListener>();
 
     private float mapOrientation = 0;
     private final float[] mRotatePoints = new float[2];
@@ -235,6 +235,32 @@ public class MapView extends ViewGroup
 
     protected MapView(Context aContext, int tileSizePixels, MapTileLayerBase aTileProvider) {
         this(aContext, tileSizePixels, aTileProvider, null, null);
+    }
+    
+    public void addListener(final MapListener listener) {
+    	if (!mListeners.contains(listener)) {
+        	mListeners.add(listener);
+    	}
+    }
+    
+    public void removeListener(MapListener listener) {
+    	if (!mListeners.contains(listener)) {
+        	mListeners.remove(listener);
+    	}
+    }
+    
+    public void addOverlay(final Overlay overlay) {
+    	mOverlayManager.add(overlay);
+    	if (overlay instanceof MapListener) {
+    		addListener((MapListener)overlay);
+    	}
+    }
+    
+    public void removeOverlay(final Overlay overlay) {
+    	mOverlayManager.remove(overlay);
+    	if (overlay instanceof MapListener) {
+    		removeListener((MapListener)overlay);
+    	}
     }
 
     public void setTileSource(final ITileLayer[] value) {
@@ -626,9 +652,11 @@ public class MapView extends ViewGroup
         getMapOverlay().rescaleCache(newZoomLevel, curZoomLevel, mProjection);
 
         // do callback on listener
-        if (newZoomLevel != curZoomLevel && mListener != null) {
+        if (newZoomLevel != curZoomLevel && mListeners.size() >0) {
             final ZoomEvent event = new ZoomEvent(this, newZoomLevel);
-            mListener.onZoom(event);
+            for (MapListener listener : mListeners) {
+            	listener.onZoom(event);
+			}
         }
 
         // Allows any views fixed to a Location in the MapView to adjust
@@ -1309,9 +1337,11 @@ public class MapView extends ViewGroup
         super.scrollTo(x, y);
 
         // do callback on listener
-        if (mListener != null) {
+        if (mListeners.size() > 0) {
             final ScrollEvent event = new ScrollEvent(this, x, y);
-            mListener.onScroll(event);
+            for (MapListener listener : mListeners) {
+            	listener.onScroll(event);
+    		}
         }
     }
 

@@ -231,7 +231,7 @@ public class Projection implements GeoConstants {
      * @param reuse just pass null if you do not have a Point to be 'recycled'.
      * @return intermediate value to be stored and passed to toMapPixelsTranslated.
      */
-    public PointF toMapPixelsProjected(final double latitude, final double longitude,
+    public static PointF toMapPixelsProjected(final double latitude, final double longitude,
             final PointF reuse) {
         final PointF out;
         if (reuse != null) {
@@ -239,7 +239,7 @@ public class Projection implements GeoConstants {
         } else {
             out = new PointF();
         }
-        this.latLongToPixelXY(latitude, longitude, TileLayerConstants.MAXIMUM_ZOOMLEVEL, out);
+        latLongToPixelXY(latitude, longitude, TileLayerConstants.MAXIMUM_ZOOMLEVEL, out);
         return out;
     }
 

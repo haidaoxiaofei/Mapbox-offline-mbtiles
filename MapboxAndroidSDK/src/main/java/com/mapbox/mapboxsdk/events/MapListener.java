@@ -11,10 +11,10 @@ public interface MapListener {
     /**
      * Called when a map is scrolled.
      */
-    public boolean onScroll(ScrollEvent event);
+    public void onScroll(ScrollEvent event);
 
     /**
      * Called when a map is zoomed.
      */
-    public boolean onZoom(ZoomEvent event);
+    public void onZoom(ZoomEvent event);
 }

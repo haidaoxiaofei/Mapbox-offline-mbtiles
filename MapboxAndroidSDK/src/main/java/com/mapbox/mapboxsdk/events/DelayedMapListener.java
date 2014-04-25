@@ -50,15 +50,13 @@ public class DelayedMapListener implements MapListener {
     }
 
     @Override
-    public boolean onScroll(final ScrollEvent event) {
+    public void onScroll(final ScrollEvent event) {
         dispatch(event);
-        return true;
     }
 
     @Override
-    public boolean onZoom(final ZoomEvent event) {
+    public void onZoom(final ZoomEvent event) {
         dispatch(event);
-        return true;
     }
 
     /*
