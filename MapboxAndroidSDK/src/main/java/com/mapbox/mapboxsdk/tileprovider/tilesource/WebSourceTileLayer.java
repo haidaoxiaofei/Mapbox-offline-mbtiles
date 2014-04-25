@@ -5,23 +5,20 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.Log;
-import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileCache;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
+import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
-import com.squareup.okhttp.OkHttpClient;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.GeneralSecurityException;
 import java.util.concurrent.atomic.AtomicInteger;
-import javax.net.ssl.SSLContext;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
@@ -33,7 +30,6 @@ public class WebSourceTileLayer extends TileLayer {
     // Tracks the number of threads active in the getBitmapFromURL method.
     private AtomicInteger activeThreads = new AtomicInteger(0);
     protected boolean mEnableSSL = false;
-    OkHttpClient client;
 
     public WebSourceTileLayer(final String pId, final String url) {
         this(pId, url, false);
@@ -41,10 +37,6 @@ public class WebSourceTileLayer extends TileLayer {
 
     public WebSourceTileLayer(final String pId, final String url, final boolean enableSSL) {
         super(pId, url);
-
-        this.client = new OkHttpClient();
-        client.setResponseCache(null);
-
         initialize(pId, url, enableSSL);
     }
 
@@ -177,8 +169,7 @@ public class WebSourceTileLayer extends TileLayer {
         }
 
         try {
-            HttpURLConnection connection = client.open(new URL(url));
-            connection.setRequestProperty("User-Agent", MapboxConstants.USER_AGENT);
+            HttpURLConnection connection = NetworkUtils.getHttpURLConnection(new URL(url));
             in = connection.getInputStream();
 
             if (in == null) {

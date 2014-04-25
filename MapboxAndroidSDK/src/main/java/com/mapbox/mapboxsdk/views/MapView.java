@@ -1,6 +1,5 @@
 package com.mapbox.mapboxsdk.views;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.BitmapFactory;
@@ -67,7 +66,6 @@ import org.json.JSONException;
  * state of a single map, including layers, markers,
  * and interaction code.
  */
-@SuppressLint("WrongCall")
 public class MapView extends ViewGroup
         implements MapViewConstants, MapEventsReceiver, MapboxConstants {
     /**
@@ -1356,7 +1354,8 @@ public class MapView extends ViewGroup
     @Override
     protected void onDraw(final Canvas c) {
         super.onDraw(c);
-        mProjection = new Projection(this);
+
+        mProjection = updateProjection();
 
         // Save the current canvas matrix
         c.save();
@@ -1373,6 +1372,15 @@ public class MapView extends ViewGroup
         this.getOverlayManager().onDraw(c, this);
 
         c.restore();
+    }
+
+    /**
+     * Private Helper Method for onDraw().
+     * @return New Projection object
+     */
+    private Projection updateProjection()
+    {
+        return new Projection(this);
     }
 
     /**
