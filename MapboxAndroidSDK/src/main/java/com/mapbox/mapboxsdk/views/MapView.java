@@ -251,6 +251,19 @@ public class MapView extends ViewGroup
     	}
     }
     
+    public void addOverlay(final Overlay overlay) {
+    	mOverlayManager.add(overlay);
+    	if (overlay instanceof MapListener) {
+    		addListener((MapListener)overlay);
+    	}
+    }
+    
+    public void removeOverlay(final Overlay overlay) {
+    	mOverlayManager.remove(overlay);
+    	if (overlay instanceof MapListener) {
+    		removeListener((MapListener)overlay);
+    	}
+    }
 
     public void setTileSource(final ITileLayer[] value) {
         if (mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
