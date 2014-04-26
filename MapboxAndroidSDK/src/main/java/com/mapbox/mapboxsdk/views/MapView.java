@@ -688,7 +688,7 @@ public class MapView extends ViewGroup
      * will always zoom to center of zoom  level 0.
      * Suggestion: Check getScreenRect(null).getHeight() > 0
      */
-    public MapView zoomToBoundingBox(final BoundingBox boundingBox, final boolean regionFit) {
+    public MapView zoomToBoundingBox(final BoundingBox boundingBox, final boolean regionFit, final boolean animated) {
         BoundingBox inter =
                 (mScrollableAreaBoundingBox != null) ? mScrollableAreaBoundingBox.intersect(
                         boundingBox) : boundingBox;
@@ -701,13 +701,22 @@ public class MapView extends ViewGroup
         }
 
         // Zoom to boundingBox center, at calculated maximum allowed zoom level
-        getController().setZoom(minimumZoomForBoundingBox(inter, regionFit));
-
-        getController().setCenter(
-                new LatLng(inter.getCenter().getLatitude(), inter.getCenter().getLongitude()));
-
+        final LatLng center = new LatLng(inter.getCenter().getLatitude(), inter.getCenter().getLongitude());
+        
+        if (animated) {
+            getController().setZoomAnimated(minimumZoomForBoundingBox(inter, regionFit));
+        	getController().animateTo(center);
+        }
+        else {
+            getController().setZoom(minimumZoomForBoundingBox(inter, regionFit));
+        	getController().setCenter(center);
+        }
         return this;
     }
+    public MapView zoomToBoundingBox(final BoundingBox boundingBox, final boolean regionFit) {
+    	return zoomToBoundingBox(boundingBox, regionFit, false);
+    }
+    
     public MapView zoomToBoundingBox(final BoundingBox boundingBox) {
     	return zoomToBoundingBox(boundingBox, false);
     }
