@@ -108,7 +108,7 @@ public class MapView extends ViewGroup
     private final OverlayManager mOverlayManager;
 
     private Projection mProjection;
-    private boolean mReadyToComputeProjection;
+    private boolean mLayedOut;
 
     private final TilesOverlay mMapOverlay;
 
@@ -170,7 +170,7 @@ public class MapView extends ViewGroup
             final AttributeSet attrs) {
         super(aContext, attrs);
         setWillNotDraw(false);
-        mReadyToComputeProjection = false;
+        mLayedOut = false;
         this.mController = new MapController(this);
         this.mScroller = new Scroller(aContext);
         Projection.setTileSize(tileSizePixels);
@@ -695,7 +695,7 @@ public class MapView extends ViewGroup
         if (inter == null) {
             return this;
         }
-        if (!mReadyToComputeProjection) {
+        if (!mLayedOut) {
             mBoundingBoxToZoomOn = inter;
             return this;
         }
@@ -874,7 +874,7 @@ public class MapView extends ViewGroup
     }
 
     private void updateMinZoomLevel() {
-        if (mScrollableAreaBoundingBox == null || !mReadyToComputeProjection) {
+        if (mScrollableAreaBoundingBox == null || !mLayedOut) {
             return;
         }
         mMinimumZoomLevel = (float) Math.max(mRequestedMinimumZoomLevel,
@@ -941,6 +941,13 @@ public class MapView extends ViewGroup
      */
     public BoundingBox getScrollableAreaBoundingBox() {
         return mScrollableAreaBoundingBox;
+    }
+    
+    /**
+     * Returns true if the view has been layed out
+     * */
+    public boolean isLayedOut() {
+        return mLayedOut;
     }
 
     public void invalidateMapCoordinates(final Rect dirty) {
@@ -1097,8 +1104,11 @@ public class MapView extends ViewGroup
         super.onSizeChanged(w, h, oldw, oldh);
         if (w != 0 && h != 0) {
             mProjection = null;
-            if (!mReadyToComputeProjection) {
-                mReadyToComputeProjection = true;
+            if (!mLayedOut) {
+                mLayedOut = true;
+                //first layout: if some actions were triggered before, they were enqueued
+                //let's trigger them again!
+                mController.mapViewLayedOut();
             }
             updateMinZoomLevel();
 
