@@ -692,7 +692,7 @@ public class MapView extends ViewGroup
         BoundingBox inter =
                 (mScrollableAreaBoundingBox != null) ? mScrollableAreaBoundingBox.intersect(
                         boundingBox) : boundingBox;
-        if (inter == null) {
+        if (inter == null || !inter.isValid()) {
             return this;
         }
         if (!mLayedOut) {
