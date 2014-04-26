@@ -185,13 +185,13 @@ public class Projection implements GeoConstants {
     public PointF toMapPixels(final ILatLng in, final PointF reuse) {
         return toMapPixels(in.getLatitude(), in.getLongitude(), reuse);
     }
-
-    public PointF toMapPixels(final double latitude, final double longitude, final PointF reuse) {
+    
+    public static PointF toMapPixels(final double latitude, final double longitude, final float zoom, final int centerX, final int centerY, final PointF reuse) {
         final PointF out = GeometryMath.reusable(reuse);
-        final float zoom = getZoomLevel();
         final int mapSize = mapSize(zoom);
         latLongToPixelXY(latitude, longitude, zoom, out);
-        out.offset(offsetX, offsetY);
+        final float worldSize2 = mapSize >> 1;
+        out.offset(-worldSize2, -worldSize2);
         if (Math.abs(out.x - centerX) > Math.abs(out.x - mapSize - centerX)) {
             out.x -= mapSize;
         }
@@ -205,6 +205,10 @@ public class Projection implements GeoConstants {
             out.y += mapSize;
         }
         return out;
+    }
+
+    public PointF toMapPixels(final double latitude, final double longitude, final PointF reuse) {
+        return toMapPixels(latitude, longitude, getZoomLevel(), centerX, centerY, reuse);
     }
 
     public static RectF toMapPixels(final BoundingBox box, final float zoom, final RectF reuse) {
