@@ -19,6 +19,8 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
     private final double mLonEast;
     private final double mLonWest;
 
+    private final boolean mIsValid;
+
     /**
      * Construct a new bounding box based on its corners, given in NESW
      * order.
@@ -33,6 +35,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
         this.mLonEast = east;
         this.mLatSouth = south;
         this.mLonWest = west;
+        this.mIsValid = ((this.mLonWest < this.mLonEast) && (this.mLatNorth > this.mLatSouth));
     }
 
     /**
@@ -45,6 +48,7 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
         this.mLonEast = other.getLonEast();
         this.mLatSouth = other.getLatSouth();
         this.mLonWest = other.getLonWest();
+        this.mIsValid = other.isValid();
     }
 
     /**
@@ -79,6 +83,10 @@ public final class BoundingBox implements Parcelable, Serializable, MapViewConst
 
     public double getLonWest() {
         return this.mLonWest;
+    }
+
+    public boolean isValid() {
+        return this.mIsValid;
     }
 
     /**
