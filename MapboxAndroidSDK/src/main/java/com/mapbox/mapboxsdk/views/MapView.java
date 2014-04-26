@@ -1354,30 +1354,32 @@ public class MapView extends ViewGroup
     
     public void scrollTo(double x, double y) {
     	if (mScrollableAreaLimit != null) {
-            final float width_2 = this.getMeasuredWidth() / 2;
-            final float height_2 = this.getMeasuredHeight() / 2;
+            final double xToTestWith = x / mMultiTouchScale;
+            final double yToTestWith = y / mMultiTouchScale;
+            final float width_2 = this.getMeasuredWidth() / 2 / mMultiTouchScale;
+            final float height_2 = this.getMeasuredHeight() / 2 / mMultiTouchScale;
             // Adjust if we are outside the scrollable area
             if (mScrollableAreaLimit.width() <= width_2 * 2) {
-                if (x - width_2 > mScrollableAreaLimit.left) {
+                if (xToTestWith - width_2 > mScrollableAreaLimit.left) {
                     x = (mScrollableAreaLimit.left + width_2);
-                } else if (x + width_2 < mScrollableAreaLimit.right) {
+                } else if (xToTestWith + width_2 < mScrollableAreaLimit.right) {
                     x = (mScrollableAreaLimit.right - width_2);
                 }
-            } else if (x - width_2 < mScrollableAreaLimit.left) {
+            } else if (xToTestWith - width_2 < mScrollableAreaLimit.left) {
                 x = (mScrollableAreaLimit.left + width_2);
-            } else if (x + width_2 > mScrollableAreaLimit.right) {
+            } else if (xToTestWith + width_2 > mScrollableAreaLimit.right) {
                 x = (mScrollableAreaLimit.right - width_2);
             }
 
             if (mScrollableAreaLimit.height() <= height_2 * 2) {
-                if (y - height_2 > mScrollableAreaLimit.top) {
+                if (yToTestWith - height_2 > mScrollableAreaLimit.top) {
                     y = (mScrollableAreaLimit.top + height_2);
-                } else if (y + height_2 < mScrollableAreaLimit.bottom) {
+                } else if (yToTestWith + height_2 < mScrollableAreaLimit.bottom) {
                     y = (mScrollableAreaLimit.bottom - height_2);
                 }
-            } else if (y - height_2 < mScrollableAreaLimit.top) {
+            } else if (yToTestWith - height_2 < mScrollableAreaLimit.top) {
                 y = (mScrollableAreaLimit.top + height_2);
-            } else if (y + height_2 > mScrollableAreaLimit.bottom) {
+            } else if (yToTestWith + height_2 > mScrollableAreaLimit.bottom) {
                 y = (mScrollableAreaLimit.bottom - height_2);
             }
         }
