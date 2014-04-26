@@ -630,8 +630,8 @@ public class MapView extends ViewGroup
             final int worldSize_current_2 = Projection.mapSize(curZoomLevel) >> 1;
             final int worldSize_new_2 = Projection.mapSize(newZoomLevel) >> 1;
             final ILatLng centerGeoPoint =
-                    Projection.pixelXYToLatLong(getScrollX() + worldSize_current_2,
-                            getScrollY() + worldSize_current_2, curZoomLevel);
+                    Projection.pixelXYToLatLong((float)mDScrollX + worldSize_current_2,
+                    		(float)mDScrollY + worldSize_current_2, curZoomLevel);
             final PointF centerPoint = Projection.latLongToPixelXY(centerGeoPoint.getLatitude(),
                     centerGeoPoint.getLongitude(), newZoomLevel, null);
             scrollTo((int) centerPoint.x - worldSize_new_2, (int) centerPoint.y - worldSize_new_2);
@@ -1307,41 +1307,54 @@ public class MapView extends ViewGroup
         // scrollTo(getScrollX(), getScrollY());
     }
 
+    private double mDScrollX, mDScrollY;    
+    
     @Override
     public void scrollTo(int x, int y) {
-        if (mScrollableAreaLimit != null) {
+    	// a trick for everyone to go through the double version of the method
+    	scrollTo((double)x, (double)y);        
+    }
+    
+    public void scrollTo(double x, double y) {
+    	if (mScrollableAreaLimit != null) {
             final float width_2 = this.getMeasuredWidth() / 2;
             final float height_2 = this.getMeasuredHeight() / 2;
             // Adjust if we are outside the scrollable area
             if (mScrollableAreaLimit.width() <= width_2 * 2) {
                 if (x - width_2 > mScrollableAreaLimit.left) {
-                    x = (int) (mScrollableAreaLimit.left + width_2);
+                    x = (mScrollableAreaLimit.left + width_2);
                 } else if (x + width_2 < mScrollableAreaLimit.right) {
-                    x = (int) (mScrollableAreaLimit.right - width_2);
+                    x = (mScrollableAreaLimit.right - width_2);
                 }
             } else if (x - width_2 < mScrollableAreaLimit.left) {
-                x = (int) (mScrollableAreaLimit.left + width_2);
+                x = (mScrollableAreaLimit.left + width_2);
             } else if (x + width_2 > mScrollableAreaLimit.right) {
-                x = (int) (mScrollableAreaLimit.right - width_2);
+                x = (mScrollableAreaLimit.right - width_2);
             }
 
             if (mScrollableAreaLimit.height() <= height_2 * 2) {
                 if (y - height_2 > mScrollableAreaLimit.top) {
-                    y = (int) (mScrollableAreaLimit.top + height_2);
+                    y = (mScrollableAreaLimit.top + height_2);
                 } else if (y + height_2 < mScrollableAreaLimit.bottom) {
-                    y = (int) (mScrollableAreaLimit.bottom - height_2);
+                    y = (mScrollableAreaLimit.bottom - height_2);
                 }
             } else if (y - height_2 < mScrollableAreaLimit.top) {
-                y = (int) (mScrollableAreaLimit.top + height_2);
+                y = (mScrollableAreaLimit.top + height_2);
             } else if (y + height_2 > mScrollableAreaLimit.bottom) {
-                y = (int) (mScrollableAreaLimit.bottom - height_2);
+                y = (mScrollableAreaLimit.bottom - height_2);
             }
         }
-        super.scrollTo(x, y);
+    	mDScrollX = x;
+    	mDScrollY = y;
+    	
+    	final int intX = (int) Math.round(x);
+    	final int intY = (int) Math.round(y);
+    	
+    	super.scrollTo(intX, intY);
 
         // do callback on listener
         if (mListeners.size() > 0) {
-            final ScrollEvent event = new ScrollEvent(this, x, y);
+            final ScrollEvent event = new ScrollEvent(this, intX, intY, mController.currentlyInUserAction());
             for (MapListener listener : mListeners) {
             	listener.onScroll(event);
     		}

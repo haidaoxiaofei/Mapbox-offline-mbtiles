@@ -81,7 +81,7 @@ public class MapController implements MapViewConstants {
             return;
         }
         PointF p = mMapView.getProjection().toMapPixels(latlng, null);
-        this.mMapView.scrollTo((int) p.x, (int) p.y);
+        this.mMapView.scrollTo(p.x, p.y);
     }
 
     public void stopPanning() {

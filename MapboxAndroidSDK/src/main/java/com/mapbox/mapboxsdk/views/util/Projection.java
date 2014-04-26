@@ -189,8 +189,8 @@ public class Projection implements GeoConstants {
     public PointF toMapPixels(final double latitude, final double longitude, final PointF reuse) {
         final PointF out = GeometryMath.reusable(reuse);
         final float zoom = getZoomLevel();
-        final int mapSize = this.mapSize(zoom);
-        this.latLongToPixelXY(latitude, longitude, zoom, out);
+        final int mapSize = mapSize(zoom);
+        latLongToPixelXY(latitude, longitude, zoom, out);
         out.offset(offsetX, offsetY);
         if (Math.abs(out.x - centerX) > Math.abs(out.x - mapSize - centerX)) {
             out.x -= mapSize;
@@ -367,9 +367,9 @@ public class Projection implements GeoConstants {
         final double sinLatitude = Math.sin(latitude * Math.PI / 180);
         final double y = 0.5 - Math.log((1 + sinLatitude) / (1 - sinLatitude)) / (4 * Math.PI);
 
-        final int mapSize = mapSize(levelOfDetail);
-        out.x = (float) clip(x * mapSize + 0.5, 0, mapSize - 1);
-        out.y = (float) clip(y * mapSize + 0.5, 0, mapSize - 1);
+        final float mapSize = mapSize(levelOfDetail);
+        out.x = (float) clip(x * mapSize, 0, mapSize - 1);
+        out.y = (float) clip(y * mapSize, 0, mapSize - 1);
         return out;
     }
 
@@ -382,17 +382,17 @@ public class Projection implements GeoConstants {
      * @param levelOfDetail Level of detail, from 1 (lowest detail) to 23 (highest detail)
      * @return Output parameter receiving the latitude and longitude in degrees.
      */
-    public static LatLng pixelXYToLatLong(int pixelX, int pixelY, final float levelOfDetail) {
-        final int mapSize = mapSize(levelOfDetail);
+    public static LatLng pixelXYToLatLong(float pixelX, float pixelY, final float levelOfDetail) {
+        final float mapSize = mapSize(levelOfDetail);
 
-        pixelX = (int) wrap(pixelX, 0, mapSize - 1, mapSize);
-        pixelY = (int) wrap(pixelY, 0, mapSize - 1, mapSize);
+        double x = wrap(pixelX, 0, mapSize - 1, mapSize);
+        double y = wrap(pixelY, 0, mapSize - 1, mapSize);
 
-        final double x = (clip(pixelX, 0, mapSize - 1) / mapSize) - 0.5;
-        final double y = 0.5 - (clip(pixelY, 0, mapSize - 1) / mapSize);
+        x = (clip(x, 0, mapSize - 1) / mapSize) - 0.5;
+        y = 0.5 - (clip(y, 0, mapSize - 1) / mapSize);
 
-        final double latitude = 90 - 360 * Math.atan(Math.exp(-y * 2 * Math.PI)) / Math.PI;
-        final double longitude = 360 * x;
+        final double latitude = 90.0 - 360.0 * Math.atan(Math.exp(-y * 2 * Math.PI)) / Math.PI;
+        final double longitude = 360.0 * x;
 
         return new LatLng(latitude, longitude);
     }
