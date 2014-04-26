@@ -203,7 +203,7 @@ public class MapView extends ViewGroup
         if (mapid != null) {
             setTileSource(new MapboxTileLayer(mapid));
         } else {
-            Log.w(MapView.class.getCanonicalName(), "mapid not set.");
+            Log.w(TAG, "mapid not set.");
         }
         String centerLat = a.getString(R.styleable.MapView_centerLat);
         String centerLng = a.getString(R.styleable.MapView_centerLng);
@@ -213,14 +213,14 @@ public class MapView extends ViewGroup
             lng = Double.parseDouble(centerLng);
             this.setCenter(new LatLng(lat, lng));
         } else {
-            Log.d(MapView.class.getCanonicalName(), "centerLatLng is not specified in XML.");
+            Log.d(TAG, "centerLatLng is not specified in XML.");
         }
         String zoomLvl = a.getString(R.styleable.MapView_zoomLevel);
         if (zoomLvl != null) {
             float lvl = Float.parseFloat(zoomLvl);
             this.setZoom(lvl);
         } else {
-            Log.d(MapView.class.getCanonicalName(), "zoomLevel is not specified in XML.");
+            Log.d(TAG, "zoomLevel is not specified in XML.");
         }
         a.recycle();
     }
