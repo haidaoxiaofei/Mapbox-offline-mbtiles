@@ -254,6 +254,7 @@ public class MapView extends ViewGroup
     	if (overlay instanceof MapListener) {
     		addListener((MapListener)overlay);
     	}
+		invalidate();
     }
     
     public void removeOverlay(final Overlay overlay) {
@@ -261,6 +262,7 @@ public class MapView extends ViewGroup
     	if (overlay instanceof MapListener) {
     		removeListener((MapListener)overlay);
     	}
+		invalidate();
     }
 
     public void setTileSource(final ITileLayer[] value) {
