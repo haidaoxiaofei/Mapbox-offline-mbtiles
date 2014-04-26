@@ -604,6 +604,15 @@ public class MapView extends ViewGroup
         return mMultiTouchScale;
     }
 
+
+    private void snapItems() {
+        // snap for all snappables
+        final Point snapPoint = new Point();
+        if (this.getOverlayManager().onSnapToItem(getScrollX(), getScrollY(), snapPoint, this)) {
+            scrollTo(snapPoint.x, snapPoint.y);
+        }
+    }
+
     /**
      * @param aZoomLevel the zoom level bound by the tile source
      * @return the map view, for chaining
@@ -646,10 +655,7 @@ public class MapView extends ViewGroup
 
         mProjection = new Projection(this);
         // snap for all snappables
-        final Point snapPoint = new Point();
-        if (this.getOverlayManager().onSnapToItem(getScrollX(), getScrollY(), snapPoint, this)) {
-            scrollTo(snapPoint.x, snapPoint.y);
-        }
+        snapItems();
 
         getMapOverlay().rescaleCache(newZoomLevel, curZoomLevel, mProjection);
 
@@ -1321,8 +1327,8 @@ public class MapView extends ViewGroup
             if (mScroller.isFinished()) {
                 // One last scrollTo to get to the final destination
                 scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
-                // This will facilitate snapping-to any Snappable points.
-                setZoom(mZoomLevel);
+                // snapping-to any Snappable points.
+                if (!isAnimating()) snapItems();
                 mIsFlinging = false;
                 mController.setCurrentlyInUserAction(false);
             } else {
