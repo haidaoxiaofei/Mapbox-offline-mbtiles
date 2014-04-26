@@ -653,7 +653,7 @@ public class MapView extends ViewGroup
 
         // do callback on listener
         if (newZoomLevel != curZoomLevel && mListeners.size() >0) {
-            final ZoomEvent event = new ZoomEvent(this, newZoomLevel);
+            final ZoomEvent event = new ZoomEvent(this, newZoomLevel, mController.currentlyInUserAction());
             for (MapListener listener : mListeners) {
             	listener.onZoom(event);
 			}
@@ -812,8 +812,13 @@ public class MapView extends ViewGroup
         return getController().zoomIn();
     }
 
+    
+    public boolean zoomInFixing(final ILatLng point, final boolean userAction) {
+        return getController().zoomInAbout(point, userAction);
+    }
+    
     public boolean zoomInFixing(final ILatLng point) {
-        return getController().zoomInAbout(point);
+        return zoomInFixing(point, false);
     }
 
     /**
@@ -823,8 +828,12 @@ public class MapView extends ViewGroup
         return getController().zoomOut();
     }
 
+    public boolean zoomOutFixing(final ILatLng point, final boolean userAction) {
+        return getController().zoomOutAbout(point, userAction);
+    }
+    
     public boolean zoomOutFixing(final ILatLng point) {
-        return getController().zoomOutAbout(point);
+        return zoomOutFixing(point, false);
     }
 
     /**
@@ -1294,6 +1303,7 @@ public class MapView extends ViewGroup
                 // This will facilitate snapping-to any Snappable points.
                 setZoom(mZoomLevel);
                 mIsFlinging = false;
+                mController.setCurrentlyInUserAction(false);
             } else {
                 scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
             }

@@ -19,6 +19,7 @@ public class MapController implements MapViewConstants {
 
     private ILatLng zoomOnLatLong = null;
     private PointF zoomDeltaScroll = new PointF();
+    private boolean mCurrentlyUserAction = false;
 
     /**
      * Constructor
@@ -32,16 +33,29 @@ public class MapController implements MapViewConstants {
         mZoomAnimation.addUpdateListener(new MyZoomAnimatorUpdateListener());
         mZoomAnimation.setDuration(ANIMATION_DURATION_SHORT);
     }
+    
+    public boolean currentlyInUserAction()
+    {
+    	return mCurrentlyUserAction;
+    }
+    
+    public void setCurrentlyInUserAction(final boolean value)
+    {
+    	 mCurrentlyUserAction = value;
+    }
 
     /**
      * Start animating the map towards the given point.
      */
-    public void animateTo(final ILatLng point) {
+    public void animateTo(final ILatLng point, final boolean userAction) {
         if (!mMapView.canGoTo(point)) {
             return;
         }
         PointF p = mMapView.getProjection().toMapPixels(point, null);
-        animateTo((int) p.x, (int) p.y);
+        animateTo((int) p.x, (int) p.y, userAction);
+    }
+    public void animateTo(final ILatLng point) {
+    	animateTo(point, false);
     }
 
     /**
@@ -56,21 +70,29 @@ public class MapController implements MapViewConstants {
     /**
      * Start animating the map towards the given point.
      */
-    public void animateTo(int x, int y) {
-        if (!mMapView.isAnimating()) {
-            mMapView.mIsFlinging = false;
-            final int xStart = mMapView.getScrollX();
-            final int yStart = mMapView.getScrollY();
-            mMapView.getScroller()
-                    .startScroll(xStart, yStart, x - xStart, y - yStart,
-                            ANIMATION_DURATION_DEFAULT);
-            mMapView.postInvalidate();
-        }
+    public void animateTo(final int x, final int y, final boolean userAction) {
+    	stopAnimation(false);
+    	mCurrentlyUserAction = userAction;
+        mMapView.mIsFlinging = false;
+        final int xStart = mMapView.getScrollX();
+        final int yStart = mMapView.getScrollY();
+        mMapView.getScroller()
+                .startScroll(xStart, yStart, x - xStart, y - yStart,
+                        ANIMATION_DURATION_DEFAULT);
+        mMapView.postInvalidate();
+    }
+    public void animateTo(final int x, final int y) {
+    	animateTo(x, y, false);
     }
 
-    public void panBy(int x, int y) {
+    public void panBy(int x, int y, final boolean userAction) {
+    	mCurrentlyUserAction = userAction;
         zoomDeltaScroll.offset(x, y);
         this.mMapView.scrollBy(x, y);
+        mCurrentlyUserAction = false;
+    }
+    public void panBy(int x, int y) {
+    	panBy(x, y, false);
     }
 
     /**
@@ -110,21 +132,51 @@ public class MapController implements MapViewConstants {
             mZoomAnimation.end();
         }
     }
+    
+    public MapView setZoomAnimated(final ILatLng latlong, final float zoomlevel) {
+        if (mMapView.isAnimating()) {
+            stopAnimation(true);
+        }
+        aboutToStartAnimation(latlong);
+        float currentZoom = mMapView.getZoomLevel(false);
+        float targetZoom = zoomlevel;
+        targetZoom = mMapView.getClampedZoomLevel(targetZoom);
+        mMapView.mTargetZoomLevel.set(Float.floatToIntBits(targetZoom));
 
+        float delta = Math.abs(targetZoom - currentZoom);
+        mZoomAnimation.setFloatValues(1.0f, 1.0f + delta);
+        mZoomAnimation.start();
+        return mMapView;
+    }
+    
     public MapView setZoom(final float zoomlevel) {
+        Log.d(TAG, "setZoom " + zoomlevel);
+        return setZoom(zoomlevel, true);
+    }
+    
+    public MapView setZoom(final float zoomlevel, final boolean shouldStopAnimation) {
+    	if (shouldStopAnimation) stopAnimation(true);
         mMapView.setZoomInternal(zoomlevel);
         mMapView.setScale(1.0f);
         return mMapView;
+    }
+    
+    public MapView setZoomAnimated(final float zoomlevel) {
+        return setZoomAnimated(mMapView.getCenter(), zoomlevel);
     }
 
     /**
      * Zoom in by one zoom level.
      */
+    public boolean zoomIn(final boolean userAction) {
+        return zoomInAbout(mMapView.getCenter(), userAction);
+    }
+    
     public boolean zoomIn() {
-        return zoomInAbout(mMapView.getCenter());
+        return zoomIn(false);
     }
 
-    public boolean zoomInAbout(final ILatLng latlong) {
+    public boolean zoomInAbout(final ILatLng latlong, final boolean userAction) {
 
         if (!mMapView.canZoomIn()) {
             return false;
@@ -151,15 +203,22 @@ public class MapController implements MapViewConstants {
             return true;
         }
     }
+    public boolean zoomInAbout(final ILatLng latlong) {
+    	return zoomInAbout(latlong, false);
+    }
 
     /**
      * Zoom out by one zoom level.
      */
+    public boolean zoomOut(final boolean userAction) {
+        return zoomOutAbout(mMapView.getCenter(), userAction);
+    }
+    
     public boolean zoomOut() {
-        return zoomOutAbout(mMapView.getCenter());
+        return zoomOut(false);
     }
 
-    public boolean zoomOutAbout(final ILatLng latlong) {
+    public boolean zoomOutAbout(final ILatLng latlong, final boolean userAction) {
         if (mMapView.canZoomOut()) {
             if (mMapView.isAnimating()) {
                 // TODO extend zoom (and return true)
@@ -183,6 +242,10 @@ public class MapController implements MapViewConstants {
         } else {
             return false;
         }
+    }
+    
+    public boolean zoomOutAbout(final ILatLng latlong) {
+    	return zoomOutAbout(latlong, false);
     }
 
     protected void onAnimationStart() {
@@ -215,7 +278,7 @@ public class MapController implements MapViewConstants {
     }
 
     public void onAnimationEnd() {
-        setZoom(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()));
+        setZoom(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()), false);
         goTo(zoomOnLatLong, zoomDeltaScroll);
         (new Handler()).postDelayed(new Runnable() {
             @Override

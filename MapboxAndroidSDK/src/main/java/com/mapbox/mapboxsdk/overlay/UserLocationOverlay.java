@@ -497,10 +497,15 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
 
 	@Override
 	public void onScroll(ScrollEvent event) {
+		if (event.getUserAction()) {
+			mIsFollowing = false;
+		}
 	}
 
 	@Override
 	public void onZoom(ZoomEvent event) {
-		mIsFollowing = false;
+		if (event.getUserAction()) {
+			mIsFollowing = false;
+		}
 	}
 }
