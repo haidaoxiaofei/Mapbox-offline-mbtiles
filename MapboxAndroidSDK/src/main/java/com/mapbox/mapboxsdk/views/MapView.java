@@ -22,6 +22,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
+
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
@@ -54,12 +55,14 @@ import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
+
+import org.json.JSONException;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.json.JSONException;
 
 /**
  * The MapView class manages all of the content and
@@ -630,6 +633,7 @@ public class MapView extends ViewGroup
 
         if (newZoomLevel != curZoomLevel) {
             this.mZoomLevel = newZoomLevel;
+            mTargetZoomLevel.set(Float.floatToIntBits(this.mZoomLevel)); //just to be sure any one got the right one
             mScroller.forceFinished(true);
             mIsFlinging = false;
             updateScrollableAreaLimit();
@@ -709,14 +713,14 @@ public class MapView extends ViewGroup
         }
 
         // Zoom to boundingBox center, at calculated maximum allowed zoom level
-        final LatLng center = new LatLng(inter.getCenter().getLatitude(), inter.getCenter().getLongitude());
-        
+        final LatLng center = inter.getCenter();
+        final float zoom = minimumZoomForBoundingBox(inter, regionFit);
+
         if (animated) {
-            getController().setZoomAnimated(minimumZoomForBoundingBox(inter, regionFit));
-        	getController().animateTo(center);
+            getController().zoomAndMoveAnimated(center, zoom);
         }
         else {
-            getController().setZoom(minimumZoomForBoundingBox(inter, regionFit));
+            getController().setZoom(zoom);
         	getController().setCenter(center);
         }
         return this;
