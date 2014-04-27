@@ -155,16 +155,14 @@ public class MapController implements MapViewConstants {
         }
     }
     
-    public MapView zoomAndMoveAnimated(final ILatLng latlong, final float zoomlevel) {
+    public MapView zoomAndMoveAnimated(final ILatLng latlong, final float zoomlevel, final boolean userAction) {
     	if (!mMapView.isLayedOut()) {
             mPointToGoTo = latlong;
             mZoomToZoomTo = zoomlevel;
             return mMapView;
         }
-        if (mMapView.isAnimating()) {
-            stopAnimation(true);
-        }
-//        aboutToStartAnimation(mMapView.getCenter());
+    	mCurrentlyUserAction = userAction;
+        stopAnimation(true);
         zoomOnLatLong = latlong;
         zoomDeltaScroll.set(0, 0);
         zoomAndMoveAnimation = true;
@@ -199,19 +197,32 @@ public class MapController implements MapViewConstants {
     }
     
     public MapView setZoom(final float zoomlevel) {
-        return setZoom(zoomlevel, true);
+        return setZoom(zoomlevel, false);
     }
     
-    public MapView setZoom(final float zoomlevel, final boolean shouldStopAnimation) {
-    	
-    	if (shouldStopAnimation) stopAnimation(true);
+    public MapView setZoom(final float zoomlevel, final boolean userAction) {
+    	mCurrentlyUserAction = userAction;
+    	stopAnimation(true);
         mMapView.setZoomInternal(zoomlevel);
         mMapView.setScale(1.0f);
+    	mCurrentlyUserAction = false;
         return mMapView;
     }
     
     public MapView setZoomAnimated(final float zoomlevel) {
-        return zoomAndMoveAnimated(mMapView.getCenter(), zoomlevel);
+        return setZoomAnimated(zoomlevel, false);
+    }
+    
+    public MapView setZoomAnimated(final float zoomlevel, final boolean userAction) {
+    	if (!mMapView.isLayedOut()) {
+            mZoomToZoomTo = zoomlevel;
+            return mMapView;
+        }
+    	
+    	//we must stop with true in case it is a scroll animation
+    	// or we won't end up at the correct position on the map
+        stopAnimation(true);
+        return zoomAndMoveAnimated(mMapView.getCenter(), zoomlevel, userAction);
     }
 
     /**
@@ -332,8 +343,8 @@ public class MapController implements MapViewConstants {
     }
 
     public void onAnimationEnd() {
-        setZoom(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()), false);
         goTo(zoomOnLatLong, zoomDeltaScroll);
+        mMapView.setZoomInternal(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()));
         (new Handler()).postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -580,9 +580,16 @@ public class MapView extends ViewGroup
      * @return the map view, for chaining
      */
     public MapView setCenter(final ILatLng aCenter) {
+        return setCenter(aCenter, false);
+    }
+    
+    public MapView setCenter(final ILatLng aCenter, final boolean userAction) {
+        getController().setCurrentlyInUserAction(userAction);
         getController().setCenter(aCenter);
+        getController().setCurrentlyInUserAction(false);
         return this;
     }
+
 
     /**
      * Pan the map by a given number of pixels in the x and y dimensions.
@@ -701,7 +708,7 @@ public class MapView extends ViewGroup
      * will always zoom to center of zoom  level 0.
      * Suggestion: Check getScreenRect(null).getHeight() > 0
      */
-    public MapView zoomToBoundingBox(final BoundingBox boundingBox, final boolean regionFit, final boolean animated) {
+    public MapView zoomToBoundingBox(final BoundingBox boundingBox, final boolean regionFit, final boolean animated, final boolean userAction) {
         BoundingBox inter =
                 (mScrollableAreaBoundingBox != null) ? mScrollableAreaBoundingBox.intersect(
                         boundingBox) : boundingBox;
@@ -718,16 +725,22 @@ public class MapView extends ViewGroup
         final float zoom = minimumZoomForBoundingBox(inter, regionFit);
 
         if (animated) {
-            getController().zoomAndMoveAnimated(center, zoom);
+            getController().zoomAndMoveAnimated(center, zoom, userAction);
         }
         else {
+        	getController().setCurrentlyInUserAction(userAction);
             getController().setZoom(zoom);
         	getController().setCenter(center);
+        	getController().setCurrentlyInUserAction(false);
         }
         return this;
     }
+    public MapView zoomToBoundingBox(final BoundingBox boundingBox, final boolean regionFit, final boolean animated) {
+    	return zoomToBoundingBox(boundingBox, regionFit, animated, false);
+    }
+    
     public MapView zoomToBoundingBox(final BoundingBox boundingBox, final boolean regionFit) {
-    	return zoomToBoundingBox(boundingBox, regionFit, false);
+    	return zoomToBoundingBox(boundingBox, regionFit, false, false);
     }
     
     public MapView zoomToBoundingBox(final BoundingBox boundingBox) {
