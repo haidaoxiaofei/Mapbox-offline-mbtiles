@@ -1250,6 +1250,8 @@ public class MapView extends ViewGroup
                         final ILatLng center =
                                 getProjection().fromPixels(event.getX(), event.getY());
                         mController.zoomOutAbout(center);
+                        canTapTwoFingers = false;
+                        multiTouchDownCount = 0;
                         return true;
                     }
                     canTapTwoFingers = false;
