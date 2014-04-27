@@ -1409,6 +1409,7 @@ public class MapView extends ViewGroup
     	final int intX = (int) Math.round(x);
     	final int intY = (int) Math.round(y);
     	
+    	mProjection = null;
     	super.scrollTo(intX, intY);
 
         // do callback on listener

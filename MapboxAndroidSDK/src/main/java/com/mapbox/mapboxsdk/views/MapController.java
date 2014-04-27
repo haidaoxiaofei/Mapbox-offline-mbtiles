@@ -4,6 +4,7 @@ import android.graphics.PointF;
 import android.os.Handler;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.nineoldandroids.animation.Animator;
@@ -20,6 +21,7 @@ public class MapController implements MapViewConstants {
 
     private ILatLng zoomOnLatLong = null;
     private PointF zoomDeltaScroll = new PointF();
+    private ILatLng animateToTargetPoint = null;
     
     private boolean mCurrentlyUserAction = false;
     
@@ -62,9 +64,10 @@ public class MapController implements MapViewConstants {
     		mPointToGoTo = point;
             return;
         }
+        animateToTargetPoint = point;
 
         PointF p = mMapView.getProjection().toMapPixels(point, null);
-        animateTo((int) p.x, (int) p.y, userAction);
+        animateTo(p, userAction);
     }
     public void animateTo(final ILatLng point) {
     	animateTo(point, false);
@@ -83,19 +86,19 @@ public class MapController implements MapViewConstants {
     /**
      * Start animating the map towards the given point.
      */
-    public void animateTo(final int x, final int y, final boolean userAction) {
+    public void animateTo(final PointF point, final boolean userAction) {
     	stopAnimation(false);
     	mCurrentlyUserAction = userAction;
         mMapView.mIsFlinging = false;
         final int xStart = mMapView.getScrollX();
         final int yStart = mMapView.getScrollY();
         mMapView.getScroller()
-                .startScroll(xStart, yStart, x - xStart, y - yStart,
+                .startScroll(xStart, yStart, (int)point.x - xStart, (int)point.y - yStart,
                         ANIMATION_DURATION_DEFAULT);
         mMapView.postInvalidate();
     }
-    public void animateTo(final int x, final int y) {
-    	animateTo(x, y, false);
+    public void animateTo(final PointF point) {
+    	animateTo(point, false);
     }
 
     public void panBy(int x, int y, final boolean userAction) {
@@ -137,6 +140,7 @@ public class MapController implements MapViewConstants {
             if (jumpToTarget) {
                 mMapView.mIsFlinging = false;
                 mMapView.getScroller().abortAnimation();
+                setCenter(animateToTargetPoint);
             } else {
                 stopPanning();
             }
@@ -148,7 +152,7 @@ public class MapController implements MapViewConstants {
         if (mMapView.mIsAnimating.get()) {
             mZoomAnimation.cancel();
             setZoom(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()), false);
-            if (jumpToTarget) {
+            if (jumpToTarget && zoomOnLatLong != null) {
                 goTo(zoomOnLatLong, zoomDeltaScroll);
             }
             mMapView.mIsAnimating.set(false);
@@ -343,8 +347,14 @@ public class MapController implements MapViewConstants {
     }
 
     public void onAnimationEnd() {
-        goTo(zoomOnLatLong, zoomDeltaScroll);
         mMapView.setZoomInternal(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()));
+        mMapView.setScale(1.0f);
+        if (zoomOnLatLong != null)  {
+        	goTo(zoomOnLatLong, zoomDeltaScroll);
+        	zoomOnLatLong = null;
+        }
+        zoomAndMoveAnimation = false;
+        mCurrentlyUserAction = false;
         (new Handler()).postDelayed(new Runnable() {
             @Override
             public void run() {
