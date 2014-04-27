@@ -525,10 +525,11 @@ public class MapView extends ViewGroup
      * @return centerpoint
      */
     public LatLng getCenter() {
-        BoundingBox box = getBoundingBox();
-        return (box != null) ? box.getCenter() : null;
+    	final int worldSize_current_2 = Projection.mapSize(mZoomLevel) >> 1;                
+        return Projection.pixelXYToLatLong((float)mDScrollX + worldSize_current_2,
+        		(float)mDScrollY + worldSize_current_2, mZoomLevel);
     }
-
+    
     /**
      * Gets the current bounds of the screen in <I>screen coordinates</I>.
      */
@@ -645,11 +646,8 @@ public class MapView extends ViewGroup
         if (newZoomLevel > curZoomLevel) {
             // We are going from a lower-resolution plane to a higher-resolution plane, so we have
             // to do it the hard way.
-            final int worldSize_current_2 = Projection.mapSize(curZoomLevel) >> 1;
             final int worldSize_new_2 = Projection.mapSize(newZoomLevel) >> 1;
-            final ILatLng centerGeoPoint =
-                    Projection.pixelXYToLatLong((float)mDScrollX + worldSize_current_2,
-                    		(float)mDScrollY + worldSize_current_2, curZoomLevel);
+            final ILatLng centerGeoPoint = getCenter();
             final PointF centerPoint = Projection.latLongToPixelXY(centerGeoPoint.getLatitude(),
                     centerGeoPoint.getLongitude(), newZoomLevel, null);
             scrollTo((int) centerPoint.x - worldSize_new_2, (int) centerPoint.y - worldSize_new_2);
