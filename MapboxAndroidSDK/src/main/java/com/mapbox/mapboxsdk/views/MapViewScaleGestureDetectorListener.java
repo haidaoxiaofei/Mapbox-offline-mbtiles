@@ -58,9 +58,9 @@ public class MapViewScaleGestureDetectorListener
         float focusX = detector.getFocusX();
         float focusY = detector.getFocusY();
 
-        this.mapView.getController()
-                .panBy((int) (lastFocusX - focusX), (int) (lastFocusY - focusY));
         this.mapView.setScale(currentScale);
+        this.mapView.getController()
+                .panBy((int) (lastFocusX - focusX), (int) (lastFocusY - focusY), true);
 
         lastFocusX = focusX;
         lastFocusY = focusY;

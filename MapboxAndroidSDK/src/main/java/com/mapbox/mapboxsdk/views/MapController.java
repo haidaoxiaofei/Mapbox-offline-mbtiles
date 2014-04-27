@@ -100,7 +100,7 @@ public class MapController implements MapViewConstants {
 
     public void panBy(int x, int y, final boolean userAction) {
     	mCurrentlyUserAction = userAction;
-        zoomDeltaScroll.offset(x, y);
+        zoomDeltaScroll.offset(-x, -y);
         this.mMapView.scrollBy(x, y);
         mCurrentlyUserAction = false;
     }
