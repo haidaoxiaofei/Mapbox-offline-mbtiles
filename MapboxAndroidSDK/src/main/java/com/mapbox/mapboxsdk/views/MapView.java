@@ -267,39 +267,42 @@ public class MapView extends ViewGroup
     	}
 		invalidate();
     }
+    
+    private void updateAfterSourceChange() {
+        Projection.setTileSize(mTileProvider.getTileSizePixels());
+    	this.setScrollableAreaLimit(mTileProvider.getBoundingBox());
+    	this.setMinZoomLevel(mTileProvider.getMinimumZoomLevel());
+    	this.setMaxZoomLevel(mTileProvider.getMaximumZoomLevel());
+    	this.scrollTo(mDScrollX, mDScrollY);
+    	this.setZoom(mZoomLevel);
+        postInvalidate();
+    }
 
     public void setTileSource(final ITileLayer[] value) {
-        if (mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
-            LatLng center = getCenter();
+        if (value != null && mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
             ((MapTileLayerBasic) mTileProvider).setTileSources(value);
-            this.setMinZoomLevel(mTileProvider.getMinimumZoomLevel());
-            this.setMaxZoomLevel(mTileProvider.getMaximumZoomLevel());
-            this.setZoom(mZoomLevel);
-            this.setCenter(center);
-            postInvalidate();
+            updateAfterSourceChange();
         }
     }
 
     public void setTileSource(final ITileLayer aTileSource) {
-        mTileProvider.setTileSource(aTileSource);
-        Projection.setTileSize(aTileSource.getTileSizePixels());
-        this.setZoom(mZoomLevel);
-        postInvalidate();
+        if (aTileSource != null && mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
+        	mTileProvider.setTileSource(aTileSource);
+        	updateAfterSourceChange();
+        }
     }
 
     public void addTileSource(final ITileLayer aTileSource) {
-        if (mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
+        if (aTileSource != null && mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
             ((MapTileLayerBasic) mTileProvider).addTileSource(aTileSource);
-            this.setZoom(mZoomLevel);
-            postInvalidate();
+        	updateAfterSourceChange();
         }
     }
 
     public void removeTileSource(final ITileLayer aTileSource) {
-        if (mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
+        if (aTileSource != null && mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
             ((MapTileLayerBasic) mTileProvider).removeTileSource(aTileSource);
-            this.setZoom(mZoomLevel);
-            postInvalidate();
+        	updateAfterSourceChange();
         }
     }
 
