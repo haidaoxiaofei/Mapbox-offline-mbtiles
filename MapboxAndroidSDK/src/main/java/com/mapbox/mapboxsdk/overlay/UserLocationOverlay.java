@@ -400,7 +400,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
 
     public void onLocationChanged(Location location, GpsLocationProvider source) {
         // If we had a previous location, let's get those bounds
-    	if (mLocation != null && mLocation.distanceTo(location) == 0) return;
+    	if (mLocation != null && mLocation.getBearing() == location.getBearing() && mLocation.distanceTo(location) == 0) return;
         mLocation = location;
         
 
