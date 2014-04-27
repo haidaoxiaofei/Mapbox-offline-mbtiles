@@ -386,7 +386,7 @@ public class Projection implements GeoConstants {
      * @param levelOfDetail Level of detail, from 1 (lowest detail) to 23 (highest detail)
      * @return Output parameter receiving the latitude and longitude in degrees.
      */
-    public static LatLng pixelXYToLatLong(float pixelX, float pixelY, final float levelOfDetail) {
+    public static LatLng pixelXYToLatLong(double pixelX, double pixelY, final float levelOfDetail) {
         final float mapSize = mapSize(levelOfDetail);
 
         double x = wrap(pixelX, 0, mapSize - 1, mapSize);
