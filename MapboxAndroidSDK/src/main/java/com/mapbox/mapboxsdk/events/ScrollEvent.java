@@ -39,14 +39,13 @@ public class ScrollEvent implements MapEvent {
     public int getY() {
         return y;
     }
-    
+
     /**
-     * Return true if it was a user action (touch action).
+     * @return true if it was a user action (touch action).
      */
     public boolean getUserAction() {
         return userAction;
     }
-
 
     @Override
     public String toString() {

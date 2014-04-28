@@ -400,9 +400,11 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
 
     public void onLocationChanged(Location location, GpsLocationProvider source) {
         // If we had a previous location, let's get those bounds
-    	if (mLocation != null && mLocation.getBearing() == location.getBearing() && mLocation.distanceTo(location) == 0) return;
+        if (mLocation != null && mLocation.getBearing() == location.getBearing() && mLocation.distanceTo(location) == 0) {
+            return;
+        }
         mLocation = location;
-        
+
 
         if (mLocation != null) {
             mLatLng = new LatLng(mLocation);
@@ -496,17 +498,17 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
 
     private static final String TAG = "UserLocationOverlay";
 
-	@Override
-	public void onScroll(ScrollEvent event) {
-		if (event.getUserAction()) {
-			mIsFollowing = false;
-		}
-	}
+    @Override
+    public void onScroll(ScrollEvent event) {
+        if (event.getUserAction()) {
+            mIsFollowing = false;
+        }
+    }
 
-	@Override
-	public void onZoom(ZoomEvent event) {
-		if (event.getUserAction()) {
-			mIsFollowing = false;
-		}
-	}
+    @Override
+    public void onZoom(ZoomEvent event) {
+        if (event.getUserAction()) {
+            mIsFollowing = false;
+        }
+    }
 }

@@ -37,16 +37,13 @@ import com.mapbox.mapboxsdk.views.MapView;
 
 public class Projection implements GeoConstants {
     private MapView mapView = null;
-
     private int viewWidth2;
     private int viewHeight2;
     private int worldSize2;
     private final int offsetX;
     private final int offsetY;
-
     private final int centerX;
     private final int centerY;
-
     private BoundingBox mBoundingBoxProjection;
     private final float mZoomLevelProjection;
     private final Rect mScreenRectProjection;
@@ -62,7 +59,7 @@ public class Projection implements GeoConstants {
         viewWidth2 = mapView.getMeasuredWidth() >> 1;
         viewHeight2 = mapView.getMeasuredHeight() >> 1;
         mZoomLevelProjection = mapView.getZoomLevel(false);
-        worldSize2 = this.mapSize(mZoomLevelProjection) >> 1;
+        worldSize2 = mapSize(mZoomLevelProjection) >> 1;
 
         offsetX = -worldSize2;
         offsetY = -worldSize2;
@@ -119,7 +116,7 @@ public class Projection implements GeoConstants {
      */
     public ILatLng fromPixels(final float x, final float y) {
         final Rect screenRect = getIntrinsicScreenRect();
-        return this.pixelXYToLatLong(screenRect.left + (int) x + worldSize2,
+        return pixelXYToLatLong(screenRect.left + (int) x + worldSize2,
                 screenRect.top + (int) y + worldSize2, mZoomLevelProjection);
     }
 
@@ -185,7 +182,7 @@ public class Projection implements GeoConstants {
     public PointF toMapPixels(final ILatLng in, final PointF reuse) {
         return toMapPixels(in.getLatitude(), in.getLongitude(), reuse);
     }
-    
+
     public static PointF toMapPixels(final double latitude, final double longitude, final float zoom, final int centerX, final int centerY, final PointF reuse) {
         final PointF out = GeometryMath.reusable(reuse);
         final int mapSize = mapSize(zoom);

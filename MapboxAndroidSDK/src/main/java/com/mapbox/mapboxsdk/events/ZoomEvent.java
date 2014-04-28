@@ -6,6 +6,7 @@ import com.mapbox.mapboxsdk.views.MapView;
  * The event generated when a map has finished zooming to the level zoomLevel
  */
 public class ZoomEvent implements MapEvent {
+
     protected MapView source;
     protected float zoomLevel;
     protected boolean userAction;
@@ -29,9 +30,9 @@ public class ZoomEvent implements MapEvent {
     public float getZoomLevel() {
         return zoomLevel;
     }
-    
+
     /**
-     * Return true if it was a user action (touch action).
+     * @return true if it was a user action (touch action).
      */
     public boolean getUserAction() {
         return userAction;
