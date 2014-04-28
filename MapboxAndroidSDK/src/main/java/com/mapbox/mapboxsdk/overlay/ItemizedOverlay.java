@@ -8,12 +8,16 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
+
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas.UnsafeCanvasHandler;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.Projection;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Draws a list of {@link Marker} as markers to a map. The item with the lowest index is drawn
@@ -129,6 +133,11 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements Overlay
         for (int a = 0; a < size; a++) {
             mInternalItemList.add(createItem(a));
         }
+        Collections.sort(mInternalItemList, new Comparator<Marker>() {
+            public int compare(Marker a, Marker b) {
+                return Double.valueOf(a.getPoint().getLatitude()).compareTo(Double.valueOf(b.getPoint().getLatitude()));
+            }
+        });
     }
 
     /**
