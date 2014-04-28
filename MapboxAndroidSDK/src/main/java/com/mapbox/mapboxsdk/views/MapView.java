@@ -634,8 +634,11 @@ public class MapView extends ViewGroup
     public MapView setZoom(final float aZoomLevel) {
         return this.mController.setZoom(aZoomLevel);
     }
-
     protected MapView setZoomInternal(final float aZoomLevel) {
+        return setZoomInternal(aZoomLevel, null, null);
+    }
+
+    protected MapView setZoomInternal(final float aZoomLevel, final ILatLng center, final PointF decale) {
         final float minZoomLevel = getMinZoomLevel();
         final float maxZoomLevel = getMaxZoomLevel();
 
@@ -649,21 +652,36 @@ public class MapView extends ViewGroup
             mIsFlinging = false;
             updateScrollableAreaLimit();
         }
+        //reset the touchScale because from now on the zoom is the new one
+        mMultiTouchScale = 1.0f;
 
-        if (newZoomLevel > curZoomLevel) {
-            // We are going from a lower-resolution plane to a higher-resolution plane, so we have
-            // to do it the hard way.
-            final int worldSize_new_2 = Projection.mapSize(newZoomLevel) >> 1;
-            final ILatLng centerGeoPoint = getCenter();
-            final PointF centerPoint = Projection.latLongToPixelXY(centerGeoPoint.getLatitude(),
-                    centerGeoPoint.getLongitude(), newZoomLevel, null);
-            scrollTo((int) centerPoint.x - worldSize_new_2, (int) centerPoint.y - worldSize_new_2);
-        } else if (newZoomLevel < curZoomLevel) {
-            // We are going from a higher-resolution plane to a lower-resolution plane, so we can do
-            // it the easy way.
-            scrollTo((int) (GeometryMath.rightShift(getScrollX(), curZoomLevel - newZoomLevel)),
-                    (int) (GeometryMath.rightShift(getScrollY(), curZoomLevel - newZoomLevel)));
+        if (center != null) {
+            //we cant use the mProjection because the values are not the right one yet
+            final PointF centerPoint = Projection.toMapPixels(center.getLatitude(),
+                    center.getLongitude(), newZoomLevel, getScrollX(), getScrollY(), null);
+            if (decale != null) {
+                centerPoint.offset(decale.x, decale.y);
+            }
+            scrollTo(centerPoint.x, centerPoint.y);
         }
+        else {
+            if (newZoomLevel > curZoomLevel) {
+                // We are going from a lower-resolution plane to a higher-resolution plane, so we have
+                // to do it the hard way.
+                final int worldSize_new_2 = Projection.mapSize(newZoomLevel) >> 1;
+                final ILatLng centerGeoPoint = getCenter();
+                final PointF centerPoint = Projection.latLongToPixelXY(centerGeoPoint.getLatitude(),
+                        centerGeoPoint.getLongitude(), newZoomLevel, null);
+                scrollTo((int) centerPoint.x - worldSize_new_2, (int) centerPoint.y - worldSize_new_2);
+            } else if (newZoomLevel < curZoomLevel) {
+                // We are going from a higher-resolution plane to a lower-resolution plane, so we can do
+                // it the easy way.
+                scrollTo((int) (GeometryMath.rightShift(getScrollX(), curZoomLevel - newZoomLevel)),
+                        (int) (GeometryMath.rightShift(getScrollY(), curZoomLevel - newZoomLevel)));
+            }
+        }
+
+
 
         mProjection = new Projection(this);
         // snap for all snappables
@@ -1408,8 +1426,10 @@ public class MapView extends ViewGroup
     	
     	final int intX = (int) Math.round(x);
     	final int intY = (int) Math.round(y);
-    	
+
+        //make sure the next time someone wants the projection it is the correct one!
     	mProjection = null;
+
     	super.scrollTo(intX, intY);
 
         // do callback on listener
