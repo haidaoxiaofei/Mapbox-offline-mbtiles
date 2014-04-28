@@ -13,8 +13,6 @@ public interface MapViewConstants {
     // Final Fields
     // ===========================================================
 
-    public static final boolean DEBUGMODE = false;
-
     public static final int ANIMATION_DURATION_SHORT = 250;
     public static final int ANIMATION_DURATION_DEFAULT = 500;
     public static final PointF DEFAULT_PIN_ANCHOR = new PointF(0.5f, 1.0f);
