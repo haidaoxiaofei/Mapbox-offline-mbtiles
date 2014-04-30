@@ -10,7 +10,7 @@ import com.mapbox.mapboxsdk.util.constants.UtilConstants;
  *
  * @author Neil Boyd
  */
-public class NetworkLocationIgnorer implements UtilConstants {
+public class NetworkLocationIgnorer {
 
     /**
      * last time we got a location from the gps provider
@@ -29,7 +29,7 @@ public class NetworkLocationIgnorer implements UtilConstants {
         if (LocationManager.GPS_PROVIDER.equals(pProvider)) {
             mLastGps = pTime;
         } else {
-            if (pTime < mLastGps + GPS_WAIT_TIME) {
+            if (pTime < mLastGps + UtilConstants.GPS_WAIT_TIME) {
                 return true;
             }
         }
