@@ -51,8 +51,11 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
             addTileSource(source);
         }
     }
-
     public void addTileSource(final ITileLayer pTileSource) {
+        addTileSource(pTileSource, mTileProviderList.size());
+    }
+
+    public void addTileSource(final ITileLayer pTileSource, final int index) {
         if (pTileSource == null) {
             return;
         }
@@ -62,7 +65,17 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
             mCacheKey = pTileSource.getCacheKey();
         }
         synchronized (mTileProviderList) {
-            mTileProviderList.add(downloaderProvider);
+            if (index < 0 || index > mTileProviderList.size()) {
+                return;
+            }
+            mTileProviderList.add(index, downloaderProvider);
+        }
+    }
+
+    public void removeTileSource(final int index) {
+        synchronized (mTileProviderList) {
+            if (index >= 0 & index < mTileProviderList.size())
+              mTileProviderList.remove(index);
         }
     }
 
