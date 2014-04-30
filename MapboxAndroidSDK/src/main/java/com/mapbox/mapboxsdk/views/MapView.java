@@ -273,8 +273,8 @@ public class MapView extends ViewGroup
     	this.setScrollableAreaLimit(mTileProvider.getBoundingBox());
     	this.setMinZoomLevel(mTileProvider.getMinimumZoomLevel());
     	this.setMaxZoomLevel(mTileProvider.getMaximumZoomLevel());
-    	this.scrollTo(mDScrollX, mDScrollY);
     	this.setZoom(mZoomLevel);
+        this.scrollTo(mDScroll.x, mDScroll.y);
         postInvalidate();
     }
 
@@ -525,23 +525,25 @@ public class MapView extends ViewGroup
      * @return centerpoint
      */
     public LatLng getCenter() {
-    	final int worldSize_current_2 = Projection.mapSize(mZoomLevel) >> 1;                
-        return Projection.pixelXYToLatLong((float)mDScrollX + worldSize_current_2,
-        		(float)mDScrollY + worldSize_current_2, mZoomLevel);
+        final int worldSize_current_2 = Projection.mapSize(mZoomLevel) >> 1;
+        return Projection.pixelXYToLatLong((float) mDScroll.x
+                + worldSize_current_2, (float) mDScroll.y + worldSize_current_2,
+                mZoomLevel);
     }
-    
+
     /**
      * Gets the current bounds of the screen in <I>screen coordinates</I>.
      */
     public Rect getScreenRect(final Rect reuse) {
         final Rect out = getIntrinsicScreenRect(reuse);
         if (this.getMapOrientation() % 180 != 0) {
-            // Since the canvas is shifted by getWidth/2, we can just return our natural scrollX/Y
+            // Since the canvas is shifted by getWidth/2, we can just return our
+            // natural scrollX/Y
             // value since that is the same as the shifted center.
             int centerX = this.getScrollX();
             int centerY = this.getScrollY();
-            GeometryMath.getBoundingBoxForRotatedRectangle(out, centerX, centerY,
-                    this.getMapOrientation(), out);
+            GeometryMath.getBoundingBoxForRotatedRectangle(out, centerX,
+                    centerY, this.getMapOrientation(), out);
         }
         return out;
     }
@@ -639,32 +641,32 @@ public class MapView extends ViewGroup
     }
 
     protected MapView setZoomInternal(final float aZoomLevel, final ILatLng center, final PointF decale) {
-        final float minZoomLevel = getMinZoomLevel();
-        final float maxZoomLevel = getMaxZoomLevel();
 
-        final float newZoomLevel = Math.max(minZoomLevel, Math.min(maxZoomLevel, aZoomLevel));
+        final float newZoomLevel = getClampedZoomLevel(aZoomLevel);
         final float curZoomLevel = this.mZoomLevel;
 
+        // reset the touchScale because from now on the zoom is the new one
+        mMultiTouchScale = 1.0f;
         if (newZoomLevel != curZoomLevel) {
             this.mZoomLevel = newZoomLevel;
-            mTargetZoomLevel.set(Float.floatToIntBits(this.mZoomLevel)); //just to be sure any one got the right one
+            // just to be sure any one got the right one
+            mTargetZoomLevel.set(Float.floatToIntBits(this.mZoomLevel)); 
             mScroller.forceFinished(true);
             mIsFlinging = false;
             updateScrollableAreaLimit();
         }
-        //reset the touchScale because from now on the zoom is the new one
-        mMultiTouchScale = 1.0f;
 
         if (center != null) {
-            //we cant use the mProjection because the values are not the right one yet
-            final PointF centerPoint = Projection.toMapPixels(center.getLatitude(),
-                    center.getLongitude(), newZoomLevel, getScrollX(), getScrollY(), null);
+            // we cant use the mProjection because the values are not the right
+            // one yet
+            final PointF centerPoint = Projection.toMapPixels(
+                    center.getLatitude(), center.getLongitude(), newZoomLevel,
+                    mDScroll.x, mDScroll.y, null);
             if (decale != null) {
                 centerPoint.offset(decale.x, decale.y);
             }
             scrollTo(centerPoint.x, centerPoint.y);
-        }
-        else {
+        } else {
             if (newZoomLevel > curZoomLevel) {
                 // We are going from a lower-resolution plane to a higher-resolution plane, so we have
                 // to do it the hard way.
@@ -741,9 +743,9 @@ public class MapView extends ViewGroup
         // Zoom to boundingBox center, at calculated maximum allowed zoom level
         final LatLng center = inter.getCenter();
         final float zoom = minimumZoomForBoundingBox(inter, regionFit);
+                    getController().setZoomAnimated(center, zoom, true, userAction);
 
         if (animated) {
-            getController().zoomAndMoveAnimated(center, zoom, userAction);
         }
         else {
         	getController().setCurrentlyInUserAction(userAction);
@@ -1368,7 +1370,6 @@ public class MapView extends ViewGroup
                 // snapping-to any Snappable points.
                 if (!isAnimating()) snapItems();
                 mIsFlinging = false;
-                mController.setCurrentlyInUserAction(false);
             } else {
                 scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
             }
@@ -1382,8 +1383,24 @@ public class MapView extends ViewGroup
         // scrollTo(getScrollX(), getScrollY());
     }
 
-    private double mDScrollX, mDScrollY;    
-    
+    private PointF mDScroll = new PointF();
+
+    public final PointF getScrollPoint() {
+        return mDScroll;
+    }
+
+    public final void setScrollPoint(final PointF point) {
+        scrollTo((double) point.x, (double) point.y);
+    }
+
+    public final PointF getScalePoint() {
+        return mMultiTouchScalePoint;
+    }
+
+    public final void setScalePoint(final PointF point) {
+        mMultiTouchScalePoint.set(point);
+    }
+
     @Override
     public void scrollTo(int x, int y) {
     	// a trick for everyone to go through the double version of the method
@@ -1421,16 +1438,16 @@ public class MapView extends ViewGroup
                 y = (mScrollableAreaLimit.bottom - height_2);
             }
         }
-    	mDScrollX = x;
-    	mDScrollY = y;
-    	
-    	final int intX = (int) Math.round(x);
-    	final int intY = (int) Math.round(y);
+        mDScroll.set((float)x, (float)y);
 
-        //make sure the next time someone wants the projection it is the correct one!
-    	mProjection = null;
+        final int intX = (int) Math.round(x);
+        final int intY = (int) Math.round(y);
 
-    	super.scrollTo(intX, intY);
+        // make sure the next time someone wants the projection it is the
+        // correct one!
+        mProjection = null;
+
+        super.scrollTo(intX, intY);
 
         // do callback on listener
         if (mListeners.size() > 0) {
