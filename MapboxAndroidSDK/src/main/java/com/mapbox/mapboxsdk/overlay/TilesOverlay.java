@@ -123,9 +123,12 @@ public class TilesOverlay extends SafeDrawOverlay {
         final float zoomLevel = pj.getZoomLevel();
         mWorldSize_2 = pj.getHalfWorldSize();
         GeometryMath.viewPortRectForTileDrawing(pj, mViewPort);
-
+        
+        int tileSize = Projection.getTileSize();
         // Draw the tiles!
-        drawTiles(c.getSafeCanvas(), zoomLevel, Projection.getTileSize(), mViewPort, mClipRect);
+        if (tileSize > 0) {
+        	drawTiles(c.getSafeCanvas(), zoomLevel, tileSize, mViewPort, mClipRect);
+        }
     }
 
     /**
