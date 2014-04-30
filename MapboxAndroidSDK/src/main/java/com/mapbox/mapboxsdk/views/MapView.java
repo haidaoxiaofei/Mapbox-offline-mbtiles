@@ -706,32 +706,57 @@ public class MapView extends ViewGroup
 
     /**
      * compute the minimum zoom necessary to show a BoundingBox
-     *
-     * @param boundingBox the box to compute the zoom for
+     * 
+     * @param boundingBox
+     *            the box to compute the zoom for
+     * @param regionFit
+     *            if true computed zoom will make sure the whole box is visible
+     * @param roundedZoom
+     *            if true the required zoom will be rounded (for better
+     *            graphics)
      * @return the minimum zoom necessary to show the bounding box
      */
-    private float minimumZoomForBoundingBox(final BoundingBox boundingBox, final boolean regionFit) {
-        final RectF rect = Projection.toMapPixels(boundingBox, TileLayerConstants.MAXIMUM_ZOOMLEVEL,
-                mTempRect);
-        final float requiredLatitudeZoom =
-                TileLayerConstants.MAXIMUM_ZOOMLEVEL - (float) ((Math.log(
-                        rect.height() / getMeasuredHeight()) / Math.log(2)));
-        final float requiredLongitudeZoom =
-                TileLayerConstants.MAXIMUM_ZOOMLEVEL - (float) ((Math.log(
-                        rect.width() / getMeasuredWidth()) / Math.log(2)));
-        return regionFit?Math.min(requiredLatitudeZoom, requiredLongitudeZoom):Math.max(requiredLatitudeZoom, requiredLongitudeZoom);
+    private double minimumZoomForBoundingBox(final BoundingBox boundingBox,
+            final boolean regionFit, final boolean roundedZoom) {
+        final RectF rect = Projection.toMapPixels(boundingBox,
+                TileLayerConstants.MAXIMUM_ZOOMLEVEL, mTempRect);
+        final float requiredLatitudeZoom = TileLayerConstants.MAXIMUM_ZOOMLEVEL
+                - (float) ((Math.log(rect.height() / getMeasuredHeight()) / Math
+                        .log(2)));
+        final float requiredLongitudeZoom = TileLayerConstants.MAXIMUM_ZOOMLEVEL
+                - (float) ((Math.log(rect.width() / getMeasuredWidth()) / Math
+                        .log(2)));
+        double result = regionFit ? Math.min(requiredLatitudeZoom,
+                requiredLongitudeZoom) : Math.max(requiredLatitudeZoom,
+                        requiredLongitudeZoom);
+        if (roundedZoom) {
+            result = regionFit ? Math.floor(result) : Math.round(result);
+        }
+        return result;
     }
 
     /**
-     * Zoom the map to enclose the specified bounding box, as closely as possible.
-     * Must be called after display layout is complete, or screen dimensions are not known, and
-     * will always zoom to center of zoom  level 0.
-     * Suggestion: Check getScreenRect(null).getHeight() > 0
+     * Zoom the map to enclose the specified bounding box, as closely as
+     * possible.
+     * 
+     * @param boundingBox
+     *            the box to compute the zoom for
+     * @param regionFit
+     *            if true computed zoom will make sure the whole box is visible
+     * @param animated
+     *            if true the zoom will be animated
+     * @param roundedZoom
+     *            if true the required zoom will be rounded (for better
+     *            graphics)
+     * @param userAction
+     *            set to true if it comes from a userAction
+     * @return the map view, for chaining
      */
-    public MapView zoomToBoundingBox(final BoundingBox boundingBox, final boolean regionFit, final boolean animated, final boolean userAction) {
-        BoundingBox inter =
-                (mScrollableAreaBoundingBox != null) ? mScrollableAreaBoundingBox.intersect(
-                        boundingBox) : boundingBox;
+    public MapView zoomToBoundingBox(final BoundingBox boundingBox,
+            final boolean regionFit, final boolean animated,
+            final boolean roundedZoom, final boolean userAction) {
+        BoundingBox inter = (mScrollableAreaBoundingBox != null) ? mScrollableAreaBoundingBox
+                .intersect(boundingBox) : boundingBox;
         if (inter == null || !inter.isValid()) {
             return this;
         }
@@ -742,9 +767,43 @@ public class MapView extends ViewGroup
 
         // Zoom to boundingBox center, at calculated maximum allowed zoom level
         final LatLng center = inter.getCenter();
-        final float zoom = minimumZoomForBoundingBox(inter, regionFit);
-                    getController().setZoomAnimated(center, zoom, true, userAction);
+        final float zoom = (float) minimumZoomForBoundingBox(inter, regionFit,
+                roundedZoom);
 
+        getController().setZoomAnimated(center, zoom, true, userAction);
+        return this;
+    }
+
+    /**
+     * Zoom the map to enclose the specified bounding box, as closely as
+     * possible.
+     * 
+     * @param boundingBox
+     *            the box to compute the zoom for
+     * @param regionFit
+     *            if true computed zoom will make sure the whole box is visible
+     * @param animated
+     *            if true the zoom will be animated
+     * @param roundedZoom
+     *            if true the required zoom will be rounded (for better
+     *            graphics)
+     * @return the map view, for chaining
+     */
+    public MapView zoomToBoundingBox(final BoundingBox boundingBox,
+            final boolean regionFit, final boolean animated,
+            final boolean roundedZoom) {
+        return zoomToBoundingBox(boundingBox, regionFit, animated, roundedZoom,
+                false);
+    }
+
+    /**
+     * Zoom the map to enclose the specified bounding box, as closely as
+     * possible.
+     * 
+     * @param boundingBox
+     *            the box to compute the zoom for
+     * @param regionFit
+     *            if true computed zoom will make sure the whole box is visible
         if (animated) {
         }
         else {
@@ -754,17 +813,40 @@ public class MapView extends ViewGroup
         	getController().setCurrentlyInUserAction(false);
         }
         return this;
+     * @param animated
+     *            if true the zoom will be animated
+     * @return the map view, for chaining
+     */
+    public MapView zoomToBoundingBox(final BoundingBox boundingBox,
+            final boolean regionFit, final boolean animated) {
+        return zoomToBoundingBox(boundingBox, regionFit, animated, false, false);
     }
-    public MapView zoomToBoundingBox(final BoundingBox boundingBox, final boolean regionFit, final boolean animated) {
-    	return zoomToBoundingBox(boundingBox, regionFit, animated, false);
+
+    /**
+     * Zoom the map to enclose the specified bounding box, as closely as
+     * possible.
+     * 
+     * @param boundingBox
+     *            the box to compute the zoom for
+     * @param regionFit
+     *            if true computed zoom will make sure the whole box is visible
+     * @return the map view, for chaining
+     */
+    public MapView zoomToBoundingBox(final BoundingBox boundingBox,
+            final boolean regionFit) {
+        return zoomToBoundingBox(boundingBox, regionFit, false, false);
     }
-    
-    public MapView zoomToBoundingBox(final BoundingBox boundingBox, final boolean regionFit) {
-    	return zoomToBoundingBox(boundingBox, regionFit, false, false);
-    }
-    
+
+    /**
+     * Zoom the map to enclose the specified bounding box, as closely as
+     * possible.
+     * 
+     * @param boundingBox
+     *            the box to compute the zoom for
+     * @return the map view, for chaining
+     */
     public MapView zoomToBoundingBox(final BoundingBox boundingBox) {
-    	return zoomToBoundingBox(boundingBox, false);
+        return zoomToBoundingBox(boundingBox, false);
     }
 
     public float getClampedZoomLevel(float zoom) {
@@ -932,8 +1014,10 @@ public class MapView extends ViewGroup
         if (mScrollableAreaBoundingBox == null || !mLayedOut) {
             return;
         }
-        mMinimumZoomLevel = (float) Math.max(mRequestedMinimumZoomLevel,
-                minimumZoomForBoundingBox(mScrollableAreaBoundingBox, false));
+        mMinimumZoomLevel = (float) Math.max(
+                mRequestedMinimumZoomLevel,
+                minimumZoomForBoundingBox(mScrollableAreaBoundingBox, false,
+                        false));
         if (mZoomLevel < mMinimumZoomLevel) {
             setZoom(mMinimumZoomLevel);
         }
