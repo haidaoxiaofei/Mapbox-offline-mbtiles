@@ -25,7 +25,7 @@ public class MapController implements MapViewConstants {
 
         public PointF evaluate(float fraction, PointF startValue,
                                PointF endValue) {
-            return new PointF((fraction * (endValue.x  - startValue.x) + startValue.x), (fraction * (endValue.y  - startValue.y) + startValue.y));
+            return new PointF((fraction * (endValue.x - startValue.x) + startValue.x), (fraction * (endValue.y - startValue.y) + startValue.y));
         }
 
     }
@@ -94,6 +94,7 @@ public class MapController implements MapViewConstants {
     public void animateTo(final ILatLng point, final boolean userAction) {
         setZoomAnimated(point, mMapView.getZoomLevel(), true, userAction);
     }
+
     public void animateTo(final ILatLng point) {
         animateTo(point, false);
     }
@@ -115,6 +116,7 @@ public class MapController implements MapViewConstants {
         this.mMapView.scrollBy(x, y);
         mCurrentlyUserAction = false;
     }
+
     public void panBy(int x, int y) {
         panBy(x, y, false);
     }
@@ -288,6 +290,7 @@ public class MapController implements MapViewConstants {
         }
         return setZoomAnimated(latlong, targetZoom, false, userAction);
     }
+
     public boolean zoomInAbout(final ILatLng latlong) {
         return zoomInAbout(latlong, false);
     }

@@ -19,7 +19,9 @@ import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas;
 import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.Projection;
+
 import java.util.HashMap;
+
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
@@ -104,7 +106,7 @@ public class TilesOverlay extends SafeDrawOverlay {
      * Set whether to use the network connection if it's available.
      *
      * @param aMode if true use the network connection if it's available. if false don't use the
-     * network connection even if it's available.
+     *              network connection even if it's available.
      */
     public void setUseDataConnection(final boolean aMode) {
         mTileProvider.setUseDataConnection(aMode);
@@ -138,7 +140,7 @@ public class TilesOverlay extends SafeDrawOverlay {
      * onTileReadyToDraw where custom manipulations can be made before drawing the tile.
      */
     public void drawTiles(final Canvas c, final float zoomLevel, final int tileSizePx,
-            final Rect viewPort, final Rect pClipRect) {
+                          final Rect viewPort, final Rect pClipRect) {
 
         mTileLooper.loop(c, mTileProvider.getCacheKey(), zoomLevel, tileSizePx, viewPort,
                 pClipRect);
@@ -171,7 +173,7 @@ public class TilesOverlay extends SafeDrawOverlay {
 
         @Override
         public void handleTile(final Canvas pCanvas, final String pCacheKey, final int pTileSizePx,
-                final MapTile pTile, final int pX, final int pY, final Rect pClipRect) {
+                               final MapTile pTile, final int pX, final int pY, final Rect pClipRect) {
             final float x = pX * pTileSizePx * mCurrentZoomFactor - mWorldSize_2;
             final float y = pY * pTileSizePx * mCurrentZoomFactor - mWorldSize_2;
             final float w = pTileSizePx * mCurrentZoomFactor;
@@ -210,8 +212,8 @@ public class TilesOverlay extends SafeDrawOverlay {
      * Set the color to use to draw the background while we're waiting for the tile to load.
      *
      * @param pLoadingBackgroundColor the color to use. If the value is {@link Color#TRANSPARENT}
-     * then there will be no
-     * loading tile.
+     *                                then there will be no
+     *                                loading tile.
      */
     public void setLoadingBackgroundColor(final int pLoadingBackgroundColor) {
         if (mLoadingBackgroundColor != pLoadingBackgroundColor) {
@@ -275,10 +277,10 @@ public class TilesOverlay extends SafeDrawOverlay {
      *
      * @param pNewZoomLevel the zoom level that we need now
      * @param pOldZoomLevel the previous zoom level that we should get the tiles to rescale
-     * @param projection the projection to compute view port
+     * @param projection    the projection to compute view port
      */
     public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel,
-            final Projection projection) {
+                             final Projection projection) {
 
         if (mTileProvider.hasNoSource() || Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel)) {
             return;
@@ -341,7 +343,7 @@ public class TilesOverlay extends SafeDrawOverlay {
 
         @Override
         public void handleTile(final Canvas pCanvas, final String pCacheKey, final int pTileSizePx,
-                final MapTile pTile, final int pX, final int pY, final Rect pClipRect) {
+                               final MapTile pTile, final int pX, final int pY, final Rect pClipRect) {
 
             // Get tile from cache.
             // If it's found then no need to created scaled version.
@@ -370,7 +372,7 @@ public class TilesOverlay extends SafeDrawOverlay {
         }
 
         protected abstract void handleScaleTile(final String pCacheKey, final int pTileSizePx,
-                final MapTile pTile, final int pX, final int pY);
+                                                final MapTile pTile, final int pX, final int pY);
     }
 
     private class ZoomInTileLooper extends ScaleTileLooper {
@@ -380,7 +382,7 @@ public class TilesOverlay extends SafeDrawOverlay {
 
         @Override
         public void handleScaleTile(final String pCacheKey, final int pTileSizePx,
-                final MapTile pTile, final int pX, final int pY) {
+                                    final MapTile pTile, final int pX, final int pY) {
             int oldTileX = GeometryMath.mod((int) GeometryMath.rightShift(pX, mDiff), mOldTileUpperBound);
             int oldTileY = GeometryMath.mod((int) GeometryMath.rightShift(pY, mDiff), mOldTileUpperBound);
 
@@ -435,7 +437,7 @@ public class TilesOverlay extends SafeDrawOverlay {
 
         @Override
         protected void handleScaleTile(final String pCacheKey, final int pTileSizePx,
-                final MapTile pTile, final int pX, final int pY) {
+                                       final MapTile pTile, final int pX, final int pY) {
 
             if (mDiff >= MAX_ZOOM_OUT_DIFF) {
                 return;
