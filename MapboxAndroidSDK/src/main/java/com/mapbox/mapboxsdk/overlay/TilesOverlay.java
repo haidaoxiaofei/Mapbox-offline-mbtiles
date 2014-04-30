@@ -315,6 +315,8 @@ public class TilesOverlay extends SafeDrawOverlay {
         protected final HashMap<MapTile, Bitmap> mNewTiles;
 
         protected final float mOldZoomLevel;
+        protected final int mOldZoomRound;
+        protected final int mOldTileUpperBound;
         protected float mDiff;
         protected int mTileSize_2;
         protected Rect mSrcRect;
@@ -323,6 +325,8 @@ public class TilesOverlay extends SafeDrawOverlay {
 
         public ScaleTileLooper(final float pOldZoomLevel) {
             mOldZoomLevel = pOldZoomLevel;
+            mOldZoomRound = (int)Math.floor(mOldZoomLevel);
+            mOldTileUpperBound = 1 << mOldZoomRound;
             mNewTiles = new HashMap<MapTile, Bitmap>();
             mSrcRect = new Rect();
             mDestRect = new Rect();
@@ -377,11 +381,12 @@ public class TilesOverlay extends SafeDrawOverlay {
         @Override
         public void handleScaleTile(final String pCacheKey, final int pTileSizePx,
                 final MapTile pTile, final int pX, final int pY) {
+            int oldTileX = GeometryMath.mod((int) GeometryMath.rightShift(pX, mDiff), mOldTileUpperBound);
+            int oldTileY = GeometryMath.mod((int) GeometryMath.rightShift(pY, mDiff), mOldTileUpperBound);
 
             // get the correct fraction of the tile from cache and scale up
-            final MapTile oldTile = new MapTile(pCacheKey, (int) Math.floor(mOldZoomLevel),
-                    (int) GeometryMath.rightShift(pX, mDiff),
-                    (int) GeometryMath.rightShift(pY, mDiff));
+            final MapTile oldTile = new MapTile(pCacheKey,
+                    mOldZoomRound, oldTileX, oldTileY);
             final Drawable oldDrawable = mTileProvider.getMapTileFromMemory(oldTile);
 
             if (oldDrawable instanceof BitmapDrawable) {
@@ -422,7 +427,7 @@ public class TilesOverlay extends SafeDrawOverlay {
     }
 
     private class ZoomOutTileLooper extends ScaleTileLooper {
-        private static final int MAX_ZOOM_OUT_DIFF = 4;
+        private static final int MAX_ZOOM_OUT_DIFF = 8;
 
         public ZoomOutTileLooper(final float pOldZoomLevel) {
             super(pOldZoomLevel);
@@ -440,14 +445,20 @@ public class TilesOverlay extends SafeDrawOverlay {
             final int xx = (int) GeometryMath.leftShift(pX, mDiff);
             final int yy = (int) GeometryMath.leftShift(pY, mDiff);
             final int numTiles = (int) GeometryMath.leftShift(1, mDiff);
+
+            int oldTileX, oldTileY;
             Bitmap bitmap = null;
             Canvas canvas = null;
             for (int x = 0; x < numTiles; x++) {
                 for (int y = 0; y < numTiles; y++) {
-                    final MapTile oldTile = new MapTile(mTileProvider.getCacheKey(),
-                            (int) Math.floor(mOldZoomLevel), xx + x, yy + y);
+                    oldTileY = GeometryMath.mod(yy + y, mOldTileUpperBound);
+                    oldTileX = GeometryMath.mod(xx + x, mOldTileUpperBound);
+                    final MapTile oldTile = new MapTile(pCacheKey,
+                            mOldZoomRound, oldTileX, oldTileY);
                     Drawable oldDrawable = mTileProvider.getMapTileFromMemory(oldTile);
-                    if (oldDrawable == null) {
+                    if (oldDrawable != null) {
+                    }
+                    else {
                         oldDrawable = getLoadingTile();
                     }
 
