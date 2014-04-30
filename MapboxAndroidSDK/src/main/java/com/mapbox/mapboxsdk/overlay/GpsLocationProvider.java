@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.mapbox.mapboxsdk.util.NetworkLocationIgnorer;
 
 public class GpsLocationProvider implements LocationListener {
+
     private final LocationManager mLocationManager;
     private Location mLocation;
 
@@ -61,7 +62,9 @@ public class GpsLocationProvider implements LocationListener {
             if (LocationManager.GPS_PROVIDER.equals(provider)
                     || LocationManager.NETWORK_PROVIDER.equals(provider)) {
                 result = true;
-                if (mLocation == null) mLocation = mLocationManager.getLastKnownLocation(provider);
+                if (mLocation == null) {
+                    mLocation = mLocationManager.getLastKnownLocation(provider);
+                }
                 mLocationManager.requestLocationUpdates(provider, mLocationUpdateMinTime,
                         mLocationUpdateMinDistance, this);
             }

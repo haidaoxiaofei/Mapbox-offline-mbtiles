@@ -707,12 +707,9 @@ public class MapView extends ViewGroup
     /**
      * compute the minimum zoom necessary to show a BoundingBox
      * 
-     * @param boundingBox
-     *            the box to compute the zoom for
-     * @param regionFit
-     *            if true computed zoom will make sure the whole box is visible
-     * @param roundedZoom
-     *            if true the required zoom will be rounded (for better
+     * @param boundingBox the box to compute the zoom for
+     * @param regionFit if true computed zoom will make sure the whole box is visible
+     * @param roundedZoom if true the required zoom will be rounded (for better
      *            graphics)
      * @return the minimum zoom necessary to show the bounding box
      */
@@ -739,17 +736,12 @@ public class MapView extends ViewGroup
      * Zoom the map to enclose the specified bounding box, as closely as
      * possible.
      * 
-     * @param boundingBox
-     *            the box to compute the zoom for
-     * @param regionFit
-     *            if true computed zoom will make sure the whole box is visible
-     * @param animated
-     *            if true the zoom will be animated
-     * @param roundedZoom
-     *            if true the required zoom will be rounded (for better
+     * @param boundingBox the box to compute the zoom for
+     * @param regionFit if true computed zoom will make sure the whole box is visible
+     * @param animated if true the zoom will be animated
+     * @param roundedZoom if true the required zoom will be rounded (for better
      *            graphics)
-     * @param userAction
-     *            set to true if it comes from a userAction
+     * @param userAction set to true if it comes from a userAction
      * @return the map view, for chaining
      */
     public MapView zoomToBoundingBox(final BoundingBox boundingBox,
@@ -770,7 +762,15 @@ public class MapView extends ViewGroup
         final float zoom = (float) minimumZoomForBoundingBox(inter, regionFit,
                 roundedZoom);
 
-        getController().setZoomAnimated(center, zoom, true, userAction);
+        if (animated) {
+            getController().setZoomAnimated(center, zoom, true, userAction);
+        }
+        else {
+            getController().setCurrentlyInUserAction(userAction);
+            getController().setZoom(zoom);
+            getController().setCenter(center);
+            getController().setCurrentlyInUserAction(false);
+        }
         return this;
     }
 
@@ -778,14 +778,10 @@ public class MapView extends ViewGroup
      * Zoom the map to enclose the specified bounding box, as closely as
      * possible.
      * 
-     * @param boundingBox
-     *            the box to compute the zoom for
-     * @param regionFit
-     *            if true computed zoom will make sure the whole box is visible
-     * @param animated
-     *            if true the zoom will be animated
-     * @param roundedZoom
-     *            if true the required zoom will be rounded (for better
+     * @param boundingBox the box to compute the zoom for
+     * @param regionFit if true computed zoom will make sure the whole box is visible
+     * @param animated if true the zoom will be animated
+     * @param roundedZoom if true the required zoom will be rounded (for better
      *            graphics)
      * @return the map view, for chaining
      */
@@ -800,21 +796,9 @@ public class MapView extends ViewGroup
      * Zoom the map to enclose the specified bounding box, as closely as
      * possible.
      * 
-     * @param boundingBox
-     *            the box to compute the zoom for
-     * @param regionFit
-     *            if true computed zoom will make sure the whole box is visible
-        if (animated) {
-        }
-        else {
-        	getController().setCurrentlyInUserAction(userAction);
-            getController().setZoom(zoom);
-        	getController().setCenter(center);
-        	getController().setCurrentlyInUserAction(false);
-        }
-        return this;
-     * @param animated
-     *            if true the zoom will be animated
+     * @param boundingBox the box to compute the zoom for
+     * @param regionFit if true computed zoom will make sure the whole box is visible
+     * @param animated if true the zoom will be animated
      * @return the map view, for chaining
      */
     public MapView zoomToBoundingBox(final BoundingBox boundingBox,
@@ -841,8 +825,7 @@ public class MapView extends ViewGroup
      * Zoom the map to enclose the specified bounding box, as closely as
      * possible.
      * 
-     * @param boundingBox
-     *            the box to compute the zoom for
+     * @param boundingBox the box to compute the zoom for
      * @return the map view, for chaining
      */
     public MapView zoomToBoundingBox(final BoundingBox boundingBox) {

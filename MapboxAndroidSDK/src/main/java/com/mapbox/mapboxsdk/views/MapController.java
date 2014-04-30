@@ -40,9 +40,7 @@ public class MapController implements MapViewConstants {
     private ILatLng zoomOnLatLong = null;
     private PointF zoomDeltaScroll = new PointF();
     private ILatLng animateToTargetPoint = null;
-
     private boolean mCurrentlyUserAction = false;
-
     private ILatLng mPointToGoTo = null;
     private float mZoomToZoomTo = -1;
 
@@ -55,14 +53,12 @@ public class MapController implements MapViewConstants {
         mMapView = mapView;
     }
 
-    public boolean currentlyInUserAction()
-    {
+    public boolean currentlyInUserAction() {
         return mCurrentlyUserAction;
     }
 
-    public void setCurrentlyInUserAction(final boolean value)
-    {
-        mCurrentlyUserAction = value;
+    public void setCurrentlyInUserAction(final boolean value) {
+         mCurrentlyUserAction = value;
     }
 
 
@@ -344,7 +340,7 @@ public class MapController implements MapViewConstants {
 
     /**
      * Called when the mapView is layed out for the first time
-     * if action were triggered before we had to wait because 
+     * if action were triggered before we had to wait because
      * we didn't have any projection
      */
     public void mapViewLayedOut() {
