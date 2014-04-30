@@ -95,7 +95,7 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
         if (obj == this) {
             return true;
         }
-        if (obj.getClass() != getClass()) {
+        if (obj.getClass().equals(this.getClass())) {
             return false;
         }
         final LatLng rhs = (LatLng) obj;
