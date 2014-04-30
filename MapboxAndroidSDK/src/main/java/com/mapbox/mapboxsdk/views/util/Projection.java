@@ -186,7 +186,7 @@ public class Projection implements GeoConstants {
         return toMapPixels(in.getLatitude(), in.getLongitude(), reuse);
     }
     
-    public static PointF toMapPixels(final double latitude, final double longitude, final float zoom, final int centerX, final int centerY, final PointF reuse) {
+    public static PointF toMapPixels(final double latitude, final double longitude, final float zoom, final double centerX, final double centerY, final PointF reuse) {
         final PointF out = GeometryMath.reusable(reuse);
         final int mapSize = mapSize(zoom);
         latLongToPixelXY(latitude, longitude, zoom, out);
