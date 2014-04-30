@@ -123,11 +123,11 @@ public class TilesOverlay extends SafeDrawOverlay {
         final float zoomLevel = pj.getZoomLevel();
         mWorldSize_2 = pj.getHalfWorldSize();
         GeometryMath.viewPortRectForTileDrawing(pj, mViewPort);
-        
+
         int tileSize = Projection.getTileSize();
         // Draw the tiles!
         if (tileSize > 0) {
-        	drawTiles(c.getSafeCanvas(), zoomLevel, tileSize, mViewPort, mClipRect);
+            drawTiles(c.getSafeCanvas(), zoomLevel, tileSize, mViewPort, mClipRect);
         }
     }
 
@@ -325,7 +325,7 @@ public class TilesOverlay extends SafeDrawOverlay {
 
         public ScaleTileLooper(final float pOldZoomLevel) {
             mOldZoomLevel = pOldZoomLevel;
-            mOldZoomRound = (int)Math.floor(mOldZoomLevel);
+            mOldZoomRound = (int) Math.floor(mOldZoomLevel);
             mOldTileUpperBound = 1 << mOldZoomRound;
             mNewTiles = new HashMap<MapTile, Bitmap>();
             mSrcRect = new Rect();
@@ -456,9 +456,7 @@ public class TilesOverlay extends SafeDrawOverlay {
                     final MapTile oldTile = new MapTile(pCacheKey,
                             mOldZoomRound, oldTileX, oldTileY);
                     Drawable oldDrawable = mTileProvider.getMapTileFromMemory(oldTile);
-                    if (oldDrawable != null) {
-                    }
-                    else {
+                    if (oldDrawable == null) {
                         oldDrawable = getLoadingTile();
                     }
 

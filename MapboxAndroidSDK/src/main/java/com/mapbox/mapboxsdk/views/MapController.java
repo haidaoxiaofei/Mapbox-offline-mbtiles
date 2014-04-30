@@ -24,8 +24,8 @@ public class MapController implements MapViewConstants {
         }
 
         public PointF evaluate(float fraction, PointF startValue,
-                              PointF endValue) {
-            return new PointF((fraction*(endValue.x  - startValue.x) + startValue.x), (fraction*(endValue.y  - startValue.y) + startValue.y));
+                               PointF endValue) {
+            return new PointF((fraction * (endValue.x  - startValue.x) + startValue.x), (fraction * (endValue.y  - startValue.y) + startValue.y));
         }
 
     }
@@ -58,7 +58,7 @@ public class MapController implements MapViewConstants {
     }
 
     public void setCurrentlyInUserAction(final boolean value) {
-         mCurrentlyUserAction = value;
+        mCurrentlyUserAction = value;
     }
 
 
@@ -67,7 +67,7 @@ public class MapController implements MapViewConstants {
         final Projection projection = mMapView.getProjection();
         mMapView.mMultiTouchScalePoint.set(mapCoords.x, mapCoords.y);
         projection.toPixels(mapCoords, mapCoords);
-        zoomDeltaScroll.set((float)(mMapView.getMeasuredWidth() / 2.0 - mapCoords.x), (float)(mMapView.getMeasuredHeight() / 2.0 - mapCoords.y));
+        zoomDeltaScroll.set((float) (mMapView.getMeasuredWidth() / 2.0 - mapCoords.x), (float) (mMapView.getMeasuredHeight() / 2.0 - mapCoords.y));
     }
 
     protected void aboutToStartAnimation(final ILatLng latlong) {
@@ -203,8 +203,7 @@ public class MapController implements MapViewConstants {
             float delta = (targetZoom - currentZoom);
             if (delta > 0) {
                 propertiesList.add(PropertyValuesHolder.ofFloat("scale", 1.0f, factor));
-            }
-            else {
+            } else {
                 propertiesList.add(PropertyValuesHolder.ofFloat("scale", 1.0f, factor));
             }
         }
@@ -214,17 +213,16 @@ public class MapController implements MapViewConstants {
             propertiesList.add(PropertyValuesHolder.ofObject(
                     "scrollPoint", evaluator,
                     p));
-        }
-        else {
+        } else {
             mMapView.getProjection().toPixels(p, p);
-            zoomDeltaScroll.set((float)(mMapView.getMeasuredWidth() / 2.0 - p.x), (float)(mMapView.getMeasuredHeight() / 2.0 - p.y));
+            zoomDeltaScroll.set((float) (mMapView.getMeasuredWidth() / 2.0 - p.x), (float) (mMapView.getMeasuredHeight() / 2.0 - p.y));
         }
 
         if (propertiesList.size() > 0) {
-            ObjectAnimator anim = ObjectAnimator.ofPropertyValuesHolder(this,   propertiesList.toArray(new PropertyValuesHolder[0]));
+            ObjectAnimator anim = ObjectAnimator.ofPropertyValuesHolder(this, propertiesList.toArray(new PropertyValuesHolder[0]));
 
             anim.setInterpolator(new LinearInterpolator());
-            anim.setDuration(zoomAndMove?ANIMATION_DURATION_DEFAULT:ANIMATION_DURATION_SHORT);
+            anim.setDuration(zoomAndMove ? ANIMATION_DURATION_DEFAULT : ANIMATION_DURATION_SHORT);
             anim.setTarget(mMapView);
             anim.addListener(new AnimatorListenerAdapter() {
                 @Override
