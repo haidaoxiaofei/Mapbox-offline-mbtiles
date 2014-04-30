@@ -1315,8 +1315,13 @@ public class MapView extends ViewGroup
                 Log.d(TAG, "OverlayManager handled onTouchEvent");
                 return true;
             }
-            mScaleGestureDetector.onTouchEvent(rotatedEvent);
+
             // can't use the scale detector's onTouchEvent() result as it always returns true (Android issue #42591)
+            //Android seems to be able to recognize a scale with one pointer ...
+            // what a smart guy... let's prevent this
+            if (rotatedEvent.getPointerCount() != 1) {
+                mScaleGestureDetector.onTouchEvent(rotatedEvent);
+            }
             boolean result = mScaleGestureDetector.isInProgress();
             if (!result) {
                 result = mGestureDetector.onTouchEvent(rotatedEvent);
