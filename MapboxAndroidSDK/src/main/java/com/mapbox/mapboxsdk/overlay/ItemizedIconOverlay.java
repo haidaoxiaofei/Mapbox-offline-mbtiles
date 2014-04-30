@@ -9,6 +9,8 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ItemizedIconOverlay extends ItemizedOverlay {
@@ -36,6 +38,16 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     }
 
     @Override
+    protected void populate(){
+        Collections.sort(mItemList, new Comparator<Marker>() {
+            public int compare(Marker a, Marker b) {
+                return Double.valueOf(a.getPoint().getLatitude()).compareTo(Double.valueOf(b.getPoint().getLatitude()));
+            }
+        });
+        super.populate();
+    }
+
+    @Override
     protected Marker createItem(final int index) {
         return mItemList.get(index);
     }
@@ -52,11 +64,11 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
         return result;
     }
 
-    public void addItem(final int location, final Marker item) {
-        item.setParentHolder(this);
-        mItemList.add(location, item);
-        populate();
-    }
+//    public void addItem(final int location, final Marker item) {
+//        item.setParentHolder(this);
+//        mItemList.add(location, item);
+//        populate();
+//    }
 
     /**
      * When a content sensitive action is performed the content item needs to be identified. This

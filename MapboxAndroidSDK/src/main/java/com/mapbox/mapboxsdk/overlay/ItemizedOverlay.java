@@ -16,8 +16,6 @@ import com.mapbox.mapboxsdk.views.safecanvas.SafePaint;
 import com.mapbox.mapboxsdk.views.util.Projection;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Draws a list of {@link Marker} as markers to a map. The item with the lowest index is drawn
@@ -126,18 +124,15 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements Overlay
      * through the createItem(int) method. The subclass should call this as soon as it has data,
      * before anything else gets called.
      */
-    protected final void populate() {
+    protected void populate() {
+
         final int size = size();
         mInternalItemList.clear();
         mInternalItemList.ensureCapacity(size);
         for (int a = 0; a < size; a++) {
             mInternalItemList.add(createItem(a));
         }
-        Collections.sort(mInternalItemList, new Comparator<Marker>() {
-            public int compare(Marker a, Marker b) {
-                return Double.valueOf(a.getPoint().getLatitude()).compareTo(Double.valueOf(b.getPoint().getLatitude()));
-            }
-        });
+
     }
 
     /**
