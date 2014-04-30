@@ -38,7 +38,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     }
 
     @Override
-    protected void populate(){
+    protected void populate() {
         Collections.sort(mItemList, new Comparator<Marker>() {
             public int compare(Marker a, Marker b) {
                 return Double.valueOf(a.getPoint().getLatitude()).compareTo(Double.valueOf(b.getPoint().getLatitude()));

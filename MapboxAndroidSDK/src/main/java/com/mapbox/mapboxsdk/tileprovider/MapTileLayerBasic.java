@@ -74,8 +74,9 @@ public class MapTileLayerBasic extends MapTileLayerArray implements IMapTileProv
 
     public void removeTileSource(final int index) {
         synchronized (mTileProviderList) {
-            if (index >= 0 & index < mTileProviderList.size())
-              mTileProviderList.remove(index);
+            if (index >= 0 & index < mTileProviderList.size()) {
+                mTileProviderList.remove(index);
+            }
         }
     }
 
