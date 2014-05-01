@@ -301,7 +301,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
             final double yDiff = y - mMapCoords.y;
             final boolean snap = xDiff * xDiff + yDiff * yDiff < 64;
             if (UtilConstants.DEBUGMODE) {
-                Log.i(TAG, "snap=" + snap);
+                Log.d(TAG, "snap=" + snap);
             }
             return snap;
         } else {

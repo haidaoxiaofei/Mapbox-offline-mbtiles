@@ -415,11 +415,6 @@ public class TilesOverlay extends SafeDrawOverlay {
                     final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
                     canvas.drawBitmap(oldBitmap, mSrcRect, mDestRect, null);
                     success = true;
-                    /*
-                        Log.i(TAG, "Created scaled tile: " + pTile);
-                        mDebugPaint.setTextSize(40);
-                        canvas.drawText("scaled", 50, 50, mDebugPaint);
-                    */
                 }
                 if (success) {
                     mNewTiles.put(pTile, bitmap);
@@ -491,11 +486,6 @@ public class TilesOverlay extends SafeDrawOverlay {
 
             if (bitmap != null) {
                 mNewTiles.put(pTile, bitmap);
-                /*
-                    Log.i(TAG, "Created scaled tile: " + pTile);
-                    mDebugPaint.setTextSize(40);
-                    canvas.drawText("scaled", 50, 50, mDebugPaint);
-                */
             }
         }
     }

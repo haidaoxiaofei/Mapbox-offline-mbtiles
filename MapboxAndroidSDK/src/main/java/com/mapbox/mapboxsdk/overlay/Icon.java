@@ -8,6 +8,7 @@ import android.util.Log;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
+import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,7 +62,9 @@ public class Icon implements MapboxConstants {
             File cacheDir = getDiskCacheDir(context, DISK_CACHE_SUBDIR);
             if (!cacheDir.exists()) {
                 if (cacheDir.mkdirs()) {
-                    Log.d(TAG, "creating cacheDir " + cacheDir);
+                    if (UtilConstants.DEBUGMODE) {
+                        Log.d(TAG, "creating cacheDir " + cacheDir);
+                    }
                 } else {
                     Log.e(TAG, "can't create cacheDir " + cacheDir);
                 }
@@ -198,7 +201,9 @@ public class Icon implements MapboxConstants {
             CacheableBitmapDrawable result = getCache().getFromDiskCache(this.url, null);
             if (result == null) {
                 try {
-                    Log.d(TAG, "Maki url to load = '" + this.url + "'");
+                    if (UtilConstants.DEBUGMODE) {
+                        Log.d(TAG, "Maki url to load = '" + this.url + "'");
+                    }
                     HttpURLConnection connection = NetworkUtils.getHttpURLConnection(new URL(url));
                     // Note, sIconCache cannot be null..
                     result = sIconCache.put(this.url, connection.getInputStream());
@@ -219,7 +224,9 @@ public class Icon implements MapboxConstants {
                             icon.marker.setMarker(bitmap);
                         }
                     }
-                    Log.w(TAG, "Loaded:" + this.url);
+                    if (UtilConstants.DEBUGMODE) {
+                        Log.d(TAG, "Loaded:" + this.url);
+                    }
                     Icon.downloadQueue.remove(this.url);
                 }
             }

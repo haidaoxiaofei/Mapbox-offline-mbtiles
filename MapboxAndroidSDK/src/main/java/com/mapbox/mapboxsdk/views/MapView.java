@@ -306,7 +306,6 @@ public class MapView extends ViewGroup
         }
     }
 
-
     public void removeTileSource(final ITileLayer aTileSource) {
         if (aTileSource != null && mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
             ((MapTileLayerBasic) mTileProvider).removeTileSource(aTileSource);

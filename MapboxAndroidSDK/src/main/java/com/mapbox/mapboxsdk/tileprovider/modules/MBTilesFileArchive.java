@@ -61,7 +61,7 @@ public class MBTilesFileArchive implements IArchiveFile {
                 return ret;
             }
         } catch (final Throwable e) {
-            Log.w(TAG, "Error getting db stream: " + pTile, e);
+            Log.e(TAG, "Error getting db stream: " + pTile, e);
         }
 
         return null;

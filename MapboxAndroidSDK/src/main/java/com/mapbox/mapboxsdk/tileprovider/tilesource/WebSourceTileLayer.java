@@ -10,6 +10,7 @@ import com.mapbox.mapboxsdk.tileprovider.MapTileCache;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
+import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import java.io.BufferedOutputStream;
@@ -58,7 +59,6 @@ public class WebSourceTileLayer extends TileLayer {
     protected void initialize(String pId, String aUrl, boolean enableSSL) {
         mEnableSSL = enableSSL;
         this.setURL(aUrl);
-        Log.d(TAG, "initialize " + aUrl);
     }
 
     /**
@@ -145,7 +145,9 @@ public class WebSourceTileLayer extends TileLayer {
 
             return result;
         } else {
-            Log.d(TAG, "Skipping tile " + aTile.toString() + " due to NetworkAvailabilityCheck.");
+            if (UtilConstants.DEBUGMODE) {
+                Log.d(TAG, "Skipping tile " + aTile.toString() + " due to NetworkAvailabilityCheck.");
+            }
         }
         return null;
     }
@@ -173,7 +175,9 @@ public class WebSourceTileLayer extends TileLayer {
             in = connection.getInputStream();
 
             if (in == null) {
-                Log.d(TAG, "No content downloading MapTile: " + url);
+                if (UtilConstants.DEBUGMODE) {
+                    Log.d(TAG, "No content downloading MapTile: " + url);
+                }
                 return null;
             }
 
@@ -184,7 +188,9 @@ public class WebSourceTileLayer extends TileLayer {
             final byte[] data = dataStream.toByteArray();
             return aCache.decodeBitmap(data, null);
         } catch (final Throwable e) {
-            Log.d(TAG, "Error downloading MapTile: " + url + ":" + e);
+            if (UtilConstants.DEBUGMODE) {
+                Log.d(TAG, "Error downloading MapTile: " + url + ":" + e);
+            }
         } finally {
             StreamUtils.closeStream(in);
             StreamUtils.closeStream(out);

@@ -10,6 +10,8 @@ import android.os.Environment;
 import android.util.Log;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
+import com.mapbox.mapboxsdk.util.constants.UtilConstants;
+
 import java.io.File;
 import java.io.InputStream;
 import uk.co.senab.bitmapcache.BitmapLruCache;
@@ -47,7 +49,9 @@ public class MapTileCache implements TileLayerConstants {
             File cacheDir = getDiskCacheDir(context, DISK_CACHE_SUBDIR);
             if (!cacheDir.exists()) {
                 if (cacheDir.mkdirs()) {
-                    Log.d(TAG, "creating cacheDir " + cacheDir);
+                    if (UtilConstants.DEBUGMODE) {
+                        Log.d(TAG, "creating cacheDir " + cacheDir);
+                    }
                 } else {
                     Log.e(TAG, "can't create cacheDir " + cacheDir);
                 }

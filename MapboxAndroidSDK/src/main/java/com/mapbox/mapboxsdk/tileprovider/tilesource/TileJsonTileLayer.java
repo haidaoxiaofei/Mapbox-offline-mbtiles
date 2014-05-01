@@ -2,9 +2,16 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
+import com.mapbox.mapboxsdk.util.constants.UtilConstants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -14,9 +21,6 @@ import java.net.ResponseCache;
 import java.net.URL;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * A type of tile layer that loads tiles from the internet and metadata about itself
@@ -72,7 +76,9 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
                 mBoundingBox = new BoundingBox(bounds[3], bounds[2], bounds[1], bounds[0]);
             }
         }
-        Log.d(TAG, "TileJSON " + this.tileJSON.toString());
+        if (UtilConstants.DEBUGMODE) {
+            Log.d(TAG, "TileJSON " + this.tileJSON.toString());
+        }
     }
 
     public JSONObject getTileJSON() {

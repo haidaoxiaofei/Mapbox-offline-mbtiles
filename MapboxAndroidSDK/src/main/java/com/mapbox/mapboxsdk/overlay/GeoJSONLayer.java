@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.format.GeoJSON;
+import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import com.mapbox.mapboxsdk.views.MapView;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +26,6 @@ public class GeoJSONLayer {
 
     public void loadURL(final String url) {
         if (Strings.isNullOrEmpty(url)) {
-            Log.w(TAG, "url is Null or empty");
             return;
         }
         new Getter().execute(url);
@@ -41,14 +41,18 @@ public class GeoJSONLayer {
             String jsonText = null;
             ArrayList<Object> uiObjects = new ArrayList<Object>();
             try {
-                Log.w(TAG, "Mapbox SDK downloading GeoJSON URL: " + params[0]);
+                if (UtilConstants.DEBUGMODE) {
+                    Log.d(TAG, "Mapbox SDK downloading GeoJSON URL: " + params[0]);
+                }
                 is = new URL(params[0]).openStream();
                 BufferedReader rd =
                         new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
                 jsonText = readAll(rd);
 
                 List<Object> parsed = GeoJSON.parseString(jsonText, mapView);
-                Log.i(TAG, "Parsed GeoJSON with " + parsed.size() + " features.");
+                if (UtilConstants.DEBUGMODE) {
+                    Log.d(TAG, "Parsed GeoJSON with " + parsed.size() + " features.");
+                }
 
                 uiObjects.addAll(parsed);
             } catch (Exception e) {

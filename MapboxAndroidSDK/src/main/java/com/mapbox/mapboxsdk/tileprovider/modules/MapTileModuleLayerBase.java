@@ -162,15 +162,15 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
     public void loadMapTileAsync(final MapTileRequestState pState) {
         synchronized (mQueueLockObject) {
             if (DEBUG_TILE_PROVIDERS) {
-                Log.i(TAG, "MapTileModuleLayerBase.loadMaptileAsync() on provider: "
+                Log.d(TAG, "MapTileModuleLayerBase.loadMaptileAsync() on provider: "
                         + getName()
                         + " for tile: "
                         + pState.getMapTile());
                 if (mPending.containsKey(pState.getMapTile())) {
-                    Log.i(TAG,
+                    Log.d(TAG,
                             "MapTileModuleLayerBase.loadMaptileAsync() tile already exists in request queue for modular provider. Moving to front of queue.");
                 } else {
-                    Log.i(TAG,
+                    Log.d(TAG,
                             "MapTileModuleLayerBase.loadMaptileAsync() adding tile to request queue for modular provider.");
                 }
             }
@@ -210,7 +210,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
     void removeTileFromQueues(final MapTile mapTile) {
         synchronized (mQueueLockObject) {
             if (DEBUG_TILE_PROVIDERS) {
-                Log.i(TAG, "MapTileModuleLayerBase.removeTileFromQueues() on provider: "
+                Log.d(TAG, "MapTileModuleLayerBase.removeTileFromQueues() on provider: "
                         + getName()
                         + " for tile: "
                         + mapTile);
@@ -255,7 +255,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
                 if (state != null) {
                     mWorking.put(state.getMapTile(), state);
                     if (DEBUG_TILE_PROVIDERS) {
-                        Log.i(TAG, "TileLoader.nextTile() on provider: "
+                        Log.d(TAG, "TileLoader.nextTile() on provider: "
                                 + getName()
                                 + " adding tile to working queue: "
                                 + state.getMapTile());
@@ -269,9 +269,6 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
          * A tile has loaded.
          */
         protected void tileLoaded(final MapTileRequestState pState, final Drawable pDrawable) {
-            if (DEBUG_TILE_PROVIDERS) {
-                Log.d(TAG, "tileloaded called");
-            }
             removeTileFromQueues(pState.getMapTile());
             pState.getCallback().mapTileRequestCompleted(pState, pDrawable);
         }
@@ -282,10 +279,12 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
          */
         protected void tileLoadedExpired(final MapTileRequestState pState,
                 final CacheableBitmapDrawable pDrawable) {
-            Log.i(TAG, "TileLoader.tileLoadedExpired() on provider: "
-                    + getName()
-                    + " with tile: "
-                    + pState.getMapTile());
+            if (DEBUG_TILE_PROVIDERS) {
+                Log.d(TAG, "TileLoader.tileLoadedExpired() on provider: "
+                        + getName()
+                        + " with tile: "
+                        + pState.getMapTile());
+            }
             removeTileFromQueues(pState.getMapTile());
             pState.getCallback().mapTileRequestExpiredTile(pState, pDrawable);
         }
@@ -318,7 +317,7 @@ public abstract class MapTileModuleLayerBase implements TileLayerConstants {
                     result = null;
                     result = loadTile(state);
                 } catch (final CantContinueException e) {
-                    Log.i(TAG, "Tile loader can't continue: " + state.getMapTile(), e);
+                    Log.e(TAG, "Tile loader can't continue: " + state.getMapTile(), e);
                     clearQueue();
                 } catch (final Throwable e) {
                     Log.e(TAG, "Error downloading tile: " + state.getMapTile(), e);
