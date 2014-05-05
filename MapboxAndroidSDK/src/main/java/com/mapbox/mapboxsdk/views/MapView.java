@@ -298,7 +298,7 @@ public class MapView extends ViewGroup
             updateAfterSourceChange();
         }
     }
-    
+
     public void addTileSource(final ITileLayer aTileSource, final int index) {
         if (aTileSource != null && mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
             ((MapTileLayerBasic) mTileProvider).addTileSource(aTileSource, index);
@@ -312,14 +312,14 @@ public class MapView extends ViewGroup
             updateAfterSourceChange();
         }
     }
-    
+
     public void removeTileSource(final int index) {
         if (mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
             ((MapTileLayerBasic) mTileProvider).removeTileSource(index);
             updateAfterSourceChange();
         }
     }
-    
+
     /**
      * Adds a marker to the default marker overlay.
      *
