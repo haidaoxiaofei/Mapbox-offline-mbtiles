@@ -617,12 +617,7 @@ public class MapView extends ViewGroup
     }
 
     public MapView setScale(float scale) {
-        float zoomDelta;
-        if (scale < 1) {
-            zoomDelta = -2 * (1 - scale);
-        } else {
-            zoomDelta = scale - 1.0f;
-        }
+        float zoomDelta = (float) (Math.log(scale) / Math.log(2d));
         float newZoom = mZoomLevel + zoomDelta;
         if (newZoom <= mMaximumZoomLevel && newZoom >= mMinimumZoomLevel) {
             mMultiTouchScale = scale;
