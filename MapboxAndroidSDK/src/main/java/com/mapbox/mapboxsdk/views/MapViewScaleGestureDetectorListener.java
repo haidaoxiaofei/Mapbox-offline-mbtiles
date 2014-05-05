@@ -79,5 +79,5 @@ public class MapViewScaleGestureDetectorListener
         scaling = false;
     }
 
-    private static String TAG = "detector";
+    private static String TAG = "Mapbox scaleDetector";
 }
