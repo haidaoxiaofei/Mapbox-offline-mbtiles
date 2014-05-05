@@ -29,6 +29,10 @@
                 android:label="@string/alternateTestMapActivity">
         </activity>
 
+		<activity android:name="com.mapbox.mapboxsdk.android.testapp.MarkersTestActivity"
+				  android:label="@string/markersTestActivity">
+		</activity>
+
     </application>
 
 </manifest>

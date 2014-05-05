@@ -70,4 +70,14 @@
             android:layout_alignRight="@+id/imageView"
             android:layout_alignEnd="@+id/imageView"/>
 
+	<Button
+			style="?android:attr/buttonStyleSmall"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Markers"
+			android:id="@+id/markersButton"
+			android:layout_above="@+id/buttonsrow"
+			android:layout_toLeftOf="@+id/spinButton"
+			/>
+
 </RelativeLayout>
