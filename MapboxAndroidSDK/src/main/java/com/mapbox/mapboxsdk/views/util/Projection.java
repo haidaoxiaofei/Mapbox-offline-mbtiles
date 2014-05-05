@@ -399,6 +399,18 @@ public class Projection implements GeoConstants {
     }
 
     /**
+     * Converts a pixel from pixel XY coordinates at a specified level of detail into
+     * latitude/longitude WGS-84 coordinates (in degrees).
+     *
+     * @param pixelX X coordinate of the point, in pixels
+     * @param pixelY Y coordinate of the point, in pixels
+     * @return Output parameter receiving the latitude and longitude in degrees.
+     */
+    public LatLng pixelXYToLatLong(double pixelX, double pixelY) {
+        return pixelXYToLatLong(pixelX, pixelY, mZoomLevelProjection);
+    }
+
+    /**
      * Converts pixel XY coordinates into tile XY coordinates of the tile containing the specified
      * pixel.
      *
