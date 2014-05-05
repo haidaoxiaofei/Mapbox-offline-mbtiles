@@ -84,8 +84,18 @@ public class MapController implements MapViewConstants {
         aboutToStartAnimation(latlong, mapCoords);
     }
 
-    protected void aboutToStartAnimation(final float x, final float y) {
-        aboutToStartAnimation(new PointF(x, y));
+    protected void aboutToStartAnimation(final float screenX, final float screenY) {
+        final float width_2 = mMapView.getMeasuredWidth() / 2.0f;
+        final float height_2 = mMapView.getMeasuredHeight() / 2.0f;
+        final PointF scrollPoint = mMapView.getScrollPoint();
+        final double mapX = screenX + scrollPoint.x - width_2;
+        final double mapY = screenY + scrollPoint.y - height_2;
+        final float zoom = mMapView.getZoomLevel(false);
+        final double worldSize_2 = mMapView.getProjection().mapSize(zoom) >> 1;
+        zoomOnLatLong = mMapView.getProjection().pixelXYToLatLong(mapX + worldSize_2,
+                        mapY + worldSize_2, zoom);
+        mMapView.mMultiTouchScalePoint.set((float) mapX, (float) mapY);
+        zoomDeltaScroll.set(width_2 - screenX, height_2 - screenY);
     }
 
     /**
@@ -110,11 +120,14 @@ public class MapController implements MapViewConstants {
         mMapView.scrollTo(p.x, p.y);
     }
 
-    public void panBy(int x, int y, final boolean userAction) {
+    public void panBy(float x, float y, final boolean userAction) {
         mCurrentlyUserAction = userAction;
-        zoomDeltaScroll.offset(x, y);
         this.mMapView.scrollBy(x, y);
         mCurrentlyUserAction = false;
+    }
+
+    public void offsetDeltaScroll(float x, float y) {
+        zoomDeltaScroll.offset(x, y);
     }
 
     public void panBy(int x, int y) {

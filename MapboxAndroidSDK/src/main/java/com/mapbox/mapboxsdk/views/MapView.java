@@ -1527,6 +1527,12 @@ public class MapView extends ViewGroup
                 y = (currentLimit.bottom - height_2);
             }
         }
+
+        if (isAnimating()) {
+            float deltaX = (float) (x - mDScroll.x);
+            float deltaY = (float) (y - mDScroll.y);
+            mController.offsetDeltaScroll(deltaX, deltaY);
+        }
         mDScroll.set((float) x, (float) y);
 
         final int intX = (int) Math.round(x);

@@ -38,11 +38,7 @@ public class MapViewScaleGestureDetectorListener
         currentScale = 1.0f;
         if (!this.mapView.isAnimating()) {
             this.mapView.mIsAnimating.set(true);
-            this.mapView.getController()
-                    .aboutToStartAnimation(
-                            lastFocusX + this.mapView.getScrollX() - (this.mapView.getWidth() / 2),
-                            lastFocusY + this.mapView.getScrollY() - (this.mapView.getHeight() / 2)
-                    );
+            this.mapView.getController().aboutToStartAnimation(lastFocusX, lastFocusY);
             scaling = true;
         }
         return true;
@@ -60,7 +56,7 @@ public class MapViewScaleGestureDetectorListener
 
         this.mapView.setScale(currentScale);
         this.mapView.getController()
-                .panBy((int) (lastFocusX - focusX), (int) (lastFocusY - focusY), true);
+                .panBy(lastFocusX - focusX, lastFocusY - focusY, true);
 
         lastFocusX = focusX;
         lastFocusY = focusY;
@@ -68,7 +64,7 @@ public class MapViewScaleGestureDetectorListener
     }
 
     @Override
-    public void onScaleEnd(ScaleGestureDetector scaleGestureDetector) {
+    public void onScaleEnd(ScaleGestureDetector detector) {
         if (!scaling) {
             return;
         }
