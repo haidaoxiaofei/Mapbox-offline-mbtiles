@@ -189,18 +189,18 @@ public class Projection implements GeoConstants {
         latLongToPixelXY(latitude, longitude, zoom, out);
         final float worldSize2 = mapSize >> 1;
         out.offset(-worldSize2, -worldSize2);
-        if (Math.abs(out.x - centerX) > Math.abs(out.x - mapSize - centerX)) {
-            out.x -= mapSize;
-        }
-        if (Math.abs(out.x - centerX) > Math.abs(out.x + mapSize - centerX)) {
-            out.x += mapSize;
-        }
-        if (Math.abs(out.y - centerY) > Math.abs(out.y - mapSize - centerY)) {
-            out.y -= mapSize;
-        }
-        if (Math.abs(out.y - centerY) > Math.abs(out.y + mapSize - centerY)) {
-            out.y += mapSize;
-        }
+//        if (Math.abs(out.x - centerX) > Math.abs(out.x - mapSize - centerX)) {
+//            out.x -= mapSize;
+//        }
+//        if (Math.abs(out.x - centerX) > Math.abs(out.x + mapSize - centerX)) {
+//            out.x += mapSize;
+//        }
+//        if (Math.abs(out.y - centerY) > Math.abs(out.y - mapSize - centerY)) {
+//            out.y -= mapSize;
+//        }
+//        if (Math.abs(out.y - centerY) > Math.abs(out.y + mapSize - centerY)) {
+//            out.y += mapSize;
+//        }
         return out;
     }
 
