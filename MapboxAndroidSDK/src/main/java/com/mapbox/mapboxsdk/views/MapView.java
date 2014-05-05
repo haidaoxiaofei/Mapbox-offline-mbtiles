@@ -22,7 +22,6 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
-
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
@@ -55,9 +54,7 @@ import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
-
 import org.json.JSONException;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -298,7 +295,7 @@ public class MapView extends ViewGroup
             updateAfterSourceChange();
         }
     }
-    
+
     public void addTileSource(final ITileLayer aTileSource, final int index) {
         if (aTileSource != null && mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
             ((MapTileLayerBasic) mTileProvider).addTileSource(aTileSource, index);
@@ -312,14 +309,14 @@ public class MapView extends ViewGroup
             updateAfterSourceChange();
         }
     }
-    
+
     public void removeTileSource(final int index) {
         if (mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
             ((MapTileLayerBasic) mTileProvider).removeTileSource(index);
             updateAfterSourceChange();
         }
     }
-    
+
     /**
      * Adds a marker to the default marker overlay.
      *
