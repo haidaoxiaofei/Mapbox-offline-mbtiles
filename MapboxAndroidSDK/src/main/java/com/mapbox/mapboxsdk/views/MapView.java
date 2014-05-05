@@ -1494,35 +1494,47 @@ public class MapView extends ViewGroup
         scrollTo((double) x, (double) y);
     }
 
+    private final RectF scaleRect(RectF rect, PointF center, float scale) {
+        if (scale == 1) {
+            return rect;
+        }
+        RectF result = new RectF(rect);
+        result.offset(-center.x, -center.y);
+        result.set(result.left * scale, result.top * scale, result.bottom * scale, result.right * scale);
+        result.offset(center.x, center.y);
+        return result;
+    }
+
     public void scrollTo(double x, double y) {
         if (mScrollableAreaLimit != null) {
-            final double xToTestWith = x / mMultiTouchScale;
-            final double yToTestWith = y / mMultiTouchScale;
-            final float width_2 = this.getMeasuredWidth() / 2 / mMultiTouchScale;
-            final float height_2 = this.getMeasuredHeight() / 2 / mMultiTouchScale;
+            final RectF currentLimit = scaleRect(mScrollableAreaLimit, mDScroll, mMultiTouchScale);
+            final double xToTestWith = x;
+            final double yToTestWith = y;
+            final float width_2 = this.getMeasuredWidth() / 2;
+            final float height_2 = this.getMeasuredHeight() / 2;
             // Adjust if we are outside the scrollable area
-            if (mScrollableAreaLimit.width() <= width_2 * 2) {
-                if (xToTestWith - width_2 > mScrollableAreaLimit.left) {
-                    x = (mScrollableAreaLimit.left + width_2);
-                } else if (xToTestWith + width_2 < mScrollableAreaLimit.right) {
-                    x = (mScrollableAreaLimit.right - width_2);
+            if (currentLimit.width() <= width_2 * 2) {
+                if (xToTestWith - width_2 > currentLimit.left) {
+                    x = (currentLimit.left + width_2);
+                } else if (xToTestWith + width_2 < currentLimit.right) {
+                    x = (currentLimit.right - width_2);
                 }
-            } else if (xToTestWith - width_2 < mScrollableAreaLimit.left) {
-                x = (mScrollableAreaLimit.left + width_2);
-            } else if (xToTestWith + width_2 > mScrollableAreaLimit.right) {
-                x = (mScrollableAreaLimit.right - width_2);
+            } else if (xToTestWith - width_2 < currentLimit.left) {
+                x = (currentLimit.left + width_2);
+            } else if (xToTestWith + width_2 > currentLimit.right) {
+                x = (currentLimit.right - width_2);
             }
 
-            if (mScrollableAreaLimit.height() <= height_2 * 2) {
-                if (yToTestWith - height_2 > mScrollableAreaLimit.top) {
-                    y = (mScrollableAreaLimit.top + height_2);
-                } else if (yToTestWith + height_2 < mScrollableAreaLimit.bottom) {
-                    y = (mScrollableAreaLimit.bottom - height_2);
+            if (currentLimit.height() <= height_2 * 2) {
+                if (yToTestWith - height_2 > currentLimit.top) {
+                    y = (currentLimit.top + height_2);
+                } else if (yToTestWith + height_2 < currentLimit.bottom) {
+                    y = (currentLimit.bottom - height_2);
                 }
-            } else if (yToTestWith - height_2 < mScrollableAreaLimit.top) {
-                y = (mScrollableAreaLimit.top + height_2);
-            } else if (yToTestWith + height_2 > mScrollableAreaLimit.bottom) {
-                y = (mScrollableAreaLimit.bottom - height_2);
+            } else if (yToTestWith - height_2 < currentLimit.top) {
+                y = (currentLimit.top + height_2);
+            } else if (yToTestWith + height_2 > currentLimit.bottom) {
+                y = (currentLimit.bottom - height_2);
             }
         }
         mDScroll.set((float) x, (float) y);
