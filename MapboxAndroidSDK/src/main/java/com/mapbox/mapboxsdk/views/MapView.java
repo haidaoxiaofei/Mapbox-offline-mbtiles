@@ -1489,26 +1489,21 @@ public class MapView extends ViewGroup
         scrollTo((double) x, (double) y);
     }
 
-    private final RectF scaleRect(RectF rect, PointF center, float scale) {
-        if (scale == 1) {
-            return rect;
-        }
-        RectF result = new RectF(rect);
-        result.offset(-center.x, -center.y);
-        result.set(result.left * scale, result.top * scale, result.bottom * scale, result.right * scale);
-        result.offset(center.x, center.y);
-        return result;
+    public void scrollBy(double x, double y) {
+        scrollTo(mDScroll.x + x, mDScroll.y + y);
     }
 
     public void scrollTo(double x, double y) {
         if (mScrollableAreaLimit != null) {
-            final RectF currentLimit = scaleRect(mScrollableAreaLimit, mDScroll, mMultiTouchScale);
+            final RectF currentLimit = mScrollableAreaLimit;
+
             final double xToTestWith = x;
             final double yToTestWith = y;
             final float width_2 = this.getMeasuredWidth() / 2;
             final float height_2 = this.getMeasuredHeight() / 2;
             // Adjust if we are outside the scrollable area
             if (currentLimit.width() <= width_2 * 2) {
+
                 if (xToTestWith - width_2 > currentLimit.left) {
                     x = (currentLimit.left + width_2);
                 } else if (xToTestWith + width_2 < currentLimit.right) {
