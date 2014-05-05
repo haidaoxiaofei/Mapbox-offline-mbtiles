@@ -190,6 +190,9 @@ public class MapController implements MapViewConstants {
     }
 
     public boolean setZoomAnimated(final ILatLng latlong, final float zoomlevel, final boolean move, final boolean userAction) {
+        if (userAction && mMapView.isAnimating()) {
+            return false;
+        }
         if (!mMapView.isLayedOut()) {
             mPointToGoTo = latlong;
             mZoomToZoomTo = zoomlevel;
