@@ -167,7 +167,7 @@ public class Projection implements GeoConstants {
     public PointF toPixels(final PointF mapPos, final PointF reuse) {
         final PointF out = GeometryMath.reusable(reuse);
         out.set(mapPos);
-        out.offset(viewWidth2 - mScreenRectProjection.exactCenterX(),
+        out.offset(viewWidth2 - mIntrinsicScreenRectProjection.exactCenterX(),
                 viewHeight2 - mIntrinsicScreenRectProjection.exactCenterY());
         return out;
     }
