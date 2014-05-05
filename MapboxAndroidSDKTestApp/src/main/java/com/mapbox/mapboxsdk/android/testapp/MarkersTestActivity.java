@@ -1,7 +1,3 @@
-/**
- * @author Brad Leege <leege@doit.wisc.edu>
- * Created on 5/4/14 at 6:42 PM
- */
 package com.mapbox.mapboxsdk.android.testapp;
 
 import android.os.Bundle;
@@ -20,6 +16,8 @@ public class MarkersTestActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_markers);
+
+		// Setup Map
 		mapView = (MapView) findViewById(R.id.markersMapView);
 		mapView.setCenter(new LatLng(38.11493876707079, 13.3647260069847));
 		mapView.setZoom(14);
