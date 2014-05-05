@@ -77,10 +77,10 @@ public class MapController implements MapViewConstants {
 
     protected void aboutToStartAnimation(final PointF mapCoords) {
         final float zoom = mMapView.getZoomLevel(false);
-        final int worldSize_2 = mMapView.getProjection().mapSize(zoom) >> 1;
+        final double worldSize_2 = mMapView.getProjection().mapSize(zoom) >> 1;
         final ILatLng latlong = mMapView.getProjection()
-                .pixelXYToLatLong((int) (mapCoords.x + worldSize_2),
-                        (int) (mapCoords.y + worldSize_2), zoom);
+                .pixelXYToLatLong(mapCoords.x + worldSize_2,
+                        mapCoords.y + worldSize_2, zoom);
         aboutToStartAnimation(latlong, mapCoords);
     }
 

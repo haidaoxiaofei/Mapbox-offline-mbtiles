@@ -384,13 +384,13 @@ public class Projection implements GeoConstants {
      * @return Output parameter receiving the latitude and longitude in degrees.
      */
     public static LatLng pixelXYToLatLong(double pixelX, double pixelY, final float levelOfDetail) {
-        final float mapSize = mapSize(levelOfDetail);
+        final double mapSize = mapSize(levelOfDetail);
+        final double maxSize = mapSize - 1.0;
+        double x = wrap(pixelX, 0, maxSize, mapSize);
+        double y = wrap(pixelY, 0, maxSize, mapSize);
 
-        double x = wrap(pixelX, 0, mapSize - 1, mapSize);
-        double y = wrap(pixelY, 0, mapSize - 1, mapSize);
-
-        x = (clip(x, 0, mapSize - 1) / mapSize) - 0.5;
-        y = 0.5 - (clip(y, 0, mapSize - 1) / mapSize);
+        x = (clip(x, 0, maxSize) / mapSize) - 0.5;
+        y = 0.5 - (clip(y, 0, maxSize) / mapSize);
 
         final double latitude = 90.0 - 360.0 * Math.atan(Math.exp(-y * 2 * Math.PI)) / Math.PI;
         final double longitude = 360.0 * x;
