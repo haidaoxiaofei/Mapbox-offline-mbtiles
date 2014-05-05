@@ -137,6 +137,17 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+		Button pinsButton = changeButtonTypeface((Button) findViewById(R.id.markersButton));
+		pinsButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent altMapActivity =
+						new Intent(MainActivity.this, MarkersTestActivity.class);
+				startActivity(altMapActivity);
+			}
+		});
+
+
         Button spinButton = changeButtonTypeface((Button) findViewById(R.id.spinButton));
         spinButton.setOnClickListener(new View.OnClickListener() {
             @Override
