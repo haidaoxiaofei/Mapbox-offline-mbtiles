@@ -187,10 +187,10 @@ public class TilesOverlay extends SafeDrawOverlay {
         @Override
         public void handleTile(final Canvas pCanvas, final String pCacheKey, final int pTileSizePx,
                                final MapTile pTile, final int pX, final int pY, final Rect pClipRect) {
-            final float x = pX * pTileSizePx * mCurrentZoomFactor - mWorldSize_2;
-            final float y = pY * pTileSizePx * mCurrentZoomFactor - mWorldSize_2;
-            final float w = pTileSizePx * mCurrentZoomFactor;
-            mTileRect.set((int) x, (int) y, (int) (x + w), (int) (y + w));
+            final double factor = pTileSizePx * mCurrentZoomFactor;
+            double x = pX * factor - mWorldSize_2;
+            double y = pY * factor - mWorldSize_2;
+            mTileRect.set((int) x, (int) y, (int) (x + factor), (int) (y + factor));
             if (!Rect.intersects(mTileRect, pClipRect)) {
                 return;
             }
