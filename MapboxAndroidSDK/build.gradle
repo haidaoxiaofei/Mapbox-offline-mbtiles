@@ -171,6 +171,16 @@ afterEvaluate { project ->
                             password: getRepositoryPassword())
                 }
 
+/*
+                // Leaving out as artifact was incorrectly named when found
+                addFilter('aar') { artifact, file ->
+                    artifact.name == archivesBaseName
+                }
+                addFilter('apklib') { artifact, file ->
+                    artifact.name == archivesBaseName + '-apklib'
+                }
+*/
+
                 pom.project {
                     name POM_NAME
                     packaging POM_PACKAGING
