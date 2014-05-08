@@ -137,9 +137,11 @@ public class MapView extends ViewGroup
 
     protected BoundingBox mScrollableAreaBoundingBox = null;
     protected RectF mScrollableAreaLimit = null;
+    private boolean mConstraintRegionFit;
     protected RectF mTempRect = new RectF();
 
     private BoundingBox mBoundingBoxToZoomOn = null;
+    private boolean mBoundingBoxToZoomOnRegionFit = false;
 
     // for speed (avoiding allocations)
     protected final MapTileLayerBase mTileProvider;
@@ -171,6 +173,7 @@ public class MapView extends ViewGroup
         super(aContext, attrs);
         setWillNotDraw(false);
         mLayedOut = false;
+        mConstraintRegionFit = true;
         this.mController = new MapController(this);
         this.mScroller = new Scroller(aContext);
         Projection.setTileSize(tileSizePixels);
@@ -256,7 +259,6 @@ public class MapView extends ViewGroup
                 addListener((MapListener) overlay);
             }
         }
-        
         invalidate();
     }
 
@@ -766,6 +768,7 @@ public class MapView extends ViewGroup
         }
         if (!mLayedOut) {
             mBoundingBoxToZoomOn = inter;
+            mBoundingBoxToZoomOnRegionFit = regionFit;
             return this;
         }
 
@@ -1005,7 +1008,7 @@ public class MapView extends ViewGroup
         }
         mMinimumZoomLevel = (float) Math.max(
                 mRequestedMinimumZoomLevel,
-                minimumZoomForBoundingBox(mScrollableAreaBoundingBox, false,
+                minimumZoomForBoundingBox(mScrollableAreaBoundingBox, mConstraintRegionFit,
                         false)
         );
         if (mZoomLevel < mMinimumZoomLevel) {
@@ -1018,7 +1021,7 @@ public class MapView extends ViewGroup
      * limit in pixels
      */
     public void updateScrollableAreaLimit() {
-        if (mScrollableAreaBoundingBox == null) {
+        if (mScrollableAreaBoundingBox == null || !isLayedOut()) {
             return;
         }
         if (mScrollableAreaLimit == null) {
@@ -1026,6 +1029,27 @@ public class MapView extends ViewGroup
         }
         Projection.toMapPixels(mScrollableAreaBoundingBox, getZoomLevel(false),
                 mScrollableAreaLimit);
+        if (mConstraintRegionFit) {
+            int width = getMeasuredWidth();
+            int height = getMeasuredHeight();
+            float ratioX = mScrollableAreaLimit.width() / (float) width;
+            float ratioY = mScrollableAreaLimit.height() / (float) height;
+
+            if (ratioX != ratioY) {
+                if (ratioX < ratioY)
+                {
+                    float newWidth_2 = mScrollableAreaLimit.height() * width / (float) height / 2;
+                    float centerX = mScrollableAreaLimit.centerX();
+                    mScrollableAreaLimit.set(centerX - newWidth_2, mScrollableAreaLimit.top, centerX + newWidth_2, mScrollableAreaLimit.bottom);
+                } else {
+                    float newHeight_2 = width * ratioX / 2;
+                    float centerY = mScrollableAreaLimit.centerY();
+                    mScrollableAreaLimit.set(mScrollableAreaLimit.left, centerY - newHeight_2, mScrollableAreaLimit.right, centerY + newHeight_2);
+                }
+            }
+
+        }
+
     }
 
     /**
@@ -1239,10 +1263,11 @@ public class MapView extends ViewGroup
                 //let's trigger them again!
                 mController.mapViewLayedOut();
             }
+            updateScrollableAreaLimit();
             updateMinZoomLevel();
 
             if (mBoundingBoxToZoomOn != null) {
-                zoomToBoundingBox(mBoundingBoxToZoomOn);
+                zoomToBoundingBox(mBoundingBoxToZoomOn, mBoundingBoxToZoomOnRegionFit);
                 mBoundingBoxToZoomOn = null;
             }
         }
@@ -1606,6 +1631,22 @@ public class MapView extends ViewGroup
      */
     public void setUseSafeCanvas(boolean useSafeCanvas) {
         this.getOverlayManager().setUseSafeCanvas(useSafeCanvas);
+    }
+
+    /**
+     * Sets whether the scrollable area limit should take the view
+     * ratio into account (keeping the same ratio as the screen)
+     * If yes you will be able to zoom out to see the whole area
+     * whatever the screen ratio.
+     *
+     * @see {@link com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas}
+     */
+    public void setConstraintRegionFit(boolean value) {
+        this.mConstraintRegionFit = value;
+        if (isLayedOut()) {
+            updateScrollableAreaLimit();
+            updateMinZoomLevel();
+        }
     }
 
     @Override
