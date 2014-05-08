@@ -250,17 +250,22 @@ public class MapView extends ViewGroup
     }
 
     public void addOverlay(final Overlay overlay) {
-        mOverlayManager.add(overlay);
-        if (overlay instanceof MapListener) {
-            addListener((MapListener) overlay);
+        if (!mOverlayManager.contains(overlay)) {
+            mOverlayManager.add(overlay);
+            if (overlay instanceof MapListener) {
+                addListener((MapListener) overlay);
+            }
         }
+        
         invalidate();
     }
 
     public void removeOverlay(final Overlay overlay) {
-        mOverlayManager.remove(overlay);
-        if (overlay instanceof MapListener) {
-            removeListener((MapListener) overlay);
+        if (mOverlayManager.contains(overlay)) {
+            mOverlayManager.remove(overlay);
+            if (overlay instanceof MapListener) {
+                removeListener((MapListener) overlay);
+            }
         }
         invalidate();
     }
