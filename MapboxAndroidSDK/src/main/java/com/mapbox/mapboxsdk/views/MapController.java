@@ -267,6 +267,14 @@ public class MapController implements MapViewConstants {
         return setZoom(zoomlevel, false);
     }
 
+    public MapView setZoom(final float zoomlevel, final ILatLng latlong, final boolean userAction) {
+        mCurrentlyUserAction = userAction;
+        stopAnimation(true);
+        mMapView.setZoomInternal(zoomlevel, latlong, null);
+        mCurrentlyUserAction = false;
+        return mMapView;
+    }
+
     public MapView setZoom(final float zoomlevel, final boolean userAction) {
         mCurrentlyUserAction = userAction;
         stopAnimation(true);

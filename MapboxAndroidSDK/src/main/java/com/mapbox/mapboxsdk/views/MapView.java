@@ -777,10 +777,7 @@ public class MapView extends ViewGroup
         if (animated) {
             getController().setZoomAnimated(center, zoom, true, userAction);
         } else {
-            getController().setCurrentlyInUserAction(userAction);
-            getController().setZoom(zoom);
-            getController().setCenter(center);
-            getController().setCurrentlyInUserAction(false);
+            getController().setZoom(zoom, center, userAction);
         }
         return this;
     }
