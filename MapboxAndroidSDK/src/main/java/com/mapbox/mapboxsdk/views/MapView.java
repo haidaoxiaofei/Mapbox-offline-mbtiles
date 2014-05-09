@@ -1095,6 +1095,14 @@ public class MapView extends ViewGroup
     public BoundingBox getScrollableAreaBoundingBox() {
         return mScrollableAreaBoundingBox;
     }
+    
+    /**
+     * Returns the map current scrollable bounding limit int map PX
+     */
+    public RectF getScrollableAreaLimit() {
+        return mScrollableAreaLimit;
+    }
+
 
     /**
      * Returns true if the view has been layed out
