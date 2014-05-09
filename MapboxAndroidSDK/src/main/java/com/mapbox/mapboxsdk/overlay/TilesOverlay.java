@@ -132,7 +132,7 @@ public class TilesOverlay extends SafeDrawOverlay {
             drawLoadingTile(c.getSafeCanvas(), mapView, zoomLevel, mClipRect);
             drawTiles(c.getSafeCanvas(), zoomLevel, tileSize, mViewPort, mClipRect);
         }
-        
+
         if (UtilConstants.DEBUGMODE) {
             SafePaint paint = new SafePaint();
             paint.setColor(Color.BLUE);

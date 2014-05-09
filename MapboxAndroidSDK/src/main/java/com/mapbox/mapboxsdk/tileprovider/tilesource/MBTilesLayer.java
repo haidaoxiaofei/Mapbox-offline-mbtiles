@@ -3,7 +3,6 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.shapes.PathShape;
 import android.os.Environment;
 import android.util.Log;
 
@@ -51,7 +50,7 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants, MapboxC
     public MBTilesLayer(final String url) {
         this(null, url);
     }
-    
+
     /**
      * Initialize a new tile layer, represented by a MBTiles file.
      *
@@ -61,17 +60,17 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants, MapboxC
         super(file.getName(), file.getAbsolutePath());
         initialize(file);
     }
-    
+
     /**
-     * Initialize a new tile layer, represented by a MBTiles file.
+     * Initialize a new tile layer, represented by a Database file.
      *
-     * @param file a MBTiles file
+     * @param db a database used as the MBTiles source
      */
     public MBTilesLayer(final SQLiteDatabase db) {
         super(getFileName(db.getPath()), db.getPath());
         initialize(db);
     }
-    
+
     private static final String getFileName(final String path) {
         return path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'));
     }
@@ -100,7 +99,7 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants, MapboxC
         }
         return null;
     }
-    
+
     /**
      * Reads and opens a MBTiles file given by url and loads its tiles into this layer.
      */
@@ -119,7 +118,7 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants, MapboxC
             mCenter = mbTilesFileArchive.getCenter();
         }
     }
-    
+
     /**
      * Reads and opens a MBTiles file given by url and loads its tiles into this layer.
      */
