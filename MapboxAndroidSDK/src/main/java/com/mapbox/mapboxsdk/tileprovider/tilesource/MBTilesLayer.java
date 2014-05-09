@@ -2,18 +2,23 @@ package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.shapes.PathShape;
 import android.os.Environment;
 import android.util.Log;
+
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.modules.MBTilesFileArchive;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
@@ -46,6 +51,30 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants, MapboxC
     public MBTilesLayer(final String url) {
         this(null, url);
     }
+    
+    /**
+     * Initialize a new tile layer, represented by a MBTiles file.
+     *
+     * @param file a MBTiles file
+     */
+    public MBTilesLayer(final File file) {
+        super(file.getName(), file.getAbsolutePath());
+        initialize(file);
+    }
+    
+    /**
+     * Initialize a new tile layer, represented by a MBTiles file.
+     *
+     * @param file a MBTiles file
+     */
+    public MBTilesLayer(final SQLiteDatabase db) {
+        super(getFileName(db.getPath()), db.getPath());
+        initialize(db);
+    }
+    
+    private static final String getFileName(final String path) {
+        return path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'));
+    }
 
     /**
      * Creates a file from an input stream by reading it byte by byte.
@@ -71,13 +100,11 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants, MapboxC
         }
         return null;
     }
-
+    
     /**
      * Reads and opens a MBTiles file given by url and loads its tiles into this layer.
      */
-    private void initialize(String url, final Context context) {
-        File file = getFile(url, context);
-
+    private void initialize(File file) {
         if (file != null) {
             mbTilesFileArchive = MBTilesFileArchive.getDatabaseFileArchive(file);
         }
@@ -91,6 +118,32 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants, MapboxC
             mBoundingBox = mbTilesFileArchive.getBounds();
             mCenter = mbTilesFileArchive.getCenter();
         }
+    }
+    
+    /**
+     * Reads and opens a MBTiles file given by url and loads its tiles into this layer.
+     */
+    private void initialize(final SQLiteDatabase db) {
+        if (db != null) {
+            mbTilesFileArchive = new MBTilesFileArchive(db);
+        }
+
+        if (mbTilesFileArchive != null) {
+            mMaximumZoomLevel = mbTilesFileArchive.getMaxZoomLevel();
+            mMinimumZoomLevel = mbTilesFileArchive.getMinZoomLevel();
+            mName = mbTilesFileArchive.getName();
+            mDescription = mbTilesFileArchive.getDescription();
+            mAttribution = mbTilesFileArchive.getAttribution();
+            mBoundingBox = mbTilesFileArchive.getBounds();
+            mCenter = mbTilesFileArchive.getCenter();
+        }
+    }
+
+    /**
+     * Reads and opens a MBTiles file given by url and loads its tiles into this layer.
+     */
+    private void initialize(String url, final Context context) {
+        initialize(getFile(url, context));
     }
 
     private File getFile(String url, final Context context) {
