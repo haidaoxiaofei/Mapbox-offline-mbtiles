@@ -1034,26 +1034,26 @@ public class MapView extends ViewGroup
         }
         Projection.toMapPixels(mScrollableAreaBoundingBox, getZoomLevel(false),
                 mScrollableAreaLimit);
-        if (mConstraintRegionFit) {
-            int width = getMeasuredWidth();
-            int height = getMeasuredHeight();
-            float ratioX = mScrollableAreaLimit.width() / (float) width;
-            float ratioY = mScrollableAreaLimit.height() / (float) height;
-
-            if (ratioX != ratioY) {
-                if (ratioX < ratioY)
-                {
-                    float newWidth_2 = mScrollableAreaLimit.height() * width / (float) height / 2;
-                    float centerX = mScrollableAreaLimit.centerX();
-                    mScrollableAreaLimit.set(centerX - newWidth_2, mScrollableAreaLimit.top, centerX + newWidth_2, mScrollableAreaLimit.bottom);
-                } else {
-                    float newHeight_2 = width * ratioX / 2;
-                    float centerY = mScrollableAreaLimit.centerY();
-                    mScrollableAreaLimit.set(mScrollableAreaLimit.left, centerY - newHeight_2, mScrollableAreaLimit.right, centerY + newHeight_2);
-                }
-            }
-
-        }
+//        if (mConstraintRegionFit) {
+//            int width = getMeasuredWidth();
+//            int height = getMeasuredHeight();
+//            float ratioX = mScrollableAreaLimit.width() / (float) width;
+//            float ratioY = mScrollableAreaLimit.height() / (float) height;
+//
+//            if (ratioX != ratioY) {
+//                if (ratioX < ratioY)
+//                {
+//                    float newWidth_2 = mScrollableAreaLimit.height() * width / (float) height / 2;
+//                    float centerX = mScrollableAreaLimit.centerX();
+//                    mScrollableAreaLimit.set(centerX - newWidth_2, mScrollableAreaLimit.top, centerX + newWidth_2, mScrollableAreaLimit.bottom);
+//                } else {
+//                    float newHeight_2 = width * ratioX / 2;
+//                    float centerY = mScrollableAreaLimit.centerY();
+//                    mScrollableAreaLimit.set(mScrollableAreaLimit.left, centerY - newHeight_2, mScrollableAreaLimit.right, centerY + newHeight_2);
+//                }
+//            }
+//
+//        }
 
     }
 
