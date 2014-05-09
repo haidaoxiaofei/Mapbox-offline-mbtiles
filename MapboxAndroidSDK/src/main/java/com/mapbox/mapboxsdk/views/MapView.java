@@ -278,6 +278,9 @@ public class MapView extends ViewGroup
         this.setMinZoomLevel(mTileProvider.getMinimumZoomLevel());
         this.setMaxZoomLevel(mTileProvider.getMaximumZoomLevel());
         this.setZoom(mZoomLevel);
+        if (!isLayedOut()) {
+            return;
+        }
         this.scrollTo(mDScroll.x, mDScroll.y);
         postInvalidate();
     }
@@ -703,7 +706,9 @@ public class MapView extends ViewGroup
         // snap for all snappables
         snapItems();
 
-        getMapOverlay().rescaleCache(newZoomLevel, curZoomLevel, mProjection);
+        if (isLayedOut()) {
+            getMapOverlay().rescaleCache(newZoomLevel, curZoomLevel, getProjection());
+        }
 
         // do callback on listener
         if (newZoomLevel != curZoomLevel && mListeners.size() > 0) {
