@@ -151,7 +151,6 @@ public class TilesOverlay extends SafeDrawOverlay {
         final float mapScale = mapView.getScale();
         ISafeCanvas canvas = (ISafeCanvas) c;
         canvas.save();
-        canvas.scale(mapScale, mapScale, viewPort.exactCenterX(), viewPort.exactCenterY());
         canvas.translate(-mapView.getScrollX(), -mapView.getScrollY());
         canvas.drawPaint(getLoadingTilePaint());
         canvas.restore();
