@@ -18,6 +18,7 @@ import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
+import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -338,23 +339,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
 
         // set initial location when enabled
         if (isMyLocationEnabled()) {
-            mLocation = mMyLocationProvider.getLastKnownLocation();
-            if (mLocation != null) {
-                mLatLng = new LatLng(mLocation);
-                if (mIsFollowing) {
-                    mMapController.animateTo(mLatLng);
-                } else {
-                    updateDrawingPositionRect();
-                    mMapView.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            mMapView.invalidateMapCoordinates(mMyLocationRect);
-                        }
-                    });
-                }
-            } else {
-                mLatLng = null;
-            }
+            updateMyLocation(mMyLocationProvider.getLastKnownLocation());
         }
     }
 
@@ -403,17 +388,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
         if (mLocation != null && mLocation.getBearing() == location.getBearing() && mLocation.distanceTo(location) == 0) {
             return;
         }
-        mLocation = location;
 
-
-        if (mLocation != null) {
-            mLatLng = new LatLng(mLocation);
-            if (mIsFollowing) {
-                mMapController.animateTo(mLatLng);
-            } else {
-                invalidate();
-            }
-        }
+        updateMyLocation(location);
 
         synchronized (mRunOnFirstFix) {
             for (final Runnable runnable : mRunOnFirstFix) {
@@ -427,6 +403,32 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
         this.setMyLocationProvider(myLocationProvider);
         mIsLocationEnabled = false;
         return enableMyLocation();
+    }
+
+    private void updateMyLocation(Location location) {
+        mLocation = location;
+        if (mLocation == null) {
+            mLatLng = null;
+            return;
+        }
+        mLatLng = new LatLng(mLocation);
+        if (mIsFollowing) {
+            float currentZoom = mMapView.getZoomLevel(false);
+            if (currentZoom < 10 && mLocation.getAccuracy() > 0) {
+                double requiredZoom = 10;
+                if (mMapView.isLayedOut()) {
+                    double delta = (mLocation.getAccuracy() / 110000) * 1.2; // approx. meter per degree latitude, plus some margin
+                    requiredZoom = Math.min(17, TileLayerConstants.MAXIMUM_ZOOMLEVEL
+                            - (2 * delta / mMapView.getMeasuredHeight()) / Math.log(2));
+                }
+
+                mMapController.setZoomAnimated((float) requiredZoom, mLatLng, true, false);
+            } else {
+                mMapController.animateTo(mLatLng);
+            }
+        } else {
+            invalidate();
+        }
     }
 
     /**
@@ -446,15 +448,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
 
         // set initial location when enabled
         if (result) {
-            mLocation = mMyLocationProvider.getLastKnownLocation();
-            if (mLocation != null) {
-                mLatLng = new LatLng(mLocation);
-                if (mIsFollowing) {
-                    mMapController.animateTo(mLatLng);
-                } else {
-                    invalidate();
-                }
-            }
+            updateMyLocation(mMyLocationProvider.getLastKnownLocation());
         }
         return result;
     }
