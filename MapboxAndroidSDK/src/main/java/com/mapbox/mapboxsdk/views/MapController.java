@@ -102,7 +102,7 @@ public class MapController implements MapViewConstants {
      * Start animating the map towards the given point.
      */
     public void animateTo(final ILatLng point, final boolean userAction) {
-        setZoomAnimated(point, mMapView.getZoomLevel(), true, userAction);
+        setZoomAnimated(mMapView.getZoomLevel(), point, true, userAction);
     }
 
     public void animateTo(final ILatLng point) {
@@ -189,7 +189,7 @@ public class MapController implements MapViewConstants {
         }
     }
 
-    public boolean setZoomAnimated(final ILatLng latlong, final float zoomlevel, final boolean move, final boolean userAction) {
+    public boolean setZoomAnimated(final float zoomlevel, final ILatLng latlong, final boolean move, final boolean userAction) {
         if (userAction && mMapView.isAnimating()) {
             return false;
         }
@@ -289,7 +289,7 @@ public class MapController implements MapViewConstants {
     }
 
     public MapView setZoomAnimated(final float zoomlevel, final ILatLng latlong, final boolean userAction) {
-        setZoomAnimated(latlong, zoomlevel, false, userAction);
+        setZoomAnimated(zoomlevel, latlong, false, userAction);
         return mMapView;
     }
 
@@ -312,7 +312,7 @@ public class MapController implements MapViewConstants {
         if (factor > 2.25) {
             targetZoom = (float) Math.ceil(currentZoom);
         }
-        return setZoomAnimated(latlong, targetZoom, false, userAction);
+        return setZoomAnimated(targetZoom, latlong, false, userAction);
     }
 
     public boolean zoomInAbout(final ILatLng latlong) {
@@ -339,7 +339,7 @@ public class MapController implements MapViewConstants {
             targetZoom = (float) (Math.floor(currentZoom) - 1);
         }
 
-        return setZoomAnimated(latlong, targetZoom, false, userAction);
+        return setZoomAnimated(targetZoom, latlong, false, userAction);
     }
 
     public boolean zoomOutAbout(final ILatLng latlong) {

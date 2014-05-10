@@ -783,7 +783,7 @@ public class MapView extends ViewGroup
                 roundedZoom);
 
         if (animated) {
-            getController().setZoomAnimated(center, zoom, true, userAction);
+            getController().setZoomAnimated(zoom, center, true, userAction);
         } else {
             getController().setZoom(zoom, center, userAction);
         }
