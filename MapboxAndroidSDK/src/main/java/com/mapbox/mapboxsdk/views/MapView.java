@@ -1541,12 +1541,7 @@ public class MapView extends ViewGroup
             final float height_2 = this.getMeasuredHeight() / 2;
             // Adjust if we are outside the scrollable area
             if (currentLimit.width() <= width_2 * 2) {
-
-                if (xToTestWith - width_2 > currentLimit.left) {
-                    x = (currentLimit.left + width_2);
-                } else if (xToTestWith + width_2 < currentLimit.right) {
-                    x = (currentLimit.right - width_2);
-                }
+                x = currentLimit.centerX();
             } else if (xToTestWith - width_2 < currentLimit.left) {
                 x = (currentLimit.left + width_2);
             } else if (xToTestWith + width_2 > currentLimit.right) {
@@ -1554,11 +1549,7 @@ public class MapView extends ViewGroup
             }
 
             if (currentLimit.height() <= height_2 * 2) {
-                if (yToTestWith - height_2 > currentLimit.top) {
-                    y = (currentLimit.top + height_2);
-                } else if (yToTestWith + height_2 < currentLimit.bottom) {
-                    y = (currentLimit.bottom - height_2);
-                }
+                y = currentLimit.centerY();
             } else if (yToTestWith - height_2 < currentLimit.top) {
                 y = (currentLimit.top + height_2);
             } else if (yToTestWith + height_2 > currentLimit.bottom) {
