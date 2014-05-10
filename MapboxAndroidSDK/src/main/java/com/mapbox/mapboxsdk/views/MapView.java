@@ -49,6 +49,7 @@ import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
+import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
@@ -1681,6 +1682,10 @@ public class MapView extends ViewGroup
 
     public TileLoadedListener getTileLoadedListener() {
         return tileLoadedListener;
+    }
+
+    public static void setDebugMode(boolean value) {
+        UtilConstants.setDebugMode(value);
     }
 
     /**
