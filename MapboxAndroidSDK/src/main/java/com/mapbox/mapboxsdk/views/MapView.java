@@ -1566,7 +1566,7 @@ public class MapView extends ViewGroup
             }
         }
 
-        if (isAnimating()) {
+        if (!isAnimating()) {
             float deltaX = (float) (x - mDScroll.x);
             float deltaY = (float) (y - mDScroll.y);
             mController.offsetDeltaScroll(deltaX, deltaY);
