@@ -27,9 +27,9 @@ public class MainActivity extends ActionBarActivity {
 
 		// Set the adapter for the list view
 		testFragmentNames = new ArrayList<String>();
-		testFragmentNames.add(getString(R.string.app_name));
-		testFragmentNames.add(getString(R.string.alternateTestMapActivity));
-		testFragmentNames.add(getString(R.string.markersTestActivity));
+		testFragmentNames.add(getString(R.string.mainTestMap));
+		testFragmentNames.add(getString(R.string.alternateTestMap));
+		testFragmentNames.add(getString(R.string.markersTestMap));
 
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, testFragmentNames));
 		// Set the list's click listener

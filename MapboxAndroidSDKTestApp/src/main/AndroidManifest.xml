@@ -26,11 +26,11 @@
         </activity>
 
         <activity android:name="com.mapbox.mapboxsdk.android.testapp.AlternateMapTestActivity"
-                android:label="@string/alternateTestMapActivity">
+                android:label="@string/alternateTestMap">
         </activity>
 
 		<activity android:name="com.mapbox.mapboxsdk.android.testapp.MarkersTestActivity"
-				  android:label="@string/markersTestActivity">
+				  android:label="@string/markersTestMap">
 		</activity>
 
     </application>

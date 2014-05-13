@@ -157,6 +157,7 @@ public class MainTestFragment extends Fragment
 			}
 		});
 
+/*
 		Button selectBut = changeButtonTypeface((Button) getView().findViewById(R.id.layerselect));
 		selectBut.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -172,6 +173,7 @@ public class MainTestFragment extends Fragment
 				ab.show();
 			}
 		});
+*/
 	}
 
 	final String[] availableLayers = {
