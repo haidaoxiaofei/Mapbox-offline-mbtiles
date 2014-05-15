@@ -13,24 +13,24 @@
             android:allowBackup="true"
             android:hardwareAccelerated="true"
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name"
+            android:label="@string/appName"
             android:theme="@style/AppTheme">
         <activity
                 android:name="com.mapbox.mapboxsdk.android.testapp.MainActivity"
                 android:configChanges="orientation|screenSize|uiMode"
-                android:label="@string/app_name">
+                android:label="@string/appName">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:name="com.mapbox.mapboxsdk.android.testapp.AlternateMapTestActivity"
-                android:label="@string/alternateTestMapActivity">
+        <activity android:name=".AlternateMapTestFragment"
+                android:label="@string/alternateTestMap">
         </activity>
 
-		<activity android:name="com.mapbox.mapboxsdk.android.testapp.MarkersTestActivity"
-				  android:label="@string/markersTestActivity">
+		<activity android:name=".MarkersTestFragment"
+				  android:label="@string/markersTestMap">
 		</activity>
 
     </application>

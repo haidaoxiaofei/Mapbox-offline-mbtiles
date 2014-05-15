@@ -1,312 +1,138 @@
 package com.mapbox.mapboxsdk.android.testapp;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import com.mapbox.mapboxsdk.api.ILatLng;
-import com.mapbox.mapboxsdk.geometry.BoundingBox;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.GpsLocationProvider;
-import com.mapbox.mapboxsdk.overlay.Icon;
-import com.mapbox.mapboxsdk.overlay.Marker;
-import com.mapbox.mapboxsdk.overlay.PathOverlay;
-import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.MBTilesLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.WebSourceTileLayer;
-import com.mapbox.mapboxsdk.views.MapView;
-import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
 
-    private LatLng startingPoint = new LatLng(51f, 0f);
-    private MapView mv;
-    private String satellite = "brunosan.map-cyglrrfu";
-    private String street = "examples.map-vyofok3q";
-    private String terrain = "examples.map-zgrqqx0w";
-    private String currentLayer = "";
+	private DrawerLayout mDrawerLayout;
+	private ActionBarDrawerToggle mDrawerToggle;
+	private ListView mDrawerList;
+	private ArrayList<String> testFragmentNames;
+	private int selectedFragmentIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mv = (MapView) findViewById(R.id.mapview);
-        replaceMapView("test.MBTiles");
-        addLocationOverlay();
 
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
-/*
-		// Original GeoJSON Test that causes crash when Hardware Acceleration when enabled in TestApp
-        mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/4a6f5fa40ab9a6b2f163/raw/b1ee1e445225fc0a397e2605feda7da74c36161b/map.geojson");
-*/
+		// Set the adapter for the list view
+		testFragmentNames = new ArrayList<String>();
+		testFragmentNames.add(getString(R.string.mainTestMap));
+		testFragmentNames.add(getString(R.string.alternateTestMap));
+		testFragmentNames.add(getString(R.string.markersTestMap));
 
-		// Smaller GeoJSON Test
-		mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/bleege/133920f60eb7a334430f/raw/5392bad4e09015d3995d6153db21869b02f34d27/map.geojson");
-        setButtonListeners();
-        Marker m = new Marker(mv, "Edinburgh", "Scotland", new LatLng(55.94629, -3.20777));
-        m.setIcon(new Icon(this, Icon.Size.SMALL, "marker-stroked", "FF0000"));
-        mv.addMarker(m);
+		mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, testFragmentNames));
+		// Set the list's click listener
+		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        m = new Marker(mv, "Stockholm", "Sweden", new LatLng(59.32995, 18.06461));
-        m.setIcon(new Icon(this, Icon.Size.MEDIUM, "city", "FFFF00"));
-        mv.addMarker(m);
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+				R.drawable.ic_drawer, R.string.drawerOpen, R.string.drawerClose) {
 
-        m = new Marker(mv, "Prague", "Czech Republic", new LatLng(50.08734, 14.42112));
-        m.setIcon(new Icon(this, Icon.Size.LARGE, "land-use", "00FFFF"));
-        mv.addMarker(m);
-
-        m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
-        mv.addMarker(m);
-
-/*
-        m = new Marker(mv, "Prague2", "Czech Republic", new LatLng(50.0875, 14.42112));
-        m.setIcon(new Icon(getBaseContext(), Icon.Size.LARGE, "land-use", "00FF00"));
-        mv.addMarker(m);
-*/
-
-        mv.setOnTilesLoadedListener(new TilesLoadedListener() {
-            @Override
-            public boolean onTilesLoaded() {
-                return false;
-            }
-
-            @Override
-            public boolean onTilesLoadStarted() {
-                // TODO Auto-generated method stub
-                return false;
-            }
-        });
-        mv.setVisibility(View.VISIBLE);
-
-        PathOverlay equator = new PathOverlay();
-        equator.addPoint(0, -89);
-        equator.addPoint(0, 89);
-        mv.getOverlays().add(equator);
-    }
-
-    private void setButtonListeners() {
-        Button satBut = changeButtonTypeface((Button) findViewById(R.id.satbut));
-        satBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!currentLayer.equals("satellite")) {
-                    replaceMapView(satellite);
-                    currentLayer = "satellite";
-                }
-            }
-        });
-        Button terBut = changeButtonTypeface((Button) findViewById(R.id.terbut));
-        terBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!currentLayer.equals("terrain")) {
-                    replaceMapView(terrain);
-                    currentLayer = "terrain";
-                }
-            }
-        });
-        Button strBut = changeButtonTypeface((Button) findViewById(R.id.strbut));
-        strBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!currentLayer.equals("street")) {
-                    replaceMapView(street);
-                    currentLayer = "street";
-                }
-            }
-        });
-
-        Button altBut = changeButtonTypeface((Button) findViewById(R.id.strAltMap));
-        altBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent altMapActivity =
-                        new Intent(MainActivity.this, AlternateMapTestActivity.class);
-                startActivity(altMapActivity);
-            }
-        });
-
-		Button pinsButton = changeButtonTypeface((Button) findViewById(R.id.markersButton));
-		pinsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent altMapActivity =
-						new Intent(MainActivity.this, MarkersTestActivity.class);
-				startActivity(altMapActivity);
+			/** Called when a drawer has settled in a completely closed state. */
+			public void onDrawerClosed(View view) {
+				super.onDrawerClosed(view);
+				getSupportActionBar().setTitle(testFragmentNames.get(selectedFragmentIndex));
 			}
-		});
 
+			/** Called when a drawer has settled in a completely open state. */
+			public void onDrawerOpened(View drawerView) {
+				super.onDrawerOpened(drawerView);
+				getSupportActionBar().setTitle(R.string.appName);
+			}
+		};
 
-        Button spinButton = changeButtonTypeface((Button) findViewById(R.id.spinButton));
-        spinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mv.setMapOrientation(mv.getMapOrientation() + 45f);
-            }
-        });
+		// Set the drawer toggle as the DrawerListener
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        Button selectBut = changeButtonTypeface((Button) findViewById(R.id.layerselect));
-        selectBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
-                ab.setTitle("Select Layer");
-                ab.setItems(availableLayers, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface d, int choice) {
-                        replaceMapView(availableLayers[choice]);
-                    }
-                });
-                ab.show();
-            }
-        });
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
+
+		// Set MainTestFragment
+		selectItem(0);
     }
 
-    final String[] availableLayers = {
-            "OpenStreetMap", "OpenSeaMap", "mapquest", "open-streets-dc.mbtiles", "test.MBTiles"
-    };
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		// Sync the toggle state after onRestoreInstanceState has occurred.
+		mDrawerToggle.syncState();
+	}
 
-    protected void replaceMapView(String layer) {
-        ITileLayer source;
-        BoundingBox box;
-        if (layer.toLowerCase().endsWith("mbtiles")) {
-            TileLayer mbTileLayer = new MBTilesLayer(this, layer);
-            //            mv.setTileSource(mbTileLayer);
-            mv.setTileSource(new ITileLayer[] {
-                    mbTileLayer, new WebSourceTileLayer("mapquest",
-                    "http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png").setName(
-                    "MapQuest Open Aerial")
-                    .setAttribution("Tiles courtesy of MapQuest and OpenStreetMap contributors.")
-                    .setMinimumZoomLevel(1)
-                    .setMaximumZoomLevel(18)
-            });
-            box = mbTileLayer.getBoundingBox();
-        } else {
-            if (layer.equalsIgnoreCase("OpenStreetMap")) {
-                source = new WebSourceTileLayer("openstreetmap",
-                        "http://tile.openstreetmap.org/{z}/{x}/{y}.png").setName("OpenStreetMap")
-                        .setAttribution("© OpenStreetMap Contributors")
-                        .setMinimumZoomLevel(1)
-                        .setMaximumZoomLevel(18);
-            } else if (layer.equalsIgnoreCase("OpenSeaMap")) {
-                source = new WebSourceTileLayer("openstreetmap",
-                        "http://tile.openstreetmap.org/seamark/{z}/{x}/{y}.png").setName(
-                        "OpenStreetMap")
-                        .setAttribution("© OpenStreetMap Contributors")
-                        .setMinimumZoomLevel(1)
-                        .setMaximumZoomLevel(18);
-            } else if (layer.equalsIgnoreCase("mapquest")) {
-                source = new WebSourceTileLayer("mapquest",
-                        "http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png").setName(
-                        "MapQuest Open Aerial")
-                        .setAttribution(
-                                "Tiles courtesy of MapQuest and OpenStreetMap contributors.")
-                        .setMinimumZoomLevel(1)
-                        .setMaximumZoomLevel(18);
-            } else {
-                source = new MapboxTileLayer(layer);
-            }
-            mv.setTileSource(source);
-            box = source.getBoundingBox();
-        }
-        //        mv.setScrollableAreaLimit(mv.getTileProvider().getBoundingBox());
-        mv.setScrollableAreaLimit(box);
-        mv.setMinZoomLevel(mv.getTileProvider().getMinimumZoomLevel());
-        mv.setMaxZoomLevel(mv.getTileProvider().getMaximumZoomLevel());
-        mv.setCenter(mv.getTileProvider().getCenterCoordinate());
-        mv.setZoom(0);
-        Log.d("MainActivity", "zoomToBoundingBox " + box.toString());
-        //        mv.zoomToBoundingBox(box);
-    }
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
 
-    private void addLocationOverlay() {
-        // Adds an icon that shows location
-        UserLocationOverlay myLocationOverlay =
-                new UserLocationOverlay(new GpsLocationProvider(this), mv);
-        myLocationOverlay.enableMyLocation();
-        myLocationOverlay.setDrawAccuracyEnabled(true);
-        mv.getOverlays().add(myLocationOverlay);
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Pass the event to ActionBarDrawerToggle, if it returns
+		// true, then it has handled the app icon touch event
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+		// Handle your other action bar items...
 
-    private void addLine() {
-        // Configures a line
-        Paint linePaint = new Paint();
-        linePaint.setStyle(Paint.Style.STROKE);
-        linePaint.setColor(Color.BLUE);
-        linePaint.setStrokeWidth(5);
+		return super.onOptionsItemSelected(item);
+	}
 
-        PathOverlay po = new PathOverlay().setPaint(linePaint);
+	private class DrawerItemClickListener implements ListView.OnItemClickListener {
+		@Override
+		public void onItemClick(AdapterView parent, View view, int position, long id) {
+			selectItem(position);
+		}
+	}
 
-        po.addPoint(startingPoint);
-        po.addPoint(new LatLng(51.7, 0.3));
-        po.addPoint(new LatLng(51.2, 0));
+	/** Swaps fragments in the main content view */
+	private void selectItem(int position) {
+		selectedFragmentIndex = position;
+		// Create a new fragment and specify the planet to show based on position
+		Fragment fragment;
 
-        // Adds line and marker to the overlay
-        mv.getOverlays().add(po);
-    }
+		switch (position){
+			case 0:
+				fragment = new MainTestFragment();
+				break;
+			case 1:
+				fragment = new AlternateMapTestFragment();
+				break;
+			case 2:
+				fragment = new MarkersTestFragment();
+				break;
+			default:
+				fragment = new MainTestFragment();
+				break;
+		}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity_main, menu);
+		// Insert the fragment by replacing any existing fragment
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		fragmentManager.beginTransaction()
+				.replace(R.id.content_frame, fragment)
+				.commit();
 
-        return true;
-    }
+		// Highlight the selected item, update the title, and close the drawer
+		mDrawerList.setItemChecked(position, true);
+		setTitle(testFragmentNames.get(position));
+		mDrawerLayout.closeDrawer(mDrawerList);
+	}
 
-    private Button changeButtonTypeface(Button button) {
-        //Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/semibold.ttf");
-        //button.setTypeface(tf);
-        return button;
-    }
-
-    public LatLng getMapCenter() {
-        return mv.getCenter();
-    }
-
-    public void setMapCenter(ILatLng center) {
-        mv.setCenter(center);
-    }
-
-    /**
-     * Method to show settings  in alert dialog
-     * On pressing Settings button will lauch Settings Options - GPS
-     */
-    public void showSettingsAlert() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
-
-        // Setting Dialog Title
-        alertDialog.setTitle("GPS settings");
-
-        // Setting Dialog Message
-        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
-
-        // On pressing Settings button
-        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                getBaseContext().startActivity(intent);
-            }
-        });
-
-        // on pressing cancel button
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        // Showing Alert Message
-        alertDialog.show();
-    }
+	@Override
+	public void setTitle(CharSequence title) {
+		getSupportActionBar().setTitle(title);
+	}
 }
