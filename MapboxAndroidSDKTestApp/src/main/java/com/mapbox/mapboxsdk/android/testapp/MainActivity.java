@@ -1,6 +1,7 @@
 package com.mapbox.mapboxsdk.android.testapp;
 
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -14,8 +15,10 @@ import java.util.ArrayList;
 public class MainActivity extends ActionBarActivity {
 
 	private DrawerLayout mDrawerLayout;
+	private ActionBarDrawerToggle mDrawerToggle;
 	private ListView mDrawerList;
 	private ArrayList<String> testFragmentNames;
+	private int selectedFragmentIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,25 @@ public class MainActivity extends ActionBarActivity {
 		// Set the list's click listener
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+				R.drawable.ic_drawer, R.string.drawerOpen, R.string.drawerClose) {
+
+			/** Called when a drawer has settled in a completely closed state. */
+			public void onDrawerClosed(View view) {
+				super.onDrawerClosed(view);
+				getSupportActionBar().setTitle(testFragmentNames.get(selectedFragmentIndex));
+			}
+
+			/** Called when a drawer has settled in a completely open state. */
+			public void onDrawerOpened(View drawerView) {
+				super.onDrawerOpened(drawerView);
+				getSupportActionBar().setTitle(R.string.appName);
+			}
+		};
+
+		// Set the drawer toggle as the DrawerListener
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
+
 		// Set MainTestFragment
 		selectItem(0);
     }
@@ -48,6 +70,7 @@ public class MainActivity extends ActionBarActivity {
 
 	/** Swaps fragments in the main content view */
 	private void selectItem(int position) {
+		selectedFragmentIndex = position;
 		// Create a new fragment and specify the planet to show based on position
 		Fragment fragment;
 
