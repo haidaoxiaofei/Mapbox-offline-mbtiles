@@ -25,7 +25,7 @@ public class MainTestFragment extends Fragment {
 	private LatLng startingPoint = new LatLng(51f, 0f);
 	private MapView mv;
 	private String satellite = "brunosan.map-cyglrrfu";
-	private String street = "examples.map-vyofok3q";
+	private String street = "examples.map-i87786ca";
 	private String terrain = "examples.map-zgrqqx0w";
 	private final String mbTile = "test.MBTiles";
 	private String currentLayer = "";
