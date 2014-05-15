@@ -21,8 +21,7 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.*;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 
-public class MainTestFragment extends Fragment
-{
+public class MainTestFragment extends Fragment {
 	private LatLng startingPoint = new LatLng(51f, 0f);
 	private MapView mv;
 	private String satellite = "brunosan.map-cyglrrfu";
@@ -35,13 +34,7 @@ public class MainTestFragment extends Fragment
 	{
 		View view = inflater.inflate(R.layout.fragment_maintest, container, false);
 
-		return view;
-	}
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data)
-	{
-		mv = (MapView) getView().findViewById(R.id.mapview);
+		mv = (MapView) view.findViewById(R.id.mapview);
 		replaceMapView("test.MBTiles");
 		addLocationOverlay();
 
@@ -53,7 +46,6 @@ public class MainTestFragment extends Fragment
 
 		// Smaller GeoJSON Test
 		mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/bleege/133920f60eb7a334430f/raw/5392bad4e09015d3995d6153db21869b02f34d27/map.geojson");
-		setButtonListeners();
 		Marker m = new Marker(mv, "Edinburgh", "Scotland", new LatLng(55.94629, -3.20777));
 		m.setIcon(new Icon(getActivity(), Icon.Size.SMALL, "marker-stroked", "FF0000"));
 		mv.addMarker(m);
@@ -75,6 +67,86 @@ public class MainTestFragment extends Fragment
         mv.addMarker(m);
 */
 
+		// Set Button Listeners
+		Button satBut = changeButtonTypeface((Button) view.findViewById(R.id.satbut));
+		satBut.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (!currentLayer.equals("satellite")) {
+					replaceMapView(satellite);
+					currentLayer = "satellite";
+				}
+			}
+		});
+		Button terBut = changeButtonTypeface((Button) view.findViewById(R.id.terbut));
+		terBut.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (!currentLayer.equals("terrain")) {
+					replaceMapView(terrain);
+					currentLayer = "terrain";
+				}
+			}
+		});
+		Button strBut = changeButtonTypeface((Button) view.findViewById(R.id.strbut));
+		strBut.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (!currentLayer.equals("street")) {
+					replaceMapView(street);
+					currentLayer = "street";
+				}
+			}
+		});
+
+/*
+		Button altBut = changeButtonTypeface((Button) view.findViewById(R.id.strAltMap));
+		altBut.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent altMapActivity =
+						new Intent(getActivity(), AlternateMapTestActivity.class);
+				startActivity(altMapActivity);
+			}
+		});
+
+		Button pinsButton = changeButtonTypeface((Button) view.findViewById(R.id.markersButton));
+		pinsButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent altMapActivity =
+						new Intent(getActivity(), MarkersTestActivity.class);
+				startActivity(altMapActivity);
+			}
+		});
+*/
+
+		Button spinButton = changeButtonTypeface((Button) view.findViewById(R.id.spinButton));
+		spinButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mv.setMapOrientation(mv.getMapOrientation() + 45f);
+			}
+		});
+
+/*
+		Button selectBut = changeButtonTypeface((Button) view.findViewById(R.id.layerselect));
+		selectBut.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
+				ab.setTitle("Select Layer");
+				ab.setItems(availableLayers, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface d, int choice) {
+						replaceMapView(availableLayers[choice]);
+					}
+				});
+				ab.show();
+			}
+		});
+*/
+
 		mv.setOnTilesLoadedListener(new TilesLoadedListener() {
 			@Override
 			public boolean onTilesLoaded() {
@@ -93,87 +165,8 @@ public class MainTestFragment extends Fragment
 		equator.addPoint(0, -89);
 		equator.addPoint(0, 89);
 		mv.getOverlays().add(equator);
-	}
 
-	private void setButtonListeners() {
-		Button satBut = changeButtonTypeface((Button) getView().findViewById(R.id.satbut));
-		satBut.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (!currentLayer.equals("satellite")) {
-					replaceMapView(satellite);
-					currentLayer = "satellite";
-				}
-			}
-		});
-		Button terBut = changeButtonTypeface((Button) getView().findViewById(R.id.terbut));
-		terBut.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (!currentLayer.equals("terrain")) {
-					replaceMapView(terrain);
-					currentLayer = "terrain";
-				}
-			}
-		});
-		Button strBut = changeButtonTypeface((Button) getView().findViewById(R.id.strbut));
-		strBut.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (!currentLayer.equals("street")) {
-					replaceMapView(street);
-					currentLayer = "street";
-				}
-			}
-		});
-
-/*
-		Button altBut = changeButtonTypeface((Button) getView().findViewById(R.id.strAltMap));
-		altBut.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent altMapActivity =
-						new Intent(getActivity(), AlternateMapTestActivity.class);
-				startActivity(altMapActivity);
-			}
-		});
-
-		Button pinsButton = changeButtonTypeface((Button) getView().findViewById(R.id.markersButton));
-		pinsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent altMapActivity =
-						new Intent(getActivity(), MarkersTestActivity.class);
-				startActivity(altMapActivity);
-			}
-		});
-*/
-
-		Button spinButton = changeButtonTypeface((Button) getView().findViewById(R.id.spinButton));
-		spinButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mv.setMapOrientation(mv.getMapOrientation() + 45f);
-			}
-		});
-
-/*
-		Button selectBut = changeButtonTypeface((Button) getView().findViewById(R.id.layerselect));
-		selectBut.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
-				ab.setTitle("Select Layer");
-				ab.setItems(availableLayers, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface d, int choice) {
-						replaceMapView(availableLayers[choice]);
-					}
-				});
-				ab.show();
-			}
-		});
-*/
+		return view;
 	}
 
 	final String[] availableLayers = {
