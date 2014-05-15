@@ -108,6 +108,9 @@ public class MainActivity extends ActionBarActivity {
 			case 0:
 				fragment = new MainTestFragment();
 				break;
+			case 1:
+				fragment = new AlternateMapTestFragment();
+				break;
 			default:
 				fragment = new MainTestFragment();
 				break;
