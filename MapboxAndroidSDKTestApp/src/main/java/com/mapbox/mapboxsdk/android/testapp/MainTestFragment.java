@@ -27,6 +27,7 @@ public class MainTestFragment extends Fragment {
 	private String satellite = "brunosan.map-cyglrrfu";
 	private String street = "examples.map-vyofok3q";
 	private String terrain = "examples.map-zgrqqx0w";
+	private final String mbTile = "test.MBTiles";
 	private String currentLayer = "";
 
 	@Override
@@ -35,9 +36,11 @@ public class MainTestFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_maintest, container, false);
 
 		mv = (MapView) view.findViewById(R.id.mapview);
-		replaceMapView("test.MBTiles");
-		addLocationOverlay();
+		// Set Default Map Type
+		replaceMapView(terrain);
+		currentLayer = "terrain";
 
+		addLocationOverlay();
 
 /*
 		// Original GeoJSON Test that causes crash when Hardware Acceleration when enabled in TestApp
@@ -98,6 +101,17 @@ public class MainTestFragment extends Fragment {
 				}
 			}
 		});
+		Button mbTileBut = changeButtonTypeface((Button) view.findViewById(R.id.mbTilesBut));
+		mbTileBut.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (!currentLayer.equals(mbTile)) {
+					replaceMapView(mbTile);
+					currentLayer = mbTile;
+				}
+			}
+		});
+
 
 /*
 		Button altBut = changeButtonTypeface((Button) view.findViewById(R.id.strAltMap));
