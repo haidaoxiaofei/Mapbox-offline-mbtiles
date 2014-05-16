@@ -9,13 +9,14 @@ data and interactive tooltips.
 
 This is a fork of [osmdroid](http://code.google.com/p/osmdroid/), so the entire
 core is open source: it doesn't depend on the Google Maps SDK or any components
-outside of AOSP that would require the Play Store.
+outside of AOSP that would require the Google Play Store.
 
 ## Installation
 
-We recommend using the Android SDK with [gradle](http://www.gradle.org/):
+We recommend using the Mapbox Android SDK with [Gradle](http://www.gradle.org/):
 this will automatically install the necessary dependencies and pull the SDK
-source code from the central Maven repository.
+binaries from the Maven Central repository ( [Mapbox Android SDK on Maven Central](http://search.maven.org/#artifactdetails%7Ccom.mapbox.mapboxsdk%7Cmapbox-android-sdk%7C0.2.3%7Cjar) ).
+
 
 ### With Gradle (Android Studio, IntelliJ, etc)
 
@@ -24,11 +25,10 @@ Add this to your to your `build.gradle`:
 ```groovy
 repositories {
     mavenCentral()
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots'}
 }
 
 dependencies {
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.2.3-SNAPSHOT@aar'){
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.2.3@aar'){
         transitive=true
     }
 }
@@ -42,12 +42,25 @@ These **will** change over time so please check back regularly.
 
 *Example:*
 
-* Mapbox Android SDK (.aar) - 0.2.3-SNAPSHOT
+* Mapbox Android SDK (.aar) - 0.2.3
 * Android Support V4 - 19.1
 * OkHttp - 1.3.0
 * NineOldAndroids - 2.4.0
 * DiskLRUCache - 2.0.1
 * Guava - 16.0.1
+ 
+### Legacy Support (Eclipse) - Experimental
+
+The Mapbox Android SDK is also packaged as a `.apk` file.  This allows integration with older tools (Eclipse) that don't support the `.aar` format yet.  It's also available from Maven Central via:
+
+```xml
+<dependency> 
+    <groupId>com.mapbox.mapboxsdk</groupId> 
+    <artifactId>mapbox-android-sdk</artifactId> 
+    <version>0.2.3</version> 
+    <type>apklib</type> 
+</dependency>
+```
 
 ### Building From Source
 
