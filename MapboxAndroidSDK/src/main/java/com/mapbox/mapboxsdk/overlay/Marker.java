@@ -156,6 +156,12 @@ public class Marker {
     public void setRelatedObject(Object o) {
         mRelatedObject = o;
     }
+    
+    public void setPoint(LatLng point) {
+        mLatLng = point;
+        invalidate();
+    }
+
 
     public String getDescription() {
         return mDescription;
