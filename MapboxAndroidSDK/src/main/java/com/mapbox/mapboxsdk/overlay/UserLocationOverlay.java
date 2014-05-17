@@ -34,6 +34,10 @@ import java.util.LinkedList;
  */
 public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, MapListener {
 
+    public enum TrackingMode {
+        NONE, FOLLOW, FOLLOW_BEARING
+    }
+
     private final SafePaint mPaint = new SafePaint();
     private final SafePaint mCirclePaint = new SafePaint();
 
@@ -51,9 +55,8 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
     private Location mLocation;
     private LatLng mLatLng;
     private boolean mIsLocationEnabled = false;
-    private boolean mIsFollowing = false; // follow location updates
     private boolean mDrawAccuracyEnabled = true;
-
+    private TrackingMode mTrackingMode = TrackingMode.NONE;
     /**
      * Coordinates the feet of the person are located scaled for display density.
      */
@@ -335,8 +338,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
      * automatically scroll as you move. Scrolling the map in the UI will disable.
      */
     public void enableFollowLocation() {
-        mIsFollowing = true;
-
+        if (mTrackingMode == TrackingMode.NONE) {
+            mTrackingMode = TrackingMode.FOLLOW;
+        }
         // set initial location when enabled
         if (isMyLocationEnabled()) {
             updateMyLocation(mMyLocationProvider.getLastKnownLocation());
@@ -347,7 +351,15 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
      * Disables "follow" functionality.
      */
     public void disableFollowLocation() {
-        mIsFollowing = false;
+        mTrackingMode = TrackingMode.NONE;
+    }
+
+
+    public void setTrackingMode(TrackingMode mode) {
+        mTrackingMode = mode;
+        if (mTrackingMode != TrackingMode.NONE && isMyLocationEnabled()) {
+            updateMyLocation(mMyLocationProvider.getLastKnownLocation());
+        }
     }
 
     /**
@@ -357,7 +369,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
      * @return true if enabled, false otherwise
      */
     public boolean isFollowLocationEnabled() {
-        return mIsFollowing;
+        return mTrackingMode != TrackingMode.NONE;
     }
 
     private void updateDrawingPositionRect() {
@@ -412,7 +424,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
             return;
         }
         mLatLng = new LatLng(mLocation);
-        if (mIsFollowing) {
+        if (isFollowLocationEnabled()) {
             float currentZoom = mMapView.getZoomLevel(false);
             if (currentZoom < 10 && mLocation.getAccuracy() > 0) {
                 double requiredZoom = 10;
@@ -495,14 +507,14 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
     @Override
     public void onScroll(ScrollEvent event) {
         if (event.getUserAction()) {
-            mIsFollowing = false;
+            disableFollowLocation();
         }
     }
 
     @Override
     public void onZoom(ZoomEvent event) {
         if (event.getUserAction()) {
-            mIsFollowing = false;
+            disableFollowLocation();
         }
     }
 }
