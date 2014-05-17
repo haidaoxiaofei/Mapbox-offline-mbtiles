@@ -106,6 +106,12 @@ public class Marker {
         }
         return mToolTip;
     }
+    
+    public void closeToolTip() {
+        if (mToolTip != null && mToolTip.equals(mToolTip.getMapView().getCurrentTooltip())) {
+            mToolTip.getMapView().closeCurrentTooltip();
+        }
+    }
 
     public void blur() {
         if (mParentHolder != null) {

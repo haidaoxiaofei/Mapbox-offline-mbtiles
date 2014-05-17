@@ -416,7 +416,7 @@ public class MapView extends ViewGroup
     /**
      * Close the currently-displayed tooltip, if any.
      */
-    private void closeCurrentTooltip() {
+    public void closeCurrentTooltip() {
         if (currentTooltip != null) {
             if (mMapViewListener != null) {
                 mMapViewListener.onHidemarker(this, currentTooltip.getBoundMarker());
@@ -424,6 +424,11 @@ public class MapView extends ViewGroup
             currentTooltip.close();
             currentTooltip = null;
         }
+    }
+    
+    
+    public InfoWindow getCurrentTooltip() {
+        return currentTooltip;
     }
 
     /**
