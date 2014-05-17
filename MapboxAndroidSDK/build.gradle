@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.+'
+    compile 'com.android.support:support-v4:19.1.0'
     compile 'com.squareup.okhttp:okhttp:1.5.4'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.jakewharton:disklrucache:2.0.2'
@@ -135,6 +135,23 @@ def getRepositoryPassword() {
             (hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : "")
 }
 
+
+task apklib(type: Zip) {
+    appendix = extension = 'apklib'
+
+    from 'AndroidManifest.xml'
+    into('res') {
+        from 'res'
+    }
+    into('src') {
+        from 'src'
+    }
+}
+
+artifacts {
+    archives apklib
+}
+
 afterEvaluate { project ->
     uploadArchives {
         repositories {
@@ -153,6 +170,16 @@ afterEvaluate { project ->
                     authentication(userName: getRepositoryUsername(),
                             password: getRepositoryPassword())
                 }
+
+/*
+                // Leaving out as artifact was incorrectly named when found
+                addFilter('aar') { artifact, file ->
+                    artifact.name == archivesBaseName
+                }
+                addFilter('apklib') { artifact, file ->
+                    artifact.name == archivesBaseName + '-apklib'
+                }
+*/
 
                 pom.project {
                     name POM_NAME

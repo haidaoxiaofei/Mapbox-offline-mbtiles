@@ -306,7 +306,7 @@ public class TilesOverlay extends SafeDrawOverlay {
     public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel,
                              final Projection projection) {
 
-        if (mTileProvider.hasNoSource() || Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel)) {
+        if (mTileProvider.hasNoSource() || Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel) || projection == null) {
             return;
         }
 
