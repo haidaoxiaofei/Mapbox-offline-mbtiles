@@ -22,6 +22,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
+
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
@@ -32,6 +33,7 @@ import com.mapbox.mapboxsdk.format.GeoJSON;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
+import com.mapbox.mapboxsdk.overlay.GpsLocationProvider;
 import com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay;
 import com.mapbox.mapboxsdk.overlay.ItemizedOverlay;
 import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
@@ -40,6 +42,7 @@ import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.Overlay;
 import com.mapbox.mapboxsdk.overlay.OverlayManager;
 import com.mapbox.mapboxsdk.overlay.TilesOverlay;
+import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
@@ -55,7 +58,9 @@ import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
+
 import org.json.JSONException;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -160,6 +165,8 @@ public class MapView extends ViewGroup
     private Drawable mDefaultPinDrawable;
     private PointF mDefaultPinAnchor = DEFAULT_PIN_ANCHOR;
 
+    private UserLocationOverlay mLocationOverlay;
+
     /**
      * Constructor for XML layout calls. Should not be used programmatically.
      *
@@ -174,7 +181,7 @@ public class MapView extends ViewGroup
         super(aContext, attrs);
         setWillNotDraw(false);
         mLayedOut = false;
-        mConstraintRegionFit = true;
+        mConstraintRegionFit = false;
         this.mController = new MapController(this);
         this.mScroller = new Scroller(aContext);
         Projection.setTileSize(tileSizePixels);
@@ -425,8 +432,8 @@ public class MapView extends ViewGroup
             currentTooltip = null;
         }
     }
-    
-    
+
+
     public InfoWindow getCurrentTooltip() {
         return currentTooltip;
     }
@@ -1653,7 +1660,6 @@ public class MapView extends ViewGroup
      * If yes you will be able to zoom out to see the whole area
      * whatever the screen ratio.
      *
-     * @see {@link com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas}
      */
     public void setConstraintRegionFit(boolean value) {
         this.mConstraintRegionFit = value;
@@ -1662,6 +1668,36 @@ public class MapView extends ViewGroup
             updateMinZoomLevel();
         }
     }
+
+    private UserLocationOverlay getOrCreateLocationOverlay() {
+        if (mLocationOverlay == null) {
+            mLocationOverlay = new UserLocationOverlay(new GpsLocationProvider(getContext()), this);
+           getOverlays().add(mLocationOverlay);
+        }
+        return mLocationOverlay;
+    }
+
+    /**
+     * Show or hide the user location overlay
+     *
+     */
+    public void setUserLocationEnabled(boolean value) {
+        if (value) {
+            getOrCreateLocationOverlay().enableMyLocation();
+        } else if (mLocationOverlay != null) {
+            getOverlays().remove(mLocationOverlay);
+            mLocationOverlay = null;
+        }
+    }
+
+    /**
+     * Show or hide the user location overlay
+     *
+     */
+    public void setUserLocationTrackingMode(UserLocationOverlay.TrackingMode mode) {
+        getOrCreateLocationOverlay().setTrackingMode(mode);
+    }
+
 
     @Override
     protected void onDetachedFromWindow() {
