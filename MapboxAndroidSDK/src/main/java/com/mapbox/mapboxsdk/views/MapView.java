@@ -664,7 +664,11 @@ public class MapView extends ViewGroup
         return setZoomInternal(aZoomLevel, null, null);
     }
 
-    protected MapView setZoomInternal(final float aZoomLevel, final ILatLng center, final PointF decale) {
+    protected MapView setZoomInternal(final float aZoomLevel, ILatLng center, final PointF decale) {
+
+        if (center == null) {
+            center = getCenter();
+        }
 
         final float newZoomLevel = getClampedZoomLevel(aZoomLevel);
         final float curZoomLevel = this.mZoomLevel;
