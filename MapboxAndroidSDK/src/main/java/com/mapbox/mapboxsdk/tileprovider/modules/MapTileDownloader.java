@@ -143,9 +143,11 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
 
         @Override
         public Drawable loadTile(final MapTileRequestState aState) throws CantContinueException {
-
-            TileLayer tileLayer = mTileSource.get();
             final MapTile tile = aState.getMapTile();
+            if (mTileCache != null && mTileCache.get().containsTileInDiskCache(tile)) {
+                return mTileCache.get().getMapTileFromDisk(tile);
+            }
+            TileLayer tileLayer = mTileSource.get();
             Drawable result =
                     (tileLayer != null) ? tileLayer.getDrawableFromTile(MapTileDownloader.this,
                             tile, hdpi) : null;

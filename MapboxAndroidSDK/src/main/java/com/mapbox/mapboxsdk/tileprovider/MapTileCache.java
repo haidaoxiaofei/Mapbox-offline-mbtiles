@@ -28,6 +28,8 @@ public class MapTileCache implements TileLayerConstants {
     static final String TAG = "MapTileCache";
     private static final String DISK_CACHE_SUBDIR = "mapbox_tiles_cache";
     private int mMaximumCacheSize;
+    
+    private boolean mDiskCacheEnabled = false;
 
     public MapTileCache(final Context aContext) {
         this(aContext, CACHE_MAPTILEDISKSIZE_DEFAULT);
@@ -58,7 +60,7 @@ public class MapTileCache implements TileLayerConstants {
             }
             this.sCachedTiles = (new BitmapLruCache.Builder(context)).setMemoryCacheEnabled(true)
                     .setMemoryCacheMaxSize(BitmapUtils.calculateMemoryCacheSize(context))
-                    .setDiskCacheEnabled(true)
+                    .setDiskCacheEnabled(mDiskCacheEnabled)
                     .setDiskCacheMaxSize(this.mMaximumCacheSize)
                     .setDiskCacheLocation(cacheDir)
                     .build();
@@ -110,7 +112,7 @@ public class MapTileCache implements TileLayerConstants {
                 drawable = getCache().putInMemoryCache(getCacheKey(aTile),
                         ((BitmapDrawable) aDrawable).getBitmap());
             }
-            if (!getCache().containsInDiskCache(key)) {
+            if (getCache().isDiskCacheEnabled() && !getCache().containsInDiskCache(key)) {
                 if (drawable != null) {
                     getCache().putInDiskCache(getCacheKey(aTile), drawable);
                 } else {
@@ -147,7 +149,7 @@ public class MapTileCache implements TileLayerConstants {
             final Drawable aDrawable) {
         if (aDrawable != null && aDrawable instanceof BitmapDrawable) {
             String key = getCacheKey(aTile);
-            if (!getCache().containsInDiskCache(key)) {
+            if (getCache().isDiskCacheEnabled() && !getCache().containsInDiskCache(key)) {
                 return getCache().putInDiskCache(getCacheKey(aTile),
                         ((BitmapDrawable) aDrawable).getBitmap());
             }
@@ -160,7 +162,7 @@ public class MapTileCache implements TileLayerConstants {
     }
 
     public boolean containsTileInDiskCache(final MapTile aTile) {
-        return getCache().containsInDiskCache(getCacheKey(aTile));
+        return getCache().isDiskCacheEnabled() && getCache().containsInDiskCache(getCacheKey(aTile));
     }
 
     public void removeTile(final MapTile aTile) {
@@ -212,5 +214,12 @@ public class MapTileCache implements TileLayerConstants {
                         : context.getFilesDir().getPath();
 
         return new File(cachePath, uniqueName);
+    }
+    
+    public void setDiskCacheEnabled(final boolean enabled) {
+        if (mDiskCacheEnabled != enabled) {
+            mDiskCacheEnabled = enabled;
+            this.sCachedTiles = null;
+        }
     }
 }

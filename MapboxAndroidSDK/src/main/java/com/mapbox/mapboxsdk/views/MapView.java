@@ -1681,7 +1681,7 @@ public class MapView extends ViewGroup
      * Show or hide the user location overlay
      *
      */
-    public void setUserLocationEnabled(boolean value) {
+    public void setUserLocationEnabled(final boolean value) {
         if (value) {
             getOrCreateLocationOverlay().enableMyLocation();
         } else if (mLocationOverlay != null) {
@@ -1694,10 +1694,21 @@ public class MapView extends ViewGroup
      * Show or hide the user location overlay
      *
      */
-    public void setUserLocationTrackingMode(UserLocationOverlay.TrackingMode mode) {
+    public void setUserLocationTrackingMode(final UserLocationOverlay.TrackingMode mode) {
         getOrCreateLocationOverlay().setTrackingMode(mode);
     }
+    
+    /**
+     * Enable or disable the diskCache
+     *
+     */
+    public void setDiskCacheEnabled(final boolean enabled) {
+        if (mTileProvider != null) {
+            mTileProvider.setDiskCacheEnabled(enabled);
+        }
+    }
 
+    
 
     @Override
     protected void onDetachedFromWindow() {

@@ -272,6 +272,10 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback, Tile
     public void clearTileDiskCache() {
         mTileCache.purgeDiskCache();
     }
+    
+    public void setDiskCacheEnabled(final boolean enabled) {
+        mTileCache.setDiskCacheEnabled(enabled);
+    }
 
     /**
      * Whether to use the network connection if it's available.
