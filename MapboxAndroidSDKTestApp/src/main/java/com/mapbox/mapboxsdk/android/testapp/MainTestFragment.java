@@ -13,11 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.*;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.*;
+import com.mapbox.mapboxsdk.overlay.Icon;
+import com.mapbox.mapboxsdk.overlay.Marker;
+import com.mapbox.mapboxsdk.overlay.PathOverlay;
+import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MBTilesLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.WebSourceTileLayer;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 
@@ -40,8 +48,8 @@ public class MainTestFragment extends Fragment {
 		replaceMapView(terrain);
 		currentLayer = "terrain";
 
-		addLocationOverlay();
-
+        mv.setUserLocationEnabled(true);
+        mv.setUserLocationTrackingMode(UserLocationOverlay.TrackingMode.FOLLOW);
 /*
 		// Original GeoJSON Test that causes crash when Hardware Acceleration when enabled in TestApp
         mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/4a6f5fa40ab9a6b2f163/raw/b1ee1e445225fc0a397e2605feda7da74c36161b/map.geojson");
@@ -238,15 +246,6 @@ public class MainTestFragment extends Fragment {
 		mv.setZoom(0);
 		Log.d("MainActivity", "zoomToBoundingBox " + box.toString());
 		//        mv.zoomToBoundingBox(box);
-	}
-
-	private void addLocationOverlay() {
-		// Adds an icon that shows location
-		UserLocationOverlay myLocationOverlay =
-				new UserLocationOverlay(new GpsLocationProvider(getActivity()), mv);
-		myLocationOverlay.enableMyLocation();
-		myLocationOverlay.setDrawAccuracyEnabled(true);
-		mv.getOverlays().add(myLocationOverlay);
 	}
 
 	private void addLine() {
