@@ -16,6 +16,7 @@ import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.events.MapListener;
 import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
@@ -57,6 +58,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
     private boolean mIsLocationEnabled = false;
     private boolean mDrawAccuracyEnabled = true;
     private TrackingMode mTrackingMode = TrackingMode.NONE;
+    private boolean mZoomBasedOnAccuracy = true;
+    private float mRequiredZoomLevel = 10;
+
     /**
      * Coordinates the feet of the person are located scaled for display density.
      */
@@ -362,6 +366,11 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
         }
     }
 
+    public void setRequiredZoom(final float zoomLevel) {
+        mRequiredZoomLevel = zoomLevel;
+        mZoomBasedOnAccuracy = false;
+    }
+
     /**
      * If enabled, the map will center on your current location and automatically scroll as you
      * move. Scrolling the map in the UI will disable.
@@ -417,7 +426,41 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
         return enableMyLocation();
     }
 
-    private void updateMyLocation(Location location) {
+    public void goToMyPosition(final boolean animated) {
+        float currentZoom = mMapView.getZoomLevel(false);
+        if (currentZoom <= mRequiredZoomLevel) {
+            double requiredZoom = mRequiredZoomLevel;
+            if (mZoomBasedOnAccuracy && mMapView.isLayedOut()) {
+                double delta = (mLocation.getAccuracy() / 110000) * 1.2; // approx. meter per degree latitude, plus some margin
+                final Projection projection = mMapView.getProjection();
+                LatLng desiredSouthWest = new LatLng(mLocation.getLatitude() - delta,
+                        mLocation.getLongitude() - delta);
+
+                LatLng desiredNorthEast = new LatLng(mLocation.getLatitude() + delta,
+                        mLocation.getLongitude() + delta);
+
+                float pixelRadius = Math.min(mMapView.getMeasuredWidth(), mMapView.getMeasuredHeight()) / 2;
+
+                BoundingBox currentBox = projection.getBoundingBox();
+                if (desiredNorthEast.getLatitude() != currentBox.getLatNorth() ||
+                        desiredNorthEast.getLongitude() != currentBox.getLonEast() ||
+                        desiredSouthWest.getLatitude() != currentBox.getLatSouth() ||
+                        desiredSouthWest.getLongitude() != currentBox.getLonWest()) {
+                    mMapView.zoomToBoundingBox(new BoundingBox(desiredNorthEast, desiredSouthWest), true, animated);
+                }
+            } else if (animated) {
+                mMapController.setZoomAnimated((float) requiredZoom, mLatLng, true, false);
+            } else {
+                mMapController.setZoom((float) requiredZoom, mLatLng, false);
+            }
+        } else if (animated) {
+            mMapController.animateTo(mLatLng);
+        } else {
+            mMapController.goTo(mLatLng, null);
+        }
+    }
+
+    private void updateMyLocation(final Location location) {
         mLocation = location;
         if (mLocation == null) {
             mLatLng = null;
@@ -425,19 +468,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
         }
         mLatLng = new LatLng(mLocation);
         if (isFollowLocationEnabled()) {
-            float currentZoom = mMapView.getZoomLevel(false);
-            if (currentZoom < 10 && mLocation.getAccuracy() > 0) {
-                double requiredZoom = 10;
-                if (mMapView.isLayedOut()) {
-                    double delta = (mLocation.getAccuracy() / 110000) * 1.2; // approx. meter per degree latitude, plus some margin
-                    requiredZoom = Math.min(17, TileLayerConstants.MAXIMUM_ZOOMLEVEL
-                            - (2 * delta / mMapView.getMeasuredHeight()) / Math.log(2));
-                }
-
-                mMapController.setZoomAnimated((float) requiredZoom, mLatLng, true, false);
-            } else {
-                mMapController.animateTo(mLatLng);
-            }
+            goToMyPosition(true);
         } else {
             invalidate();
         }
