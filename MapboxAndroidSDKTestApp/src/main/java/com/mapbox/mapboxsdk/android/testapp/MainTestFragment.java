@@ -47,14 +47,12 @@ public class MainTestFragment extends Fragment {
 		// Set Default Map Type
 		replaceMapView(terrain);
 		currentLayer = "terrain";
-
-        mv.setUserLocationEnabled(true);
-        mv.setUserLocationTrackingMode(UserLocationOverlay.TrackingMode.FOLLOW);
+        mv.setUserLocationEnabled(true)
+                .setUserLocationTrackingMode(UserLocationOverlay.TrackingMode.FOLLOW);
 /*
-		// Original GeoJSON Test that causes crash when Hardware Acceleration when enabled in TestApp
+		// Original GeoJSON Test that caus es crash when Hardware Acceleration when enabled in TestApp
         mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/4a6f5fa40ab9a6b2f163/raw/b1ee1e445225fc0a397e2605feda7da74c36161b/map.geojson");
 */
-
 		// Smaller GeoJSON Test
 		mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/bleege/133920f60eb7a334430f/raw/5392bad4e09015d3995d6153db21869b02f34d27/map.geojson");
 		Marker m = new Marker(mv, "Edinburgh", "Scotland", new LatLng(55.94629, -3.20777));
@@ -77,7 +75,6 @@ public class MainTestFragment extends Fragment {
         m.setIcon(new Icon(getBaseContext(), Icon.Size.LARGE, "land-use", "00FF00"));
         mv.addMarker(m);
 */
-
 		// Set Button Listeners
 		Button satBut = changeButtonTypeface((Button) view.findViewById(R.id.satbut));
 		satBut.setOnClickListener(new View.OnClickListener() {
@@ -113,10 +110,11 @@ public class MainTestFragment extends Fragment {
 		mbTileBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (!currentLayer.equals(mbTile)) {
-					replaceMapView(mbTile);
-					currentLayer = mbTile;
-				}
+//				if (!currentLayer.equals(mbTile)) {
+//					replaceMapView(mbTile);
+//					currentLayer = mbTile;
+//				}
+                mv.goToUserLocation(true);
 			}
 		});
 
