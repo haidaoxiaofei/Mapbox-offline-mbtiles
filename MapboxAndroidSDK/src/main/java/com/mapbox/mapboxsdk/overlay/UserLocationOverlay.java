@@ -19,7 +19,6 @@ import com.mapbox.mapboxsdk.events.ZoomEvent;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Overlay.Snappable;
-import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
@@ -371,6 +370,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
         mZoomBasedOnAccuracy = false;
     }
 
+    public TrackingMode getTrackingMode() {
+        return mTrackingMode;
+    }
     /**
      * If enabled, the map will center on your current location and automatically scroll as you
      * move. Scrolling the map in the UI will disable.

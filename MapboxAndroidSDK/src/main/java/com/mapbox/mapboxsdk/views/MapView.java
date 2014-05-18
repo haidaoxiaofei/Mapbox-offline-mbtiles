@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -1661,12 +1662,13 @@ public class MapView extends ViewGroup
      * whatever the screen ratio.
      *
      */
-    public void setConstraintRegionFit(boolean value) {
+    public MapView setConstraintRegionFit(boolean value) {
         this.mConstraintRegionFit = value;
         if (isLayedOut()) {
             updateScrollableAreaLimit();
             updateMinZoomLevel();
         }
+        return this;
     }
 
     private UserLocationOverlay getOrCreateLocationOverlay() {
@@ -1681,23 +1683,103 @@ public class MapView extends ViewGroup
      * Show or hide the user location overlay
      *
      */
-    public void setUserLocationEnabled(final boolean value) {
+    public MapView setUserLocationEnabled(final boolean value) {
         if (value) {
             getOrCreateLocationOverlay().enableMyLocation();
         } else if (mLocationOverlay != null) {
+            mLocationOverlay.disableMyLocation();
             getOverlays().remove(mLocationOverlay);
             mLocationOverlay = null;
         }
+        return this;
     }
 
     /**
      * Show or hide the user location overlay
      *
      */
-    public void setUserLocationTrackingMode(final UserLocationOverlay.TrackingMode mode) {
-        getOrCreateLocationOverlay().setTrackingMode(mode);
+    public final boolean getUserLocationEnabled() {
+         if (mLocationOverlay != null) {
+            return mLocationOverlay.isMyLocationEnabled();
+        }
+        return false;
     }
-    
+
+    /**
+     * Set the user location tracking mode
+     *
+     */
+    public MapView setUserLocationTrackingMode(final UserLocationOverlay.TrackingMode mode) {
+        getOrCreateLocationOverlay().setTrackingMode(mode);
+        return this;
+    }
+
+    /**
+     * Set the user location tracking mode
+     *
+     */
+    public MapView setUserLocationRequiredZoom(final float zoomLevel) {
+        getOrCreateLocationOverlay().setRequiredZoom(zoomLevel);
+        return this;
+    }
+
+    /**
+     * get the user location tracking mode
+     *
+     */
+    public UserLocationOverlay.TrackingMode getUserLocationTrackingMode() {
+        if (mLocationOverlay != null) {
+            return mLocationOverlay.getTrackingMode();
+        }
+        return  UserLocationOverlay.TrackingMode.NONE;
+    }
+
+    /**
+     * Go to user location
+     *
+     */
+    public void goToUserLocation(final boolean animated) {
+        if (mLocationOverlay != null) {
+            mLocationOverlay.goToMyPosition(animated);
+        }
+    }
+
+    /**
+     * Get the user location overlay if created
+     *
+     */
+    public UserLocationOverlay getUserLocationOverlay() {
+        return mLocationOverlay;
+    }
+
+    /**
+     * Get the user location overlay if created
+     *
+     */
+    public LatLng getUserLocation() {
+        if (mLocationOverlay != null) {
+            return mLocationOverlay.getMyLocation();
+        }
+        return null;
+    }
+
+    public boolean isUserLocationVisible() {
+        if (mLocationOverlay != null) {
+            final Location pos = mLocationOverlay.getLastFix();
+            if (pos != null && isLayedOut()) {
+                final Projection projection = getProjection();
+                final float accuracyInPixels = pos.getAccuracy() / (float) projection.groundResolution(
+                        pos.getLatitude());
+                final PointF point = projection.toMapPixels(pos.getLatitude(), pos.getLongitude(), null);
+                return projection.getScreenRect().intersects((int) (point.x - accuracyInPixels),
+                        (int) (point.y - accuracyInPixels),
+                        (int) (point.x + accuracyInPixels),
+                        (int) (point.y + accuracyInPixels));
+            }
+        }
+        return false;
+    }
+
     /**
      * Enable or disable the diskCache
      *
@@ -1707,8 +1789,6 @@ public class MapView extends ViewGroup
             mTileProvider.setDiskCacheEnabled(enabled);
         }
     }
-
-    
 
     @Override
     protected void onDetachedFromWindow() {
