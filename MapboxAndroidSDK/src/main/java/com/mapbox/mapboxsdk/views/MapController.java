@@ -101,23 +101,27 @@ public class MapController implements MapViewConstants {
     /**
      * Start animating the map towards the given point.
      */
-    public void animateTo(final ILatLng point, final boolean userAction) {
-        setZoomAnimated(mMapView.getZoomLevel(), point, true, userAction);
+    public boolean animateTo(final ILatLng point, final boolean userAction) {
+        return setZoomAnimated(mMapView.getZoomLevel(), point, true, userAction);
     }
 
-    public void animateTo(final ILatLng point) {
-        animateTo(point, false);
+    public boolean animateTo(final ILatLng point) {
+        return animateTo(point, false);
     }
 
     /**
      * Go to a given point (not animated)
      */
-    public void goTo(final ILatLng point, PointF delta) {
+    public boolean goTo(final ILatLng point, PointF delta) {
 
         final Projection projection = mMapView.getProjection();
         PointF p = projection.toMapPixels(point, null);
         p.offset(delta.x, delta.y);
+        if (mMapView.getScrollPoint().equals(p)) {
+            return false;
+        }
         mMapView.scrollTo(p.x, p.y);
+        return true;
     }
 
     public void panBy(float x, float y, final boolean userAction) {
@@ -207,6 +211,10 @@ public class MapController implements MapViewConstants {
 
         final PointF dCurrentScroll = mMapView.getScrollPoint();
         PointF p = Projection.toMapPixels(latlong.getLatitude(), latlong.getLongitude(), currentZoom, dCurrentScroll.x, dCurrentScroll.y, null);
+        if (dCurrentScroll.equals(p)) {
+            mMapView.invalidate();
+            return false;
+        }
 
         mMapView.mMultiTouchScalePoint.set(p.x, p.y);
         List<PropertyValuesHolder> propertiesList = new ArrayList<PropertyValuesHolder>();
