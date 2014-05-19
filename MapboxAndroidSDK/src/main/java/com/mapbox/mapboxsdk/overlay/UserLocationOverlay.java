@@ -428,7 +428,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
         return enableMyLocation();
     }
 
-    public void goToMyPosition(final boolean animated) {
+    public boolean goToMyPosition(final boolean animated) {
         float currentZoom = mMapView.getZoomLevel(false);
         if (currentZoom <= mRequiredZoomLevel) {
             double requiredZoom = mRequiredZoomLevel;
@@ -451,15 +451,16 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
                     mMapView.zoomToBoundingBox(new BoundingBox(desiredNorthEast, desiredSouthWest), true, animated, true);
                 }
             } else if (animated) {
-                mMapController.setZoomAnimated((float) requiredZoom, mLatLng, true, false);
+                return mMapController.setZoomAnimated((float) requiredZoom, mLatLng, true, false);
             } else {
                 mMapController.setZoom((float) requiredZoom, mLatLng, false);
             }
         } else if (animated) {
-            mMapController.animateTo(mLatLng);
+           return mMapController.animateTo(mLatLng);
         } else {
-            mMapController.goTo(mLatLng, null);
+            return mMapController.goTo(mLatLng, null);
         }
+        return true;
     }
 
     private void updateMyLocation(final Location location) {
@@ -469,9 +470,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
             return;
         }
         mLatLng = new LatLng(mLocation);
-        if (isFollowLocationEnabled()) {
-            goToMyPosition(true);
-        } else {
+        //if goToMyPosition return false, it means we are already there
+        //which means we have to invalidate ourselves to make sure we are redrawn
+        if (!isFollowLocationEnabled() || !goToMyPosition(true)) {
             invalidate();
         }
     }
