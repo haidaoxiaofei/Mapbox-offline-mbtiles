@@ -448,7 +448,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
                         desiredNorthEast.getLongitude() != currentBox.getLonEast() ||
                         desiredSouthWest.getLatitude() != currentBox.getLatSouth() ||
                         desiredSouthWest.getLongitude() != currentBox.getLonWest()) {
-                    mMapView.zoomToBoundingBox(new BoundingBox(desiredNorthEast, desiredSouthWest), true, animated);
+                    mMapView.zoomToBoundingBox(new BoundingBox(desiredNorthEast, desiredSouthWest), true, animated, true);
                 }
             } else if (animated) {
                 mMapController.setZoomAnimated((float) requiredZoom, mLatLng, true, false);
