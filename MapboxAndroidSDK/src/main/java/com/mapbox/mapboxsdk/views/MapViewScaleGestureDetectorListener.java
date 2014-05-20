@@ -56,6 +56,8 @@ public class MapViewScaleGestureDetectorListener
 
         this.mapView.setScale(currentScale);
         this.mapView.getController()
+                .offsetDeltaScroll(lastFocusX - focusX, lastFocusY - focusY);
+        this.mapView.getController()
                 .panBy(lastFocusX - focusX, lastFocusY - focusY, true);
 
         lastFocusX = focusX;
