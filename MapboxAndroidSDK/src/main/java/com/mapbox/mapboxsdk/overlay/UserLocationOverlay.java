@@ -108,7 +108,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
     }
 
     public UserLocationOverlay(GpsLocationProvider myLocationProvider, MapView mapView) {
-        this(myLocationProvider, mapView, R.drawable.direction_arrow, R.drawable.person);
+        this(myLocationProvider, mapView, R.drawable.direction_arrow, R.drawable.location_marker);
     }
 
     @Override
