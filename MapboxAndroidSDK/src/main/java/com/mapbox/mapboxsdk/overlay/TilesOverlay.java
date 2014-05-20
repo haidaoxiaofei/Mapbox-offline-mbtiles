@@ -214,12 +214,12 @@ public class TilesOverlay extends SafeDrawOverlay {
                 }
                 drawable.setBounds(mTileRect);
                 drawable.draw(pCanvas);
-                if (UtilConstants.DEBUGMODE) {
-                    ISafeCanvas canvas = (ISafeCanvas) pCanvas;
-                    canvas.drawText(pTile.toString(), mTileRect.left + 1,
-                            mTileRect.top + mDebugPaint.getTextSize(), mDebugPaint);
-                    canvas.drawRect(mTileRect, mDebugPaint);
-                }
+            }
+            if (UtilConstants.DEBUGMODE) {
+                ISafeCanvas canvas = (ISafeCanvas) pCanvas;
+                canvas.drawText(pTile.toString(), mTileRect.left + 1,
+                        mTileRect.top + mDebugPaint.getTextSize(), mDebugPaint);
+                canvas.drawRect(mTileRect, mDebugPaint);
             }
         }
     };
