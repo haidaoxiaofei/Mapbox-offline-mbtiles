@@ -12,9 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.mapbox.mapboxsdk.views.MapView;
-
 import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
@@ -39,6 +37,7 @@ public class MainActivity extends ActionBarActivity {
 		testFragmentNames.add(getString(R.string.mainTestMap));
 		testFragmentNames.add(getString(R.string.alternateTestMap));
 		testFragmentNames.add(getString(R.string.markersTestMap));
+		testFragmentNames.add(getString(R.string.itemizedOverlayTestMap));
 
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, testFragmentNames));
 		// Set the list's click listener
@@ -117,6 +116,9 @@ public class MainActivity extends ActionBarActivity {
 				break;
 			case 2:
 				fragment = new MarkersTestFragment();
+				break;
+			case 3:
+				fragment = new ItemizedIconOverlayTestFragment();
 				break;
 			default:
 				fragment = new MainTestFragment();
