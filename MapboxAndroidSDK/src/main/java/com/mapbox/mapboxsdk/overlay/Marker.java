@@ -421,6 +421,9 @@ public class Marker {
     }
 
     public void updateDrawingPosition() {
+        if (mapView == null) {
+            return; //not on map yet
+        }
         getMapDrawingBounds(mapView.getProjection(), mMyLocationRect);
     }
 
