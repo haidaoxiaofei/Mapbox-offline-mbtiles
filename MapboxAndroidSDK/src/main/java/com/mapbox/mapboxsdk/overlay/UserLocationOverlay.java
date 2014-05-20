@@ -167,7 +167,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
 
         if (mDrawAccuracyEnabled) {
             final float radius = lastFix.getAccuracy() / (float) Projection.groundResolution(
-                    lastFix.getLatitude(), mapView.getZoomLevel());
+                    lastFix.getLatitude(), mapView.getZoomLevel()) * mapView.getScale();
             canvas.save();
             // Rotate the icon
             canvas.rotate(lastFix.getBearing(), mMapCoords.x, mMapCoords.y);
