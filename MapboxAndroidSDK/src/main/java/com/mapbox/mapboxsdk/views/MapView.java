@@ -919,7 +919,7 @@ public class MapView extends ViewGroup
      * provider.
      */
     public void setMinZoomLevel(float zoomLevel) {
-        mRequestedMinimumZoomLevel = mMinimumZoomLevel = Math.max(zoomLevel, mTileProvider.getMinimumZoomLevel());
+        mMinimumZoomLevel = zoomLevel;
         updateMinZoomLevel();
     }
 
@@ -928,7 +928,7 @@ public class MapView extends ViewGroup
      * provider.
      */
     public void setMaxZoomLevel(float zoomLevel) {
-        mMaximumZoomLevel = Math.min(zoomLevel, mTileProvider.getMaximumZoomLevel());
+        mMaximumZoomLevel = zoomLevel;
     }
 
     /**
