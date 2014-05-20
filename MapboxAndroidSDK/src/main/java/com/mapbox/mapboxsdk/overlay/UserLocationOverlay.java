@@ -94,7 +94,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
         mPaint.setAntiAlias(true);
         mPaint.setFilterBitmap(true);
 
-        mPersonHotspot = new PointF(0.5f, 1.0f);
+        mPersonHotspot = new PointF(0.5f, 0.5f);
         mDirectionHotspot = new PointF(0.5f, 0.5f);
 
         if (personId != 0) {
