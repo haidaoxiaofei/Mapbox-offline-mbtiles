@@ -387,7 +387,15 @@ public class MapView extends ViewGroup
      *
      * @param itemizedOverlay the itemized overlay
      */
-    public void addItemizedOverlay(ItemizedOverlay itemizedOverlay) {
+    public void addItemizedOverlay(final ItemizedOverlay itemizedOverlay) {
+		if (itemizedOverlay instanceof ItemizedIconOverlay) {
+			// Make sure Markers are added to MapView
+			ItemizedIconOverlay overlay = (ItemizedIconOverlay) itemizedOverlay;
+			for (int lc = 0; lc < overlay.size(); lc++) {
+				overlay.getItem(lc).addTo(this);
+			}
+		}
+
         this.getOverlays().add(itemizedOverlay);
     }
 

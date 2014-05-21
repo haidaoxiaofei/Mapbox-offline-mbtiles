@@ -13,14 +13,13 @@ import com.mapbox.mapboxsdk.views.MapView;
 import java.util.ArrayList;
 
 public class ItemizedIconOverlayTestFragment extends Fragment {
-	private MapView mapView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_itemizedoverlay, container, false);
 
 		// Setup Map
-		mapView = (MapView) view.findViewById(R.id.markersMapView);
+		MapView mapView = (MapView) view.findViewById(R.id.markersMapView);
 		mapView.setCenter(new LatLng(50.51171, 4.86325));
 		mapView.setZoom(8);
 
@@ -38,13 +37,13 @@ public class ItemizedIconOverlayTestFragment extends Fragment {
 			@Override
 			public boolean onItemSingleTapUp(int i, Marker marker) {
 				Toast.makeText(getActivity(), "Marker Selected: " + marker.getTitle(), Toast.LENGTH_SHORT).show();
-				return false;
+				return true;
 			}
 
 			@Override
 			public boolean onItemLongPress(int i, Marker marker) {
 				Toast.makeText(getActivity(), "Marker Selected: " + marker.getTitle(), Toast.LENGTH_LONG).show();
-				return false;
+				return true;
 			}
 		}));
 
