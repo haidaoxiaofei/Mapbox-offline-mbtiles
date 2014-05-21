@@ -28,7 +28,7 @@ public class MapTileCache implements TileLayerConstants {
     static final String TAG = "MapTileCache";
     private static final String DISK_CACHE_SUBDIR = "mapbox_tiles_cache";
     private int mMaximumCacheSize;
-    
+
     private boolean mDiskCacheEnabled = false;
 
     public MapTileCache(final Context aContext) {
@@ -47,7 +47,7 @@ public class MapTileCache implements TileLayerConstants {
      * @return BitmapLruCache the cache
      */
     protected BitmapLruCache getCache() {
-        if (this.sCachedTiles == null) {
+        if (sCachedTiles == null) {
             File cacheDir = getDiskCacheDir(context, DISK_CACHE_SUBDIR);
             if (!cacheDir.exists()) {
                 if (cacheDir.mkdirs()) {
@@ -58,14 +58,14 @@ public class MapTileCache implements TileLayerConstants {
                     Log.e(TAG, "can't create cacheDir " + cacheDir);
                 }
             }
-            this.sCachedTiles = (new BitmapLruCache.Builder(context)).setMemoryCacheEnabled(true)
+            sCachedTiles = (new BitmapLruCache.Builder(context)).setMemoryCacheEnabled(true)
                     .setMemoryCacheMaxSize(BitmapUtils.calculateMemoryCacheSize(context))
                     .setDiskCacheEnabled(mDiskCacheEnabled)
                     .setDiskCacheMaxSize(this.mMaximumCacheSize)
                     .setDiskCacheLocation(cacheDir)
                     .build();
         }
-        return this.sCachedTiles;
+        return sCachedTiles;
     }
 
     /**
@@ -215,7 +215,7 @@ public class MapTileCache implements TileLayerConstants {
 
         return new File(cachePath, uniqueName);
     }
-    
+
     public void setDiskCacheEnabled(final boolean enabled) {
         if (mDiskCacheEnabled != enabled) {
             mDiskCacheEnabled = enabled;
