@@ -458,7 +458,7 @@ public class MapView extends ViewGroup
                     }
                 }
         );
-        this.getOverlays().add(defaultMarkerOverlay);
+		addItemizedOverlay(defaultMarkerOverlay);
     }
 
     /**
