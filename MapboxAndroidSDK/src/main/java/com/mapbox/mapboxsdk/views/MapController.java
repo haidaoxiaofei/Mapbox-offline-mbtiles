@@ -211,15 +211,18 @@ public class MapController implements MapViewConstants {
 
         final PointF dCurrentScroll = mMapView.getScrollPoint();
         PointF p = Projection.toMapPixels(latlong.getLatitude(), latlong.getLongitude(), currentZoom, dCurrentScroll.x, dCurrentScroll.y, null);
-        if (dCurrentScroll.equals(p)) {
+
+        float targetZoom = mMapView.getClampedZoomLevel(zoomlevel);
+        boolean zoomAnimating = (targetZoom != currentZoom);
+        boolean zoomAndMove = move && !p.equals(dCurrentScroll);
+
+        if (!zoomAnimating && !zoomAndMove) {
             mMapView.invalidate();
             return false;
         }
 
         mMapView.mMultiTouchScalePoint.set(p.x, p.y);
         List<PropertyValuesHolder> propertiesList = new ArrayList<PropertyValuesHolder>();
-        float targetZoom = mMapView.getClampedZoomLevel(zoomlevel);
-        boolean zoomAnimating = (targetZoom != currentZoom);
         zoomDeltaScroll.set(0, 0);
         if (zoomAnimating) {
             zoomOnLatLong = latlong;
@@ -233,7 +236,6 @@ public class MapController implements MapViewConstants {
                 propertiesList.add(PropertyValuesHolder.ofFloat("scale", 1.0f, factor));
             }
         }
-        boolean zoomAndMove = move && !p.equals(dCurrentScroll);
         if (zoomAndMove) {
             PointEvaluator evaluator = new PointEvaluator();
             propertiesList.add(PropertyValuesHolder.ofObject(
