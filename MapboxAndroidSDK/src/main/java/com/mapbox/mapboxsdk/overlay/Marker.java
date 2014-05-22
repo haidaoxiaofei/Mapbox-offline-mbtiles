@@ -63,6 +63,8 @@ public class Marker {
      * @param aLatLng the location of the marker
      */
     public Marker(MapView mv, String aTitle, String aDescription, LatLng aLatLng) {
+        super();
+        this.mapView = mv;
         this.setTitle(aTitle);
         this.setDescription(aDescription);
         this.mLatLng = aLatLng;
@@ -106,7 +108,7 @@ public class Marker {
         }
         return mToolTip;
     }
-    
+
     public void closeToolTip() {
         if (mToolTip != null && mToolTip.equals(mToolTip.getMapView().getCurrentTooltip())) {
             mToolTip.getMapView().closeCurrentTooltip();
@@ -162,7 +164,7 @@ public class Marker {
     public void setRelatedObject(Object o) {
         mRelatedObject = o;
     }
-    
+
     public void setPoint(LatLng point) {
         mLatLng = point;
         invalidate();
