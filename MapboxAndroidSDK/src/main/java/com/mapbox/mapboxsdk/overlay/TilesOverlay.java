@@ -123,7 +123,7 @@ public class TilesOverlay extends SafeDrawOverlay {
         final Projection pj = mapView.getProjection();
         c.getClipBounds(mClipRect);
         float zoomDelta = (float) (Math.log(mapView.getScale()) / Math.log(2d));
-        final float zoomLevel = pj.getZoomLevel() + zoomDelta;
+        final float zoomLevel = pj.getZoomLevel();
         mWorldSize_2 = pj.getHalfWorldSize();
         GeometryMath.viewPortRectForTileDrawing(pj, mViewPort);
 
