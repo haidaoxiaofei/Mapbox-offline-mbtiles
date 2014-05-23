@@ -927,7 +927,7 @@ public class MapView extends ViewGroup
      * provider.
      */
     public void setMinZoomLevel(float zoomLevel) {
-        mMinimumZoomLevel = zoomLevel;
+        mRequestedMinimumZoomLevel = mMinimumZoomLevel = zoomLevel;
         updateMinZoomLevel();
     }
 
