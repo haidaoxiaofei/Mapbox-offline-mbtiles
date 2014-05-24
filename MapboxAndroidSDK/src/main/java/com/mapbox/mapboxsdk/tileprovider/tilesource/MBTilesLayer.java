@@ -105,10 +105,6 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants, MapboxC
             mbTilesFileArchive = MBTilesFileArchive.getDatabaseFileArchive(file);
         }
 
-        if (file != null) {
-            mbTilesFileArchive = MBTilesFileArchive.getDatabaseFileArchive(file);
-        }
-
         if (mbTilesFileArchive != null) {
             mMaximumZoomLevel = mbTilesFileArchive.getMaxZoomLevel();
             mMinimumZoomLevel = mbTilesFileArchive.getMinZoomLevel();
