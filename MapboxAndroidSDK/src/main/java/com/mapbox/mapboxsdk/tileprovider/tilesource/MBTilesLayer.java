@@ -5,19 +5,16 @@ import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
-
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.modules.MBTilesFileArchive;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
@@ -101,7 +98,7 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants, MapboxC
     }
 
     /**
-     * Reads and opens a MBTiles file given by url and loads its tiles into this layer.
+     * Reads and opens a MBTiles file and loads its tiles into this layer.
      */
     private void initialize(File file) {
         if (file != null) {
