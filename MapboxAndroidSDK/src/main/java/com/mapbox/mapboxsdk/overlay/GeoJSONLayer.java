@@ -3,9 +3,7 @@ package com.mapbox.mapboxsdk.overlay;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.util.Log;
-import com.cocoahero.android.geojson.Feature;
-import com.cocoahero.android.geojson.FeatureCollection;
-import com.cocoahero.android.geojson.GeoJSON;
+import com.cocoahero.android.geojson.*;
 import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
@@ -65,10 +63,9 @@ public class GeoJSONLayer {
 
                 for (Feature f : parsed.getFeatures()) {
                     // Parse Into UI Objections
-                    String type = f.getType();
                     int j;
 
-                    if (type.equals("Point")) {
+                    if (f.getGeometry() instanceof Point) {
                         JSONArray coordinates = (JSONArray) f.toJSON().get("coordinates");
                         double lon = (Double) coordinates.get(0);
                         double lat = (Double) coordinates.get(1);
@@ -77,7 +74,7 @@ public class GeoJSONLayer {
                             marker.setIcon(markerIcon);
                         }
                         uiObjects.add(marker);
-                    } else if (type.equals("MultiPoint")) {
+                    } else if (f.getGeometry() instanceof MultiPoint) {
                         JSONArray points = (JSONArray) f.toJSON().get("coordinates");
                         for (j = 0; j < points.length(); j++) {
                             JSONArray coordinates = (JSONArray) points.get(j);
@@ -89,7 +86,7 @@ public class GeoJSONLayer {
                             }
                             uiObjects.add(marker);
                         }
-                    } else if (type.equals("LineString")) {
+                    } else if (f.getGeometry() instanceof LineString) {
                         PathOverlay path = new PathOverlay();
                         JSONArray points = (JSONArray) f.toJSON().get("coordinates");
                         JSONArray coordinates;
@@ -100,7 +97,7 @@ public class GeoJSONLayer {
                             path.addPoint(new LatLng(lat, lon));
                         }
                         uiObjects.add(path);
-                    } else if (type.equals("MultiLineString")) {
+                    } else if (f.getGeometry() instanceof MultiLineString) {
                         JSONArray lines = (JSONArray) f.toJSON().get("coordinates");
                         for (int k = 0; k < lines.length(); k++) {
                             PathOverlay path = new PathOverlay();
@@ -114,7 +111,7 @@ public class GeoJSONLayer {
                             }
                             uiObjects.add(path);
                         }
-                    } else if (type.equals("Polygon")) {
+                    } else if (f.getGeometry() instanceof Polygon) {
                         PathOverlay path = new PathOverlay();
                         path.getPaint().setStyle(Paint.Style.FILL);
                         JSONArray points = (JSONArray) f.toJSON().get("coordinates");
@@ -145,7 +142,7 @@ public class GeoJSONLayer {
                             }
                             uiObjects.add(path);
                         }
-                    } else if (type.equals("MultiPolygon")) {
+                    } else if (f.getGeometry() instanceof MultiPolygon) {
                         PathOverlay path = new PathOverlay();
                         path.getPaint().setStyle(Paint.Style.FILL);
                         JSONArray polygons = (JSONArray) f.toJSON().get("coordinates");
