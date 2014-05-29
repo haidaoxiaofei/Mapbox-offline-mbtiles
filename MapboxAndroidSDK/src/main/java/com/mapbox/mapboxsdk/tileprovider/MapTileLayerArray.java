@@ -113,7 +113,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
     }
 
     @Override
-    public Drawable getMapTile(final MapTile pTile) {
+    public Drawable getMapTile(final MapTile pTile, final boolean allowRemote) {
         if (tileUnavailable(pTile)) {
             if (DEBUG_TILE_PROVIDERS) {
                 Log.i(TAG, "MapTileLayerArray.getMapTile() tileUnavailable: " + pTile);
@@ -125,7 +125,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
                 !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
             tileDrawable.setBeingUsed(true);
             return tileDrawable;
-        } else {
+        } else if (allowRemote) {
             boolean alreadyInProgress = false;
             synchronized (mWorking) {
                 alreadyInProgress = mWorking.containsKey(pTile);
@@ -166,6 +166,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
             }
             return tileDrawable;
         }
+        return null;
     }
 
     @Override
