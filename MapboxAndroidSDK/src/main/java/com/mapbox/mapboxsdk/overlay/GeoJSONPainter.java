@@ -19,28 +19,28 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
-public class GeoJSONLayer {
+public class GeoJSONPainter {
 
     private final MapView mapView;
     private final Icon markerIcon;
 
-    public GeoJSONLayer(final MapView mapView, final Icon markerIcon) {
+    public GeoJSONPainter(final MapView mapView, final Icon markerIcon) {
         super();
         this.mapView = mapView;
         this.markerIcon = markerIcon;
     }
 
-    public void loadURL(final String url) {
+    public void loadFromURL(final String url) {
         if (Strings.isNullOrEmpty(url)) {
             return;
         }
-        new Getter().execute(url);
+        new LoadAndDisplay().execute(url);
     }
 
     /**
      * Class that generates markers from formats such as GeoJSON
      */
-    private class Getter extends AsyncTask<String, Void, ArrayList<Object>> {
+    private class LoadAndDisplay extends AsyncTask<String, Void, ArrayList<Object>> {
         @Override
         protected ArrayList<Object> doInBackground(String... params) {
             InputStream is;
