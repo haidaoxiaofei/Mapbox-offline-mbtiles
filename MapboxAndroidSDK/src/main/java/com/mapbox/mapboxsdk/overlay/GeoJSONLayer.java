@@ -66,7 +66,7 @@ public class GeoJSONLayer {
                     int j;
 
                     if (f.getGeometry() instanceof Point) {
-                        JSONArray coordinates = (JSONArray) f.toJSON().get("coordinates");
+                        JSONArray coordinates = (JSONArray) f.getGeometry().toJSON().get("coordinates");
                         double lon = (Double) coordinates.get(0);
                         double lat = (Double) coordinates.get(1);
                         Marker marker = new Marker(mapView, "", "", new LatLng(lat, lon));
@@ -75,7 +75,7 @@ public class GeoJSONLayer {
                         }
                         uiObjects.add(marker);
                     } else if (f.getGeometry() instanceof MultiPoint) {
-                        JSONArray points = (JSONArray) f.toJSON().get("coordinates");
+                        JSONArray points = (JSONArray) f.getGeometry().toJSON().get("coordinates");
                         for (j = 0; j < points.length(); j++) {
                             JSONArray coordinates = (JSONArray) points.get(j);
                             double lon = (Double) coordinates.get(0);
@@ -88,7 +88,7 @@ public class GeoJSONLayer {
                         }
                     } else if (f.getGeometry() instanceof LineString) {
                         PathOverlay path = new PathOverlay();
-                        JSONArray points = (JSONArray) f.toJSON().get("coordinates");
+                        JSONArray points = (JSONArray) f.getGeometry().toJSON().get("coordinates");
                         JSONArray coordinates;
                         for (j = 0; j < points.length(); j++) {
                             coordinates = (JSONArray) points.get(j);
@@ -98,7 +98,7 @@ public class GeoJSONLayer {
                         }
                         uiObjects.add(path);
                     } else if (f.getGeometry() instanceof MultiLineString) {
-                        JSONArray lines = (JSONArray) f.toJSON().get("coordinates");
+                        JSONArray lines = (JSONArray) f.getGeometry().toJSON().get("coordinates");
                         for (int k = 0; k < lines.length(); k++) {
                             PathOverlay path = new PathOverlay();
                             JSONArray points = (JSONArray) lines.get(k);
@@ -114,7 +114,7 @@ public class GeoJSONLayer {
                     } else if (f.getGeometry() instanceof Polygon) {
                         PathOverlay path = new PathOverlay();
                         path.getPaint().setStyle(Paint.Style.FILL);
-                        JSONArray points = (JSONArray) f.toJSON().get("coordinates");
+                        JSONArray points = (JSONArray) f.getGeometry().toJSON().get("coordinates");
 
                         for (int r = 0; r < points.length(); r++) {
                             JSONArray ring = (JSONArray) points.get(r);
@@ -145,7 +145,7 @@ public class GeoJSONLayer {
                     } else if (f.getGeometry() instanceof MultiPolygon) {
                         PathOverlay path = new PathOverlay();
                         path.getPaint().setStyle(Paint.Style.FILL);
-                        JSONArray polygons = (JSONArray) f.toJSON().get("coordinates");
+                        JSONArray polygons = (JSONArray) f.getGeometry().toJSON().get("coordinates");
 
                         for (int p = 0; p < polygons.length(); p++) {
                             JSONArray points = (JSONArray) polygons.get(p);
