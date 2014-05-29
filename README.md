@@ -17,6 +17,14 @@ We recommend using the Mapbox Android SDK with [Gradle](http://www.gradle.org/):
 this will automatically install the necessary dependencies and pull the SDK
 binaries from the Maven Central repository ( [Mapbox Android SDK on Maven Central](http://search.maven.org/#artifactdetails%7Ccom.mapbox.mapboxsdk%7Cmapbox-android-sdk%7C0.2.3%7Cjar) ).
 
+### NOTE: SDK Versions 
+At any given time there will be 3 different versions of the SDK to use.  You're welcome to use whichever one makes the most sense for your project, just be aware that each comes with a different level of **stability**.  The installation instructions below all describe how to use the `Stable / Supported` version (although the SNAPSHOT version can make use of the same instructions.  Just need to update the Repo and the Version Number).
+
+1. Stable / Supported
+ * Currently `0.2.3`
+2. SNAPSHOT
+ * Currently `0.3.0-SNAPSHOT` and available via the Maven Central Snapshot Repo https://oss.sonatype.org/content/repositories/snapshots/com/mapbox/mapboxsdk/mapbox-android-sdk/
+3. Source
 
 ### With Gradle (Android Studio, IntelliJ, etc)
 
