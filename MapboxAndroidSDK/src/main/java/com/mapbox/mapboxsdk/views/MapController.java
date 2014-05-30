@@ -361,10 +361,10 @@ public class MapController implements MapViewConstants {
 
     public void onAnimationEnd() {
         stopPanning();
+        mMapView.mIsAnimating.set(false);
         mMapView.setZoomInternal(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()), zoomOnLatLong, zoomDeltaScroll);
         zoomOnLatLong = null;
         mCurrentlyUserAction = false;
-        mMapView.mIsAnimating.set(false);
     }
 
     /**
