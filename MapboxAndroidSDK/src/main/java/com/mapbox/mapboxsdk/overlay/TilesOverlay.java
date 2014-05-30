@@ -119,7 +119,9 @@ public class TilesOverlay extends SafeDrawOverlay {
         if (shadow) {
             return;
         }
-        isAnimating = mapView.isAnimating();
+        //Commented for now. It needs heavy testing to see if we actually need it
+//        isAnimating = mapView.isAnimating();
+        
         // Calculate the half-world size
         final Projection pj = mapView.getProjection();
         c.getClipBounds(mClipRect);
@@ -375,7 +377,7 @@ public class TilesOverlay extends SafeDrawOverlay {
             // If it's found then no need to created scaled version.
             // If not found (null) them we've initiated a new request for it,
             // and now we'll create a scaled version until the request completes.
-            final Drawable requestedTile = mTileProvider.getMapTile(pTile, true);
+            final Drawable requestedTile = mTileProvider.getMapTile(pTile, !isAnimating);
             if (requestedTile == null) {
                 try {
                     handleScaleTile(pCacheKey, pTileSizePx, pTile, pX, pY);
