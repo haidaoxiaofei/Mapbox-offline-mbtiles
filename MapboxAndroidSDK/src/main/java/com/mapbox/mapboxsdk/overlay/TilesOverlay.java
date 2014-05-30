@@ -51,6 +51,7 @@ public class TilesOverlay extends SafeDrawOverlay {
     private final Rect mViewPort = new Rect();
     private final Rect mClipRect = new Rect();
     float mCurrentZoomFactor = 1;
+    private float mRescaleZoomDiffMax = 4;
     private boolean isAnimating = false;
     private boolean mOptionsMenuEnabled = true;
 
@@ -307,7 +308,7 @@ public class TilesOverlay extends SafeDrawOverlay {
     public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel,
                              final Projection projection) {
 
-        if (mTileProvider.hasNoSource() || Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel) || projection == null) {
+        if (mTileProvider.hasNoSource() || Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel) || projection == null || Math.abs(pOldZoomLevel - pNewZoomLevel) > mRescaleZoomDiffMax) {
             return;
         }
 
