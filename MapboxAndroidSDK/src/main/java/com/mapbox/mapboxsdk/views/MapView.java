@@ -23,27 +23,18 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
-
+import com.cocoahero.android.geojson.GeoJSON;
+import com.cocoahero.android.geojson.GeoJSONObject;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.events.MapListener;
 import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
-import com.mapbox.mapboxsdk.format.GeoJSON;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.GeoJSONLayer;
-import com.mapbox.mapboxsdk.overlay.GpsLocationProvider;
-import com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay;
-import com.mapbox.mapboxsdk.overlay.ItemizedOverlay;
-import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
-import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
-import com.mapbox.mapboxsdk.overlay.Marker;
-import com.mapbox.mapboxsdk.overlay.Overlay;
-import com.mapbox.mapboxsdk.overlay.OverlayManager;
-import com.mapbox.mapboxsdk.overlay.TilesOverlay;
-import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
+import com.mapbox.mapboxsdk.overlay.*;
+import com.mapbox.mapboxsdk.overlay.GeoJSONPainter;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
@@ -59,9 +50,7 @@ import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
-
 import org.json.JSONException;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -416,7 +405,7 @@ public class MapView extends ViewGroup
      */
     public void loadFromGeoJSONURL(String URL) {
         if (NetworkUtils.isNetworkAvailable(getContext())) {
-            new GeoJSONLayer(this).loadURL(URL);
+            new GeoJSONPainter(this, null).loadFromURL(URL);
         }
     }
 
@@ -424,9 +413,10 @@ public class MapView extends ViewGroup
      * Load and parse a GeoJSON file at a given URL
      *
      * @param geoJSON the GeoJSON string to parse
+	 * @return GeoJSONObject
      */
-    public void loadFromGeoJSONString(String geoJSON) throws JSONException {
-        GeoJSON.parseString(geoJSON, MapView.this);
+    public GeoJSONObject loadFromGeoJSONString(String geoJSON) throws JSONException {
+		return GeoJSON.parse(geoJSON);
     }
 
     /**
