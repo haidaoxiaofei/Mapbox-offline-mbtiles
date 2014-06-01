@@ -76,12 +76,12 @@ mapView.addMarker(marker);
 
 #### Location overlay
 
-The location of the user can be displayed on the view using ```MyLocationNewOverlay```
+The location of the user can be displayed on the view using ```UserLocationOverlay```
 ```java
-MyLocationNewOverlay myLocationOverlay = new MyLocationNewOverlay(this, mapView);
-myLocationOverlay.enableMyLocation();
-myLocationOverlay.setDrawAccuracyEnabled(true);
-mapView.getOverlays().add(myLocationOverlay);
+UserLocationOverlay myLocationOverlay = new UserLocationOverlay(this, mapView);
+userLocationOverlay.enableMyLocation();
+userLocationOverlay.setDrawAccuracyEnabled(true);
+mapView.getOverlays().add(userLocationOverlay);
 ```
 
 ####Paths

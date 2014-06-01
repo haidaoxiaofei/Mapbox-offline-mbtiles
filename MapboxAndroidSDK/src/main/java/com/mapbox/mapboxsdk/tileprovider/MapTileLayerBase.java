@@ -45,7 +45,7 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback, Tile
      *
      * @see CacheableBitmapDrawable
      */
-    public abstract Drawable getMapTile(MapTile pTile);
+    public abstract Drawable getMapTile(MapTile pTile, boolean allowRemote);
 
     public abstract void detach();
 

@@ -420,6 +420,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
     }
 
     public boolean goToMyPosition(final boolean animated) {
+        if (mLocation == null) {
+            return false;
+        }
         float currentZoom = mMapView.getZoomLevel(false);
         if (currentZoom <= mRequiredZoomLevel) {
             double requiredZoom = mRequiredZoomLevel;

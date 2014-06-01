@@ -51,7 +51,8 @@ public class TilesOverlay extends SafeDrawOverlay {
     private final Rect mViewPort = new Rect();
     private final Rect mClipRect = new Rect();
     float mCurrentZoomFactor = 1;
-
+    private float mRescaleZoomDiffMax = 4;
+    private boolean isAnimating = false;
     private boolean mOptionsMenuEnabled = true;
 
     private int mWorldSize_2;
@@ -118,7 +119,9 @@ public class TilesOverlay extends SafeDrawOverlay {
         if (shadow) {
             return;
         }
-
+        //Commented for now. It needs heavy testing to see if we actually need it
+//        isAnimating = mapView.isAnimating();
+        
         // Calculate the half-world size
         final Projection pj = mapView.getProjection();
         c.getClipBounds(mClipRect);
@@ -206,7 +209,7 @@ public class TilesOverlay extends SafeDrawOverlay {
                 return;
             }
             pTile.setTileRect(mTileRect);
-            Drawable drawable = mTileProvider.getMapTile(pTile);
+            Drawable drawable = mTileProvider.getMapTile(pTile, !isAnimating);
             boolean isReusable = drawable instanceof CacheableBitmapDrawable;
 
             if (drawable != null) {
@@ -307,7 +310,7 @@ public class TilesOverlay extends SafeDrawOverlay {
     public void rescaleCache(final float pNewZoomLevel, final float pOldZoomLevel,
                              final Projection projection) {
 
-        if (mTileProvider.hasNoSource() || Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel) || projection == null) {
+        if (mTileProvider.hasNoSource() || Math.floor(pNewZoomLevel) == Math.floor(pOldZoomLevel) || projection == null || Math.abs(pOldZoomLevel - pNewZoomLevel) > mRescaleZoomDiffMax) {
             return;
         }
 
@@ -374,7 +377,7 @@ public class TilesOverlay extends SafeDrawOverlay {
             // If it's found then no need to created scaled version.
             // If not found (null) them we've initiated a new request for it,
             // and now we'll create a scaled version until the request completes.
-            final Drawable requestedTile = mTileProvider.getMapTile(pTile);
+            final Drawable requestedTile = mTileProvider.getMapTile(pTile, !isAnimating);
             if (requestedTile == null) {
                 try {
                     handleScaleTile(pCacheKey, pTileSizePx, pTile, pX, pY);

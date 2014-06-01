@@ -1672,7 +1672,7 @@ public class MapView extends ViewGroup
     private UserLocationOverlay getOrCreateLocationOverlay() {
         if (mLocationOverlay == null) {
             mLocationOverlay = new UserLocationOverlay(new GpsLocationProvider(getContext()), this);
-           getOverlays().add(mLocationOverlay);
+           addOverlay(mLocationOverlay);
         }
         return mLocationOverlay;
     }
@@ -1686,7 +1686,7 @@ public class MapView extends ViewGroup
             getOrCreateLocationOverlay().enableMyLocation();
         } else if (mLocationOverlay != null) {
             mLocationOverlay.disableMyLocation();
-            getOverlays().remove(mLocationOverlay);
+            removeOverlay(mLocationOverlay);
             mLocationOverlay = null;
         }
         return this;

@@ -1,7 +1,6 @@
 package com.mapbox.mapboxsdk.views;
 
 import android.graphics.PointF;
-import android.os.Handler;
 import android.view.animation.LinearInterpolator;
 
 import com.mapbox.mapboxsdk.api.ILatLng;
@@ -362,15 +361,10 @@ public class MapController implements MapViewConstants {
 
     public void onAnimationEnd() {
         stopPanning();
+        mMapView.mIsAnimating.set(false);
         mMapView.setZoomInternal(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()), zoomOnLatLong, zoomDeltaScroll);
         zoomOnLatLong = null;
         mCurrentlyUserAction = false;
-        (new Handler()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mMapView.mIsAnimating.set(false);
-            }
-        }, 100);
     }
 
     /**
