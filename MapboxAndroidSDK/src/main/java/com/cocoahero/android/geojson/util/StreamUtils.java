@@ -34,7 +34,7 @@ public class StreamUtils {
 
         InputStreamReader reader = new InputStreamReader(byteStream, charsetName);
 
-        for (int length = 0; (length = reader.read(buffer)) >= 0; ) {
+        for (int length = 0; (length = reader.read(buffer)) >= 0;) {
             builder.append(buffer, 0, length);
         }
 
