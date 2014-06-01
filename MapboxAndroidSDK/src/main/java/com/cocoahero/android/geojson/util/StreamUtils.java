@@ -9,7 +9,7 @@ public class StreamUtils {
     /**
      * Decodes the contents of the provided {@link InputStream} into a
      * {@link String} using the UTF-8 charset.
-     * 
+     *
      * @param byteStream The {@link InputStream} to decode.
      * @return A {@link String} representation of the stream's contents.
      * @throws IOException
@@ -21,8 +21,8 @@ public class StreamUtils {
     /**
      * Decodes the contents of the provided {@link InputStream} into a
      * {@link String} using the charset denoted by the charsetName parameter.
-     * 
-     * @param byteStream The {@link InputStream} to decode.
+     *
+     * @param byteStream  The {@link InputStream} to decode.
      * @param charsetName The charset used to decode the stream.
      * @return A {@link String} representation of the stream's contents.
      * @throws IOException
@@ -34,7 +34,7 @@ public class StreamUtils {
 
         InputStreamReader reader = new InputStreamReader(byteStream, charsetName);
 
-        for (int length = 0; (length = reader.read(buffer)) >= 0;) {
+        for (int length = 0; (length = reader.read(buffer)) >= 0; ) {
             builder.append(buffer, 0, length);
         }
 

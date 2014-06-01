@@ -76,8 +76,7 @@ public class Point extends Geometry {
     public void setPosition(JSONArray position) {
         if (position != null) {
             this.mPosition = new Position(position);
-        }
-        else {
+        } else {
             this.mPosition = null;
         }
     }

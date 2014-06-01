@@ -22,8 +22,7 @@ public abstract class GeoJSONObject implements Parcelable {
         String json = parcel.readString();
         try {
             return GeoJSON.parse(json);
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             throw new RuntimeException(e);
         }
     }
@@ -65,8 +64,7 @@ public abstract class GeoJSONObject implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         try {
             dest.writeString(this.toJSON().toString());
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             throw new RuntimeException(e);
         }
     }

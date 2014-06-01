@@ -51,6 +51,7 @@ import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import org.json.JSONException;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -413,10 +414,10 @@ public class MapView extends ViewGroup
      * Load and parse a GeoJSON file at a given URL
      *
      * @param geoJSON the GeoJSON string to parse
-	 * @return GeoJSONObject
+     * @return GeoJSONObject
      */
     public GeoJSONObject loadFromGeoJSONString(String geoJSON) throws JSONException {
-		return GeoJSON.parse(geoJSON);
+        return GeoJSON.parse(geoJSON);
     }
 
     /**
@@ -1658,7 +1659,6 @@ public class MapView extends ViewGroup
      * ratio into account (keeping the same ratio as the screen)
      * If yes you will be able to zoom out to see the whole area
      * whatever the screen ratio.
-     *
      */
     public MapView setConstraintRegionFit(boolean value) {
         this.mConstraintRegionFit = value;
@@ -1672,14 +1672,13 @@ public class MapView extends ViewGroup
     private UserLocationOverlay getOrCreateLocationOverlay() {
         if (mLocationOverlay == null) {
             mLocationOverlay = new UserLocationOverlay(new GpsLocationProvider(getContext()), this);
-           addOverlay(mLocationOverlay);
+            addOverlay(mLocationOverlay);
         }
         return mLocationOverlay;
     }
 
     /**
      * Show or hide the user location overlay
-     *
      */
     public MapView setUserLocationEnabled(final boolean value) {
         if (value) {
@@ -1694,10 +1693,9 @@ public class MapView extends ViewGroup
 
     /**
      * Show or hide the user location overlay
-     *
      */
     public final boolean getUserLocationEnabled() {
-         if (mLocationOverlay != null) {
+        if (mLocationOverlay != null) {
             return mLocationOverlay.isMyLocationEnabled();
         }
         return false;
@@ -1705,7 +1703,6 @@ public class MapView extends ViewGroup
 
     /**
      * Set the user location tracking mode
-     *
      */
     public MapView setUserLocationTrackingMode(final UserLocationOverlay.TrackingMode mode) {
         getOrCreateLocationOverlay().setTrackingMode(mode);
@@ -1714,7 +1711,6 @@ public class MapView extends ViewGroup
 
     /**
      * Set the user location tracking mode
-     *
      */
     public MapView setUserLocationRequiredZoom(final float zoomLevel) {
         getOrCreateLocationOverlay().setRequiredZoom(zoomLevel);
@@ -1723,18 +1719,16 @@ public class MapView extends ViewGroup
 
     /**
      * get the user location tracking mode
-     *
      */
     public UserLocationOverlay.TrackingMode getUserLocationTrackingMode() {
         if (mLocationOverlay != null) {
             return mLocationOverlay.getTrackingMode();
         }
-        return  UserLocationOverlay.TrackingMode.NONE;
+        return UserLocationOverlay.TrackingMode.NONE;
     }
 
     /**
      * Go to user location
-     *
      */
     public void goToUserLocation(final boolean animated) {
         if (mLocationOverlay != null) {
@@ -1744,7 +1738,6 @@ public class MapView extends ViewGroup
 
     /**
      * Get the user location overlay if created
-     *
      */
     public UserLocationOverlay getUserLocationOverlay() {
         return mLocationOverlay;
@@ -1752,7 +1745,6 @@ public class MapView extends ViewGroup
 
     /**
      * Get the user location overlay if created
-     *
      */
     public LatLng getUserLocation() {
         if (mLocationOverlay != null) {
@@ -1780,7 +1772,6 @@ public class MapView extends ViewGroup
 
     /**
      * Enable or disable the diskCache
-     *
      */
     public void setDiskCacheEnabled(final boolean enabled) {
         if (mTileProvider != null) {

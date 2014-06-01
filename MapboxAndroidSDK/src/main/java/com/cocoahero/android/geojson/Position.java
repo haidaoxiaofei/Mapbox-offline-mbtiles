@@ -41,8 +41,7 @@ public class Position implements Parcelable {
         if (array.length == 2) {
             this.mStorage[LON_IDX] = array[LON_IDX];
             this.mStorage[LAT_IDX] = array[LAT_IDX];
-        }
-        else if (array.length == 3) {
+        } else if (array.length == 3) {
             this.mStorage[LON_IDX] = array[LON_IDX];
             this.mStorage[LAT_IDX] = array[LAT_IDX];
             this.mStorage[ALT_IDX] = array[ALT_IDX];

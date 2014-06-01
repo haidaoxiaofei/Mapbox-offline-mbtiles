@@ -112,15 +112,13 @@ public class Feature extends GeoJSONObject {
 
         if (this.mGeometry != null) {
             json.put(JSON_GEOMETRY, this.mGeometry.toJSON());
-        }
-        else {
+        } else {
             json.put(JSON_GEOMETRY, JSONObject.NULL);
         }
 
         if (this.mProperties != null) {
             json.put(JSON_PROPERTIES, this.mProperties);
-        }
-        else {
+        } else {
             json.put(JSON_PROPERTIES, JSONObject.NULL);
         }
 
