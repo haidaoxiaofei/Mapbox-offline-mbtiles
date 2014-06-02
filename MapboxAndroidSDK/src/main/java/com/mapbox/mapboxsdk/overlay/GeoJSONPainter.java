@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import com.cocoahero.android.geojson.Feature;
 import com.cocoahero.android.geojson.FeatureCollection;
-import com.cocoahero.android.geojson.GeoJSON;
 import com.cocoahero.android.geojson.LineString;
 import com.cocoahero.android.geojson.MultiLineString;
 import com.cocoahero.android.geojson.MultiPoint;
@@ -14,17 +13,11 @@ import com.cocoahero.android.geojson.Point;
 import com.cocoahero.android.geojson.Polygon;
 import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.util.constants.UtilConstants;
+import com.mapbox.mapboxsdk.util.DataLoadingUtils;
 import com.mapbox.mapboxsdk.views.MapView;
 import org.json.JSONArray;
 import org.json.JSONException;
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class GeoJSONPainter {
@@ -56,18 +49,7 @@ public class GeoJSONPainter {
             ArrayList<Object> uiObjects = new ArrayList<Object>();
 
             try {
-                if (UtilConstants.DEBUGMODE) {
-                    Log.d(TAG, "Mapbox SDK downloading GeoJSON URL: " + params[0]);
-                }
-                is = new URL(params[0]).openStream();
-                BufferedReader rd =
-                        new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-                jsonText = readAll(rd);
-
-                FeatureCollection parsed = (FeatureCollection) GeoJSON.parse(jsonText);
-                if (UtilConstants.DEBUGMODE) {
-                    Log.d(TAG, "Parsed GeoJSON with " + parsed.getFeatures().size() + " features.");
-                }
+                FeatureCollection parsed = DataLoadingUtils.loadGeoJSONFromUrl(params[0]);
 
                 for (Feature f : parsed.getFeatures()) {
                     // Parse Into UI Objections
@@ -208,15 +190,6 @@ public class GeoJSONPainter {
                 mapView.invalidate();
             }
         }
-    }
-
-    private String readAll(Reader rd) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-            sb.append((char) cp);
-        }
-        return sb.toString();
     }
 
     private static boolean windingOrder(JSONArray ring) throws JSONException {
