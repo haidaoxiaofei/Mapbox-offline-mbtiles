@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk.util;
 import android.util.Log;
 import com.cocoahero.android.geojson.FeatureCollection;
 import com.cocoahero.android.geojson.GeoJSON;
+import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import org.json.JSONException;
 import java.io.BufferedReader;
@@ -23,10 +24,15 @@ public class DataLoadingUtils {
      * @throws JSONException
      */
     public static FeatureCollection loadGeoJSONFromUrl(final String url) throws IOException, JSONException {
+        if (Strings.isNullOrEmpty(url)) {
+            throw new NullPointerException("No GeoJSON URL passed in.");
+        }
+
         if (UtilConstants.DEBUGMODE) {
             Log.d(DataLoadingUtils.class.getCanonicalName(), "Mapbox SDK downloading GeoJSON URL: " + url);
         }
-        InputStream is = new URL(url).openStream();
+
+        InputStream is = NetworkUtils.getHttpURLConnection(new URL(url)).getInputStream();
         BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
         String jsonText = readAll(rd);
 
