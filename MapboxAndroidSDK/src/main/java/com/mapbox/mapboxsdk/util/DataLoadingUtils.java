@@ -80,7 +80,7 @@ public class DataLoadingUtils {
      * @return Collection of Mapbox SDK UI Objects
      * @throws JSONException
      */
-    public static ArrayList<Object> createUIObjectsFromGeoJSONObjects(final FeatureCollection featureCollection, final Icon markerIcon) throws JSONException{
+    public static ArrayList<Object> createUIObjectsFromGeoJSONObjects(final FeatureCollection featureCollection, final Icon markerIcon) throws JSONException {
         ArrayList<Object> uiObjects = new ArrayList<Object>();
 
         for (Feature f : featureCollection.getFeatures()) {
