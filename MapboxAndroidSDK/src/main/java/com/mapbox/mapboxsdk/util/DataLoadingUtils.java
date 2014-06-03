@@ -27,6 +27,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DataLoadingUtils {
 
@@ -46,7 +47,12 @@ public class DataLoadingUtils {
             Log.d(DataLoadingUtils.class.getCanonicalName(), "Mapbox SDK downloading GeoJSON URL: " + url);
         }
 
-        InputStream is = NetworkUtils.getHttpURLConnection(new URL(url)).getInputStream();
+        InputStream is;
+        if (url.toLowerCase(Locale.US).indexOf("http") == 0) {
+            is = NetworkUtils.getHttpURLConnection(new URL(url)).getInputStream();
+        } else {
+            is = new URL(url).openStream();
+        }
         BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
         String jsonText = readAll(rd);
 
