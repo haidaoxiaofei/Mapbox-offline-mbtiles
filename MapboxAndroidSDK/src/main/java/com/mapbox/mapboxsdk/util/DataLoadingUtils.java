@@ -67,6 +67,13 @@ public class DataLoadingUtils {
         return sb.toString();
     }
 
+    /**
+     * Converts GeoJSON objects into Mapbox SDK UI Objects
+     * @param featureCollection Parsed GeoJSON Objects
+     * @param markerIcon Optional Icon to use for markers
+     * @return Collection of Mapbox SDK UI Objects
+     * @throws JSONException
+     */
     public static ArrayList<Object> createUIObjectsFromGeoJSONObjects(final FeatureCollection featureCollection, final Icon markerIcon) throws JSONException{
         ArrayList<Object> uiObjects = new ArrayList<Object>();
 
