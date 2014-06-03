@@ -125,7 +125,7 @@ This project is a fork of OSMDroid, but is significantly different as the result
 
 * [GeoJSON](http://geojson.org/) and [TileJSON](https://www.mapbox.com/foundations/an-open-platform) support added.
 * The Mapbox Android SDK is [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) licensed, and does not include any GPL or copyleft add-ons.
-* Mapbox Android SDK is a small core design. OSMDroid's semi-related utilities like GPX uploading, UI zoom buttons, GEM & Zip file support, and more have been removed.
+* Mapbox Android SDK is a small core design. OSMDroid's semi-related utilities like GPX uploading, UI zoom buttons, GEM & Zip file support, Scale Bar, Compass Overlay, and more have been removed. These requirements will be better served by separate modules that do one thing well.
 * Interfaces and abstract classes are only defined when suitable: most single-use interfaces are removed for simplicity.
 * Data objects like points and lines use `double`s instead of the `E6` int convention. This simplifies implementations. The `reuse` pattern is also deemphasized, since it's less necessary with newer JITs.
 * Instead of supporting [specific tile layers](https://github.com/osmdroid/osmdroid/tree/master/osmdroid-android/src/main/java/org/osmdroid/tileprovider/tilesource) with hardcoded paths, Mapbox Android SDK provides an easy-to-configure `TileLayer` class.
