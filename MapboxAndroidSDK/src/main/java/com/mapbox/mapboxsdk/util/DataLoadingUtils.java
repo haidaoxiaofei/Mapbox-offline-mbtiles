@@ -1,5 +1,6 @@
 package com.mapbox.mapboxsdk.util;
 
+import android.content.Context;
 import android.graphics.Paint;
 import android.util.Log;
 import com.cocoahero.android.geojson.Feature;
@@ -53,6 +54,35 @@ public class DataLoadingUtils {
         } else {
             is = new URL(url).openStream();
         }
+        BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+        String jsonText = readAll(rd);
+
+        FeatureCollection parsed = (FeatureCollection) GeoJSON.parse(jsonText);
+        if (UtilConstants.DEBUGMODE) {
+            Log.d(DataLoadingUtils.class.getCanonicalName(), "Parsed GeoJSON with " + parsed.getFeatures().size() + " features.");
+        }
+
+        return parsed;
+    }
+
+    /**
+     * Load GeoJSON from URL (in synchronous manner) and return GeoJSON FeatureCollection
+     * @param context Application's Context
+     * @param fileName Name of file in assets directory
+     * @return Local GeoJSON file parsed into Library objects
+     * @throws IOException
+     * @throws JSONException
+     */
+    public static FeatureCollection loadGeoJSONFromAssets(final Context context, final String fileName)  throws IOException, JSONException {
+        if (Strings.isNullOrEmpty(fileName)) {
+            throw new NullPointerException("No GeoJSON File Name passed in.");
+        }
+
+        if (UtilConstants.DEBUGMODE) {
+            Log.d(DataLoadingUtils.class.getCanonicalName(), "Mapbox SDK loading GeoJSON URL: " + fileName);
+        }
+
+        InputStream is = context.getAssets().open(fileName);
         BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
         String jsonText = readAll(rd);
 

@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import com.mapbox.mapboxsdk.views.MapView;
 import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
@@ -40,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
 		testFragmentNames.add(getString(R.string.alternateTestMap));
 		testFragmentNames.add(getString(R.string.markersTestMap));
 		testFragmentNames.add(getString(R.string.itemizedOverlayTestMap));
+        testFragmentNames.add(getString(R.string.localGeoJSONTestMap));
 
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, testFragmentNames));
 		// Set the list's click listener
@@ -109,7 +109,7 @@ public class MainActivity extends ActionBarActivity {
 		// Create a new fragment and specify the planet to show based on position
 		Fragment fragment;
 
-		switch (position){
+		switch (position) {
 			case 0:
 				fragment = new MainTestFragment();
 				break;
@@ -122,6 +122,9 @@ public class MainActivity extends ActionBarActivity {
 			case 3:
 				fragment = new ItemizedIconOverlayTestFragment();
 				break;
+            case 4:
+                fragment = new LocalGeoJSONTestFragment();
+                break;
 			default:
 				fragment = new MainTestFragment();
 				break;
