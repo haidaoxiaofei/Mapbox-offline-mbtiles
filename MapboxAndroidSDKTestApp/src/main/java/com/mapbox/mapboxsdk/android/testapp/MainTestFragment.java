@@ -110,11 +110,10 @@ public class MainTestFragment extends Fragment {
 		mbTileBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				if (!currentLayer.equals(mbTile)) {
-//					replaceMapView(mbTile);
-//					currentLayer = mbTile;
-//				}
-                mv.goToUserLocation(true);
+				if (!currentLayer.equals(mbTile)) {
+					replaceMapView(mbTile);
+					currentLayer = mbTile;
+				}
 			}
 		});
 
