@@ -9,14 +9,12 @@ import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
-
 import uk.co.senab.bitmapcache.BitmapLruCache;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
@@ -110,6 +108,14 @@ public class Icon implements MapboxConstants {
             url += "+" + aColor.replace("#", "") + "@2x.png";
         }
         downloadBitmap(context, url);
+    }
+
+    /**
+     * Initialize an Icon with a custom Drawable
+     * @param drawable Custom Drawable
+     */
+    public Icon(BitmapDrawable drawable) {
+        this.drawable = drawable;
     }
 
     /**
