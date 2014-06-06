@@ -1,7 +1,7 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
@@ -25,7 +25,7 @@ import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 public class Icon implements MapboxConstants {
 
     private Marker marker;
-    private BitmapDrawable drawable;
+    private Drawable drawable;
 
     protected static BitmapLruCache sIconCache;
     private static final String DISK_CACHE_SUBDIR = "mapbox_icon_cache";
@@ -114,7 +114,7 @@ public class Icon implements MapboxConstants {
      * Initialize an Icon with a custom Drawable
      * @param drawable Custom Drawable
      */
-    public Icon(BitmapDrawable drawable) {
+    public Icon(Drawable drawable) {
         this.drawable = drawable;
     }
 
