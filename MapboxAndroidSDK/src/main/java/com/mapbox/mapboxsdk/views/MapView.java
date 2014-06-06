@@ -23,8 +23,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
-import com.cocoahero.android.geojson.GeoJSON;
-import com.cocoahero.android.geojson.GeoJSONObject;
+import com.cocoahero.android.geojson.FeatureCollection;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
@@ -51,6 +50,7 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.tileprovider.util.SimpleInvalidationHandler;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
+import com.mapbox.mapboxsdk.util.DataLoadingUtils;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
@@ -61,6 +61,7 @@ import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import org.json.JSONException;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -420,13 +421,12 @@ public class MapView extends ViewGroup
     }
 
     /**
-     * Load and parse a GeoJSON file at a given URL
-     *
-     * @param geoJSON the GeoJSON string to parse
-     * @return GeoJSONObject
+     * Parse a GeoJSON file at a given URL
+     * @param url The URL of GeoJSON string to parse
+     * @return FeatureCollection Parsed GeoJSON
      */
-    public GeoJSONObject loadFromGeoJSONString(String geoJSON) throws JSONException {
-        return GeoJSON.parse(geoJSON);
+    public FeatureCollection parseFromGeoJSONURL(final String url) throws IOException, JSONException {
+        return DataLoadingUtils.loadGeoJSONFromUrl(url);
     }
 
     /**
