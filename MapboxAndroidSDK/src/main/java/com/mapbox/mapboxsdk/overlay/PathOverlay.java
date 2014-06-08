@@ -31,6 +31,9 @@ public class PathOverlay extends Overlay {
      */
     private int mPointsPrecomputed;
 
+
+    private boolean mOptimizePath = true;
+
     /**
      * Paint settings.
      */
@@ -134,6 +137,7 @@ public class PathOverlay extends Overlay {
         final Rect clipBounds = pj.fromPixelsToProjected(pj.getScreenRect());
 
         mPath.rewind();
+        boolean needsDrawing = !mOptimizePath;
         projectedPoint0 = this.mPoints.get(size - 1);
         mLineBounds.set((int) projectedPoint0.x, (int) projectedPoint0.y, (int) projectedPoint0.x,
                 (int) projectedPoint0.y);
@@ -141,7 +145,18 @@ public class PathOverlay extends Overlay {
         for (int i = size - 2; i >= 0; i--) {
             // compute next points
             projectedPoint1 = this.mPoints.get(i);
+
+            //mLineBounds needs to be computed
             mLineBounds.union((int) projectedPoint1.x, (int) projectedPoint1.y);
+
+            if (mOptimizePath && !Rect.intersects(clipBounds, mLineBounds)) {
+                // skip this line, move to next point
+                projectedPoint0 = projectedPoint1;
+                mLineBounds.set((int) projectedPoint0.x, (int) projectedPoint0.y, (int) projectedPoint0.x,
+                        (int) projectedPoint0.y);
+                screenPoint0 = null;
+                continue;
+            }
 
             // the starting point may be not calculated, because previous segment was out of clip
             // bounds
@@ -163,13 +178,29 @@ public class PathOverlay extends Overlay {
             projectedPoint0 = projectedPoint1;
             screenPoint0.x = screenPoint1.x;
             screenPoint0.y = screenPoint1.y;
+            if (mOptimizePath) {
+                needsDrawing = true;
+                mLineBounds.set((int) projectedPoint0.x, (int) projectedPoint0.y, (int) projectedPoint0.x,
+                        (int) projectedPoint0.y);
+            }
+        }
+        if (!mOptimizePath) {
+            needsDrawing = Rect.intersects(clipBounds, mLineBounds);
         }
 
-        if (Rect.intersects(clipBounds, mLineBounds)) {
+        if (needsDrawing) {
             final float realWidth = this.mPaint.getStrokeWidth();
             this.mPaint.setStrokeWidth(realWidth / mapView.getScale());
             canvas.drawPath(mPath, this.mPaint);
             this.mPaint.setStrokeWidth(realWidth);
         }
+    }
+
+    /**
+     * if true the path will be optimised. True by default. But be aware that the optimize method
+     * does not work for filled path.
+     */
+    public void setOptimizePath(final boolean value) {
+        mOptimizePath = value;
     }
 }
