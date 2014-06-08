@@ -34,7 +34,7 @@ To add the ```MapView``` as a layout element, add the following to your xml file
 android:id="@+id/mapview"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent"
-mapid="Your MapBox mapid" />
+mapbox:mapid="Your MapBox mapid" />
 ```
 
 

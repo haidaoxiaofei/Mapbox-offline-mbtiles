@@ -1,7 +1,7 @@
 package com.mapbox.mapboxsdk.overlay;
 
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
@@ -9,14 +9,12 @@ import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.util.BitmapUtils;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
-
 import uk.co.senab.bitmapcache.BitmapLruCache;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
@@ -27,7 +25,7 @@ import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 public class Icon implements MapboxConstants {
 
     private Marker marker;
-    private BitmapDrawable drawable;
+    private Drawable drawable;
 
     protected static BitmapLruCache sIconCache;
     private static final String DISK_CACHE_SUBDIR = "mapbox_icon_cache";
@@ -110,6 +108,14 @@ public class Icon implements MapboxConstants {
             url += "+" + aColor.replace("#", "") + "@2x.png";
         }
         downloadBitmap(context, url);
+    }
+
+    /**
+     * Initialize an Icon with a custom Drawable
+     * @param drawable Custom Drawable
+     */
+    public Icon(Drawable drawable) {
+        this.drawable = drawable;
     }
 
     /**

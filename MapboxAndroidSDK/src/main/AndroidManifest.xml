@@ -3,10 +3,4 @@
         package="com.mapbox.mapboxsdk">
     <application android:allowBackup="true"/>
     <uses-sdk android:minSdkVersion="9"/>
-	<supports-screens
-			android:anyDensity="true"
-			android:largeScreens="true"
-			android:normalScreens="true"
-			android:smallScreens="true"
-			android:xlargeScreens="true" />
 </manifest>
