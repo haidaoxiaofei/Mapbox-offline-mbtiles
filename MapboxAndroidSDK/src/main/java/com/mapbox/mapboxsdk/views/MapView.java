@@ -249,18 +249,32 @@ public class MapView extends ViewGroup
         this(aContext, tileSizePixels, aTileProvider, null, null);
     }
 
+    /**
+     * Add a new MapListener that observes changes in this map.
+     * @param listener
+     */
     public void addListener(final MapListener listener) {
         if (!mListeners.contains(listener)) {
             mListeners.add(listener);
         }
     }
 
+    /**
+     * Remove a listener object that observed changes in this map.
+     * @param listener
+     */
     public void removeListener(MapListener listener) {
         if (!mListeners.contains(listener)) {
             mListeners.remove(listener);
         }
     }
 
+    /**
+     * Add an overlay to this map. If the overlay is already included,
+     * does nothing. After adding the overlay, invalidates the map to
+     * redraw it.
+     * @param overlay
+     */
     public void addOverlay(final Overlay overlay) {
         if (!mOverlayManager.contains(overlay)) {
             mOverlayManager.add(overlay);
@@ -271,6 +285,11 @@ public class MapView extends ViewGroup
         invalidate();
     }
 
+    /**
+     * Remove an overlay from displaying in this map and invalidates
+     * the map to trigger a redraw.
+     * @param overlay
+     */
     public void removeOverlay(final Overlay overlay) {
         if (mOverlayManager.contains(overlay)) {
             mOverlayManager.remove(overlay);
@@ -294,6 +313,11 @@ public class MapView extends ViewGroup
         postInvalidate();
     }
 
+    /**
+     * Set the tile source of this map as an array of tile layers,
+     * which will be presented on top of each other.
+     * @param value
+     */
     public void setTileSource(final ITileLayer[] value) {
         if (value != null && mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
             ((MapTileLayerBasic) mTileProvider).setTileSources(value);
@@ -301,6 +325,11 @@ public class MapView extends ViewGroup
         }
     }
 
+    /**
+     * Set the tile source of this map as a single source, and trigger
+     * an update.
+     * @param aTileSource
+     */
     public void setTileSource(final ITileLayer aTileSource) {
         if (aTileSource != null && mTileProvider != null && mTileProvider instanceof MapTileLayerBasic) {
             mTileProvider.setTileSource(aTileSource);
@@ -399,6 +428,10 @@ public class MapView extends ViewGroup
         this.getOverlays().add(itemizedOverlay);
     }
 
+    /**
+     * Get all itemized overlays on the map as an ArrayList.
+     * @return
+     */
     public ArrayList<ItemizedIconOverlay> getItemizedOverlays() {
         ArrayList<ItemizedIconOverlay> list = new ArrayList<ItemizedIconOverlay>();
         for (Overlay overlay : getOverlays()) {
@@ -442,7 +475,10 @@ public class MapView extends ViewGroup
         }
     }
 
-
+    /**
+     * Get the current tooltip of this map if there is one being displayed.
+     * @return
+     */
     public InfoWindow getCurrentTooltip() {
         return currentTooltip;
     }

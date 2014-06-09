@@ -106,10 +106,26 @@ public class GeometryMath {
         return out;
     }
 
+    /**
+     * fast minimum of four numbers
+     * @param a
+     * @param b
+     * @param c
+     * @param d
+     * @return the minimum value
+     */
     private static double Min4(final double a, final double b, final double c, final double d) {
         return Math.floor(Math.min(Math.min(a, b), Math.min(c, d)));
     }
 
+    /**
+     * fast maximum of four numbers
+     * @param a
+     * @param b
+     * @param c
+     * @param d
+     * @return the maximum value
+     */
     private static double Max4(final double a, final double b, final double c, final double d) {
         return Math.ceil(Math.max(Math.max(a, b), Math.max(c, d)));
     }
@@ -155,10 +171,22 @@ public class GeometryMath {
         return number;
     }
 
+    /**
+     * simulate a binary left shift of a number without using bit operations.
+     * @param value
+     * @param multiplier
+     * @return
+     */
     public static float leftShift(final float value, final float multiplier) {
         return (float) (value * Math.pow(2, multiplier));
     }
 
+    /**
+     * simulate a binary right shift of a number without using bit operations.
+     * @param value
+     * @param multiplier
+     * @return
+     */
     public static float rightShift(final float value, final float multiplier) {
         return (float) (value / Math.pow(2, multiplier));
     }

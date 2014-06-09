@@ -75,6 +75,11 @@ public class Marker {
         mParentHolder = null;
     }
 
+    /**
+     * Attach this marker to a given mapview and that mapview's context
+     * @param mv the mapview to add this marker to
+     * @return
+     */
     public Marker addTo(MapView mv) {
         if (mMarker == null) {
             //if there is an icon it means it's not loaded yet
@@ -89,6 +94,11 @@ public class Marker {
         return this;
     }
 
+    /**
+     * Determine if this marker has a title, description, subdescription,
+     * or image that could be displayed
+     * @return true if the marker has content
+     */
     public boolean hasContent() {
         return !Strings.isNullOrEmpty(this.mTitle) ||
                 !Strings.isNullOrEmpty(this.mDescription) ||
@@ -102,6 +112,11 @@ public class Marker {
 
     private InfoWindow mToolTip;
 
+    /**
+     * Get this marker's tooltip, creating it if it doesn't exist yet.
+     * @param mv
+     * @return
+     */
     public InfoWindow getToolTip(MapView mv) {
         if (mToolTip == null || mToolTip.getMapView() != mv) {
             mToolTip = createTooltip(mv);
@@ -165,20 +180,35 @@ public class Marker {
         mRelatedObject = o;
     }
 
+    /**
+     * Set the centerpoint of this marker in geographical coordinates
+     * @param point
+     */
     public void setPoint(LatLng point) {
         mLatLng = point;
         invalidate();
     }
 
-
+    /**
+     * Set the description attached to this marker
+     * @return
+     */
     public String getDescription() {
         return mDescription;
     }
 
+    /**
+     * Set the sub-description attached to this marker
+     * @return
+     */
     public String getSubDescription() {
         return mSubDescription;
     }
 
+    /**
+     * Set the image attached to this marker
+     * @return
+     */
     public Drawable getImage() {
         return mImage;
     }

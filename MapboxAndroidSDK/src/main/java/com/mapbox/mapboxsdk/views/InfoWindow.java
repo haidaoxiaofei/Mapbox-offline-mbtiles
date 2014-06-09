@@ -82,6 +82,7 @@ public class InfoWindow {
      * @param position to place the window on the map
      * @param offsetX (&offsetY) the offset of the view to the position, in pixels.
      * This allows to offset the view from the object position.
+     * @return this infowindow
      */
     public InfoWindow open(Marker object, LatLng position, int offsetX, int offsetY) {
         onOpen(object);
@@ -96,6 +97,7 @@ public class InfoWindow {
 
     /**
      * Close this InfoWindow if it is visible, otherwise don't do anything.
+     * @return this info window
      */
     public InfoWindow close() {
         if (mIsVisible) {
@@ -162,6 +164,11 @@ public class InfoWindow {
         return boundMarker;
     }
 
+    /**
+     * Given a context, set the resource ids for the layout
+     * of the InfoWindow.
+     * @param context
+     */
     private static void setResIds(Context context) {
         String packageName = context.getPackageName(); //get application package name
         mTitleId = context.getResources().getIdentifier("id/tooltip_title", null, packageName);

@@ -68,6 +68,11 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants, MapboxC
         initialize(db);
     }
 
+    /**
+     * Get the filename of this layer based on the full path
+     * @param path
+     * @return the filename of the backing mbtiles file
+     */
     private static final String getFileName(final String path) {
         return path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'));
     }
@@ -99,6 +104,7 @@ public class MBTilesLayer extends TileLayer implements MapViewConstants, MapboxC
 
     /**
      * Reads and opens a MBTiles file and loads its tiles into this layer.
+     * @param file
      */
     private void initialize(File file) {
         if (file != null) {

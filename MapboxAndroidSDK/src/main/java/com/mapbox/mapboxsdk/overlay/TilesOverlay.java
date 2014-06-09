@@ -98,6 +98,7 @@ public class TilesOverlay extends SafeDrawOverlay {
 
     /**
      * Whether to use the network connection if it's available.
+     * @return true if this uses a data connection
      */
     public boolean useDataConnection() {
         return mTileProvider.useDataConnection();
@@ -150,9 +151,13 @@ public class TilesOverlay extends SafeDrawOverlay {
     }
 
     /**
+     * Draw a loading tile image to make in-progress tiles easier to deal with.
+     * @param c
+     * @param mapView
+     * @param zoomLevel
+     * @param viewPort
      */
     public void drawLoadingTile(final Canvas c, final MapView mapView, final float zoomLevel, final Rect viewPort) {
-        final float mapScale = mapView.getScale();
         ISafeCanvas canvas = (ISafeCanvas) c;
         canvas.save();
         canvas.translate(-mapView.getScrollX(), -mapView.getScrollY());

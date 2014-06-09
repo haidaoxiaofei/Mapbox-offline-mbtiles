@@ -312,6 +312,10 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback, Tile
         return (mTileCache != null) ? mTileCache.getBitmapFromRemoved(width, height) : null;
     }
 
+    /**
+     * If a given MapTile is present in this cache, remove it from memory.
+     * @param aTile
+     */
     public void removeTileFromMemory(final MapTile aTile) {
         if (mTileCache != null) {
             mTileCache.removeTileFromMemory(aTile);
