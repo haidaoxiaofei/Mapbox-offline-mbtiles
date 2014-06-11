@@ -120,7 +120,19 @@ By default, every time the screen is rotated, Android will call ```onCreate``` a
 
 Alternatively you can override the methods ```onSaveInstanceState()``` and ```onRestoreInstanceState()``` to have broader control of the saved states in the app. See this [StackOverflow question](http://stackoverflow.com/questions/4096169/onsaveinstancestate-and-onrestoreinstancestate) for more information on these methods
 
-### Generating API Documentation (aka JavaDoc)
+### Including SDK JavaDoc
+
+JavaDocs are automatically generated and distributed with each official and SNAPSHOT release.  They can be downloaded from Maven Central for local viewing and / or integration with an IDE.  The latest official version is available here:
+
+**`0.2.3` Release Overview**
+
+http://search.maven.org/#artifactdetails%7Ccom.mapbox.mapboxsdk%7Cmapbox-android-sdk%7C0.2.3%7Cjar
+
+**`0.2.3` JavaDoc**
+
+http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/0.2.3/mapbox-android-sdk-0.2.3-javadoc.jar
+
+### Generating SDK Documentation (aka JavaDoc)
 
 ```
 cd <PROJECT_HOME>/MapboxAndroidSDK/
