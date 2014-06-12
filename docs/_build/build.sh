@@ -25,7 +25,18 @@ scrape() {
   FR=`grep -n "$HTMLTOP" $1 | grep -o [0-9]*`
   TO=`grep -n "$HTMLEND" $1 | grep -o [0-9]*`
   LINES=`echo "$TO - $FR" | bc`
-  echo "$(tail -n +$FR $1 | head -n $LINES)"
+  tail -n +$FR $1 | head -n $LINES | \
+    sed -e 's,<br[ /]*>,,g' \
+    -e 's,<hr>,,g' \
+    -e 's,<caption>.*</caption>,,g' \
+    -e '1,/^\<div class="description">$/b' \
+    -e 's,<ul class="inheritance">,,g' \
+    -e 's,<ul class="blockList">,,g' \
+    -e 's,<ul class="blockListLast">,,g' \
+    -e 's,</ul>,,g' \
+    -e 's,<li class="blockList">,,g' \
+    -e 's,<li>,,g' \
+    -e 's,</li>,,g'
 }
 
 for file in `find com/mapbox/mapboxsdk/*/*.html | grep -v package-`; do
@@ -40,6 +51,7 @@ tags: $(echo $file | sed 's#.*/\([^/]*\)/[^/]*#\1#')
 
 FILENAME=$(echo '../../_posts/api/0100-01-01-'${file##*/} | sed -e 's/\([a-z]\)\([A-Z]\)/\1-\2/g' | tr '[:upper:]' '[:lower:]')
 CONTENT="$CONTENT\n$(scrape $file)"
+
 ALL="$ALL\n$(scrape $file)"
 
 echo -e "$CONTENT" > $FILENAME

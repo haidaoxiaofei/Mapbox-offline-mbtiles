@@ -14,27 +14,27 @@ tags: format
 </li>
 </ul>
 <div class="description">
-<ul class="blockList">
-<li class="blockList">
-<hr>
-<br>
+
+
+
+
 <pre>public class <span class="strong">GeoJSON</span>
 extends java.lang.Object</pre>
 <div class="block">A GeoJSON parser.</div>
-</li>
-</ul>
+
+
 </div>
 <div class="summary">
-<ul class="blockList">
-<li class="blockList">
+
+
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor_summary">
+
+<a name="constructor_summary">
 <!--   -->
 </a>
 <h3>Constructor Summary</h3>
 <table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+
 <tr>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
@@ -42,16 +42,16 @@ extends java.lang.Object</pre>
 <td class="colOne"><code><strong><a href="../../../../com/mapbox/mapboxsdk/format/GeoJSON.html#GeoJSON()">GeoJSON</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
-</li>
-</ul>
+
+
 <!-- ========== METHOD SUMMARY =========== -->
-<ul class="blockList">
-<li class="blockList"><a name="method_summary">
+
+<a name="method_summary">
 <!--   -->
 </a>
 <h3>Method Summary</h3>
 <table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -88,49 +88,49 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
+
+<a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
 </div>
 <div class="details">
-<ul class="blockList">
-<li class="blockList">
+
+
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor_detail">
+
+<a name="constructor_detail">
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
 <a name="GeoJSON()">
 <!--   -->
 </a>
-<ul class="blockListLast">
-<li class="blockList">
+
+
 <h4>GeoJSON</h4>
 <pre>public&nbsp;GeoJSON()</pre>
-</li>
-</ul>
-</li>
-</ul>
+
+
+
+
 <!-- ============ METHOD DETAIL ========== -->
-<ul class="blockList">
-<li class="blockList"><a name="method_detail">
+
+<a name="method_detail">
 <!--   -->
 </a>
 <h3>Method Detail</h3>
 <a name="parseString(java.lang.String, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>parseString</h4>
 <pre>public static&nbsp;java.util.List&lt;java.lang.Object&gt;&nbsp;parseString(java.lang.String&nbsp;jsonString,
                                            <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)
@@ -139,13 +139,13 @@ extends java.lang.Object</pre>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>jsonString</code> - GeoJSON string</dd>
 <dt><span class="strong">Throws:</span></dt>
 <dd><code>org.json.JSONException</code></dd></dl>
-</li>
-</ul>
+
+
 <a name="parse(org.json.JSONObject, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>parse</h4>
 <pre>public static&nbsp;java.util.List&lt;java.lang.Object&gt;&nbsp;parse(org.json.JSONObject&nbsp;json,
                                      <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)
@@ -154,13 +154,13 @@ extends java.lang.Object</pre>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>json</code> - GeoJSON</dd><dd><code>mv</code> - a mapview for the overlays to be added to</dd>
 <dt><span class="strong">Throws:</span></dt>
 <dd><code>org.json.JSONException</code></dd></dl>
-</li>
-</ul>
+
+
 <a name="featureCollectionToLayers(org.json.JSONObject, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>featureCollectionToLayers</h4>
 <pre>public static&nbsp;java.util.ArrayList&lt;java.lang.Object&gt;&nbsp;featureCollectionToLayers(org.json.JSONObject&nbsp;featureCollection,
                                                               <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)
@@ -171,13 +171,13 @@ extends java.lang.Object</pre>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>featureCollection</code> - a json object representing a featurecollection</dd><dd><code>mv</code> - a mapview</dd>
 <dt><span class="strong">Throws:</span></dt>
 <dd><code>org.json.JSONException</code></dd></dl>
-</li>
-</ul>
+
+
 <a name="featureToLayer(org.json.JSONObject, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
-<ul class="blockListLast">
-<li class="blockList">
+
+
 <h4>featureToLayer</h4>
 <pre>public static&nbsp;java.util.List&lt;java.lang.Object&gt;&nbsp;featureToLayer(org.json.JSONObject&nbsp;feature,
                                               <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)
@@ -187,12 +187,12 @@ extends java.lang.Object</pre>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>feature</code> - GeoJSON</dd>
 <dt><span class="strong">Throws:</span></dt>
 <dd><code>org.json.JSONException</code></dd></dl>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+
+
+
+
+
+
 </div>
 </div>
 <!-- ========= END OF CLASS DATA ========= -->

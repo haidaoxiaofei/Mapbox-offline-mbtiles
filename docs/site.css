@@ -1,0 +1,6 @@
+.install > div        { display:none; }
+.install:target > div { display:block; }
+
+.contentContainer dl {
+  margin:0 0 20px;
+  }

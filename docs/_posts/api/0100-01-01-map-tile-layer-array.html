@@ -19,8 +19,8 @@ tags: tileprovider
 </li>
 </ul>
 <div class="description">
-<ul class="blockList">
-<li class="blockList">
+
+
 <dl>
 <dt>All Implemented Interfaces:</dt>
 <dd><a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/IMapTileProviderCallback.html" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></dd>
@@ -29,8 +29,8 @@ tags: tileprovider
 <dt>Direct Known Subclasses:</dt>
 <dd><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBasic.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBasic</a></dd>
 </dl>
-<hr>
-<br>
+
+
 <pre>public class <span class="strong">MapTileLayerArray</span>
 extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></pre>
 <div class="block">This top-level tile provider allows a consumer to provide an array of modular asynchronous tile
@@ -45,20 +45,20 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
  providers in the chain, then the failure result is passed to the base class. The
  <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerArray.html" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> provides a mechanism so that only one unique tile-request can be in
  the map tile request chain at a time.</div>
-</li>
-</ul>
+
+
 </div>
 <div class="summary">
-<ul class="blockList">
-<li class="blockList">
+
+
 <!-- =========== FIELD SUMMARY =========== -->
-<ul class="blockList">
-<li class="blockList"><a name="field_summary">
+
+<a name="field_summary">
 <!--   -->
 </a>
 <h3>Field Summary</h3>
 <table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
-<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Field and Description</th>
@@ -80,30 +80,30 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 <td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerArray.html#mWorking">mWorking</a></strong></code>&nbsp;</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase">
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase">
 <!--   -->
 </a>
 <h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></h3>
-<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#context">context</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#mCacheKey">mCacheKey</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#mTileCache">mTileCache</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants">
+<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#context">context</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#mCacheKey">mCacheKey</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#mTileCache">mTileCache</a></code>
+
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants">
 <!--   -->
 </a>
 <h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.constants.<a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></h3>
-<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#CACHE_MAPTILECOUNT_DEFAULT">CACHE_MAPTILECOUNT_DEFAULT</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#CACHE_MAPTILEDISKSIZE_DEFAULT">CACHE_MAPTILEDISKSIZE_DEFAULT</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#DEBUG_TILE_PROVIDERS">DEBUG_TILE_PROVIDERS</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#DEFAULT_TILE_SIZE">DEFAULT_TILE_SIZE</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#MAXIMUM_ZOOMLEVEL">MAXIMUM_ZOOMLEVEL</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#MINIMUM_ZOOMLEVEL">MINIMUM_ZOOMLEVEL</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#NUMBER_OF_TILE_DOWNLOAD_THREADS">NUMBER_OF_TILE_DOWNLOAD_THREADS</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE">TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#WORLD_BOUNDING_BOX">WORLD_BOUNDING_BOX</a></code></li>
-</ul>
-</li>
-</ul>
+<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#CACHE_MAPTILECOUNT_DEFAULT">CACHE_MAPTILECOUNT_DEFAULT</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#CACHE_MAPTILEDISKSIZE_DEFAULT">CACHE_MAPTILEDISKSIZE_DEFAULT</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#DEBUG_TILE_PROVIDERS">DEBUG_TILE_PROVIDERS</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#DEFAULT_TILE_SIZE">DEFAULT_TILE_SIZE</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#MAXIMUM_ZOOMLEVEL">MAXIMUM_ZOOMLEVEL</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#MINIMUM_ZOOMLEVEL">MINIMUM_ZOOMLEVEL</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#NUMBER_OF_TILE_DOWNLOAD_THREADS">NUMBER_OF_TILE_DOWNLOAD_THREADS</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE">TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/constants/TileLayerConstants.html#WORLD_BOUNDING_BOX">WORLD_BOUNDING_BOX</a></code>
+
+
+
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor_summary">
+
+<a name="constructor_summary">
 <!--   -->
 </a>
 <h3>Constructor Summary</h3>
 <table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+
 <tr>
 <th class="colFirst" scope="col">Modifier</th>
 <th class="colLast" scope="col">Constructor and Description</th>
@@ -126,16 +126,16 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 </td>
 </tr>
 </table>
-</li>
-</ul>
+
+
 <!-- ========== METHOD SUMMARY =========== -->
-<ul class="blockList">
-<li class="blockList"><a name="method_summary">
+
+<a name="method_summary">
 <!--   -->
 </a>
 <h3>Method Summary</h3>
 <table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -232,96 +232,96 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 </td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase">
+
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></h3>
-<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#clearTileDiskCache()">clearTileDiskCache</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#clearTileMemoryCache()">clearTileMemoryCache</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#createCacheableBitmapDrawable(android.graphics.Bitmap, com.mapbox.mapboxsdk.tileprovider.MapTile)">createCacheableBitmapDrawable</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#createTileCache(android.content.Context)">createTileCache</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getBitmapFromRemoved(int, int)">getBitmapFromRemoved</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getCacheKey()">getCacheKey</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getMapTileFromMemory(com.mapbox.mapboxsdk.tileprovider.MapTile)">getMapTileFromMemory</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getTileSource()">getTileSource</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#putExpiredTileIntoCache(com.mapbox.mapboxsdk.tileprovider.MapTile, android.graphics.Bitmap)">putExpiredTileIntoCache</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#putTileIntoCache(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, android.graphics.drawable.Drawable)">putTileIntoCache</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#removeTileFromCache(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">removeTileFromCache</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#removeTileFromMemory(com.mapbox.mapboxsdk.tileprovider.MapTile)">removeTileFromMemory</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#setTileRequestCompleteHandler(android.os.Handler)">setTileRequestCompleteHandler</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#setUseDataConnection(boolean)">setUseDataConnection</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#useDataConnection()">useDataConnection</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
+<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#clearTileDiskCache()">clearTileDiskCache</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#clearTileMemoryCache()">clearTileMemoryCache</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#createCacheableBitmapDrawable(android.graphics.Bitmap, com.mapbox.mapboxsdk.tileprovider.MapTile)">createCacheableBitmapDrawable</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#createTileCache(android.content.Context)">createTileCache</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getBitmapFromRemoved(int, int)">getBitmapFromRemoved</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getCacheKey()">getCacheKey</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getMapTileFromMemory(com.mapbox.mapboxsdk.tileprovider.MapTile)">getMapTileFromMemory</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getTileSource()">getTileSource</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#putExpiredTileIntoCache(com.mapbox.mapboxsdk.tileprovider.MapTile, android.graphics.Bitmap)">putExpiredTileIntoCache</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#putTileIntoCache(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, android.graphics.drawable.Drawable)">putTileIntoCache</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#removeTileFromCache(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">removeTileFromCache</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#removeTileFromMemory(com.mapbox.mapboxsdk.tileprovider.MapTile)">removeTileFromMemory</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#setTileRequestCompleteHandler(android.os.Handler)">setTileRequestCompleteHandler</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#setUseDataConnection(boolean)">setUseDataConnection</a>, <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#useDataConnection()">useDataConnection</a></code>
+
+
+<a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
 </div>
 <div class="details">
-<ul class="blockList">
-<li class="blockList">
+
+
 <!-- ============ FIELD DETAIL =========== -->
-<ul class="blockList">
-<li class="blockList"><a name="field_detail">
+
+<a name="field_detail">
 <!--   -->
 </a>
 <h3>Field Detail</h3>
 <a name="mWorking">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>mWorking</h4>
 <pre>protected final&nbsp;java.util.HashMap&lt;<a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTile.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>,<a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileRequestState.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&gt; mWorking</pre>
-</li>
-</ul>
+
+
 <a name="mTileProviderList">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>mTileProviderList</h4>
 <pre>protected final&nbsp;java.util.List&lt;<a href="../../../../com/mapbox/mapboxsdk/tileprovider/modules/MapTileModuleLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>&gt; mTileProviderList</pre>
-</li>
-</ul>
+
+
 <a name="mUnaccessibleTiles">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>mUnaccessibleTiles</h4>
 <pre>protected final&nbsp;java.util.List&lt;<a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTile.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&gt; mUnaccessibleTiles</pre>
-</li>
-</ul>
+
+
 <a name="mNetworkAvailabilityCheck">
 <!--   -->
 </a>
-<ul class="blockListLast">
-<li class="blockList">
+
+
 <h4>mNetworkAvailabilityCheck</h4>
 <pre>protected final&nbsp;<a href="../../../../com/mapbox/mapboxsdk/tileprovider/modules/NetworkAvailabilityCheck.html" title="class in com.mapbox.mapboxsdk.tileprovider.modules">NetworkAvailabilityCheck</a> mNetworkAvailabilityCheck</pre>
-</li>
-</ul>
-</li>
-</ul>
+
+
+
+
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor_detail">
+
+<a name="constructor_detail">
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
 <a name="MapTileLayerArray(android.content.Context, com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, com.mapbox.mapboxsdk.tileprovider.IRegisterReceiver)">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>MapTileLayerArray</h4>
 <pre>protected&nbsp;MapTileLayerArray(android.content.Context&nbsp;context,
                  <a href="../../../../com/mapbox/mapboxsdk/tileprovider/tilesource/ITileLayer.html" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
                  <a href="../../../../com/mapbox/mapboxsdk/tileprovider/IRegisterReceiver.html" title="interface in com.mapbox.mapboxsdk.tileprovider">IRegisterReceiver</a>&nbsp;pRegisterReceiver)</pre>
 <div class="block">Creates an <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerArray.html" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> with no tile providers.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>pRegisterReceiver</code> - a <a href="../../../../com/mapbox/mapboxsdk/tileprovider/IRegisterReceiver.html" title="interface in com.mapbox.mapboxsdk.tileprovider"><code>IRegisterReceiver</code></a></dd></dl>
-</li>
-</ul>
+
+
 <a name="MapTileLayerArray(android.content.Context, com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, com.mapbox.mapboxsdk.tileprovider.IRegisterReceiver, com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase[])">
 <!--   -->
 </a>
-<ul class="blockListLast">
-<li class="blockList">
+
+
 <h4>MapTileLayerArray</h4>
 <pre>public&nbsp;MapTileLayerArray(android.content.Context&nbsp;context,
                  <a href="../../../../com/mapbox/mapboxsdk/tileprovider/tilesource/ITileLayer.html" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
@@ -329,34 +329,34 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
                  <a href="../../../../com/mapbox/mapboxsdk/tileprovider/modules/MapTileModuleLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>[]&nbsp;pTileProviderArray)</pre>
 <div class="block">Creates an <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerArray.html" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> with the specified tile providers.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>aRegisterReceiver</code> - a <a href="../../../../com/mapbox/mapboxsdk/tileprovider/IRegisterReceiver.html" title="interface in com.mapbox.mapboxsdk.tileprovider"><code>IRegisterReceiver</code></a></dd><dd><code>pTileProviderArray</code> - an array of <a href="../../../../com/mapbox/mapboxsdk/tileprovider/modules/MapTileModuleLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider.modules"><code>MapTileModuleLayerBase</code></a></dd></dl>
-</li>
-</ul>
-</li>
-</ul>
+
+
+
+
 <!-- ============ METHOD DETAIL ========== -->
-<ul class="blockList">
-<li class="blockList"><a name="method_detail">
+
+<a name="method_detail">
 <!--   -->
 </a>
 <h3>Method Detail</h3>
 <a name="detach()">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>detach</h4>
 <pre>public&nbsp;void&nbsp;detach()</pre>
 <dl>
 <dt><strong>Specified by:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#detach()">detach</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 </dl>
-</li>
-</ul>
+
+
 <a name="getMapTile(com.mapbox.mapboxsdk.tileprovider.MapTile)">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>getMapTile</h4>
 <pre>public&nbsp;android.graphics.drawable.Drawable&nbsp;getMapTile(<a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTile.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile)</pre>
 <div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getMapTile(com.mapbox.mapboxsdk.tileprovider.MapTile)">MapTileLayerBase</a></code></strong></div>
@@ -369,13 +369,13 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 <dt><strong>Specified by:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getMapTile(com.mapbox.mapboxsdk.tileprovider.MapTile)">getMapTile</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">See Also:</span></dt><dd><a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache"><code>CacheableBitmapDrawable</code></a></dd></dl>
-</li>
-</ul>
+
+
 <a name="mapTileRequestCompleted(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, android.graphics.drawable.Drawable)">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>mapTileRequestCompleted</h4>
 <pre>public&nbsp;void&nbsp;mapTileRequestCompleted(<a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileRequestState.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState,
                            android.graphics.drawable.Drawable&nbsp;aDrawable)</pre>
@@ -388,13 +388,13 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#mapTileRequestCompleted(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, android.graphics.drawable.Drawable)">mapTileRequestCompleted</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Parameters:</span></dt><dd><code>aState</code> - the map tile request state object</dd><dd><code>aDrawable</code> - the Drawable of the map tile</dd></dl>
-</li>
-</ul>
+
+
 <a name="mapTileRequestFailed(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>mapTileRequestFailed</h4>
 <pre>public&nbsp;void&nbsp;mapTileRequestFailed(<a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileRequestState.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState)</pre>
 <div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#mapTileRequestFailed(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">MapTileLayerBase</a></code></strong></div>
@@ -406,13 +406,13 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#mapTileRequestFailed(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">mapTileRequestFailed</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Parameters:</span></dt><dd><code>aState</code> - the map tile request state object</dd></dl>
-</li>
-</ul>
+
+
 <a name="mapTileRequestExpiredTile(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, uk.co.senab.bitmapcache.CacheableBitmapDrawable)">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>mapTileRequestExpiredTile</h4>
 <pre>public&nbsp;void&nbsp;mapTileRequestExpiredTile(<a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileRequestState.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState,
                              <a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a>&nbsp;aDrawable)</pre>
@@ -426,34 +426,34 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#mapTileRequestExpiredTile(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, uk.co.senab.bitmapcache.CacheableBitmapDrawable)">mapTileRequestExpiredTile</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Parameters:</span></dt><dd><code>aState</code> - the map tile request state object</dd><dd><code>aDrawable</code> - the Drawable of the map tile</dd></dl>
-</li>
-</ul>
+
+
 <a name="findNextAppropriateProvider(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>findNextAppropriateProvider</h4>
 <pre>protected&nbsp;<a href="../../../../com/mapbox/mapboxsdk/tileprovider/modules/MapTileModuleLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>&nbsp;findNextAppropriateProvider(<a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileRequestState.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState)</pre>
 <div class="block">We want to not use a provider that doesn't exist anymore in the chain, and we want to not
  use
  a provider that requires a data connection when one is not available.</div>
-</li>
-</ul>
+
+
 <a name="getProviderExists(com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase)">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>getProviderExists</h4>
 <pre>public&nbsp;boolean&nbsp;getProviderExists(<a href="../../../../com/mapbox/mapboxsdk/tileprovider/modules/MapTileModuleLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>&nbsp;provider)</pre>
-</li>
-</ul>
+
+
 <a name="getMinimumZoomLevel()">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>getMinimumZoomLevel</h4>
 <pre>public&nbsp;float&nbsp;getMinimumZoomLevel()</pre>
 <div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getMinimumZoomLevel()">MapTileLayerBase</a></code></strong></div>
@@ -462,13 +462,13 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getMinimumZoomLevel()">getMinimumZoomLevel</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>the minimum zoom level</dd></dl>
-</li>
-</ul>
+
+
 <a name="getMaximumZoomLevel()">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>getMaximumZoomLevel</h4>
 <pre>public&nbsp;float&nbsp;getMaximumZoomLevel()</pre>
 <div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getMaximumZoomLevel()">MapTileLayerBase</a></code></strong></div>
@@ -477,13 +477,13 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getMaximumZoomLevel()">getMaximumZoomLevel</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>the maximum zoom level</dd></dl>
-</li>
-</ul>
+
+
 <a name="setTileSource(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer)">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>setTileSource</h4>
 <pre>public&nbsp;void&nbsp;setTileSource(<a href="../../../../com/mapbox/mapboxsdk/tileprovider/tilesource/ITileLayer.html" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</pre>
 <div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#setTileSource(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer)">MapTileLayerBase</a></code></strong></div>
@@ -492,26 +492,26 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#setTileSource(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer)">setTileSource</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Parameters:</span></dt><dd><code>aTileSource</code> - the tile source</dd></dl>
-</li>
-</ul>
+
+
 <a name="hasNoSource()">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>hasNoSource</h4>
 <pre>public&nbsp;boolean&nbsp;hasNoSource()</pre>
 <dl>
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#hasNoSource()">hasNoSource</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 </dl>
-</li>
-</ul>
+
+
 <a name="getBoundingBox()">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>getBoundingBox</h4>
 <pre>public&nbsp;<a href="../../../../com/mapbox/mapboxsdk/geometry/BoundingBox.html" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getBoundingBox()</pre>
 <div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getBoundingBox()">MapTileLayerBase</a></code></strong></div>
@@ -520,13 +520,13 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getBoundingBox()">getBoundingBox</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>the tile source bounding box</dd></dl>
-</li>
-</ul>
+
+
 <a name="getCenterCoordinate()">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>getCenterCoordinate</h4>
 <pre>public&nbsp;<a href="../../../../com/mapbox/mapboxsdk/geometry/LatLng.html" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;getCenterCoordinate()</pre>
 <div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getCenterCoordinate()">MapTileLayerBase</a></code></strong></div>
@@ -535,13 +535,13 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getCenterCoordinate()">getCenterCoordinate</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>the tile source center</dd></dl>
-</li>
-</ul>
+
+
 <a name="getCenterZoom()">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
+
+
 <h4>getCenterZoom</h4>
 <pre>public&nbsp;float&nbsp;getCenterZoom()</pre>
 <div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getCenterZoom()">MapTileLayerBase</a></code></strong></div>
@@ -550,13 +550,13 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getCenterZoom()">getCenterZoom</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>the tile suggested starting zoom</dd></dl>
-</li>
-</ul>
+
+
 <a name="getTileSizePixels()">
 <!--   -->
 </a>
-<ul class="blockListLast">
-<li class="blockList">
+
+
 <h4>getTileSizePixels</h4>
 <pre>public&nbsp;int&nbsp;getTileSizePixels()</pre>
 <div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getTileSizePixels()">MapTileLayerBase</a></code></strong></div>
@@ -565,12 +565,12 @@ extends <a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html#getTileSizePixels()">getTileSizePixels</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/tileprovider/MapTileLayerBase.html" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>the tile size in pixels</dd></dl>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+
+
+
+
+
+
 </div>
 </div>
 <!-- ========= END OF CLASS DATA ========= -->
