@@ -34,14 +34,6 @@ head: |
          <div class='space-bottom'>
            <a class='block quiet active strong small truncate' href='{{site.baseurl}}/api/'>API {{site.version}}</a>
         </div>
-        {% for heading in page.navigation %}
-          <div class='space-bottom1'>
-            <a class='block quiet small truncate' href='#{{heading[0]|replace:' ','_'}}'><strong>{{heading[0]}}</strong></a>
-          {% for item in heading[1] %}
-            <a class='block small truncate' href='#{{item|replace:' ','_'}}'>{{item | replace:'-class','' | replace:'-protocol',''}}</a>
-          {% endfor %}
-          </div>
-        {% endfor %}
       {% endif %}
     </nav>
   </div></div>

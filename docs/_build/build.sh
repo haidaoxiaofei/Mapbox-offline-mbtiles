@@ -15,6 +15,9 @@ cd $VERSION
 
 #rm mapbox-android-sdk-$VERSION.jar
 
+rm -rf '../../_posts/api/*'
+
+ALL=''
 HTMLTOP='<div class="contentContainer">'
 HTMLEND='<div class="bottomNav">'
 
@@ -31,23 +34,25 @@ CONTENT="\
 ---
 layout: pages
 title: $(echo ${file##*/} | sed -e 's/\([a-z]\)\([A-Z]\)/\1 \2/g' -e 's/\.html$//')
-category: $(echo $file | sed 's#.*/\([^/]*\)/[^/]*#\1#')
+category: api
+tags: $(echo $file | sed 's#.*/\([^/]*\)/[^/]*#\1#')
 ---"
 
 FILENAME=$(echo '../../_posts/api/0100-01-01-'${file##*/} | sed -e 's/\([a-z]\)\([A-Z]\)/\1-\2/g' | tr '[:upper:]' '[:lower:]')
 CONTENT="$CONTENT\n$(scrape $file)"
+ALL="$ALL\n$(scrape $file)"
 
 echo -e "$CONTENT" > $FILENAME
 done
 
-ALL="\
+ALLYAML="\
 ---
 layout: pages
-
-title: $(echo ${file##*/} | sed -e 's/\([a-z]\)\([A-Z]\)/\1 \2/g' -e 's/\.html$//')
+title: Mapbox Android API $VERSION
+category: api
 ---"
 
-echo -e "$ALL" > '../../_posts/api/0100-01-01-api.html' 
+echo -e "$ALLYAML $ALL" > '../../api/index.html' 
 
 echo "Complete!"
 exit
