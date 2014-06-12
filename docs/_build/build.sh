@@ -32,7 +32,7 @@ for file in `find com/mapbox/mapboxsdk/*/*.html | grep -v package-`; do
 
 CONTENT="\
 ---
-layout: pages
+layout: api
 title: $(echo ${file##*/} | sed -e 's/\([a-z]\)\([A-Z]\)/\1 \2/g' -e 's/\.html$//')
 category: api
 tags: $(echo $file | sed 's#.*/\([^/]*\)/[^/]*#\1#')
@@ -47,7 +47,7 @@ done
 
 ALLYAML="\
 ---
-layout: pages
+layout: api
 title: Mapbox Android API $VERSION
 category: api
 ---"

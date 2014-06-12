@@ -34,6 +34,16 @@ head: |
          <div class='space-bottom'>
            <a class='block quiet active strong small truncate' href='{{site.baseurl}}/api/'>API {{site.version}}</a>
         </div>
+
+        {% for section in page.menu %}
+        <div class='space-bottom1'>
+          <strong class='block quiet small capitalize'>{{section}}</strong>
+          {% for nav in site.tags[section] %}
+            <a class='block small truncate {% if page.url == nav.url %}active{% endif %}' href='{{site.baseurl}}{{nav.url}}/'>{{nav.title}}</a>
+          {% endfor %}
+        </div>
+        {% endfor %}
+
       {% endif %}
     </nav>
   </div></div>
