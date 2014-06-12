@@ -1,0 +1,771 @@
+---
+layout: pages
+title: User Location Overlay
+category: overlay
+---
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.Overlay</a></li>
+<li>
+<ul class="inheritance">
+<li><a href="../../../../com/mapbox/mapboxsdk/overlay/SafeDrawOverlay.html" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.SafeDrawOverlay</a></li>
+<li>
+<ul class="inheritance">
+<li>com.mapbox.mapboxsdk.overlay.UserLocationOverlay</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="../../../../com/mapbox/mapboxsdk/events/MapListener.html" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.Snappable.html" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></dd>
+</dl>
+<hr>
+<br>
+<pre>public class <span class="strong">UserLocationOverlay</span>
+extends <a href="../../../../com/mapbox/mapboxsdk/overlay/SafeDrawOverlay.html" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a>
+implements <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.Snappable.html" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a>, <a href="../../../../com/mapbox/mapboxsdk/events/MapListener.html" title="interface in com.mapbox.mapboxsdk.events">MapListener</a></pre>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="nested_class_summary">
+<!--   -->
+</a>
+<h3>Nested Class Summary</h3>
+<ul class="blockList">
+<li class="blockList"><a name="nested_classes_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
+<!--   -->
+</a>
+<h3>Nested classes/interfaces inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.Snappable.html" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></code></li>
+</ul>
+</li>
+</ul>
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected android.content.Context</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#mContext">mContext</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#mMapView">mMapView</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#mMyLocationProvider">mMyLocationProvider</a></strong></code>&nbsp;</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="fields_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#mScale">mScale</a></code></li>
+</ul>
+</li>
+</ul>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#UserLocationOverlay(com.mapbox.mapboxsdk.overlay.GpsLocationProvider, com.mapbox.mapboxsdk.views.MapView)">UserLocationOverlay</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a>&nbsp;myLocationProvider,
+                   <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#UserLocationOverlay(com.mapbox.mapboxsdk.overlay.GpsLocationProvider, com.mapbox.mapboxsdk.views.MapView, int, int)">UserLocationOverlay</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a>&nbsp;myLocationProvider,
+                   <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+                   int&nbsp;arrowId,
+                   int&nbsp;personId)</code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#disableFollowLocation()">disableFollowLocation</a></strong>()</code>
+<div class="block">Disables "follow" functionality.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#disableMyLocation()">disableMyLocation</a></strong>()</code>
+<div class="block">Disable location updates</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#drawMyLocation(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas, com.mapbox.mapboxsdk.views.MapView, android.location.Location)">drawMyLocation</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/safecanvas/ISafeCanvas.html" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas,
+              <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+              android.location.Location&nbsp;lastFix)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#drawSafe(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas, com.mapbox.mapboxsdk.views.MapView, boolean)">drawSafe</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/safecanvas/ISafeCanvas.html" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas,
+        <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+        boolean&nbsp;shadow)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#enableFollowLocation()">enableFollowLocation</a></strong>()</code>
+<div class="block">Enables "follow" functionality.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#enableMyLocation()">enableMyLocation</a></strong>()</code>
+<div class="block">Enable receiving location updates from the provided GpsLocationProvider and show your
+ location on the maps.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#enableMyLocation(com.mapbox.mapboxsdk.overlay.GpsLocationProvider)">enableMyLocation</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a>&nbsp;myLocationProvider)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected android.graphics.RectF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#getDrawingBounds(android.graphics.PointF, android.location.Location, android.graphics.RectF)">getDrawingBounds</a></strong>(android.graphics.PointF&nbsp;positionOnScreen,
+                android.location.Location&nbsp;lastFix,
+                android.graphics.RectF&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected android.graphics.RectF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#getDrawingBounds(com.mapbox.mapboxsdk.views.util.Projection, android.location.Location, android.graphics.RectF)">getDrawingBounds</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                android.location.Location&nbsp;lastFix,
+                android.graphics.RectF&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#getDrawingPositionOnScreen(com.mapbox.mapboxsdk.views.util.Projection, android.location.Location, android.graphics.PointF)">getDrawingPositionOnScreen</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                          android.location.Location&nbsp;lastFix,
+                          android.graphics.PointF&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.location.Location</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#getLastFix()">getLastFix</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../com/mapbox/mapboxsdk/geometry/LatLng.html" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#getMyLocation()">getMyLocation</a></strong>()</code>
+<div class="block">Return a LatLng of the last known location, or null if not known.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected android.graphics.RectF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#getMyLocationMapDrawingBounds(com.mapbox.mapboxsdk.views.MapView, android.location.Location, android.graphics.RectF)">getMyLocationMapDrawingBounds</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv,
+                             android.location.Location&nbsp;lastFix,
+                             android.graphics.RectF&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#getMyLocationProvider()">getMyLocationProvider</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#getPositionOnScreen(com.mapbox.mapboxsdk.views.util.Projection, android.graphics.PointF)">getPositionOnScreen</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                   android.graphics.PointF&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#isDrawAccuracyEnabled()">isDrawAccuracyEnabled</a></strong>()</code>
+<div class="block">If enabled, an accuracy circle will be drawn around your current position.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#isFollowLocationEnabled()">isFollowLocationEnabled</a></strong>()</code>
+<div class="block">If enabled, the map will center on your current location and automatically scroll as you
+ move.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#isMyLocationEnabled()">isMyLocationEnabled</a></strong>()</code>
+<div class="block">If enabled, the map is receiving location updates and drawing your location on the map.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#onDetach(com.mapbox.mapboxsdk.views.MapView)">onDetach</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">Override to perform clean up of resources before shutdown.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#onLocationChanged(android.location.Location, com.mapbox.mapboxsdk.overlay.GpsLocationProvider)">onLocationChanged</a></strong>(android.location.Location&nbsp;location,
+                 <a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a>&nbsp;source)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#onScroll(com.mapbox.mapboxsdk.events.ScrollEvent)">onScroll</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/events/ScrollEvent.html" title="class in com.mapbox.mapboxsdk.events">ScrollEvent</a>&nbsp;event)</code>
+<div class="block">Called when a map is scrolled.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#onSnapToItem(int, int, android.graphics.Point, com.mapbox.mapboxsdk.views.MapView)">onSnapToItem</a></strong>(int&nbsp;x,
+            int&nbsp;y,
+            android.graphics.Point&nbsp;snapPoint,
+            <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">Checks to see if the given x and y are close enough to an item resulting in snapping the
+ current action (e.g.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#onTouchEvent(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">onTouchEvent</a></strong>(android.view.MotionEvent&nbsp;event,
+            <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block"><b>You can prevent all(!) other Touch-related events from happening!</b><br />
+ By default does nothing (<code>return false</code>).</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#onZoom(com.mapbox.mapboxsdk.events.ZoomEvent)">onZoom</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/events/ZoomEvent.html" title="class in com.mapbox.mapboxsdk.events">ZoomEvent</a>&nbsp;event)</code>
+<div class="block">Called when a map is zoomed.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#runOnFirstFix(java.lang.Runnable)">runOnFirstFix</a></strong>(java.lang.Runnable&nbsp;runnable)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#setDirectionArrowBitmap(android.graphics.Bitmap)">setDirectionArrowBitmap</a></strong>(android.graphics.Bitmap&nbsp;bitmap)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#setDirectionArrowHotspot(android.graphics.PointF)">setDirectionArrowHotspot</a></strong>(android.graphics.PointF&nbsp;point)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#setDrawAccuracyEnabled(boolean)">setDrawAccuracyEnabled</a></strong>(boolean&nbsp;drawAccuracyEnabled)</code>
+<div class="block">If enabled, an accuracy circle will be drawn around your current position.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#setMyLocationProvider(com.mapbox.mapboxsdk.overlay.GpsLocationProvider)">setMyLocationProvider</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a>&nbsp;myLocationProvider)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#setPersonBitmap(android.graphics.Bitmap)">setPersonBitmap</a></strong>(android.graphics.Bitmap&nbsp;bitmap)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html#setPersonHotspot(android.graphics.PointF)">setPersonHotspot</a></strong>(android.graphics.PointF&nbsp;point)</code>&nbsp;</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.SafeDrawOverlay">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="../../../../com/mapbox/mapboxsdk/overlay/SafeDrawOverlay.html" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a></h3>
+<code><a href="../../../../com/mapbox/mapboxsdk/overlay/SafeDrawOverlay.html#draw(android.graphics.Canvas, com.mapbox.mapboxsdk.views.MapView, boolean)">draw</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/SafeDrawOverlay.html#isUsingSafeCanvas()">isUsingSafeCanvas</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/SafeDrawOverlay.html#setUseSafeCanvas(boolean)">setUseSafeCanvas</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#drawAt(android.graphics.Canvas, android.graphics.drawable.Drawable, android.graphics.Point, android.graphics.Point, boolean, float)">drawAt</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#getSafeMenuId()">getSafeMenuId</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#isEnabled()">isEnabled</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onDoubleTap(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">onDoubleTap</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onDoubleTapEvent(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">onDoubleTapEvent</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onDown(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">onDown</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onFling(android.view.MotionEvent, android.view.MotionEvent, float, float, com.mapbox.mapboxsdk.views.MapView)">onFling</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onKeyDown(int, android.view.KeyEvent, com.mapbox.mapboxsdk.views.MapView)">onKeyDown</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onKeyUp(int, android.view.KeyEvent, com.mapbox.mapboxsdk.views.MapView)">onKeyUp</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onLongPress(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">onLongPress</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onScroll(android.view.MotionEvent, android.view.MotionEvent, float, float, com.mapbox.mapboxsdk.views.MapView)">onScroll</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onShowPress(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">onShowPress</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onSingleTapConfirmed(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">onSingleTapConfirmed</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onSingleTapUp(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">onSingleTapUp</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onTrackballEvent(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">onTrackballEvent</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#setContext(android.content.Context)">setContext</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#setEnabled(boolean)">setEnabled</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ============ FIELD DETAIL =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="mMapView">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>mMapView</h4>
+<pre>protected final&nbsp;<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a> mMapView</pre>
+</li>
+</ul>
+<a name="mContext">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>mContext</h4>
+<pre>protected final&nbsp;android.content.Context mContext</pre>
+</li>
+</ul>
+<a name="mMyLocationProvider">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>mMyLocationProvider</h4>
+<pre>public&nbsp;<a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a> mMyLocationProvider</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="UserLocationOverlay(com.mapbox.mapboxsdk.overlay.GpsLocationProvider, com.mapbox.mapboxsdk.views.MapView, int, int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>UserLocationOverlay</h4>
+<pre>public&nbsp;UserLocationOverlay(<a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a>&nbsp;myLocationProvider,
+                   <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+                   int&nbsp;arrowId,
+                   int&nbsp;personId)</pre>
+</li>
+</ul>
+<a name="UserLocationOverlay(com.mapbox.mapboxsdk.overlay.GpsLocationProvider, com.mapbox.mapboxsdk.views.MapView)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>UserLocationOverlay</h4>
+<pre>public&nbsp;UserLocationOverlay(<a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a>&nbsp;myLocationProvider,
+                   <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="setDirectionArrowBitmap(android.graphics.Bitmap)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setDirectionArrowBitmap</h4>
+<pre>public&nbsp;void&nbsp;setDirectionArrowBitmap(android.graphics.Bitmap&nbsp;bitmap)</pre>
+</li>
+</ul>
+<a name="setPersonBitmap(android.graphics.Bitmap)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setPersonBitmap</h4>
+<pre>public&nbsp;void&nbsp;setPersonBitmap(android.graphics.Bitmap&nbsp;bitmap)</pre>
+</li>
+</ul>
+<a name="setDirectionArrowHotspot(android.graphics.PointF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setDirectionArrowHotspot</h4>
+<pre>public&nbsp;void&nbsp;setDirectionArrowHotspot(android.graphics.PointF&nbsp;point)</pre>
+</li>
+</ul>
+<a name="setPersonHotspot(android.graphics.PointF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setPersonHotspot</h4>
+<pre>public&nbsp;void&nbsp;setPersonHotspot(android.graphics.PointF&nbsp;point)</pre>
+</li>
+</ul>
+<a name="onDetach(com.mapbox.mapboxsdk.views.MapView)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>onDetach</h4>
+<pre>public&nbsp;void&nbsp;onDetach(<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onDetach(com.mapbox.mapboxsdk.views.MapView)">Overlay</a></code></strong></div>
+<div class="block">Override to perform clean up of resources before shutdown. By default does nothing.</div>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onDetach(com.mapbox.mapboxsdk.views.MapView)">onDetach</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="setDrawAccuracyEnabled(boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setDrawAccuracyEnabled</h4>
+<pre>public&nbsp;void&nbsp;setDrawAccuracyEnabled(boolean&nbsp;drawAccuracyEnabled)</pre>
+<div class="block">If enabled, an accuracy circle will be drawn around your current position.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>drawAccuracyEnabled</code> - whether the accuracy circle will be enabled</dd></dl>
+</li>
+</ul>
+<a name="isDrawAccuracyEnabled()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isDrawAccuracyEnabled</h4>
+<pre>public&nbsp;boolean&nbsp;isDrawAccuracyEnabled()</pre>
+<div class="block">If enabled, an accuracy circle will be drawn around your current position.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>true if enabled, false otherwise</dd></dl>
+</li>
+</ul>
+<a name="getMyLocationProvider()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMyLocationProvider</h4>
+<pre>public&nbsp;<a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a>&nbsp;getMyLocationProvider()</pre>
+</li>
+</ul>
+<a name="setMyLocationProvider(com.mapbox.mapboxsdk.overlay.GpsLocationProvider)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setMyLocationProvider</h4>
+<pre>protected&nbsp;void&nbsp;setMyLocationProvider(<a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a>&nbsp;myLocationProvider)</pre>
+</li>
+</ul>
+<a name="drawMyLocation(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas, com.mapbox.mapboxsdk.views.MapView, android.location.Location)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>drawMyLocation</h4>
+<pre>protected&nbsp;void&nbsp;drawMyLocation(<a href="../../../../com/mapbox/mapboxsdk/views/safecanvas/ISafeCanvas.html" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas,
+                  <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+                  android.location.Location&nbsp;lastFix)</pre>
+</li>
+</ul>
+<a name="getPositionOnScreen(com.mapbox.mapboxsdk.views.util.Projection, android.graphics.PointF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPositionOnScreen</h4>
+<pre>public&nbsp;android.graphics.PointF&nbsp;getPositionOnScreen(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                                          android.graphics.PointF&nbsp;reuse)</pre>
+</li>
+</ul>
+<a name="getDrawingPositionOnScreen(com.mapbox.mapboxsdk.views.util.Projection, android.location.Location, android.graphics.PointF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDrawingPositionOnScreen</h4>
+<pre>public&nbsp;android.graphics.PointF&nbsp;getDrawingPositionOnScreen(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                                                 android.location.Location&nbsp;lastFix,
+                                                 android.graphics.PointF&nbsp;reuse)</pre>
+</li>
+</ul>
+<a name="getDrawingBounds(com.mapbox.mapboxsdk.views.util.Projection, android.location.Location, android.graphics.RectF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDrawingBounds</h4>
+<pre>protected&nbsp;android.graphics.RectF&nbsp;getDrawingBounds(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                                      android.location.Location&nbsp;lastFix,
+                                      android.graphics.RectF&nbsp;reuse)</pre>
+</li>
+</ul>
+<a name="getDrawingBounds(android.graphics.PointF, android.location.Location, android.graphics.RectF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDrawingBounds</h4>
+<pre>protected&nbsp;android.graphics.RectF&nbsp;getDrawingBounds(android.graphics.PointF&nbsp;positionOnScreen,
+                                      android.location.Location&nbsp;lastFix,
+                                      android.graphics.RectF&nbsp;reuse)</pre>
+</li>
+</ul>
+<a name="getMyLocationMapDrawingBounds(com.mapbox.mapboxsdk.views.MapView, android.location.Location, android.graphics.RectF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMyLocationMapDrawingBounds</h4>
+<pre>protected&nbsp;android.graphics.RectF&nbsp;getMyLocationMapDrawingBounds(<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv,
+                                                   android.location.Location&nbsp;lastFix,
+                                                   android.graphics.RectF&nbsp;reuse)</pre>
+</li>
+</ul>
+<a name="drawSafe(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas, com.mapbox.mapboxsdk.views.MapView, boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>drawSafe</h4>
+<pre>protected&nbsp;void&nbsp;drawSafe(<a href="../../../../com/mapbox/mapboxsdk/views/safecanvas/ISafeCanvas.html" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas,
+            <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+            boolean&nbsp;shadow)</pre>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="../../../../com/mapbox/mapboxsdk/overlay/SafeDrawOverlay.html#drawSafe(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas, com.mapbox.mapboxsdk.views.MapView, boolean)">drawSafe</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/overlay/SafeDrawOverlay.html" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="onSnapToItem(int, int, android.graphics.Point, com.mapbox.mapboxsdk.views.MapView)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>onSnapToItem</h4>
+<pre>public&nbsp;boolean&nbsp;onSnapToItem(int&nbsp;x,
+                   int&nbsp;y,
+                   android.graphics.Point&nbsp;snapPoint,
+                   <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.Snappable.html#onSnapToItem(int, int, android.graphics.Point, com.mapbox.mapboxsdk.views.MapView)">Overlay.Snappable</a></code></strong></div>
+<div class="block">Checks to see if the given x and y are close enough to an item resulting in snapping the
+ current action (e.g. zoom) to the item.</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.Snappable.html#onSnapToItem(int, int, android.graphics.Point, com.mapbox.mapboxsdk.views.MapView)">onSnapToItem</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.Snappable.html" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></code></dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>x</code> - The x in screen coordinates.</dd><dd><code>y</code> - The y in screen coordinates.</dd><dd><code>snapPoint</code> - To be filled with the the interesting point (in screen coordinates)
+ that
+ is
+ closest to the given x and y. Can be untouched if not snapping.</dd><dd><code>mapView</code> - The <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> that is requesting the snap. Use
+ MapView.getProjection()
+ to convert between on-screen pixels and latitude/longitude pairs.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>Whether or not to snap to the interesting point.</dd></dl>
+</li>
+</ul>
+<a name="onTouchEvent(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>onTouchEvent</h4>
+<pre>public&nbsp;boolean&nbsp;onTouchEvent(android.view.MotionEvent&nbsp;event,
+                   <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onTouchEvent(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">Overlay</a></code></strong></div>
+<div class="block"><b>You can prevent all(!) other Touch-related events from happening!</b><br />
+ By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
+ this event.</div>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html#onTouchEvent(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">onTouchEvent</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getMyLocation()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMyLocation</h4>
+<pre>public&nbsp;<a href="../../../../com/mapbox/mapboxsdk/geometry/LatLng.html" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;getMyLocation()</pre>
+<div class="block">Return a LatLng of the last known location, or null if not known.</div>
+</li>
+</ul>
+<a name="getLastFix()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getLastFix</h4>
+<pre>public&nbsp;android.location.Location&nbsp;getLastFix()</pre>
+</li>
+</ul>
+<a name="enableFollowLocation()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>enableFollowLocation</h4>
+<pre>public&nbsp;void&nbsp;enableFollowLocation()</pre>
+<div class="block">Enables "follow" functionality. The map will center on your current location and
+ automatically scroll as you move. Scrolling the map in the UI will disable.</div>
+</li>
+</ul>
+<a name="disableFollowLocation()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>disableFollowLocation</h4>
+<pre>public&nbsp;void&nbsp;disableFollowLocation()</pre>
+<div class="block">Disables "follow" functionality.</div>
+</li>
+</ul>
+<a name="isFollowLocationEnabled()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isFollowLocationEnabled</h4>
+<pre>public&nbsp;boolean&nbsp;isFollowLocationEnabled()</pre>
+<div class="block">If enabled, the map will center on your current location and automatically scroll as you
+ move. Scrolling the map in the UI will disable.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>true if enabled, false otherwise</dd></dl>
+</li>
+</ul>
+<a name="onLocationChanged(android.location.Location, com.mapbox.mapboxsdk.overlay.GpsLocationProvider)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>onLocationChanged</h4>
+<pre>public&nbsp;void&nbsp;onLocationChanged(android.location.Location&nbsp;location,
+                     <a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a>&nbsp;source)</pre>
+</li>
+</ul>
+<a name="enableMyLocation(com.mapbox.mapboxsdk.overlay.GpsLocationProvider)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>enableMyLocation</h4>
+<pre>public&nbsp;boolean&nbsp;enableMyLocation(<a href="../../../../com/mapbox/mapboxsdk/overlay/GpsLocationProvider.html" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a>&nbsp;myLocationProvider)</pre>
+</li>
+</ul>
+<a name="enableMyLocation()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>enableMyLocation</h4>
+<pre>public&nbsp;boolean&nbsp;enableMyLocation()</pre>
+<div class="block">Enable receiving location updates from the provided GpsLocationProvider and show your
+ location on the maps. You will likely want to call enableMyLocation() from your Activity's
+ Activity.onResume() method, to enable the features of this overlay. Remember to call the
+ corresponding disableMyLocation() in your Activity's Activity.onPause() method to turn off
+ updates when in the background.</div>
+</li>
+</ul>
+<a name="disableMyLocation()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>disableMyLocation</h4>
+<pre>public&nbsp;void&nbsp;disableMyLocation()</pre>
+<div class="block">Disable location updates</div>
+</li>
+</ul>
+<a name="isMyLocationEnabled()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isMyLocationEnabled</h4>
+<pre>public&nbsp;boolean&nbsp;isMyLocationEnabled()</pre>
+<div class="block">If enabled, the map is receiving location updates and drawing your location on the map.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>true if enabled, false otherwise</dd></dl>
+</li>
+</ul>
+<a name="runOnFirstFix(java.lang.Runnable)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>runOnFirstFix</h4>
+<pre>public&nbsp;boolean&nbsp;runOnFirstFix(java.lang.Runnable&nbsp;runnable)</pre>
+</li>
+</ul>
+<a name="onScroll(com.mapbox.mapboxsdk.events.ScrollEvent)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>onScroll</h4>
+<pre>public&nbsp;void&nbsp;onScroll(<a href="../../../../com/mapbox/mapboxsdk/events/ScrollEvent.html" title="class in com.mapbox.mapboxsdk.events">ScrollEvent</a>&nbsp;event)</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/events/MapListener.html#onScroll(com.mapbox.mapboxsdk.events.ScrollEvent)">MapListener</a></code></strong></div>
+<div class="block">Called when a map is scrolled.</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="../../../../com/mapbox/mapboxsdk/events/MapListener.html#onScroll(com.mapbox.mapboxsdk.events.ScrollEvent)">onScroll</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/events/MapListener.html" title="interface in com.mapbox.mapboxsdk.events">MapListener</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="onZoom(com.mapbox.mapboxsdk.events.ZoomEvent)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>onZoom</h4>
+<pre>public&nbsp;void&nbsp;onZoom(<a href="../../../../com/mapbox/mapboxsdk/events/ZoomEvent.html" title="class in com.mapbox.mapboxsdk.events">ZoomEvent</a>&nbsp;event)</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/events/MapListener.html#onZoom(com.mapbox.mapboxsdk.events.ZoomEvent)">MapListener</a></code></strong></div>
+<div class="block">Called when a map is zoomed.</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="../../../../com/mapbox/mapboxsdk/events/MapListener.html#onZoom(com.mapbox.mapboxsdk.events.ZoomEvent)">onZoom</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../com/mapbox/mapboxsdk/events/MapListener.html" title="interface in com.mapbox.mapboxsdk.events">MapListener</a></code></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

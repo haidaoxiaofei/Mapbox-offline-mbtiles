@@ -1,0 +1,95 @@
+---
+layout: pages
+title: Overlay.Snappable
+category: overlay
+---
+<div class="contentContainer">
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl>
+<dt>All Known Implementing Classes:</dt>
+<dd><a href="../../../../com/mapbox/mapboxsdk/overlay/ItemizedIconOverlay.html" title="class in com.mapbox.mapboxsdk.overlay">ItemizedIconOverlay</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/ItemizedOverlay.html" title="class in com.mapbox.mapboxsdk.overlay">ItemizedOverlay</a>, <a href="../../../../com/mapbox/mapboxsdk/overlay/UserLocationOverlay.html" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a></dd>
+</dl>
+<dl>
+<dt>Enclosing class:</dt>
+<dd><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.html" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></dd>
+</dl>
+<hr>
+<br>
+<pre>public static interface <span class="strong">Overlay.Snappable</span></pre>
+<div class="block">Interface definition for overlays that contain items that can be snapped to (for example,
+ when the user invokes a zoom, this could be called allowing the user to snap the zoom to an
+ interesting point.)</div>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Overlay.Snappable.html#onSnapToItem(int, int, android.graphics.Point, com.mapbox.mapboxsdk.views.MapView)">onSnapToItem</a></strong>(int&nbsp;x,
+            int&nbsp;y,
+            android.graphics.Point&nbsp;snapPoint,
+            <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">Checks to see if the given x and y are close enough to an item resulting in snapping the
+ current action (e.g.</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="onSnapToItem(int, int, android.graphics.Point, com.mapbox.mapboxsdk.views.MapView)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>onSnapToItem</h4>
+<pre>boolean&nbsp;onSnapToItem(int&nbsp;x,
+                   int&nbsp;y,
+                   android.graphics.Point&nbsp;snapPoint,
+                   <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block">Checks to see if the given x and y are close enough to an item resulting in snapping the
+ current action (e.g. zoom) to the item.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>x</code> - The x in screen coordinates.</dd><dd><code>y</code> - The y in screen coordinates.</dd><dd><code>snapPoint</code> - To be filled with the the interesting point (in screen coordinates)
+ that
+ is
+ closest to the given x and y. Can be untouched if not snapping.</dd><dd><code>mapView</code> - The <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> that is requesting the snap. Use
+ MapView.getProjection()
+ to convert between on-screen pixels and latitude/longitude pairs.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>Whether or not to snap to the interesting point.</dd></dl>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

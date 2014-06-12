@@ -17,3 +17,5 @@ local.properties
 gen
 
 bin
+
+docs/_build/*/

@@ -1,0 +1,849 @@
+---
+layout: pages
+title: Marker
+category: overlay
+---
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>com.mapbox.mapboxsdk.overlay.Marker</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<hr>
+<br>
+<pre>public class <span class="strong">Marker</span>
+extends java.lang.Object</pre>
+<div class="block">Immutable class describing a LatLng with a Title and a Description.</div>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="nested_class_summary">
+<!--   -->
+</a>
+<h3>Nested Class Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Nested Class Summary table, listing nested classes, and an explanation">
+<caption><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Class and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.HotspotPlace.html" title="enum in com.mapbox.mapboxsdk.overlay">Marker.HotspotPlace</a></strong></code>
+<div class="block">Indicates a hotspot for an area.</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#ITEM_STATE_FOCUSED_MASK">ITEM_STATE_FOCUSED_MASK</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#ITEM_STATE_PRESSED_MASK">ITEM_STATE_PRESSED_MASK</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#ITEM_STATE_SELECTED_MASK">ITEM_STATE_SELECTED_MASK</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#mAnchor">mAnchor</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#mCurMapCoords">mCurMapCoords</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="../../../../com/mapbox/mapboxsdk/geometry/LatLng.html" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#mLatLng">mLatLng</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected android.graphics.drawable.Drawable</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#mMarker">mMarker</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#mUid">mUid</a></strong></code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#Marker(com.mapbox.mapboxsdk.views.MapView, java.lang.String, java.lang.String, com.mapbox.mapboxsdk.geometry.LatLng)">Marker</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv,
+      java.lang.String&nbsp;aTitle,
+      java.lang.String&nbsp;aDescription,
+      <a href="../../../../com/mapbox/mapboxsdk/geometry/LatLng.html" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;aLatLng)</code>
+<div class="block">Initialize a new marker object, adding it to a MapView and attaching a tooltip</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#Marker(java.lang.String, java.lang.String, com.mapbox.mapboxsdk.geometry.LatLng)">Marker</a></strong>(java.lang.String&nbsp;title,
+      java.lang.String&nbsp;description,
+      <a href="../../../../com/mapbox/mapboxsdk/geometry/LatLng.html" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;latLng)</code>
+<div class="block">Construct a new Marker, given title, description, and place</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html" title="class in com.mapbox.mapboxsdk.overlay">Marker</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#addTo(com.mapbox.mapboxsdk.views.MapView)">addTo</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#blur()">blur</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../com/mapbox/mapboxsdk/views/InfoWindow.html" title="class in com.mapbox.mapboxsdk.views">InfoWindow</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#createTooltip(com.mapbox.mapboxsdk.views.MapView)">createTooltip</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>android.graphics.Point</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getAnchor()">getAnchor</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.Point</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getAnchor(com.mapbox.mapboxsdk.overlay.Marker.HotspotPlace)">getAnchor</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.HotspotPlace.html" title="enum in com.mapbox.mapboxsdk.overlay">Marker.HotspotPlace</a>&nbsp;place)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getDescription()">getDescription</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.drawable.Drawable</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getDrawable()">getDrawable</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected android.graphics.RectF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getDrawingBounds(com.mapbox.mapboxsdk.views.util.Projection, android.graphics.RectF)">getDrawingBounds</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                android.graphics.RectF&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getDrawingPositionOnScreen(com.mapbox.mapboxsdk.views.util.Projection, android.graphics.PointF)">getDrawingPositionOnScreen</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                          android.graphics.PointF&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getHeight()">getHeight</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.Point</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getHotspot(com.mapbox.mapboxsdk.overlay.Marker.HotspotPlace, int, int)">getHotspot</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.HotspotPlace.html" title="enum in com.mapbox.mapboxsdk.overlay">Marker.HotspotPlace</a>&nbsp;place,
+          int&nbsp;w,
+          int&nbsp;h)</code>
+<div class="block">From a HotspotPlace and drawable dimensions (width, height), return the hotspot position.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getHotspotScale(com.mapbox.mapboxsdk.overlay.Marker.HotspotPlace, android.graphics.PointF)">getHotspotScale</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.HotspotPlace.html" title="enum in com.mapbox.mapboxsdk.overlay">Marker.HotspotPlace</a>&nbsp;place,
+               android.graphics.PointF&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.drawable.Drawable</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getImage()">getImage</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected android.graphics.RectF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getMapDrawingBounds(com.mapbox.mapboxsdk.views.util.Projection, android.graphics.RectF)">getMapDrawingBounds</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                   android.graphics.RectF&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.drawable.Drawable</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getMarker(int)">getMarker</a></strong>(int&nbsp;stateBitset)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../com/mapbox/mapboxsdk/overlay/ItemizedOverlay.html" title="class in com.mapbox.mapboxsdk.overlay">ItemizedOverlay</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getParentHolder()">getParentHolder</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../com/mapbox/mapboxsdk/geometry/LatLng.html" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getPoint()">getPoint</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getPositionOnMap()">getPositionOnMap</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getPositionOnScreen(com.mapbox.mapboxsdk.views.util.Projection, android.graphics.PointF)">getPositionOnScreen</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                   android.graphics.PointF&nbsp;reuse)</code>
+<div class="block">Get the current position of the marker in pixels</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.Object</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getRelatedObject()">getRelatedObject</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getSubDescription()">getSubDescription</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getTitle()">getTitle</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../com/mapbox/mapboxsdk/views/InfoWindow.html" title="class in com.mapbox.mapboxsdk.views">InfoWindow</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getToolTip(com.mapbox.mapboxsdk.views.MapView)">getToolTip</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getUid()">getUid</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#getWidth()">getWidth</a></strong>()</code>
+<div class="block">Get the width of the marker, based on the width of the image backing it.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#hasContent()">hasContent</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#invalidate()">invalidate</a></strong>()</code>
+<div class="block">Sets the marker to be redrawn.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#setAnchor(android.graphics.PointF)">setAnchor</a></strong>(android.graphics.PointF&nbsp;anchor)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#setDescription(java.lang.String)">setDescription</a></strong>(java.lang.String&nbsp;aDescription)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#setHotspot(com.mapbox.mapboxsdk.overlay.Marker.HotspotPlace)">setHotspot</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.HotspotPlace.html" title="enum in com.mapbox.mapboxsdk.overlay">Marker.HotspotPlace</a>&nbsp;place)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html" title="class in com.mapbox.mapboxsdk.overlay">Marker</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#setIcon(com.mapbox.mapboxsdk.overlay.Icon)">setIcon</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/overlay/Icon.html" title="class in com.mapbox.mapboxsdk.overlay">Icon</a>&nbsp;aIcon)</code>
+<div class="block">Sets the Icon image that represents this marker on screen.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#setImage(android.graphics.drawable.Drawable)">setImage</a></strong>(android.graphics.drawable.Drawable&nbsp;anImage)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#setMarker(android.graphics.drawable.Drawable)">setMarker</a></strong>(android.graphics.drawable.Drawable&nbsp;marker)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#setParentHolder(com.mapbox.mapboxsdk.overlay.ItemizedOverlay)">setParentHolder</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/overlay/ItemizedOverlay.html" title="class in com.mapbox.mapboxsdk.overlay">ItemizedOverlay</a>&nbsp;o)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#setRelatedObject(java.lang.Object)">setRelatedObject</a></strong>(java.lang.Object&nbsp;o)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#setState(android.graphics.drawable.Drawable, int)">setState</a></strong>(android.graphics.drawable.Drawable&nbsp;drawable,
+        int&nbsp;stateBitset)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#setSubDescription(java.lang.String)">setSubDescription</a></strong>(java.lang.String&nbsp;aSubDescription)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#setTitle(java.lang.String)">setTitle</a></strong>(java.lang.String&nbsp;aTitle)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#showBubble(com.mapbox.mapboxsdk.views.InfoWindow, com.mapbox.mapboxsdk.views.MapView, boolean)">showBubble</a></strong>(<a href="../../../../com/mapbox/mapboxsdk/views/InfoWindow.html" title="class in com.mapbox.mapboxsdk.views">InfoWindow</a>&nbsp;tooltip,
+          <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;aMapView,
+          boolean&nbsp;panIntoView)</code>
+<div class="block">Populates this tooltip with all item info:
+ title and description in any case, 
+ image and sub-description if any.
+ and centers the map view on the item if panIntoView is true.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html#updateDrawingPosition()">updateDrawingPosition</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ============ FIELD DETAIL =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="ITEM_STATE_FOCUSED_MASK">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ITEM_STATE_FOCUSED_MASK</h4>
+<pre>public static final&nbsp;int ITEM_STATE_FOCUSED_MASK</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.overlay.Marker.ITEM_STATE_FOCUSED_MASK">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="ITEM_STATE_PRESSED_MASK">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ITEM_STATE_PRESSED_MASK</h4>
+<pre>public static final&nbsp;int ITEM_STATE_PRESSED_MASK</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.overlay.Marker.ITEM_STATE_PRESSED_MASK">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="ITEM_STATE_SELECTED_MASK">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ITEM_STATE_SELECTED_MASK</h4>
+<pre>public static final&nbsp;int ITEM_STATE_SELECTED_MASK</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.overlay.Marker.ITEM_STATE_SELECTED_MASK">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="mCurMapCoords">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>mCurMapCoords</h4>
+<pre>protected final&nbsp;android.graphics.PointF mCurMapCoords</pre>
+</li>
+</ul>
+<a name="mUid">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>mUid</h4>
+<pre>protected&nbsp;java.lang.String mUid</pre>
+</li>
+</ul>
+<a name="mLatLng">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>mLatLng</h4>
+<pre>protected&nbsp;<a href="../../../../com/mapbox/mapboxsdk/geometry/LatLng.html" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a> mLatLng</pre>
+</li>
+</ul>
+<a name="mMarker">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>mMarker</h4>
+<pre>protected&nbsp;android.graphics.drawable.Drawable mMarker</pre>
+</li>
+</ul>
+<a name="mAnchor">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>mAnchor</h4>
+<pre>protected&nbsp;android.graphics.PointF mAnchor</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="Marker(java.lang.String, java.lang.String, com.mapbox.mapboxsdk.geometry.LatLng)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>Marker</h4>
+<pre>public&nbsp;Marker(java.lang.String&nbsp;title,
+      java.lang.String&nbsp;description,
+      <a href="../../../../com/mapbox/mapboxsdk/geometry/LatLng.html" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;latLng)</pre>
+<div class="block">Construct a new Marker, given title, description, and place</div>
+</li>
+</ul>
+<a name="Marker(com.mapbox.mapboxsdk.views.MapView, java.lang.String, java.lang.String, com.mapbox.mapboxsdk.geometry.LatLng)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>Marker</h4>
+<pre>public&nbsp;Marker(<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv,
+      java.lang.String&nbsp;aTitle,
+      java.lang.String&nbsp;aDescription,
+      <a href="../../../../com/mapbox/mapboxsdk/geometry/LatLng.html" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;aLatLng)</pre>
+<div class="block">Initialize a new marker object, adding it to a MapView and attaching a tooltip</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>mv</code> - a mapview</dd><dd><code>aTitle</code> - the title of the marker, in a potential tooltip</dd><dd><code>aDescription</code> - the description of the marker, in a tooltip</dd><dd><code>aLatLng</code> - the location of the marker</dd></dl>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="addTo(com.mapbox.mapboxsdk.views.MapView)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>addTo</h4>
+<pre>public&nbsp;<a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;addTo(<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</pre>
+</li>
+</ul>
+<a name="hasContent()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>hasContent</h4>
+<pre>public&nbsp;boolean&nbsp;hasContent()</pre>
+</li>
+</ul>
+<a name="createTooltip(com.mapbox.mapboxsdk.views.MapView)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>createTooltip</h4>
+<pre>protected&nbsp;<a href="../../../../com/mapbox/mapboxsdk/views/InfoWindow.html" title="class in com.mapbox.mapboxsdk.views">InfoWindow</a>&nbsp;createTooltip(<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</pre>
+</li>
+</ul>
+<a name="getToolTip(com.mapbox.mapboxsdk.views.MapView)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getToolTip</h4>
+<pre>public&nbsp;<a href="../../../../com/mapbox/mapboxsdk/views/InfoWindow.html" title="class in com.mapbox.mapboxsdk.views">InfoWindow</a>&nbsp;getToolTip(<a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</pre>
+</li>
+</ul>
+<a name="blur()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>blur</h4>
+<pre>public&nbsp;void&nbsp;blur()</pre>
+</li>
+</ul>
+<a name="getUid()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getUid</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getUid()</pre>
+</li>
+</ul>
+<a name="getTitle()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTitle</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getTitle()</pre>
+</li>
+</ul>
+<a name="getPoint()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPoint</h4>
+<pre>public&nbsp;<a href="../../../../com/mapbox/mapboxsdk/geometry/LatLng.html" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;getPoint()</pre>
+</li>
+</ul>
+<a name="setTitle(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setTitle</h4>
+<pre>public&nbsp;void&nbsp;setTitle(java.lang.String&nbsp;aTitle)</pre>
+</li>
+</ul>
+<a name="setDescription(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setDescription</h4>
+<pre>public&nbsp;void&nbsp;setDescription(java.lang.String&nbsp;aDescription)</pre>
+</li>
+</ul>
+<a name="setSubDescription(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setSubDescription</h4>
+<pre>public&nbsp;void&nbsp;setSubDescription(java.lang.String&nbsp;aSubDescription)</pre>
+</li>
+</ul>
+<a name="setImage(android.graphics.drawable.Drawable)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setImage</h4>
+<pre>public&nbsp;void&nbsp;setImage(android.graphics.drawable.Drawable&nbsp;anImage)</pre>
+</li>
+</ul>
+<a name="setRelatedObject(java.lang.Object)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setRelatedObject</h4>
+<pre>public&nbsp;void&nbsp;setRelatedObject(java.lang.Object&nbsp;o)</pre>
+</li>
+</ul>
+<a name="getDescription()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDescription</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getDescription()</pre>
+</li>
+</ul>
+<a name="getSubDescription()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getSubDescription</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getSubDescription()</pre>
+</li>
+</ul>
+<a name="getImage()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getImage</h4>
+<pre>public&nbsp;android.graphics.drawable.Drawable&nbsp;getImage()</pre>
+</li>
+</ul>
+<a name="getRelatedObject()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getRelatedObject</h4>
+<pre>public&nbsp;java.lang.Object&nbsp;getRelatedObject()</pre>
+</li>
+</ul>
+<a name="getParentHolder()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getParentHolder</h4>
+<pre>public&nbsp;<a href="../../../../com/mapbox/mapboxsdk/overlay/ItemizedOverlay.html" title="class in com.mapbox.mapboxsdk.overlay">ItemizedOverlay</a>&nbsp;getParentHolder()</pre>
+</li>
+</ul>
+<a name="setParentHolder(com.mapbox.mapboxsdk.overlay.ItemizedOverlay)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setParentHolder</h4>
+<pre>public&nbsp;void&nbsp;setParentHolder(<a href="../../../../com/mapbox/mapboxsdk/overlay/ItemizedOverlay.html" title="class in com.mapbox.mapboxsdk.overlay">ItemizedOverlay</a>&nbsp;o)</pre>
+</li>
+</ul>
+<a name="getMarker(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMarker</h4>
+<pre>public&nbsp;android.graphics.drawable.Drawable&nbsp;getMarker(int&nbsp;stateBitset)</pre>
+</li>
+</ul>
+<a name="setMarker(android.graphics.drawable.Drawable)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setMarker</h4>
+<pre>public&nbsp;void&nbsp;setMarker(android.graphics.drawable.Drawable&nbsp;marker)</pre>
+</li>
+</ul>
+<a name="setHotspot(com.mapbox.mapboxsdk.overlay.Marker.HotspotPlace)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setHotspot</h4>
+<pre>public&nbsp;void&nbsp;setHotspot(<a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.HotspotPlace.html" title="enum in com.mapbox.mapboxsdk.overlay">Marker.HotspotPlace</a>&nbsp;place)</pre>
+</li>
+</ul>
+<a name="getAnchor()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAnchor</h4>
+<pre>public&nbsp;android.graphics.Point&nbsp;getAnchor()</pre>
+</li>
+</ul>
+<a name="getAnchor(com.mapbox.mapboxsdk.overlay.Marker.HotspotPlace)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAnchor</h4>
+<pre>public&nbsp;android.graphics.Point&nbsp;getAnchor(<a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.HotspotPlace.html" title="enum in com.mapbox.mapboxsdk.overlay">Marker.HotspotPlace</a>&nbsp;place)</pre>
+</li>
+</ul>
+<a name="setAnchor(android.graphics.PointF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setAnchor</h4>
+<pre>public&nbsp;void&nbsp;setAnchor(android.graphics.PointF&nbsp;anchor)</pre>
+</li>
+</ul>
+<a name="setState(android.graphics.drawable.Drawable, int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setState</h4>
+<pre>public static&nbsp;void&nbsp;setState(android.graphics.drawable.Drawable&nbsp;drawable,
+            int&nbsp;stateBitset)</pre>
+</li>
+</ul>
+<a name="getDrawable()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDrawable</h4>
+<pre>public&nbsp;android.graphics.drawable.Drawable&nbsp;getDrawable()</pre>
+</li>
+</ul>
+<a name="getWidth()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getWidth</h4>
+<pre>public&nbsp;int&nbsp;getWidth()</pre>
+<div class="block">Get the width of the marker, based on the width of the image backing it.</div>
+</li>
+</ul>
+<a name="getHeight()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getHeight</h4>
+<pre>public&nbsp;int&nbsp;getHeight()</pre>
+</li>
+</ul>
+<a name="getPositionOnScreen(com.mapbox.mapboxsdk.views.util.Projection, android.graphics.PointF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPositionOnScreen</h4>
+<pre>public&nbsp;android.graphics.PointF&nbsp;getPositionOnScreen(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                                          android.graphics.PointF&nbsp;reuse)</pre>
+<div class="block">Get the current position of the marker in pixels</div>
+</li>
+</ul>
+<a name="getDrawingPositionOnScreen(com.mapbox.mapboxsdk.views.util.Projection, android.graphics.PointF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDrawingPositionOnScreen</h4>
+<pre>public&nbsp;android.graphics.PointF&nbsp;getDrawingPositionOnScreen(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                                                 android.graphics.PointF&nbsp;reuse)</pre>
+</li>
+</ul>
+<a name="getDrawingBounds(com.mapbox.mapboxsdk.views.util.Projection, android.graphics.RectF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDrawingBounds</h4>
+<pre>protected&nbsp;android.graphics.RectF&nbsp;getDrawingBounds(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                                      android.graphics.RectF&nbsp;reuse)</pre>
+</li>
+</ul>
+<a name="getMapDrawingBounds(com.mapbox.mapboxsdk.views.util.Projection, android.graphics.RectF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMapDrawingBounds</h4>
+<pre>protected&nbsp;android.graphics.RectF&nbsp;getMapDrawingBounds(<a href="../../../../com/mapbox/mapboxsdk/views/util/Projection.html" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+                                         android.graphics.RectF&nbsp;reuse)</pre>
+</li>
+</ul>
+<a name="getHotspotScale(com.mapbox.mapboxsdk.overlay.Marker.HotspotPlace, android.graphics.PointF)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getHotspotScale</h4>
+<pre>public&nbsp;android.graphics.PointF&nbsp;getHotspotScale(<a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.HotspotPlace.html" title="enum in com.mapbox.mapboxsdk.overlay">Marker.HotspotPlace</a>&nbsp;place,
+                                      android.graphics.PointF&nbsp;reuse)</pre>
+</li>
+</ul>
+<a name="getHotspot(com.mapbox.mapboxsdk.overlay.Marker.HotspotPlace, int, int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getHotspot</h4>
+<pre>public&nbsp;android.graphics.Point&nbsp;getHotspot(<a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.HotspotPlace.html" title="enum in com.mapbox.mapboxsdk.overlay">Marker.HotspotPlace</a>&nbsp;place,
+                                int&nbsp;w,
+                                int&nbsp;h)</pre>
+<div class="block">From a HotspotPlace and drawable dimensions (width, height), return the hotspot position.
+ Could be a public method of HotspotPlace or OverlayItem...</div>
+</li>
+</ul>
+<a name="showBubble(com.mapbox.mapboxsdk.views.InfoWindow, com.mapbox.mapboxsdk.views.MapView, boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>showBubble</h4>
+<pre>public&nbsp;void&nbsp;showBubble(<a href="../../../../com/mapbox/mapboxsdk/views/InfoWindow.html" title="class in com.mapbox.mapboxsdk.views">InfoWindow</a>&nbsp;tooltip,
+              <a href="../../../../com/mapbox/mapboxsdk/views/MapView.html" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;aMapView,
+              boolean&nbsp;panIntoView)</pre>
+<div class="block">Populates this tooltip with all item info:
+ <ul>title and description in any case, </ul>
+ <ul>image and sub-description if any.</ul>
+ and centers the map view on the item if panIntoView is true. <br></div>
+</li>
+</ul>
+<a name="setIcon(com.mapbox.mapboxsdk.overlay.Icon)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setIcon</h4>
+<pre>public&nbsp;<a href="../../../../com/mapbox/mapboxsdk/overlay/Marker.html" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;setIcon(<a href="../../../../com/mapbox/mapboxsdk/overlay/Icon.html" title="class in com.mapbox.mapboxsdk.overlay">Icon</a>&nbsp;aIcon)</pre>
+<div class="block">Sets the Icon image that represents this marker on screen.</div>
+</li>
+</ul>
+<a name="getPositionOnMap()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPositionOnMap</h4>
+<pre>public&nbsp;android.graphics.PointF&nbsp;getPositionOnMap()</pre>
+</li>
+</ul>
+<a name="updateDrawingPosition()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>updateDrawingPosition</h4>
+<pre>public&nbsp;void&nbsp;updateDrawingPosition()</pre>
+</li>
+</ul>
+<a name="invalidate()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>invalidate</h4>
+<pre>public&nbsp;void&nbsp;invalidate()</pre>
+<div class="block">Sets the marker to be redrawn.</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
