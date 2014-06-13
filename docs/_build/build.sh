@@ -2,18 +2,19 @@
 
 VERSION=$1
 
-if [ -z $VERSION ]; then
-  echo "Specify a version ie. 0.2.3"
-  exit
-fi
+#if [ -z $VERSION ]; then
+  #echo "Specify a version ie. 0.2.3"
+  #exit
+#fi
 
-mkdir $VERSION
-curl "http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/$VERSION/mapbox-android-sdk-$VERSION-javadoc.jar" > $VERSION/mapbox-android-sdk-$VERSION.jar
+#mkdir $VERSION
+#curl "http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/$VERSION/mapbox-android-sdk-$VERSION-javadoc.jar" > $VERSION/mapbox-android-sdk-$VERSION.jar
 
-cd $VERSION && unzip mapbox-android-sdk-$VERSION.jar
+cd $VERSION
+#cd $VERSION && unzip mapbox-android-sdk-$VERSION.jar
 
 # Drop some things we dont need
-rm mapbox-android-sdk-$VERSION.jar
+#rm mapbox-android-sdk-$VERSION.jar
 rm -rf '../../_posts/api/*'
 
 ALL=''
@@ -27,8 +28,8 @@ scrape() {
   tail -n +$FR $1 | head -n $LINES | \
     sed -e 's,<br[ /]*>,,g' \
     -e 's,<hr>,,g' \
-    -e 's,<a href="../../../../com/mapbox/mapboxsdk/.*/\([^"]*\).html\(#*[^"]*\)",<a href="{{site.baseurl}}/api/\1\2",g' \
-    -e 's,<caption>.*</caption>,,g' \
+    -e 's,<caption>,<caption class="small dark strong round-top pad1 fill-darken3">,g' \
+    -e 's,<a href="[./]*com/mapbox/mapboxsdk/.*/\([^"]*\).html\(#*[^"]*\)",<a href="{{site.baseurl}}/api/\1\2",g' \
     -e '1,/^\<div class="description">$/b' \
     -e 's,<ul class="inheritance">,,g' \
     -e 's,<ul class="blockList">,,g' \
@@ -44,15 +45,15 @@ for file in `find com/mapbox/mapboxsdk/*/*.html | grep -v package-`; do
 CONTENT="\
 ---
 layout: api
-title: $(echo ${file##*/} | sed -e 's/\([a-z]\)\([A-Z]\)/\1 \2/g' -e 's/\.html$//')
+title: $(echo ${file##*/} | sed -e 's/\([a-z]\)\([A-Z]\)/\1\2/g' -e 's/\.html$//')
 category: api
-tags: $(echo $file | sed 's#.*/\([^/]*\)/[^/]*#\1#')
+tags: $(echo $file | sed 's,com/mapbox/mapboxsdk/\([^/]*\)/.*,\1,')
 ---"
 
 FILENAME=$(echo '../../_posts/api/0100-01-01-'${file##*/} | sed -e 's/\([a-z]\)\([A-Z]\)/\1\2/g' | tr '[:upper:]' '[:lower:]')
 CONTENT="$CONTENT\n$(scrape $file)"
 
-ALL="$ALL\n$(scrape $file)"
+ALL="$ALL\n <h2>$(echo ${file##*/} | sed -e 's/\([a-z]\)\([A-Z]\)/\1\2/g' -e 's/\.html$//')</h2>\n $(scrape $file)"
 
 echo -e "$CONTENT" > $FILENAME
 done
