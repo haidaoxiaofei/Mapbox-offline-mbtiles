@@ -32,14 +32,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AlternateMapTestFragment"
-                android:label="@string/alternateTestMap">
-        </activity>
-
-		<activity android:name=".MarkersTestFragment"
-				  android:label="@string/markersTestMap">
-		</activity>
-
     </application>
 
 </manifest>
