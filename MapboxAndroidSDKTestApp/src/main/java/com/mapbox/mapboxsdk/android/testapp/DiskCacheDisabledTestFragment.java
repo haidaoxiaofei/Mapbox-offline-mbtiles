@@ -10,14 +10,13 @@ import com.mapbox.mapboxsdk.views.MapView;
 
 public class DiskCacheDisabledTestFragment extends Fragment
 {
-    private MapView mapView;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_diskcachedisabled, container, false);
 
         // Setup Map
-        mapView = (MapView) view.findViewById(R.id.diskCacheDisableMapView);
+        MapView mapView = (MapView) view.findViewById(R.id.diskCacheDisableMapView);
+        mapView.getTileProvider().setDiskCacheEnabled(false);
         mapView.setCenter(new LatLng(-22.95903, -43.17970));
         mapView.setZoom(14);
 
