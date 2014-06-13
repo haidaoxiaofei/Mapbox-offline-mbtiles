@@ -1,0 +1,160 @@
+---
+layout: api
+title: Map Tile Request State
+category: api
+tags: tileprovider
+---
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>com.mapbox.mapboxsdk.tileprovider.MapTileRequestState</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+
+
+
+
+<pre>public class <span class="strong">MapTileRequestState</span>
+extends java.lang.Object</pre>
+<div class="block">Track the status of a single map tile given a list of providers that could
+ change its state by loading, caching, or disposing it.</div>
+
+
+</div>
+<div class="summary">
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;mapTile,
+                   <a href="{{site.baseurl}}/api/MapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>[]&nbsp;providers,
+                   <a href="{{site.baseurl}}/api/IMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a>&nbsp;callback)</code>
+<div class="block">Initialize a new state to keep track of a map tile</div>
+</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/IMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileRequestState#getCallback()">getCallback</a></strong>()</code>
+<div class="block">Get the assigned callback</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileRequestState#getMapTile()">getMapTile</a></strong>()</code>
+<div class="block">Get the map tile this class owns</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/MapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileRequestState#getNextProvider()">getNextProvider</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="MapTileRequestState(com.mapbox.mapboxsdk.tileprovider.MapTile, com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase[], com.mapbox.mapboxsdk.tileprovider.IMapTileProviderCallback)">
+<!--   -->
+</a>
+
+
+<h4>MapTileRequestState</h4>
+<pre>public&nbsp;MapTileRequestState(<a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;mapTile,
+                   <a href="{{site.baseurl}}/api/MapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>[]&nbsp;providers,
+                   <a href="{{site.baseurl}}/api/IMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a>&nbsp;callback)</pre>
+<div class="block">Initialize a new state to keep track of a map tile</div>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getMapTile()">
+<!--   -->
+</a>
+
+
+<h4>getMapTile</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;getMapTile()</pre>
+<div class="block">Get the map tile this class owns</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>this map tile</dd></dl>
+
+
+<a name="getCallback()">
+<!--   -->
+</a>
+
+
+<h4>getCallback</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/IMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a>&nbsp;getCallback()</pre>
+<div class="block">Get the assigned callback</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the assigned callback</dd></dl>
+
+
+<a name="getNextProvider()">
+<!--   -->
+</a>
+
+
+<h4>getNextProvider</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/MapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>&nbsp;getNextProvider()</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

@@ -1,0 +1,262 @@
+---
+layout: api
+title: Map View.Layout Params
+category: api
+tags: views
+---
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>android.view.ViewGroup.LayoutParams</li>
+<li>
+<ul class="inheritance">
+<li>com.mapbox.mapboxsdk.views.MapView.LayoutParams</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+
+
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/MapViewLayouts" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewLayouts</a></dd>
+</dl>
+<dl>
+<dt>Enclosing class:</dt>
+<dd><a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></dd>
+</dl>
+
+
+<pre>public static class <span class="strong">MapView.LayoutParams</span>
+extends android.view.ViewGroup.LayoutParams
+implements <a href="{{site.baseurl}}/api/MapViewLayouts" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewLayouts</a></pre>
+<div class="block">Per-child layout information associated with OpenStreetMapView.</div>
+
+
+</div>
+<div class="summary">
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapView.LayoutParams#alignment">alignment</a></strong></code>
+<div class="block">The alignment the alignment of the view compared to the location.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/ILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapView.LayoutParams#geoPoint">geoPoint</a></strong></code>
+<div class="block">The location of the child within the map view.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapView.LayoutParams#offsetX">offsetX</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapView.LayoutParams#offsetY">offsetY</a></strong></code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="fields_inherited_from_class_android.view.ViewGroup.LayoutParams">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;android.view.ViewGroup.LayoutParams</h3>
+<code>FILL_PARENT, height, layoutAnimationParameters, MATCH_PARENT, width, WRAP_CONTENT</code>
+
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.views.util.constants.<a href="{{site.baseurl}}/api/MapViewLayouts" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewLayouts</a></h3>
+<code><a href="{{site.baseurl}}/api/MapViewLayouts#TOP_RIGHT">TOP_RIGHT</a></code>
+
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/MapView.LayoutParams#MapView.LayoutParams(android.content.Context, android.util.AttributeSet)">MapView.LayoutParams</a></strong>(android.content.Context&nbsp;c,
+                    android.util.AttributeSet&nbsp;attrs)</code>
+<div class="block">Since we cannot use XML files in this project this constructor is useless.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/MapView.LayoutParams#MapView.LayoutParams(int, int, com.mapbox.mapboxsdk.api.ILatLng, int, int, int)">MapView.LayoutParams</a></strong>(int&nbsp;width,
+                    int&nbsp;height,
+                    <a href="{{site.baseurl}}/api/ILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aGeoPoint,
+                    int&nbsp;aAlignment,
+                    int&nbsp;aOffsetX,
+                    int&nbsp;aOffsetY)</code>
+<div class="block">Creates a new set of layout parameters with the specified width, height and location.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/MapView.LayoutParams#MapView.LayoutParams(android.view.ViewGroup.LayoutParams)">MapView.LayoutParams</a></strong>(android.view.ViewGroup.LayoutParams&nbsp;source)</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+
+<a name="methods_inherited_from_class_android.view.ViewGroup.LayoutParams">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;android.view.ViewGroup.LayoutParams</h3>
+<code>resolveLayoutDirection, setBaseAttributes</code>
+
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="geoPoint">
+<!--   -->
+</a>
+
+
+<h4>geoPoint</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/ILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a> geoPoint</pre>
+<div class="block">The location of the child within the map view.</div>
+
+
+<a name="alignment">
+<!--   -->
+</a>
+
+
+<h4>alignment</h4>
+<pre>public&nbsp;int alignment</pre>
+<div class="block">The alignment the alignment of the view compared to the location.</div>
+
+
+<a name="offsetX">
+<!--   -->
+</a>
+
+
+<h4>offsetX</h4>
+<pre>public&nbsp;int offsetX</pre>
+
+
+<a name="offsetY">
+<!--   -->
+</a>
+
+
+<h4>offsetY</h4>
+<pre>public&nbsp;int offsetY</pre>
+
+
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="MapView.LayoutParams(int, int, com.mapbox.mapboxsdk.api.ILatLng, int, int, int)">
+<!--   -->
+</a>
+
+
+<h4>MapView.LayoutParams</h4>
+<pre>public&nbsp;MapView.LayoutParams(int&nbsp;width,
+                    int&nbsp;height,
+                    <a href="{{site.baseurl}}/api/ILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aGeoPoint,
+                    int&nbsp;aAlignment,
+                    int&nbsp;aOffsetX,
+                    int&nbsp;aOffsetY)</pre>
+<div class="block">Creates a new set of layout parameters with the specified width, height and location.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>width</code> - the width, either <code>ViewGroup.LayoutParams.FILL_PARENT</code>, <code>ViewGroup.LayoutParams.WRAP_CONTENT</code> or a fixed
+                   size
+                   in pixels</dd><dd><code>height</code> - the height, either <code>ViewGroup.LayoutParams.FILL_PARENT</code>, <code>ViewGroup.LayoutParams.WRAP_CONTENT</code> or a fixed
+                   size
+                   in pixels</dd><dd><code>aGeoPoint</code> - the location of the child within the map view</dd><dd><code>aAlignment</code> - the alignment of the view compared to the location <a href="{{site.baseurl}}/api/MapViewLayouts#BOTTOM_CENTER"><code>MapViewLayouts.BOTTOM_CENTER</code></a>,
+                   <a href="{{site.baseurl}}/api/MapViewLayouts#TOP_CENTER"><code>MapViewLayouts.TOP_CENTER</code></a>,
+                   <a href="{{site.baseurl}}/api/MapViewLayouts#TOP_RIGHT"><code>MapViewLayouts.TOP_RIGHT</code></a></dd><dd><code>aOffsetX</code> - the additional X offset from the alignment location to draw the child
+                   within
+                   the map view</dd><dd><code>aOffsetY</code> - the additional Y offset from the alignment location to draw the child
+                   within
+                   the map view</dd></dl>
+
+
+<a name="MapView.LayoutParams(android.content.Context, android.util.AttributeSet)">
+<!--   -->
+</a>
+
+
+<h4>MapView.LayoutParams</h4>
+<pre>public&nbsp;MapView.LayoutParams(android.content.Context&nbsp;c,
+                    android.util.AttributeSet&nbsp;attrs)</pre>
+<div class="block">Since we cannot use XML files in this project this constructor is useless. Creates a new
+ set of layout parameters. The values are extracted from the supplied attributes set and
+ context.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>c</code> - the application environment</dd><dd><code>attrs</code> - the set of attributes fom which to extract the layout parameters values</dd></dl>
+
+
+<a name="MapView.LayoutParams(android.view.ViewGroup.LayoutParams)">
+<!--   -->
+</a>
+
+
+<h4>MapView.LayoutParams</h4>
+<pre>public&nbsp;MapView.LayoutParams(android.view.ViewGroup.LayoutParams&nbsp;source)</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

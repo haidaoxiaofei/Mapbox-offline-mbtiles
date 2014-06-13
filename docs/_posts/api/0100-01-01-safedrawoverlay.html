@@ -1,0 +1,223 @@
+---
+layout: api
+title: Safe Draw Overlay
+category: api
+tags: overlay
+---
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li><a href="{{site.baseurl}}/api/Overlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.Overlay</a></li>
+<li>
+<ul class="inheritance">
+<li>com.mapbox.mapboxsdk.overlay.SafeDrawOverlay</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+
+
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="{{site.baseurl}}/api/UserLocationOverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a></dd>
+</dl>
+
+
+<pre>public abstract class <span class="strong">SafeDrawOverlay</span>
+extends <a href="{{site.baseurl}}/api/Overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></pre>
+<div class="block">An overlay class that uses the safe drawing canvas to draw itself and can be zoomed in to high
+ levels without drawing issues.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>ISafeCanvas}</code></dd></dl>
+
+
+</div>
+<div class="summary">
+
+
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<a name="nested_class_summary">
+<!--   -->
+</a>
+<h3>Nested Class Summary</h3>
+
+<a name="nested_classes_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
+<!--   -->
+</a>
+<h3>Nested classes/interfaces inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/Overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/Overlay.Snappable" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></code>
+
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/Overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/Overlay#mScale">mScale</a></code>
+
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/SafeDrawOverlay#SafeDrawOverlay()">SafeDrawOverlay</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeDrawOverlay#draw(android.graphics.Canvas, com.mapbox.mapboxsdk.views.MapView, boolean)">draw</a></strong>(android.graphics.Canvas&nbsp;c,
+    <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+    boolean&nbsp;shadow)</code>
+<div class="block">Draw the overlay over the map.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected abstract void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;c,
+        <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+        boolean&nbsp;shadow)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeDrawOverlay#isUsingSafeCanvas()">isUsingSafeCanvas</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeDrawOverlay#setUseSafeCanvas(boolean)">setUseSafeCanvas</a></strong>(boolean&nbsp;useSafeCanvas)</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/Overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/Overlay#setEnabled(boolean)">setEnabled</a></code>
+
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="SafeDrawOverlay()">
+<!--   -->
+</a>
+
+
+<h4>SafeDrawOverlay</h4>
+<pre>public&nbsp;SafeDrawOverlay()</pre>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="drawSafe(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas, com.mapbox.mapboxsdk.views.MapView, boolean)">
+<!--   -->
+</a>
+
+
+<h4>drawSafe</h4>
+<pre>protected abstract&nbsp;void&nbsp;drawSafe(<a href="{{site.baseurl}}/api/ISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;c,
+            <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+            boolean&nbsp;shadow)</pre>
+
+
+<a name="draw(android.graphics.Canvas, com.mapbox.mapboxsdk.views.MapView, boolean)">
+<!--   -->
+</a>
+
+
+<h4>draw</h4>
+<pre>protected&nbsp;void&nbsp;draw(android.graphics.Canvas&nbsp;c,
+        <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+        boolean&nbsp;shadow)</pre>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/Overlay#draw(android.graphics.Canvas, com.mapbox.mapboxsdk.views.MapView, boolean)">Overlay</a></code></strong></div>
+<div class="block">Draw the overlay over the map. This will be called on all active overlays with shadow=true,
+ to lay down the shadow layer, and then again on all overlays with shadow=false. Callers
+ should check isEnabled() before calling draw(). By default, draws nothing.</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/Overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></code></dd>
+</dl>
+
+
+<a name="isUsingSafeCanvas()">
+<!--   -->
+</a>
+
+
+<h4>isUsingSafeCanvas</h4>
+<pre>public&nbsp;boolean&nbsp;isUsingSafeCanvas()</pre>
+
+
+<a name="setUseSafeCanvas(boolean)">
+<!--   -->
+</a>
+
+
+<h4>setUseSafeCanvas</h4>
+<pre>public&nbsp;void&nbsp;setUseSafeCanvas(boolean&nbsp;useSafeCanvas)</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

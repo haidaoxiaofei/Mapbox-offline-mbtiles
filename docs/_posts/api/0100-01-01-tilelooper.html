@@ -1,0 +1,256 @@
+---
+layout: api
+title: Tile Looper
+category: api
+tags: util
+---
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>com.mapbox.mapboxsdk.util.TileLooper</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+
+
+
+
+<pre>public abstract class <span class="strong">TileLooper</span>
+extends java.lang.Object</pre>
+<div class="block">A class that will loop around all the map tiles in the given viewport.</div>
+
+
+</div>
+<div class="summary">
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected android.graphics.Point</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/TileLooper#center">center</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected java.util.List&lt;<a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/TileLooper#mBeingUsedDrawables">mBeingUsedDrawables</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected android.graphics.Point</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/TileLooper#mLowerRight">mLowerRight</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected android.graphics.Point</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/TileLooper#mUpperLeft">mUpperLeft</a></strong></code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/TileLooper#TileLooper()">TileLooper</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/TileLooper#finalizeLoop()">finalizeLoop</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/TileLooper#handleTile(android.graphics.Canvas, java.lang.String, int, com.mapbox.mapboxsdk.tileprovider.MapTile, int, int, android.graphics.Rect)">handleTile</a></strong>(android.graphics.Canvas&nbsp;pCanvas,
+          java.lang.String&nbsp;pCacheKey,
+          int&nbsp;pTileSizePx,
+          <a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
+          int&nbsp;pX,
+          int&nbsp;pY,
+          android.graphics.Rect&nbsp;pClipRect)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>abstract void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/TileLooper#initializeLoop(float, int)">initializeLoop</a></strong>(float&nbsp;pZoomLevel,
+              int&nbsp;pTileSizePx)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/TileLooper#loop(android.graphics.Canvas, java.lang.String, float, int, android.graphics.Rect, android.graphics.Rect)">loop</a></strong>(android.graphics.Canvas&nbsp;pCanvas,
+    java.lang.String&nbsp;pCacheKey,
+    float&nbsp;pZoomLevel,
+    int&nbsp;pTileSizePx,
+    android.graphics.Rect&nbsp;pViewPort,
+    android.graphics.Rect&nbsp;pClipRect)</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="mUpperLeft">
+<!--   -->
+</a>
+
+
+<h4>mUpperLeft</h4>
+<pre>protected final&nbsp;android.graphics.Point mUpperLeft</pre>
+
+
+<a name="mLowerRight">
+<!--   -->
+</a>
+
+
+<h4>mLowerRight</h4>
+<pre>protected final&nbsp;android.graphics.Point mLowerRight</pre>
+
+
+<a name="center">
+<!--   -->
+</a>
+
+
+<h4>center</h4>
+<pre>protected final&nbsp;android.graphics.Point center</pre>
+
+
+<a name="mBeingUsedDrawables">
+<!--   -->
+</a>
+
+
+<h4>mBeingUsedDrawables</h4>
+<pre>protected&nbsp;java.util.List&lt;<a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a>&gt; mBeingUsedDrawables</pre>
+
+
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="TileLooper()">
+<!--   -->
+</a>
+
+
+<h4>TileLooper</h4>
+<pre>public&nbsp;TileLooper()</pre>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="loop(android.graphics.Canvas, java.lang.String, float, int, android.graphics.Rect, android.graphics.Rect)">
+<!--   -->
+</a>
+
+
+<h4>loop</h4>
+<pre>public final&nbsp;void&nbsp;loop(android.graphics.Canvas&nbsp;pCanvas,
+        java.lang.String&nbsp;pCacheKey,
+        float&nbsp;pZoomLevel,
+        int&nbsp;pTileSizePx,
+        android.graphics.Rect&nbsp;pViewPort,
+        android.graphics.Rect&nbsp;pClipRect)</pre>
+
+
+<a name="initializeLoop(float, int)">
+<!--   -->
+</a>
+
+
+<h4>initializeLoop</h4>
+<pre>public abstract&nbsp;void&nbsp;initializeLoop(float&nbsp;pZoomLevel,
+                  int&nbsp;pTileSizePx)</pre>
+
+
+<a name="handleTile(android.graphics.Canvas, java.lang.String, int, com.mapbox.mapboxsdk.tileprovider.MapTile, int, int, android.graphics.Rect)">
+<!--   -->
+</a>
+
+
+<h4>handleTile</h4>
+<pre>public abstract&nbsp;void&nbsp;handleTile(android.graphics.Canvas&nbsp;pCanvas,
+              java.lang.String&nbsp;pCacheKey,
+              int&nbsp;pTileSizePx,
+              <a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
+              int&nbsp;pX,
+              int&nbsp;pY,
+              android.graphics.Rect&nbsp;pClipRect)</pre>
+
+
+<a name="finalizeLoop()">
+<!--   -->
+</a>
+
+
+<h4>finalizeLoop</h4>
+<pre>public&nbsp;void&nbsp;finalizeLoop()</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

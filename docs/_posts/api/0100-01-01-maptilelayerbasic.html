@@ -1,0 +1,263 @@
+---
+layout: api
+title: Map Tile Layer Basic
+category: api
+tags: tileprovider
+---
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li><a href="{{site.baseurl}}/api/MapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase</a></li>
+<li>
+<ul class="inheritance">
+<li><a href="{{site.baseurl}}/api/MapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider">com.mapbox.mapboxsdk.tileprovider.MapTileLayerArray</a></li>
+<li>
+<ul class="inheritance">
+<li>com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+
+
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/IMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></dd>
+</dl>
+
+
+<pre>public class <span class="strong">MapTileLayerBasic</span>
+extends <a href="{{site.baseurl}}/api/MapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerArray</a>
+implements <a href="{{site.baseurl}}/api/IMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></pre>
+<div class="block">A base class for tile layers to built, this is a simple collection of tile sources.</div>
+
+
+</div>
+<div class="summary">
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.MapTileLayerArray">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="{{site.baseurl}}/api/MapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerArray</a></h3>
+<code><a href="{{site.baseurl}}/api/MapTileLayerArray#mWorking">mWorking</a></code>
+
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="{{site.baseurl}}/api/MapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></h3>
+<code><a href="{{site.baseurl}}/api/MapTileLayerBase#mTileCache">mTileCache</a></code>
+
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.constants.<a href="{{site.baseurl}}/api/TileLayerConstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/TileLayerConstants#WORLD_BOUNDING_BOX">WORLD_BOUNDING_BOX</a></code>
+
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBasic#MapTileLayerBasic(android.content.Context, com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, com.mapbox.mapboxsdk.views.MapView)">MapTileLayerBasic</a></strong>(android.content.Context&nbsp;pContext,
+                 <a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
+                 <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
+             int&nbsp;index)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBasic#removeTileSource(int)">removeTileSource</a></strong>(int&nbsp;index)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</code>
+<div class="block">Sets the tile source for this tile provider.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>[]&nbsp;aTileSources)</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.MapTileLayerArray">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="{{site.baseurl}}/api/MapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerArray</a></h3>
+<code><a href="{{site.baseurl}}/api/MapTileLayerArray#mapTileRequestFailed(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">mapTileRequestFailed</a></code>
+
+
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="{{site.baseurl}}/api/MapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></h3>
+<code><a href="{{site.baseurl}}/api/MapTileLayerBase#useDataConnection()">useDataConnection</a></code>
+
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.IMapTileProviderCallback">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="{{site.baseurl}}/api/IMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></h3>
+<code><a href="{{site.baseurl}}/api/IMapTileProviderCallback#useDataConnection()">useDataConnection</a></code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="MapTileLayerBasic(android.content.Context, com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, com.mapbox.mapboxsdk.views.MapView)">
+<!--   -->
+</a>
+
+
+<h4>MapTileLayerBasic</h4>
+<pre>public&nbsp;MapTileLayerBasic(android.content.Context&nbsp;pContext,
+                 <a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
+                 <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>pContext</code> - </dd><dd><code>pTileSource</code> - </dd><dd><code>mapView</code> - </dd></dl>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="setTileSource(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer)">
+<!--   -->
+</a>
+
+
+<h4>setTileSource</h4>
+<pre>public&nbsp;void&nbsp;setTileSource(<a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</pre>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/MapTileLayerBase#setTileSource(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer)">MapTileLayerBase</a></code></strong></div>
+<div class="block">Sets the tile source for this tile provider.</div>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/MapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerArray</a></code></dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>aTileSource</code> - the tile source</dd></dl>
+
+
+<a name="setTileSources(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer[])">
+<!--   -->
+</a>
+
+
+<h4>setTileSources</h4>
+<pre>public&nbsp;void&nbsp;setTileSources(<a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>[]&nbsp;aTileSources)</pre>
+
+
+<a name="addTileSource(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer)">
+<!--   -->
+</a>
+
+
+<h4>addTileSource</h4>
+<pre>public&nbsp;void&nbsp;addTileSource(<a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource)</pre>
+
+
+<a name="addTileSource(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, int)">
+<!--   -->
+</a>
+
+
+<h4>addTileSource</h4>
+<pre>public&nbsp;void&nbsp;addTileSource(<a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
+                 int&nbsp;index)</pre>
+
+
+<a name="removeTileSource(int)">
+<!--   -->
+</a>
+
+
+<h4>removeTileSource</h4>
+<pre>public&nbsp;void&nbsp;removeTileSource(int&nbsp;index)</pre>
+
+
+<a name="removeTileSource(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer)">
+<!--   -->
+</a>
+
+
+<h4>removeTileSource</h4>
+<pre>public&nbsp;void&nbsp;removeTileSource(<a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource)</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

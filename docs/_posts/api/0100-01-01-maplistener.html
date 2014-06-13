@@ -1,0 +1,93 @@
+---
+layout: api
+title: Map Listener
+category: api
+tags: events
+---
+<div class="contentContainer">
+<div class="description">
+
+
+<dl>
+<dt>All Known Implementing Classes:</dt>
+<dd><a href="{{site.baseurl}}/api/UserLocationOverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a></dd>
+</dl>
+
+
+<pre>public interface <span class="strong">MapListener</span></pre>
+<div class="block">The listener interface for receiving map movement events. To process a map event, either
+ implement this interface or extend MapAdapter, then register with the MapView using
+ setMapListener.</div>
+
+
+</div>
+<div class="summary">
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ScrollEvent" title="class in com.mapbox.mapboxsdk.events">ScrollEvent</a>&nbsp;event)</code>
+<div class="block">Called when a map is scrolled.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ZoomEvent" title="class in com.mapbox.mapboxsdk.events">ZoomEvent</a>&nbsp;event)</code>
+<div class="block">Called when a map is zoomed.</div>
+</td>
+</tr>
+</table>
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="onScroll(com.mapbox.mapboxsdk.events.ScrollEvent)">
+<!--   -->
+</a>
+
+
+<h4>onScroll</h4>
+<pre>void&nbsp;onScroll(<a href="{{site.baseurl}}/api/ScrollEvent" title="class in com.mapbox.mapboxsdk.events">ScrollEvent</a>&nbsp;event)</pre>
+<div class="block">Called when a map is scrolled.</div>
+
+
+<a name="onZoom(com.mapbox.mapboxsdk.events.ZoomEvent)">
+<!--   -->
+</a>
+
+
+<h4>onZoom</h4>
+<pre>void&nbsp;onZoom(<a href="{{site.baseurl}}/api/ZoomEvent" title="class in com.mapbox.mapboxsdk.events">ZoomEvent</a>&nbsp;event)</pre>
+<div class="block">Called when a map is zoomed.</div>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

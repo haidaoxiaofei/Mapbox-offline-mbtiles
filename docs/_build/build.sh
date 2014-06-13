@@ -7,14 +7,13 @@ if [ -z $VERSION ]; then
   exit
 fi
 
-#mkdir $VERSION
-#curl "http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/$VERSION/mapbox-android-sdk-$VERSION-javadoc.jar" > $VERSION/mapbox-android-sdk-$VERSION.jar
+mkdir $VERSION
+curl "http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/$VERSION/mapbox-android-sdk-$VERSION-javadoc.jar" > $VERSION/mapbox-android-sdk-$VERSION.jar
 
-cd $VERSION
-#cd $VERSION && unzip mapbox-android-sdk-$VERSION.jar
+cd $VERSION && unzip mapbox-android-sdk-$VERSION.jar
 
-#rm mapbox-android-sdk-$VERSION.jar
-
+# Drop some things we dont need
+rm mapbox-android-sdk-$VERSION.jar
 rm -rf '../../_posts/api/*'
 
 ALL=''
@@ -28,6 +27,7 @@ scrape() {
   tail -n +$FR $1 | head -n $LINES | \
     sed -e 's,<br[ /]*>,,g' \
     -e 's,<hr>,,g' \
+    -e 's,<a href="../../../../com/mapbox/mapboxsdk/.*/\([^"]*\).html\(#*[^"]*\)",<a href="{{site.baseurl}}/api/\1\2",g' \
     -e 's,<caption>.*</caption>,,g' \
     -e '1,/^\<div class="description">$/b' \
     -e 's,<ul class="inheritance">,,g' \
@@ -49,7 +49,7 @@ category: api
 tags: $(echo $file | sed 's#.*/\([^/]*\)/[^/]*#\1#')
 ---"
 
-FILENAME=$(echo '../../_posts/api/0100-01-01-'${file##*/} | sed -e 's/\([a-z]\)\([A-Z]\)/\1-\2/g' | tr '[:upper:]' '[:lower:]')
+FILENAME=$(echo '../../_posts/api/0100-01-01-'${file##*/} | sed -e 's/\([a-z]\)\([A-Z]\)/\1\2/g' | tr '[:upper:]' '[:lower:]')
 CONTENT="$CONTENT\n$(scrape $file)"
 
 ALL="$ALL\n$(scrape $file)"
@@ -60,7 +60,7 @@ done
 ALLYAML="\
 ---
 layout: api
-title: Mapbox Android API $VERSION
+title: Mapbox Android SDK $VERSION
 category: api
 ---"
 

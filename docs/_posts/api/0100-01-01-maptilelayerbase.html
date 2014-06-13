@@ -1,0 +1,669 @@
+---
+layout: api
+title: Map Tile Layer Base
+category: api
+tags: tileprovider
+---
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+
+
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/IMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></dd>
+</dl>
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="{{site.baseurl}}/api/MapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerArray</a></dd>
+</dl>
+
+
+<pre>public abstract class <span class="strong">MapTileLayerBase</span>
+extends java.lang.Object
+implements <a href="{{site.baseurl}}/api/TileLayerConstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></pre>
+<div class="block">This is an abstract class. The tile provider is responsible for:
+ <ul>
+ determining if a map tile is available,
+ notifying the client, via a callback handler
+ 
+ see <a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTile</code></a> for an overview of how tiles are served by this provider.</div>
+
+
+</div>
+<div class="summary">
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected android.content.Context</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#context">context</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#mCacheKey">mCacheKey</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/MapTileCache" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileCache</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#mTileCache">mTileCache</a></strong></code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.constants.<a href="{{site.baseurl}}/api/TileLayerConstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/TileLayerConstants#WORLD_BOUNDING_BOX">WORLD_BOUNDING_BOX</a></code>
+
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#MapTileLayerBase(android.content.Context, com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer)">MapTileLayerBase</a></strong>(android.content.Context&nbsp;aContext,
+                <a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#MapTileLayerBase(android.content.Context, com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, android.os.Handler)">MapTileLayerBase</a></strong>(android.content.Context&nbsp;aContext,
+                <a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
+                android.os.Handler&nbsp;pDownloadFinishedListener)</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#clearTileDiskCache()">clearTileDiskCache</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#clearTileMemoryCache()">clearTileMemoryCache</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#createCacheableBitmapDrawable(android.graphics.Bitmap, com.mapbox.mapboxsdk.tileprovider.MapTile)">createCacheableBitmapDrawable</a></strong>(android.graphics.Bitmap&nbsp;bitmap,
+                             <a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;aTile)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/MapTileCache" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileCache</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#createTileCache(android.content.Context)">createTileCache</a></strong>(android.content.Context&nbsp;aContext)</code>
+<div class="block">Creates a <a href="{{site.baseurl}}/api/MapTileCache" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileCache</code></a> to be used to cache tiles in memory.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>abstract void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#detach()">detach</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>android.graphics.Bitmap</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#getBitmapFromRemoved(int, int)">getBitmapFromRemoved</a></strong>(int&nbsp;width,
+                    int&nbsp;height)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/BoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#getBoundingBox()">getBoundingBox</a></strong>()</code>
+<div class="block">Get the tile provider bounding box.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#getCacheKey()">getCacheKey</a></strong>()</code>
+<div class="block">Gets the cache key for that layer</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#getCenterCoordinate()">getCenterCoordinate</a></strong>()</code>
+<div class="block">Get the tile provider center.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#getCenterZoom()">getCenterZoom</a></strong>()</code>
+<div class="block">Get the tile provider suggested starting zoom.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>abstract android.graphics.drawable.Drawable</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile)</code>
+<div class="block">Attempts to get a Drawable that represents a <a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTile</code></a>.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#getMaximumZoomLevel()">getMaximumZoomLevel</a></strong>()</code>
+<div class="block">Get the maximum zoom level this tile provider can provide.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#getMinimumZoomLevel()">getMinimumZoomLevel</a></strong>()</code>
+<div class="block">Gets the minimum zoom level this tile provider can provide</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#getTileSizePixels()">getTileSizePixels</a></strong>()</code>
+<div class="block">Get the tile size in pixels this tile provider provides.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#getTileSource()">getTileSource</a></strong>()</code>
+<div class="block">Gets the tile source for this tile provider.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#hasNoSource()">hasNoSource</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState,
+                       android.graphics.drawable.Drawable&nbsp;pDrawable)</code>
+<div class="block">Called by implementation class methods indicating that they have completed the request as
+ best it can.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState,
+                         <a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a>&nbsp;pDrawable)</code>
+<div class="block">Called by implementation class methods indicating that they have produced an expired result
+ that can be used but better results may be delivered later.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState)</code>
+<div class="block">Called by implementation class methods indicating that they have failed to retrieve the
+ requested map tile.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
+                       android.graphics.Bitmap&nbsp;bitmap)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState,
+                android.graphics.drawable.Drawable&nbsp;pDrawable)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;aTile)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#setTileRequestCompleteHandler(android.os.Handler)">setTileRequestCompleteHandler</a></strong>(android.os.Handler&nbsp;handler)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource)</code>
+<div class="block">Sets the tile source for this tile provider.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#setUseDataConnection(boolean)">setUseDataConnection</a></strong>(boolean&nbsp;pMode)</code>
+<div class="block">Set whether to use the network connection if it's available.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileLayerBase#useDataConnection()">useDataConnection</a></strong>()</code>
+<div class="block">Whether to use the network connection if it's available.</div>
+</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="context">
+<!--   -->
+</a>
+
+
+<h4>context</h4>
+<pre>protected&nbsp;android.content.Context context</pre>
+
+
+<a name="mTileCache">
+<!--   -->
+</a>
+
+
+<h4>mTileCache</h4>
+<pre>protected final&nbsp;<a href="{{site.baseurl}}/api/MapTileCache" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileCache</a> mTileCache</pre>
+
+
+<a name="mCacheKey">
+<!--   -->
+</a>
+
+
+<h4>mCacheKey</h4>
+<pre>protected&nbsp;java.lang.String mCacheKey</pre>
+
+
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="MapTileLayerBase(android.content.Context, com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer)">
+<!--   -->
+</a>
+
+
+<h4>MapTileLayerBase</h4>
+<pre>public&nbsp;MapTileLayerBase(android.content.Context&nbsp;aContext,
+                <a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource)</pre>
+
+
+<a name="MapTileLayerBase(android.content.Context, com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, android.os.Handler)">
+<!--   -->
+</a>
+
+
+<h4>MapTileLayerBase</h4>
+<pre>public&nbsp;MapTileLayerBase(android.content.Context&nbsp;aContext,
+                <a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
+                android.os.Handler&nbsp;pDownloadFinishedListener)</pre>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getMapTile(com.mapbox.mapboxsdk.tileprovider.MapTile)">
+<!--   -->
+</a>
+
+
+<h4>getMapTile</h4>
+<pre>public abstract&nbsp;android.graphics.drawable.Drawable&nbsp;getMapTile(<a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile)</pre>
+<div class="block">Attempts to get a Drawable that represents a <a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTile</code></a>. If the tile is not immediately
+ available this will return null and attempt to get the tile from known tile sources for
+ subsequent future requests. Note that this may return a <a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache"><code>CacheableBitmapDrawable</code></a> in
+ which case you should follow proper handling procedures for using that Drawable or it may
+ reused while you are working with it.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache"><code>CacheableBitmapDrawable</code></a></dd></dl>
+
+
+<a name="detach()">
+<!--   -->
+</a>
+
+
+<h4>detach</h4>
+<pre>public abstract&nbsp;void&nbsp;detach()</pre>
+
+
+<a name="getMinimumZoomLevel()">
+<!--   -->
+</a>
+
+
+<h4>getMinimumZoomLevel</h4>
+<pre>public&nbsp;float&nbsp;getMinimumZoomLevel()</pre>
+<div class="block">Gets the minimum zoom level this tile provider can provide</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the minimum zoom level</dd></dl>
+
+
+<a name="getMaximumZoomLevel()">
+<!--   -->
+</a>
+
+
+<h4>getMaximumZoomLevel</h4>
+<pre>public&nbsp;float&nbsp;getMaximumZoomLevel()</pre>
+<div class="block">Get the maximum zoom level this tile provider can provide.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the maximum zoom level</dd></dl>
+
+
+<a name="getTileSizePixels()">
+<!--   -->
+</a>
+
+
+<h4>getTileSizePixels</h4>
+<pre>public&nbsp;int&nbsp;getTileSizePixels()</pre>
+<div class="block">Get the tile size in pixels this tile provider provides.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the tile size in pixels</dd></dl>
+
+
+<a name="getBoundingBox()">
+<!--   -->
+</a>
+
+
+<h4>getBoundingBox</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/BoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getBoundingBox()</pre>
+<div class="block">Get the tile provider bounding box.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the tile source bounding box</dd></dl>
+
+
+<a name="getCenterCoordinate()">
+<!--   -->
+</a>
+
+
+<h4>getCenterCoordinate</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;getCenterCoordinate()</pre>
+<div class="block">Get the tile provider center.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the tile source center</dd></dl>
+
+
+<a name="getCenterZoom()">
+<!--   -->
+</a>
+
+
+<h4>getCenterZoom</h4>
+<pre>public&nbsp;float&nbsp;getCenterZoom()</pre>
+<div class="block">Get the tile provider suggested starting zoom.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the tile suggested starting zoom</dd></dl>
+
+
+<a name="setTileSource(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer)">
+<!--   -->
+</a>
+
+
+<h4>setTileSource</h4>
+<pre>public&nbsp;void&nbsp;setTileSource(<a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource)</pre>
+<div class="block">Sets the tile source for this tile provider.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>pTileSource</code> - the tile source</dd></dl>
+
+
+<a name="getTileSource()">
+<!--   -->
+</a>
+
+
+<h4>getTileSource</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;getTileSource()</pre>
+<div class="block">Gets the tile source for this tile provider.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the tile source</dd></dl>
+
+
+<a name="getCacheKey()">
+<!--   -->
+</a>
+
+
+<h4>getCacheKey</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getCacheKey()</pre>
+<div class="block">Gets the cache key for that layer</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the cache key</dd></dl>
+
+
+<a name="createTileCache(android.content.Context)">
+<!--   -->
+</a>
+
+
+<h4>createTileCache</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/MapTileCache" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileCache</a>&nbsp;createTileCache(android.content.Context&nbsp;aContext)</pre>
+<div class="block">Creates a <a href="{{site.baseurl}}/api/MapTileCache" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileCache</code></a> to be used to cache tiles in memory.</div>
+
+
+<a name="mapTileRequestCompleted(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, android.graphics.drawable.Drawable)">
+<!--   -->
+</a>
+
+
+<h4>mapTileRequestCompleted</h4>
+<pre>public&nbsp;void&nbsp;mapTileRequestCompleted(<a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState,
+                           android.graphics.drawable.Drawable&nbsp;pDrawable)</pre>
+<div class="block">Called by implementation class methods indicating that they have completed the request as
+ best it can. The tile is added to the cache, and a MAPTILE_SUCCESS_ID message is sent.</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/IMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></code></dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>pState</code> - the map tile request state object</dd><dd><code>pDrawable</code> - the Drawable of the map tile</dd></dl>
+
+
+<a name="mapTileRequestFailed(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">
+<!--   -->
+</a>
+
+
+<h4>mapTileRequestFailed</h4>
+<pre>public&nbsp;void&nbsp;mapTileRequestFailed(<a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState)</pre>
+<div class="block">Called by implementation class methods indicating that they have failed to retrieve the
+ requested map tile. a MAPTILE_FAIL_ID message is sent.</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/IMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></code></dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>pState</code> - the map tile request state object</dd></dl>
+
+
+<a name="mapTileRequestExpiredTile(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, uk.co.senab.bitmapcache.CacheableBitmapDrawable)">
+<!--   -->
+</a>
+
+
+<h4>mapTileRequestExpiredTile</h4>
+<pre>public&nbsp;void&nbsp;mapTileRequestExpiredTile(<a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState,
+                             <a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a>&nbsp;pDrawable)</pre>
+<div class="block">Called by implementation class methods indicating that they have produced an expired result
+ that can be used but better results may be delivered later. The tile is added to the cache,
+ and a MAPTILE_SUCCESS_ID message is sent.</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/IMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></code></dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>pState</code> - the map tile request state object</dd><dd><code>pDrawable</code> - the Drawable of the map tile</dd></dl>
+
+
+<a name="putTileIntoCache(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, android.graphics.drawable.Drawable)">
+<!--   -->
+</a>
+
+
+<h4>putTileIntoCache</h4>
+<pre>protected&nbsp;void&nbsp;putTileIntoCache(<a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState,
+                    android.graphics.drawable.Drawable&nbsp;pDrawable)</pre>
+
+
+<a name="removeTileFromCache(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">
+<!--   -->
+</a>
+
+
+<h4>removeTileFromCache</h4>
+<pre>protected&nbsp;void&nbsp;removeTileFromCache(<a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState)</pre>
+
+
+<a name="putExpiredTileIntoCache(com.mapbox.mapboxsdk.tileprovider.MapTile, android.graphics.Bitmap)">
+<!--   -->
+</a>
+
+
+<h4>putExpiredTileIntoCache</h4>
+<pre>public&nbsp;void&nbsp;putExpiredTileIntoCache(<a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
+                           android.graphics.Bitmap&nbsp;bitmap)</pre>
+
+
+<a name="setTileRequestCompleteHandler(android.os.Handler)">
+<!--   -->
+</a>
+
+
+<h4>setTileRequestCompleteHandler</h4>
+<pre>public&nbsp;void&nbsp;setTileRequestCompleteHandler(android.os.Handler&nbsp;handler)</pre>
+
+
+<a name="clearTileMemoryCache()">
+<!--   -->
+</a>
+
+
+<h4>clearTileMemoryCache</h4>
+<pre>public&nbsp;void&nbsp;clearTileMemoryCache()</pre>
+
+
+<a name="clearTileDiskCache()">
+<!--   -->
+</a>
+
+
+<h4>clearTileDiskCache</h4>
+<pre>public&nbsp;void&nbsp;clearTileDiskCache()</pre>
+
+
+<a name="useDataConnection()">
+<!--   -->
+</a>
+
+
+<h4>useDataConnection</h4>
+<pre>public&nbsp;boolean&nbsp;useDataConnection()</pre>
+<div class="block">Whether to use the network connection if it's available.</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/IMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if data connection should be used, false otherwise</dd></dl>
+
+
+<a name="setUseDataConnection(boolean)">
+<!--   -->
+</a>
+
+
+<h4>setUseDataConnection</h4>
+<pre>public&nbsp;void&nbsp;setUseDataConnection(boolean&nbsp;pMode)</pre>
+<div class="block">Set whether to use the network connection if it's available.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>pMode</code> - if true use the network connection if it's available. if false don't use the
+ network connection even if it's available.</dd></dl>
+
+
+<a name="hasNoSource()">
+<!--   -->
+</a>
+
+
+<h4>hasNoSource</h4>
+<pre>public&nbsp;boolean&nbsp;hasNoSource()</pre>
+
+
+<a name="getMapTileFromMemory(com.mapbox.mapboxsdk.tileprovider.MapTile)">
+<!--   -->
+</a>
+
+
+<h4>getMapTileFromMemory</h4>
+<pre>public&nbsp;<a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a>&nbsp;getMapTileFromMemory(<a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile)</pre>
+
+
+<a name="createCacheableBitmapDrawable(android.graphics.Bitmap, com.mapbox.mapboxsdk.tileprovider.MapTile)">
+<!--   -->
+</a>
+
+
+<h4>createCacheableBitmapDrawable</h4>
+<pre>public&nbsp;<a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a>&nbsp;createCacheableBitmapDrawable(android.graphics.Bitmap&nbsp;bitmap,
+                                                    <a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;aTile)</pre>
+
+
+<a name="getBitmapFromRemoved(int, int)">
+<!--   -->
+</a>
+
+
+<h4>getBitmapFromRemoved</h4>
+<pre>public&nbsp;android.graphics.Bitmap&nbsp;getBitmapFromRemoved(int&nbsp;width,
+                                           int&nbsp;height)</pre>
+
+
+<a name="removeTileFromMemory(com.mapbox.mapboxsdk.tileprovider.MapTile)">
+<!--   -->
+</a>
+
+
+<h4>removeTileFromMemory</h4>
+<pre>public&nbsp;void&nbsp;removeTileFromMemory(<a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;aTile)</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
