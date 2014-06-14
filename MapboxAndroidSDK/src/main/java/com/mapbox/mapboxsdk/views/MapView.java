@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
 import com.cocoahero.android.geojson.FeatureCollection;
+import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
@@ -212,7 +213,7 @@ public class MapView extends ViewGroup
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MapView);
         String mapid = a.getString(R.styleable.MapView_mapid);
-        if (mapid != null) {
+        if (!Strings.isNullOrEmpty(mapid)) {
             setTileSource(new MapboxTileLayer(mapid));
         } else {
             Log.w(TAG, "mapid not set.");
