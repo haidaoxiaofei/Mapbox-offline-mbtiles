@@ -2,6 +2,7 @@
 layout: pages
 category: overview
 title: Mapbox Android SDK
+mapid: examples.map-i86nkdio
 navigation:
 - title: Installation
   items:
@@ -29,7 +30,35 @@ navigation:
     hash: generating-sdk-documentation
 ---
 
-<div class='row6 contain fill-grey round-top clip clearfix keyline-all'></div>
+<div class='row6 contain fill-grey round-top clip clearfix keyline-all'>
+ <div id='example-map' class='pin-bottom pin-top round-top'></div>
+  <div id='example-snippet' class='snippet pin-bottom margin2 row3 col8'>
+    <div class='clip row3 fill-light pad2x'>
+{% highlight html %}
+<script>
+// Create a new MapView passing context and map ID
+MapView mapView = new MapView(this, '{{page.mapid}}');
+</script>
+{% endhighlight html %}
+    </div>
+  </div>
+</div>
+
+<script>
+$(function load() {
+    L.mapbox.map('example-map', '{{page.mapid}}', {
+      scrollWheelZoom: false,
+      center: [43.075, -89.382], zoom: 15
+    });
+
+    // Replace username.mapid with the current one.
+    var key = /{{page.mapid}}/g;
+    var unique = (App && App.user) ? App.user.id + '.' + App.tmpkey : '{{site.defaultid}}';
+    $('pre, code').each(function() {
+        $(this).html($(this).html().replace(key, unique));
+    });
+});
+</script>
 
 <div class='space-bottom2 pad2 quiet keyline-bottom keyline-left keyline-right fill-white prose round-bottom center clearfix'>
   <div class='col10 margin1'>
