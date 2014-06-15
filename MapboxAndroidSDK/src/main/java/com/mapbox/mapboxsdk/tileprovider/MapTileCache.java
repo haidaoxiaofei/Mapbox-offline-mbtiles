@@ -49,10 +49,12 @@ public class MapTileCache implements TileLayerConstants {
             File cacheDir = getDiskCacheDir(context, DISK_CACHE_SUBDIR);
             if (!cacheDir.exists()) {
                 if (cacheDir.mkdirs()) {
-                    Log.i(TAG, "created cacheDir " + cacheDir);
+                    Log.i(TAG, "created cacheDir " + cacheDir.getAbsolutePath());
                 } else {
                     Log.e(TAG, "can't create cacheDir " + cacheDir);
                 }
+            } else {
+                Log.i(TAG, "cacheDir previously created '" + cacheDir.getAbsolutePath() + "'");
             }
             sCachedTiles = (new BitmapLruCache.Builder(context)).setMemoryCacheEnabled(true)
                     .setMemoryCacheMaxSize(BitmapUtils.calculateMemoryCacheSize(context))
@@ -60,6 +62,7 @@ public class MapTileCache implements TileLayerConstants {
                     .setDiskCacheMaxSize(mMaximumCacheSize)
                     .setDiskCacheLocation(cacheDir)
                     .build();
+            Log.i(TAG, "Disk Cache Enabled: '" + sCachedTiles.isDiskCacheEnabled() + "'; Memory Cache Enabled: '" + sCachedTiles.isMemoryCacheEnabled() + "'");
         }
         return sCachedTiles;
     }
