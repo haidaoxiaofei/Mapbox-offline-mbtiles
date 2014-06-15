@@ -114,6 +114,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
     @Override
     public Drawable getMapTile(final MapTile pTile, final boolean allowRemote) {
+        Log.d(TAG, "getMapTile() with pTile (CacheKey) = '" + pTile.getCacheKey() + "'; allowRemote = '" + allowRemote + "'");
         if (tileUnavailable(pTile)) {
             if (DEBUG_TILE_PROVIDERS) {
                 Log.i(TAG, "MapTileLayerArray.getMapTile() tileUnavailable: " + pTile);
@@ -121,11 +122,12 @@ public class MapTileLayerArray extends MapTileLayerBase {
             return null;
         }
         final CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
-        if (tileDrawable != null && tileDrawable.isBitmapValid() &&
-                !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
+        if (tileDrawable != null && tileDrawable.isBitmapValid() && !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
             tileDrawable.setBeingUsed(true);
+            Log.d(TAG, "Found tile(" + pTile.getCacheKey() + ") in memory, so returning for drawing.");
             return tileDrawable;
         } else if (allowRemote) {
+            Log.d(TAG, "Tile not found in memory so will load from remote.");
             boolean alreadyInProgress = false;
             synchronized (mWorking) {
                 alreadyInProgress = mWorking.containsKey(pTile);
@@ -165,6 +167,8 @@ public class MapTileLayerArray extends MapTileLayerBase {
                 }
             }
             return tileDrawable;
+        } else {
+            Log.w(TAG, "Tile not found in memory, and not allowed to load from remote source.");
         }
         return null;
     }
