@@ -1,0 +1,253 @@
+---
+layout: api
+title: MapTileModuleLayerBase.TileLoader
+category: api
+tags: tileprovider
+---
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase.TileLoader</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+
+
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd>java.lang.Runnable</dd>
+</dl>
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="{{site.baseurl}}/api/MapTileDownloader.TileLoader" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileDownloader.TileLoader</a></dd>
+</dl>
+<dl>
+<dt>Enclosing class:</dt>
+<dd><a href="{{site.baseurl}}/api/MapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a></dd>
+</dl>
+
+
+<pre>protected abstract class <span class="strong">MapTileModuleLayerBase.TileLoader</span>
+extends java.lang.Object
+implements java.lang.Runnable</pre>
+<div class="block">Load the requested tile. An abstract internal class whose objects are used by worker threads
+ to acquire tiles from servers. It processes tiles from the 'pending' set to the 'working'
+ set
+ as they become available. The key unimplemented method is 'loadTile'.</div>
+
+
+</div>
+<div class="summary">
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier</th>
+<th class="colLast" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected </code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileModuleLayerBase.TileLoader#MapTileModuleLayerBase.TileLoader()">MapTileModuleLayerBase.TileLoader</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected abstract android.graphics.drawable.Drawable</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState)</code>
+<div class="block">Load the requested tile.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileModuleLayerBase.TileLoader#nextTile()">nextTile</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileModuleLayerBase.TileLoader#onTileLoaderInit()">onTileLoaderInit</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileModuleLayerBase.TileLoader#onTileLoaderShutdown()">onTileLoaderShutdown</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileModuleLayerBase.TileLoader#run()">run</a></strong>()</code>
+<div class="block">This is a functor class of type Runnable.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState,
+          android.graphics.drawable.Drawable&nbsp;pDrawable)</code>
+<div class="block">A tile has loaded.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState,
+                 <a href="../../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a>&nbsp;pDrawable)</code>
+<div class="block">A tile has loaded but it's expired.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState)</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="MapTileModuleLayerBase.TileLoader()">
+<!--   -->
+</a>
+
+
+<h4>MapTileModuleLayerBase.TileLoader</h4>
+<pre>protected&nbsp;MapTileModuleLayerBase.TileLoader()</pre>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="loadTile(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">
+<!--   -->
+</a>
+
+
+<h4>loadTile</h4>
+<pre>protected abstract&nbsp;android.graphics.drawable.Drawable&nbsp;loadTile(<a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState)
+                                                        throws <a href="{{site.baseurl}}/api/MapTileModuleLayerBase.CantContinueException" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase.CantContinueException</a></pre>
+<div class="block">Load the requested tile.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the tile if it was loaded successfully, or null if failed to
+ load and other tile providers need to be called</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="{{site.baseurl}}/api/MapTileModuleLayerBase.CantContinueException" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase.CantContinueException</a></code></dd></dl>
+
+
+<a name="onTileLoaderInit()">
+<!--   -->
+</a>
+
+
+<h4>onTileLoaderInit</h4>
+<pre>protected&nbsp;void&nbsp;onTileLoaderInit()</pre>
+
+
+<a name="onTileLoaderShutdown()">
+<!--   -->
+</a>
+
+
+<h4>onTileLoaderShutdown</h4>
+<pre>protected&nbsp;void&nbsp;onTileLoaderShutdown()</pre>
+
+
+<a name="nextTile()">
+<!--   -->
+</a>
+
+
+<h4>nextTile</h4>
+<pre>protected&nbsp;<a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;nextTile()</pre>
+
+
+<a name="tileLoaded(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, android.graphics.drawable.Drawable)">
+<!--   -->
+</a>
+
+
+<h4>tileLoaded</h4>
+<pre>protected&nbsp;void&nbsp;tileLoaded(<a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState,
+              android.graphics.drawable.Drawable&nbsp;pDrawable)</pre>
+<div class="block">A tile has loaded.</div>
+
+
+<a name="tileLoadedExpired(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, uk.co.senab.bitmapcache.CacheableBitmapDrawable)">
+<!--   -->
+</a>
+
+
+<h4>tileLoadedExpired</h4>
+<pre>protected&nbsp;void&nbsp;tileLoadedExpired(<a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState,
+                     <a href="../../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a>&nbsp;pDrawable)</pre>
+<div class="block">A tile has loaded but it's expired.
+ Return it <b>and</b> send request to next provider.</div>
+
+
+<a name="tileLoadedFailed(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">
+<!--   -->
+</a>
+
+
+<h4>tileLoadedFailed</h4>
+<pre>protected&nbsp;void&nbsp;tileLoadedFailed(<a href="{{site.baseurl}}/api/MapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState)</pre>
+
+
+<a name="run()">
+<!--   -->
+</a>
+
+
+<h4>run</h4>
+<pre>public&nbsp;void&nbsp;run()</pre>
+<div class="block">This is a functor class of type Runnable. The run method is the encapsulated function.</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>run</code>&nbsp;in interface&nbsp;<code>java.lang.Runnable</code></dd>
+</dl>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

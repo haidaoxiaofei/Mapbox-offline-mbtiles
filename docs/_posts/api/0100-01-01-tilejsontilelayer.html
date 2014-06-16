@@ -1,0 +1,217 @@
+---
+layout: api
+title: TileJsonTileLayer
+category: api
+tags: tileprovider
+---
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li><a href="{{site.baseurl}}/api/TileLayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer</a></li>
+<li>
+<ul class="inheritance">
+<li><a href="{{site.baseurl}}/api/WebSourceTileLayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">com.mapbox.mapboxsdk.tileprovider.tilesource.WebSourceTileLayer</a></li>
+<li>
+<ul class="inheritance">
+<li>com.mapbox.mapboxsdk.tileprovider.tilesource.TileJsonTileLayer</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+
+
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/MapViewConstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewConstants</a></dd>
+</dl>
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="{{site.baseurl}}/api/MapboxTileLayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">MapboxTileLayer</a></dd>
+</dl>
+
+
+<pre>public class <span class="strong">TileJsonTileLayer</span>
+extends <a href="{{site.baseurl}}/api/WebSourceTileLayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">WebSourceTileLayer</a></pre>
+<div class="block">A type of tile layer that loads tiles from the internet and metadata about itself
+ with the <a href='https://github.com/mapbox/tilejson-spec'>TileJSON</a> standard.</div>
+
+
+</div>
+<div class="summary">
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.tilesource.WebSourceTileLayer">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.tilesource.<a href="{{site.baseurl}}/api/WebSourceTileLayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">WebSourceTileLayer</a></h3>
+<code><a href="{{site.baseurl}}/api/WebSourceTileLayer#mEnableSSL">mEnableSSL</a></code>
+
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.tilesource.<a href="{{site.baseurl}}/api/TileLayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a></h3>
+<code><a href="{{site.baseurl}}/api/TileLayer#mUrl">mUrl</a></code>
+
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.constants.<a href="{{site.baseurl}}/api/TileLayerConstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/TileLayerConstants#WORLD_BOUNDING_BOX">WORLD_BOUNDING_BOX</a></code>
+
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.views.util.constants.MapViewConstants">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.views.util.constants.<a href="{{site.baseurl}}/api/MapViewConstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/MapViewConstants#DEFAULT_PIN_ANCHOR">DEFAULT_PIN_ANCHOR</a></code>
+
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/TileJsonTileLayer#TileJsonTileLayer(java.lang.String, java.lang.String, boolean)">TileJsonTileLayer</a></strong>(java.lang.String&nbsp;pId,
+                 java.lang.String&nbsp;url,
+                 boolean&nbsp;enableSSL)</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/TileJsonTileLayer#getBrandedJSONURL()">getBrandedJSONURL</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>org.json.JSONObject</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/TileJsonTileLayer#getTileJSON()">getTileJSON</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/TileJsonTileLayer#setTileJSON(org.json.JSONObject)">setTileJSON</a></strong>(org.json.JSONObject&nbsp;aTileJSON)</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.tilesource.WebSourceTileLayer">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.tilesource.<a href="{{site.baseurl}}/api/WebSourceTileLayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">WebSourceTileLayer</a></h3>
+<code><a href="{{site.baseurl}}/api/WebSourceTileLayer#setURL(java.lang.String)">setURL</a></code>
+
+
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.tilesource.<a href="{{site.baseurl}}/api/TileLayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a></h3>
+<code><a href="{{site.baseurl}}/api/TileLayer#setName(java.lang.String)">setName</a></code>
+
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="TileJsonTileLayer(java.lang.String, java.lang.String, boolean)">
+<!--   -->
+</a>
+
+
+<h4>TileJsonTileLayer</h4>
+<pre>public&nbsp;TileJsonTileLayer(java.lang.String&nbsp;pId,
+                 java.lang.String&nbsp;url,
+                 boolean&nbsp;enableSSL)</pre>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getTileJSON()">
+<!--   -->
+</a>
+
+
+<h4>getTileJSON</h4>
+<pre>public&nbsp;org.json.JSONObject&nbsp;getTileJSON()</pre>
+
+
+<a name="setTileJSON(org.json.JSONObject)">
+<!--   -->
+</a>
+
+
+<h4>setTileJSON</h4>
+<pre>public&nbsp;void&nbsp;setTileJSON(org.json.JSONObject&nbsp;aTileJSON)</pre>
+
+
+<a name="getBrandedJSONURL()">
+<!--   -->
+</a>
+
+
+<h4>getBrandedJSONURL</h4>
+<pre>protected&nbsp;java.lang.String&nbsp;getBrandedJSONURL()</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

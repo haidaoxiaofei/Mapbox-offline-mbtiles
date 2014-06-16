@@ -1,0 +1,78 @@
+---
+layout: api
+title: IArchiveFile
+category: api
+tags: tileprovider
+---
+<div class="contentContainer">
+<div class="description">
+
+
+<dl>
+<dt>All Known Implementing Classes:</dt>
+<dd><a href="{{site.baseurl}}/api/MBTilesFileArchive" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MBTilesFileArchive</a></dd>
+</dl>
+
+
+<pre>public interface <span class="strong">IArchiveFile</span></pre>
+
+
+</div>
+<div class="summary">
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>java.io.InputStream</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;tileSource,
+              <a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;tile)</code>
+<div class="block">Get the input stream for the requested tile.</div>
+</td>
+</tr>
+</table>
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getInputStream(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, com.mapbox.mapboxsdk.tileprovider.MapTile)">
+<!--   -->
+</a>
+
+
+<h4>getInputStream</h4>
+<pre>java.io.InputStream&nbsp;getInputStream(<a href="{{site.baseurl}}/api/ITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;tileSource,
+                                 <a href="{{site.baseurl}}/api/MapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;tile)</pre>
+<div class="block">Get the input stream for the requested tile.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the input stream, or null if the archive doesn't contain an entry for the requested
+ tile</dd></dl>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

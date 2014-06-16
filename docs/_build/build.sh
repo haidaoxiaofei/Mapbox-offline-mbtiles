@@ -2,19 +2,18 @@
 
 VERSION=$1
 
-#if [ -z $VERSION ]; then
-  #echo "Specify a version ie. 0.2.3"
-  #exit
-#fi
+if [ -z $VERSION ]; then
+  echo "Specify a version ie. 0.2.3"
+  exit
+fi
 
-#mkdir $VERSION
-#curl "http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/$VERSION/mapbox-android-sdk-$VERSION-javadoc.jar" > $VERSION/mapbox-android-sdk-$VERSION.jar
+mkdir $VERSION
+curl "http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/$VERSION/mapbox-android-sdk-$VERSION-javadoc.jar" > $VERSION/mapbox-android-sdk-$VERSION.jar
 
-cd $VERSION
-#cd $VERSION && unzip mapbox-android-sdk-$VERSION.jar
+cd $VERSION && unzip mapbox-android-sdk-$VERSION.jar
 
 # Drop some things we dont need
-#rm mapbox-android-sdk-$VERSION.jar
+rm mapbox-android-sdk-$VERSION.jar
 rm -rf '../../_posts/api/*'
 
 ALL=''
@@ -40,7 +39,7 @@ scrape() {
     -e 's,</li>,,g'
 }
 
-for file in `find com/mapbox/mapboxsdk/*/*.html | grep -v package-`; do
+for file in `find com/mapbox/mapboxsdk -name "*.html" | grep -v package-`; do
 
 CONTENT="\
 ---

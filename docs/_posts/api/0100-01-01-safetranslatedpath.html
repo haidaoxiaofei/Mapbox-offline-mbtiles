@@ -1,0 +1,928 @@
+---
+layout: api
+title: SafeTranslatedPath
+category: api
+tags: views
+---
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>android.graphics.Path</li>
+<li>
+<ul class="inheritance">
+<li>com.mapbox.mapboxsdk.views.safecanvas.SafeTranslatedPath</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+
+
+
+
+<pre>public class <span class="strong">SafeTranslatedPath</span>
+extends android.graphics.Path</pre>
+<div class="block">The SafeTranslatedPath class is designed to work in conjunction with <a href="{{site.baseurl}}/api/SafeTranslatedCanvas" title="class in com.mapbox.mapboxsdk.views.safecanvas"><code>SafeTranslatedCanvas</code></a>
+ to work around various Android issues with large canvases. For the two classes to work together,
+ call <a href="{{site.baseurl}}/api/SafeTranslatedPath#onDrawCycleStart(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas)"><code>onDrawCycleStart(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas)</code></a> at the start of the
+ <code>com.mapbox.mapboxsdk.overlay.Overlay.Overlay#drawSafe</code>
+ method of your
+ <code>com.mapbox.mapboxsdk.overlay.Overlay.Overlay</code>. This will set the adjustment needed to
+ draw
+ your Path safely on the canvas
+ without any drawing distortion at high zoom levels. Methods of the <code>Path</code> class that use
+ unsafe float types have been deprecated in favor of replacement methods that use doubles.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>ISafeCanvas}</code></dd></dl>
+
+
+</div>
+<div class="summary">
+
+
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<a name="nested_class_summary">
+<!--   -->
+</a>
+<h3>Nested Class Summary</h3>
+
+<a name="nested_classes_inherited_from_class_android.graphics.Path">
+<!--   -->
+</a>
+<h3>Nested classes/interfaces inherited from class&nbsp;android.graphics.Path</h3>
+<code>android.graphics.Path.Direction, android.graphics.Path.FillType, android.graphics.Path.Op</code>
+
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#xOffset">xOffset</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#yOffset">yOffset</a></strong></code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#SafeTranslatedPath()">SafeTranslatedPath</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#addArc(android.graphics.Rect, float, float)">addArc</a></strong>(android.graphics.Rect&nbsp;oval,
+      float&nbsp;startAngle,
+      float&nbsp;sweepAngle)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#addCircle(double, double, float, android.graphics.Path.Direction)">addCircle</a></strong>(double&nbsp;x,
+         double&nbsp;y,
+         float&nbsp;radius,
+         android.graphics.Path.Direction&nbsp;dir)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#addOval(android.graphics.Rect, android.graphics.Path.Direction)">addOval</a></strong>(android.graphics.Rect&nbsp;oval,
+       android.graphics.Path.Direction&nbsp;dir)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#addPath(android.graphics.Path)">addPath</a></strong>(android.graphics.Path&nbsp;src)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#addPath(android.graphics.Path, float, float)">addPath</a></strong>(android.graphics.Path&nbsp;src,
+       float&nbsp;dx,
+       float&nbsp;dy)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#addPath(android.graphics.Path, android.graphics.Matrix)">addPath</a></strong>(android.graphics.Path&nbsp;src,
+       android.graphics.Matrix&nbsp;matrix)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#addRect(double, double, double, double, android.graphics.Path.Direction)">addRect</a></strong>(double&nbsp;left,
+       double&nbsp;top,
+       double&nbsp;right,
+       double&nbsp;bottom,
+       android.graphics.Path.Direction&nbsp;dir)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#addRect(android.graphics.Rect, android.graphics.Path.Direction)">addRect</a></strong>(android.graphics.Rect&nbsp;rect,
+       android.graphics.Path.Direction&nbsp;dir)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#addRoundRect(android.graphics.Rect, float[], android.graphics.Path.Direction)">addRoundRect</a></strong>(android.graphics.Rect&nbsp;rect,
+            float[]&nbsp;radii,
+            android.graphics.Path.Direction&nbsp;dir)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#addRoundRect(android.graphics.Rect, float, float, android.graphics.Path.Direction)">addRoundRect</a></strong>(android.graphics.Rect&nbsp;rect,
+            float&nbsp;rx,
+            float&nbsp;ry,
+            android.graphics.Path.Direction&nbsp;dir)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#arcTo(android.graphics.Rect, float, float)">arcTo</a></strong>(android.graphics.Rect&nbsp;oval,
+     float&nbsp;startAngle,
+     float&nbsp;sweepAngle)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#arcTo(android.graphics.Rect, float, float, boolean)">arcTo</a></strong>(android.graphics.Rect&nbsp;oval,
+     float&nbsp;startAngle,
+     float&nbsp;sweepAngle,
+     boolean&nbsp;forceMoveTo)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#close()">close</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#computeBounds(android.graphics.Rect, boolean)">computeBounds</a></strong>(android.graphics.Rect&nbsp;bounds,
+             boolean&nbsp;exact)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#cubicTo(double, double, double, double, double, double)">cubicTo</a></strong>(double&nbsp;x1,
+       double&nbsp;y1,
+       double&nbsp;x2,
+       double&nbsp;y2,
+       double&nbsp;x3,
+       double&nbsp;y3)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#finalize()">finalize</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.Path.FillType</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#getFillType()">getFillType</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#incReserve(int)">incReserve</a></strong>(int&nbsp;extraPtCount)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#isEmpty()">isEmpty</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#isInverseFillType()">isInverseFillType</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#isRect(android.graphics.Rect)">isRect</a></strong>(android.graphics.Rect&nbsp;rect)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#lineTo(double, double)">lineTo</a></strong>(double&nbsp;x,
+      double&nbsp;y)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#moveTo(double, double)">moveTo</a></strong>(double&nbsp;x,
+      double&nbsp;y)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#offset(float, float)">offset</a></strong>(float&nbsp;dx,
+      float&nbsp;dy)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#offset(float, float, android.graphics.Path)">offset</a></strong>(float&nbsp;dx,
+      float&nbsp;dy,
+      android.graphics.Path&nbsp;dst)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas)</code>
+<div class="block">This method <b>must</b> be called at the start of the <code>Overlay#drawSafe</code> draw cycle
+ method.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#quadTo(double, double, double, double)">quadTo</a></strong>(double&nbsp;x1,
+      double&nbsp;y1,
+      double&nbsp;x2,
+      double&nbsp;y2)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#rCubicTo(float, float, float, float, float, float)">rCubicTo</a></strong>(float&nbsp;x1,
+        float&nbsp;y1,
+        float&nbsp;x2,
+        float&nbsp;y2,
+        float&nbsp;x3,
+        float&nbsp;y3)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#reset()">reset</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#rewind()">rewind</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#rLineTo(float, float)">rLineTo</a></strong>(float&nbsp;dx,
+       float&nbsp;dy)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#rMoveTo(float, float)">rMoveTo</a></strong>(float&nbsp;dx,
+       float&nbsp;dy)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#rQuadTo(float, float, float, float)">rQuadTo</a></strong>(float&nbsp;dx1,
+       float&nbsp;dy1,
+       float&nbsp;dx2,
+       float&nbsp;dy2)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#set(android.graphics.Path)">set</a></strong>(android.graphics.Path&nbsp;src)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#setFillType(android.graphics.Path.FillType)">setFillType</a></strong>(android.graphics.Path.FillType&nbsp;ft)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#setLastPoint(double, double)">setLastPoint</a></strong>(double&nbsp;dx,
+            double&nbsp;dy)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#toggleInverseFillType()">toggleInverseFillType</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected android.graphics.RectF</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#toOffsetRectF(android.graphics.Rect, android.graphics.RectF)">toOffsetRectF</a></strong>(android.graphics.Rect&nbsp;rect,
+             android.graphics.RectF&nbsp;reuse)</code>
+<div class="block">Helper function to convert a Rect to RectF and adjust the values of the Rect by the offsets.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#transform(android.graphics.Matrix)">transform</a></strong>(android.graphics.Matrix&nbsp;matrix)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/SafeTranslatedPath#transform(android.graphics.Matrix, android.graphics.Path)">transform</a></strong>(android.graphics.Matrix&nbsp;matrix,
+         android.graphics.Path&nbsp;dst)</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_android.graphics.Path">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;android.graphics.Path</h3>
+<code>addArc, addCircle, addOval, addRect, addRect, addRoundRect, addRoundRect, arcTo, arcTo, computeBounds, cubicTo, isRect, lineTo, moveTo, op, op, quadTo, setLastPoint</code>
+
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="xOffset">
+<!--   -->
+</a>
+
+
+<h4>xOffset</h4>
+<pre>public&nbsp;int xOffset</pre>
+
+
+<a name="yOffset">
+<!--   -->
+</a>
+
+
+<h4>yOffset</h4>
+<pre>public&nbsp;int yOffset</pre>
+
+
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="SafeTranslatedPath()">
+<!--   -->
+</a>
+
+
+<h4>SafeTranslatedPath</h4>
+<pre>public&nbsp;SafeTranslatedPath()</pre>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="onDrawCycleStart(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas)">
+<!--   -->
+</a>
+
+
+<h4>onDrawCycleStart</h4>
+<pre>public&nbsp;void&nbsp;onDrawCycleStart(<a href="{{site.baseurl}}/api/ISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas)</pre>
+<div class="block">This method <b>must</b> be called at the start of the <code>Overlay#drawSafe</code> draw cycle
+ method. This will adjust the Path to the current state of the <a href="{{site.baseurl}}/api/ISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas"><code>ISafeCanvas</code></a> passed to
+ it.</div>
+
+
+<a name="reset()">
+<!--   -->
+</a>
+
+
+<h4>reset</h4>
+<pre>public&nbsp;void&nbsp;reset()</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>reset</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="rewind()">
+<!--   -->
+</a>
+
+
+<h4>rewind</h4>
+<pre>public&nbsp;void&nbsp;rewind()</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>rewind</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="set(android.graphics.Path)">
+<!--   -->
+</a>
+
+
+<h4>set</h4>
+<pre>public&nbsp;void&nbsp;set(android.graphics.Path&nbsp;src)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>set</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="getFillType()">
+<!--   -->
+</a>
+
+
+<h4>getFillType</h4>
+<pre>public&nbsp;android.graphics.Path.FillType&nbsp;getFillType()</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>getFillType</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="setFillType(android.graphics.Path.FillType)">
+<!--   -->
+</a>
+
+
+<h4>setFillType</h4>
+<pre>public&nbsp;void&nbsp;setFillType(android.graphics.Path.FillType&nbsp;ft)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>setFillType</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="isInverseFillType()">
+<!--   -->
+</a>
+
+
+<h4>isInverseFillType</h4>
+<pre>public&nbsp;boolean&nbsp;isInverseFillType()</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>isInverseFillType</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="toggleInverseFillType()">
+<!--   -->
+</a>
+
+
+<h4>toggleInverseFillType</h4>
+<pre>public&nbsp;void&nbsp;toggleInverseFillType()</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>toggleInverseFillType</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="isEmpty()">
+<!--   -->
+</a>
+
+
+<h4>isEmpty</h4>
+<pre>public&nbsp;boolean&nbsp;isEmpty()</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>isEmpty</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="isRect(android.graphics.Rect)">
+<!--   -->
+</a>
+
+
+<h4>isRect</h4>
+<pre>public&nbsp;boolean&nbsp;isRect(android.graphics.Rect&nbsp;rect)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#isRect(RectF)}</code></dd></dl>
+
+
+<a name="computeBounds(android.graphics.Rect, boolean)">
+<!--   -->
+</a>
+
+
+<h4>computeBounds</h4>
+<pre>public&nbsp;void&nbsp;computeBounds(android.graphics.Rect&nbsp;bounds,
+                 boolean&nbsp;exact)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#computeBounds(RectF, boolean)}</code></dd></dl>
+
+
+<a name="incReserve(int)">
+<!--   -->
+</a>
+
+
+<h4>incReserve</h4>
+<pre>public&nbsp;void&nbsp;incReserve(int&nbsp;extraPtCount)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>incReserve</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="moveTo(double, double)">
+<!--   -->
+</a>
+
+
+<h4>moveTo</h4>
+<pre>public&nbsp;void&nbsp;moveTo(double&nbsp;x,
+          double&nbsp;y)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#moveTo(float, float)}</code></dd></dl>
+
+
+<a name="rMoveTo(float, float)">
+<!--   -->
+</a>
+
+
+<h4>rMoveTo</h4>
+<pre>public&nbsp;void&nbsp;rMoveTo(float&nbsp;dx,
+           float&nbsp;dy)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>rMoveTo</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="lineTo(double, double)">
+<!--   -->
+</a>
+
+
+<h4>lineTo</h4>
+<pre>public&nbsp;void&nbsp;lineTo(double&nbsp;x,
+          double&nbsp;y)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#lineTo(float, float)}</code></dd></dl>
+
+
+<a name="rLineTo(float, float)">
+<!--   -->
+</a>
+
+
+<h4>rLineTo</h4>
+<pre>public&nbsp;void&nbsp;rLineTo(float&nbsp;dx,
+           float&nbsp;dy)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>rLineTo</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="quadTo(double, double, double, double)">
+<!--   -->
+</a>
+
+
+<h4>quadTo</h4>
+<pre>public&nbsp;void&nbsp;quadTo(double&nbsp;x1,
+          double&nbsp;y1,
+          double&nbsp;x2,
+          double&nbsp;y2)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#quadTo(float, float, float, float)}</code></dd></dl>
+
+
+<a name="rQuadTo(float, float, float, float)">
+<!--   -->
+</a>
+
+
+<h4>rQuadTo</h4>
+<pre>public&nbsp;void&nbsp;rQuadTo(float&nbsp;dx1,
+           float&nbsp;dy1,
+           float&nbsp;dx2,
+           float&nbsp;dy2)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>rQuadTo</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="cubicTo(double, double, double, double, double, double)">
+<!--   -->
+</a>
+
+
+<h4>cubicTo</h4>
+<pre>public&nbsp;void&nbsp;cubicTo(double&nbsp;x1,
+           double&nbsp;y1,
+           double&nbsp;x2,
+           double&nbsp;y2,
+           double&nbsp;x3,
+           double&nbsp;y3)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#cubicTo(float, float, float, float, float, float)}</code></dd></dl>
+
+
+<a name="rCubicTo(float, float, float, float, float, float)">
+<!--   -->
+</a>
+
+
+<h4>rCubicTo</h4>
+<pre>public&nbsp;void&nbsp;rCubicTo(float&nbsp;x1,
+            float&nbsp;y1,
+            float&nbsp;x2,
+            float&nbsp;y2,
+            float&nbsp;x3,
+            float&nbsp;y3)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>rCubicTo</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="arcTo(android.graphics.Rect, float, float, boolean)">
+<!--   -->
+</a>
+
+
+<h4>arcTo</h4>
+<pre>public&nbsp;void&nbsp;arcTo(android.graphics.Rect&nbsp;oval,
+         float&nbsp;startAngle,
+         float&nbsp;sweepAngle,
+         boolean&nbsp;forceMoveTo)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#arcTo(RectF, float, float, boolean)}</code></dd></dl>
+
+
+<a name="arcTo(android.graphics.Rect, float, float)">
+<!--   -->
+</a>
+
+
+<h4>arcTo</h4>
+<pre>public&nbsp;void&nbsp;arcTo(android.graphics.Rect&nbsp;oval,
+         float&nbsp;startAngle,
+         float&nbsp;sweepAngle)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#arcTo(RectF, float, float)}</code></dd></dl>
+
+
+<a name="close()">
+<!--   -->
+</a>
+
+
+<h4>close</h4>
+<pre>public&nbsp;void&nbsp;close()</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>close</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="addRect(android.graphics.Rect, android.graphics.Path.Direction)">
+<!--   -->
+</a>
+
+
+<h4>addRect</h4>
+<pre>public&nbsp;void&nbsp;addRect(android.graphics.Rect&nbsp;rect,
+           android.graphics.Path.Direction&nbsp;dir)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#addRect(RectF, Direction)}</code></dd></dl>
+
+
+<a name="addRect(double, double, double, double, android.graphics.Path.Direction)">
+<!--   -->
+</a>
+
+
+<h4>addRect</h4>
+<pre>public&nbsp;void&nbsp;addRect(double&nbsp;left,
+           double&nbsp;top,
+           double&nbsp;right,
+           double&nbsp;bottom,
+           android.graphics.Path.Direction&nbsp;dir)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#addRect(float, float, float, float, Direction)}</code></dd></dl>
+
+
+<a name="addOval(android.graphics.Rect, android.graphics.Path.Direction)">
+<!--   -->
+</a>
+
+
+<h4>addOval</h4>
+<pre>public&nbsp;void&nbsp;addOval(android.graphics.Rect&nbsp;oval,
+           android.graphics.Path.Direction&nbsp;dir)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#addOval(RectF, Direction)</code></dd></dl>
+
+
+<a name="addCircle(double, double, float, android.graphics.Path.Direction)">
+<!--   -->
+</a>
+
+
+<h4>addCircle</h4>
+<pre>public&nbsp;void&nbsp;addCircle(double&nbsp;x,
+             double&nbsp;y,
+             float&nbsp;radius,
+             android.graphics.Path.Direction&nbsp;dir)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#addCircle(float, float, float, Direction)}</code></dd></dl>
+
+
+<a name="addArc(android.graphics.Rect, float, float)">
+<!--   -->
+</a>
+
+
+<h4>addArc</h4>
+<pre>public&nbsp;void&nbsp;addArc(android.graphics.Rect&nbsp;oval,
+          float&nbsp;startAngle,
+          float&nbsp;sweepAngle)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#addArc(RectF, float, float)}</code></dd></dl>
+
+
+<a name="addRoundRect(android.graphics.Rect, float, float, android.graphics.Path.Direction)">
+<!--   -->
+</a>
+
+
+<h4>addRoundRect</h4>
+<pre>public&nbsp;void&nbsp;addRoundRect(android.graphics.Rect&nbsp;rect,
+                float&nbsp;rx,
+                float&nbsp;ry,
+                android.graphics.Path.Direction&nbsp;dir)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#addRoundRect(RectF, float, float)}</code></dd></dl>
+
+
+<a name="addRoundRect(android.graphics.Rect, float[], android.graphics.Path.Direction)">
+<!--   -->
+</a>
+
+
+<h4>addRoundRect</h4>
+<pre>public&nbsp;void&nbsp;addRoundRect(android.graphics.Rect&nbsp;rect,
+                float[]&nbsp;radii,
+                android.graphics.Path.Direction&nbsp;dir)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#addRoundRect(RectF, float, Direction)}</code></dd></dl>
+
+
+<a name="addPath(android.graphics.Path, float, float)">
+<!--   -->
+</a>
+
+
+<h4>addPath</h4>
+<pre>public&nbsp;void&nbsp;addPath(android.graphics.Path&nbsp;src,
+           float&nbsp;dx,
+           float&nbsp;dy)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>addPath</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="addPath(android.graphics.Path)">
+<!--   -->
+</a>
+
+
+<h4>addPath</h4>
+<pre>public&nbsp;void&nbsp;addPath(android.graphics.Path&nbsp;src)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>addPath</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="addPath(android.graphics.Path, android.graphics.Matrix)">
+<!--   -->
+</a>
+
+
+<h4>addPath</h4>
+<pre>public&nbsp;void&nbsp;addPath(android.graphics.Path&nbsp;src,
+           android.graphics.Matrix&nbsp;matrix)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>addPath</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="offset(float, float, android.graphics.Path)">
+<!--   -->
+</a>
+
+
+<h4>offset</h4>
+<pre>public&nbsp;void&nbsp;offset(float&nbsp;dx,
+          float&nbsp;dy,
+          android.graphics.Path&nbsp;dst)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>offset</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="offset(float, float)">
+<!--   -->
+</a>
+
+
+<h4>offset</h4>
+<pre>public&nbsp;void&nbsp;offset(float&nbsp;dx,
+          float&nbsp;dy)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>offset</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="setLastPoint(double, double)">
+<!--   -->
+</a>
+
+
+<h4>setLastPoint</h4>
+<pre>public&nbsp;void&nbsp;setLastPoint(double&nbsp;dx,
+                double&nbsp;dy)</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>#setLastPoint(float, float)}</code></dd></dl>
+
+
+<a name="transform(android.graphics.Matrix, android.graphics.Path)">
+<!--   -->
+</a>
+
+
+<h4>transform</h4>
+<pre>public&nbsp;void&nbsp;transform(android.graphics.Matrix&nbsp;matrix,
+             android.graphics.Path&nbsp;dst)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>transform</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="transform(android.graphics.Matrix)">
+<!--   -->
+</a>
+
+
+<h4>transform</h4>
+<pre>public&nbsp;void&nbsp;transform(android.graphics.Matrix&nbsp;matrix)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>transform</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+</dl>
+
+
+<a name="finalize()">
+<!--   -->
+</a>
+
+
+<h4>finalize</h4>
+<pre>protected&nbsp;void&nbsp;finalize()
+                 throws java.lang.Throwable</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>finalize</code>&nbsp;in class&nbsp;<code>android.graphics.Path</code></dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code>java.lang.Throwable</code></dd></dl>
+
+
+<a name="toOffsetRectF(android.graphics.Rect, android.graphics.RectF)">
+<!--   -->
+</a>
+
+
+<h4>toOffsetRectF</h4>
+<pre>protected final&nbsp;android.graphics.RectF&nbsp;toOffsetRectF(android.graphics.Rect&nbsp;rect,
+                                   android.graphics.RectF&nbsp;reuse)</pre>
+<div class="block">Helper function to convert a Rect to RectF and adjust the values of the Rect by the offsets.</div>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

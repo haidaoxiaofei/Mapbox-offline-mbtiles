@@ -1,0 +1,741 @@
+---
+layout: api
+title: Projection
+category: api
+tags: views
+---
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>com.mapbox.mapboxsdk.views.util.Projection</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+
+
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/GeoConstants" title="interface in com.mapbox.mapboxsdk.geometry">GeoConstants</a></dd>
+</dl>
+
+
+<pre>public class <span class="strong">Projection</span>
+extends java.lang.Object
+implements <a href="{{site.baseurl}}/api/GeoConstants" title="interface in com.mapbox.mapboxsdk.geometry">GeoConstants</a></pre>
+
+
+</div>
+<div class="summary">
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected static int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#mTileSize">mTileSize</a></strong></code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.geometry.GeoConstants">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.geometry.<a href="{{site.baseurl}}/api/GeoConstants" title="interface in com.mapbox.mapboxsdk.geometry">GeoConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/GeoConstants#RADIUS_EARTH_METERS">RADIUS_EARTH_METERS</a></code>
+
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.Point</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#fromMapPixels(int, int, android.graphics.Point)">fromMapPixels</a></strong>(int&nbsp;x,
+             int&nbsp;y,
+             android.graphics.Point&nbsp;reuse)</code>
+<div class="block">Converts from map pixels to a Point value.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/ILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#fromPixels(float, float)">fromPixels</a></strong>(float&nbsp;x,
+          float&nbsp;y)</code>
+<div class="block">Converts <I>screen coordinates</I> to the underlying LatLng.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/ILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#fromPixels(int, int)">fromPixels</a></strong>(int&nbsp;x,
+          int&nbsp;y)</code>
+<div class="block">Converts <I>screen coordinates</I> to the underlying LatLng.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>android.graphics.Rect</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#fromPixelsToProjected(android.graphics.Rect)">fromPixelsToProjected</a></strong>(android.graphics.Rect&nbsp;in)</code>
+<div class="block">Translates a rectangle from <I>screen coordinates</I> to <I>intermediate coordinates</I>.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/BoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#getBoundingBox()">getBoundingBox</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#getCenterX()">getCenterX</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#getCenterY()">getCenterY</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#getHalfWorldSize()">getHalfWorldSize</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.Rect</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#getIntrinsicScreenRect()">getIntrinsicScreenRect</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#getMapOrientation()">getMapOrientation</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.Matrix</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#getRotationMatrix()">getRotationMatrix</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>android.graphics.Rect</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#getScreenRect()">getScreenRect</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#getTileSize()">getTileSize</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#getZoomLevel()">getZoomLevel</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static double</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#groundResolution(double, float)">groundResolution</a></strong>(double&nbsp;latitude,
+                float&nbsp;levelOfDetail)</code>
+<div class="block">Determines the ground resolution (in meters per pixel) at a specified latitude and level of
+ detail.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#latLongToPixelXY(double, double, float, android.graphics.PointF)">latLongToPixelXY</a></strong>(double&nbsp;latitude,
+                double&nbsp;longitude,
+                float&nbsp;levelOfDetail,
+                android.graphics.PointF&nbsp;reuse)</code>
+<div class="block">Converts a point from latitude/longitude WGS-84 coordinates (in degrees) into pixel XY
+ coordinates at a specified level of detail.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static double</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#mapScale(double, int, int)">mapScale</a></strong>(double&nbsp;latitude,
+        int&nbsp;levelOfDetail,
+        int&nbsp;screenDpi)</code>
+<div class="block">Determines the map scale at a specified latitude, level of detail, and screen resolution.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#mapSize(float)">mapSize</a></strong>(float&nbsp;levelOfDetail)</code>
+<div class="block">Determines the map width and height (in pixels) at a specified level of detail.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#pixelXYToLatLong(double, double)">pixelXYToLatLong</a></strong>(double&nbsp;pixelX,
+                double&nbsp;pixelY)</code>
+<div class="block">Converts a pixel from pixel XY coordinates at a specified level of detail into
+ latitude/longitude WGS-84 coordinates (in degrees).</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="{{site.baseurl}}/api/LatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#pixelXYToLatLong(double, double, float)">pixelXYToLatLong</a></strong>(double&nbsp;pixelX,
+                double&nbsp;pixelY,
+                float&nbsp;levelOfDetail)</code>
+<div class="block">Converts a pixel from pixel XY coordinates at a specified level of detail into
+ latitude/longitude WGS-84 coordinates (in degrees).</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static android.graphics.Point</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#pixelXYToTileXY(int, int, android.graphics.Point)">pixelXYToTileXY</a></strong>(int&nbsp;pixelX,
+               int&nbsp;pixelY,
+               android.graphics.Point&nbsp;reuse)</code>
+<div class="block">Converts pixel XY coordinates into tile XY coordinates of the tile containing the specified
+ pixel.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#rotatePoints(float[])">rotatePoints</a></strong>(float[]&nbsp;pRotatePoints)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#rotateRect(android.graphics.RectF)">rotateRect</a></strong>(android.graphics.RectF&nbsp;rect)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#setTileSize(int)">setTileSize</a></strong>(int&nbsp;tileSize)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static android.graphics.Point</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#tileXYToPixelXY(int, int, android.graphics.Point)">tileXYToPixelXY</a></strong>(int&nbsp;tileX,
+               int&nbsp;tileY,
+               android.graphics.Point&nbsp;reuse)</code>
+<div class="block">Converts tile XY coordinates into pixel XY coordinates of the upper-left pixel of the
+ specified tile.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static android.graphics.RectF</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/BoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;box,
+           float&nbsp;zoom,
+           android.graphics.RectF&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#toMapPixels(double, double, float, double, double, android.graphics.PointF)">toMapPixels</a></strong>(double&nbsp;latitude,
+           double&nbsp;longitude,
+           float&nbsp;zoom,
+           double&nbsp;centerX,
+           double&nbsp;centerY,
+           android.graphics.PointF&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#toMapPixels(double, double, android.graphics.PointF)">toMapPixels</a></strong>(double&nbsp;latitude,
+           double&nbsp;longitude,
+           android.graphics.PointF&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;in,
+           android.graphics.PointF&nbsp;reuse)</code>
+<div class="block">Converts a LatLng to its <I>Map coordinates</I> in pixels for the current zoom.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#toMapPixelsProjected(double, double, android.graphics.PointF)">toMapPixelsProjected</a></strong>(double&nbsp;latitude,
+                    double&nbsp;longitude,
+                    android.graphics.PointF&nbsp;reuse)</code>
+<div class="block">Performs only the first computationally heavy part of the projection.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#toMapPixelsTranslated(android.graphics.PointF, android.graphics.PointF)">toMapPixelsTranslated</a></strong>(android.graphics.PointF&nbsp;in,
+                     android.graphics.PointF&nbsp;reuse)</code>
+<div class="block">Performs the second computationally light part of the projection.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;in,
+        android.graphics.PointF&nbsp;reuse)</code>
+<div class="block">Converts a LatLng to its <I>screen coordinates</I>.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.PointF</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/Projection#toPixels(android.graphics.PointF, android.graphics.PointF)">toPixels</a></strong>(android.graphics.PointF&nbsp;mapPos,
+        android.graphics.PointF&nbsp;reuse)</code>
+<div class="block">Converts a map position in pixel to its <I>screen coordinates</I>.</div>
+</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="mTileSize">
+<!--   -->
+</a>
+
+
+<h4>mTileSize</h4>
+<pre>protected static&nbsp;int mTileSize</pre>
+
+
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="Projection(com.mapbox.mapboxsdk.views.MapView)">
+<!--   -->
+</a>
+
+
+<h4>Projection</h4>
+<pre>public&nbsp;Projection(<a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</pre>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getZoomLevel()">
+<!--   -->
+</a>
+
+
+<h4>getZoomLevel</h4>
+<pre>public&nbsp;float&nbsp;getZoomLevel()</pre>
+
+
+<a name="getHalfWorldSize()">
+<!--   -->
+</a>
+
+
+<h4>getHalfWorldSize</h4>
+<pre>public&nbsp;int&nbsp;getHalfWorldSize()</pre>
+
+
+<a name="getBoundingBox()">
+<!--   -->
+</a>
+
+
+<h4>getBoundingBox</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/BoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getBoundingBox()</pre>
+
+
+<a name="getScreenRect()">
+<!--   -->
+</a>
+
+
+<h4>getScreenRect</h4>
+<pre>public&nbsp;android.graphics.Rect&nbsp;getScreenRect()</pre>
+
+
+<a name="getIntrinsicScreenRect()">
+<!--   -->
+</a>
+
+
+<h4>getIntrinsicScreenRect</h4>
+<pre>public&nbsp;android.graphics.Rect&nbsp;getIntrinsicScreenRect()</pre>
+
+
+<a name="getMapOrientation()">
+<!--   -->
+</a>
+
+
+<h4>getMapOrientation</h4>
+<pre>public&nbsp;float&nbsp;getMapOrientation()</pre>
+
+
+<a name="getCenterX()">
+<!--   -->
+</a>
+
+
+<h4>getCenterX</h4>
+<pre>public&nbsp;int&nbsp;getCenterX()</pre>
+
+
+<a name="getCenterY()">
+<!--   -->
+</a>
+
+
+<h4>getCenterY</h4>
+<pre>public&nbsp;int&nbsp;getCenterY()</pre>
+
+
+<a name="fromPixels(float, float)">
+<!--   -->
+</a>
+
+
+<h4>fromPixels</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/ILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;fromPixels(float&nbsp;x,
+                 float&nbsp;y)</pre>
+<div class="block">Converts <I>screen coordinates</I> to the underlying LatLng.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>LatLng under x/y.</dd></dl>
+
+
+<a name="fromPixels(int, int)">
+<!--   -->
+</a>
+
+
+<h4>fromPixels</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/ILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;fromPixels(int&nbsp;x,
+                 int&nbsp;y)</pre>
+<div class="block">Converts <I>screen coordinates</I> to the underlying LatLng.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>LatLng under x/y.</dd></dl>
+
+
+<a name="fromMapPixels(int, int, android.graphics.Point)">
+<!--   -->
+</a>
+
+
+<h4>fromMapPixels</h4>
+<pre>public&nbsp;android.graphics.Point&nbsp;fromMapPixels(int&nbsp;x,
+                                   int&nbsp;y,
+                                   android.graphics.Point&nbsp;reuse)</pre>
+<div class="block">Converts from map pixels to a Point value. Optionally reuses an existing Point.</div>
+
+
+<a name="toPixels(com.mapbox.mapboxsdk.api.ILatLng, android.graphics.PointF)">
+<!--   -->
+</a>
+
+
+<h4>toPixels</h4>
+<pre>public&nbsp;android.graphics.PointF&nbsp;toPixels(<a href="{{site.baseurl}}/api/ILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;in,
+                               android.graphics.PointF&nbsp;reuse)</pre>
+<div class="block">Converts a LatLng to its <I>screen coordinates</I>.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>in</code> - the LatLng you want the <I>screen coordinates</I> of</dd><dd><code>reuse</code> - just pass null if you do not have a Point to be 'recycled'.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the Point containing the <I>screen coordinates</I> of the LatLng passed.</dd></dl>
+
+
+<a name="toPixels(android.graphics.PointF, android.graphics.PointF)">
+<!--   -->
+</a>
+
+
+<h4>toPixels</h4>
+<pre>public&nbsp;android.graphics.PointF&nbsp;toPixels(android.graphics.PointF&nbsp;mapPos,
+                               android.graphics.PointF&nbsp;reuse)</pre>
+<div class="block">Converts a map position in pixel to its <I>screen coordinates</I>.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>mapPos</code> - the map point you want the <I>screen coordinates</I> of</dd><dd><code>reuse</code> - just pass null if you do not have a Point to be 'recycled'.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the Point containing the <I>screen coordinates</I> of the point passed.</dd></dl>
+
+
+<a name="toMapPixels(com.mapbox.mapboxsdk.api.ILatLng, android.graphics.PointF)">
+<!--   -->
+</a>
+
+
+<h4>toMapPixels</h4>
+<pre>public&nbsp;android.graphics.PointF&nbsp;toMapPixels(<a href="{{site.baseurl}}/api/ILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;in,
+                                  android.graphics.PointF&nbsp;reuse)</pre>
+<div class="block">Converts a LatLng to its <I>Map coordinates</I> in pixels for the current zoom.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>in</code> - the LatLng you want the <I>screen coordinates</I> of</dd><dd><code>reuse</code> - just pass null if you do not have a Point to be 'recycled'.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the Point containing the <I>Map coordinates</I> of the LatLng passed.</dd></dl>
+
+
+<a name="toMapPixels(double, double, float, double, double, android.graphics.PointF)">
+<!--   -->
+</a>
+
+
+<h4>toMapPixels</h4>
+<pre>public static&nbsp;android.graphics.PointF&nbsp;toMapPixels(double&nbsp;latitude,
+                                  double&nbsp;longitude,
+                                  float&nbsp;zoom,
+                                  double&nbsp;centerX,
+                                  double&nbsp;centerY,
+                                  android.graphics.PointF&nbsp;reuse)</pre>
+
+
+<a name="toMapPixels(double, double, android.graphics.PointF)">
+<!--   -->
+</a>
+
+
+<h4>toMapPixels</h4>
+<pre>public&nbsp;android.graphics.PointF&nbsp;toMapPixels(double&nbsp;latitude,
+                                  double&nbsp;longitude,
+                                  android.graphics.PointF&nbsp;reuse)</pre>
+
+
+<a name="toMapPixels(com.mapbox.mapboxsdk.geometry.BoundingBox, float, android.graphics.RectF)">
+<!--   -->
+</a>
+
+
+<h4>toMapPixels</h4>
+<pre>public static&nbsp;android.graphics.RectF&nbsp;toMapPixels(<a href="{{site.baseurl}}/api/BoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;box,
+                                 float&nbsp;zoom,
+                                 android.graphics.RectF&nbsp;reuse)</pre>
+
+
+<a name="toMapPixelsProjected(double, double, android.graphics.PointF)">
+<!--   -->
+</a>
+
+
+<h4>toMapPixelsProjected</h4>
+<pre>public static&nbsp;android.graphics.PointF&nbsp;toMapPixelsProjected(double&nbsp;latitude,
+                                           double&nbsp;longitude,
+                                           android.graphics.PointF&nbsp;reuse)</pre>
+<div class="block">Performs only the first computationally heavy part of the projection. Call
+ toMapPixelsTranslated to get the final position.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>latitude</code> - the latitude of the point</dd><dd><code>longitude</code> - the longitude of the point</dd><dd><code>reuse</code> - just pass null if you do not have a Point to be 'recycled'.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>intermediate value to be stored and passed to toMapPixelsTranslated.</dd></dl>
+
+
+<a name="toMapPixelsTranslated(android.graphics.PointF, android.graphics.PointF)">
+<!--   -->
+</a>
+
+
+<h4>toMapPixelsTranslated</h4>
+<pre>public&nbsp;android.graphics.PointF&nbsp;toMapPixelsTranslated(android.graphics.PointF&nbsp;in,
+                                            android.graphics.PointF&nbsp;reuse)</pre>
+<div class="block">Performs the second computationally light part of the projection. Returns results in
+ <I>screen coordinates</I>.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>in</code> - the Point calculated by the toMapPixelsProjected</dd><dd><code>reuse</code> - just pass null if you do not have a Point to be 'recycled'.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the Point containing the <I>Screen coordinates</I> of the initial LatLng passed
+ to the toMapPixelsProjected.</dd></dl>
+
+
+<a name="fromPixelsToProjected(android.graphics.Rect)">
+<!--   -->
+</a>
+
+
+<h4>fromPixelsToProjected</h4>
+<pre>public&nbsp;android.graphics.Rect&nbsp;fromPixelsToProjected(android.graphics.Rect&nbsp;in)</pre>
+<div class="block">Translates a rectangle from <I>screen coordinates</I> to <I>intermediate coordinates</I>.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>in</code> - the rectangle in <I>screen coordinates</I></dd>
+<dt><span class="strong">Returns:</span></dt><dd>a rectangle in </I>intermediate coordindates</I>.</dd></dl>
+
+
+<a name="setTileSize(int)">
+<!--   -->
+</a>
+
+
+<h4>setTileSize</h4>
+<pre>public static&nbsp;void&nbsp;setTileSize(int&nbsp;tileSize)</pre>
+
+
+<a name="getTileSize()">
+<!--   -->
+</a>
+
+
+<h4>getTileSize</h4>
+<pre>public static&nbsp;int&nbsp;getTileSize()</pre>
+
+
+<a name="mapSize(float)">
+<!--   -->
+</a>
+
+
+<h4>mapSize</h4>
+<pre>public static&nbsp;int&nbsp;mapSize(float&nbsp;levelOfDetail)</pre>
+<div class="block">Determines the map width and height (in pixels) at a specified level of detail.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>levelOfDetail</code> - Level of detail, from 1 (lowest detail) to 23 (highest detail)</dd>
+<dt><span class="strong">Returns:</span></dt><dd>The map width and height in pixels</dd></dl>
+
+
+<a name="groundResolution(double, float)">
+<!--   -->
+</a>
+
+
+<h4>groundResolution</h4>
+<pre>public static&nbsp;double&nbsp;groundResolution(double&nbsp;latitude,
+                      float&nbsp;levelOfDetail)</pre>
+<div class="block">Determines the ground resolution (in meters per pixel) at a specified latitude and level of
+ detail.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>latitude</code> - Latitude (in degrees) at which to measure the ground resolution</dd><dd><code>levelOfDetail</code> - Level of detail, from 1 (lowest detail) to 23 (highest detail)</dd>
+<dt><span class="strong">Returns:</span></dt><dd>The ground resolution, in meters per pixel</dd></dl>
+
+
+<a name="mapScale(double, int, int)">
+<!--   -->
+</a>
+
+
+<h4>mapScale</h4>
+<pre>public static&nbsp;double&nbsp;mapScale(double&nbsp;latitude,
+              int&nbsp;levelOfDetail,
+              int&nbsp;screenDpi)</pre>
+<div class="block">Determines the map scale at a specified latitude, level of detail, and screen resolution.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>latitude</code> - Latitude (in degrees) at which to measure the map scale</dd><dd><code>levelOfDetail</code> - Level of detail, from 1 (lowest detail) to 23 (highest detail)</dd><dd><code>screenDpi</code> - Resolution of the screen, in dots per inch</dd>
+<dt><span class="strong">Returns:</span></dt><dd>The map scale, expressed as the denominator N of the ratio 1 : N</dd></dl>
+
+
+<a name="latLongToPixelXY(double, double, float, android.graphics.PointF)">
+<!--   -->
+</a>
+
+
+<h4>latLongToPixelXY</h4>
+<pre>public static&nbsp;android.graphics.PointF&nbsp;latLongToPixelXY(double&nbsp;latitude,
+                                       double&nbsp;longitude,
+                                       float&nbsp;levelOfDetail,
+                                       android.graphics.PointF&nbsp;reuse)</pre>
+<div class="block">Converts a point from latitude/longitude WGS-84 coordinates (in degrees) into pixel XY
+ coordinates at a specified level of detail.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>latitude</code> - Latitude of the point, in degrees</dd><dd><code>longitude</code> - Longitude of the point, in degrees</dd><dd><code>levelOfDetail</code> - Level of detail, from 1 (lowest detail) to 23 (highest detail)</dd><dd><code>reuse</code> - An optional Point to be recycled, or null to create a new one automatically</dd>
+<dt><span class="strong">Returns:</span></dt><dd>Output parameter receiving the X and Y coordinates in pixels</dd></dl>
+
+
+<a name="pixelXYToLatLong(double, double, float)">
+<!--   -->
+</a>
+
+
+<h4>pixelXYToLatLong</h4>
+<pre>public static&nbsp;<a href="{{site.baseurl}}/api/LatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;pixelXYToLatLong(double&nbsp;pixelX,
+                      double&nbsp;pixelY,
+                      float&nbsp;levelOfDetail)</pre>
+<div class="block">Converts a pixel from pixel XY coordinates at a specified level of detail into
+ latitude/longitude WGS-84 coordinates (in degrees).</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>pixelX</code> - X coordinate of the point, in pixels</dd><dd><code>pixelY</code> - Y coordinate of the point, in pixels</dd><dd><code>levelOfDetail</code> - Level of detail, from 1 (lowest detail) to 23 (highest detail)</dd>
+<dt><span class="strong">Returns:</span></dt><dd>Output parameter receiving the latitude and longitude in degrees.</dd></dl>
+
+
+<a name="pixelXYToLatLong(double, double)">
+<!--   -->
+</a>
+
+
+<h4>pixelXYToLatLong</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;pixelXYToLatLong(double&nbsp;pixelX,
+                      double&nbsp;pixelY)</pre>
+<div class="block">Converts a pixel from pixel XY coordinates at a specified level of detail into
+ latitude/longitude WGS-84 coordinates (in degrees).</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>pixelX</code> - X coordinate of the point, in pixels</dd><dd><code>pixelY</code> - Y coordinate of the point, in pixels</dd>
+<dt><span class="strong">Returns:</span></dt><dd>Output parameter receiving the latitude and longitude in degrees.</dd></dl>
+
+
+<a name="pixelXYToTileXY(int, int, android.graphics.Point)">
+<!--   -->
+</a>
+
+
+<h4>pixelXYToTileXY</h4>
+<pre>public static&nbsp;android.graphics.Point&nbsp;pixelXYToTileXY(int&nbsp;pixelX,
+                                     int&nbsp;pixelY,
+                                     android.graphics.Point&nbsp;reuse)</pre>
+<div class="block">Converts pixel XY coordinates into tile XY coordinates of the tile containing the specified
+ pixel.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>pixelX</code> - Pixel X coordinate</dd><dd><code>pixelY</code> - Pixel Y coordinate</dd><dd><code>reuse</code> - An optional Point to be recycled, or null to create a new one automatically</dd>
+<dt><span class="strong">Returns:</span></dt><dd>Output parameter receiving the tile X and Y coordinates</dd></dl>
+
+
+<a name="tileXYToPixelXY(int, int, android.graphics.Point)">
+<!--   -->
+</a>
+
+
+<h4>tileXYToPixelXY</h4>
+<pre>public static&nbsp;android.graphics.Point&nbsp;tileXYToPixelXY(int&nbsp;tileX,
+                                     int&nbsp;tileY,
+                                     android.graphics.Point&nbsp;reuse)</pre>
+<div class="block">Converts tile XY coordinates into pixel XY coordinates of the upper-left pixel of the
+ specified tile.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>tileX</code> - Tile X coordinate</dd><dd><code>tileY</code> - Tile X coordinate</dd><dd><code>reuse</code> - An optional Point to be recycled, or null to create a new one automatically</dd>
+<dt><span class="strong">Returns:</span></dt><dd>Output parameter receiving the pixel X and Y coordinates</dd></dl>
+
+
+<a name="rotatePoints(float[])">
+<!--   -->
+</a>
+
+
+<h4>rotatePoints</h4>
+<pre>public&nbsp;void&nbsp;rotatePoints(float[]&nbsp;pRotatePoints)</pre>
+
+
+<a name="rotateRect(android.graphics.RectF)">
+<!--   -->
+</a>
+
+
+<h4>rotateRect</h4>
+<pre>public&nbsp;void&nbsp;rotateRect(android.graphics.RectF&nbsp;rect)</pre>
+
+
+<a name="getRotationMatrix()">
+<!--   -->
+</a>
+
+
+<h4>getRotationMatrix</h4>
+<pre>public final&nbsp;android.graphics.Matrix&nbsp;getRotationMatrix()</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
