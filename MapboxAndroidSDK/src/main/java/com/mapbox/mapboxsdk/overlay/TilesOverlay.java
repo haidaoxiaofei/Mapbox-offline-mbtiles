@@ -132,10 +132,10 @@ public class TilesOverlay extends SafeDrawOverlay {
         int tileSize = Projection.getTileSize();
         // Draw the tiles!
         if (tileSize > 0) {
-            Log.i(TAG, "drawSafe(), start drawing tiles!");
+            Log.d(TAG, "drawSafe(), start drawing tiles!");
             drawLoadingTile(c.getSafeCanvas(), mapView, zoomLevel, mClipRect);
             drawTiles(c.getSafeCanvas(), zoomLevel, tileSize, mViewPort, mClipRect);
-            Log.i(TAG, "drawSafe(), done drawing tiles!");
+            Log.d(TAG, "drawSafe(), done drawing tiles!");
         }
 
         if (UtilConstants.DEBUGMODE && mapView.getScrollableAreaLimit() != null) {
