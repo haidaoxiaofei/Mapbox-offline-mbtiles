@@ -14,5 +14,7 @@
     <string name="mapbox_id_terrain">examples.map-zgrqqx0w</string>
 	<string name="drawerOpen">Open Nav Drawer</string>
 	<string name="drawerClose">Close Nav Drawer</string>
+    <string name="dataOn">Data On</string>
+    <string name="dataOff">Data Off</string>
 
 </resources>
