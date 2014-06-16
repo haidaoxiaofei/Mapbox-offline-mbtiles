@@ -61,7 +61,6 @@ import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import org.json.JSONException;
-
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -118,7 +117,7 @@ public class MapView extends ViewGroup
     private Projection mProjection;
     private boolean mLayedOut;
 
-    private final TilesOverlay mMapOverlay;
+    private final TilesOverlay mTilesOverlay;
 
     private final GestureDetector mGestureDetector;
 
@@ -198,8 +197,8 @@ public class MapView extends ViewGroup
         mTileProvider = tileProvider;
         mTileProvider.setTileRequestCompleteHandler(mTileRequestCompleteHandler);
 
-        this.mMapOverlay = new TilesOverlay(mTileProvider);
-        mOverlayManager = new OverlayManager(mMapOverlay);
+        mTilesOverlay = new TilesOverlay(mTileProvider);
+        mOverlayManager = new OverlayManager(mTilesOverlay);
 
         this.mGestureDetector =
                 new GestureDetector(aContext, new MapViewGestureDetectorListener(this));
@@ -548,7 +547,7 @@ public class MapView extends ViewGroup
      * Returns the map's overlay
      */
     public TilesOverlay getMapOverlay() {
-        return mMapOverlay;
+        return mTilesOverlay;
     }
 
     /**
@@ -1057,7 +1056,7 @@ public class MapView extends ViewGroup
      * Whether to use the network connection if it's available.
      */
     public boolean useDataConnection() {
-        return mMapOverlay.useDataConnection();
+        return mTilesOverlay.useDataConnection();
     }
 
     /**
@@ -1067,7 +1066,7 @@ public class MapView extends ViewGroup
      *              network connection even if it's available.
      */
     public void setUseDataConnection(final boolean aMode) {
-        mMapOverlay.setUseDataConnection(aMode);
+        mTilesOverlay.setUseDataConnection(aMode);
     }
 
     private void updateMinZoomLevel() {
@@ -1646,7 +1645,7 @@ public class MapView extends ViewGroup
 
     @Override
     public void setBackgroundColor(final int pColor) {
-        mMapOverlay.setLoadingBackgroundColor(pColor);
+        mTilesOverlay.setLoadingBackgroundColor(pColor);
         invalidate();
     }
 
