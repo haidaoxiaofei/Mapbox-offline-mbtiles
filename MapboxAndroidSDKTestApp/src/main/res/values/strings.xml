@@ -8,6 +8,7 @@
 	<string name="itemizedOverlayTestMap">ItemizedIconOverlay</string>
     <string name="localGeoJSONTestMap">Local GeoJSON</string>
     <string name="diskCacheDisabledTestMap">DiskCache Disabled</string>
+    <string name="offlineCacheTestMap">Offline Cache</string>
     <string name="mapbox_id">examples.map-i87786ca</string>
 	<string name="drawerOpen">Open Nav Drawer</string>
 	<string name="drawerClose">Close Nav Drawer</string>
