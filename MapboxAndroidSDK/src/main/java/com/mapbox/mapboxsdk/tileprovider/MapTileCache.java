@@ -222,4 +222,8 @@ public class MapTileCache implements TileLayerConstants {
             sCachedTiles = null;
         }
     }
+
+    public boolean isDiskCacheEnabled() {
+        return mDiskCacheEnabled;
+    }
 }

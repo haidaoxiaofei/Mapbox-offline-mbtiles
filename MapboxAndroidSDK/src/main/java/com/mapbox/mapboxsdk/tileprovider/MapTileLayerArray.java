@@ -116,12 +116,19 @@ public class MapTileLayerArray extends MapTileLayerBase {
     public Drawable getMapTile(final MapTile pTile, final boolean allowRemote) {
         Log.d(TAG, "getMapTile() with pTile (CacheKey) = '" + pTile.getCacheKey() + "'; allowRemote = '" + allowRemote + "'");
         if (tileUnavailable(pTile)) {
-            if (DEBUG_TILE_PROVIDERS) {
-                Log.i(TAG, "MapTileLayerArray.getMapTile() tileUnavailable: " + pTile);
-            }
+            Log.d(TAG, "MapTileLayerArray.getMapTile() tileUnavailable: " + pTile);
             return null;
         }
-        final CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
+
+        CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
+/*
+        // Causes java.lang.IllegalStateException(): This method should not be called on main/UI thread
+        if (tileDrawable == null && mTileCache.isDiskCacheEnabled()) {
+            Log.d(TAG, "Tile not found in memory, so now look in disk cache.");
+            tileDrawable = mTileCache.getMapTileFromDisk(pTile);
+        }
+*/
+
         if (tileDrawable != null && tileDrawable.isBitmapValid() && !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
             tileDrawable.setBeingUsed(true);
             Log.d(TAG, "Found tile(" + pTile.getCacheKey() + ") in memory, so returning for drawing.");
@@ -134,20 +141,13 @@ public class MapTileLayerArray extends MapTileLayerBase {
             }
 
             if (!alreadyInProgress) {
-                if (DEBUG_TILE_PROVIDERS) {
-                    Log.i(TAG,
-                            "MapTileLayerArray.getMapTile() requested but not in cache, trying from async providers: "
-                                    + pTile
-                    );
-                }
+                Log.d(TAG, "MapTileLayerArray.getMapTile() requested but not in cache, trying from async providers: " + pTile);
 
                 final MapTileRequestState state;
 
                 synchronized (mTileProviderList) {
-                    final MapTileModuleLayerBase[] providerArray =
-                            new MapTileModuleLayerBase[mTileProviderList.size()];
-                    state = new MapTileRequestState(pTile, mTileProviderList.toArray(providerArray),
-                            this);
+                    final MapTileModuleLayerBase[] providerArray = new MapTileModuleLayerBase[mTileProviderList.size()];
+                    state = new MapTileRequestState(pTile, mTileProviderList.toArray(providerArray), this);
                 }
 
                 synchronized (mWorking) {
