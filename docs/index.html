@@ -36,7 +36,7 @@ navigation:
     <div class='clip row2 fill-light pad2x'>
 {% highlight java %}
 // Create a new MapView passing context and map ID
-MapView mapView = new MapView(this, "{{page.mapid}}");
+MapView mapView = new MapView(this, "username.mapid");
 {% endhighlight %}
     </div>
   </div>
@@ -49,11 +49,16 @@ $(function load() {
       center: [43.075, -89.382], zoom: 15
     });
 
+    var mapid = App.storage('map.id'),
+        exampleid = 'username.mapid';
+
+    if (mapid && (mapid || '').indexOf(App.user.id) === 0) {
+        exampleid = mapid;
+    }
+
     // Replace username.mapid with the current one.
-    var key = /{{page.mapid}}/g;
-    var unique = (App && App.user) ? App.user.id + '.' + App.tmpkey : '{{site.defaultid}}';
     $('pre, code').each(function() {
-        $(this).html($(this).html().replace(key, unique));
+        $(this).html($(this).html().replace(/username.mapid/g, unique));
     });
 });
 </script>
