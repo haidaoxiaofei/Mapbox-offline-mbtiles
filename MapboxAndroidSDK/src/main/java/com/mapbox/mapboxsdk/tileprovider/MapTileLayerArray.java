@@ -121,13 +121,6 @@ public class MapTileLayerArray extends MapTileLayerBase {
         }
 
         CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
-/*
-        // Causes java.lang.IllegalStateException(): This method should not be called on main/UI thread
-        if (tileDrawable == null && mTileCache.isDiskCacheEnabled()) {
-            Log.d(TAG, "Tile not found in memory, so now look in disk cache.");
-            tileDrawable = mTileCache.getMapTileFromDisk(pTile);
-        }
-*/
 
         if (tileDrawable != null && tileDrawable.isBitmapValid() && !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
             tileDrawable.setBeingUsed(true);
