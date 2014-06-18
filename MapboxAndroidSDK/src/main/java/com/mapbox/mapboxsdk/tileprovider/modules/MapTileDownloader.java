@@ -20,7 +20,7 @@ import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
  * The {@link MapTileDownloader} loads tiles from an HTTP server.
  */
 public class MapTileDownloader extends MapTileModuleLayerBase {
-    private static final String TAG = "Tile downloader";
+    private static final String TAG = "MapTileDownloader";
 
     private final AtomicReference<TileLayer> mTileSource = new AtomicReference<TileLayer>();
     private final AtomicReference<MapTileCache> mTileCache = new AtomicReference<MapTileCache>();
@@ -162,6 +162,4 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
     private CacheableBitmapDrawable onTileLoaded(CacheableBitmapDrawable pDrawable) {
         return mapView.getTileLoadedListener().onTileLoaded(pDrawable);
     }
-
-    private static final String TAG = "MapTileDownloader";
 }
