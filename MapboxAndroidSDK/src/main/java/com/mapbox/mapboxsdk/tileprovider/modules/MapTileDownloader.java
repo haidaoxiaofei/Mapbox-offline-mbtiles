@@ -147,7 +147,7 @@ public class MapTileDownloader extends MapTileModuleLayerBase {
             final MapTile tile = aState.getMapTile();
             Log.d(TAG, "loadTile() with tile = '" + tile + "'");
             if (mTileCache != null && mTileCache.get().containsTileInDiskCache(tile)) {
-                Log.d(TAG, "tile found in Disk Cache, so returning it.");
+                Log.d(TAG, "tile found in Disk Cache, so returning it. tile = '" + tile + "'");
                 return mTileCache.get().getMapTileFromDisk(tile);
             }
             TileLayer tileLayer = mTileSource.get();
