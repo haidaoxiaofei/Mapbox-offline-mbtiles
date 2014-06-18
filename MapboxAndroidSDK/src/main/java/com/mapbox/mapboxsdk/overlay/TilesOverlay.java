@@ -113,7 +113,7 @@ public class TilesOverlay extends SafeDrawOverlay {
     @Override
     protected void drawSafe(final ISafeCanvas c, final MapView mapView, final boolean shadow) {
 
-        Log.i(TAG, "drawSafe() called with shadow = '" + shadow + "'");
+        Log.d(TAG, "drawSafe() called with shadow = '" + shadow + "'");
 
         if (shadow) {
             return;
@@ -136,6 +136,8 @@ public class TilesOverlay extends SafeDrawOverlay {
             drawLoadingTile(c.getSafeCanvas(), mapView, zoomLevel, mClipRect);
             drawTiles(c.getSafeCanvas(), zoomLevel, tileSize, mViewPort, mClipRect);
             Log.d(TAG, "drawSafe(), done drawing tiles!");
+        } else {
+            Log.d(TAG, "tileSize is not > 0, so not drawing tiles.");
         }
 
         if (UtilConstants.DEBUGMODE && mapView.getScrollableAreaLimit() != null) {
@@ -174,6 +176,7 @@ public class TilesOverlay extends SafeDrawOverlay {
     public void drawTiles(final Canvas c, final float zoomLevel, final int tileSizePx,
                           final Rect viewPort, final Rect pClipRect) {
 
+        Log.d(TAG, "drawTiles() start.");
         mTileLooper.loop(c, mTileProvider.getCacheKey(), zoomLevel, tileSizePx, viewPort, pClipRect);
 
         // draw a cross at center in debug mode
@@ -186,6 +189,7 @@ public class TilesOverlay extends SafeDrawOverlay {
             canvas.drawLine(centerPoint.x - 9, centerPoint.y, centerPoint.x + 9, centerPoint.y,
                     mDebugPaint);
         }
+        Log.d(TAG, "drawTiles() done.");
     }
 
     private final TileLooper mTileLooper = new TileLooper() {
@@ -222,11 +226,13 @@ public class TilesOverlay extends SafeDrawOverlay {
                 }
                 drawable.setBounds(mTileRect);
                 drawable.draw(pCanvas);
+            } else {
+                Log.w(TAG, "tile should have been drawn to canvas, but it was null.  tile = '" + pTile + "'");
             }
+
             if (UtilConstants.DEBUGMODE) {
                 ISafeCanvas canvas = (ISafeCanvas) pCanvas;
-                canvas.drawText(pTile.toString(), mTileRect.left + 1,
-                        mTileRect.top + mDebugPaint.getTextSize(), mDebugPaint);
+                canvas.drawText(pTile.toString(), mTileRect.left + 1, mTileRect.top + mDebugPaint.getTextSize(), mDebugPaint);
                 canvas.drawRect(mTileRect, mDebugPaint);
             }
         }
