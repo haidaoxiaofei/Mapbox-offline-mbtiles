@@ -5,12 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.Log;
+import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileCache;
 import com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader;
 import com.mapbox.mapboxsdk.tileprovider.util.StreamUtils;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
-import com.mapbox.mapboxsdk.util.constants.UtilConstants;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import java.io.BufferedOutputStream;
@@ -58,7 +58,7 @@ public class WebSourceTileLayer extends TileLayer {
 
     protected void initialize(String pId, String aUrl, boolean enableSSL) {
         mEnableSSL = enableSSL;
-        this.setURL(aUrl);
+        setURL(aUrl);
     }
 
     /**
@@ -70,7 +70,7 @@ public class WebSourceTileLayer extends TileLayer {
      */
     public String[] getTileURLs(final MapTile aTile, boolean hdpi) {
         String url = getTileURL(aTile, hdpi);
-        if (url != null) {
+        if (!Strings.isNullOrEmpty(url)) {
             return new String[] { url };
         }
         return null;
@@ -145,9 +145,7 @@ public class WebSourceTileLayer extends TileLayer {
 
             return result;
         } else {
-            if (UtilConstants.DEBUGMODE) {
-                Log.d(TAG, "Skipping tile " + aTile.toString() + " due to NetworkAvailabilityCheck.");
-            }
+            Log.d(TAG, "Skipping tile " + aTile.toString() + " due to NetworkAvailabilityCheck.");
         }
         return null;
     }
@@ -161,6 +159,7 @@ public class WebSourceTileLayer extends TileLayer {
      */
     public Bitmap getBitmapFromURL(final String url, final MapTileCache aCache) {
         // We track the active threads here, every exit point should decrement this value.
+        Log.d(getClass().getCanonicalName(), "getBitmapFormURL() called with url = '" + url + "'");
         activeThreads.incrementAndGet();
         InputStream in = null;
         OutputStream out = null;
@@ -175,9 +174,7 @@ public class WebSourceTileLayer extends TileLayer {
             in = connection.getInputStream();
 
             if (in == null) {
-                if (UtilConstants.DEBUGMODE) {
-                    Log.d(TAG, "No content downloading MapTile: " + url);
-                }
+                Log.d(TAG, "No content downloading MapTile: '" + url + "'");
                 return null;
             }
 
@@ -188,9 +185,7 @@ public class WebSourceTileLayer extends TileLayer {
             final byte[] data = dataStream.toByteArray();
             return aCache.decodeBitmap(data, null);
         } catch (final Throwable e) {
-            if (UtilConstants.DEBUGMODE) {
-                Log.d(TAG, "Error downloading MapTile: " + url + ":" + e);
-            }
+            Log.e(TAG, "Error downloading MapTile: " + url + ":" + e);
         } finally {
             StreamUtils.closeStream(in);
             StreamUtils.closeStream(out);

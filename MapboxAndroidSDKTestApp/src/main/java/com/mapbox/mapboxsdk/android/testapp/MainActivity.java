@@ -40,6 +40,8 @@ public class MainActivity extends ActionBarActivity {
         testFragmentNames.add(getString(R.string.markersTestMap));
         testFragmentNames.add(getString(R.string.itemizedOverlayTestMap));
         testFragmentNames.add(getString(R.string.localGeoJSONTestMap));
+        testFragmentNames.add(getString(R.string.diskCacheDisabledTestMap));
+        testFragmentNames.add(getString(R.string.offlineCacheTestMap));
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, testFragmentNames));
         // Set the list's click listener
@@ -124,6 +126,12 @@ public class MainActivity extends ActionBarActivity {
                 break;
             case 4:
                 fragment = new LocalGeoJSONTestFragment();
+                break;
+            case 5:
+                fragment = new DiskCacheDisabledTestFragment();
+                break;
+            case 6:
+                fragment = new OfflineCacheTestFragment();
                 break;
             default:
                 fragment = new MainTestFragment();

@@ -9,6 +9,6 @@
         android:id="@+id/localGeoJSONMapView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        mapbox:mapid="@string/mapbox_id"/>
+        mapbox:mapid="@string/mapbox_id_street"/>
 
 </FrameLayout>
