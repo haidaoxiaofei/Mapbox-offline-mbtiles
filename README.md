@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mapbox/mapbox-android-sdk.svg?branch=master)](https://travis-ci.org/mapbox/mapbox-android-sdk)
+[![Build Status](https://travis-ci.org/mapbox/mapbox-android-sdk.svg?branch=mb-pages)](https://travis-ci.org/mapbox/mapbox-android-sdk)
 
 # Mapbox Android SDK
 
@@ -31,7 +31,7 @@ dependencies {
 }
 ```
 
-### NOTE: SDK Versions 
+### NOTE: SDK Versions
 At any given time there will be 3 different versions of the SDK to use.  You're welcome to use whichever one makes the most sense for your project, just be aware that each comes with a different level of **stability**.  The installation instructions below all describe how to use the `Stable / Supported` version (although the SNAPSHOT version can make use of the same instructions.  Just need to update the Repo and the Version Number).
 
 1. Stable / Supported
@@ -54,17 +54,17 @@ These **will** change over time so please check back regularly.
 * [NineOldAndroids](http://nineoldandroids.com/) - 2.4.0
 * [DiskLRUCache](https://github.com/JakeWharton/DiskLruCache) - 2.0.1
 * [Guava](http://code.google.com/p/guava-libraries/) - 16.0.1
- 
+
 ### Legacy Support (Eclipse) - Experimental
 
 The Mapbox Android SDK is also packaged as a `.apk` file.  This allows integration with older tools (Eclipse) that don't support the `.aar` format yet.  It's also available from Maven Central via:
 
 ```xml
-<dependency> 
-    <groupId>com.mapbox.mapboxsdk</groupId> 
-    <artifactId>mapbox-android-sdk</artifactId> 
-    <version>0.2.3</version> 
-    <type>apklib</type> 
+<dependency>
+    <groupId>com.mapbox.mapboxsdk</groupId>
+    <artifactId>mapbox-android-sdk</artifactId>
+    <version>0.2.3</version>
+    <type>apklib</type>
 </dependency>
 ```
 
@@ -128,11 +128,11 @@ This project is a fork of OSMDroid, but is significantly different as the result
 * Mapbox Android SDK is a small core design. OSMDroid's semi-related utilities like GPX uploading, UI zoom buttons, GEM & Zip file support, Scale Bar, Compass Overlay, and more have been removed. These requirements will be better served by separate modules that do one thing well.
 * Interfaces and abstract classes are only defined when suitable: most single-use interfaces are removed for simplicity.
 * Data objects like points and lines use `double`s instead of the `E6` int convention. This simplifies implementations. The `reuse` pattern is also deemphasized, since it's less necessary with newer JITs.
-* Instead of supporting [specific tile layers](https://github.com/osmdroid/osmdroid/tree/master/osmdroid-android/src/main/java/org/osmdroid/tileprovider/tilesource) with hardcoded paths, Mapbox Android SDK provides an easy-to-configure `TileLayer` class.
+* Instead of supporting [specific tile layers](https://github.com/osmdroid/osmdroid/tree/mb-pages/osmdroid-android/src/main/java/org/osmdroid/tileprovider/tilesource) with hardcoded paths, Mapbox Android SDK provides an easy-to-configure `TileLayer` class.
 * Small modules are used in place of local implementations - [DiskLRUCache](https://github.com/JakeWharton/DiskLruCache) for caching, [OkHttp](http://square.github.io/okhttp/) for connection niceties, and [android-geojson](https://github.com/cocoahero/android-geojson) for GeoJSON parsing.
 * Markers can optionally use the Mapbox marker API for customized images.
-* Code style follows [the Sun conventions](https://github.com/mapbox/mapbox-android-sdk/blob/master/checks.xml)
-* [Automated tests](https://github.com/mapbox/mapbox-android-sdk/blob/master/MapboxAndroidSDKTestApp/src/instrumentTest/java/com/mapbox/mapboxsdk/android/testapp/test/MainActivityTest.java) are included.
+* Code style follows [the Sun conventions](https://github.com/mapbox/mapbox-android-sdk/blob/mb-pages/checks.xml)
+* [Automated tests](https://github.com/mapbox/mapbox-android-sdk/blob/mb-pages/MapboxAndroidSDKTestApp/src/instrumentTest/java/com/mapbox/mapboxsdk/android/testapp/test/MainActivityTest.java) are included.
 * [slf4j](http://www.slf4j.org/) dependency is removed
 
-## [Quick-start Guide](https://github.com/mapbox/mapbox-android-sdk/blob/master/QUICKSTART.md)
+## [Quick-start Guide](https://github.com/mapbox/mapbox-android-sdk/blob/mb-pages/QUICKSTART.md)
