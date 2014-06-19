@@ -28,7 +28,6 @@ scrape() {
     sed -e 's,<br[ /]*>,,g' \
     -e 's,<hr>,,g' \
     -e 's,<caption>,<caption class="small dark strong round-top pad1 fill-darken3">,g' \
-    -e 's,<a href="[./]*com/mapbox/mapboxsdk/.*/\([^"]*\).html\(#*[^"]*\)",<a href="{{site.baseurl}}/api/\1\2",g' \
     -e '1,/^\<div class="description">$/b' \
     -e 's,<ul class="inheritance">,,g' \
     -e 's,<ul class="blockList">,,g' \
@@ -36,7 +35,9 @@ scrape() {
     -e 's,</ul>,,g' \
     -e 's,<li class="blockList">,,g' \
     -e 's,<li>,,g' \
-    -e 's,</li>,,g'
+    -e 's,</li>,,g' | \
+    sed -e 's,<a href="[./]*com/mapbox/mapboxsdk/.*/\([^"]*\).html\(#*[^"]*\)",<a href="{{site.baseurl}}/api/\1\2",g' | \
+    awk '{print tolower($0)}'
 }
 
 for file in `find com/mapbox/mapboxsdk -name "*.html" | grep -v package-`; do

@@ -4,12 +4,12 @@ title: GeoJSON
 category: api
 tags: format
 ---
-<div class="contentContainer">
+<div class="contentcontainer">
 <ul class="inheritance">
-<li>java.lang.Object</li>
+<li>java.lang.object</li>
 <li>
 <ul class="inheritance">
-<li>com.mapbox.mapboxsdk.format.GeoJSON</li>
+<li>com.mapbox.mapboxsdk.format.geojson</li>
 </ul>
 </li>
 </ul>
@@ -18,82 +18,82 @@ tags: format
 
 
 
-<pre>public class <span class="strong">GeoJSON</span>
-extends java.lang.Object</pre>
-<div class="block">A GeoJSON parser.</div>
+<pre>public class <span class="strong">geojson</span>
+extends java.lang.object</pre>
+<div class="block">a geojson parser.</div>
 
 
 </div>
 <div class="summary">
 
 
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<!-- ======== constructor summary ======== -->
 
 <a name="constructor_summary">
 <!--   -->
 </a>
-<h3>Constructor Summary</h3>
-<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<h3>constructor summary</h3>
+<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="constructor summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>constructors</span><span class="tabend">&nbsp;</span></caption>
 <tr>
-<th class="colOne" scope="col">Constructor and Description</th>
+<th class="colone" scope="col">constructor and description</th>
 </tr>
-<tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/GeoJSON#GeoJSON()">GeoJSON</a></strong>()</code>&nbsp;</td>
+<tr class="altcolor">
+<td class="colone"><code><strong><a href="{{site.baseurl}}/api/geojson#geojson()">geojson</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
 
 
-<!-- ========== METHOD SUMMARY =========== -->
+<!-- ========== method summary =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>Method Summary</h3>
-<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<h3>method summary</h3>
+<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
 <tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colLast" scope="col">Method and Description</th>
+<th class="colfirst" scope="col">modifier and type</th>
+<th class="collast" scope="col">method and description</th>
 </tr>
-<tr class="altColor">
-<td class="colFirst"><code>static java.util.ArrayList&lt;java.lang.Object&gt;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/GeoJSON#featureCollectionToLayers(org.json.JSONObject, com.mapbox.mapboxsdk.views.MapView)">featureCollectionToLayers</a></strong>(org.json.JSONObject&nbsp;featureCollection,
-                         <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</code>
-<div class="block">Given a <a href='http://geojson.org/geojson-spec.html#feature-collection-objects'>GeoJSON
- FeatureCollection</a>,
+<tr class="altcolor">
+<td class="colfirst"><code>static java.util.arraylist&lt;java.lang.object&gt;</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/geojson#featurecollectiontolayers(org.json.jsonobject, com.mapbox.mapboxsdk.views.mapview)">featurecollectiontolayers</a></strong>(org.json.jsonobject&nbsp;featurecollection,
+                         <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)</code>
+<div class="block">given a <a href='http://geojson.org/geojson-spec.html#feature-collection-objects'>geojson
+ featurecollection</a>,
  parse each feature and create layers on the given map</div>
 </td>
 </tr>
-<tr class="rowColor">
-<td class="colFirst"><code>static java.util.List&lt;java.lang.Object&gt;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/GeoJSON#featureToLayer(org.json.JSONObject, com.mapbox.mapboxsdk.views.MapView)">featureToLayer</a></strong>(org.json.JSONObject&nbsp;feature,
-              <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</code>
-<div class="block">Parse a GeoJSON feature object into some number of overlays, adding them to the overlays
+<tr class="rowcolor">
+<td class="colfirst"><code>static java.util.list&lt;java.lang.object&gt;</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/geojson#featuretolayer(org.json.jsonobject, com.mapbox.mapboxsdk.views.mapview)">featuretolayer</a></strong>(org.json.jsonobject&nbsp;feature,
+              <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)</code>
+<div class="block">parse a geojson feature object into some number of overlays, adding them to the overlays
  array.</div>
 </td>
 </tr>
-<tr class="altColor">
-<td class="colFirst"><code>static java.util.List&lt;java.lang.Object&gt;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/GeoJSON#parse(org.json.JSONObject, com.mapbox.mapboxsdk.views.MapView)">parse</a></strong>(org.json.JSONObject&nbsp;json,
-     <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</code>
-<div class="block">Parse a GeoJSON object into an array of overlays.</div>
+<tr class="altcolor">
+<td class="colfirst"><code>static java.util.list&lt;java.lang.object&gt;</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/geojson#parse(org.json.jsonobject, com.mapbox.mapboxsdk.views.mapview)">parse</a></strong>(org.json.jsonobject&nbsp;json,
+     <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)</code>
+<div class="block">parse a geojson object into an array of overlays.</div>
 </td>
 </tr>
-<tr class="rowColor">
-<td class="colFirst"><code>static java.util.List&lt;java.lang.Object&gt;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/GeoJSON#parseString(java.lang.String, com.mapbox.mapboxsdk.views.MapView)">parseString</a></strong>(java.lang.String&nbsp;jsonString,
-           <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</code>
-<div class="block">Parse a string of GeoJSON data, returning an array of Overlay objects.</div>
+<tr class="rowcolor">
+<td class="colfirst"><code>static java.util.list&lt;java.lang.object&gt;</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/geojson#parsestring(java.lang.string, com.mapbox.mapboxsdk.views.mapview)">parsestring</a></strong>(java.lang.string&nbsp;jsonstring,
+           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)</code>
+<div class="block">parse a string of geojson data, returning an array of overlay objects.</div>
 </td>
 </tr>
 </table>
 
-<a name="methods_inherited_from_class_java.lang.Object">
+<a name="methods_inherited_from_class_java.lang.object">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+<h3>methods inherited from class&nbsp;java.lang.object</h3>
+<code>clone, equals, finalize, getclass, hashcode, notify, notifyall, tostring, wait, wait, wait</code>
 
 
 
@@ -103,90 +103,90 @@ extends java.lang.Object</pre>
 <div class="details">
 
 
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<!-- ========= constructor detail ======== -->
 
 <a name="constructor_detail">
 <!--   -->
 </a>
-<h3>Constructor Detail</h3>
-<a name="GeoJSON()">
+<h3>constructor detail</h3>
+<a name="geojson()">
 <!--   -->
 </a>
 
 
-<h4>GeoJSON</h4>
-<pre>public&nbsp;GeoJSON()</pre>
+<h4>geojson</h4>
+<pre>public&nbsp;geojson()</pre>
 
 
 
 
-<!-- ============ METHOD DETAIL ========== -->
+<!-- ============ method detail ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>Method Detail</h3>
-<a name="parseString(java.lang.String, com.mapbox.mapboxsdk.views.MapView)">
+<h3>method detail</h3>
+<a name="parsestring(java.lang.string, com.mapbox.mapboxsdk.views.mapview)">
 <!--   -->
 </a>
 
 
-<h4>parseString</h4>
-<pre>public static&nbsp;java.util.List&lt;java.lang.Object&gt;&nbsp;parseString(java.lang.String&nbsp;jsonString,
-                                           <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)
-                                                    throws org.json.JSONException</pre>
-<div class="block">Parse a string of GeoJSON data, returning an array of Overlay objects.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>jsonString</code> - GeoJSON string</dd>
-<dt><span class="strong">Throws:</span></dt>
-<dd><code>org.json.JSONException</code></dd></dl>
+<h4>parsestring</h4>
+<pre>public static&nbsp;java.util.list&lt;java.lang.object&gt;&nbsp;parsestring(java.lang.string&nbsp;jsonstring,
+                                           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)
+                                                    throws org.json.jsonexception</pre>
+<div class="block">parse a string of geojson data, returning an array of overlay objects.</div>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>jsonstring</code> - geojson string</dd>
+<dt><span class="strong">throws:</span></dt>
+<dd><code>org.json.jsonexception</code></dd></dl>
 
 
-<a name="parse(org.json.JSONObject, com.mapbox.mapboxsdk.views.MapView)">
+<a name="parse(org.json.jsonobject, com.mapbox.mapboxsdk.views.mapview)">
 <!--   -->
 </a>
 
 
 <h4>parse</h4>
-<pre>public static&nbsp;java.util.List&lt;java.lang.Object&gt;&nbsp;parse(org.json.JSONObject&nbsp;json,
-                                     <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)
-                                              throws org.json.JSONException</pre>
-<div class="block">Parse a GeoJSON object into an array of overlays.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>json</code> - GeoJSON</dd><dd><code>mv</code> - a mapview for the overlays to be added to</dd>
-<dt><span class="strong">Throws:</span></dt>
-<dd><code>org.json.JSONException</code></dd></dl>
+<pre>public static&nbsp;java.util.list&lt;java.lang.object&gt;&nbsp;parse(org.json.jsonobject&nbsp;json,
+                                     <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)
+                                              throws org.json.jsonexception</pre>
+<div class="block">parse a geojson object into an array of overlays.</div>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>json</code> - geojson</dd><dd><code>mv</code> - a mapview for the overlays to be added to</dd>
+<dt><span class="strong">throws:</span></dt>
+<dd><code>org.json.jsonexception</code></dd></dl>
 
 
-<a name="featureCollectionToLayers(org.json.JSONObject, com.mapbox.mapboxsdk.views.MapView)">
+<a name="featurecollectiontolayers(org.json.jsonobject, com.mapbox.mapboxsdk.views.mapview)">
 <!--   -->
 </a>
 
 
-<h4>featureCollectionToLayers</h4>
-<pre>public static&nbsp;java.util.ArrayList&lt;java.lang.Object&gt;&nbsp;featureCollectionToLayers(org.json.JSONObject&nbsp;featureCollection,
-                                                              <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)
-                                                                       throws org.json.JSONException</pre>
-<div class="block">Given a <a href='http://geojson.org/geojson-spec.html#feature-collection-objects'>GeoJSON
- FeatureCollection</a>,
+<h4>featurecollectiontolayers</h4>
+<pre>public static&nbsp;java.util.arraylist&lt;java.lang.object&gt;&nbsp;featurecollectiontolayers(org.json.jsonobject&nbsp;featurecollection,
+                                                              <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)
+                                                                       throws org.json.jsonexception</pre>
+<div class="block">given a <a href='http://geojson.org/geojson-spec.html#feature-collection-objects'>geojson
+ featurecollection</a>,
  parse each feature and create layers on the given map</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>featureCollection</code> - a json object representing a featurecollection</dd><dd><code>mv</code> - a mapview</dd>
-<dt><span class="strong">Throws:</span></dt>
-<dd><code>org.json.JSONException</code></dd></dl>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>featurecollection</code> - a json object representing a featurecollection</dd><dd><code>mv</code> - a mapview</dd>
+<dt><span class="strong">throws:</span></dt>
+<dd><code>org.json.jsonexception</code></dd></dl>
 
 
-<a name="featureToLayer(org.json.JSONObject, com.mapbox.mapboxsdk.views.MapView)">
+<a name="featuretolayer(org.json.jsonobject, com.mapbox.mapboxsdk.views.mapview)">
 <!--   -->
 </a>
 
 
-<h4>featureToLayer</h4>
-<pre>public static&nbsp;java.util.List&lt;java.lang.Object&gt;&nbsp;featureToLayer(org.json.JSONObject&nbsp;feature,
-                                              <a href="{{site.baseurl}}/api/MapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)
-                                                       throws org.json.JSONException</pre>
-<div class="block">Parse a GeoJSON feature object into some number of overlays, adding them to the overlays
+<h4>featuretolayer</h4>
+<pre>public static&nbsp;java.util.list&lt;java.lang.object&gt;&nbsp;featuretolayer(org.json.jsonobject&nbsp;feature,
+                                              <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)
+                                                       throws org.json.jsonexception</pre>
+<div class="block">parse a geojson feature object into some number of overlays, adding them to the overlays
  array.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>feature</code> - GeoJSON</dd>
-<dt><span class="strong">Throws:</span></dt>
-<dd><code>org.json.JSONException</code></dd></dl>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>feature</code> - geojson</dd>
+<dt><span class="strong">throws:</span></dt>
+<dd><code>org.json.jsonexception</code></dd></dl>
 
 
 
@@ -195,5 +195,5 @@ extends java.lang.Object</pre>
 
 </div>
 </div>
-<!-- ========= END OF CLASS DATA ========= -->
-<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<!-- ========= end of class data ========= -->
+<!-- ======= start of bottom navbar ====== -->
