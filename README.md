@@ -135,4 +135,8 @@ This project is a fork of OSMDroid, but is significantly different as the result
 * [Automated tests](https://github.com/mapbox/mapbox-android-sdk/blob/mb-pages/MapboxAndroidSDKTestApp/src/instrumentTest/java/com/mapbox/mapboxsdk/android/testapp/test/MainActivityTest.java) are included.
 * [slf4j](http://www.slf4j.org/) dependency is removed
 
+## Contributors Note (aka, Where's the `master` branch?)
+
+The project's `master` branch is actually `mb-pages`.  There is no branch named `master` nor will there be.  The reason for it is that it allows some automatic processing and publishing of documentation behind the scenes.  In practice this shouldn't affect anybody wanting to contribute, but is something that will probably seem a bit "different" to newcomers.  Anyway, that's what's going on.  If you'd like more information please see #404 .
+
 ## [Quick-start Guide](https://github.com/mapbox/mapbox-android-sdk/blob/mb-pages/QUICKSTART.md)
