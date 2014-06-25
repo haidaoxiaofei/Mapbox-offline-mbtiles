@@ -3,8 +3,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
-        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.11.+'
+        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.1'
     }
 }
 
@@ -72,16 +72,22 @@ android {
 }
 
 android.libraryVariants.all { variant ->
-    def name = variant.name
-    task "javadoc$name"(type: Javadoc) {
-        description = "Generates javadoc for build $name"
-        failOnError = false
-        destinationDir = new File(destinationDir, variant.baseName)
-        source = files(variant.javaCompile.source)
-        classpath = files(android.plugin.runtimeJarList, variant.javaCompile.classpath)
-        options.links("http://docs.oracle.com/javase/7/docs/api/")
-        options.links("http://d.android.com/reference/")
-        exclude '**/R.html', '**/R.*.html'
+
+    task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+        title = "Documentation for Android $android.defaultConfig.versionName b$android.defaultConfig.versionCode"
+        destinationDir = new File("${project.getProjectDir()}/doc/compiled/", variant.baseName)
+        source = variant.javaCompile.source
+
+        ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+        classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+
+        description "Generates Javadoc for $variant.name."
+
+        options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PRIVATE
+        options.links("http://docs.oracle.com/javase/7/docs/api/");
+        options.links("http://developer.android.com/reference/reference/");
+        exclude '**/BuildConfig.java'
+        exclude '**/R.java'
     }
 }
 
@@ -222,8 +228,8 @@ afterEvaluate { project ->
 
     task androidJavadocs(type: Javadoc) {
         failOnError false
-        source = android.sourceSets.main.allJava
-        classpath += project.files(android.plugin.getRuntimeJarList().join(File.pathSeparator))
+        source = android.sourceSets.main.java
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
     }
 
     task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
@@ -233,7 +239,7 @@ afterEvaluate { project ->
 
     task androidSourcesJar(type: Jar) {
         classifier = 'sources'
-        from android.sourceSets.main.allSource
+        from android.sourceSets.main.java
     }
 
     artifacts {
