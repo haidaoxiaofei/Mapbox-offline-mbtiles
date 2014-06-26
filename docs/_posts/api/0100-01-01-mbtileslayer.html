@@ -92,6 +92,16 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </td>
 </tr>
 <tr class="rowcolor">
+<td class="colone"><code><strong><a href="{{site.baseurl}}/api/mbtileslayer#mbtileslayer(java.io.file)">mbtileslayer</a></strong>(java.io.file&nbsp;file)</code>
+<div class="block">initialize a new tile layer, represented by a mbtiles file.</div>
+</td>
+</tr>
+<tr class="altcolor">
+<td class="colone"><code><strong><a href="{{site.baseurl}}/api/mbtileslayer#mbtileslayer(android.database.sqlite.sqlitedatabase)">mbtileslayer</a></strong>(android.database.sqlite.sqlitedatabase&nbsp;db)</code>
+<div class="block">initialize a new tile layer, represented by a database file.</div>
+</td>
+</tr>
+<tr class="rowcolor">
 <td class="colone"><code><strong><a href="{{site.baseurl}}/api/mbtileslayer#mbtileslayer(java.lang.string)">mbtileslayer</a></strong>(java.lang.string&nbsp;url)</code>
 <div class="block">initialize a new tile layer, represented by a mbtiles file.</div>
 </td>
@@ -175,6 +185,28 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
  this constructor does need a context but as a consequence won't look
  for an asset mbtiles</div>
 <dl><dt><span class="strong">parameters:</span></dt><dd><code>url</code> - path to a mbtiles file</dd></dl>
+
+
+<a name="mbtileslayer(java.io.file)">
+<!--   -->
+</a>
+
+
+<h4>mbtileslayer</h4>
+<pre>public&nbsp;mbtileslayer(java.io.file&nbsp;file)</pre>
+<div class="block">initialize a new tile layer, represented by a mbtiles file.</div>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>file</code> - a mbtiles file</dd></dl>
+
+
+<a name="mbtileslayer(android.database.sqlite.sqlitedatabase)">
+<!--   -->
+</a>
+
+
+<h4>mbtileslayer</h4>
+<pre>public&nbsp;mbtileslayer(android.database.sqlite.sqlitedatabase&nbsp;db)</pre>
+<div class="block">initialize a new tile layer, represented by a database file.</div>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>db</code> - a database used as the mbtiles source</dd></dl>
 
 
 

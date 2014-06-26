@@ -172,7 +172,8 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 </tr>
 <tr class="rowcolor">
 <td class="colfirst"><code>android.graphics.drawable.drawable</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;ptile)</code>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;ptile,
+          boolean&nbsp;allowremote)</code>
 <div class="block">attempts to get a drawable that represents a <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>maptile</code></a>.</div>
 </td>
 </tr>
@@ -352,14 +353,15 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 </dl>
 
 
-<a name="getmaptile(com.mapbox.mapboxsdk.tileprovider.maptile)">
+<a name="getmaptile(com.mapbox.mapboxsdk.tileprovider.maptile, boolean)">
 <!--   -->
 </a>
 
 
 <h4>getmaptile</h4>
-<pre>public&nbsp;android.graphics.drawable.drawable&nbsp;getmaptile(<a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;ptile)</pre>
-<div class="block"><strong>description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#getmaptile(com.mapbox.mapboxsdk.tileprovider.maptile)">maptilelayerbase</a></code></strong></div>
+<pre>public&nbsp;android.graphics.drawable.drawable&nbsp;getmaptile(<a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;ptile,
+                                            boolean&nbsp;allowremote)</pre>
+<div class="block"><strong>description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#getmaptile(com.mapbox.mapboxsdk.tileprovider.maptile, boolean)">maptilelayerbase</a></code></strong></div>
 <div class="block">attempts to get a drawable that represents a <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>maptile</code></a>. if the tile is not immediately
  available this will return null and attempt to get the tile from known tile sources for
  subsequent future requests. note that this may return a <a href="../../../../uk/co/senab/bitmapcache/cacheablebitmapdrawable.html" title="class in uk.co.senab.bitmapcache"><code>cacheablebitmapdrawable</code></a> in

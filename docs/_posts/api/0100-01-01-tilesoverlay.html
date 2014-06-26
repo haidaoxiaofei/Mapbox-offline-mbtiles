@@ -136,7 +136,9 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#drawloadingtile(android.graphics.canvas, com.mapbox.mapboxsdk.views.mapview, float, android.graphics.rect)">drawloadingtile</a></strong>(android.graphics.canvas&nbsp;c,
                <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview,
                float&nbsp;zoomlevel,
-               android.graphics.rect&nbsp;viewport)</code>&nbsp;</td>
+               android.graphics.rect&nbsp;viewport)</code>
+<div class="block">draw a loading tile image to make in-progress tiles easier to deal with.</div>
+</td>
 </tr>
 <tr class="rowcolor">
 <td class="colfirst"><code>protected void</code></td>
@@ -365,6 +367,7 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 <h4>usedataconnection</h4>
 <pre>public&nbsp;boolean&nbsp;usedataconnection()</pre>
 <div class="block">whether to use the network connection if it's available.</div>
+<dl><dt><span class="strong">returns:</span></dt><dd>true if this uses a data connection</dd></dl>
 
 
 <a name="setusedataconnection(boolean)">
@@ -404,6 +407,8 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
                    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview,
                    float&nbsp;zoomlevel,
                    android.graphics.rect&nbsp;viewport)</pre>
+<div class="block">draw a loading tile image to make in-progress tiles easier to deal with.</div>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>c</code> - </dd><dd><code>mapview</code> - </dd><dd><code>zoomlevel</code> - </dd><dd><code>viewport</code> - </dd></dl>
 
 
 <a name="drawtiles(android.graphics.canvas, float, int, android.graphics.rect, android.graphics.rect)">

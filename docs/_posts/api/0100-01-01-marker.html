@@ -138,47 +138,55 @@ extends java.lang.object</pre>
 </tr>
 <tr class="altcolor">
 <td class="colfirst"><code><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)</code>&nbsp;</td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)</code>
+<div class="block">attach this marker to a given mapview and that mapview's context</div>
+</td>
 </tr>
 <tr class="rowcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#blur()">blur</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altcolor">
+<td class="colfirst"><code>void</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#closetooltip()">closetooltip</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowcolor">
 <td class="colfirst"><code>protected <a href="{{site.baseurl}}/api/infowindow" title="class in com.mapbox.mapboxsdk.views">infowindow</a></code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>android.graphics.point</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getanchor()">getanchor</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>android.graphics.point</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker.hotspotplace" title="enum in com.mapbox.mapboxsdk.overlay">marker.hotspotplace</a>&nbsp;place)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getdescription()">getdescription</a></strong>()</code>&nbsp;</td>
-</tr>
 <tr class="altcolor">
+<td class="colfirst"><code>java.lang.string</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getdescription()">getdescription</a></strong>()</code>
+<div class="block">set the description attached to this marker</div>
+</td>
+</tr>
+<tr class="rowcolor">
 <td class="colfirst"><code>android.graphics.drawable.drawable</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getdrawable()">getdrawable</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>protected android.graphics.rectf</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">projection</a>&nbsp;projection,
                 android.graphics.rectf&nbsp;reuse)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>android.graphics.pointf</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">projection</a>&nbsp;projection,
                           android.graphics.pointf&nbsp;reuse)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>int</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getheight()">getheight</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>android.graphics.point</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker.hotspotplace" title="enum in com.mapbox.mapboxsdk.overlay">marker.hotspotplace</a>&nbsp;place,
           int&nbsp;w,
@@ -186,108 +194,123 @@ extends java.lang.object</pre>
 <div class="block">from a hotspotplace and drawable dimensions (width, height), return the hotspot position.</div>
 </td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>android.graphics.pointf</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker.hotspotplace" title="enum in com.mapbox.mapboxsdk.overlay">marker.hotspotplace</a>&nbsp;place,
                android.graphics.pointf&nbsp;reuse)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>android.graphics.drawable.drawable</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getimage()">getimage</a></strong>()</code>&nbsp;</td>
-</tr>
 <tr class="rowcolor">
+<td class="colfirst"><code>android.graphics.drawable.drawable</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getimage()">getimage</a></strong>()</code>
+<div class="block">set the image attached to this marker</div>
+</td>
+</tr>
+<tr class="altcolor">
 <td class="colfirst"><code>protected android.graphics.rectf</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">projection</a>&nbsp;projection,
                    android.graphics.rectf&nbsp;reuse)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>android.graphics.drawable.drawable</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getmarker(int)">getmarker</a></strong>(int&nbsp;statebitset)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code><a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbox.mapboxsdk.overlay">itemizedoverlay</a></code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getparentholder()">getparentholder</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a></code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getpoint()">getpoint</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>android.graphics.pointf</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getpositiononmap()">getpositiononmap</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>android.graphics.pointf</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">projection</a>&nbsp;projection,
                    android.graphics.pointf&nbsp;reuse)</code>
 <div class="block">get the current position of the marker in pixels</div>
 </td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>java.lang.object</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getrelatedobject()">getrelatedobject</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getsubdescription()">getsubdescription</a></strong>()</code>&nbsp;</td>
-</tr>
 <tr class="rowcolor">
+<td class="colfirst"><code>java.lang.string</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getsubdescription()">getsubdescription</a></strong>()</code>
+<div class="block">set the sub-description attached to this marker</div>
+</td>
+</tr>
+<tr class="altcolor">
 <td class="colfirst"><code>java.lang.string</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#gettitle()">gettitle</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/infowindow" title="class in com.mapbox.mapboxsdk.views">infowindow</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)</code>&nbsp;</td>
-</tr>
 <tr class="rowcolor">
+<td class="colfirst"><code><a href="{{site.baseurl}}/api/infowindow" title="class in com.mapbox.mapboxsdk.views">infowindow</a></code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)</code>
+<div class="block">get this marker's tooltip, creating it if it doesn't exist yet.</div>
+</td>
+</tr>
+<tr class="altcolor">
 <td class="colfirst"><code>java.lang.string</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getuid()">getuid</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>int</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#getwidth()">getwidth</a></strong>()</code>
 <div class="block">get the width of the marker, based on the width of the image backing it.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#hascontent()">hascontent</a></strong>()</code>&nbsp;</td>
-</tr>
 <tr class="altcolor">
+<td class="colfirst"><code>boolean</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#hascontent()">hascontent</a></strong>()</code>
+<div class="block">determine if this marker has a title, description, subdescription,
+ or image that could be displayed</div>
+</td>
+</tr>
+<tr class="rowcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#invalidate()">invalidate</a></strong>()</code>
 <div class="block">sets the marker to be redrawn.</div>
 </td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#setanchor(android.graphics.pointf)">setanchor</a></strong>(android.graphics.pointf&nbsp;anchor)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#setdescription(java.lang.string)">setdescription</a></strong>(java.lang.string&nbsp;adescription)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker.hotspotplace" title="enum in com.mapbox.mapboxsdk.overlay">marker.hotspotplace</a>&nbsp;place)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a></code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/icon" title="class in com.mapbox.mapboxsdk.overlay">icon</a>&nbsp;aicon)</code>
 <div class="block">sets the icon image that represents this marker on screen.</div>
 </td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#setimage(android.graphics.drawable.drawable)">setimage</a></strong>(android.graphics.drawable.drawable&nbsp;animage)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker#setmarker(android.graphics.drawable.drawable)">setmarker</a></strong>(android.graphics.drawable.drawable&nbsp;marker)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbox.mapboxsdk.overlay">itemizedoverlay</a>&nbsp;o)</code>&nbsp;</td>
+</tr>
+<tr class="rowcolor">
+<td class="colfirst"><code>void</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a>&nbsp;point)</code>
+<div class="block">set the centerpoint of this marker in geographical coordinates</div>
+</td>
 </tr>
 <tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
@@ -467,6 +490,9 @@ extends java.lang.object</pre>
 
 <h4>addto</h4>
 <pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)</pre>
+<div class="block">attach this marker to a given mapview and that mapview's context</div>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>mv</code> - the mapview to add this marker to</dd>
+<dt><span class="strong">returns:</span></dt><dd></dd></dl>
 
 
 <a name="hascontent()">
@@ -476,6 +502,9 @@ extends java.lang.object</pre>
 
 <h4>hascontent</h4>
 <pre>public&nbsp;boolean&nbsp;hascontent()</pre>
+<div class="block">determine if this marker has a title, description, subdescription,
+ or image that could be displayed</div>
+<dl><dt><span class="strong">returns:</span></dt><dd>true if the marker has content</dd></dl>
 
 
 <a name="createtooltip(com.mapbox.mapboxsdk.views.mapview)">
@@ -494,6 +523,18 @@ extends java.lang.object</pre>
 
 <h4>gettooltip</h4>
 <pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mv)</pre>
+<div class="block">get this marker's tooltip, creating it if it doesn't exist yet.</div>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>mv</code> - </dd>
+<dt><span class="strong">returns:</span></dt><dd></dd></dl>
+
+
+<a name="closetooltip()">
+<!--   -->
+</a>
+
+
+<h4>closetooltip</h4>
+<pre>public&nbsp;void&nbsp;closetooltip()</pre>
 
 
 <a name="blur()">
@@ -577,6 +618,17 @@ extends java.lang.object</pre>
 <pre>public&nbsp;void&nbsp;setrelatedobject(java.lang.object&nbsp;o)</pre>
 
 
+<a name="setpoint(com.mapbox.mapboxsdk.geometry.latlng)">
+<!--   -->
+</a>
+
+
+<h4>setpoint</h4>
+<pre>public&nbsp;void&nbsp;setpoint(<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a>&nbsp;point)</pre>
+<div class="block">set the centerpoint of this marker in geographical coordinates</div>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>point</code> - </dd></dl>
+
+
 <a name="getdescription()">
 <!--   -->
 </a>
@@ -584,6 +636,8 @@ extends java.lang.object</pre>
 
 <h4>getdescription</h4>
 <pre>public&nbsp;java.lang.string&nbsp;getdescription()</pre>
+<div class="block">set the description attached to this marker</div>
+<dl><dt><span class="strong">returns:</span></dt><dd></dd></dl>
 
 
 <a name="getsubdescription()">
@@ -593,6 +647,8 @@ extends java.lang.object</pre>
 
 <h4>getsubdescription</h4>
 <pre>public&nbsp;java.lang.string&nbsp;getsubdescription()</pre>
+<div class="block">set the sub-description attached to this marker</div>
+<dl><dt><span class="strong">returns:</span></dt><dd></dd></dl>
 
 
 <a name="getimage()">
@@ -602,6 +658,8 @@ extends java.lang.object</pre>
 
 <h4>getimage</h4>
 <pre>public&nbsp;android.graphics.drawable.drawable&nbsp;getimage()</pre>
+<div class="block">set the image attached to this marker</div>
+<dl><dt><span class="strong">returns:</span></dt><dd></dd></dl>
 
 
 <a name="getrelatedobject()">

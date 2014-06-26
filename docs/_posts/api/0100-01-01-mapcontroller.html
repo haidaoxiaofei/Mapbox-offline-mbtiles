@@ -126,11 +126,11 @@ implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in c
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#abouttostartanimation(android.graphics.pointf)">abouttostartanimation</a></strong>(android.graphics.pointf&nbsp;mapcoords)</code>&nbsp;</td>
 </tr>
 <tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
+<td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;point)</code>&nbsp;</td>
 </tr>
 <tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
+<td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;point,
          boolean&nbsp;useraction)</code>
 <div class="block">start animating the map towards the given point.</div>
@@ -141,7 +141,7 @@ implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in c
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#currentlyinuseraction()">currentlyinuseraction</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
+<td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;point,
     android.graphics.pointf&nbsp;delta)</code>
 <div class="block">go to a given point (not animated)</div>
@@ -205,65 +205,71 @@ implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in c
 </tr>
 <tr class="rowcolor">
 <td class="colfirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#setzoomanimated(float)">setzoomanimated</a></strong>(float&nbsp;zoomlevel)</code>&nbsp;</td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#setzoom(float, com.mapbox.mapboxsdk.api.ilatlng, boolean)">setzoom</a></strong>(float&nbsp;zoomlevel,
+       <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;latlong,
+       boolean&nbsp;useraction)</code>&nbsp;</td>
 </tr>
 <tr class="altcolor">
+<td class="colfirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a></code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#setzoomanimated(float)">setzoomanimated</a></strong>(float&nbsp;zoomlevel)</code>&nbsp;</td>
+</tr>
+<tr class="rowcolor">
 <td class="colfirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a></code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#setzoomanimated(float, com.mapbox.mapboxsdk.api.ilatlng, boolean)">setzoomanimated</a></strong>(float&nbsp;zoomlevel,
                <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;latlong,
                boolean&nbsp;useraction)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;latlong,
-               float&nbsp;zoomlevel,
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#setzoomanimated(float, com.mapbox.mapboxsdk.api.ilatlng, boolean, boolean)">setzoomanimated</a></strong>(float&nbsp;zoomlevel,
+               <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;latlong,
                boolean&nbsp;move,
                boolean&nbsp;useraction)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#stopanimation(boolean)">stopanimation</a></strong>(boolean&nbsp;jumptotarget)</code>
 <div class="block">stops a running animation.</div>
 </td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#stoppanning()">stoppanning</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#zoomin()">zoomin</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#zoomin(boolean)">zoomin</a></strong>(boolean&nbsp;useraction)</code>
 <div class="block">zoom in by one zoom level.</div>
 </td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;latlong)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;latlong,
            boolean&nbsp;useraction)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#zoomout()">zoomout</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapcontroller#zoomout(boolean)">zoomout</a></strong>(boolean&nbsp;useraction)</code>
 <div class="block">zoom out by one zoom level.</div>
 </td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;latlong)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;latlong,
             boolean&nbsp;useraction)</code>&nbsp;</td>
@@ -388,8 +394,8 @@ implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in c
 
 
 <h4>animateto</h4>
-<pre>public&nbsp;void&nbsp;animateto(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;point,
-             boolean&nbsp;useraction)</pre>
+<pre>public&nbsp;boolean&nbsp;animateto(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;point,
+                boolean&nbsp;useraction)</pre>
 <div class="block">start animating the map towards the given point.</div>
 
 
@@ -399,7 +405,7 @@ implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in c
 
 
 <h4>animateto</h4>
-<pre>public&nbsp;void&nbsp;animateto(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;point)</pre>
+<pre>public&nbsp;boolean&nbsp;animateto(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;point)</pre>
 
 
 <a name="goto(com.mapbox.mapboxsdk.api.ilatlng, android.graphics.pointf)">
@@ -408,8 +414,8 @@ implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in c
 
 
 <h4>goto</h4>
-<pre>public&nbsp;void&nbsp;goto(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;point,
-        android.graphics.pointf&nbsp;delta)</pre>
+<pre>public&nbsp;boolean&nbsp;goto(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;point,
+           android.graphics.pointf&nbsp;delta)</pre>
 <div class="block">go to a given point (not animated)</div>
 
 
@@ -483,14 +489,14 @@ implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in c
 <div class="block">stops a running animation.</div>
 
 
-<a name="setzoomanimated(com.mapbox.mapboxsdk.api.ilatlng, float, boolean, boolean)">
+<a name="setzoomanimated(float, com.mapbox.mapboxsdk.api.ilatlng, boolean, boolean)">
 <!--   -->
 </a>
 
 
 <h4>setzoomanimated</h4>
-<pre>public&nbsp;boolean&nbsp;setzoomanimated(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;latlong,
-                      float&nbsp;zoomlevel,
+<pre>public&nbsp;boolean&nbsp;setzoomanimated(float&nbsp;zoomlevel,
+                      <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;latlong,
                       boolean&nbsp;move,
                       boolean&nbsp;useraction)</pre>
 
@@ -502,6 +508,17 @@ implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in c
 
 <h4>setzoom</h4>
 <pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;setzoom(float&nbsp;zoomlevel)</pre>
+
+
+<a name="setzoom(float, com.mapbox.mapboxsdk.api.ilatlng, boolean)">
+<!--   -->
+</a>
+
+
+<h4>setzoom</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;setzoom(float&nbsp;zoomlevel,
+              <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;latlong,
+              boolean&nbsp;useraction)</pre>
 
 
 <a name="setzoom(float, boolean)">
