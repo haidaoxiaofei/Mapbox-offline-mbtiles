@@ -25,7 +25,10 @@ repositories {
 }
 
 dependencies {
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.2.3@aar'){
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.3.0@aar'){
+        transitive=true
+    }
+    compile ('com.cocoahero.android:geojson:1.0.0@aar'){
         transitive=true
     }
 }
@@ -35,9 +38,9 @@ dependencies {
 At any given time there will be 3 different versions of the SDK to use.  You're welcome to use whichever one makes the most sense for your project, just be aware that each comes with a different level of **stability**.  The installation instructions below all describe how to use the `Stable / Supported` version (although the SNAPSHOT version can make use of the same instructions.  Just need to update the Repo and the Version Number).
 
 1. Stable / Supported
- * Currently `0.2.3`
+ * Currently `0.3.0`
 2. SNAPSHOT
- * Currently `0.3.0-SNAPSHOT` and available via the Maven Central Snapshot Repo https://oss.sonatype.org/content/repositories/snapshots/com/mapbox/mapboxsdk/mapbox-android-sdk/
+ * Currently `0.4.0-SNAPSHOT` and available via the Maven Central Snapshot Repo https://oss.sonatype.org/content/repositories/snapshots/com/mapbox/mapboxsdk/mapbox-android-sdk/
 3. Source
 
 ### Manually / Hardcoding In Project
@@ -63,7 +66,7 @@ The Mapbox Android SDK is also packaged as a `.apk` file.  This allows integrati
 <dependency>
     <groupId>com.mapbox.mapboxsdk</groupId>
     <artifactId>mapbox-android-sdk</artifactId>
-    <version>0.2.3</version>
+    <version>0.3.0</version>
     <type>apklib</type>
 </dependency>
 ```
