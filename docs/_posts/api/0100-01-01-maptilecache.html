@@ -153,51 +153,59 @@ implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile)</code>&nbsp;</td>
 </tr>
 <tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilecache#purgediskcache()">purgediskcache</a></strong>()</code>&nbsp;</td>
+<td class="colfirst"><code>boolean</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilecache#isdiskcacheenabled()">isdiskcacheenabled</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowcolor">
 <td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilecache#purgememorycache()">purgememorycache</a></strong>()</code>&nbsp;</td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilecache#purgediskcache()">purgediskcache</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altcolor">
+<td class="colfirst"><code>void</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilecache#purgememorycache()">purgememorycache</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowcolor">
 <td class="colfirst"><code><a href="../../../../uk/co/senab/bitmapcache/cacheablebitmapdrawable.html" title="class in uk.co.senab.bitmapcache">cacheablebitmapdrawable</a></code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile,
        android.graphics.drawable.drawable&nbsp;adrawable)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code><a href="../../../../uk/co/senab/bitmapcache/cacheablebitmapdrawable.html" title="class in uk.co.senab.bitmapcache">cacheablebitmapdrawable</a></code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile,
              android.graphics.bitmap&nbsp;bitmap)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code><a href="../../../../uk/co/senab/bitmapcache/cacheablebitmapdrawable.html" title="class in uk.co.senab.bitmapcache">cacheablebitmapdrawable</a></code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile,
                   android.graphics.drawable.drawable&nbsp;adrawable)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code><a href="../../../../uk/co/senab/bitmapcache/cacheablebitmapdrawable.html" title="class in uk.co.senab.bitmapcache">cacheablebitmapdrawable</a></code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile,
                     android.graphics.bitmap&nbsp;abitmap)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code><a href="../../../../uk/co/senab/bitmapcache/cacheablebitmapdrawable.html" title="class in uk.co.senab.bitmapcache">cacheablebitmapdrawable</a></code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile,
                     android.graphics.drawable.drawable&nbsp;adrawable)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code><a href="../../../../uk/co/senab/bitmapcache/cacheablebitmapdrawable.html" title="class in uk.co.senab.bitmapcache">cacheablebitmapdrawable</a></code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile,
              java.io.inputstream&nbsp;inputstream,
              android.graphics.bitmapfactory.options&nbsp;decodeopts)</code>&nbsp;</td>
 </tr>
+<tr class="rowcolor">
+<td class="colfirst"><code>void</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile)</code>&nbsp;</td>
+</tr>
 <tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile)</code>&nbsp;</td>
 </tr>
 <tr class="rowcolor">
 <td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile)</code>&nbsp;</td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilecache#setdiskcacheenabled(boolean)">setdiskcacheenabled</a></strong>(boolean&nbsp;enabled)</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -481,6 +489,24 @@ implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in
                            java.lang.string&nbsp;uniquename)</pre>
 <div class="block">creates a unique subdirectory of the designated app cache directory. tries to use external
  but if not mounted, falls back on internal storage.</div>
+
+
+<a name="setdiskcacheenabled(boolean)">
+<!--   -->
+</a>
+
+
+<h4>setdiskcacheenabled</h4>
+<pre>public&nbsp;void&nbsp;setdiskcacheenabled(boolean&nbsp;enabled)</pre>
+
+
+<a name="isdiskcacheenabled()">
+<!--   -->
+</a>
+
+
+<h4>isdiskcacheenabled</h4>
+<pre>public&nbsp;boolean&nbsp;isdiskcacheenabled()</pre>
 
 
 

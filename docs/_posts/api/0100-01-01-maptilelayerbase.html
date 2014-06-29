@@ -164,7 +164,8 @@ implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in
 </tr>
 <tr class="altcolor">
 <td class="colfirst"><code>abstract android.graphics.drawable.drawable</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;ptile)</code>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;ptile,
+          boolean&nbsp;allowremote)</code>
 <div class="block">attempts to get a drawable that represents a <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>maptile</code></a>.</div>
 </td>
 </tr>
@@ -239,25 +240,31 @@ implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in
 </tr>
 <tr class="rowcolor">
 <td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile)</code>&nbsp;</td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile)</code>
+<div class="block">if a given maptile is present in this cache, remove it from memory.</div>
+</td>
 </tr>
 <tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerbase#settilerequestcompletehandler(android.os.handler)">settilerequestcompletehandler</a></strong>(android.os.handler&nbsp;handler)</code>&nbsp;</td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerbase#setdiskcacheenabled(boolean)">setdiskcacheenabled</a></strong>(boolean&nbsp;enabled)</code>&nbsp;</td>
 </tr>
 <tr class="rowcolor">
+<td class="colfirst"><code>void</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerbase#settilerequestcompletehandler(android.os.handler)">settilerequestcompletehandler</a></strong>(android.os.handler&nbsp;handler)</code>&nbsp;</td>
+</tr>
+<tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a>&nbsp;ptilesource)</code>
 <div class="block">sets the tile source for this tile provider.</div>
 </td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerbase#setusedataconnection(boolean)">setusedataconnection</a></strong>(boolean&nbsp;pmode)</code>
 <div class="block">set whether to use the network connection if it's available.</div>
 </td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerbase#usedataconnection()">usedataconnection</a></strong>()</code>
 <div class="block">whether to use the network connection if it's available.</div>
@@ -349,13 +356,14 @@ implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in
 <!--   -->
 </a>
 <h3>method detail</h3>
-<a name="getmaptile(com.mapbox.mapboxsdk.tileprovider.maptile)">
+<a name="getmaptile(com.mapbox.mapboxsdk.tileprovider.maptile, boolean)">
 <!--   -->
 </a>
 
 
 <h4>getmaptile</h4>
-<pre>public abstract&nbsp;android.graphics.drawable.drawable&nbsp;getmaptile(<a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;ptile)</pre>
+<pre>public abstract&nbsp;android.graphics.drawable.drawable&nbsp;getmaptile(<a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;ptile,
+                                            boolean&nbsp;allowremote)</pre>
 <div class="block">attempts to get a drawable that represents a <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>maptile</code></a>. if the tile is not immediately
  available this will return null and attempt to get the tile from known tile sources for
  subsequent future requests. note that this may return a <a href="../../../../uk/co/senab/bitmapcache/cacheablebitmapdrawable.html" title="class in uk.co.senab.bitmapcache"><code>cacheablebitmapdrawable</code></a> in
@@ -586,6 +594,15 @@ implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in
 <pre>public&nbsp;void&nbsp;cleartilediskcache()</pre>
 
 
+<a name="setdiskcacheenabled(boolean)">
+<!--   -->
+</a>
+
+
+<h4>setdiskcacheenabled</h4>
+<pre>public&nbsp;void&nbsp;setdiskcacheenabled(boolean&nbsp;enabled)</pre>
+
+
 <a name="usedataconnection()">
 <!--   -->
 </a>
@@ -657,6 +674,8 @@ implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in
 
 <h4>removetilefrommemory</h4>
 <pre>public&nbsp;void&nbsp;removetilefrommemory(<a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile)</pre>
+<div class="block">if a given maptile is present in this cache, remove it from memory.</div>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>atile</code> - </dd></dl>
 
 
 

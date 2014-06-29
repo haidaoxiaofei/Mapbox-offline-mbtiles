@@ -47,6 +47,17 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
 <!--   -->
 </a>
 <h3>nested class summary</h3>
+<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="nested class summary table, listing nested classes, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>nested classes</span><span class="tabend">&nbsp;</span></caption>
+<tr>
+<th class="colfirst" scope="col">modifier and type</th>
+<th class="collast" scope="col">class and description</th>
+</tr>
+<tr class="altcolor">
+<td class="colfirst"><code>static class&nbsp;</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay.trackingmode" title="enum in com.mapbox.mapboxsdk.overlay">userlocationoverlay.trackingmode</a></strong></code>&nbsp;</td>
+</tr>
+</table>
 
 <a name="nested_classes_inherited_from_class_com.mapbox.mapboxsdk.overlay.overlay">
 <!--   -->
@@ -211,6 +222,14 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
                    android.graphics.pointf&nbsp;reuse)</code>&nbsp;</td>
 </tr>
 <tr class="rowcolor">
+<td class="colfirst"><code><a href="{{site.baseurl}}/api/userlocationoverlay.trackingmode" title="enum in com.mapbox.mapboxsdk.overlay">userlocationoverlay.trackingmode</a></code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay#gettrackingmode()">gettrackingmode</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altcolor">
+<td class="colfirst"><code>boolean</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay#gotomyposition(boolean)">gotomyposition</a></strong>(boolean&nbsp;animated)</code>&nbsp;</td>
+</tr>
+<tr class="rowcolor">
 <td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay#isdrawaccuracyenabled()">isdrawaccuracyenabled</a></strong>()</code>
 <div class="block">if enabled, an accuracy circle will be drawn around your current position.</div>
@@ -299,6 +318,14 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
 <tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay#setpersonhotspot(android.graphics.pointf)">setpersonhotspot</a></strong>(android.graphics.pointf&nbsp;point)</code>&nbsp;</td>
+</tr>
+<tr class="rowcolor">
+<td class="colfirst"><code>void</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay#setrequiredzoom(float)">setrequiredzoom</a></strong>(float&nbsp;zoomlevel)</code>&nbsp;</td>
+</tr>
+<tr class="altcolor">
+<td class="colfirst"><code>void</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay.trackingmode" title="enum in com.mapbox.mapboxsdk.overlay">userlocationoverlay.trackingmode</a>&nbsp;mode)</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -657,6 +684,33 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
 <div class="block">disables "follow" functionality.</div>
 
 
+<a name="settrackingmode(com.mapbox.mapboxsdk.overlay.userlocationoverlay.trackingmode)">
+<!--   -->
+</a>
+
+
+<h4>settrackingmode</h4>
+<pre>public&nbsp;void&nbsp;settrackingmode(<a href="{{site.baseurl}}/api/userlocationoverlay.trackingmode" title="enum in com.mapbox.mapboxsdk.overlay">userlocationoverlay.trackingmode</a>&nbsp;mode)</pre>
+
+
+<a name="setrequiredzoom(float)">
+<!--   -->
+</a>
+
+
+<h4>setrequiredzoom</h4>
+<pre>public&nbsp;void&nbsp;setrequiredzoom(float&nbsp;zoomlevel)</pre>
+
+
+<a name="gettrackingmode()">
+<!--   -->
+</a>
+
+
+<h4>gettrackingmode</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/userlocationoverlay.trackingmode" title="enum in com.mapbox.mapboxsdk.overlay">userlocationoverlay.trackingmode</a>&nbsp;gettrackingmode()</pre>
+
+
 <a name="isfollowlocationenabled()">
 <!--   -->
 </a>
@@ -686,6 +740,15 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
 
 <h4>enablemylocation</h4>
 <pre>public&nbsp;boolean&nbsp;enablemylocation(<a href="{{site.baseurl}}/api/gpslocationprovider" title="class in com.mapbox.mapboxsdk.overlay">gpslocationprovider</a>&nbsp;mylocationprovider)</pre>
+
+
+<a name="gotomyposition(boolean)">
+<!--   -->
+</a>
+
+
+<h4>gotomyposition</h4>
+<pre>public&nbsp;boolean&nbsp;gotomyposition(boolean&nbsp;animated)</pre>
 
 
 <a name="enablemylocation()">

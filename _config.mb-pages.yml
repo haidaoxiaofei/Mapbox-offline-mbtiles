@@ -4,8 +4,8 @@ url: https://www.mapbox.com
 permalink: /:categories/:title
 baseurl: /mapbox-android-sdk
 pygments: true
-version: 0.2.3
-snapshot: 0.3.0-SNAPSHOT
+version: 0.3.0
+snapshot: 0.4.0-SNAPSHOT
 defaultid: 'examples.map-i86nkdio'
 rdiscount:
   extensions: [smart]
