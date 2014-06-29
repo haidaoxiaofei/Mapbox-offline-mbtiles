@@ -61,7 +61,7 @@ public class MapViewGestureDetectorListener extends SimpleOnGestureListener {
         }
         if (UtilConstants.DEBUGMODE) {
             final ILatLng center = this.mapView.getProjection().fromPixels(e.getX(), e.getY());
-            this.mapView.zoomOutFixing(center, true);
+            this.mapView.zoomOutFixing(center, false);
         }
     }
 
@@ -97,6 +97,6 @@ public class MapViewGestureDetectorListener extends SimpleOnGestureListener {
             return true;
         }
         final ILatLng center = this.mapView.getProjection().fromPixels(e.getX(), e.getY());
-        return this.mapView.zoomInFixing(center, true);
+        return this.mapView.zoomInFixing(center, false);
     }
 }
