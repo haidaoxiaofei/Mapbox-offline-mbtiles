@@ -16,6 +16,7 @@
 package uk.co.senab.bitmapcache;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v4.util.LruCache;
 
 import java.lang.ref.SoftReference;
@@ -86,6 +87,8 @@ final class BitmapMemoryLruCache extends LruCache<String, CacheableBitmapDrawabl
                 if (canUseForInBitmap(value)) {
                     if (canUseForInBitmapForSize(value, width, height) && !value.isBeingDisplayed() && !value.isReferencedByCache()) {
                         result = value.getBitmap();
+                        SDK12.setHasAlpha(result, true);
+                        result.eraseColor(Color.TRANSPARENT);
                         value.setReused();
                         it.remove();
                         break;
@@ -122,8 +125,7 @@ final class BitmapMemoryLruCache extends LruCache<String, CacheableBitmapDrawabl
                 remove(entry.getKey());
             }
         }
-        
-        if (mRemovedEntries!=null) {
+        if (mRemovedEntries != null) {
             synchronized (mRemovedEntries) {
                 mRemovedEntries.clear();
             }
