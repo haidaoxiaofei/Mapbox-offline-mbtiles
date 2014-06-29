@@ -292,7 +292,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
     @Override
     public boolean onSnapToItem(final int x, final int y, final Point snapPoint,
             final MapView mapView) {
-        if (this.mLocation != null) {
+        if (!isFollowLocationEnabled() && this.mLocation != null) {
             snapPoint.x = (int) mMapCoords.x;
             snapPoint.y = (int) mMapCoords.y;
             final double xDiff = x - mMapCoords.x;
