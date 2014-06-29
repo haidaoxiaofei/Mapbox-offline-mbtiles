@@ -119,7 +119,7 @@ public class TilesOverlay extends SafeDrawOverlay {
             return;
         }
         //Commented for now. It needs heavy testing to see if we actually need it
-//        isAnimating = mapView.isAnimating();
+        isAnimating = mapView.isAnimating();
 
         // Calculate the half-world size
         final Projection pj = mapView.getProjection();
