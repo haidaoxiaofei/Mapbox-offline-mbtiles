@@ -288,9 +288,6 @@ public class TilesOverlay extends SafeDrawOverlay {
                 }
                 mLoadingTilePaint = new SafePaint();
                 mLoadingTilePaint.setShader(new BitmapShader(mLoadingTileBitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT));
-//                mLoadingTile = new BitmapDrawable(bitmap);
-//                mLoadingTile.setBounds(0, 0, tileSize, tileSize);
-//                mLoadingTile.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
             } catch (final OutOfMemoryError e) {
                 Log.e(TAG, "OutOfMemoryError getting loading tile");
                 System.gc();
@@ -430,32 +427,30 @@ public class TilesOverlay extends SafeDrawOverlay {
             final Drawable oldDrawable = mTileProvider.getMapTileFromMemory(oldTile);
 
             if (oldDrawable instanceof BitmapDrawable) {
-                if (oldDrawable instanceof CacheableBitmapDrawable) {
+                final boolean isReusable = oldDrawable instanceof CacheableBitmapDrawable;
+                if (isReusable) {
                     ((CacheableBitmapDrawable) oldDrawable).setBeingUsed(true);
                     mBeingUsedDrawables.add((CacheableBitmapDrawable) oldDrawable);
                 }
-                final int xx = (pX % (int) GeometryMath.leftShift(1, mDiff)) * mTileSize_2;
-                final int yy = (pY % (int) GeometryMath.leftShift(1, mDiff)) * mTileSize_2;
-                mSrcRect.set(xx, yy, xx + mTileSize_2, yy + mTileSize_2);
-                mDestRect.set(0, 0, pTileSizePx, pTileSizePx);
 
-                // Try to get a bitmap from the pool, otherwise allocate a new one
-                Bitmap bitmap = mTileProvider.getBitmapFromRemoved(pTileSizePx, pTileSizePx);
+                final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
+                if (oldBitmap != null) {
+                    final int xx = (pX % (int) GeometryMath.leftShift(1, mDiff)) * mTileSize_2;
+                    final int yy = (pY % (int) GeometryMath.leftShift(1, mDiff)) * mTileSize_2;
+                    mSrcRect.set(xx, yy, xx + mTileSize_2, yy + mTileSize_2);
+                    mDestRect.set(0, 0, pTileSizePx, pTileSizePx);
 
-                if (bitmap == null) {
-                    bitmap = Bitmap.createBitmap(pTileSizePx, pTileSizePx, Bitmap.Config.ARGB_8888);
-                }
+                    // Try to get a bitmap from the pool, otherwise allocate a new one
+                    Bitmap bitmap = mTileProvider.getBitmapFromRemoved(pTileSizePx, pTileSizePx);
 
-                final Canvas canvas = new Canvas(bitmap);
-                final boolean isReusable = oldDrawable instanceof CacheableBitmapDrawable;
-                boolean success = false;
-                if (!isReusable || ((CacheableBitmapDrawable) oldDrawable).isBitmapValid()) {
-                    final Bitmap oldBitmap = ((BitmapDrawable) oldDrawable).getBitmap();
+                    if (bitmap == null) {
+                        bitmap = Bitmap.createBitmap(pTileSizePx, pTileSizePx, Bitmap.Config.ARGB_8888);
+                    }
+                    final Canvas canvas = new Canvas(bitmap);
                     canvas.drawBitmap(oldBitmap, mSrcRect, mDestRect, null);
-                    success = true;
-                }
-                if (success) {
                     mNewTiles.put(pTile, bitmap);
+                    Log.d(TAG, "rescaled new tile : " + pTile);
+
                 }
             }
         }
@@ -493,7 +488,8 @@ public class TilesOverlay extends SafeDrawOverlay {
                     Drawable oldDrawable = mTileProvider.getMapTileFromMemory(oldTile);
 
                     if (oldDrawable instanceof BitmapDrawable) {
-                        if (oldDrawable instanceof CacheableBitmapDrawable) {
+                        final boolean isReusable = oldDrawable instanceof CacheableBitmapDrawable;
+                        if (isReusable) {
                             ((CacheableBitmapDrawable) oldDrawable).setBeingUsed(true);
                             mBeingUsedDrawables.add((CacheableBitmapDrawable) oldDrawable);
                         }
@@ -512,7 +508,6 @@ public class TilesOverlay extends SafeDrawOverlay {
                             mDestRect.set(x * mTileSize_2, y * mTileSize_2, (x + 1) * mTileSize_2,
                                     (y + 1) * mTileSize_2);
                             canvas.drawBitmap(oldBitmap, null, mDestRect, null);
-                            mTileProvider.removeTileFromMemory(oldTile);
                         }
                     }
                 }
