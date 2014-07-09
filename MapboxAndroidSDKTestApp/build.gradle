@@ -9,7 +9,7 @@ buildscript {
 }
 
 apply plugin: 'android-sdk-manager'
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 apply plugin: 'checkstyle'
 
 repositories {

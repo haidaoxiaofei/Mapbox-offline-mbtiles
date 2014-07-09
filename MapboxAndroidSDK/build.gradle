@@ -9,7 +9,7 @@ buildscript {
 }
 
 apply plugin: 'android-sdk-manager'
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 apply plugin: 'checkstyle'
 apply plugin: 'maven'
 apply plugin: 'signing'
