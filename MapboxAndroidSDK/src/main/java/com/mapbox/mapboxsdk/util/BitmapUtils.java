@@ -69,7 +69,13 @@ public class BitmapUtils {
         if (largeHeap && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             memoryClass = ActivityManagerHoneycomb.getLargeMemoryClass(am);
         }
+        Log.d(TAG, "LargeHeap enabled? = '" + largeHeap + "'");
         // Target ~15% of the available heap.
-        return 1024 * 1024 * memoryClass / 7;
+        int heapRes = 1024 * 1024 * memoryClass / 7;
+        Log.d(TAG, "Heap Reserve Request For Cache Size = '" + heapRes + "'");
+        ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+        am.getMemoryInfo(memoryInfo);
+        Log.d(TAG, "Available Memory = '" + memoryInfo.availMem + "'");
+        return heapRes;
     }
 }
