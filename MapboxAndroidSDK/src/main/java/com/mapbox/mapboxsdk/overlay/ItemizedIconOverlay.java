@@ -23,11 +23,30 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
 
     public ItemizedIconOverlay(final Context pContext, final List<Marker> pList,
             final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Marker> pOnItemGestureListener) {
+        this(pContext, pList, pOnItemGestureListener, false);
+    }
+
+    public ItemizedIconOverlay(final Context pContext, final List<Marker> pList,
+                               final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Marker> pOnItemGestureListener, boolean sortList) {
         super();
         this.context = pContext;
         this.mItemList = pList;
         this.mOnItemGestureListener = pOnItemGestureListener;
+        if (sortList) {
+            sortListByLatitude();
+        }
         populate();
+    }
+
+    /**
+     * Sorts List of Marker by Latitude
+     */
+    private void sortListByLatitude() {
+        Collections.sort(mItemList, new Comparator<Marker>() {
+            public int compare(Marker a, Marker b) {
+                return Double.valueOf(a.getPoint().getLatitude()).compareTo(b.getPoint().getLatitude());
+            }
+        });
     }
 
     @Override
@@ -35,16 +54,6 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
             final MapView pMapView) {
         // TODO Implement this!
         return false;
-    }
-
-    @Override
-    protected void populate() {
-        Collections.sort(mItemList, new Comparator<Marker>() {
-            public int compare(Marker a, Marker b) {
-                return Double.valueOf(a.getPoint().getLatitude()).compareTo(Double.valueOf(b.getPoint().getLatitude()));
-            }
-        });
-        super.populate();
     }
 
     @Override
