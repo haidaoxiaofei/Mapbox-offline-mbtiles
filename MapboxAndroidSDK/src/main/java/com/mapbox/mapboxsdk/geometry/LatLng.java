@@ -4,13 +4,16 @@ import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.mapbox.mapboxsdk.api.ILatLng;
+import com.mapbox.mapboxsdk.constants.GeoConstants;
+import com.mapbox.mapboxsdk.constants.MathConstants;
+
 import java.io.Serializable;
 
 /**
  * An immutable latitude, longitude, and optionally altitude point.
  * Coordinates are stored as WGS84 degrees.
  */
-public final class LatLng implements ILatLng, Parcelable, Serializable {
+public final class LatLng implements ILatLng, GeoConstants, MathConstants, Parcelable, Serializable {
 
     private double longitude;
     private double latitude;
@@ -141,4 +144,27 @@ public final class LatLng implements ILatLng, Parcelable, Serializable {
             return new LatLng[size];
         }
     };
+
+    /**
+     * Calculate distance between two points
+     * @param other Other LatLng to compare to
+     * @return distance in meters
+     */
+    public int distanceTo(final LatLng other) {
+
+        final double a1 = DEG2RAD * this.latitude;
+        final double a2 = DEG2RAD * this.longitude;
+        final double b1 = DEG2RAD * other.getLatitude();
+        final double b2 = DEG2RAD * other.getLongitude();
+
+        final double cosa1 = Math.cos(a1);
+        final double cosb1 = Math.cos(b1);
+
+        final double t1 = cosa1 * Math.cos(a2) * cosb1 * Math.cos(b2);
+        final double t2 = cosa1 * Math.sin(a2) * cosb1 * Math.sin(b2);
+        final double t3 = Math.sin(a1) * Math.sin(b1);
+        final double tt = Math.acos(t1 + t2 + t3);
+
+        return (int) (RADIUS_EARTH_METERS * tt);
+    }
 }

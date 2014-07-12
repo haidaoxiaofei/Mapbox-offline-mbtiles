@@ -1,5 +1,5 @@
 // Created by plusminus on 17:41:55 - 16.10.2008
-package com.mapbox.mapboxsdk.geometry;
+package com.mapbox.mapboxsdk.constants;
 
 public interface GeoConstants {
     // http://en.wikipedia.org/wiki/Earth_radius#Equatorial_radius
