@@ -14,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import java.lang.reflect.Field;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 public class BitmapUtils {
