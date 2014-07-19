@@ -98,7 +98,7 @@ public final class LatLng implements ILatLng, GeoConstants, MathConstants, Parce
         if (obj == this) {
             return true;
         }
-        if (obj.getClass().equals(this.getClass())) {
+        if (!obj.getClass().equals(this.getClass())) {
             return false;
         }
         final LatLng rhs = (LatLng) obj;
