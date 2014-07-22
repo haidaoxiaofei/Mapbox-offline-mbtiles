@@ -264,7 +264,7 @@ public class MapView extends ViewGroup
      * @param listener
      */
     public void removeListener(MapListener listener) {
-        if (!mListeners.contains(listener)) {
+        if (mListeners.contains(listener)) {
             mListeners.remove(listener);
         }
     }
