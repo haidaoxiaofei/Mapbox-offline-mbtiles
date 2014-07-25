@@ -20,7 +20,6 @@ import java.net.HttpURLConnection;
 import java.net.ResponseCache;
 import java.net.URL;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 /**
  * A type of tile layer that loads tiles from the internet and metadata about itself
@@ -44,7 +43,7 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
 
         String jsonURL = this.getBrandedJSONURL();
         if (jsonURL != null) {
-            initWithTileJSON(this.getBrandedJSON(jsonURL));
+            fetchBrandedJSONAndInit(jsonURL);
         }
     }
 
@@ -144,13 +143,13 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
         return out.toByteArray();
     }
 
-    private JSONObject getBrandedJSON(String url) {
-        try {
-            return new RetrieveJSONTask().execute(url).get(10000, TimeUnit.MILLISECONDS);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    private void fetchBrandedJSONAndInit(String url) {
+        new RetrieveJSONTask() {
+            @Override
+            protected void onPostExecute(JSONObject jsonObject) {
+                initWithTileJSON(jsonObject);
+            }
+        }.execute(url);
     }
 
     protected String getBrandedJSONURL() {
