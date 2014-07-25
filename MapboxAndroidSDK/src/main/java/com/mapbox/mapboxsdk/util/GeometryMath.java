@@ -13,8 +13,8 @@ public class GeometryMath {
     public static final double DEG2RAD = (Math.PI / 180.0);
     public static final double RAD2DEG = (180.0 / Math.PI);
 
-    public static final Rect getBoundingBoxForRotatedRectangle(final Rect rect, final int centerX,
-            final int centerY, final float angle, final Rect reuse) {
+    public static final Rect getBoundingBoxForRotatedRectangle(final Rect rect, final float centerX,
+            final float centerY, final float angle, final Rect reuse) {
         final Rect out = GeometryMath.reusable(reuse);
         if (angle % 360 == 0) {
             out.set(rect);
