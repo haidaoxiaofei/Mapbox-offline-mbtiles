@@ -135,6 +135,7 @@ public class MapView extends ViewGroup
     protected ScaleGestureDetector mScaleGestureDetector;
     protected float mMultiTouchScale = 1.0f;
     protected PointF mMultiTouchScalePoint = new PointF();
+    protected Matrix mInvTransformMatrix = new Matrix();
 
     protected List<MapListener> mListeners = new ArrayList<MapListener>();
 
@@ -611,23 +612,6 @@ public class MapView extends ViewGroup
         );
     }
 
-    /**
-     * Gets the current bounds of the screen in <I>screen coordinates</I>.
-     */
-    public Rect getScreenRect(final Rect reuse) {
-        final Rect out = getIntrinsicScreenRect(reuse);
-        if (this.getMapOrientation() % 180 != 0) {
-            // Since the canvas is shifted by getWidth/2, we can just return our
-            // natural scrollX/Y
-            // value since that is the same as the shifted center.
-            int centerX = this.getScrollX();
-            int centerY = this.getScrollY();
-            GeometryMath.getBoundingBoxForRotatedRectangle(out, centerX,
-                    centerY, this.getMapOrientation(), out);
-        }
-        return out;
-    }
-
     public Rect getIntrinsicScreenRect(Rect reuse) {
         if (reuse == null) {
             reuse = new Rect();
@@ -686,6 +670,7 @@ public class MapView extends ViewGroup
         float newZoom = mZoomLevel + zoomDelta;
         if (newZoom <= mMaximumZoomLevel && newZoom >= mMinimumZoomLevel) {
             mMultiTouchScale = scale;
+            updateInversedTransformMatrix();
             invalidate();
         }
         return this;
@@ -693,6 +678,16 @@ public class MapView extends ViewGroup
 
     public float getScale() {
         return mMultiTouchScale;
+    }
+
+    private final void updateInversedTransformMatrix() {
+        mInvTransformMatrix.reset();
+        mInvTransformMatrix.preScale(1/mMultiTouchScale, 1/mMultiTouchScale, mMultiTouchScalePoint.x,
+                mMultiTouchScalePoint.y);
+    }
+
+    public final Matrix getInversedTransformMatrix() {
+        return mInvTransformMatrix;
     }
 
 
@@ -727,6 +722,8 @@ public class MapView extends ViewGroup
 
         // reset the touchScale because from now on the zoom is the new one
         mMultiTouchScale = 1.0f;
+        mInvTransformMatrix.reset();
+        
         if (newZoomLevel != curZoomLevel) {
             this.mZoomLevel = newZoomLevel;
             // just to be sure any one got the right one
@@ -1580,6 +1577,7 @@ public class MapView extends ViewGroup
 
     public final void setScalePoint(final PointF point) {
         mMultiTouchScalePoint.set(point);
+        updateInversedTransformMatrix();
     }
 
     @Override

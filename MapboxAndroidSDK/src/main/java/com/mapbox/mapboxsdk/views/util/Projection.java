@@ -47,6 +47,7 @@ public class Projection implements GeoConstants {
     private BoundingBox mBoundingBoxProjection;
     private final float mZoomLevelProjection;
     private final Rect mScreenRectProjection;
+    private final RectF mTransformedScreenRectProjection;
     private final Rect mIntrinsicScreenRectProjection;
     private final float mMapOrientation;
     private final Matrix mRotateMatrix = new Matrix();
@@ -69,7 +70,19 @@ public class Projection implements GeoConstants {
 
         //TODO: optimize because right now each line re-compute the previous value
         mIntrinsicScreenRectProjection = mapView.getIntrinsicScreenRect(null);
-        mScreenRectProjection = mapView.getScreenRect(null);
+        if (mapView.getMapOrientation() % 180 != 0) {
+            // Since the canvas is shifted by getWidth/2, we can just return our
+            // natural scrollX/Y
+            // value since that is the same as the shifted center.
+            PointF scrollPoint = mapView.getScrollPoint();
+            mScreenRectProjection = GeometryMath.getBoundingBoxForRotatedRectangle(mIntrinsicScreenRectProjection,
+                    scrollPoint.x, scrollPoint.y, this.getMapOrientation(), null);
+        }
+        else {
+            mScreenRectProjection = mIntrinsicScreenRectProjection;
+        }
+        mTransformedScreenRectProjection = new RectF(mScreenRectProjection);
+        mapView.getInversedTransformMatrix().mapRect(mTransformedScreenRectProjection);
         mMapOrientation = mapView.getMapOrientation();
         mRotateMatrix.setRotate(-mMapOrientation, viewWidth2, viewHeight2);
     }
@@ -91,6 +104,10 @@ public class Projection implements GeoConstants {
 
     public Rect getScreenRect() {
         return mScreenRectProjection;
+    }
+
+    public RectF getTransformScreenRect() {
+        return mTransformedScreenRectProjection;
     }
 
     public Rect getIntrinsicScreenRect() {
