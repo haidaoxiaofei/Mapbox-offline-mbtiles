@@ -149,7 +149,7 @@ public class TileJsonTileLayer extends WebSourceTileLayer {
             protected void onPostExecute(JSONObject jsonObject) {
                 initWithTileJSON(jsonObject);
             }
-        }.execute(url);
+        } .execute(url);
     }
 
     protected String getBrandedJSONURL() {
