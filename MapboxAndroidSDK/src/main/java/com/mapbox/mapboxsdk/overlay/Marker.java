@@ -5,8 +5,8 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.Log;
-import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.InfoWindow;
@@ -100,9 +100,9 @@ public class Marker {
      * @return true if the marker has content
      */
     public boolean hasContent() {
-        return !Strings.isNullOrEmpty(this.mTitle) ||
-                !Strings.isNullOrEmpty(this.mDescription) ||
-                !Strings.isNullOrEmpty(this.mSubDescription) ||
+        return !TextUtils.isEmpty(this.mTitle) ||
+                !TextUtils.isEmpty(this.mDescription) ||
+                !TextUtils.isEmpty(this.mSubDescription) ||
                 this.mImage != null;
     }
 
