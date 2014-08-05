@@ -38,7 +38,7 @@ public class MapViewScaleGestureDetectorListener
         firstSpan = detector.getCurrentSpan();
         currentScale = 1.0f;
         if (!this.mapView.isAnimating()) {
-            this.mapView.mIsAnimating.set(true);
+            this.mapView.setIsAnimating(true);
             this.mapView.getController().aboutToStartAnimation(lastFocusX, lastFocusY);
             scaling = true;
         }
@@ -80,7 +80,8 @@ public class MapViewScaleGestureDetectorListener
             public void run() {
                 float preZoom = mapView.getZoomLevel(false);
                 float newZoom = (float) (Math.log(currentScale) / Math.log(2d) + preZoom);
-                mapView.mTargetZoomLevel.set(Float.floatToIntBits(newZoom));
+                //set animated zoom so that animationEnd will correctly set it in the mapView
+                mapView.setAnimatedZoom(newZoom);
                 mapView.getController().onAnimationEnd();
                 scaling = false;
             }
