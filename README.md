@@ -56,6 +56,7 @@ These **will** change over time so please check back regularly.
 * [OkHttp](http://square.github.io/okhttp/) - 1.3.0
 * [NineOldAndroids](http://nineoldandroids.com/) - 2.4.0
 * [DiskLRUCache](https://github.com/JakeWharton/DiskLruCache) - 2.0.1
+* [Guava](http://code.google.com/p/guava-libraries/) - 16.0.1
 * [GeoJSON](https://github.com/cocoahero/android-geojson) - 1.0.0
 
 ### Legacy Support (Eclipse) - Experimental
