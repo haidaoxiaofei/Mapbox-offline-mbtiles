@@ -25,16 +25,21 @@ If your project needs to access location services, it'll also need the following
 ```
 
 ###The MapView
-The ```MapView``` class is the key component of our library. It behaves like any other ```ViewGroup``` and its behavior can be changed statically with an [XML layout](http://developer.android.com/guide/topics/ui/declaring-layout.html) file, or programmatically during runtime.
+
+The `MapView` class is the key component of our library. It behaves
+like any other `ViewGroup` and its behavior can be changed statically with an
+[XML layout](http://developer.android.com/guide/topics/ui/declaring-layout.html)
+file, or programmatically during runtime.
 
 #### XML layout
-To add the ```MapView``` as a layout element, add the following to your xml file:
+To add the `MapView` as a layout element, add the following to your xml file:
+
 ```xml
 <com.mapbox.mapboxsdk.views.MapView
 android:id="@+id/mapview"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent"
-mapbox:mapid="Your MapBox mapid" />
+mapbox:mapid="Your Mapbox mapid" />
 ```
 
 
@@ -46,7 +51,10 @@ this.findViewById(R.id.mapview);
 
 #### On runtime
 
-On runtime you can create a new MapView by specifying the context of the application and a valid [MapBox mapid](https://www.mapbox.com/developers/api-overview/), a TileJSON file or a zxy image template.
+On runtime you can create a new MapView by specifying the context of the
+application and a valid [Mapbox mapid](https://www.mapbox.com/developers/api-overview/),
+a [TileJSON](https://github.com/mapbox/tilejson-spec) file or
+a [ZXY image template](http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames).
 
 ```java
 MapView mapView = new MapView(context);
@@ -54,13 +62,15 @@ mapView.setTileSource(new MapboxTileLayer("examples.map-vyofok3q"));
 ```
 
 And set it as the current view like this:
-```java	
+```java
 this.setContentView(mapView);
 ```
 
 ### Overlays
 
-Anything visual that is displayed over the map, maintaining its geographical position, we call it an ```Overlay```. To access a MapView's overlays at any point during runtime, use:
+Anything visual that is displayed over the map, maintaining its geographical
+position, we call it an `Overlay`. To access a MapView's overlays
+at any point during runtime, use:
 
 ```java
 mapView.getOverlays();
@@ -68,7 +78,8 @@ mapView.getOverlays();
 
 #### Markers
 
-Adding a marker with the default styling is as simple as calling this for every marker you want to add:
+Adding a marker with the default styling is as simple as calling this
+for every marker you want to add:
 
 ```java
 Marker marker = new Marker(mapView, title, description, LatLng)
@@ -77,7 +88,8 @@ mapView.addMarker(marker);
 
 #### Location overlay
 
-The location of the user can be displayed on the view using ```UserLocationOverlay```
+The location of the user can be displayed on the view using `UserLocationOverlay`
+
 ```java
 UserLocationOverlay myLocationOverlay = new UserLocationOverlay(this, mapView);
 userLocationOverlay.enableMyLocation();
@@ -87,7 +99,8 @@ mapView.getOverlays().add(userLocationOverlay);
 
 ####Paths
 
-Paths are treated as any other ```Overlay```, and are drawn like this:
+Paths are treated as any other `Overlay`, and are drawn like this:
+
 ```java
 PathOverlay line = new PathOverlay(Color.RED, this);
 line.addPoint(new GeoPoint(51.2, 0.1));
@@ -95,35 +108,50 @@ line.addPoint(new GeoPoint(51.7, 0.3));
 mapView.getOverlays().add(line);
 ```
 
-####Drawing anything into the map
-To add anything with a higher degree of  customization you can declare your own ```Overlay``` subclass and define what to draw by overriding the ```draw``` method. It will give you a Canvas object for you to add anything to it:
+#### Drawing anything into the map
+
+To add anything with a higher degree of  customization you can declare your own `Overlay`
+subclass and define what to draw by overriding the `draw` method. It will
+give you a Canvas object for you to add anything to it:
 
 ```java
 class AnyOverlay extends Overlay{
     @Override
-    protected void draw(Canvas canvas, MapView mapView, boolean shadow) {		
+    protected void draw(Canvas canvas, MapView mapView, boolean shadow) {
         //do anything with the Canvas object
     }
 }
 ```
 
 ### Switching layers *(experimental)*
-We're making switchable layers as simple as possible in the SDK. You can try toggling between several maps (identified by a valid MapBox ID, a TileJSON file or a zxy image template) using the switchToLayer method
+
+You can toggle between several maps (identified by a valid Mapbox ID, a TileJSON file
+or a zxy image template) using the switchToLayer method
 
 ```java
 mapView.switchToLayer("examples.map-vyofok3q");
 ```
 
 ### Screen rotation
-By default, every time the screen is rotated, Android will call ```onCreate``` and return all states in the app to their inital values. This includes current zoom level and position of the MapView. The simplest way to avoid this is adding this line to your ```AndroidManifest.xml```, inside ```<activity>```:
+
+By default, every time the screen is rotated, Android will call `onCreate`
+and return all states in the app to their inital values. This includes current
+zoom level and position of the MapView. The simplest way to avoid this is adding
+this line to your `AndroidManifest.xml`, inside `<activity>`:
 
 	android:configChanges="orientation|screenSize|uiMode"
 
-Alternatively you can override the methods ```onSaveInstanceState()``` and ```onRestoreInstanceState()``` to have broader control of the saved states in the app. See this [StackOverflow question](http://stackoverflow.com/questions/4096169/onsaveinstancestate-and-onrestoreinstancestate) for more information on these methods
+Alternatively you can override the methods `onSaveInstanceState()` and
+`onRestoreInstanceState()` to have broader control of the saved states in the app.
+See this [StackOverflow question](http://stackoverflow.com/questions/4096169/onsaveinstancestate-and-onrestoreinstancestate) for
+more information on these methods
 
 ### Including SDK JavaDoc
 
-JavaDocs are automatically generated and distributed with each official and SNAPSHOT release.  They can be downloaded from Maven Central for local viewing and / or integration with an IDE.  The latest official version is available here:
+JavaDocs are automatically generated and distributed with each official and
+SNAPSHOT release.  They can be downloaded from Maven Central for local
+viewing and / or integration with an IDE.  The latest official version
+is available here:
 
 **`0.2.3` Release Overview**
 
@@ -141,4 +169,3 @@ cd <PROJECT_HOME>/MapboxAndroidSDK/
 cd build/docs/javadoc
 open index.html
 ```
-
