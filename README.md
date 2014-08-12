@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.3.0@aar'){
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.4.0@aar'){
         transitive=true
     }
     compile ('com.cocoahero.android:geojson:1.0.0@aar'){
@@ -38,9 +38,9 @@ dependencies {
 At any given time there will be 3 different versions of the SDK to use.  You're welcome to use whichever one makes the most sense for your project, just be aware that each comes with a different level of **stability**.  The installation instructions below all describe how to use the `Stable / Supported` version (although the SNAPSHOT version can make use of the same instructions.  Just need to update the Repo and the Version Number).
 
 1. Stable / Supported
- * Currently `0.3.0`
+ * Currently `0.4.0`
 2. SNAPSHOT
- * Currently `0.4.0-SNAPSHOT` and available via the Maven Central Snapshot Repo https://oss.sonatype.org/content/repositories/snapshots/com/mapbox/mapboxsdk/mapbox-android-sdk/
+ * Currently `0.5.0-SNAPSHOT` and available via the Maven Central Snapshot Repo https://oss.sonatype.org/content/repositories/snapshots/com/mapbox/mapboxsdk/mapbox-android-sdk/
 3. Source
 
 ### Manually / Hardcoding In Project
@@ -51,12 +51,11 @@ These **will** change over time so please check back regularly.
 
 *Example:*
 
-* Mapbox Android SDK (.aar) - 0.2.3
+* Mapbox Android SDK (.aar) - 0.4.0
 * Android Support V4 - 19.1
 * [OkHttp](http://square.github.io/okhttp/) - 1.3.0
 * [NineOldAndroids](http://nineoldandroids.com/) - 2.4.0
 * [DiskLRUCache](https://github.com/JakeWharton/DiskLruCache) - 2.0.1
-* [Guava](http://code.google.com/p/guava-libraries/) - 16.0.1
 * [GeoJSON](https://github.com/cocoahero/android-geojson) - 1.0.0
 
 ### Legacy Support (Eclipse) - Experimental
@@ -67,7 +66,7 @@ The Mapbox Android SDK is also packaged as a `.apk` file.  This allows integrati
 <dependency>
     <groupId>com.mapbox.mapboxsdk</groupId>
     <artifactId>mapbox-android-sdk</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <type>apklib</type>
 </dependency>
 ```
