@@ -137,6 +137,12 @@ extends <a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbo
                    java.util.list&lt;<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&gt;&nbsp;plist,
                    <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&gt;&nbsp;ponitemgesturelistener)</code>&nbsp;</td>
 </tr>
+<tr class="rowcolor">
+<td class="colone"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#itemizediconoverlay(android.content.context, java.util.list, com.mapbox.mapboxsdk.overlay.itemizediconoverlay.onitemgesturelistener, boolean)">itemizediconoverlay</a></strong>(android.content.context&nbsp;pcontext,
+                   java.util.list&lt;<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&gt;&nbsp;plist,
+                   <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&gt;&nbsp;ponitemgesturelistener,
+                   boolean&nbsp;sortlist)</code>&nbsp;</td>
+</tr>
 </table>
 
 
@@ -206,36 +212,30 @@ extends <a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbo
 </td>
 </tr>
 <tr class="rowcolor">
-<td class="colfirst"><code>protected void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#populate()">populate</a></strong>()</code>
-<div class="block">utility method to perform all processing on a new itemizedoverlay.</div>
-</td>
-</tr>
-<tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#removeallitems()">removeallitems</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#removeallitems(boolean)">removeallitems</a></strong>(boolean&nbsp;withpopulate)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a></code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#removeitem(int)">removeitem</a></strong>(int&nbsp;position)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&nbsp;item)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#removeitems(java.util.list)">removeitems</a></strong>(java.util.list&nbsp;items)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#setdrawnitemslimit(int)">setdrawnitemslimit</a></strong>(int&nbsp;alimit)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>int</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#size()">size</a></strong>()</code>
 <div class="block">the number of items in this overlay.</div>
@@ -321,6 +321,18 @@ extends <a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbo
                    <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&gt;&nbsp;ponitemgesturelistener)</pre>
 
 
+<a name="itemizediconoverlay(android.content.context, java.util.list, com.mapbox.mapboxsdk.overlay.itemizediconoverlay.onitemgesturelistener, boolean)">
+<!--   -->
+</a>
+
+
+<h4>itemizediconoverlay</h4>
+<pre>public&nbsp;itemizediconoverlay(android.content.context&nbsp;pcontext,
+                   java.util.list&lt;<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&gt;&nbsp;plist,
+                   <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&gt;&nbsp;ponitemgesturelistener,
+                   boolean&nbsp;sortlist)</pre>
+
+
 
 
 <!-- ============ method detail ========== -->
@@ -349,23 +361,6 @@ extends <a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbo
  mapview.getprojection()
  to convert between on-screen pixels and latitude/longitude pairs.</dd>
 <dt><span class="strong">returns:</span></dt><dd>whether or not to snap to the interesting point.</dd></dl>
-
-
-<a name="populate()">
-<!--   -->
-</a>
-
-
-<h4>populate</h4>
-<pre>protected&nbsp;void&nbsp;populate()</pre>
-<div class="block"><strong>description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/itemizedoverlay#populate()">itemizedoverlay</a></code></strong></div>
-<div class="block">utility method to perform all processing on a new itemizedoverlay. subclasses provide items
- through the createitem(int) method. the subclass should call this as soon as it has data,
- before anything else gets called.</div>
-<dl>
-<dt><strong>overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbox.mapboxsdk.overlay">itemizedoverlay</a></code></dd>
-</dl>
 
 
 <a name="createitem(int)">

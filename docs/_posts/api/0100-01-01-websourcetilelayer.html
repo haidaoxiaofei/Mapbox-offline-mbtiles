@@ -117,7 +117,8 @@ extends <a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapb
 </tr>
 <tr class="altcolor">
 <td class="colfirst"><code>android.graphics.bitmap</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/websourcetilelayer#getbitmapfromurl(java.lang.string, com.mapbox.mapboxsdk.tileprovider.maptilecache)">getbitmapfromurl</a></strong>(java.lang.string&nbsp;url,
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;maptile,
+                java.lang.string&nbsp;url,
                 <a href="{{site.baseurl}}/api/maptilecache" title="class in com.mapbox.mapboxsdk.tileprovider">maptilecache</a>&nbsp;acache)</code>
 <div class="block">requests and returns a bitmap object from a given url, using acache to decode it.</div>
 </td>
@@ -322,16 +323,17 @@ extends <a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapb
 <dt><span class="strong">returns:</span></dt><dd>the rendered drawable</dd></dl>
 
 
-<a name="getbitmapfromurl(java.lang.string, com.mapbox.mapboxsdk.tileprovider.maptilecache)">
+<a name="getbitmapfromurl(com.mapbox.mapboxsdk.tileprovider.maptile, java.lang.string, com.mapbox.mapboxsdk.tileprovider.maptilecache)">
 <!--   -->
 </a>
 
 
 <h4>getbitmapfromurl</h4>
-<pre>public&nbsp;android.graphics.bitmap&nbsp;getbitmapfromurl(java.lang.string&nbsp;url,
+<pre>public&nbsp;android.graphics.bitmap&nbsp;getbitmapfromurl(<a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;maptile,
+                                       java.lang.string&nbsp;url,
                                        <a href="{{site.baseurl}}/api/maptilecache" title="class in com.mapbox.mapboxsdk.tileprovider">maptilecache</a>&nbsp;acache)</pre>
 <div class="block">requests and returns a bitmap object from a given url, using acache to decode it.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>url</code> - the map tile url. should refer to a valid bitmap resource.</dd><dd><code>acache</code> - a cache, an instance of maptilecache</dd>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>maptile</code> - maptile</dd><dd><code>url</code> - the map tile url. should refer to a valid bitmap resource.</dd><dd><code>acache</code> - a cache, an instance of maptilecache</dd>
 <dt><span class="strong">returns:</span></dt><dd>the tile if valid, otherwise null</dd></dl>
 
 

@@ -18,13 +18,13 @@ tags: geometry
 
 <dl>
 <dt>all implemented interfaces:</dt>
-<dd>android.os.parcelable, <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>, java.io.serializable</dd>
+<dd>android.os.parcelable, <a href="{{site.baseurl}}/api/mathconstants" title="interface in com.mapbox.mapboxsdk.constants">mathconstants</a>, java.io.serializable</dd>
 </dl>
 
 
 <pre>public final class <span class="strong">latlng</span>
 extends java.lang.object
-implements <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>, android.os.parcelable, java.io.serializable</pre>
+implements <a href="{{site.baseurl}}/api/mathconstants" title="interface in com.mapbox.mapboxsdk.constants">mathconstants</a>, android.os.parcelable, java.io.serializable</pre>
 <div class="block">an immutable latitude, longitude, and optionally altitude point.
  coordinates are stored as wgs84 degrees.</div>
 <dl><dt><span class="strong">see also:</span></dt><dd><a href="../../../../serialized-form.html#com.mapbox.mapboxsdk.geometry.latlng">serialized form</a></dd></dl>
@@ -66,6 +66,20 @@ implements <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#creator">creator</a></strong></code>&nbsp;</td>
 </tr>
 </table>
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.constants.geoconstants">
+<!--   -->
+</a>
+<h3>fields inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/geoconstants" title="interface in com.mapbox.mapboxsdk.constants">geoconstants</a></h3>
+<code><a href="{{site.baseurl}}/api/geoconstants#radius_earth_meters">radius_earth_meters</a></code>
+
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.constants.mathconstants">
+<!--   -->
+</a>
+<h3>fields inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/mathconstants" title="interface in com.mapbox.mapboxsdk.constants">mathconstants</a></h3>
+<code><a href="{{site.baseurl}}/api/mathconstants#rad2deg">rad2deg</a></code>
+
 
 <a name="fields_inherited_from_class_android.os.parcelable">
 <!--   -->
@@ -129,36 +143,42 @@ implements <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#describecontents()">describecontents</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowcolor">
+<td class="colfirst"><code>int</code></td>
+<td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a>&nbsp;other)</code>
+<div class="block">calculate distance between two points</div>
+</td>
+</tr>
+<tr class="altcolor">
 <td class="colfirst"><code>boolean</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#equals(java.lang.object)">equals</a></strong>(java.lang.object&nbsp;obj)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>double</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#getaltitude()">getaltitude</a></strong>()</code>
 <div class="block">returns the altitude value of this point.</div>
 </td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>double</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#getlatitude()">getlatitude</a></strong>()</code>
 <div class="block">returns the latitude value of this point</div>
 </td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>double</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#getlongitude()">getlongitude</a></strong>()</code>
 <div class="block">returns the longitude value of this point</div>
 </td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>int</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#hashcode()">hashcode</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
+<tr class="rowcolor">
 <td class="colfirst"><code>java.lang.string</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#tostring()">tostring</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
+<tr class="altcolor">
 <td class="colfirst"><code>void</code></td>
 <td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#writetoparcel(android.os.parcel, int)">writetoparcel</a></strong>(android.os.parcel&nbsp;out,
              int&nbsp;flags)</code>&nbsp;</td>
@@ -360,6 +380,18 @@ implements <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox
 <dt><strong>specified by:</strong></dt>
 <dd><code>writetoparcel</code>&nbsp;in interface&nbsp;<code>android.os.parcelable</code></dd>
 </dl>
+
+
+<a name="distanceto(com.mapbox.mapboxsdk.geometry.latlng)">
+<!--   -->
+</a>
+
+
+<h4>distanceto</h4>
+<pre>public&nbsp;int&nbsp;distanceto(<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a>&nbsp;other)</pre>
+<div class="block">calculate distance between two points</div>
+<dl><dt><span class="strong">parameters:</span></dt><dd><code>other</code> - other latlng to compare to</dd>
+<dt><span class="strong">returns:</span></dt><dd>distance in meters</dd></dl>
 
 
 
