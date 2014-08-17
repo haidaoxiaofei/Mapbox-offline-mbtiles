@@ -103,8 +103,8 @@ Paths are treated as any other `Overlay`, and are drawn like this:
 
 ```java
 PathOverlay line = new PathOverlay(Color.RED, this);
-line.addPoint(new GeoPoint(51.2, 0.1));
-line.addPoint(new GeoPoint(51.7, 0.3));
+line.addPoint(new LatLng(51.2, 0.1));
+line.addPoint(new LatLng(51.7, 0.3));
 mapView.getOverlays().add(line);
 ```
 
