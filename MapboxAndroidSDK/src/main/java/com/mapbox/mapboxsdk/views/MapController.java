@@ -115,9 +115,7 @@ public class MapController implements MapViewConstants {
 
         final Projection projection = mMapView.getProjection();
         PointF p = projection.toMapPixels(point, null);
-        if (delta != null) {
-            p.offset(delta.x, delta.y);
-        }
+        p.offset(delta.x, delta.y);
         if (mMapView.getScrollPoint().equals(p)) {
             return false;
         }
