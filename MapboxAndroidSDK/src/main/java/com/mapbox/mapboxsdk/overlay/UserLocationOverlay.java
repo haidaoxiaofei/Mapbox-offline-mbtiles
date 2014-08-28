@@ -452,7 +452,7 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
         } else if (animated) {
            return mMapController.animateTo(mLatLng);
         } else {
-            return mMapController.goTo(mLatLng, null);
+            return mMapController.goTo(mLatLng, new PointF(0, 0));
         }
         return true;
     }
