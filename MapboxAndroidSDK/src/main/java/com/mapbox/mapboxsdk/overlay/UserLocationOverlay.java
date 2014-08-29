@@ -85,7 +85,9 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
         mPersonHotspot = point;
     }
 
-    public void setOverlayCircleColor(int alpha, int red, int blue, int green){ mCirclePaint.setARGB(alpha, red, blue, green); }
+    public void setOverlayCircleColor(int alpha, int red, int green, int blue){
+        mCirclePaint.setARGB(alpha, red, green, blue); 
+    }
 
     public UserLocationOverlay(GpsLocationProvider myLocationProvider, MapView mapView, int arrowId, int personId) {
         mMapView = mapView;
