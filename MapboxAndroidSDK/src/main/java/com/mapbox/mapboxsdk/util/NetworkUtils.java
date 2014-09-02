@@ -48,7 +48,7 @@ public class NetworkUtils {
         return connection;
     }
 
-    public static Cache getResponseCache(final File cacheDir, final int maxSize) throws IOException {
+    public static Cache getCache(final File cacheDir, final int maxSize) throws IOException {
         return new Cache(cacheDir, maxSize);
     }
 }
