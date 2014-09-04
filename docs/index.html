@@ -290,9 +290,9 @@ mapView.getOverlays().add(userLocationOverlay);
 <p>Paths are treated as any other <code>Overlay</code>, and are drawn like this:</p>
 
 {% highlight java %}
-PathOverlay line = new PathOverlay(Color.RED, this);
-line.addPoint(new GeoPoint(51.2, 0.1));
-line.addPoint(new GeoPoint(51.7, 0.3));
+PathOverlay line = new PathOverlay(Color.RED, 3);
+line.addPoint(new LatLng(51.2, 0.1));
+line.addPoint(new LatLng(51.7, 0.3));
 mapView.getOverlays().add(line);
 {% endhighlight %}
 
