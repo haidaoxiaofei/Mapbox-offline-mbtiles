@@ -33,7 +33,8 @@ repositories {
 
 dependencies {
     compile 'com.android.support:support-v4:19.1.0'
-    compile 'com.squareup.okhttp:okhttp:1.5.4'
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.jakewharton:disklrucache:2.0.2'
     compile ('com.cocoahero.android:geojson:1.0.0@aar'){
