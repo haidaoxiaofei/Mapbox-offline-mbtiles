@@ -1,6 +1,6 @@
 url: https://www.mapbox.com
 api: https://www.mapbox.com
-tileapi: https://api.tiles.mapbox.com
+tileApi: https://api.tiles.mapbox.com
 source: docs
 permalink: /:categories/:title
 baseurl: /mapbox-android-sdk
