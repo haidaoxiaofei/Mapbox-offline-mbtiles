@@ -44,6 +44,7 @@ MapView mapView = new MapView(this, "username.mapid");
 
 <script>
 $(function load() {
+    L.mapbox.accessToken = window.mapbox_accessToken;
     L.mapbox.map('example-map', '{{page.mapid}}', {
       scrollWheelZoom: false,
       center: [43.075, -89.382], zoom: 15
