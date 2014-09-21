@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,7 +23,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     private Context context;
 
     public ItemizedIconOverlay(final Context pContext, final List<Marker> pList,
-            final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Marker> pOnItemGestureListener) {
+                               final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Marker> pOnItemGestureListener) {
         this(pContext, pList, pOnItemGestureListener, false);
     }
 
@@ -51,7 +52,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
 
     @Override
     public boolean onSnapToItem(final int pX, final int pY, final Point pSnapPoint,
-            final MapView pMapView) {
+                                final MapView pMapView) {
         // TODO Implement this!
         return false;
     }
@@ -86,7 +87,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
      * @return true if event is handled false otherwise
      */
     private boolean activateSelectedItems(final MotionEvent event, final MapView mapView,
-            final ActiveItem task) {
+                                          final ActiveItem task) {
         final Projection projection = mapView.getProjection();
         final float x = event.getX();
         final float y = event.getY();
@@ -126,7 +127,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
             populate();
         }
     }
-    
+
     protected void onItemRemoved(final Marker item) {
         blurItem(item);
         item.setParentHolder(null);
@@ -184,7 +185,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     }
 
     protected boolean onSingleTapUpHelper(final int index, final Marker item,
-            final MapView mapView) {
+                                          final MapView mapView) {
         return this.mOnItemGestureListener.onItemSingleTapUp(index, item);
     }
 
