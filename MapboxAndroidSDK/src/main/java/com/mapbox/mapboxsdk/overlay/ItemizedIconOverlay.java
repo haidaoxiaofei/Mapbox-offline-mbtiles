@@ -8,7 +8,6 @@ import android.view.WindowManager;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.Projection;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,8 +26,10 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
         this(pContext, pList, pOnItemGestureListener, false);
     }
 
-    public ItemizedIconOverlay(final Context pContext, final List<Marker> pList,
-                               final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Marker> pOnItemGestureListener, boolean sortList) {
+    public ItemizedIconOverlay(final Context pContext,
+                               final List<Marker> pList,
+                               final com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay.OnItemGestureListener<Marker> pOnItemGestureListener,
+                               boolean sortList) {
         super();
         this.context = pContext;
         this.mItemList = pList;
@@ -86,7 +87,8 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
      *
      * @return true if event is handled false otherwise
      */
-    private boolean activateSelectedItems(final MotionEvent event, final MapView mapView,
+    private boolean activateSelectedItems(final MotionEvent event,
+                                          final MapView mapView,
                                           final ActiveItem task) {
         final Projection projection = mapView.getProjection();
         final float x = event.getX();
