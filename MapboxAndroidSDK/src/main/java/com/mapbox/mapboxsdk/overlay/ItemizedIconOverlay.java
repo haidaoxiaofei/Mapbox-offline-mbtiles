@@ -126,11 +126,16 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
             populate();
         }
     }
+    
+    protected void onItemRemoved(final Marker item) {
+        blurItem(item);
+        item.setParentHolder(null);
+    }
 
     public boolean removeItem(final Marker item) {
         final boolean result = mItemList.remove(item);
         if (result) {
-            item.setParentHolder(null);
+            onItemRemoved(item);
         }
         populate();
         return result;
@@ -139,7 +144,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
     public Marker removeItem(final int position) {
         final Marker item = mItemList.remove(position);
         if (item != null) {
-            item.setParentHolder(null);
+            onItemRemoved(item);
         }
         populate();
         return item;
@@ -150,7 +155,7 @@ public class ItemizedIconOverlay extends ItemizedOverlay {
             if (item instanceof Marker) {
                 final boolean result = mItemList.remove(item);
                 if (result) {
-                    ((Marker) item).setParentHolder(null);
+                    onItemRemoved((Marker) item);
                 }
             }
         }
