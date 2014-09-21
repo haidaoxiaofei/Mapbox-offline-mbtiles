@@ -91,10 +91,11 @@ mapView.addMarker(marker);
 The location of the user can be displayed on the view using `UserLocationOverlay`
 
 ```java
-UserLocationOverlay myLocationOverlay = new UserLocationOverlay(this, mapView);
-userLocationOverlay.enableMyLocation();
-userLocationOverlay.setDrawAccuracyEnabled(true);
-mapView.getOverlays().add(userLocationOverlay);
+GpsLocationProvider myLocationProvider = new GpsLocationProvider(getActivity());
+UserLocationOverlay myLocationOverlay = new UserLocationOverlay(myLocationProvider, mapView);
+myLocationOverlay.enableMyLocation();
+myLocationOverlay.setDrawAccuracyEnabled(true);
+mapView.getOverlays().add(myLocationOverlay);
 ```
 
 ####Paths
