@@ -52,6 +52,10 @@ dependencies {
 }
 ```
 
+For a full example Android project incorporating the SDK in this manner, please see the Mapbox Dev Preview app.
+
+* Source: https://github.com/mapbox/mapbox-android-demo
+* Free download to your Android device from Google Play: https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo
 
 ### NOTE: SDK Versions
 At any given time there will be 3 different versions of the SDK to use.  You're welcome to use whichever one makes the most sense for your project, just be aware that each comes with a different level of **stability**.
