@@ -46,17 +46,9 @@ At any given time there will be 3 different versions of the SDK to use.  You're 
 ### Manually / Hardcoding In Project
 
 Download and include the mapbox-android-sdk.aar file and all
-artifacts (.aar and .jar files listed) listed in `MapboxAndroidSDK / build.gradle`.
+artifacts (.aar, .jar files, and Android support / compatibility libraries listed) listed in [`MapboxAndroidSDK / build.gradle`](https://github.com/mapbox/mapbox-android-sdk/blob/mb-pages/MapboxAndroidSDK/build.gradle).  For those new to Gradle the artifacts are listed in the `dependencies` block.
 These **will** change over time so please check back regularly.
 
-*Example:*
-
-* Mapbox Android SDK (.aar) - 0.4.0
-* Android Support V4 - 19.1
-* [OkHttp](http://square.github.io/okhttp/) - 1.3.0
-* [NineOldAndroids](http://nineoldandroids.com/) - 2.4.0
-* [DiskLRUCache](https://github.com/JakeWharton/DiskLruCache) - 2.0.1
-* [GeoJSON](https://github.com/cocoahero/android-geojson) - 1.0.0
 
 ### Legacy Support (Eclipse) - Experimental
 
