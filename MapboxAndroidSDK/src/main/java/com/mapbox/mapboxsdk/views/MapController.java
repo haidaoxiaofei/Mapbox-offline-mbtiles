@@ -115,7 +115,9 @@ public class MapController implements MapViewConstants {
 
         final Projection projection = mMapView.getProjection();
         PointF p = projection.toMapPixels(point, null);
-        p.offset(delta.x, delta.y);
+        if (delta != null) {
+            p.offset(delta.x, delta.y);
+        }
         if (mMapView.getScrollPoint().equals(p)) {
             return false;
         }
@@ -182,13 +184,15 @@ public class MapController implements MapViewConstants {
         // We ignore the jumpToTarget for zoom levels since it doesn't make sense to stop
         // the animation in the middle. Maybe we could have it cancel the zoom operation and jump
         // back to original zoom level?
-        if (mMapView.mIsAnimating.get()) {
-            mCurrentAnimation.cancel();
-            mMapView.setZoomInternal(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()));
+        if (mMapView.isAnimating()) {
+            if (mCurrentAnimation != null) {
+                mCurrentAnimation.cancel();
+            }
+            mMapView.setZoomInternal(mMapView.getAnimatedZoom());
             if (jumpToTarget && zoomOnLatLong != null) {
                 goTo(zoomOnLatLong, zoomDeltaScroll);
             }
-            mMapView.mIsAnimating.set(false);
+            mMapView.setIsAnimating(false);
         }
     }
 
@@ -225,7 +229,7 @@ public class MapController implements MapViewConstants {
         zoomDeltaScroll.set(0, 0);
         if (zoomAnimating) {
             zoomOnLatLong = latlong;
-            mMapView.mTargetZoomLevel.set(Float.floatToIntBits(targetZoom));
+            mMapView.setAnimatedZoom(targetZoom);
 
             float factor = (float) Math.pow(2, targetZoom - currentZoom);
             float delta = (targetZoom - currentZoom);
@@ -234,6 +238,10 @@ public class MapController implements MapViewConstants {
             } else {
                 propertiesList.add(PropertyValuesHolder.ofFloat("scale", 1.0f, factor));
             }
+        }
+        else {
+            //this is to make sure we don't change the zoom incorrectly at the end of the animation
+            mMapView.setAnimatedZoom(currentZoom);
         }
         if (zoomAndMove) {
             PointEvaluator evaluator = new PointEvaluator();
@@ -356,13 +364,13 @@ public class MapController implements MapViewConstants {
     }
 
     protected void onAnimationStart() {
-        mMapView.mIsAnimating.set(true);
+        mMapView.setIsAnimating(true);
     }
 
     public void onAnimationEnd() {
         stopPanning();
-        mMapView.mIsAnimating.set(false);
-        mMapView.setZoomInternal(Float.intBitsToFloat(mMapView.mTargetZoomLevel.get()), zoomOnLatLong, zoomDeltaScroll);
+        mMapView.setIsAnimating(false);
+        mMapView.setZoomInternal(mMapView.getAnimatedZoom(), zoomOnLatLong, zoomDeltaScroll);
         zoomOnLatLong = null;
         mCurrentlyUserAction = false;
     }
