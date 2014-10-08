@@ -468,7 +468,7 @@ public class MapView extends ViewGroup
     public void closeCurrentTooltip() {
         if (currentTooltip != null) {
             if (mMapViewListener != null) {
-                mMapViewListener.onHidemarker(this, currentTooltip.getBoundMarker());
+                mMapViewListener.onHideMarker(this, currentTooltip.getBoundMarker());
             }
             currentTooltip.close();
             currentTooltip = null;
