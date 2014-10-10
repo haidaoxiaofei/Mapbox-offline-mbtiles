@@ -121,7 +121,7 @@ public class DataLoadingUtils {
                 JSONArray coordinates = (JSONArray) f.getGeometry().toJSON().get("coordinates");
                 double lon = (Double) coordinates.get(0);
                 double lat = (Double) coordinates.get(1);
-                Marker marker = new Marker(f.getProperties().optString("title"), "", new LatLng(lat, lon));
+                Marker marker = new Marker(f.getProperties().optString("title"), f.getProperties().optString("description"), new LatLng(lat, lon));
                 if (markerIcon != null) {
                     marker.setIcon(markerIcon);
                 }
@@ -132,7 +132,7 @@ public class DataLoadingUtils {
                     JSONArray coordinates = (JSONArray) points.get(j);
                     double lon = (Double) coordinates.get(0);
                     double lat = (Double) coordinates.get(1);
-                    Marker marker = new Marker(f.getProperties().optString("title"), "", new LatLng(lat, lon));
+                    Marker marker = new Marker(f.getProperties().optString("title"), f.getProperties().optString("description"), new LatLng(lat, lon));
                     if (markerIcon != null) {
                         marker.setIcon(markerIcon);
                     }
