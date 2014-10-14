@@ -64,19 +64,24 @@ public class TilesOverlay extends SafeDrawOverlay {
         }
         this.mTileProvider = aTileProvider;
         if (UtilConstants.DEBUGMODE) {
-            if (mDebugPaint == null) {
-                mDebugPaint = new SafePaint();
-                mDebugPaint.setAntiAlias(true);
-                mDebugPaint.setFilterBitmap(true);
-                mDebugPaint.setColor(Color.RED);
-                mDebugPaint.setStyle(Paint.Style.STROKE);
-            }
+            getDebugPaint();
         }
         mLoadingPaint = new Paint();
         mLoadingPaint.setAntiAlias(true);
         mLoadingPaint.setFilterBitmap(true);
         mLoadingPaint.setColor(mLoadingLineColor);
         mLoadingPaint.setStrokeWidth(0);
+    }
+
+    public static SafePaint getDebugPaint() {
+        if (mDebugPaint == null) {
+            mDebugPaint = new SafePaint();
+            mDebugPaint.setAntiAlias(true);
+            mDebugPaint.setFilterBitmap(true);
+            mDebugPaint.setColor(Color.RED);
+            mDebugPaint.setStyle(Paint.Style.STROKE);
+        }
+        return mDebugPaint;
     }
 
     @Override
@@ -185,9 +190,9 @@ public class TilesOverlay extends SafeDrawOverlay {
             final Point centerPoint =
                     new Point(viewPort.centerX() - mWorldSize_2, viewPort.centerY() - mWorldSize_2);
             canvas.drawLine(centerPoint.x, centerPoint.y - 9, centerPoint.x, centerPoint.y + 9,
-                    mDebugPaint);
+                    getDebugPaint());
             canvas.drawLine(centerPoint.x - 9, centerPoint.y, centerPoint.x + 9, centerPoint.y,
-                    mDebugPaint);
+                    getDebugPaint());
         }
         Log.d(TAG, "drawTiles() done.");
     }
@@ -232,8 +237,8 @@ public class TilesOverlay extends SafeDrawOverlay {
 
             if (UtilConstants.DEBUGMODE) {
                 ISafeCanvas canvas = (ISafeCanvas) pCanvas;
-                canvas.drawText(pTile.toString(), mTileRect.left + 1, mTileRect.top + mDebugPaint.getTextSize(), mDebugPaint);
-                canvas.drawRect(mTileRect, mDebugPaint);
+                canvas.drawText(pTile.toString(), mTileRect.left + 1, mTileRect.top + getDebugPaint().getTextSize(), getDebugPaint());
+                canvas.drawRect(mTileRect, getDebugPaint());
             }
         }
     };
