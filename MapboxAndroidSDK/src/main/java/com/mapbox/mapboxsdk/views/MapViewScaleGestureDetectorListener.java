@@ -1,7 +1,6 @@
 package com.mapbox.mapboxsdk.views;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.ScaleGestureDetector;
 
 /**

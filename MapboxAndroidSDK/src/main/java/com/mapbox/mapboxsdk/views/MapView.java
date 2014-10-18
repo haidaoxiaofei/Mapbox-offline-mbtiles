@@ -723,7 +723,7 @@ public class MapView extends ViewGroup
         // reset the touchScale because from now on the zoom is the new one
         mMultiTouchScale = 1.0f;
         mInvTransformMatrix.reset();
-        
+
         if (newZoomLevel != curZoomLevel) {
             this.mZoomLevel = newZoomLevel;
             // just to be sure any one got the right one
