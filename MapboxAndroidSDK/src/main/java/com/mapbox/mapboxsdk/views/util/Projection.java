@@ -77,8 +77,7 @@ public class Projection implements GeoConstants {
             PointF scrollPoint = mapView.getScrollPoint();
             mScreenRectProjection = GeometryMath.getBoundingBoxForRotatedRectangle(mIntrinsicScreenRectProjection,
                     scrollPoint.x, scrollPoint.y, this.getMapOrientation(), null);
-        }
-        else {
+        } else {
             mScreenRectProjection = mIntrinsicScreenRectProjection;
         }
         mTransformedScreenRectProjection = new RectF(mScreenRectProjection);
