@@ -682,7 +682,7 @@ public class MapView extends ViewGroup
 
     private final void updateInversedTransformMatrix() {
         mInvTransformMatrix.reset();
-        mInvTransformMatrix.preScale(1/mMultiTouchScale, 1/mMultiTouchScale, mMultiTouchScalePoint.x,
+        mInvTransformMatrix.preScale(1 / mMultiTouchScale, 1 / mMultiTouchScale, mMultiTouchScalePoint.x,
                 mMultiTouchScalePoint.y);
     }
 
