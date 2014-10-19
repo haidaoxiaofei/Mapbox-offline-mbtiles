@@ -392,12 +392,11 @@ public class MapView extends ViewGroup
         defaultMarkerOverlay.removeItem(marker);
         this.invalidate();
     }
-    
+
     /**
      * Remove all markers from the map's display.
      */
-    public void clear()
-    {
+    public void clear() {
         defaultMarkerList.clear();
         if (defaultMarkerOverlay != null) {
             defaultMarkerOverlay.removeAllItems();
