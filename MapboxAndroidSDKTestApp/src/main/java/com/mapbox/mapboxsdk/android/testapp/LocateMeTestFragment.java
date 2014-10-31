@@ -20,12 +20,8 @@ public class LocateMeTestFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_locate_me_test, container, false);
         MapView mv = (MapView) view.findViewById(R.id.locateMeMapView);
-        mv.setZoom(14);
-
-        // Adds an icon that shows location
-        UserLocationOverlay myLocationOverlay = new UserLocationOverlay(new GpsLocationProvider(getActivity()), mv);
-        myLocationOverlay.setDrawAccuracyEnabled(true);
-        mv.getOverlays().add(myLocationOverlay);
+        mv.setUserLocationEnabled(true);
+        mv.setUserLocationTrackingMode(UserLocationOverlay.TrackingMode.FOLLOW);
 
         return view;
     }
