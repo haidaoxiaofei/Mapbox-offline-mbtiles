@@ -2,21 +2,23 @@
 <resources>
 
     <string name="appName">Mapbox Android SDK Test App</string>
-	<string name="mainTestMap">Main Test Map</string>
+    <string name="mainTestMap">Main Test Map</string>
     <string name="alternateTestMap">Alternate Test Map</string>
-	<string name="markersTestMap">Markers Test</string>
-	<string name="itemizedOverlayTestMap">ItemizedIconOverlay</string>
+    <string name="markersTestMap">Markers Test</string>
+    <string name="itemizedOverlayTestMap">ItemizedIconOverlay</string>
     <string name="localGeoJSONTestMap">Local GeoJSON</string>
     <string name="diskCacheDisabledTestMap">DiskCache Disabled</string>
     <string name="offlineCacheTestMap">Offline Cache</string>
     <string name="programmaticTestMap">Programmatic</string>
     <string name="webSourceTileTestMap">WebSourceTile</string>
+    <string name="locateMeTestMap">Locate Me</string>
     <string name="mapbox_id_street">examples.map-i87786ca</string>
     <string name="mapbox_id_satellite">brunosan.map-cyglrrfu</string>
     <string name="mapbox_id_terrain">examples.map-zgrqqx0w</string>
-	<string name="drawerOpen">Open Nav Drawer</string>
-	<string name="drawerClose">Close Nav Drawer</string>
+    <string name="drawerOpen">Open Nav Drawer</string>
+    <string name="drawerClose">Close Nav Drawer</string>
     <string name="dataOn">Data On</string>
     <string name="dataOff">Data Off</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
