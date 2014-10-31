@@ -1,14 +1,10 @@
 package com.mapbox.mapboxsdk.android.testapp;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.GpsLocationProvider;
 import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
 import com.mapbox.mapboxsdk.views.MapView;
 
@@ -22,6 +18,7 @@ public class LocateMeTestFragment extends Fragment {
         MapView mv = (MapView) view.findViewById(R.id.locateMeMapView);
         mv.setUserLocationEnabled(true);
         mv.setUserLocationTrackingMode(UserLocationOverlay.TrackingMode.FOLLOW);
+        mv.setUserLocationRequiredZoom(12);
 
         return view;
     }
