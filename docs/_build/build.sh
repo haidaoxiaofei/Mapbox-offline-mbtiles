@@ -8,7 +8,7 @@ if [ -z $VERSION ]; then
 fi
 
 mkdir $VERSION
-#curl "http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/$VERSION/mapbox-android-sdk-$VERSION-javadoc.jar" > $VERSION/mapbox-android-sdk-$VERSION.jar
+curl "http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/$VERSION/mapbox-android-sdk-$VERSION-javadoc.jar" > $VERSION/mapbox-android-sdk-$VERSION.jar
 
 cd $VERSION && unzip mapbox-android-sdk-$VERSION.jar
 
