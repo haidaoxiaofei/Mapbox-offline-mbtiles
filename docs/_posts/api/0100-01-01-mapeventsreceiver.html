@@ -4,44 +4,44 @@ title: MapEventsReceiver
 category: api
 tags: overlay
 ---
-<div class="contentcontainer">
+<div class="contentContainer">
 <div class="description">
 
 
 <dl>
-<dt>all known implementing classes:</dt>
-<dd><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a></dd>
+<dt>All Known Implementing Classes:</dt>
+<dd><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></dd>
 </dl>
 
 
-<pre>public interface <span class="strong">mapeventsreceiver</span></pre>
-<div class="block">interface for objects that need to handle map events thrown by a mapeventsoverlay.</div>
-<dl><dt><span class="strong">see also:</span></dt><dd><a href="{{site.baseurl}}/api/mapeventsoverlay" title="class in com.mapbox.mapboxsdk.overlay"><code>mapeventsoverlay</code></a></dd></dl>
+<pre>public interface <span class="strong">MapEventsReceiver</span></pre>
+<div class="block">Interface for objects that need to handle map events thrown by a MapEventsOverlay.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/mapeventsoverlay" title="class in com.mapbox.mapboxsdk.overlay"><code>MapEventsOverlay</code></a></dd></dl>
 
 
 </div>
 <div class="summary">
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;p)</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;p)</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -52,32 +52,32 @@ tags: overlay
 <div class="details">
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="singletapuphelper(com.mapbox.mapboxsdk.api.ilatlng)">
+<h3>Method Detail</h3>
+<a name="singleTapUpHelper(com.mapbox.mapboxsdk.api.ILatLng)">
 <!--   -->
 </a>
 
 
-<h4>singletapuphelper</h4>
-<pre>boolean&nbsp;singletapuphelper(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;p)</pre>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>p</code> - the position where the event occurred.</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the event has been "consumed" and should not be handled by other objects.</dd></dl>
+<h4>singleTapUpHelper</h4>
+<pre>boolean&nbsp;singleTapUpHelper(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</pre>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>p</code> - the position where the event occurred.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if the event has been "consumed" and should not be handled by other objects.</dd></dl>
 
 
-<a name="longpresshelper(com.mapbox.mapboxsdk.api.ilatlng)">
+<a name="longPressHelper(com.mapbox.mapboxsdk.api.ILatLng)">
 <!--   -->
 </a>
 
 
-<h4>longpresshelper</h4>
-<pre>boolean&nbsp;longpresshelper(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a>&nbsp;p)</pre>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>p</code> - the position where the event occurred.</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the event has been "consumed" and should not be handled by other objects.</dd></dl>
+<h4>longPressHelper</h4>
+<pre>boolean&nbsp;longPressHelper(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</pre>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>p</code> - the position where the event occurred.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if the event has been "consumed" and should not be handled by other objects.</dd></dl>
 
 
 
@@ -86,5 +86,5 @@ tags: overlay
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

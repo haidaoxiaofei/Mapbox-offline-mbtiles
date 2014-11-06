@@ -4,192 +4,192 @@ title: LatLng
 category: api
 tags: geometry
 ---
-<div class="contentcontainer">
-<ul class="inheritance">
-<li>java.lang.object</li>
-<li>
-<ul class="inheritance">
-<li>com.mapbox.mapboxsdk.geometry.latlng</li>
-</ul>
-</li>
-</ul>
+<div class="contentContainer">
+
+java.lang.Object
+
+
+com.mapbox.mapboxsdk.geometry.LatLng
+
+
+
 <div class="description">
 
 
 <dl>
-<dt>all implemented interfaces:</dt>
-<dd>android.os.parcelable, <a href="{{site.baseurl}}/api/mathconstants" title="interface in com.mapbox.mapboxsdk.constants">mathconstants</a>, java.io.serializable</dd>
+<dt>All Implemented Interfaces:</dt>
+<dd>android.os.Parcelable, <a href="{{site.baseurl}}/api/mathconstants" title="interface in com.mapbox.mapboxsdk.constants">MathConstants</a>, java.io.Serializable</dd>
 </dl>
 
 
-<pre>public final class <span class="strong">latlng</span>
-extends java.lang.object
-implements <a href="{{site.baseurl}}/api/mathconstants" title="interface in com.mapbox.mapboxsdk.constants">mathconstants</a>, android.os.parcelable, java.io.serializable</pre>
-<div class="block">an immutable latitude, longitude, and optionally altitude point.
- coordinates are stored as wgs84 degrees.</div>
-<dl><dt><span class="strong">see also:</span></dt><dd><a href="../../../../serialized-form.html#com.mapbox.mapboxsdk.geometry.latlng">serialized form</a></dd></dl>
+<pre>public final class <span class="strong">LatLng</span>
+extends java.lang.Object
+implements <a href="{{site.baseurl}}/api/mathconstants" title="interface in com.mapbox.mapboxsdk.constants">MathConstants</a>, android.os.Parcelable, java.io.Serializable</pre>
+<div class="block">An immutable latitude, longitude, and optionally altitude point.
+ Coordinates are stored as WGS84 degrees.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../serialized-form.html#com.mapbox.mapboxsdk.geometry.LatLng">Serialized Form</a></dd></dl>
 
 
 </div>
 <div class="summary">
 
 
-<!-- ======== nested class summary ======== -->
+<!-- ======== NESTED CLASS SUMMARY ======== -->
 
 <a name="nested_class_summary">
 <!--   -->
 </a>
-<h3>nested class summary</h3>
+<h3>Nested Class Summary</h3>
 
-<a name="nested_classes_inherited_from_class_android.os.parcelable">
+<a name="nested_classes_inherited_from_class_android.os.Parcelable">
 <!--   -->
 </a>
-<h3>nested classes/interfaces inherited from interface&nbsp;android.os.parcelable</h3>
-<code>android.os.parcelable.classloadercreator&lt;t&gt;, android.os.parcelable.creator&lt;t&gt;</code>
+<h3>Nested classes/interfaces inherited from interface&nbsp;android.os.Parcelable</h3>
+<code>android.os.Parcelable.ClassLoaderCreator&lt;T&gt;, android.os.Parcelable.Creator&lt;T&gt;</code>
 
 
 
-<!-- =========== field summary =========== -->
+<!-- =========== FIELD SUMMARY =========== -->
 
 <a name="field_summary">
 <!--   -->
 </a>
-<h3>field summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="field summary table, listing fields, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>fields</span><span class="tabend">&nbsp;</span></caption>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">field and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>static android.os.parcelable.creator&lt;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a>&gt;</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#creator">creator</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>static android.os.Parcelable.Creator&lt;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng#creator">CREATOR</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
-<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.constants.geoconstants">
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.constants.GeoConstants">
 <!--   -->
 </a>
-<h3>fields inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/geoconstants" title="interface in com.mapbox.mapboxsdk.constants">geoconstants</a></h3>
-<code><a href="{{site.baseurl}}/api/geoconstants#radius_earth_meters">radius_earth_meters</a></code>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/geoconstants" title="interface in com.mapbox.mapboxsdk.constants">GeoConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/geoconstants#radius_earth_meters">RADIUS_EARTH_METERS</a></code>
 
 
-<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.constants.mathconstants">
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.constants.MathConstants">
 <!--   -->
 </a>
-<h3>fields inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/mathconstants" title="interface in com.mapbox.mapboxsdk.constants">mathconstants</a></h3>
-<code><a href="{{site.baseurl}}/api/mathconstants#rad2deg">rad2deg</a></code>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/mathconstants" title="interface in com.mapbox.mapboxsdk.constants">MathConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/mathconstants#rad2deg">RAD2DEG</a></code>
 
 
-<a name="fields_inherited_from_class_android.os.parcelable">
+<a name="fields_inherited_from_class_android.os.Parcelable">
 <!--   -->
 </a>
-<h3>fields inherited from interface&nbsp;android.os.parcelable</h3>
-<code>contents_file_descriptor, parcelable_write_return_value</code>
+<h3>Fields inherited from interface&nbsp;android.os.Parcelable</h3>
+<code>CONTENTS_FILE_DESCRIPTOR, PARCELABLE_WRITE_RETURN_VALUE</code>
 
 
 
-<!-- ======== constructor summary ======== -->
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <a name="constructor_summary">
 <!--   -->
 </a>
-<h3>constructor summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="constructor summary table, listing constructors, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>constructors</span><span class="tabend">&nbsp;</span></caption>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colone" scope="col">constructor and description</th>
+<th class="colOne" scope="col">Constructor and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colone"><code><strong><a href="{{site.baseurl}}/api/latlng#latlng(double, double)">latlng</a></strong>(double&nbsp;alatitude,
-      double&nbsp;alongitude)</code>
-<div class="block">construct a new latitude, longitude point given float arguments</div>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/latlng#latlng(double, double)">LatLng</a></strong>(double&nbsp;aLatitude,
+      double&nbsp;aLongitude)</code>
+<div class="block">Construct a new latitude, longitude point given float arguments</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colone"><code><strong><a href="{{site.baseurl}}/api/latlng#latlng(double, double, double)">latlng</a></strong>(double&nbsp;alatitude,
-      double&nbsp;alongitude,
-      double&nbsp;aaltitude)</code>
-<div class="block">construct a new latitude, longitude, altitude point given float arguments</div>
+<tr class="rowColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/latlng#latlng(double, double, double)">LatLng</a></strong>(double&nbsp;aLatitude,
+      double&nbsp;aLongitude,
+      double&nbsp;aAltitude)</code>
+<div class="block">Construct a new latitude, longitude, altitude point given float arguments</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colone"><code><strong><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a>&nbsp;alatlng)</code>
-<div class="block">clone an existing latitude longitude point</div>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;aLatLng)</code>
+<div class="block">Clone an existing latitude longitude point</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colone"><code><strong><a href="{{site.baseurl}}/api/latlng#latlng(android.location.location)">latlng</a></strong>(android.location.location&nbsp;alocation)</code>
-<div class="block">transform a location into a latlng point</div>
+<tr class="rowColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/latlng#latlng(android.location.location)">LatLng</a></strong>(android.location.Location&nbsp;aLocation)</code>
+<div class="block">Transform a Location into a LatLng point</div>
 </td>
 </tr>
 </table>
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#describecontents()">describecontents</a></strong>()</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng#describecontents()">describeContents</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a>&nbsp;other)</code>
-<div class="block">calculate distance between two points</div>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;other)</code>
+<div class="block">Calculate distance between two points</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#equals(java.lang.object)">equals</a></strong>(java.lang.object&nbsp;obj)</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng#equals(java.lang.object)">equals</a></strong>(java.lang.Object&nbsp;obj)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>double</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#getaltitude()">getaltitude</a></strong>()</code>
-<div class="block">returns the altitude value of this point.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>double</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng#getaltitude()">getAltitude</a></strong>()</code>
+<div class="block">Returns the altitude value of this point.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>double</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#getlatitude()">getlatitude</a></strong>()</code>
-<div class="block">returns the latitude value of this point</div>
+<tr class="altColor">
+<td class="colFirst"><code>double</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng#getlatitude()">getLatitude</a></strong>()</code>
+<div class="block">Returns the latitude value of this point</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>double</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#getlongitude()">getlongitude</a></strong>()</code>
-<div class="block">returns the longitude value of this point</div>
+<tr class="rowColor">
+<td class="colFirst"><code>double</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng#getlongitude()">getLongitude</a></strong>()</code>
+<div class="block">Returns the longitude value of this point</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#hashcode()">hashcode</a></strong>()</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng#hashcode()">hashCode</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#tostring()">tostring</a></strong>()</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng#tostring()">toString</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/latlng#writetoparcel(android.os.parcel, int)">writetoparcel</a></strong>(android.os.parcel&nbsp;out,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng#writetoparcel(android.os.parcel, int)">writeToParcel</a></strong>(android.os.Parcel&nbsp;out,
              int&nbsp;flags)</code>&nbsp;</td>
 </tr>
 </table>
 
-<a name="methods_inherited_from_class_java.lang.object">
+<a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>methods inherited from class&nbsp;java.lang.object</h3>
-<code>clone, finalize, getclass, notify, notifyall, wait, wait, wait</code>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code>
 
 
 
@@ -199,199 +199,199 @@ implements <a href="{{site.baseurl}}/api/mathconstants" title="interface in com.
 <div class="details">
 
 
-<!-- ============ field detail =========== -->
+<!-- ============ FIELD DETAIL =========== -->
 
 <a name="field_detail">
 <!--   -->
 </a>
-<h3>field detail</h3>
-<a name="creator">
+<h3>Field Detail</h3>
+<a name="CREATOR">
 <!--   -->
 </a>
 
 
-<h4>creator</h4>
-<pre>public static final&nbsp;android.os.parcelable.creator&lt;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a>&gt; creator</pre>
+<h4>CREATOR</h4>
+<pre>public static final&nbsp;android.os.Parcelable.Creator&lt;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&gt; CREATOR</pre>
 
 
 
 
-<!-- ========= constructor detail ======== -->
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <a name="constructor_detail">
 <!--   -->
 </a>
-<h3>constructor detail</h3>
-<a name="latlng(double, double)">
+<h3>Constructor Detail</h3>
+<a name="LatLng(double, double)">
 <!--   -->
 </a>
 
 
-<h4>latlng</h4>
-<pre>public&nbsp;latlng(double&nbsp;alatitude,
-      double&nbsp;alongitude)</pre>
-<div class="block">construct a new latitude, longitude point given float arguments</div>
+<h4>LatLng</h4>
+<pre>public&nbsp;LatLng(double&nbsp;aLatitude,
+      double&nbsp;aLongitude)</pre>
+<div class="block">Construct a new latitude, longitude point given float arguments</div>
 
 
-<a name="latlng(double, double, double)">
+<a name="LatLng(double, double, double)">
 <!--   -->
 </a>
 
 
-<h4>latlng</h4>
-<pre>public&nbsp;latlng(double&nbsp;alatitude,
-      double&nbsp;alongitude,
-      double&nbsp;aaltitude)</pre>
-<div class="block">construct a new latitude, longitude, altitude point given float arguments</div>
+<h4>LatLng</h4>
+<pre>public&nbsp;LatLng(double&nbsp;aLatitude,
+      double&nbsp;aLongitude,
+      double&nbsp;aAltitude)</pre>
+<div class="block">Construct a new latitude, longitude, altitude point given float arguments</div>
 
 
-<a name="latlng(android.location.location)">
+<a name="LatLng(android.location.Location)">
 <!--   -->
 </a>
 
 
-<h4>latlng</h4>
-<pre>public&nbsp;latlng(android.location.location&nbsp;alocation)</pre>
-<div class="block">transform a location into a latlng point</div>
+<h4>LatLng</h4>
+<pre>public&nbsp;LatLng(android.location.Location&nbsp;aLocation)</pre>
+<div class="block">Transform a Location into a LatLng point</div>
 
 
-<a name="latlng(com.mapbox.mapboxsdk.geometry.latlng)">
+<a name="LatLng(com.mapbox.mapboxsdk.geometry.LatLng)">
 <!--   -->
 </a>
 
 
-<h4>latlng</h4>
-<pre>public&nbsp;latlng(<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a>&nbsp;alatlng)</pre>
-<div class="block">clone an existing latitude longitude point</div>
+<h4>LatLng</h4>
+<pre>public&nbsp;LatLng(<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;aLatLng)</pre>
+<div class="block">Clone an existing latitude longitude point</div>
 
 
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="getlongitude()">
+<h3>Method Detail</h3>
+<a name="getLongitude()">
 <!--   -->
 </a>
 
 
-<h4>getlongitude</h4>
-<pre>public&nbsp;double&nbsp;getlongitude()</pre>
-<div class="block">returns the longitude value of this point</div>
+<h4>getLongitude</h4>
+<pre>public&nbsp;double&nbsp;getLongitude()</pre>
+<div class="block">Returns the longitude value of this point</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the longitude value in decimal degrees</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the longitude value in decimal degrees</dd></dl>
 
 
-<a name="getlatitude()">
+<a name="getLatitude()">
 <!--   -->
 </a>
 
 
-<h4>getlatitude</h4>
-<pre>public&nbsp;double&nbsp;getlatitude()</pre>
-<div class="block">returns the latitude value of this point</div>
+<h4>getLatitude</h4>
+<pre>public&nbsp;double&nbsp;getLatitude()</pre>
+<div class="block">Returns the latitude value of this point</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the latitude value in decimal degrees</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the latitude value in decimal degrees</dd></dl>
 
 
-<a name="getaltitude()">
+<a name="getAltitude()">
 <!--   -->
 </a>
 
 
-<h4>getaltitude</h4>
-<pre>public&nbsp;double&nbsp;getaltitude()</pre>
-<div class="block">returns the altitude value of this point. the encoding
+<h4>getAltitude</h4>
+<pre>public&nbsp;double&nbsp;getAltitude()</pre>
+<div class="block">Returns the altitude value of this point. The encoding
  of altitude is unspecified.</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ilatlng</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the altitude value</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the altitude value</dd></dl>
 
 
-<a name="tostring()">
+<a name="toString()">
 <!--   -->
 </a>
 
 
-<h4>tostring</h4>
-<pre>public&nbsp;java.lang.string&nbsp;tostring()</pre>
+<h4>toString</h4>
+<pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
 <dl>
-<dt><strong>overrides:</strong></dt>
-<dd><code>tostring</code>&nbsp;in class&nbsp;<code>java.lang.object</code></dd>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
 </dl>
 
 
-<a name="equals(java.lang.object)">
+<a name="equals(java.lang.Object)">
 <!--   -->
 </a>
 
 
 <h4>equals</h4>
-<pre>public&nbsp;boolean&nbsp;equals(java.lang.object&nbsp;obj)</pre>
+<pre>public&nbsp;boolean&nbsp;equals(java.lang.Object&nbsp;obj)</pre>
 <dl>
-<dt><strong>overrides:</strong></dt>
-<dd><code>equals</code>&nbsp;in class&nbsp;<code>java.lang.object</code></dd>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>equals</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
 </dl>
 
 
-<a name="hashcode()">
+<a name="hashCode()">
 <!--   -->
 </a>
 
 
-<h4>hashcode</h4>
-<pre>public&nbsp;int&nbsp;hashcode()</pre>
+<h4>hashCode</h4>
+<pre>public&nbsp;int&nbsp;hashCode()</pre>
 <dl>
-<dt><strong>overrides:</strong></dt>
-<dd><code>hashcode</code>&nbsp;in class&nbsp;<code>java.lang.object</code></dd>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>hashCode</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
 </dl>
 
 
-<a name="describecontents()">
+<a name="describeContents()">
 <!--   -->
 </a>
 
 
-<h4>describecontents</h4>
-<pre>public&nbsp;int&nbsp;describecontents()</pre>
+<h4>describeContents</h4>
+<pre>public&nbsp;int&nbsp;describeContents()</pre>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code>describecontents</code>&nbsp;in interface&nbsp;<code>android.os.parcelable</code></dd>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>describeContents</code>&nbsp;in interface&nbsp;<code>android.os.Parcelable</code></dd>
 </dl>
 
 
-<a name="writetoparcel(android.os.parcel, int)">
+<a name="writeToParcel(android.os.Parcel, int)">
 <!--   -->
 </a>
 
 
-<h4>writetoparcel</h4>
-<pre>public&nbsp;void&nbsp;writetoparcel(android.os.parcel&nbsp;out,
+<h4>writeToParcel</h4>
+<pre>public&nbsp;void&nbsp;writeToParcel(android.os.Parcel&nbsp;out,
                  int&nbsp;flags)</pre>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code>writetoparcel</code>&nbsp;in interface&nbsp;<code>android.os.parcelable</code></dd>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>writeToParcel</code>&nbsp;in interface&nbsp;<code>android.os.Parcelable</code></dd>
 </dl>
 
 
-<a name="distanceto(com.mapbox.mapboxsdk.geometry.latlng)">
+<a name="distanceTo(com.mapbox.mapboxsdk.geometry.LatLng)">
 <!--   -->
 </a>
 
 
-<h4>distanceto</h4>
-<pre>public&nbsp;int&nbsp;distanceto(<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a>&nbsp;other)</pre>
-<div class="block">calculate distance between two points</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>other</code> - other latlng to compare to</dd>
-<dt><span class="strong">returns:</span></dt><dd>distance in meters</dd></dl>
+<h4>distanceTo</h4>
+<pre>public&nbsp;int&nbsp;distanceTo(<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;other)</pre>
+<div class="block">Calculate distance between two points</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>other</code> - Other LatLng to compare to</dd>
+<dt><span class="strong">Returns:</span></dt><dd>distance in meters</dd></dl>
 
 
 
@@ -400,5 +400,5 @@ implements <a href="{{site.baseurl}}/api/mathconstants" title="interface in com.
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

@@ -4,236 +4,236 @@ title: MapTileModuleLayerBase
 category: api
 tags: tileprovider
 ---
-<div class="contentcontainer">
-<ul class="inheritance">
-<li>java.lang.object</li>
-<li>
-<ul class="inheritance">
-<li>com.mapbox.mapboxsdk.tileprovider.modules.maptilemodulelayerbase</li>
-</ul>
-</li>
-</ul>
+<div class="contentContainer">
+
+java.lang.Object
+
+
+com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase
+
+
+
 <div class="description">
 
 
 <dl>
-<dt>all implemented interfaces:</dt>
-<dd><a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">tilelayerconstants</a></dd>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></dd>
 </dl>
 <dl>
-<dt>direct known subclasses:</dt>
-<dd><a href="{{site.baseurl}}/api/maptiledownloader" title="class in com.mapbox.mapboxsdk.tileprovider.modules">maptiledownloader</a></dd>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="{{site.baseurl}}/api/maptiledownloader" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileDownloader</a></dd>
 </dl>
 
 
-<pre>public abstract class <span class="strong">maptilemodulelayerbase</span>
-extends java.lang.object
-implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">tilelayerconstants</a></pre>
-<div class="block">an abstract base class for modular tile providers</div>
+<pre>public abstract class <span class="strong">MapTileModuleLayerBase</span>
+extends java.lang.Object
+implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></pre>
+<div class="block">An abstract base class for modular tile providers</div>
 
 
 </div>
 <div class="summary">
 
 
-<!-- ======== nested class summary ======== -->
+<!-- ======== NESTED CLASS SUMMARY ======== -->
 
 <a name="nested_class_summary">
 <!--   -->
 </a>
-<h3>nested class summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="nested class summary table, listing nested classes, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>nested classes</span><span class="tabend">&nbsp;</span></caption>
+<h3>Nested Class Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Nested Class Summary table, listing nested classes, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">class and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Class and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>class&nbsp;</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase.cantcontinueexception" title="class in com.mapbox.mapboxsdk.tileprovider.modules">maptilemodulelayerbase.cantcontinueexception</a></strong></code>
-<div class="block">thrown by a tile provider module in tileloader.loadtile() to signal that it can no longer
+<tr class="altColor">
+<td class="colFirst"><code>class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase.cantcontinueexception" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase.CantContinueException</a></strong></code>
+<div class="block">Thrown by a tile provider module in TileLoader.loadTile() to signal that it can no longer
  function properly.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected class&nbsp;</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase.tileloader" title="class in com.mapbox.mapboxsdk.tileprovider.modules">maptilemodulelayerbase.tileloader</a></strong></code>
-<div class="block">load the requested tile.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>protected class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase.tileloader" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase.TileLoader</a></strong></code>
+<div class="block">Load the requested tile.</div>
 </td>
 </tr>
 </table>
 
 
-<!-- =========== field summary =========== -->
+<!-- =========== FIELD SUMMARY =========== -->
 
 <a name="field_summary">
 <!--   -->
 </a>
-<h3>field summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="field summary table, listing fields, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>fields</span><span class="tabend">&nbsp;</span></caption>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">field and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected java.util.linkedhashmap&lt;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">maptilerequeststate</a>&gt;</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#mpending">mpending</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>protected java.util.LinkedHashMap&lt;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#mpending">mPending</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected java.lang.object</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#mqueuelockobject">mqueuelockobject</a></strong></code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>protected java.lang.Object</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#mqueuelockobject">mQueueLockObject</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected java.util.hashmap&lt;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">maptilerequeststate</a>&gt;</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#mworking">mworking</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>protected java.util.HashMap&lt;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#mworking">mWorking</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
-<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.constants.tilelayerconstants">
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants">
 <!--   -->
 </a>
-<h3>fields inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.constants.<a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">tilelayerconstants</a></h3>
-<code><a href="{{site.baseurl}}/api/tilelayerconstants#world_bounding_box">world_bounding_box</a></code>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.constants.<a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/tilelayerconstants#world_bounding_box">WORLD_BOUNDING_BOX</a></code>
 
 
 
-<!-- ======== constructor summary ======== -->
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <a name="constructor_summary">
 <!--   -->
 </a>
-<h3>constructor summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="constructor summary table, listing constructors, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>constructors</span><span class="tabend">&nbsp;</span></caption>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colone" scope="col">constructor and description</th>
+<th class="colOne" scope="col">Constructor and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colone"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#maptilemodulelayerbase(int, int)">maptilemodulelayerbase</a></strong>(int&nbsp;pthreadpoolsize,
-                      int&nbsp;ppendingqueuesize)</code>
-<div class="block">initialize a new tile provider, given a thread pool and a pending queue size.</div>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#maptilemodulelayerbase(int, int)">MapTileModuleLayerBase</a></strong>(int&nbsp;pThreadPoolSize,
+                      int&nbsp;pPendingQueueSize)</code>
+<div class="block">Initialize a new tile provider, given a thread pool and a pending queue size.</div>
 </td>
 </tr>
 </table>
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#clearqueue()">clearqueue</a></strong>()</code>
-<div class="block">clears both pending and working queues.</div>
+<tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#clearqueue()">clearQueue</a></strong>()</code>
+<div class="block">Clears both pending and working queues.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#detach()">detach</a></strong>()</code>
-<div class="block">detach, we're shutting down - stops all workers.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#detach()">detach</a></strong>()</code>
+<div class="block">Detach, we're shutting down - Stops all workers.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>abstract <a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">boundingbox</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getboundingbox()">getboundingbox</a></strong>()</code>
-<div class="block">get the tile provider bounding box.</div>
+<tr class="altColor">
+<td class="colFirst"><code>abstract <a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getboundingbox()">getBoundingBox</a></strong>()</code>
+<div class="block">Get the tile provider bounding box.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>abstract java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getcachekey()">getcachekey</a></strong>()</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getcachekey()">getCacheKey</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>abstract <a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getcentercoordinate()">getcentercoordinate</a></strong>()</code>
-<div class="block">get the tile provider center.</div>
+<tr class="altColor">
+<td class="colFirst"><code>abstract <a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getcentercoordinate()">getCenterCoordinate</a></strong>()</code>
+<div class="block">Get the tile provider center.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>abstract float</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getcenterzoom()">getcenterzoom</a></strong>()</code>
-<div class="block">get the tile provider suggested starting zoom.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getcenterzoom()">getCenterZoom</a></strong>()</code>
+<div class="block">Get the tile provider suggested starting zoom.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>abstract float</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getmaximumzoomlevel()">getmaximumzoomlevel</a></strong>()</code>
-<div class="block">gets the maximum zoom level this tile provider can provide</div>
+<tr class="altColor">
+<td class="colFirst"><code>abstract float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getmaximumzoomlevel()">getMaximumZoomLevel</a></strong>()</code>
+<div class="block">Gets the maximum zoom level this tile provider can provide</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>abstract float</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getminimumzoomlevel()">getminimumzoomlevel</a></strong>()</code>
-<div class="block">gets the minimum zoom level this tile provider can provide</div>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getminimumzoomlevel()">getMinimumZoomLevel</a></strong>()</code>
+<div class="block">Gets the minimum zoom level this tile provider can provide</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected abstract java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getname()">getname</a></strong>()</code>
-<div class="block">gets the human-friendly name assigned to this tile provider.</div>
+<tr class="altColor">
+<td class="colFirst"><code>protected abstract java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getname()">getName</a></strong>()</code>
+<div class="block">Gets the human-friendly name assigned to this tile provider.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected abstract java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getthreadgroupname()">getthreadgroupname</a></strong>()</code>
-<div class="block">gets the name assigned to the thread for this provider.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>protected abstract java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getthreadgroupname()">getThreadGroupName</a></strong>()</code>
+<div class="block">Gets the name assigned to the thread for this provider.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected abstract java.lang.runnable</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#gettileloader()">gettileloader</a></strong>()</code>
-<div class="block">it is expected that the implementation will construct an internal member which internally
- implements a <a href="{{site.baseurl}}/api/maptilemodulelayerbase.tileloader" title="class in com.mapbox.mapboxsdk.tileprovider.modules"><code>maptilemodulelayerbase.tileloader</code></a>.</div>
+<tr class="altColor">
+<td class="colFirst"><code>protected abstract java.lang.Runnable</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#gettileloader()">getTileLoader</a></strong>()</code>
+<div class="block">It is expected that the implementation will construct an internal member which internally
+ implements a <a href="{{site.baseurl}}/api/maptilemodulelayerbase.tileloader" title="class in com.mapbox.mapboxsdk.tileprovider.modules"><code>MapTileModuleLayerBase.TileLoader</code></a>.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>abstract int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#gettilesizepixels()">gettilesizepixels</a></strong>()</code>
-<div class="block">get the tile provider size in pixels.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#gettilesizepixels()">getTileSizePixels</a></strong>()</code>
+<div class="block">Get the tile provider size in pixels.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>abstract <a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#gettilesource()">gettilesource</a></strong>()</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>abstract <a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#gettilesource()">getTileSource</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>abstract boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getusesdataconnection()">getusesdataconnection</a></strong>()</code>
-<div class="block">returns true if implementation uses a data connection, false otherwise.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#getusesdataconnection()">getUsesDataConnection</a></strong>()</code>
+<div class="block">Returns true if implementation uses a data connection, false otherwise.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">maptilerequeststate</a>&nbsp;pstate)</code>
-<div class="block">loads a map tile asynchronously, adding it to the queue and calling gettileloader.</div>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState)</code>
+<div class="block">Loads a map tile asynchronously, adding it to the queue and calling getTileLoader.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">maptilerequeststate</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#popfirstpending()">popfirstpending</a></strong>()</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase#popfirstpending()">popFirstPending</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>abstract void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a>&nbsp;tilesource)</code>
-<div class="block">sets the tile source for this tile provider.</div>
+<tr class="altColor">
+<td class="colFirst"><code>abstract void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;tileSource)</code>
+<div class="block">Sets the tile source for this tile provider.</div>
 </td>
 </tr>
 </table>
 
-<a name="methods_inherited_from_class_java.lang.object">
+<a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>methods inherited from class&nbsp;java.lang.object</h3>
-<code>clone, equals, finalize, getclass, hashcode, notify, notifyall, tostring, wait, wait, wait</code>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
 
 
 
@@ -243,238 +243,238 @@ implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in
 <div class="details">
 
 
-<!-- ============ field detail =========== -->
+<!-- ============ FIELD DETAIL =========== -->
 
 <a name="field_detail">
 <!--   -->
 </a>
-<h3>field detail</h3>
-<a name="mqueuelockobject">
+<h3>Field Detail</h3>
+<a name="mQueueLockObject">
 <!--   -->
 </a>
 
 
-<h4>mqueuelockobject</h4>
-<pre>protected final&nbsp;java.lang.object mqueuelockobject</pre>
+<h4>mQueueLockObject</h4>
+<pre>protected final&nbsp;java.lang.Object mQueueLockObject</pre>
 
 
-<a name="mworking">
+<a name="mWorking">
 <!--   -->
 </a>
 
 
-<h4>mworking</h4>
-<pre>protected final&nbsp;java.util.hashmap&lt;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">maptilerequeststate</a>&gt; mworking</pre>
+<h4>mWorking</h4>
+<pre>protected final&nbsp;java.util.HashMap&lt;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&gt; mWorking</pre>
 
 
-<a name="mpending">
+<a name="mPending">
 <!--   -->
 </a>
 
 
-<h4>mpending</h4>
-<pre>protected final&nbsp;java.util.linkedhashmap&lt;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">maptilerequeststate</a>&gt; mpending</pre>
+<h4>mPending</h4>
+<pre>protected final&nbsp;java.util.LinkedHashMap&lt;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&gt; mPending</pre>
 
 
 
 
-<!-- ========= constructor detail ======== -->
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <a name="constructor_detail">
 <!--   -->
 </a>
-<h3>constructor detail</h3>
-<a name="maptilemodulelayerbase(int, int)">
+<h3>Constructor Detail</h3>
+<a name="MapTileModuleLayerBase(int, int)">
 <!--   -->
 </a>
 
 
-<h4>maptilemodulelayerbase</h4>
-<pre>public&nbsp;maptilemodulelayerbase(int&nbsp;pthreadpoolsize,
-                      int&nbsp;ppendingqueuesize)</pre>
-<div class="block">initialize a new tile provider, given a thread pool and a pending queue size. the pending
+<h4>MapTileModuleLayerBase</h4>
+<pre>public&nbsp;MapTileModuleLayerBase(int&nbsp;pThreadPoolSize,
+                      int&nbsp;pPendingQueueSize)</pre>
+<div class="block">Initialize a new tile provider, given a thread pool and a pending queue size. The pending
  queue
  size must be larger than or equal to the thread pool size.</div>
 
 
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="getname()">
+<h3>Method Detail</h3>
+<a name="getName()">
 <!--   -->
 </a>
 
 
-<h4>getname</h4>
-<pre>protected abstract&nbsp;java.lang.string&nbsp;getname()</pre>
-<div class="block">gets the human-friendly name assigned to this tile provider.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the thread name</dd></dl>
+<h4>getName</h4>
+<pre>protected abstract&nbsp;java.lang.String&nbsp;getName()</pre>
+<div class="block">Gets the human-friendly name assigned to this tile provider.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the thread name</dd></dl>
 
 
-<a name="getthreadgroupname()">
+<a name="getThreadGroupName()">
 <!--   -->
 </a>
 
 
-<h4>getthreadgroupname</h4>
-<pre>protected abstract&nbsp;java.lang.string&nbsp;getthreadgroupname()</pre>
-<div class="block">gets the name assigned to the thread for this provider.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the thread name</dd></dl>
+<h4>getThreadGroupName</h4>
+<pre>protected abstract&nbsp;java.lang.String&nbsp;getThreadGroupName()</pre>
+<div class="block">Gets the name assigned to the thread for this provider.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the thread name</dd></dl>
 
 
-<a name="gettileloader()">
+<a name="getTileLoader()">
 <!--   -->
 </a>
 
 
-<h4>gettileloader</h4>
-<pre>protected abstract&nbsp;java.lang.runnable&nbsp;gettileloader()</pre>
-<div class="block">it is expected that the implementation will construct an internal member which internally
- implements a <a href="{{site.baseurl}}/api/maptilemodulelayerbase.tileloader" title="class in com.mapbox.mapboxsdk.tileprovider.modules"><code>maptilemodulelayerbase.tileloader</code></a>. this method is expected to return a that internal member to
+<h4>getTileLoader</h4>
+<pre>protected abstract&nbsp;java.lang.Runnable&nbsp;getTileLoader()</pre>
+<div class="block">It is expected that the implementation will construct an internal member which internally
+ implements a <a href="{{site.baseurl}}/api/maptilemodulelayerbase.tileloader" title="class in com.mapbox.mapboxsdk.tileprovider.modules"><code>MapTileModuleLayerBase.TileLoader</code></a>. This method is expected to return a that internal member to
  methods of the parent methods.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the internal member of this tile provider.</dd></dl>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the internal member of this tile provider.</dd></dl>
 
 
-<a name="getusesdataconnection()">
+<a name="getUsesDataConnection()">
 <!--   -->
 </a>
 
 
-<h4>getusesdataconnection</h4>
-<pre>public abstract&nbsp;boolean&nbsp;getusesdataconnection()</pre>
-<div class="block">returns true if implementation uses a data connection, false otherwise. this value is used
+<h4>getUsesDataConnection</h4>
+<pre>public abstract&nbsp;boolean&nbsp;getUsesDataConnection()</pre>
+<div class="block">Returns true if implementation uses a data connection, false otherwise. This value is used
  to
  determine if this provider should be skipped if there is no data connection.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>true if implementation uses a data connection, false otherwise</dd></dl>
+<dl><dt><span class="strong">Returns:</span></dt><dd>true if implementation uses a data connection, false otherwise</dd></dl>
 
 
-<a name="getminimumzoomlevel()">
+<a name="getMinimumZoomLevel()">
 <!--   -->
 </a>
 
 
-<h4>getminimumzoomlevel</h4>
-<pre>public abstract&nbsp;float&nbsp;getminimumzoomlevel()</pre>
-<div class="block">gets the minimum zoom level this tile provider can provide</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the minimum zoom level</dd></dl>
+<h4>getMinimumZoomLevel</h4>
+<pre>public abstract&nbsp;float&nbsp;getMinimumZoomLevel()</pre>
+<div class="block">Gets the minimum zoom level this tile provider can provide</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the minimum zoom level</dd></dl>
 
 
-<a name="getmaximumzoomlevel()">
+<a name="getMaximumZoomLevel()">
 <!--   -->
 </a>
 
 
-<h4>getmaximumzoomlevel</h4>
-<pre>public abstract&nbsp;float&nbsp;getmaximumzoomlevel()</pre>
-<div class="block">gets the maximum zoom level this tile provider can provide</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the maximum zoom level</dd></dl>
+<h4>getMaximumZoomLevel</h4>
+<pre>public abstract&nbsp;float&nbsp;getMaximumZoomLevel()</pre>
+<div class="block">Gets the maximum zoom level this tile provider can provide</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the maximum zoom level</dd></dl>
 
 
-<a name="getboundingbox()">
+<a name="getBoundingBox()">
 <!--   -->
 </a>
 
 
-<h4>getboundingbox</h4>
-<pre>public abstract&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">boundingbox</a>&nbsp;getboundingbox()</pre>
-<div class="block">get the tile provider bounding box.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the tile source bounding box</dd></dl>
+<h4>getBoundingBox</h4>
+<pre>public abstract&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getBoundingBox()</pre>
+<div class="block">Get the tile provider bounding box.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the tile source bounding box</dd></dl>
 
 
-<a name="getcentercoordinate()">
+<a name="getCenterCoordinate()">
 <!--   -->
 </a>
 
 
-<h4>getcentercoordinate</h4>
-<pre>public abstract&nbsp;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a>&nbsp;getcentercoordinate()</pre>
-<div class="block">get the tile provider center.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the tile source center</dd></dl>
+<h4>getCenterCoordinate</h4>
+<pre>public abstract&nbsp;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;getCenterCoordinate()</pre>
+<div class="block">Get the tile provider center.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the tile source center</dd></dl>
 
 
-<a name="getcenterzoom()">
+<a name="getCenterZoom()">
 <!--   -->
 </a>
 
 
-<h4>getcenterzoom</h4>
-<pre>public abstract&nbsp;float&nbsp;getcenterzoom()</pre>
-<div class="block">get the tile provider suggested starting zoom.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the tile suggested starting zoom</dd></dl>
+<h4>getCenterZoom</h4>
+<pre>public abstract&nbsp;float&nbsp;getCenterZoom()</pre>
+<div class="block">Get the tile provider suggested starting zoom.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the tile suggested starting zoom</dd></dl>
 
 
-<a name="gettilesizepixels()">
+<a name="getTileSizePixels()">
 <!--   -->
 </a>
 
 
-<h4>gettilesizepixels</h4>
-<pre>public abstract&nbsp;int&nbsp;gettilesizepixels()</pre>
-<div class="block">get the tile provider size in pixels.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the tile size in pixels</dd></dl>
+<h4>getTileSizePixels</h4>
+<pre>public abstract&nbsp;int&nbsp;getTileSizePixels()</pre>
+<div class="block">Get the tile provider size in pixels.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the tile size in pixels</dd></dl>
 
 
-<a name="settilesource(com.mapbox.mapboxsdk.tileprovider.tilesource.itilelayer)">
+<a name="setTileSource(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer)">
 <!--   -->
 </a>
 
 
-<h4>settilesource</h4>
-<pre>public abstract&nbsp;void&nbsp;settilesource(<a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a>&nbsp;tilesource)</pre>
-<div class="block">sets the tile source for this tile provider.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>tilesource</code> - the tile source</dd></dl>
+<h4>setTileSource</h4>
+<pre>public abstract&nbsp;void&nbsp;setTileSource(<a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;tileSource)</pre>
+<div class="block">Sets the tile source for this tile provider.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>tileSource</code> - the tile source</dd></dl>
 
 
-<a name="gettilesource()">
+<a name="getTileSource()">
 <!--   -->
 </a>
 
 
-<h4>gettilesource</h4>
-<pre>public abstract&nbsp;<a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a>&nbsp;gettilesource()</pre>
+<h4>getTileSource</h4>
+<pre>public abstract&nbsp;<a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;getTileSource()</pre>
 
 
-<a name="getcachekey()">
+<a name="getCacheKey()">
 <!--   -->
 </a>
 
 
-<h4>getcachekey</h4>
-<pre>public abstract&nbsp;java.lang.string&nbsp;getcachekey()</pre>
+<h4>getCacheKey</h4>
+<pre>public abstract&nbsp;java.lang.String&nbsp;getCacheKey()</pre>
 
 
-<a name="popfirstpending()">
+<a name="popFirstPending()">
 <!--   -->
 </a>
 
 
-<h4>popfirstpending</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">maptilerequeststate</a>&nbsp;popfirstpending()</pre>
+<h4>popFirstPending</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;popFirstPending()</pre>
 
 
-<a name="loadmaptileasync(com.mapbox.mapboxsdk.tileprovider.maptilerequeststate)">
+<a name="loadMapTileAsync(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">
 <!--   -->
 </a>
 
 
-<h4>loadmaptileasync</h4>
-<pre>public&nbsp;void&nbsp;loadmaptileasync(<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">maptilerequeststate</a>&nbsp;pstate)</pre>
-<div class="block">loads a map tile asynchronously, adding it to the queue and calling gettileloader.</div>
+<h4>loadMapTileAsync</h4>
+<pre>public&nbsp;void&nbsp;loadMapTileAsync(<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;pState)</pre>
+<div class="block">Loads a map tile asynchronously, adding it to the queue and calling getTileLoader.</div>
 
 
-<a name="clearqueue()">
+<a name="clearQueue()">
 <!--   -->
 </a>
 
 
-<h4>clearqueue</h4>
-<pre>protected&nbsp;void&nbsp;clearqueue()</pre>
-<div class="block">clears both pending and working queues.</div>
+<h4>clearQueue</h4>
+<pre>protected&nbsp;void&nbsp;clearQueue()</pre>
+<div class="block">Clears both pending and working queues.</div>
 
 
 <a name="detach()">
@@ -484,7 +484,7 @@ implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in
 
 <h4>detach</h4>
 <pre>public&nbsp;void&nbsp;detach()</pre>
-<div class="block">detach, we're shutting down - stops all workers.</div>
+<div class="block">Detach, we're shutting down - Stops all workers.</div>
 
 
 
@@ -493,5 +493,5 @@ implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

@@ -4,46 +4,46 @@ title: ItemizedIconOverlay.OnItemGestureListener
 category: api
 tags: overlay
 ---
-<div class="contentcontainer">
+<div class="contentContainer">
 <div class="description">
 
 
 <dl>
-<dt>enclosing class:</dt>
-<dd><a href="{{site.baseurl}}/api/itemizediconoverlay" title="class in com.mapbox.mapboxsdk.overlay">itemizediconoverlay</a></dd>
+<dt>Enclosing class:</dt>
+<dd><a href="{{site.baseurl}}/api/itemizediconoverlay" title="class in com.mapbox.mapboxsdk.overlay">ItemizedIconOverlay</a></dd>
 </dl>
 
 
-<pre>public static interface <span class="strong">itemizediconoverlay.onitemgesturelistener&lt;t&gt;</span></pre>
-<div class="block">when the item is touched one of these methods may be invoked depending on the type of touch.
- each of them returns true if the event was completely handled.</div>
+<pre>public static interface <span class="strong">ItemizedIconOverlay.OnItemGestureListener&lt;T&gt;</span></pre>
+<div class="block">When the item is touched one of these methods may be invoked depending on the type of touch.
+ Each of them returns true if the event was completely handled.</div>
 
 
 </div>
 <div class="summary">
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay.onitemgesturelistener#onitemlongpress(int, t)">onitemlongpress</a></strong>(int&nbsp;index,
-               <a href="{{site.baseurl}}/api/itemizediconoverlay.onitemgesturelistener" title="type parameter in itemizediconoverlay.onitemgesturelistener">t</a>&nbsp;item)</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay.onitemgesturelistener#onitemlongpress(int, t)">onItemLongPress</a></strong>(int&nbsp;index,
+               <a href="{{site.baseurl}}/api/itemizediconoverlay.onitemgesturelistener" title="type parameter in ItemizedIconOverlay.OnItemGestureListener">T</a>&nbsp;item)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay.onitemgesturelistener#onitemsingletapup(int, t)">onitemsingletapup</a></strong>(int&nbsp;index,
-                 <a href="{{site.baseurl}}/api/itemizediconoverlay.onitemgesturelistener" title="type parameter in itemizediconoverlay.onitemgesturelistener">t</a>&nbsp;item)</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay.onitemgesturelistener#onitemsingletapup(int, t)">onItemSingleTapUp</a></strong>(int&nbsp;index,
+                 <a href="{{site.baseurl}}/api/itemizediconoverlay.onitemgesturelistener" title="type parameter in ItemizedIconOverlay.OnItemGestureListener">T</a>&nbsp;item)</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -54,34 +54,34 @@ tags: overlay
 <div class="details">
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="onitemsingletapup(int,java.lang.object)">
+<h3>Method Detail</h3>
+<a name="onItemSingleTapUp(int,java.lang.Object)">
 <!--   -->
-</a><a name="onitemsingletapup(int, t)">
-<!--   -->
-</a>
-
-
-<h4>onitemsingletapup</h4>
-<pre>boolean&nbsp;onitemsingletapup(int&nbsp;index,
-                        <a href="{{site.baseurl}}/api/itemizediconoverlay.onitemgesturelistener" title="type parameter in itemizediconoverlay.onitemgesturelistener">t</a>&nbsp;item)</pre>
-
-
-<a name="onitemlongpress(int,java.lang.object)">
-<!--   -->
-</a><a name="onitemlongpress(int, t)">
+</a><a name="onItemSingleTapUp(int, T)">
 <!--   -->
 </a>
 
 
-<h4>onitemlongpress</h4>
-<pre>boolean&nbsp;onitemlongpress(int&nbsp;index,
-                      <a href="{{site.baseurl}}/api/itemizediconoverlay.onitemgesturelistener" title="type parameter in itemizediconoverlay.onitemgesturelistener">t</a>&nbsp;item)</pre>
+<h4>onItemSingleTapUp</h4>
+<pre>boolean&nbsp;onItemSingleTapUp(int&nbsp;index,
+                        <a href="{{site.baseurl}}/api/itemizediconoverlay.onitemgesturelistener" title="type parameter in ItemizedIconOverlay.OnItemGestureListener">T</a>&nbsp;item)</pre>
+
+
+<a name="onItemLongPress(int,java.lang.Object)">
+<!--   -->
+</a><a name="onItemLongPress(int, T)">
+<!--   -->
+</a>
+
+
+<h4>onItemLongPress</h4>
+<pre>boolean&nbsp;onItemLongPress(int&nbsp;index,
+                      <a href="{{site.baseurl}}/api/itemizediconoverlay.onitemgesturelistener" title="type parameter in ItemizedIconOverlay.OnItemGestureListener">T</a>&nbsp;item)</pre>
 
 
 
@@ -90,5 +90,5 @@ tags: overlay
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

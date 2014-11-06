@@ -4,81 +4,81 @@ title: TileLayerConstants
 category: api
 tags: tileprovider
 ---
-<div class="contentcontainer">
+<div class="contentContainer">
 <div class="description">
 
 
 <dl>
-<dt>all known implementing classes:</dt>
-<dd><a href="{{site.baseurl}}/api/websourcetilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">websourcetilelayer</a></dd>
+<dt>All Known Implementing Classes:</dt>
+<dd><a href="{{site.baseurl}}/api/websourcetilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">WebSourceTileLayer</a></dd>
 </dl>
 
 
-<pre>public interface <span class="strong">tilelayerconstants</span></pre>
-<div class="block">this class contains constants used by the tile provider.</div>
+<pre>public interface <span class="strong">TileLayerConstants</span></pre>
+<div class="block">This class contains constants used by the tile provider.</div>
 
 
 </div>
 <div class="summary">
 
 
-<!-- =========== field summary =========== -->
+<!-- =========== FIELD SUMMARY =========== -->
 
 <a name="field_summary">
 <!--   -->
 </a>
-<h3>field summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="field summary table, listing fields, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>fields</span><span class="tabend">&nbsp;</span></caption>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">field and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>static int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#cache_maptilecount_default">cache_maptilecount_default</a></strong></code>
-<div class="block">initial tile cache size.</div>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#cache_maptilecount_default">CACHE_MAPTILECOUNT_DEFAULT</a></strong></code>
+<div class="block">Initial tile cache size.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>static int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#cache_maptiledisksize_default">cache_maptiledisksize_default</a></strong></code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#cache_maptiledisksize_default">CACHE_MAPTILEDISKSIZE_DEFAULT</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>static boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#debug_tile_providers">debug_tile_providers</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>static boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#debug_tile_providers">DEBUG_TILE_PROVIDERS</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>static int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#default_tile_size">default_tile_size</a></strong></code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#default_tile_size">DEFAULT_TILE_SIZE</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>static int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#maximum_zoomlevel">maximum_zoomlevel</a></strong></code>
-<div class="block">maximum zoom level - we use integers to store zoom levels so overflow happens at 2^32 - 1,
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#maximum_zoomlevel">MAXIMUM_ZOOMLEVEL</a></strong></code>
+<div class="block">Maximum Zoom Level - we use Integers to store zoom levels so overflow happens at 2^32 - 1,
  but we also have a tile size that is typically 2^8, so (32-1)-8-1 = 22</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>static int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#minimum_zoomlevel">minimum_zoomlevel</a></strong></code>
-<div class="block">minimum zoom level</div>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#minimum_zoomlevel">MINIMUM_ZOOMLEVEL</a></strong></code>
+<div class="block">Minimum Zoom Level</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>static int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#number_of_tile_download_threads">number_of_tile_download_threads</a></strong></code>
-<div class="block">number of tile download threads, conforming to osm policy:
- http://wiki.openstreetmap.org/wiki/tile_usage_policy</div>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#number_of_tile_download_threads">NUMBER_OF_TILE_DOWNLOAD_THREADS</a></strong></code>
+<div class="block">number of tile download threads, conforming to OSM policy:
+ http://wiki.openstreetmap.org/wiki/Tile_usage_policy</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>static int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#tile_download_maximum_queue_size">tile_download_maximum_queue_size</a></strong></code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#tile_download_maximum_queue_size">TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>static <a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">boundingbox</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#world_bounding_box">world_bounding_box</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#world_bounding_box">WORLD_BOUNDING_BOX</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
@@ -89,105 +89,105 @@ tags: tileprovider
 <div class="details">
 
 
-<!-- ============ field detail =========== -->
+<!-- ============ FIELD DETAIL =========== -->
 
 <a name="field_detail">
 <!--   -->
 </a>
-<h3>field detail</h3>
-<a name="debug_tile_providers">
+<h3>Field Detail</h3>
+<a name="DEBUG_TILE_PROVIDERS">
 <!--   -->
 </a>
 
 
-<h4>debug_tile_providers</h4>
-<pre>static final&nbsp;boolean debug_tile_providers</pre>
-<dl><dt><span class="strong">see also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.tilelayerconstants.debug_tile_providers">constant field values</a></dd></dl>
+<h4>DEBUG_TILE_PROVIDERS</h4>
+<pre>static final&nbsp;boolean DEBUG_TILE_PROVIDERS</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants.DEBUG_TILE_PROVIDERS">Constant Field Values</a></dd></dl>
 
 
-<a name="world_bounding_box">
+<a name="WORLD_BOUNDING_BOX">
 <!--   -->
 </a>
 
 
-<h4>world_bounding_box</h4>
-<pre>static final&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">boundingbox</a> world_bounding_box</pre>
+<h4>WORLD_BOUNDING_BOX</h4>
+<pre>static final&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a> WORLD_BOUNDING_BOX</pre>
 
 
-<a name="minimum_zoomlevel">
+<a name="MINIMUM_ZOOMLEVEL">
 <!--   -->
 </a>
 
 
-<h4>minimum_zoomlevel</h4>
-<pre>static final&nbsp;int minimum_zoomlevel</pre>
-<div class="block">minimum zoom level</div>
-<dl><dt><span class="strong">see also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.tilelayerconstants.minimum_zoomlevel">constant field values</a></dd></dl>
+<h4>MINIMUM_ZOOMLEVEL</h4>
+<pre>static final&nbsp;int MINIMUM_ZOOMLEVEL</pre>
+<div class="block">Minimum Zoom Level</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants.MINIMUM_ZOOMLEVEL">Constant Field Values</a></dd></dl>
 
 
-<a name="maximum_zoomlevel">
+<a name="MAXIMUM_ZOOMLEVEL">
 <!--   -->
 </a>
 
 
-<h4>maximum_zoomlevel</h4>
-<pre>static final&nbsp;int maximum_zoomlevel</pre>
-<div class="block">maximum zoom level - we use integers to store zoom levels so overflow happens at 2^32 - 1,
+<h4>MAXIMUM_ZOOMLEVEL</h4>
+<pre>static final&nbsp;int MAXIMUM_ZOOMLEVEL</pre>
+<div class="block">Maximum Zoom Level - we use Integers to store zoom levels so overflow happens at 2^32 - 1,
  but we also have a tile size that is typically 2^8, so (32-1)-8-1 = 22</div>
-<dl><dt><span class="strong">see also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.tilelayerconstants.maximum_zoomlevel">constant field values</a></dd></dl>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants.MAXIMUM_ZOOMLEVEL">Constant Field Values</a></dd></dl>
 
 
-<a name="default_tile_size">
+<a name="DEFAULT_TILE_SIZE">
 <!--   -->
 </a>
 
 
-<h4>default_tile_size</h4>
-<pre>static final&nbsp;int default_tile_size</pre>
-<dl><dt><span class="strong">see also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.tilelayerconstants.default_tile_size">constant field values</a></dd></dl>
+<h4>DEFAULT_TILE_SIZE</h4>
+<pre>static final&nbsp;int DEFAULT_TILE_SIZE</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants.DEFAULT_TILE_SIZE">Constant Field Values</a></dd></dl>
 
 
-<a name="cache_maptilecount_default">
+<a name="CACHE_MAPTILECOUNT_DEFAULT">
 <!--   -->
 </a>
 
 
-<h4>cache_maptilecount_default</h4>
-<pre>static final&nbsp;int cache_maptilecount_default</pre>
-<div class="block">initial tile cache size. the size will be increased as required by calling <code>lrumaptilecache.ensurecapacity(int)</code> the tile cache will always be at least 3x3.</div>
-<dl><dt><span class="strong">see also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.tilelayerconstants.cache_maptilecount_default">constant field values</a></dd></dl>
+<h4>CACHE_MAPTILECOUNT_DEFAULT</h4>
+<pre>static final&nbsp;int CACHE_MAPTILECOUNT_DEFAULT</pre>
+<div class="block">Initial tile cache size. The size will be increased as required by calling <code>LRUMapTileCache.ensureCapacity(int)</code> The tile cache will always be at least 3x3.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants.CACHE_MAPTILECOUNT_DEFAULT">Constant Field Values</a></dd></dl>
 
 
-<a name="cache_maptiledisksize_default">
+<a name="CACHE_MAPTILEDISKSIZE_DEFAULT">
 <!--   -->
 </a>
 
 
-<h4>cache_maptiledisksize_default</h4>
-<pre>static final&nbsp;int cache_maptiledisksize_default</pre>
-<dl><dt><span class="strong">see also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.tilelayerconstants.cache_maptiledisksize_default">constant field values</a></dd></dl>
+<h4>CACHE_MAPTILEDISKSIZE_DEFAULT</h4>
+<pre>static final&nbsp;int CACHE_MAPTILEDISKSIZE_DEFAULT</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants.CACHE_MAPTILEDISKSIZE_DEFAULT">Constant Field Values</a></dd></dl>
 
 
-<a name="number_of_tile_download_threads">
+<a name="NUMBER_OF_TILE_DOWNLOAD_THREADS">
 <!--   -->
 </a>
 
 
-<h4>number_of_tile_download_threads</h4>
-<pre>static final&nbsp;int number_of_tile_download_threads</pre>
-<div class="block">number of tile download threads, conforming to osm policy:
- http://wiki.openstreetmap.org/wiki/tile_usage_policy</div>
-<dl><dt><span class="strong">see also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.tilelayerconstants.number_of_tile_download_threads">constant field values</a></dd></dl>
+<h4>NUMBER_OF_TILE_DOWNLOAD_THREADS</h4>
+<pre>static final&nbsp;int NUMBER_OF_TILE_DOWNLOAD_THREADS</pre>
+<div class="block">number of tile download threads, conforming to OSM policy:
+ http://wiki.openstreetmap.org/wiki/Tile_usage_policy</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants.NUMBER_OF_TILE_DOWNLOAD_THREADS">Constant Field Values</a></dd></dl>
 
 
-<a name="tile_download_maximum_queue_size">
+<a name="TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE">
 <!--   -->
 </a>
 
 
-<h4>tile_download_maximum_queue_size</h4>
-<pre>static final&nbsp;int tile_download_maximum_queue_size</pre>
-<dl><dt><span class="strong">see also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.tilelayerconstants.tile_download_maximum_queue_size">constant field values</a></dd></dl>
+<h4>TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE</h4>
+<pre>static final&nbsp;int TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants.TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE">Constant Field Values</a></dd></dl>
 
 
 
@@ -196,5 +196,5 @@ tags: tileprovider
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

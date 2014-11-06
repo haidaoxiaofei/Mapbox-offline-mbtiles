@@ -4,114 +4,114 @@ title: SafeBitmapShader
 category: api
 tags: views
 ---
-<div class="contentcontainer">
-<ul class="inheritance">
-<li>java.lang.object</li>
-<li>
-<ul class="inheritance">
-<li>android.graphics.shader</li>
-<li>
-<ul class="inheritance">
-<li>android.graphics.bitmapshader</li>
-<li>
-<ul class="inheritance">
-<li>com.mapbox.mapboxsdk.views.safecanvas.safebitmapshader</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<div class="contentContainer">
+
+java.lang.Object
+
+
+android.graphics.Shader
+
+
+android.graphics.BitmapShader
+
+
+com.mapbox.mapboxsdk.views.safecanvas.SafeBitmapShader
+
+
+
+
+
+
+
 <div class="description">
 
 
 
 
-<pre>public class <span class="strong">safebitmapshader</span>
-extends android.graphics.bitmapshader</pre>
-<div class="block">the safebitmapshader class is designed to work in conjunction with <a href="{{site.baseurl}}/api/safetranslatedcanvas" title="class in com.mapbox.mapboxsdk.views.safecanvas"><code>safetranslatedcanvas</code></a>
- to work around various android issues with large canvases. for the two classes to work together,
- call <a href="{{site.baseurl}}/api/safebitmapshader#ondrawcyclestart(com.mapbox.mapboxsdk.views.safecanvas.isafecanvas)"><code>ondrawcyclestart(com.mapbox.mapboxsdk.views.safecanvas.isafecanvas)</code></a> at the start of the
- <code>com.mapbox.mapboxsdk.overlay.overlayoverlay#drawsafe</code>
- method of your <code>com.mapbox.mapboxsdk.overlay.overlayoverlay</code>. this will set the adjustment
- needed to draw your bitmapshader safely on the canvas without any drawing distortion at high
+<pre>public class <span class="strong">SafeBitmapShader</span>
+extends android.graphics.BitmapShader</pre>
+<div class="block">The SafeBitmapShader class is designed to work in conjunction with <a href="{{site.baseurl}}/api/safetranslatedcanvas" title="class in com.mapbox.mapboxsdk.views.safecanvas"><code>SafeTranslatedCanvas</code></a>
+ to work around various Android issues with large canvases. For the two classes to work together,
+ call <a href="{{site.baseurl}}/api/safebitmapshader#ondrawcyclestart(com.mapbox.mapboxsdk.views.safecanvas.isafecanvas)"><code>onDrawCycleStart(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas)</code></a> at the start of the
+ <code>com.mapbox.mapboxsdk.overlay.OverlayOverlay#drawSafe</code>
+ method of your <code>com.mapbox.mapboxsdk.overlay.OverlayOverlay</code>. This will set the adjustment
+ needed to draw your BitmapShader safely on the canvas without any drawing distortion at high
  zoom
  levels and without any scrolling issues.</div>
-<dl><dt><span class="strong">see also:</span></dt><dd><code>isafecanvas}</code></dd></dl>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>ISafeCanvas}</code></dd></dl>
 
 
 </div>
 <div class="summary">
 
 
-<!-- ======== nested class summary ======== -->
+<!-- ======== NESTED CLASS SUMMARY ======== -->
 
 <a name="nested_class_summary">
 <!--   -->
 </a>
-<h3>nested class summary</h3>
+<h3>Nested Class Summary</h3>
 
-<a name="nested_classes_inherited_from_class_android.graphics.shader">
+<a name="nested_classes_inherited_from_class_android.graphics.Shader">
 <!--   -->
 </a>
-<h3>nested classes/interfaces inherited from class&nbsp;android.graphics.shader</h3>
-<code>android.graphics.shader.tilemode</code>
+<h3>Nested classes/interfaces inherited from class&nbsp;android.graphics.Shader</h3>
+<code>android.graphics.Shader.TileMode</code>
 
 
 
-<!-- ======== constructor summary ======== -->
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <a name="constructor_summary">
 <!--   -->
 </a>
-<h3>constructor summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="constructor summary table, listing constructors, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>constructors</span><span class="tabend">&nbsp;</span></caption>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colone" scope="col">constructor and description</th>
+<th class="colOne" scope="col">Constructor and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colone"><code><strong><a href="{{site.baseurl}}/api/safebitmapshader#safebitmapshader(android.graphics.bitmap, android.graphics.shader.tilemode, android.graphics.shader.tilemode)">safebitmapshader</a></strong>(android.graphics.bitmap&nbsp;bitmap,
-                android.graphics.shader.tilemode&nbsp;tilex,
-                android.graphics.shader.tilemode&nbsp;tiley)</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/safebitmapshader#safebitmapshader(android.graphics.bitmap, android.graphics.shader.tilemode, android.graphics.shader.tilemode)">SafeBitmapShader</a></strong>(android.graphics.Bitmap&nbsp;bitmap,
+                android.graphics.Shader.TileMode&nbsp;tileX,
+                android.graphics.Shader.TileMode&nbsp;tileY)</code>&nbsp;</td>
 </tr>
 </table>
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">isafecanvas</a>&nbsp;canvas)</code>
-<div class="block">this method <b>must</b> be called at the start of the <code>overlay#drawsafe</code> draw cycle
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas)</code>
+<div class="block">This method <b>must</b> be called at the start of the <code>Overlay#drawSafe</code> draw cycle
  method.</div>
 </td>
 </tr>
 </table>
 
-<a name="methods_inherited_from_class_android.graphics.shader">
+<a name="methods_inherited_from_class_android.graphics.Shader">
 <!--   -->
 </a>
-<h3>methods inherited from class&nbsp;android.graphics.shader</h3>
-<code>finalize, getlocalmatrix, setlocalmatrix</code>
+<h3>Methods inherited from class&nbsp;android.graphics.Shader</h3>
+<code>finalize, getLocalMatrix, setLocalMatrix</code>
 
 
-<a name="methods_inherited_from_class_java.lang.object">
+<a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>methods inherited from class&nbsp;java.lang.object</h3>
-<code>clone, equals, getclass, hashcode, notify, notifyall, tostring, wait, wait, wait</code>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
 
 
 
@@ -121,40 +121,40 @@ extends android.graphics.bitmapshader</pre>
 <div class="details">
 
 
-<!-- ========= constructor detail ======== -->
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <a name="constructor_detail">
 <!--   -->
 </a>
-<h3>constructor detail</h3>
-<a name="safebitmapshader(android.graphics.bitmap, android.graphics.shader.tilemode, android.graphics.shader.tilemode)">
+<h3>Constructor Detail</h3>
+<a name="SafeBitmapShader(android.graphics.Bitmap, android.graphics.Shader.TileMode, android.graphics.Shader.TileMode)">
 <!--   -->
 </a>
 
 
-<h4>safebitmapshader</h4>
-<pre>public&nbsp;safebitmapshader(android.graphics.bitmap&nbsp;bitmap,
-                android.graphics.shader.tilemode&nbsp;tilex,
-                android.graphics.shader.tilemode&nbsp;tiley)</pre>
+<h4>SafeBitmapShader</h4>
+<pre>public&nbsp;SafeBitmapShader(android.graphics.Bitmap&nbsp;bitmap,
+                android.graphics.Shader.TileMode&nbsp;tileX,
+                android.graphics.Shader.TileMode&nbsp;tileY)</pre>
 
 
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="ondrawcyclestart(com.mapbox.mapboxsdk.views.safecanvas.isafecanvas)">
+<h3>Method Detail</h3>
+<a name="onDrawCycleStart(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas)">
 <!--   -->
 </a>
 
 
-<h4>ondrawcyclestart</h4>
-<pre>public&nbsp;void&nbsp;ondrawcyclestart(<a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">isafecanvas</a>&nbsp;canvas)</pre>
-<div class="block">this method <b>must</b> be called at the start of the <code>overlay#drawsafe</code> draw cycle
- method. this will adjust the bitmapshader to the current state of the <a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas"><code>isafecanvas</code></a>
+<h4>onDrawCycleStart</h4>
+<pre>public&nbsp;void&nbsp;onDrawCycleStart(<a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas)</pre>
+<div class="block">This method <b>must</b> be called at the start of the <code>Overlay#drawSafe</code> draw cycle
+ method. This will adjust the BitmapShader to the current state of the <a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas"><code>ISafeCanvas</code></a>
  passed to it.</div>
 
 
@@ -164,5 +164,5 @@ extends android.graphics.bitmapshader</pre>
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

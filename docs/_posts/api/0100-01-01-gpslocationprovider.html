@@ -4,121 +4,121 @@ title: GpsLocationProvider
 category: api
 tags: overlay
 ---
-<div class="contentcontainer">
-<ul class="inheritance">
-<li>java.lang.object</li>
-<li>
-<ul class="inheritance">
-<li>com.mapbox.mapboxsdk.overlay.gpslocationprovider</li>
-</ul>
-</li>
-</ul>
+<div class="contentContainer">
+
+java.lang.Object
+
+
+com.mapbox.mapboxsdk.overlay.GpsLocationProvider
+
+
+
 <div class="description">
 
 
 <dl>
-<dt>all implemented interfaces:</dt>
-<dd>android.location.locationlistener</dd>
+<dt>All Implemented Interfaces:</dt>
+<dd>android.location.LocationListener</dd>
 </dl>
 
 
-<pre>public class <span class="strong">gpslocationprovider</span>
-extends java.lang.object
-implements android.location.locationlistener</pre>
+<pre>public class <span class="strong">GpsLocationProvider</span>
+extends java.lang.Object
+implements android.location.LocationListener</pre>
 
 
 </div>
 <div class="summary">
 
 
-<!-- ======== constructor summary ======== -->
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <a name="constructor_summary">
 <!--   -->
 </a>
-<h3>constructor summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="constructor summary table, listing constructors, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>constructors</span><span class="tabend">&nbsp;</span></caption>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colone" scope="col">constructor and description</th>
+<th class="colOne" scope="col">Constructor and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colone"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#gpslocationprovider(android.content.context)">gpslocationprovider</a></strong>(android.content.context&nbsp;context)</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#gpslocationprovider(android.content.context)">GpsLocationProvider</a></strong>(android.content.Context&nbsp;context)</code>&nbsp;</td>
 </tr>
 </table>
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>android.location.location</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#getlastknownlocation()">getlastknownlocation</a></strong>()</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>android.location.Location</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#getlastknownlocation()">getLastKnownLocation</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>float</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#getlocationupdatemindistance()">getlocationupdatemindistance</a></strong>()</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#getlocationupdatemindistance()">getLocationUpdateMinDistance</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>long</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#getlocationupdatemintime()">getlocationupdatemintime</a></strong>()</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>long</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#getlocationupdatemintime()">getLocationUpdateMinTime</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#onlocationchanged(android.location.location)">onlocationchanged</a></strong>(android.location.location&nbsp;location)</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#onlocationchanged(android.location.location)">onLocationChanged</a></strong>(android.location.Location&nbsp;location)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#onproviderdisabled(java.lang.string)">onproviderdisabled</a></strong>(java.lang.string&nbsp;provider)</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#onproviderdisabled(java.lang.string)">onProviderDisabled</a></strong>(java.lang.String&nbsp;provider)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#onproviderenabled(java.lang.string)">onproviderenabled</a></strong>(java.lang.string&nbsp;provider)</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#onproviderenabled(java.lang.string)">onProviderEnabled</a></strong>(java.lang.String&nbsp;provider)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#onstatuschanged(java.lang.string, int, android.os.bundle)">onstatuschanged</a></strong>(java.lang.string&nbsp;provider,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#onstatuschanged(java.lang.string, int, android.os.bundle)">onStatusChanged</a></strong>(java.lang.String&nbsp;provider,
                int&nbsp;status,
-               android.os.bundle&nbsp;extras)</code>&nbsp;</td>
+               android.os.Bundle&nbsp;extras)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#setlocationupdatemindistance(float)">setlocationupdatemindistance</a></strong>(float&nbsp;meters)</code>
-<div class="block">set the minimum distance for location updates.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#setlocationupdatemindistance(float)">setLocationUpdateMinDistance</a></strong>(float&nbsp;meters)</code>
+<div class="block">Set the minimum distance for location updates.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#setlocationupdatemintime(long)">setlocationupdatemintime</a></strong>(long&nbsp;milliseconds)</code>
-<div class="block">set the minimum interval for location updates.</div>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#setlocationupdatemintime(long)">setLocationUpdateMinTime</a></strong>(long&nbsp;milliSeconds)</code>
+<div class="block">Set the minimum interval for location updates.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay" title="class in com.mapbox.mapboxsdk.overlay">userlocationoverlay</a>&nbsp;mylocationconsumer)</code>
-<div class="block">enable location updates and show your current location on the map.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a>&nbsp;myLocationConsumer)</code>
+<div class="block">Enable location updates and show your current location on the map.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#stoplocationprovider()">stoplocationprovider</a></strong>()</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#stoplocationprovider()">stopLocationProvider</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
 
-<a name="methods_inherited_from_class_java.lang.object">
+<a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>methods inherited from class&nbsp;java.lang.object</h3>
-<code>clone, equals, finalize, getclass, hashcode, notify, notifyall, tostring, wait, wait, wait</code>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
 
 
 
@@ -128,153 +128,153 @@ implements android.location.locationlistener</pre>
 <div class="details">
 
 
-<!-- ========= constructor detail ======== -->
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <a name="constructor_detail">
 <!--   -->
 </a>
-<h3>constructor detail</h3>
-<a name="gpslocationprovider(android.content.context)">
+<h3>Constructor Detail</h3>
+<a name="GpsLocationProvider(android.content.Context)">
 <!--   -->
 </a>
 
 
-<h4>gpslocationprovider</h4>
-<pre>public&nbsp;gpslocationprovider(android.content.context&nbsp;context)</pre>
+<h4>GpsLocationProvider</h4>
+<pre>public&nbsp;GpsLocationProvider(android.content.Context&nbsp;context)</pre>
 
 
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="getlocationupdatemintime()">
+<h3>Method Detail</h3>
+<a name="getLocationUpdateMinTime()">
 <!--   -->
 </a>
 
 
-<h4>getlocationupdatemintime</h4>
-<pre>public&nbsp;long&nbsp;getlocationupdatemintime()</pre>
+<h4>getLocationUpdateMinTime</h4>
+<pre>public&nbsp;long&nbsp;getLocationUpdateMinTime()</pre>
 
 
-<a name="setlocationupdatemintime(long)">
+<a name="setLocationUpdateMinTime(long)">
 <!--   -->
 </a>
 
 
-<h4>setlocationupdatemintime</h4>
-<pre>public&nbsp;void&nbsp;setlocationupdatemintime(long&nbsp;milliseconds)</pre>
-<div class="block">set the minimum interval for location updates. see <code>locationmanager.requestlocationupdates(string, long, float, locationlistener)</code>. note that
+<h4>setLocationUpdateMinTime</h4>
+<pre>public&nbsp;void&nbsp;setLocationUpdateMinTime(long&nbsp;milliSeconds)</pre>
+<div class="block">Set the minimum interval for location updates. See <code>LocationManager.requestLocationUpdates(String, long, float, LocationListener)</code>. Note that
  you
- should call this before calling <code>enablemylocation()</code>.</div>
+ should call this before calling <code>enableMyLocation()</code>.</div>
 
 
-<a name="getlocationupdatemindistance()">
+<a name="getLocationUpdateMinDistance()">
 <!--   -->
 </a>
 
 
-<h4>getlocationupdatemindistance</h4>
-<pre>public&nbsp;float&nbsp;getlocationupdatemindistance()</pre>
+<h4>getLocationUpdateMinDistance</h4>
+<pre>public&nbsp;float&nbsp;getLocationUpdateMinDistance()</pre>
 
 
-<a name="setlocationupdatemindistance(float)">
+<a name="setLocationUpdateMinDistance(float)">
 <!--   -->
 </a>
 
 
-<h4>setlocationupdatemindistance</h4>
-<pre>public&nbsp;void&nbsp;setlocationupdatemindistance(float&nbsp;meters)</pre>
-<div class="block">set the minimum distance for location updates. see
- <code>locationmanager.requestlocationupdates</code>. note that you should call this before
+<h4>setLocationUpdateMinDistance</h4>
+<pre>public&nbsp;void&nbsp;setLocationUpdateMinDistance(float&nbsp;meters)</pre>
+<div class="block">Set the minimum distance for location updates. See
+ <code>LocationManager.requestLocationUpdates</code>. Note that you should call this before
  calling
- <code>enablemylocation()</code>.</div>
+ <code>enableMyLocation()</code>.</div>
 
 
-<a name="startlocationprovider(com.mapbox.mapboxsdk.overlay.userlocationoverlay)">
+<a name="startLocationProvider(com.mapbox.mapboxsdk.overlay.UserLocationOverlay)">
 <!--   -->
 </a>
 
 
-<h4>startlocationprovider</h4>
-<pre>public&nbsp;boolean&nbsp;startlocationprovider(<a href="{{site.baseurl}}/api/userlocationoverlay" title="class in com.mapbox.mapboxsdk.overlay">userlocationoverlay</a>&nbsp;mylocationconsumer)</pre>
-<div class="block">enable location updates and show your current location on the map. by default this will
+<h4>startLocationProvider</h4>
+<pre>public&nbsp;boolean&nbsp;startLocationProvider(<a href="{{site.baseurl}}/api/userlocationoverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a>&nbsp;myLocationConsumer)</pre>
+<div class="block">Enable location updates and show your current location on the map. By default this will
  request location updates as frequently as possible, but you can change the frequency and/or
- distance by calling <a href="{{site.baseurl}}/api/gpslocationprovider#setlocationupdatemindistance(float)"><code>setlocationupdatemindistance(float)</code></a> before calling this method.</div>
+ distance by calling <a href="{{site.baseurl}}/api/gpslocationprovider#setlocationupdatemindistance(float)"><code>setLocationUpdateMinDistance(float)</code></a> before calling this method.</div>
 
 
-<a name="stoplocationprovider()">
+<a name="stopLocationProvider()">
 <!--   -->
 </a>
 
 
-<h4>stoplocationprovider</h4>
-<pre>public&nbsp;void&nbsp;stoplocationprovider()</pre>
+<h4>stopLocationProvider</h4>
+<pre>public&nbsp;void&nbsp;stopLocationProvider()</pre>
 
 
-<a name="getlastknownlocation()">
+<a name="getLastKnownLocation()">
 <!--   -->
 </a>
 
 
-<h4>getlastknownlocation</h4>
-<pre>public&nbsp;android.location.location&nbsp;getlastknownlocation()</pre>
+<h4>getLastKnownLocation</h4>
+<pre>public&nbsp;android.location.Location&nbsp;getLastKnownLocation()</pre>
 
 
-<a name="onlocationchanged(android.location.location)">
+<a name="onLocationChanged(android.location.Location)">
 <!--   -->
 </a>
 
 
-<h4>onlocationchanged</h4>
-<pre>public&nbsp;void&nbsp;onlocationchanged(android.location.location&nbsp;location)</pre>
+<h4>onLocationChanged</h4>
+<pre>public&nbsp;void&nbsp;onLocationChanged(android.location.Location&nbsp;location)</pre>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code>onlocationchanged</code>&nbsp;in interface&nbsp;<code>android.location.locationlistener</code></dd>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>onLocationChanged</code>&nbsp;in interface&nbsp;<code>android.location.LocationListener</code></dd>
 </dl>
 
 
-<a name="onproviderdisabled(java.lang.string)">
+<a name="onProviderDisabled(java.lang.String)">
 <!--   -->
 </a>
 
 
-<h4>onproviderdisabled</h4>
-<pre>public&nbsp;void&nbsp;onproviderdisabled(java.lang.string&nbsp;provider)</pre>
+<h4>onProviderDisabled</h4>
+<pre>public&nbsp;void&nbsp;onProviderDisabled(java.lang.String&nbsp;provider)</pre>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code>onproviderdisabled</code>&nbsp;in interface&nbsp;<code>android.location.locationlistener</code></dd>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>onProviderDisabled</code>&nbsp;in interface&nbsp;<code>android.location.LocationListener</code></dd>
 </dl>
 
 
-<a name="onproviderenabled(java.lang.string)">
+<a name="onProviderEnabled(java.lang.String)">
 <!--   -->
 </a>
 
 
-<h4>onproviderenabled</h4>
-<pre>public&nbsp;void&nbsp;onproviderenabled(java.lang.string&nbsp;provider)</pre>
+<h4>onProviderEnabled</h4>
+<pre>public&nbsp;void&nbsp;onProviderEnabled(java.lang.String&nbsp;provider)</pre>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code>onproviderenabled</code>&nbsp;in interface&nbsp;<code>android.location.locationlistener</code></dd>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>onProviderEnabled</code>&nbsp;in interface&nbsp;<code>android.location.LocationListener</code></dd>
 </dl>
 
 
-<a name="onstatuschanged(java.lang.string, int, android.os.bundle)">
+<a name="onStatusChanged(java.lang.String, int, android.os.Bundle)">
 <!--   -->
 </a>
 
 
-<h4>onstatuschanged</h4>
-<pre>public&nbsp;void&nbsp;onstatuschanged(java.lang.string&nbsp;provider,
+<h4>onStatusChanged</h4>
+<pre>public&nbsp;void&nbsp;onStatusChanged(java.lang.String&nbsp;provider,
                    int&nbsp;status,
-                   android.os.bundle&nbsp;extras)</pre>
+                   android.os.Bundle&nbsp;extras)</pre>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code>onstatuschanged</code>&nbsp;in interface&nbsp;<code>android.location.locationlistener</code></dd>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>onStatusChanged</code>&nbsp;in interface&nbsp;<code>android.location.LocationListener</code></dd>
 </dl>
 
 
@@ -284,5 +284,5 @@ implements android.location.locationlistener</pre>
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

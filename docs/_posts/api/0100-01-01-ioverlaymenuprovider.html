@@ -4,59 +4,59 @@ title: IOverlayMenuProvider
 category: api
 tags: overlay
 ---
-<div class="contentcontainer">
+<div class="contentContainer">
 <div class="description">
 
 
 
 
-<pre>public interface <span class="strong">ioverlaymenuprovider</span></pre>
+<pre>public interface <span class="strong">IOverlayMenuProvider</span></pre>
 
 
 </div>
 <div class="summary">
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/ioverlaymenuprovider#isoptionsmenuenabled()">isoptionsmenuenabled</a></strong>()</code>
-<div class="block">can be used to signal to external callers that this overlay should not be used for providing
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ioverlaymenuprovider#isoptionsmenuenabled()">isOptionsMenuEnabled</a></strong>()</code>
+<div class="block">Can be used to signal to external callers that this Overlay should not be used for providing
  option menu items.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/ioverlaymenuprovider#oncreateoptionsmenu(android.view.menu, int, com.mapbox.mapboxsdk.views.mapview)">oncreateoptionsmenu</a></strong>(android.view.menu&nbsp;pmenu,
-                   int&nbsp;pmenuidoffset,
-                   <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;pmapview)</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ioverlaymenuprovider#oncreateoptionsmenu(android.view.menu, int, com.mapbox.mapboxsdk.views.mapview)">onCreateOptionsMenu</a></strong>(android.view.Menu&nbsp;pMenu,
+                   int&nbsp;pMenuIdOffset,
+                   <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/ioverlaymenuprovider#onoptionsitemselected(android.view.menuitem, int, com.mapbox.mapboxsdk.views.mapview)">onoptionsitemselected</a></strong>(android.view.menuitem&nbsp;pitem,
-                     int&nbsp;pmenuidoffset,
-                     <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;pmapview)</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ioverlaymenuprovider#onoptionsitemselected(android.view.menuitem, int, com.mapbox.mapboxsdk.views.mapview)">onOptionsItemSelected</a></strong>(android.view.MenuItem&nbsp;pItem,
+                     int&nbsp;pMenuIdOffset,
+                     <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/ioverlaymenuprovider#onprepareoptionsmenu(android.view.menu, int, com.mapbox.mapboxsdk.views.mapview)">onprepareoptionsmenu</a></strong>(android.view.menu&nbsp;pmenu,
-                    int&nbsp;pmenuidoffset,
-                    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;pmapview)</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ioverlaymenuprovider#onprepareoptionsmenu(android.view.menu, int, com.mapbox.mapboxsdk.views.mapview)">onPrepareOptionsMenu</a></strong>(android.view.Menu&nbsp;pMenu,
+                    int&nbsp;pMenuIdOffset,
+                    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/ioverlaymenuprovider#setoptionsmenuenabled(boolean)">setoptionsmenuenabled</a></strong>(boolean&nbsp;poptionsmenuenabled)</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ioverlaymenuprovider#setoptionsmenuenabled(boolean)">setOptionsMenuEnabled</a></strong>(boolean&nbsp;pOptionsMenuEnabled)</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -67,63 +67,63 @@ tags: overlay
 <div class="details">
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="oncreateoptionsmenu(android.view.menu, int, com.mapbox.mapboxsdk.views.mapview)">
+<h3>Method Detail</h3>
+<a name="onCreateOptionsMenu(android.view.Menu, int, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>oncreateoptionsmenu</h4>
-<pre>boolean&nbsp;oncreateoptionsmenu(android.view.menu&nbsp;pmenu,
-                          int&nbsp;pmenuidoffset,
-                          <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;pmapview)</pre>
+<h4>onCreateOptionsMenu</h4>
+<pre>boolean&nbsp;onCreateOptionsMenu(android.view.Menu&nbsp;pMenu,
+                          int&nbsp;pMenuIdOffset,
+                          <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</pre>
 
 
-<a name="onprepareoptionsmenu(android.view.menu, int, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onPrepareOptionsMenu(android.view.Menu, int, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>onprepareoptionsmenu</h4>
-<pre>boolean&nbsp;onprepareoptionsmenu(android.view.menu&nbsp;pmenu,
-                           int&nbsp;pmenuidoffset,
-                           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;pmapview)</pre>
+<h4>onPrepareOptionsMenu</h4>
+<pre>boolean&nbsp;onPrepareOptionsMenu(android.view.Menu&nbsp;pMenu,
+                           int&nbsp;pMenuIdOffset,
+                           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</pre>
 
 
-<a name="onoptionsitemselected(android.view.menuitem, int, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onOptionsItemSelected(android.view.MenuItem, int, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>onoptionsitemselected</h4>
-<pre>boolean&nbsp;onoptionsitemselected(android.view.menuitem&nbsp;pitem,
-                            int&nbsp;pmenuidoffset,
-                            <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;pmapview)</pre>
+<h4>onOptionsItemSelected</h4>
+<pre>boolean&nbsp;onOptionsItemSelected(android.view.MenuItem&nbsp;pItem,
+                            int&nbsp;pMenuIdOffset,
+                            <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</pre>
 
 
-<a name="isoptionsmenuenabled()">
+<a name="isOptionsMenuEnabled()">
 <!--   -->
 </a>
 
 
-<h4>isoptionsmenuenabled</h4>
-<pre>boolean&nbsp;isoptionsmenuenabled()</pre>
-<div class="block">can be used to signal to external callers that this overlay should not be used for providing
+<h4>isOptionsMenuEnabled</h4>
+<pre>boolean&nbsp;isOptionsMenuEnabled()</pre>
+<div class="block">Can be used to signal to external callers that this Overlay should not be used for providing
  option menu items.</div>
 
 
-<a name="setoptionsmenuenabled(boolean)">
+<a name="setOptionsMenuEnabled(boolean)">
 <!--   -->
 </a>
 
 
-<h4>setoptionsmenuenabled</h4>
-<pre>void&nbsp;setoptionsmenuenabled(boolean&nbsp;poptionsmenuenabled)</pre>
+<h4>setOptionsMenuEnabled</h4>
+<pre>void&nbsp;setOptionsMenuEnabled(boolean&nbsp;pOptionsMenuEnabled)</pre>
 
 
 
@@ -132,5 +132,5 @@ tags: overlay
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

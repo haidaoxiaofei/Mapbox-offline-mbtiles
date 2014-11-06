@@ -4,257 +4,257 @@ title: TileLayer
 category: api
 tags: tileprovider
 ---
-<div class="contentcontainer">
-<ul class="inheritance">
-<li>java.lang.object</li>
-<li>
-<ul class="inheritance">
-<li>com.mapbox.mapboxsdk.tileprovider.tilesource.tilelayer</li>
-</ul>
-</li>
-</ul>
+<div class="contentContainer">
+
+java.lang.Object
+
+
+com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer
+
+
+
 <div class="description">
 
 
 <dl>
-<dt>all implemented interfaces:</dt>
-<dd><a href="{{site.baseurl}}/api/mapviewconstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">mapviewconstants</a></dd>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/mapviewconstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewConstants</a></dd>
 </dl>
 <dl>
-<dt>direct known subclasses:</dt>
-<dd><a href="{{site.baseurl}}/api/websourcetilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">websourcetilelayer</a></dd>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="{{site.baseurl}}/api/websourcetilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">WebSourceTileLayer</a></dd>
 </dl>
 
 
-<pre>public class <span class="strong">tilelayer</span>
-extends java.lang.object
-implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">mapviewconstants</a></pre>
+<pre>public class <span class="strong">TileLayer</span>
+extends java.lang.Object
+implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewConstants</a></pre>
 
 
 </div>
 <div class="summary">
 
 
-<!-- =========== field summary =========== -->
+<!-- =========== FIELD SUMMARY =========== -->
 
 <a name="field_summary">
 <!--   -->
 </a>
-<h3>field summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="field summary table, listing fields, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>fields</span><span class="tabend">&nbsp;</span></caption>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">field and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mattribution">mattribution</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mattribution">mAttribution</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected <a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">boundingbox</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mboundingbox">mboundingbox</a></strong></code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mboundingbox">mBoundingBox</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mcachekey">mcachekey</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mcachekey">mCacheKey</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected <a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mcenter">mcenter</a></strong></code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mcenter">mCenter</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mdescription">mdescription</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mdescription">mDescription</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mlegend">mlegend</a></strong></code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mlegend">mLegend</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected float</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mmaximumzoomlevel">mmaximumzoomlevel</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>protected float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mmaximumzoomlevel">mMaximumZoomLevel</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected float</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mminimumzoomlevel">mminimumzoomlevel</a></strong></code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>protected float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mminimumzoomlevel">mMinimumZoomLevel</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mname">mname</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#mname">mName</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#murl">murl</a></strong></code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#murl">mUrl</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
-<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.constants.tilelayerconstants">
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants">
 <!--   -->
 </a>
-<h3>fields inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.constants.<a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">tilelayerconstants</a></h3>
-<code><a href="{{site.baseurl}}/api/tilelayerconstants#world_bounding_box">world_bounding_box</a></code>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.constants.<a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/tilelayerconstants#world_bounding_box">WORLD_BOUNDING_BOX</a></code>
 
 
-<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.views.util.constants.mapviewconstants">
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.views.util.constants.MapViewConstants">
 <!--   -->
 </a>
-<h3>fields inherited from interface&nbsp;com.mapbox.mapboxsdk.views.util.constants.<a href="{{site.baseurl}}/api/mapviewconstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">mapviewconstants</a></h3>
-<code><a href="{{site.baseurl}}/api/mapviewconstants#default_pin_anchor">default_pin_anchor</a></code>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.views.util.constants.<a href="{{site.baseurl}}/api/mapviewconstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/mapviewconstants#default_pin_anchor">DEFAULT_PIN_ANCHOR</a></code>
 
 
 
-<!-- ======== constructor summary ======== -->
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <a name="constructor_summary">
 <!--   -->
 </a>
-<h3>constructor summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="constructor summary table, listing constructors, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>constructors</span><span class="tabend">&nbsp;</span></caption>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colone" scope="col">constructor and description</th>
+<th class="colOne" scope="col">Constructor and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colone"><code><strong><a href="{{site.baseurl}}/api/tilelayer#tilelayer(java.lang.string, java.lang.string)">tilelayer</a></strong>(java.lang.string&nbsp;pid,
-         java.lang.string&nbsp;aurl)</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/tilelayer#tilelayer(java.lang.string, java.lang.string)">TileLayer</a></strong>(java.lang.String&nbsp;pId,
+         java.lang.String&nbsp;aUrl)</code>&nbsp;</td>
 </tr>
 </table>
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#detach()">detach</a></strong>()</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#detach()">detach</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getattribution()">getattribution</a></strong>()</code>
-<div class="block">get the tile source attribution</div>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getattribution()">getAttribution</a></strong>()</code>
+<div class="block">Get the tile source attribution</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">boundingbox</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getboundingbox()">getboundingbox</a></strong>()</code>
-<div class="block">get the tile source bounding box.</div>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getboundingbox()">getBoundingBox</a></strong>()</code>
+<div class="block">Get the tile source bounding box.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getcachekey()">getcachekey</a></strong>()</code>
-<div class="block">get the cache key used for the disk cache</div>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getcachekey()">getCacheKey</a></strong>()</code>
+<div class="block">Get the cache key used for the disk cache</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getcentercoordinate()">getcentercoordinate</a></strong>()</code>
-<div class="block">get the tile source center.</div>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getcentercoordinate()">getCenterCoordinate</a></strong>()</code>
+<div class="block">Get the tile source center.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>float</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getcenterzoom()">getcenterzoom</a></strong>()</code>
-<div class="block">get the tile source suggested starting zoom.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getcenterzoom()">getCenterZoom</a></strong>()</code>
+<div class="block">Get the tile source suggested starting zoom.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getdescription()">getdescription</a></strong>()</code>
-<div class="block">get the tile source description</div>
+<tr class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getdescription()">getDescription</a></strong>()</code>
+<div class="block">Get the tile source description</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>android.graphics.drawable.drawable</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/maptiledownloader" title="class in com.mapbox.mapboxsdk.tileprovider.modules">maptiledownloader</a>&nbsp;downloader,
-                   <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile,
+<tr class="rowColor">
+<td class="colFirst"><code>android.graphics.drawable.Drawable</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptiledownloader" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileDownloader</a>&nbsp;downloader,
+                   <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;aTile,
                    boolean&nbsp;hdpi)</code>
-<div class="block">get a rendered drawable from the specified tile.</div>
+<div class="block">Get a rendered Drawable from the specified Tile.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getlegend()">getlegend</a></strong>()</code>
-<div class="block">get the tile source legend</div>
+<tr class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getlegend()">getLegend</a></strong>()</code>
+<div class="block">Get the tile source legend</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>float</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getmaximumzoomlevel()">getmaximumzoomlevel</a></strong>()</code>
-<div class="block">get the maximum zoom level this tile source can provide.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getmaximumzoomlevel()">getMaximumZoomLevel</a></strong>()</code>
+<div class="block">Get the maximum zoom level this tile source can provide.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>float</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getminimumzoomlevel()">getminimumzoomlevel</a></strong>()</code>
-<div class="block">get the minimum zoom level this tile source can provide.</div>
+<tr class="altColor">
+<td class="colFirst"><code>float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getminimumzoomlevel()">getMinimumZoomLevel</a></strong>()</code>
+<div class="block">Get the minimum zoom level this tile source can provide.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getname()">getname</a></strong>()</code>
-<div class="block">get the tile source short name</div>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#getname()">getName</a></strong>()</code>
+<div class="block">Get the tile source short name</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#gettilesizepixels()">gettilesizepixels</a></strong>()</code>
-<div class="block">get the tile size in pixels this tile source provides.</div>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#gettilesizepixels()">getTileSizePixels</a></strong>()</code>
+<div class="block">Get the tile size in pixels this tile source provides.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">tilelayer</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#setattribution(java.lang.string)">setattribution</a></strong>(java.lang.string&nbsp;aattribution)</code>
-<div class="block">sets the layer's attribution string.</div>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#setattribution(java.lang.string)">setAttribution</a></strong>(java.lang.String&nbsp;aAttribution)</code>
+<div class="block">Sets the layer's attribution string.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">tilelayer</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#setdescription(java.lang.string)">setdescription</a></strong>(java.lang.string&nbsp;adescription)</code>
-<div class="block">sets the layer's description string.</div>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#setdescription(java.lang.string)">setDescription</a></strong>(java.lang.String&nbsp;aDescription)</code>
+<div class="block">Sets the layer's description string.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">tilelayer</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#setmaximumzoomlevel(float)">setmaximumzoomlevel</a></strong>(float&nbsp;amaximumzoomlevel)</code>
-<div class="block">sets the layer's minimum zoom level.</div>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#setmaximumzoomlevel(float)">setMaximumZoomLevel</a></strong>(float&nbsp;aMaximumZoomLevel)</code>
+<div class="block">Sets the layer's minimum zoom level.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">tilelayer</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#setminimumzoomlevel(float)">setminimumzoomlevel</a></strong>(float&nbsp;aminimumzoomlevel)</code>
-<div class="block">sets the layer's minimum zoom level.</div>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#setminimumzoomlevel(float)">setMinimumZoomLevel</a></strong>(float&nbsp;aMinimumZoomLevel)</code>
+<div class="block">Sets the layer's minimum zoom level.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">tilelayer</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#setname(java.lang.string)">setname</a></strong>(java.lang.string&nbsp;aname)</code>
-<div class="block">sets the layer's name.</div>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#setname(java.lang.string)">setName</a></strong>(java.lang.String&nbsp;aName)</code>
+<div class="block">Sets the layer's name.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">tilelayer</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#seturl(java.lang.string)">seturl</a></strong>(java.lang.string&nbsp;aurl)</code>
-<div class="block">sets the layer's tile url template string.</div>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayer#seturl(java.lang.string)">setURL</a></strong>(java.lang.String&nbsp;aUrl)</code>
+<div class="block">Sets the layer's tile URL template string.</div>
 </td>
 </tr>
 </table>
 
-<a name="methods_inherited_from_class_java.lang.object">
+<a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>methods inherited from class&nbsp;java.lang.object</h3>
-<code>clone, equals, finalize, getclass, hashcode, notify, notifyall, tostring, wait, wait, wait</code>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
 
 
 
@@ -264,208 +264,208 @@ implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in c
 <div class="details">
 
 
-<!-- ============ field detail =========== -->
+<!-- ============ FIELD DETAIL =========== -->
 
 <a name="field_detail">
 <!--   -->
 </a>
-<h3>field detail</h3>
-<a name="murl">
+<h3>Field Detail</h3>
+<a name="mUrl">
 <!--   -->
 </a>
 
 
-<h4>murl</h4>
-<pre>protected&nbsp;java.lang.string murl</pre>
+<h4>mUrl</h4>
+<pre>protected&nbsp;java.lang.String mUrl</pre>
 
 
-<a name="mcachekey">
+<a name="mCacheKey">
 <!--   -->
 </a>
 
 
-<h4>mcachekey</h4>
-<pre>protected&nbsp;java.lang.string mcachekey</pre>
+<h4>mCacheKey</h4>
+<pre>protected&nbsp;java.lang.String mCacheKey</pre>
 
 
-<a name="mname">
+<a name="mName">
 <!--   -->
 </a>
 
 
-<h4>mname</h4>
-<pre>protected&nbsp;java.lang.string mname</pre>
+<h4>mName</h4>
+<pre>protected&nbsp;java.lang.String mName</pre>
 
 
-<a name="mdescription">
+<a name="mDescription">
 <!--   -->
 </a>
 
 
-<h4>mdescription</h4>
-<pre>protected&nbsp;java.lang.string mdescription</pre>
+<h4>mDescription</h4>
+<pre>protected&nbsp;java.lang.String mDescription</pre>
 
 
-<a name="mattribution">
+<a name="mAttribution">
 <!--   -->
 </a>
 
 
-<h4>mattribution</h4>
-<pre>protected&nbsp;java.lang.string mattribution</pre>
+<h4>mAttribution</h4>
+<pre>protected&nbsp;java.lang.String mAttribution</pre>
 
 
-<a name="mlegend">
+<a name="mLegend">
 <!--   -->
 </a>
 
 
-<h4>mlegend</h4>
-<pre>protected&nbsp;java.lang.string mlegend</pre>
+<h4>mLegend</h4>
+<pre>protected&nbsp;java.lang.String mLegend</pre>
 
 
-<a name="mminimumzoomlevel">
+<a name="mMinimumZoomLevel">
 <!--   -->
 </a>
 
 
-<h4>mminimumzoomlevel</h4>
-<pre>protected&nbsp;float mminimumzoomlevel</pre>
+<h4>mMinimumZoomLevel</h4>
+<pre>protected&nbsp;float mMinimumZoomLevel</pre>
 
 
-<a name="mmaximumzoomlevel">
+<a name="mMaximumZoomLevel">
 <!--   -->
 </a>
 
 
-<h4>mmaximumzoomlevel</h4>
-<pre>protected&nbsp;float mmaximumzoomlevel</pre>
+<h4>mMaximumZoomLevel</h4>
+<pre>protected&nbsp;float mMaximumZoomLevel</pre>
 
 
-<a name="mboundingbox">
+<a name="mBoundingBox">
 <!--   -->
 </a>
 
 
-<h4>mboundingbox</h4>
-<pre>protected&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">boundingbox</a> mboundingbox</pre>
+<h4>mBoundingBox</h4>
+<pre>protected&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a> mBoundingBox</pre>
 
 
-<a name="mcenter">
+<a name="mCenter">
 <!--   -->
 </a>
 
 
-<h4>mcenter</h4>
-<pre>protected&nbsp;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a> mcenter</pre>
+<h4>mCenter</h4>
+<pre>protected&nbsp;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a> mCenter</pre>
 
 
 
 
-<!-- ========= constructor detail ======== -->
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <a name="constructor_detail">
 <!--   -->
 </a>
-<h3>constructor detail</h3>
-<a name="tilelayer(java.lang.string, java.lang.string)">
+<h3>Constructor Detail</h3>
+<a name="TileLayer(java.lang.String, java.lang.String)">
 <!--   -->
 </a>
 
 
-<h4>tilelayer</h4>
-<pre>public&nbsp;tilelayer(java.lang.string&nbsp;pid,
-         java.lang.string&nbsp;aurl)</pre>
+<h4>TileLayer</h4>
+<pre>public&nbsp;TileLayer(java.lang.String&nbsp;pId,
+         java.lang.String&nbsp;aUrl)</pre>
 
 
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="seturl(java.lang.string)">
+<h3>Method Detail</h3>
+<a name="setURL(java.lang.String)">
 <!--   -->
 </a>
 
 
-<h4>seturl</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">tilelayer</a>&nbsp;seturl(java.lang.string&nbsp;aurl)</pre>
-<div class="block">sets the layer's tile url template string.</div>
+<h4>setURL</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a>&nbsp;setURL(java.lang.String&nbsp;aUrl)</pre>
+<div class="block">Sets the layer's tile URL template string.</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the tile layer</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the tile layer</dd></dl>
 
 
-<a name="setattribution(java.lang.string)">
+<a name="setAttribution(java.lang.String)">
 <!--   -->
 </a>
 
 
-<h4>setattribution</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">tilelayer</a>&nbsp;setattribution(java.lang.string&nbsp;aattribution)</pre>
-<div class="block">sets the layer's attribution string.</div>
+<h4>setAttribution</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a>&nbsp;setAttribution(java.lang.String&nbsp;aAttribution)</pre>
+<div class="block">Sets the layer's attribution string.</div>
 
 
-<a name="setdescription(java.lang.string)">
+<a name="setDescription(java.lang.String)">
 <!--   -->
 </a>
 
 
-<h4>setdescription</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">tilelayer</a>&nbsp;setdescription(java.lang.string&nbsp;adescription)</pre>
-<div class="block">sets the layer's description string.</div>
+<h4>setDescription</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a>&nbsp;setDescription(java.lang.String&nbsp;aDescription)</pre>
+<div class="block">Sets the layer's description string.</div>
 
 
-<a name="setname(java.lang.string)">
+<a name="setName(java.lang.String)">
 <!--   -->
 </a>
 
 
-<h4>setname</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">tilelayer</a>&nbsp;setname(java.lang.string&nbsp;aname)</pre>
-<div class="block">sets the layer's name.</div>
+<h4>setName</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a>&nbsp;setName(java.lang.String&nbsp;aName)</pre>
+<div class="block">Sets the layer's name.</div>
 
 
-<a name="setminimumzoomlevel(float)">
+<a name="setMinimumZoomLevel(float)">
 <!--   -->
 </a>
 
 
-<h4>setminimumzoomlevel</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">tilelayer</a>&nbsp;setminimumzoomlevel(float&nbsp;aminimumzoomlevel)</pre>
-<div class="block">sets the layer's minimum zoom level.</div>
+<h4>setMinimumZoomLevel</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a>&nbsp;setMinimumZoomLevel(float&nbsp;aMinimumZoomLevel)</pre>
+<div class="block">Sets the layer's minimum zoom level.</div>
 
 
-<a name="setmaximumzoomlevel(float)">
+<a name="setMaximumZoomLevel(float)">
 <!--   -->
 </a>
 
 
-<h4>setmaximumzoomlevel</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">tilelayer</a>&nbsp;setmaximumzoomlevel(float&nbsp;amaximumzoomlevel)</pre>
-<div class="block">sets the layer's minimum zoom level.</div>
+<h4>setMaximumZoomLevel</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a>&nbsp;setMaximumZoomLevel(float&nbsp;aMaximumZoomLevel)</pre>
+<div class="block">Sets the layer's minimum zoom level.</div>
 
 
-<a name="getdrawablefromtile(com.mapbox.mapboxsdk.tileprovider.modules.maptiledownloader, com.mapbox.mapboxsdk.tileprovider.maptile, boolean)">
+<a name="getDrawableFromTile(com.mapbox.mapboxsdk.tileprovider.modules.MapTileDownloader, com.mapbox.mapboxsdk.tileprovider.MapTile, boolean)">
 <!--   -->
 </a>
 
 
-<h4>getdrawablefromtile</h4>
-<pre>public&nbsp;android.graphics.drawable.drawable&nbsp;getdrawablefromtile(<a href="{{site.baseurl}}/api/maptiledownloader" title="class in com.mapbox.mapboxsdk.tileprovider.modules">maptiledownloader</a>&nbsp;downloader,
-                                                     <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;atile,
+<h4>getDrawableFromTile</h4>
+<pre>public&nbsp;android.graphics.drawable.Drawable&nbsp;getDrawableFromTile(<a href="{{site.baseurl}}/api/maptiledownloader" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileDownloader</a>&nbsp;downloader,
+                                                     <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;aTile,
                                                      boolean&nbsp;hdpi)</pre>
-<div class="block"><strong>description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getdrawablefromtile(com.mapbox.mapboxsdk.tileprovider.modules.maptiledownloader, com.mapbox.mapboxsdk.tileprovider.maptile, boolean)">itilelayer</a></code></strong></div>
-<div class="block">get a rendered drawable from the specified tile.</div>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getdrawablefromtile(com.mapbox.mapboxsdk.tileprovider.modules.maptiledownloader, com.mapbox.mapboxsdk.tileprovider.maptile, boolean)">ITileLayer</a></code></strong></div>
+<div class="block">Get a rendered Drawable from the specified Tile.</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">parameters:</span></dt><dd><code>downloader</code> - reference to the downloader asking for the tile</dd><dd><code>atile</code> - the tile requested</dd><dd><code>hdpi</code> - is hdpi requested?</dd>
-<dt><span class="strong">returns:</span></dt><dd>the rendered drawable</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>downloader</code> - reference to the downloader asking for the tile</dd><dd><code>aTile</code> - the tile requested</dd><dd><code>hdpi</code> - is hdpi requested?</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the rendered Drawable</dd></dl>
 
 
 <a name="detach()">
@@ -476,174 +476,174 @@ implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in c
 <h4>detach</h4>
 <pre>public&nbsp;void&nbsp;detach()</pre>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
 </dl>
 
 
-<a name="getminimumzoomlevel()">
+<a name="getMinimumZoomLevel()">
 <!--   -->
 </a>
 
 
-<h4>getminimumzoomlevel</h4>
-<pre>public&nbsp;float&nbsp;getminimumzoomlevel()</pre>
-<div class="block"><strong>description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getminimumzoomlevel()">itilelayer</a></code></strong></div>
-<div class="block">get the minimum zoom level this tile source can provide.</div>
+<h4>getMinimumZoomLevel</h4>
+<pre>public&nbsp;float&nbsp;getMinimumZoomLevel()</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getminimumzoomlevel()">ITileLayer</a></code></strong></div>
+<div class="block">Get the minimum zoom level this tile source can provide.</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the minimum zoom level</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the minimum zoom level</dd></dl>
 
 
-<a name="getmaximumzoomlevel()">
+<a name="getMaximumZoomLevel()">
 <!--   -->
 </a>
 
 
-<h4>getmaximumzoomlevel</h4>
-<pre>public&nbsp;float&nbsp;getmaximumzoomlevel()</pre>
-<div class="block"><strong>description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getmaximumzoomlevel()">itilelayer</a></code></strong></div>
-<div class="block">get the maximum zoom level this tile source can provide.</div>
+<h4>getMaximumZoomLevel</h4>
+<pre>public&nbsp;float&nbsp;getMaximumZoomLevel()</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getmaximumzoomlevel()">ITileLayer</a></code></strong></div>
+<div class="block">Get the maximum zoom level this tile source can provide.</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the maximum zoom level</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the maximum zoom level</dd></dl>
 
 
-<a name="gettilesizepixels()">
+<a name="getTileSizePixels()">
 <!--   -->
 </a>
 
 
-<h4>gettilesizepixels</h4>
-<pre>public&nbsp;int&nbsp;gettilesizepixels()</pre>
-<div class="block"><strong>description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#gettilesizepixels()">itilelayer</a></code></strong></div>
-<div class="block">get the tile size in pixels this tile source provides.</div>
+<h4>getTileSizePixels</h4>
+<pre>public&nbsp;int&nbsp;getTileSizePixels()</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#gettilesizepixels()">ITileLayer</a></code></strong></div>
+<div class="block">Get the tile size in pixels this tile source provides.</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the tile size in pixels</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the tile size in pixels</dd></dl>
 
 
-<a name="getcachekey()">
+<a name="getCacheKey()">
 <!--   -->
 </a>
 
 
-<h4>getcachekey</h4>
-<pre>public&nbsp;java.lang.string&nbsp;getcachekey()</pre>
-<div class="block"><strong>description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getcachekey()">itilelayer</a></code></strong></div>
-<div class="block">get the cache key used for the disk cache</div>
+<h4>getCacheKey</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getCacheKey()</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getcachekey()">ITileLayer</a></code></strong></div>
+<div class="block">Get the cache key used for the disk cache</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the cache key</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the cache key</dd></dl>
 
 
-<a name="getboundingbox()">
+<a name="getBoundingBox()">
 <!--   -->
 </a>
 
 
-<h4>getboundingbox</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">boundingbox</a>&nbsp;getboundingbox()</pre>
-<div class="block"><strong>description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getboundingbox()">itilelayer</a></code></strong></div>
-<div class="block">get the tile source bounding box.</div>
+<h4>getBoundingBox</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getBoundingBox()</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getboundingbox()">ITileLayer</a></code></strong></div>
+<div class="block">Get the tile source bounding box.</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the tile source bounding box</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the tile source bounding box</dd></dl>
 
 
-<a name="getcentercoordinate()">
+<a name="getCenterCoordinate()">
 <!--   -->
 </a>
 
 
-<h4>getcentercoordinate</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">latlng</a>&nbsp;getcentercoordinate()</pre>
-<div class="block"><strong>description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getcentercoordinate()">itilelayer</a></code></strong></div>
-<div class="block">get the tile source center.</div>
+<h4>getCenterCoordinate</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;getCenterCoordinate()</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getcentercoordinate()">ITileLayer</a></code></strong></div>
+<div class="block">Get the tile source center.</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the tile source center</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the tile source center</dd></dl>
 
 
-<a name="getcenterzoom()">
+<a name="getCenterZoom()">
 <!--   -->
 </a>
 
 
-<h4>getcenterzoom</h4>
-<pre>public&nbsp;float&nbsp;getcenterzoom()</pre>
-<div class="block"><strong>description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getcenterzoom()">itilelayer</a></code></strong></div>
-<div class="block">get the tile source suggested starting zoom.</div>
+<h4>getCenterZoom</h4>
+<pre>public&nbsp;float&nbsp;getCenterZoom()</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getcenterzoom()">ITileLayer</a></code></strong></div>
+<div class="block">Get the tile source suggested starting zoom.</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the tile suggested starting zoom</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the tile suggested starting zoom</dd></dl>
 
 
-<a name="getname()">
+<a name="getName()">
 <!--   -->
 </a>
 
 
-<h4>getname</h4>
-<pre>public&nbsp;java.lang.string&nbsp;getname()</pre>
-<div class="block"><strong>description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getname()">itilelayer</a></code></strong></div>
-<div class="block">get the tile source short name</div>
+<h4>getName</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getName()</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getname()">ITileLayer</a></code></strong></div>
+<div class="block">Get the tile source short name</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the short name</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the short name</dd></dl>
 
 
-<a name="getdescription()">
+<a name="getDescription()">
 <!--   -->
 </a>
 
 
-<h4>getdescription</h4>
-<pre>public&nbsp;java.lang.string&nbsp;getdescription()</pre>
-<div class="block"><strong>description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getdescription()">itilelayer</a></code></strong></div>
-<div class="block">get the tile source description</div>
+<h4>getDescription</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getDescription()</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getdescription()">ITileLayer</a></code></strong></div>
+<div class="block">Get the tile source description</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the short description</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the short description</dd></dl>
 
 
-<a name="getattribution()">
+<a name="getAttribution()">
 <!--   -->
 </a>
 
 
-<h4>getattribution</h4>
-<pre>public&nbsp;java.lang.string&nbsp;getattribution()</pre>
-<div class="block"><strong>description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getattribution()">itilelayer</a></code></strong></div>
-<div class="block">get the tile source attribution</div>
+<h4>getAttribution</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getAttribution()</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getattribution()">ITileLayer</a></code></strong></div>
+<div class="block">Get the tile source attribution</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the short attribution</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the short attribution</dd></dl>
 
 
-<a name="getlegend()">
+<a name="getLegend()">
 <!--   -->
 </a>
 
 
-<h4>getlegend</h4>
-<pre>public&nbsp;java.lang.string&nbsp;getlegend()</pre>
-<div class="block"><strong>description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getlegend()">itilelayer</a></code></strong></div>
-<div class="block">get the tile source legend</div>
+<h4>getLegend</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getLegend()</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getlegend()">ITileLayer</a></code></strong></div>
+<div class="block">Get the tile source legend</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a></code></dd>
-<dt><span class="strong">returns:</span></dt><dd>the legend</dd></dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the legend</dd></dl>
 
 
 
@@ -652,5 +652,5 @@ implements <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in c
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

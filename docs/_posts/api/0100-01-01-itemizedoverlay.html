@@ -4,248 +4,248 @@ title: ItemizedOverlay
 category: api
 tags: overlay
 ---
-<div class="contentcontainer">
-<ul class="inheritance">
-<li>java.lang.object</li>
-<li>
-<ul class="inheritance">
-<li><a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.overlay</a></li>
-<li>
-<ul class="inheritance">
-<li><a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.safedrawoverlay</a></li>
-<li>
-<ul class="inheritance">
-<li>com.mapbox.mapboxsdk.overlay.itemizedoverlay</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<div class="contentContainer">
+
+java.lang.Object
+
+
+<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.Overlay</a>
+
+
+<a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.SafeDrawOverlay</a>
+
+
+com.mapbox.mapboxsdk.overlay.ItemizedOverlay
+
+
+
+
+
+
+
 <div class="description">
 
 
 <dl>
-<dt>all implemented interfaces:</dt>
-<dd><a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">overlay.snappable</a></dd>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></dd>
 </dl>
 <dl>
-<dt>direct known subclasses:</dt>
-<dd><a href="{{site.baseurl}}/api/itemizediconoverlay" title="class in com.mapbox.mapboxsdk.overlay">itemizediconoverlay</a></dd>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="{{site.baseurl}}/api/itemizediconoverlay" title="class in com.mapbox.mapboxsdk.overlay">ItemizedIconOverlay</a></dd>
 </dl>
 
 
-<pre>public abstract class <span class="strong">itemizedoverlay</span>
-extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">safedrawoverlay</a>
-implements <a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">overlay.snappable</a></pre>
-<div class="block">draws a list of <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay"><code>marker</code></a> as markers to a map. the item with the lowest index is drawn
- as last and therefore the 'topmost' marker. it also gets checked for ontap first. this class is
- generic, because you then you get your custom item-class passed back in ontap().</div>
+<pre>public abstract class <span class="strong">ItemizedOverlay</span>
+extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a>
+implements <a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></pre>
+<div class="block">Draws a list of <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay"><code>Marker</code></a> as markers to a map. The item with the lowest index is drawn
+ as last and therefore the 'topmost' marker. It also gets checked for onTap first. This class is
+ generic, because you then you get your custom item-class passed back in onTap().</div>
 
 
 </div>
 <div class="summary">
 
 
-<!-- ======== nested class summary ======== -->
+<!-- ======== NESTED CLASS SUMMARY ======== -->
 
 <a name="nested_class_summary">
 <!--   -->
 </a>
-<h3>nested class summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="nested class summary table, listing nested classes, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>nested classes</span><span class="tabend">&nbsp;</span></caption>
+<h3>Nested Class Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Nested Class Summary table, listing nested classes, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">class and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Class and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>static interface&nbsp;</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay.onfocuschangelistener" title="interface in com.mapbox.mapboxsdk.overlay">itemizedoverlay.onfocuschangelistener</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>static interface&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay.onfocuschangelistener" title="interface in com.mapbox.mapboxsdk.overlay">ItemizedOverlay.OnFocusChangeListener</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
-<a name="nested_classes_inherited_from_class_com.mapbox.mapboxsdk.overlay.overlay">
+<a name="nested_classes_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
 <!--   -->
 </a>
-<h3>nested classes/interfaces inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">overlay</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">overlay.snappable</a></code>
+<h3>Nested classes/interfaces inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></code>
 
 
 
-<!-- =========== field summary =========== -->
+<!-- =========== FIELD SUMMARY =========== -->
 
 <a name="field_summary">
 <!--   -->
 </a>
-<h3>field summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="field summary table, listing fields, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>fields</span><span class="tabend">&nbsp;</span></caption>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">field and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#mdrawfocuseditem">mdrawfocuseditem</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>protected boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#mdrawfocuseditem">mDrawFocusedItem</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
-<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.overlay.overlay">
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
 <!--   -->
 </a>
-<h3>fields inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">overlay</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay#mscale">mscale</a></code>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/overlay#mscale">mScale</a></code>
 
 
 
-<!-- ======== constructor summary ======== -->
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <a name="constructor_summary">
 <!--   -->
 </a>
-<h3>constructor summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="constructor summary table, listing constructors, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>constructors</span><span class="tabend">&nbsp;</span></caption>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colone" scope="col">constructor and description</th>
+<th class="colOne" scope="col">Constructor and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colone"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#itemizedoverlay()">itemizedoverlay</a></strong>()</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#itemizedoverlay()">ItemizedOverlay</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&nbsp;item)</code>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item)</code>
 <div class="block">an item want's to be blured, if it is the focused one, blur it</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected abstract <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#createitem(int)">createitem</a></strong>(int&nbsp;i)</code>
-<div class="block">method by which subclasses create the actual items.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>protected abstract <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#createitem(int)">createItem</a></strong>(int&nbsp;i)</code>
+<div class="block">Method by which subclasses create the actual Items.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">isafecanvas</a>&nbsp;canvas,
-        <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview,
+<tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas,
+        <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
         boolean&nbsp;shadow)</code>
-<div class="block">draw a marker on each of our items.</div>
+<div class="block">Draw a marker on each of our items.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#getfocus()">getfocus</a></strong>()</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#getfocus()">getFocus</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#getitem(int)">getitem</a></strong>(int&nbsp;position)</code>
-<div class="block">returns the item at the given index.</div>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#getitem(int)">getItem</a></strong>(int&nbsp;position)</code>
+<div class="block">Returns the Item at the given index.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&nbsp;pmarker,
-             <a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">projection</a>&nbsp;pprojection,
-             float&nbsp;px,
-             float&nbsp;py)</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>protected boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;pMarker,
+             <a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;pProjection,
+             float&nbsp;pX,
+             float&nbsp;pY)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">isafecanvas</a>&nbsp;canvas,
-          <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&nbsp;item,
-          <a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">projection</a>&nbsp;projection,
-          float&nbsp;amaporientation,
-          android.graphics.rectf&nbsp;mapbounds,
-          float&nbsp;mapscale)</code>
-<div class="block">draws an item located at the provided screen coordinates to the canvas.</div>
+<tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas,
+          <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item,
+          <a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+          float&nbsp;aMapOrientation,
+          android.graphics.RectF&nbsp;mapBounds,
+          float&nbsp;mapScale)</code>
+<div class="block">Draws an item located at the provided screen coordinates to the canvas.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#onsingletapconfirmed(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onsingletapconfirmed</a></strong>(android.view.motionevent&nbsp;e,
-                    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block">by default does nothing (<code>return false</code>).</div>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#onsingletapconfirmed(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onSingleTapConfirmed</a></strong>(android.view.MotionEvent&nbsp;e,
+                    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#ontap(int)">ontap</a></strong>(int&nbsp;index)</code>
-<div class="block">override this method to handle a "tap" on an item.</div>
+<tr class="altColor">
+<td class="colFirst"><code>protected boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#ontap(int)">onTap</a></strong>(int&nbsp;index)</code>
+<div class="block">Override this method to handle a "tap" on an item.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#populate()">populate</a></strong>()</code>
-<div class="block">utility method to perform all processing on a new itemizedoverlay.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#populate()">populate</a></strong>()</code>
+<div class="block">Utility method to perform all processing on a new ItemizedOverlay.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#setdrawfocuseditem(boolean)">setdrawfocuseditem</a></strong>(boolean&nbsp;drawfocuseditem)</code>
-<div class="block">set whether or not to draw the focused item.</div>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#setdrawfocuseditem(boolean)">setDrawFocusedItem</a></strong>(boolean&nbsp;drawFocusedItem)</code>
+<div class="block">Set whether or not to draw the focused item.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&nbsp;item)</code>
-<div class="block">if the given item is found in the overlay, force it to be the current focus-bearer.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item)</code>
+<div class="block">If the given Item is found in the overlay, force it to be the current focus-bearer.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay.onfocuschangelistener" title="interface in com.mapbox.mapboxsdk.overlay">itemizedoverlay.onfocuschangelistener</a>&nbsp;l)</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay.onfocuschangelistener" title="interface in com.mapbox.mapboxsdk.overlay">ItemizedOverlay.OnFocusChangeListener</a>&nbsp;l)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>abstract int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#size()">size</a></strong>()</code>
-<div class="block">the number of items in this overlay.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay#size()">size</a></strong>()</code>
+<div class="block">The number of items in this overlay.</div>
 </td>
 </tr>
 </table>
 
-<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.safedrawoverlay">
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.SafeDrawOverlay">
 <!--   -->
 </a>
-<h3>methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">safedrawoverlay</a></h3>
-<code><a href="{{site.baseurl}}/api/safedrawoverlay#setusesafecanvas(boolean)">setusesafecanvas</a></code>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a></h3>
+<code><a href="{{site.baseurl}}/api/safedrawoverlay#setusesafecanvas(boolean)">setUseSafeCanvas</a></code>
 
 
-<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.overlay">
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
 <!--   -->
 </a>
-<h3>methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">overlay</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay#setenabled(boolean)">setenabled</a></code>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/overlay#setenabled(boolean)">setEnabled</a></code>
 
 
-<a name="methods_inherited_from_class_java.lang.object">
+<a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>methods inherited from class&nbsp;java.lang.object</h3>
-<code>clone, equals, finalize, getclass, hashcode, notify, notifyall, tostring, wait, wait, wait</code>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
 
 
-<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.overlay.snappable">
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay.Snappable">
 <!--   -->
 </a>
-<h3>methods inherited from interface&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">overlay.snappable</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay.snappable#onsnaptoitem(int, int, android.graphics.point, com.mapbox.mapboxsdk.views.mapview)">onsnaptoitem</a></code>
+<h3>Methods inherited from interface&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></h3>
+<code><a href="{{site.baseurl}}/api/overlay.snappable#onsnaptoitem(int, int, android.graphics.point, com.mapbox.mapboxsdk.views.mapview)">onSnapToItem</a></code>
 
 
 
@@ -255,54 +255,54 @@ implements <a href="{{site.baseurl}}/api/overlay.snappable" title="interface in 
 <div class="details">
 
 
-<!-- ============ field detail =========== -->
+<!-- ============ FIELD DETAIL =========== -->
 
 <a name="field_detail">
 <!--   -->
 </a>
-<h3>field detail</h3>
-<a name="mdrawfocuseditem">
+<h3>Field Detail</h3>
+<a name="mDrawFocusedItem">
 <!--   -->
 </a>
 
 
-<h4>mdrawfocuseditem</h4>
-<pre>protected&nbsp;boolean mdrawfocuseditem</pre>
+<h4>mDrawFocusedItem</h4>
+<pre>protected&nbsp;boolean mDrawFocusedItem</pre>
 
 
 
 
-<!-- ========= constructor detail ======== -->
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <a name="constructor_detail">
 <!--   -->
 </a>
-<h3>constructor detail</h3>
-<a name="itemizedoverlay()">
+<h3>Constructor Detail</h3>
+<a name="ItemizedOverlay()">
 <!--   -->
 </a>
 
 
-<h4>itemizedoverlay</h4>
-<pre>public&nbsp;itemizedoverlay()</pre>
+<h4>ItemizedOverlay</h4>
+<pre>public&nbsp;ItemizedOverlay()</pre>
 
 
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="createitem(int)">
+<h3>Method Detail</h3>
+<a name="createItem(int)">
 <!--   -->
 </a>
 
 
-<h4>createitem</h4>
-<pre>protected abstract&nbsp;<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&nbsp;createitem(int&nbsp;i)</pre>
-<div class="block">method by which subclasses create the actual items. this will only be called from populate()
+<h4>createItem</h4>
+<pre>protected abstract&nbsp;<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;createItem(int&nbsp;i)</pre>
+<div class="block">Method by which subclasses create the actual Items. This will only be called from populate()
  we'll cache them for later use.</div>
 
 
@@ -313,39 +313,39 @@ implements <a href="{{site.baseurl}}/api/overlay.snappable" title="interface in 
 
 <h4>size</h4>
 <pre>public abstract&nbsp;int&nbsp;size()</pre>
-<div class="block">the number of items in this overlay.</div>
+<div class="block">The number of items in this overlay.</div>
 
 
-<a name="drawsafe(com.mapbox.mapboxsdk.views.safecanvas.isafecanvas, com.mapbox.mapboxsdk.views.mapview, boolean)">
+<a name="drawSafe(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas, com.mapbox.mapboxsdk.views.MapView, boolean)">
 <!--   -->
 </a>
 
 
-<h4>drawsafe</h4>
-<pre>protected&nbsp;void&nbsp;drawsafe(<a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">isafecanvas</a>&nbsp;canvas,
-            <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview,
+<h4>drawSafe</h4>
+<pre>protected&nbsp;void&nbsp;drawSafe(<a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas,
+            <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
             boolean&nbsp;shadow)</pre>
-<div class="block">draw a marker on each of our items. populate() must have been called first.
+<div class="block">Draw a marker on each of our items. populate() must have been called first.
  
- the marker will be drawn twice for each item in the overlay--once in the shadow phase,
+ The marker will be drawn twice for each Item in the Overlay--once in the shadow phase,
  skewed
- and darkened, then again in the non-shadow phase. the bottom-center of the marker will be
- aligned with the geographical coordinates of the item.
+ and darkened, then again in the non-shadow phase. The bottom-center of the marker will be
+ aligned with the geographical coordinates of the Item.
  
- the order of drawing may be changed by overriding the getindextodraw(int) method. an item
+ The order of drawing may be changed by overriding the getIndexToDraw(int) method. An item
  may
- provide an alternate marker via its marker.getmarker(int) method. if that method returns
+ provide an alternate marker via its Marker.getMarker(int) method. If that method returns
  null, the default marker is used.
  
- the focused item is always drawn last, which puts it visually on top of the other
+ The focused item is always drawn last, which puts it visually on top of the other
  items.</div>
 <dl>
-<dt><strong>specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">safedrawoverlay</a></code></dd>
-<dt><span class="strong">parameters:</span></dt><dd><code>canvas</code> - the canvas upon which to draw. note that this may already have a
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a></code></dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>canvas</code> - the Canvas upon which to draw. Note that this may already have a
  transformation
- applied, so be sure to leave it the way you found it</dd><dd><code>mapview</code> - the mapview that requested the draw. use mapview.getprojection() to convert
- between on-screen pixels and latitude/longitude pairs</dd><dd><code>shadow</code> - if true, draw the shadow layer. if false, draw the overlay contents.</dd></dl>
+ applied, so be sure to leave it the way you found it</dd><dd><code>mapView</code> - the MapView that requested the draw. Use MapView.getProjection() to convert
+ between on-screen pixels and latitude/longitude pairs</dd><dd><code>shadow</code> - if true, draw the shadow layer. If false, draw the overlay contents.</dd></dl>
 
 
 <a name="populate()">
@@ -355,137 +355,137 @@ implements <a href="{{site.baseurl}}/api/overlay.snappable" title="interface in 
 
 <h4>populate</h4>
 <pre>protected&nbsp;void&nbsp;populate()</pre>
-<div class="block">utility method to perform all processing on a new itemizedoverlay. subclasses provide items
- through the createitem(int) method. the subclass should call this as soon as it has data,
+<div class="block">Utility method to perform all processing on a new ItemizedOverlay. Subclasses provide Items
+ through the createItem(int) method. The subclass should call this as soon as it has data,
  before anything else gets called.</div>
 
 
-<a name="getitem(int)">
+<a name="getItem(int)">
 <!--   -->
 </a>
 
 
-<h4>getitem</h4>
-<pre>public final&nbsp;<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&nbsp;getitem(int&nbsp;position)</pre>
-<div class="block">returns the item at the given index.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>position</code> - the position of the item to return</dd>
-<dt><span class="strong">returns:</span></dt><dd>the item of the given index.</dd></dl>
+<h4>getItem</h4>
+<pre>public final&nbsp;<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;getItem(int&nbsp;position)</pre>
+<div class="block">Returns the Item at the given index.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>position</code> - the position of the item to return</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the Item of the given index.</dd></dl>
 
 
-<a name="ondrawitem(com.mapbox.mapboxsdk.views.safecanvas.isafecanvas, com.mapbox.mapboxsdk.overlay.marker, com.mapbox.mapboxsdk.views.util.projection, float, android.graphics.rectf, float)">
+<a name="onDrawItem(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas, com.mapbox.mapboxsdk.overlay.Marker, com.mapbox.mapboxsdk.views.util.Projection, float, android.graphics.RectF, float)">
 <!--   -->
 </a>
 
 
-<h4>ondrawitem</h4>
-<pre>protected&nbsp;void&nbsp;ondrawitem(<a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">isafecanvas</a>&nbsp;canvas,
-              <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&nbsp;item,
-              <a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">projection</a>&nbsp;projection,
-              float&nbsp;amaporientation,
-              android.graphics.rectf&nbsp;mapbounds,
-              float&nbsp;mapscale)</pre>
-<div class="block">draws an item located at the provided screen coordinates to the canvas.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>canvas</code> - what the item is drawn upon</dd><dd><code>item</code> - the item to be drawn</dd></dl>
+<h4>onDrawItem</h4>
+<pre>protected&nbsp;void&nbsp;onDrawItem(<a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas,
+              <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item,
+              <a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
+              float&nbsp;aMapOrientation,
+              android.graphics.RectF&nbsp;mapBounds,
+              float&nbsp;mapScale)</pre>
+<div class="block">Draws an item located at the provided screen coordinates to the canvas.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>canvas</code> - what the item is drawn upon</dd><dd><code>item</code> - the item to be drawn</dd></dl>
 
 
-<a name="markerhittest(com.mapbox.mapboxsdk.overlay.marker, com.mapbox.mapboxsdk.views.util.projection, float, float)">
+<a name="markerHitTest(com.mapbox.mapboxsdk.overlay.Marker, com.mapbox.mapboxsdk.views.util.Projection, float, float)">
 <!--   -->
 </a>
 
 
-<h4>markerhittest</h4>
-<pre>protected&nbsp;boolean&nbsp;markerhittest(<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&nbsp;pmarker,
-                    <a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">projection</a>&nbsp;pprojection,
-                    float&nbsp;px,
-                    float&nbsp;py)</pre>
+<h4>markerHitTest</h4>
+<pre>protected&nbsp;boolean&nbsp;markerHitTest(<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;pMarker,
+                    <a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;pProjection,
+                    float&nbsp;pX,
+                    float&nbsp;pY)</pre>
 
 
-<a name="onsingletapconfirmed(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onSingleTapConfirmed(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>onsingletapconfirmed</h4>
-<pre>public&nbsp;boolean&nbsp;onsingletapconfirmed(android.view.motionevent&nbsp;e,
-                           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block"><strong>description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/overlay#onsingletapconfirmed(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">overlay</a></code></strong></div>
-<div class="block">by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onSingleTapConfirmed</h4>
+<pre>public&nbsp;boolean&nbsp;onSingleTapConfirmed(android.view.MotionEvent&nbsp;e,
+                           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/overlay#onsingletapconfirmed(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">Overlay</a></code></strong></div>
+<div class="block">By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 <dl>
-<dt><strong>overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">overlay</a></code></dd>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></code></dd>
 </dl>
 
 
-<a name="ontap(int)">
+<a name="onTap(int)">
 <!--   -->
 </a>
 
 
-<h4>ontap</h4>
-<pre>protected&nbsp;boolean&nbsp;ontap(int&nbsp;index)</pre>
-<div class="block">override this method to handle a "tap" on an item. this could be from a touchscreen tap on
+<h4>onTap</h4>
+<pre>protected&nbsp;boolean&nbsp;onTap(int&nbsp;index)</pre>
+<div class="block">Override this method to handle a "tap" on an item. This could be from a touchscreen tap on
  an
- onscreen item, or from a trackball click on a centered, selected item. by default, does
+ onscreen Item, or from a trackball click on a centered, selected Item. By default, does
  nothing and returns false.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>true if you handled the tap, false if you want the event that generated it to pass to
+<dl><dt><span class="strong">Returns:</span></dt><dd>true if you handled the tap, false if you want the event that generated it to pass to
  other overlays.</dd></dl>
 
 
-<a name="setdrawfocuseditem(boolean)">
+<a name="setDrawFocusedItem(boolean)">
 <!--   -->
 </a>
 
 
-<h4>setdrawfocuseditem</h4>
-<pre>public&nbsp;void&nbsp;setdrawfocuseditem(boolean&nbsp;drawfocuseditem)</pre>
-<div class="block">set whether or not to draw the focused item. the default is to draw it, but some clients may
+<h4>setDrawFocusedItem</h4>
+<pre>public&nbsp;void&nbsp;setDrawFocusedItem(boolean&nbsp;drawFocusedItem)</pre>
+<div class="block">Set whether or not to draw the focused item. The default is to draw it, but some clients may
  prefer to draw the focused item themselves.</div>
 
 
-<a name="setfocus(com.mapbox.mapboxsdk.overlay.marker)">
+<a name="setFocus(com.mapbox.mapboxsdk.overlay.Marker)">
 <!--   -->
 </a>
 
 
-<h4>setfocus</h4>
-<pre>public&nbsp;void&nbsp;setfocus(<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&nbsp;item)</pre>
-<div class="block">if the given item is found in the overlay, force it to be the current focus-bearer. any
- registered <a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbox.mapboxsdk.overlay"><code>itemizedoverlay</code></a> will be notified. this does not move
- the map, so if the item isn't already centered, the user may get confused. if the item is
+<h4>setFocus</h4>
+<pre>public&nbsp;void&nbsp;setFocus(<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item)</pre>
+<div class="block">If the given Item is found in the overlay, force it to be the current focus-bearer. Any
+ registered <a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbox.mapboxsdk.overlay"><code>ItemizedOverlay</code></a> will be notified. This does not move
+ the map, so if the Item isn't already centered, the user may get confused. If the Item is
  not
- found, this is a no-op. you can also pass null to remove focus.</div>
+ found, this is a no-op. You can also pass null to remove focus.</div>
 
 
-<a name="getfocus()">
+<a name="getFocus()">
 <!--   -->
 </a>
 
 
-<h4>getfocus</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&nbsp;getfocus()</pre>
-<dl><dt><span class="strong">returns:</span></dt><dd>the currently-focused item, or null if no item is currently focused.</dd></dl>
+<h4>getFocus</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;getFocus()</pre>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the currently-focused item, or null if no item is currently focused.</dd></dl>
 
 
-<a name="bluritem(com.mapbox.mapboxsdk.overlay.marker)">
+<a name="blurItem(com.mapbox.mapboxsdk.overlay.Marker)">
 <!--   -->
 </a>
 
 
-<h4>bluritem</h4>
-<pre>public&nbsp;void&nbsp;bluritem(<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">marker</a>&nbsp;item)</pre>
+<h4>blurItem</h4>
+<pre>public&nbsp;void&nbsp;blurItem(<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item)</pre>
 <div class="block">an item want's to be blured, if it is the focused one, blur it</div>
 
 
-<a name="setonfocuschangelistener(com.mapbox.mapboxsdk.overlay.itemizedoverlay.onfocuschangelistener)">
+<a name="setOnFocusChangeListener(com.mapbox.mapboxsdk.overlay.ItemizedOverlay.OnFocusChangeListener)">
 <!--   -->
 </a>
 
 
-<h4>setonfocuschangelistener</h4>
-<pre>public&nbsp;void&nbsp;setonfocuschangelistener(<a href="{{site.baseurl}}/api/itemizedoverlay.onfocuschangelistener" title="interface in com.mapbox.mapboxsdk.overlay">itemizedoverlay.onfocuschangelistener</a>&nbsp;l)</pre>
+<h4>setOnFocusChangeListener</h4>
+<pre>public&nbsp;void&nbsp;setOnFocusChangeListener(<a href="{{site.baseurl}}/api/itemizedoverlay.onfocuschangelistener" title="interface in com.mapbox.mapboxsdk.overlay">ItemizedOverlay.OnFocusChangeListener</a>&nbsp;l)</pre>
 
 
 
@@ -494,5 +494,5 @@ implements <a href="{{site.baseurl}}/api/overlay.snappable" title="interface in 
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

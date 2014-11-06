@@ -4,33 +4,33 @@ title: Overlay
 category: api
 tags: overlay
 ---
-<div class="contentcontainer">
-<ul class="inheritance">
-<li>java.lang.object</li>
-<li>
-<ul class="inheritance">
-<li>com.mapbox.mapboxsdk.overlay.overlay</li>
-</ul>
-</li>
-</ul>
+<div class="contentContainer">
+
+java.lang.Object
+
+
+com.mapbox.mapboxsdk.overlay.Overlay
+
+
+
 <div class="description">
 
 
 <dl>
-<dt>direct known subclasses:</dt>
-<dd><a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">safedrawoverlay</a></dd>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a></dd>
 </dl>
 
 
-<pre>public abstract class <span class="strong">overlay</span>
-extends java.lang.object</pre>
-<div class="block">base class representing an overlay which may be displayed on top of a <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a>. to add an
+<pre>public abstract class <span class="strong">Overlay</span>
+extends java.lang.Object</pre>
+<div class="block">Base class representing an overlay which may be displayed on top of a <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a>. To add an
  overlay, subclass this class, create an instance, and add it to the list obtained from
- getoverlays() of <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a>.
+ getOverlays() of <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a>.
  <p/>
- this class implements a form of gesture handling similar to
- <code>gesturedetector.simpleongesturelistener</code> and
- <code>gesturedetector.ongesturelistener</code>. the difference is there is an additional argument for
+ This class implements a form of Gesture Handling similar to
+ <code>GestureDetector.SimpleOnGestureListener</code> and
+ <code>GestureDetector.OnGestureListener</code>. The difference is there is an additional argument for
  the item.</div>
 
 
@@ -38,22 +38,22 @@ extends java.lang.object</pre>
 <div class="summary">
 
 
-<!-- ======== nested class summary ======== -->
+<!-- ======== NESTED CLASS SUMMARY ======== -->
 
 <a name="nested_class_summary">
 <!--   -->
 </a>
-<h3>nested class summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="nested class summary table, listing nested classes, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>nested classes</span><span class="tabend">&nbsp;</span></caption>
+<h3>Nested Class Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Nested Class Summary table, listing nested classes, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">class and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Class and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>static interface&nbsp;</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">overlay.snappable</a></strong></code>
-<div class="block">interface definition for overlays that contain items that can be snapped to (for example,
+<tr class="altColor">
+<td class="colFirst"><code>static interface&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></strong></code>
+<div class="block">Interface definition for overlays that contain items that can be snapped to (for example,
  when the user invokes a zoom, this could be called allowing the user to snap the zoom to an
  interesting point.)</div>
 </td>
@@ -61,211 +61,211 @@ extends java.lang.object</pre>
 </table>
 
 
-<!-- =========== field summary =========== -->
+<!-- =========== FIELD SUMMARY =========== -->
 
 <a name="field_summary">
 <!--   -->
 </a>
-<h3>field summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="field summary table, listing fields, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>fields</span><span class="tabend">&nbsp;</span></caption>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">field and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected float</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#mscale">mscale</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>protected float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#mscale">mScale</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
 
-<!-- ======== constructor summary ======== -->
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <a name="constructor_summary">
 <!--   -->
 </a>
-<h3>constructor summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="constructor summary table, listing constructors, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>constructors</span><span class="tabend">&nbsp;</span></caption>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colone" scope="col">constructor and description</th>
+<th class="colOne" scope="col">Constructor and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colone"><code><strong><a href="{{site.baseurl}}/api/overlay#overlay()">overlay</a></strong>()</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/overlay#overlay()">Overlay</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colone"><code><strong><a href="{{site.baseurl}}/api/overlay#overlay(android.content.context)">overlay</a></strong>(android.content.context&nbsp;ctx)</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/overlay#overlay(android.content.context)">Overlay</a></strong>(android.content.Context&nbsp;ctx)</code>&nbsp;</td>
 </tr>
 </table>
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected abstract void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#draw(android.graphics.canvas, com.mapbox.mapboxsdk.views.mapview, boolean)">draw</a></strong>(android.graphics.canvas&nbsp;c,
-    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;osmv,
+<tr class="altColor">
+<td class="colFirst"><code>protected abstract void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#draw(android.graphics.canvas, com.mapbox.mapboxsdk.views.mapview, boolean)">draw</a></strong>(android.graphics.Canvas&nbsp;c,
+    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;osmv,
     boolean&nbsp;shadow)</code>
-<div class="block">draw the overlay over the map.</div>
+<div class="block">Draw the overlay over the map.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected static void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#drawat(android.graphics.canvas, android.graphics.drawable.drawable, android.graphics.point, android.graphics.point, boolean, float)">drawat</a></strong>(android.graphics.canvas&nbsp;canvas,
-      android.graphics.drawable.drawable&nbsp;drawable,
-      android.graphics.point&nbsp;origin,
-      android.graphics.point&nbsp;offset,
+<tr class="rowColor">
+<td class="colFirst"><code>protected static void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#drawat(android.graphics.canvas, android.graphics.drawable.drawable, android.graphics.point, android.graphics.point, boolean, float)">drawAt</a></strong>(android.graphics.Canvas&nbsp;canvas,
+      android.graphics.drawable.Drawable&nbsp;drawable,
+      android.graphics.Point&nbsp;origin,
+      android.graphics.Point&nbsp;offset,
       boolean&nbsp;shadow,
-      float&nbsp;amaporientation)</code>
-<div class="block">convenience method to draw a drawable at an offset.</div>
+      float&nbsp;aMapOrientation)</code>
+<div class="block">Convenience method to draw a Drawable at an offset.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected static int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#getsafemenuid()">getsafemenuid</a></strong>()</code>
-<div class="block">since the menu-chain will pass through several independent overlays, menu ids cannot be
+<tr class="altColor">
+<td class="colFirst"><code>protected static int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#getsafemenuid()">getSafeMenuId</a></strong>()</code>
+<div class="block">Since the menu-chain will pass through several independent Overlays, menu IDs cannot be
  fixed
  at compile time.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#isenabled()">isenabled</a></strong>()</code>
-<div class="block">specifies if the overlay is marked to be enabled.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#isenabled()">isEnabled</a></strong>()</code>
+<div class="block">Specifies if the Overlay is marked to be enabled.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block">override to perform clean up of resources before shutdown.</div>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">Override to perform clean up of resources before shutdown.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#ondoubletap(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">ondoubletap</a></strong>(android.view.motionevent&nbsp;e,
-           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block">by default does nothing (<code>return false</code>).</div>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#ondoubletap(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onDoubleTap</a></strong>(android.view.MotionEvent&nbsp;e,
+           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#ondoubletapevent(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">ondoubletapevent</a></strong>(android.view.motionevent&nbsp;e,
-                <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block">by default does nothing (<code>return false</code>).</div>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#ondoubletapevent(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onDoubleTapEvent</a></strong>(android.view.MotionEvent&nbsp;e,
+                <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#ondown(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">ondown</a></strong>(android.view.motionevent&nbsp;e,
-      <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block">by default does nothing (<code>return false</code>).</div>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#ondown(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onDown</a></strong>(android.view.MotionEvent&nbsp;e,
+      <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#onfling(android.view.motionevent, android.view.motionevent, float, float, com.mapbox.mapboxsdk.views.mapview)">onfling</a></strong>(android.view.motionevent&nbsp;pevent1,
-       android.view.motionevent&nbsp;pevent2,
-       float&nbsp;pvelocityx,
-       float&nbsp;pvelocityy,
-       <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;pmapview)</code>
-<div class="block">by default does nothing (<code>return false</code>).</div>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#onfling(android.view.motionevent, android.view.motionevent, float, float, com.mapbox.mapboxsdk.views.mapview)">onFling</a></strong>(android.view.MotionEvent&nbsp;pEvent1,
+       android.view.MotionEvent&nbsp;pEvent2,
+       float&nbsp;pVelocityX,
+       float&nbsp;pVelocityY,
+       <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</code>
+<div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#onkeydown(int, android.view.keyevent, com.mapbox.mapboxsdk.views.mapview)">onkeydown</a></strong>(int&nbsp;keycode,
-         android.view.keyevent&nbsp;event,
-         <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block">by default does nothing (<code>return false</code>).</div>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#onkeydown(int, android.view.keyevent, com.mapbox.mapboxsdk.views.mapview)">onKeyDown</a></strong>(int&nbsp;keyCode,
+         android.view.KeyEvent&nbsp;event,
+         <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#onkeyup(int, android.view.keyevent, com.mapbox.mapboxsdk.views.mapview)">onkeyup</a></strong>(int&nbsp;keycode,
-       android.view.keyevent&nbsp;event,
-       <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block">by default does nothing (<code>return false</code>).</div>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#onkeyup(int, android.view.keyevent, com.mapbox.mapboxsdk.views.mapview)">onKeyUp</a></strong>(int&nbsp;keyCode,
+       android.view.KeyEvent&nbsp;event,
+       <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#onlongpress(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onlongpress</a></strong>(android.view.motionevent&nbsp;e,
-           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block">by default does nothing (<code>return false</code>).</div>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#onlongpress(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onLongPress</a></strong>(android.view.MotionEvent&nbsp;e,
+           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#onscroll(android.view.motionevent, android.view.motionevent, float, float, com.mapbox.mapboxsdk.views.mapview)">onscroll</a></strong>(android.view.motionevent&nbsp;pevent1,
-        android.view.motionevent&nbsp;pevent2,
-        float&nbsp;pdistancex,
-        float&nbsp;pdistancey,
-        <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;pmapview)</code>
-<div class="block">by default does nothing (<code>return false</code>).</div>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#onscroll(android.view.motionevent, android.view.motionevent, float, float, com.mapbox.mapboxsdk.views.mapview)">onScroll</a></strong>(android.view.MotionEvent&nbsp;pEvent1,
+        android.view.MotionEvent&nbsp;pEvent2,
+        float&nbsp;pDistanceX,
+        float&nbsp;pDistanceY,
+        <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</code>
+<div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#onshowpress(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onshowpress</a></strong>(android.view.motionevent&nbsp;pevent,
-           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;pmapview)</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#onshowpress(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onShowPress</a></strong>(android.view.MotionEvent&nbsp;pEvent,
+           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#onsingletapconfirmed(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onsingletapconfirmed</a></strong>(android.view.motionevent&nbsp;e,
-                    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block">by default does nothing (<code>return false</code>).</div>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#onsingletapconfirmed(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onSingleTapConfirmed</a></strong>(android.view.MotionEvent&nbsp;e,
+                    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#onsingletapup(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onsingletapup</a></strong>(android.view.motionevent&nbsp;e,
-             <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block">by default does nothing (<code>return false</code>).</div>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#onsingletapup(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onSingleTapUp</a></strong>(android.view.MotionEvent&nbsp;e,
+             <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#ontouchevent(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">ontouchevent</a></strong>(android.view.motionevent&nbsp;event,
-            <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block"><b>you can prevent all(!) other touch-related events from happening!</b>
- by default does nothing (<code>return false</code>).</div>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#ontouchevent(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onTouchEvent</a></strong>(android.view.MotionEvent&nbsp;event,
+            <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block"><b>You can prevent all(!) other Touch-related events from happening!</b>
+ By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#ontrackballevent(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">ontrackballevent</a></strong>(android.view.motionevent&nbsp;event,
-                <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block">by default does nothing (<code>return false</code>).</div>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#ontrackballevent(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onTrackballEvent</a></strong>(android.view.MotionEvent&nbsp;event,
+                <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">overlay</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#setcontext(android.content.context)">setcontext</a></strong>(android.content.context&nbsp;ctx)</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#setcontext(android.content.context)">setContext</a></strong>(android.content.Context&nbsp;ctx)</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay#setenabled(boolean)">setenabled</a></strong>(boolean&nbsp;penabled)</code>
-<div class="block">sets whether the overlay is marked to be enabled.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay#setenabled(boolean)">setEnabled</a></strong>(boolean&nbsp;pEnabled)</code>
+<div class="block">Sets whether the Overlay is marked to be enabled.</div>
 </td>
 </tr>
 </table>
 
-<a name="methods_inherited_from_class_java.lang.object">
+<a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>methods inherited from class&nbsp;java.lang.object</h3>
-<code>clone, equals, finalize, getclass, hashcode, notify, notifyall, tostring, wait, wait, wait</code>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
 
 
 
@@ -275,329 +275,329 @@ extends java.lang.object</pre>
 <div class="details">
 
 
-<!-- ============ field detail =========== -->
+<!-- ============ FIELD DETAIL =========== -->
 
 <a name="field_detail">
 <!--   -->
 </a>
-<h3>field detail</h3>
-<a name="mscale">
+<h3>Field Detail</h3>
+<a name="mScale">
 <!--   -->
 </a>
 
 
-<h4>mscale</h4>
-<pre>protected&nbsp;float mscale</pre>
+<h4>mScale</h4>
+<pre>protected&nbsp;float mScale</pre>
 
 
 
 
-<!-- ========= constructor detail ======== -->
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <a name="constructor_detail">
 <!--   -->
 </a>
-<h3>constructor detail</h3>
-<a name="overlay()">
+<h3>Constructor Detail</h3>
+<a name="Overlay()">
 <!--   -->
 </a>
 
 
-<h4>overlay</h4>
-<pre>public&nbsp;overlay()</pre>
+<h4>Overlay</h4>
+<pre>public&nbsp;Overlay()</pre>
 
 
-<a name="overlay(android.content.context)">
+<a name="Overlay(android.content.Context)">
 <!--   -->
 </a>
 
 
-<h4>overlay</h4>
-<pre>public&nbsp;overlay(android.content.context&nbsp;ctx)</pre>
+<h4>Overlay</h4>
+<pre>public&nbsp;Overlay(android.content.Context&nbsp;ctx)</pre>
 
 
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="setcontext(android.content.context)">
+<h3>Method Detail</h3>
+<a name="setContext(android.content.Context)">
 <!--   -->
 </a>
 
 
-<h4>setcontext</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">overlay</a>&nbsp;setcontext(android.content.context&nbsp;ctx)</pre>
+<h4>setContext</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&nbsp;setContext(android.content.Context&nbsp;ctx)</pre>
 
 
-<a name="setenabled(boolean)">
+<a name="setEnabled(boolean)">
 <!--   -->
 </a>
 
 
-<h4>setenabled</h4>
-<pre>public&nbsp;void&nbsp;setenabled(boolean&nbsp;penabled)</pre>
-<div class="block">sets whether the overlay is marked to be enabled. this setting does nothing by default, but
+<h4>setEnabled</h4>
+<pre>public&nbsp;void&nbsp;setEnabled(boolean&nbsp;pEnabled)</pre>
+<div class="block">Sets whether the Overlay is marked to be enabled. This setting does nothing by default, but
  should be checked before calling draw().</div>
 
 
-<a name="isenabled()">
+<a name="isEnabled()">
 <!--   -->
 </a>
 
 
-<h4>isenabled</h4>
-<pre>public&nbsp;boolean&nbsp;isenabled()</pre>
-<div class="block">specifies if the overlay is marked to be enabled. this should be checked before calling
+<h4>isEnabled</h4>
+<pre>public&nbsp;boolean&nbsp;isEnabled()</pre>
+<div class="block">Specifies if the Overlay is marked to be enabled. This should be checked before calling
  draw().</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>true if the overlay is marked enabled, false otherwise</dd></dl>
+<dl><dt><span class="strong">Returns:</span></dt><dd>true if the Overlay is marked enabled, false otherwise</dd></dl>
 
 
-<a name="getsafemenuid()">
+<a name="getSafeMenuId()">
 <!--   -->
 </a>
 
 
-<h4>getsafemenuid</h4>
-<pre>protected static final&nbsp;int&nbsp;getsafemenuid()</pre>
-<div class="block">since the menu-chain will pass through several independent overlays, menu ids cannot be
+<h4>getSafeMenuId</h4>
+<pre>protected static final&nbsp;int&nbsp;getSafeMenuId()</pre>
+<div class="block">Since the menu-chain will pass through several independent Overlays, menu IDs cannot be
  fixed
- at compile time. overlays should use this method to obtain and store a menu id for each menu
- item at construction time. this will ensure that two overlays don't use the same id.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>an integer suitable to be used as a menu identifier</dd></dl>
+ at compile time. Overlays should use this method to obtain and store a menu id for each menu
+ item at construction time. This will ensure that two overlays don't use the same id.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>an integer suitable to be used as a menu identifier</dd></dl>
 
 
-<a name="draw(android.graphics.canvas, com.mapbox.mapboxsdk.views.mapview, boolean)">
+<a name="draw(android.graphics.Canvas, com.mapbox.mapboxsdk.views.MapView, boolean)">
 <!--   -->
 </a>
 
 
 <h4>draw</h4>
-<pre>protected abstract&nbsp;void&nbsp;draw(android.graphics.canvas&nbsp;c,
-        <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;osmv,
+<pre>protected abstract&nbsp;void&nbsp;draw(android.graphics.Canvas&nbsp;c,
+        <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;osmv,
         boolean&nbsp;shadow)</pre>
-<div class="block">draw the overlay over the map. this will be called on all active overlays with shadow=true,
- to lay down the shadow layer, and then again on all overlays with shadow=false. callers
- should check isenabled() before calling draw(). by default, draws nothing.</div>
+<div class="block">Draw the overlay over the map. This will be called on all active overlays with shadow=true,
+ to lay down the shadow layer, and then again on all overlays with shadow=false. Callers
+ should check isEnabled() before calling draw(). By default, draws nothing.</div>
 
 
-<a name="ondetach(com.mapbox.mapboxsdk.views.mapview)">
+<a name="onDetach(com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>ondetach</h4>
-<pre>public&nbsp;void&nbsp;ondetach(<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block">override to perform clean up of resources before shutdown. by default does nothing.</div>
+<h4>onDetach</h4>
+<pre>public&nbsp;void&nbsp;onDetach(<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block">Override to perform clean up of resources before shutdown. By default does nothing.</div>
 
 
-<a name="onkeydown(int, android.view.keyevent, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onKeyDown(int, android.view.KeyEvent, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>onkeydown</h4>
-<pre>public&nbsp;boolean&nbsp;onkeydown(int&nbsp;keycode,
-                android.view.keyevent&nbsp;event,
-                <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block">by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onKeyDown</h4>
+<pre>public&nbsp;boolean&nbsp;onKeyDown(int&nbsp;keyCode,
+                android.view.KeyEvent&nbsp;event,
+                <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block">By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 
 
-<a name="onkeyup(int, android.view.keyevent, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onKeyUp(int, android.view.KeyEvent, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>onkeyup</h4>
-<pre>public&nbsp;boolean&nbsp;onkeyup(int&nbsp;keycode,
-              android.view.keyevent&nbsp;event,
-              <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block">by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onKeyUp</h4>
+<pre>public&nbsp;boolean&nbsp;onKeyUp(int&nbsp;keyCode,
+              android.view.KeyEvent&nbsp;event,
+              <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block">By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 
 
-<a name="ontouchevent(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onTouchEvent(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>ontouchevent</h4>
-<pre>public&nbsp;boolean&nbsp;ontouchevent(android.view.motionevent&nbsp;event,
-                   <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block"><b>you can prevent all(!) other touch-related events from happening!</b>
- by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onTouchEvent</h4>
+<pre>public&nbsp;boolean&nbsp;onTouchEvent(android.view.MotionEvent&nbsp;event,
+                   <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block"><b>You can prevent all(!) other Touch-related events from happening!</b>
+ By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 
 
-<a name="ontrackballevent(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onTrackballEvent(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>ontrackballevent</h4>
-<pre>public&nbsp;boolean&nbsp;ontrackballevent(android.view.motionevent&nbsp;event,
-                       <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block">by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onTrackballEvent</h4>
+<pre>public&nbsp;boolean&nbsp;onTrackballEvent(android.view.MotionEvent&nbsp;event,
+                       <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block">By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 
 
-<a name="ondoubletap(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onDoubleTap(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>ondoubletap</h4>
-<pre>public&nbsp;boolean&nbsp;ondoubletap(android.view.motionevent&nbsp;e,
-                  <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block">by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onDoubleTap</h4>
+<pre>public&nbsp;boolean&nbsp;onDoubleTap(android.view.MotionEvent&nbsp;e,
+                  <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block">By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 
 
-<a name="ondoubletapevent(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onDoubleTapEvent(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>ondoubletapevent</h4>
-<pre>public&nbsp;boolean&nbsp;ondoubletapevent(android.view.motionevent&nbsp;e,
-                       <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block">by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onDoubleTapEvent</h4>
+<pre>public&nbsp;boolean&nbsp;onDoubleTapEvent(android.view.MotionEvent&nbsp;e,
+                       <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block">By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 
 
-<a name="onsingletapconfirmed(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onSingleTapConfirmed(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>onsingletapconfirmed</h4>
-<pre>public&nbsp;boolean&nbsp;onsingletapconfirmed(android.view.motionevent&nbsp;e,
-                           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block">by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onSingleTapConfirmed</h4>
+<pre>public&nbsp;boolean&nbsp;onSingleTapConfirmed(android.view.MotionEvent&nbsp;e,
+                           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block">By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 
 
-<a name="ondown(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onDown(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>ondown</h4>
-<pre>public&nbsp;boolean&nbsp;ondown(android.view.motionevent&nbsp;e,
-             <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block">by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onDown</h4>
+<pre>public&nbsp;boolean&nbsp;onDown(android.view.MotionEvent&nbsp;e,
+             <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block">By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 
 
-<a name="onfling(android.view.motionevent, android.view.motionevent, float, float, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onFling(android.view.MotionEvent, android.view.MotionEvent, float, float, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>onfling</h4>
-<pre>public&nbsp;boolean&nbsp;onfling(android.view.motionevent&nbsp;pevent1,
-              android.view.motionevent&nbsp;pevent2,
-              float&nbsp;pvelocityx,
-              float&nbsp;pvelocityy,
-              <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;pmapview)</pre>
-<div class="block">by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onFling</h4>
+<pre>public&nbsp;boolean&nbsp;onFling(android.view.MotionEvent&nbsp;pEvent1,
+              android.view.MotionEvent&nbsp;pEvent2,
+              float&nbsp;pVelocityX,
+              float&nbsp;pVelocityY,
+              <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</pre>
+<div class="block">By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 
 
-<a name="onlongpress(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onLongPress(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>onlongpress</h4>
-<pre>public&nbsp;boolean&nbsp;onlongpress(android.view.motionevent&nbsp;e,
-                  <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block">by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onLongPress</h4>
+<pre>public&nbsp;boolean&nbsp;onLongPress(android.view.MotionEvent&nbsp;e,
+                  <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block">By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 
 
-<a name="onscroll(android.view.motionevent, android.view.motionevent, float, float, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onScroll(android.view.MotionEvent, android.view.MotionEvent, float, float, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>onscroll</h4>
-<pre>public&nbsp;boolean&nbsp;onscroll(android.view.motionevent&nbsp;pevent1,
-               android.view.motionevent&nbsp;pevent2,
-               float&nbsp;pdistancex,
-               float&nbsp;pdistancey,
-               <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;pmapview)</pre>
-<div class="block">by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onScroll</h4>
+<pre>public&nbsp;boolean&nbsp;onScroll(android.view.MotionEvent&nbsp;pEvent1,
+               android.view.MotionEvent&nbsp;pEvent2,
+               float&nbsp;pDistanceX,
+               float&nbsp;pDistanceY,
+               <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</pre>
+<div class="block">By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 
 
-<a name="onshowpress(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onShowPress(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>onshowpress</h4>
-<pre>public&nbsp;void&nbsp;onshowpress(android.view.motionevent&nbsp;pevent,
-               <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;pmapview)</pre>
+<h4>onShowPress</h4>
+<pre>public&nbsp;void&nbsp;onShowPress(android.view.MotionEvent&nbsp;pEvent,
+               <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</pre>
 
 
-<a name="onsingletapup(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">
+<a name="onSingleTapUp(android.view.MotionEvent, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>onsingletapup</h4>
-<pre>public&nbsp;boolean&nbsp;onsingletapup(android.view.motionevent&nbsp;e,
-                    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block">by default does nothing (<code>return false</code>). if you handled the event, return
- <code>true</code>, otherwise return <code>false</code>. if you returned <code>true</code>
- none of the following overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> has the chance to handle
+<h4>onSingleTapUp</h4>
+<pre>public&nbsp;boolean&nbsp;onSingleTapUp(android.view.MotionEvent&nbsp;e,
+                    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block">By default does nothing (<code>return false</code>). If you handled the Event, return
+ <code>true</code>, otherwise return <code>false</code>. If you returned <code>true</code>
+ none of the following Overlays or the underlying <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> has the chance to handle
  this event.</div>
 
 
-<a name="drawat(android.graphics.canvas, android.graphics.drawable.drawable, android.graphics.point, android.graphics.point, boolean, float)">
+<a name="drawAt(android.graphics.Canvas, android.graphics.drawable.Drawable, android.graphics.Point, android.graphics.Point, boolean, float)">
 <!--   -->
 </a>
 
 
-<h4>drawat</h4>
-<pre>protected static&nbsp;void&nbsp;drawat(android.graphics.canvas&nbsp;canvas,
-          android.graphics.drawable.drawable&nbsp;drawable,
-          android.graphics.point&nbsp;origin,
-          android.graphics.point&nbsp;offset,
+<h4>drawAt</h4>
+<pre>protected static&nbsp;void&nbsp;drawAt(android.graphics.Canvas&nbsp;canvas,
+          android.graphics.drawable.Drawable&nbsp;drawable,
+          android.graphics.Point&nbsp;origin,
+          android.graphics.Point&nbsp;offset,
           boolean&nbsp;shadow,
-          float&nbsp;amaporientation)</pre>
-<div class="block">convenience method to draw a drawable at an offset. x and y are pixel coordinates. you can
- find appropriate coordinates from latitude/longitude using the mapview.getprojection()
+          float&nbsp;aMapOrientation)</pre>
+<div class="block">Convenience method to draw a Drawable at an offset. x and y are pixel coordinates. You can
+ find appropriate coordinates from latitude/longitude using the MapView.getProjection()
  method
- on the mapview passed to you in draw(canvas, mapview, boolean).</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>shadow</code> - if true, draw only the drawable's shadow. otherwise, draw the drawable itself.</dd></dl>
+ on the MapView passed to you in draw(Canvas, MapView, boolean).</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>shadow</code> - If true, draw only the drawable's shadow. Otherwise, draw the drawable itself.</dd></dl>
 
 
 
@@ -606,5 +606,5 @@ extends java.lang.object</pre>
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

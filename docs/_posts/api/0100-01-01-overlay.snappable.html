@@ -4,22 +4,22 @@ title: Overlay.Snappable
 category: api
 tags: overlay
 ---
-<div class="contentcontainer">
+<div class="contentContainer">
 <div class="description">
 
 
 <dl>
-<dt>all known implementing classes:</dt>
-<dd><a href="{{site.baseurl}}/api/userlocationoverlay" title="class in com.mapbox.mapboxsdk.overlay">userlocationoverlay</a></dd>
+<dt>All Known Implementing Classes:</dt>
+<dd><a href="{{site.baseurl}}/api/userlocationoverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a></dd>
 </dl>
 <dl>
-<dt>enclosing class:</dt>
-<dd><a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">overlay</a></dd>
+<dt>Enclosing class:</dt>
+<dd><a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></dd>
 </dl>
 
 
-<pre>public static interface <span class="strong">overlay.snappable</span></pre>
-<div class="block">interface definition for overlays that contain items that can be snapped to (for example,
+<pre>public static interface <span class="strong">Overlay.Snappable</span></pre>
+<div class="block">Interface definition for overlays that contain items that can be snapped to (for example,
  when the user invokes a zoom, this could be called allowing the user to snap the zoom to an
  interesting point.)</div>
 
@@ -28,25 +28,25 @@ tags: overlay
 <div class="summary">
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/overlay.snappable#onsnaptoitem(int, int, android.graphics.point, com.mapbox.mapboxsdk.views.mapview)">onsnaptoitem</a></strong>(int&nbsp;x,
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay.snappable#onsnaptoitem(int, int, android.graphics.point, com.mapbox.mapboxsdk.views.mapview)">onSnapToItem</a></strong>(int&nbsp;x,
             int&nbsp;y,
-            android.graphics.point&nbsp;snappoint,
-            <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</code>
-<div class="block">checks to see if the given x and y are close enough to an item resulting in snapping the
+            android.graphics.Point&nbsp;snapPoint,
+            <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
+<div class="block">Checks to see if the given x and y are close enough to an item resulting in snapping the
  current action (e.g.</div>
 </td>
 </tr>
@@ -59,31 +59,31 @@ tags: overlay
 <div class="details">
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="onsnaptoitem(int, int, android.graphics.point, com.mapbox.mapboxsdk.views.mapview)">
+<h3>Method Detail</h3>
+<a name="onSnapToItem(int, int, android.graphics.Point, com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
 
 
-<h4>onsnaptoitem</h4>
-<pre>boolean&nbsp;onsnaptoitem(int&nbsp;x,
+<h4>onSnapToItem</h4>
+<pre>boolean&nbsp;onSnapToItem(int&nbsp;x,
                    int&nbsp;y,
-                   android.graphics.point&nbsp;snappoint,
-                   <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;mapview)</pre>
-<div class="block">checks to see if the given x and y are close enough to an item resulting in snapping the
+                   android.graphics.Point&nbsp;snapPoint,
+                   <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</pre>
+<div class="block">Checks to see if the given x and y are close enough to an item resulting in snapping the
  current action (e.g. zoom) to the item.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>x</code> - the x in screen coordinates.</dd><dd><code>y</code> - the y in screen coordinates.</dd><dd><code>snappoint</code> - to be filled with the the interesting point (in screen coordinates)
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>x</code> - The x in screen coordinates.</dd><dd><code>y</code> - The y in screen coordinates.</dd><dd><code>snapPoint</code> - To be filled with the the interesting point (in screen coordinates)
  that
  is
- closest to the given x and y. can be untouched if not snapping.</dd><dd><code>mapview</code> - the <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>mapview</code></a> that is requesting the snap. use
- mapview.getprojection()
+ closest to the given x and y. Can be untouched if not snapping.</dd><dd><code>mapView</code> - The <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views"><code>MapView</code></a> that is requesting the snap. Use
+ MapView.getProjection()
  to convert between on-screen pixels and latitude/longitude pairs.</dd>
-<dt><span class="strong">returns:</span></dt><dd>whether or not to snap to the interesting point.</dd></dl>
+<dt><span class="strong">Returns:</span></dt><dd>Whether or not to snap to the interesting point.</dd></dl>
 
 
 
@@ -92,5 +92,5 @@ tags: overlay
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
