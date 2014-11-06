@@ -50,3 +50,9 @@ caption {
   }
 .snippet .highlight { width:200%; }
 .highlight pre { background-color:#f8f8f8; }
+
+code,
+code pre,
+code strong,
+pre code,
+pre { white-space:normal; }

@@ -4,729 +4,729 @@ title: ISafeCanvas
 category: api
 tags: views
 ---
-<div class="contentcontainer">
+<div class="contentContainer">
 <div class="description">
 
 
 <dl>
-<dt>all known implementing classes:</dt>
-<dd><a href="{{site.baseurl}}/api/safetranslatedcanvas" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedcanvas</a></dd>
+<dt>All Known Implementing Classes:</dt>
+<dd><a href="{{site.baseurl}}/api/safetranslatedcanvas" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedCanvas</a></dd>
 </dl>
 
 
-<pre>public interface <span class="strong">isafecanvas</span></pre>
-<div class="block">the isafecanvas interface is designed to work android's issues with large canvases.
+<pre>public interface <span class="strong">ISafeCanvas</span></pre>
+<div class="block">The ISafeCanvas interface is designed to work Android's issues with large canvases.
  
- the internal representation of canvas coordinates in the skia graphics library is float. canvas
- sizes are specified as integers. at high zoom levels, the canvas sizes get to the high end of
+ The internal representation of canvas coordinates in the Skia graphics library is float. Canvas
+ sizes are specified as integers. At high zoom levels, the canvas sizes get to the high end of
  the
- integer data type which subsequently get rounded off when represented as floats in skia. this
+ integer data type which subsequently get rounded off when represented as floats in Skia. This
  causes drawing anomalies such as jagged edges or distorted shapes that progressively get worse
  as
- the zoom level increases. the issue becomes visibly noticeable around zoom level 18 which is
+ the zoom level increases. The issue becomes visibly noticeable around zoom level 18 which is
  commonly available amongst most online map tile providers.
  
- to prevent this issue we can't pass large values to the native android methods. to accomplish
+ To prevent this issue we can't pass large values to the native Android methods. To accomplish
  that, we must intercept all values being passed to the canvas draw methods and translate them to
- a coordinate system where the origin (0,0) is the center of the screen. we then draw them to a
- canvas that has the same coordinate system. we also prevent passing coordinate parameter values
+ a coordinate system where the origin (0,0) is the center of the screen. We then draw them to a
+ canvas that has the same coordinate system. We also prevent passing coordinate parameter values
  as floats, instead accepting doubles.</div>
-<dl><dt><span class="strong">see also:</span></dt><dd><code>safetranslatedcanvas}, {@link safetranslatedpath}, {@link safepaint}</code></dd></dl>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>SafeTranslatedCanvas}, {@link SafeTranslatedPath}, {@link SafePaint}</code></dd></dl>
 
 
 </div>
 <div class="summary">
 
 
-<!-- ======== nested class summary ======== -->
+<!-- ======== NESTED CLASS SUMMARY ======== -->
 
 <a name="nested_class_summary">
 <!--   -->
 </a>
-<h3>nested class summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="nested class summary table, listing nested classes, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>nested classes</span><span class="tabend">&nbsp;</span></caption>
+<h3>Nested Class Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Nested Class Summary table, listing nested classes, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">interface and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Interface and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>static interface&nbsp;</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas.unsafecanvashandler" title="interface in com.mapbox.mapboxsdk.views.safecanvas">isafecanvas.unsafecanvashandler</a></strong></code>
-<div class="block">allows access to the original unsafe canvas.</div>
+<tr class="altColor">
+<td class="colFirst"><code>static interface&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas.unsafecanvashandler" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas.UnsafeCanvasHandler</a></strong></code>
+<div class="block">Allows access to the original unsafe canvas.</div>
 </td>
 </tr>
 </table>
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedpath</a>&nbsp;path)</code>
-<div class="block">intersect the current clip with the specified path.</div>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedPath</a>&nbsp;path)</code>
+<div class="block">Intersect the current clip with the specified path.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedpath</a>&nbsp;path,
-        android.graphics.region.op&nbsp;op)</code>
-<div class="block">modify the current clip with the specified path.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedPath</a>&nbsp;path,
+        android.graphics.Region.Op&nbsp;op)</code>
+<div class="block">Modify the current clip with the specified path.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#cliprect(double, double, double, double)">cliprect</a></strong>(double&nbsp;left,
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#cliprect(double, double, double, double)">clipRect</a></strong>(double&nbsp;left,
         double&nbsp;top,
         double&nbsp;right,
         double&nbsp;bottom)</code>
-<div class="block">intersect the current clip with the specified rectangle, which is expressed in local
+<div class="block">Intersect the current clip with the specified rectangle, which is expressed in local
  coordinates.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#cliprect(double, double, double, double, android.graphics.region.op)">cliprect</a></strong>(double&nbsp;left,
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#cliprect(double, double, double, double, android.graphics.region.op)">clipRect</a></strong>(double&nbsp;left,
         double&nbsp;top,
         double&nbsp;right,
         double&nbsp;bottom,
-        android.graphics.region.op&nbsp;op)</code>
-<div class="block">modify the current clip with the specified rectangle, which is expressed in local
+        android.graphics.Region.Op&nbsp;op)</code>
+<div class="block">Modify the current clip with the specified rectangle, which is expressed in local
  coordinates.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#cliprect(int, int, int, int)">cliprect</a></strong>(int&nbsp;left,
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#cliprect(int, int, int, int)">clipRect</a></strong>(int&nbsp;left,
         int&nbsp;top,
         int&nbsp;right,
         int&nbsp;bottom)</code>
-<div class="block">intersect the current clip with the specified rectangle, which is expressed in local
+<div class="block">Intersect the current clip with the specified rectangle, which is expressed in local
  coordinates.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#cliprect(android.graphics.rect)">cliprect</a></strong>(android.graphics.rect&nbsp;rect)</code>
-<div class="block">intersect the current clip with the specified rectangle, which is expressed in local
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#cliprect(android.graphics.rect)">clipRect</a></strong>(android.graphics.Rect&nbsp;rect)</code>
+<div class="block">Intersect the current clip with the specified rectangle, which is expressed in local
  coordinates.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#cliprect(android.graphics.rect, android.graphics.region.op)">cliprect</a></strong>(android.graphics.rect&nbsp;rect,
-        android.graphics.region.op&nbsp;op)</code>
-<div class="block">modify the current clip with the specified rectangle, which is expressed in local
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#cliprect(android.graphics.rect, android.graphics.region.op)">clipRect</a></strong>(android.graphics.Rect&nbsp;rect,
+        android.graphics.Region.Op&nbsp;op)</code>
+<div class="block">Modify the current clip with the specified rectangle, which is expressed in local
  coordinates.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#clipregion(android.graphics.region)">clipregion</a></strong>(android.graphics.region&nbsp;region)</code>
-<div class="block">intersect the current clip with the specified region.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#clipregion(android.graphics.region)">clipRegion</a></strong>(android.graphics.Region&nbsp;region)</code>
+<div class="block">Intersect the current clip with the specified region.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#clipregion(android.graphics.region, android.graphics.region.op)">clipregion</a></strong>(android.graphics.region&nbsp;region,
-          android.graphics.region.op&nbsp;op)</code>
-<div class="block">modify the current clip with the specified region.</div>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#clipregion(android.graphics.region, android.graphics.region.op)">clipRegion</a></strong>(android.graphics.Region&nbsp;region,
+          android.graphics.Region.Op&nbsp;op)</code>
+<div class="block">Modify the current clip with the specified region.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#concat(android.graphics.matrix)">concat</a></strong>(android.graphics.matrix&nbsp;matrix)</code>
-<div class="block">preconcat the current matrix with the specified matrix.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#concat(android.graphics.matrix)">concat</a></strong>(android.graphics.Matrix&nbsp;matrix)</code>
+<div class="block">Preconcat the current matrix with the specified matrix.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawarc(android.graphics.rect, float, float, boolean, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawarc</a></strong>(android.graphics.rect&nbsp;oval,
-       float&nbsp;startangle,
-       float&nbsp;sweepangle,
-       boolean&nbsp;usecenter,
-       <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawarc(android.graphics.rect, float, float, boolean, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawArc</a></strong>(android.graphics.Rect&nbsp;oval,
+       float&nbsp;startAngle,
+       float&nbsp;sweepAngle,
+       boolean&nbsp;useCenter,
+       <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
 <div class="block">
- draw the specified arc, which will be scaled to fit inside the specified oval.</div>
+ Draw the specified arc, which will be scaled to fit inside the specified oval.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawargb(int, int, int, int)">drawargb</a></strong>(int&nbsp;a,
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawargb(int, int, int, int)">drawARGB</a></strong>(int&nbsp;a,
         int&nbsp;r,
         int&nbsp;g,
         int&nbsp;b)</code>
-<div class="block">fill the entire canvas' bitmap (restricted to the current clip) with the specified argb
+<div class="block">Fill the entire canvas' bitmap (restricted to the current clip) with the specified ARGB
  color, using srcover porterduff mode.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawbitmap(android.graphics.bitmap, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawbitmap</a></strong>(android.graphics.bitmap&nbsp;bitmap,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawbitmap(android.graphics.bitmap, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawBitmap</a></strong>(android.graphics.Bitmap&nbsp;bitmap,
           double&nbsp;left,
           double&nbsp;top,
-          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the specified bitmap, with its top/left corner at (x,y), using the specified paint,
+          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the specified bitmap, with its top/left corner at (x,y), using the specified paint,
  transformed by the current matrix.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawbitmap(android.graphics.bitmap, android.graphics.matrix, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawbitmap</a></strong>(android.graphics.bitmap&nbsp;bitmap,
-          android.graphics.matrix&nbsp;matrix,
-          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the bitmap using the specified matrix.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawbitmap(android.graphics.bitmap, android.graphics.matrix, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawBitmap</a></strong>(android.graphics.Bitmap&nbsp;bitmap,
+          android.graphics.Matrix&nbsp;matrix,
+          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the bitmap using the specified matrix.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawbitmap(android.graphics.bitmap, android.graphics.rect, android.graphics.rect, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawbitmap</a></strong>(android.graphics.bitmap&nbsp;bitmap,
-          android.graphics.rect&nbsp;src,
-          android.graphics.rect&nbsp;dst,
-          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the specified bitmap, scaling/translating automatically to fill the destination
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawbitmap(android.graphics.bitmap, android.graphics.rect, android.graphics.rect, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawBitmap</a></strong>(android.graphics.Bitmap&nbsp;bitmap,
+          android.graphics.Rect&nbsp;src,
+          android.graphics.Rect&nbsp;dst,
+          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the specified bitmap, scaling/translating automatically to fill the destination
  rectangle.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawbitmap(int[], int, int, double, double, int, int, boolean, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawbitmap</a></strong>(int[]&nbsp;colors,
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawbitmap(int[], int, int, double, double, int, int, boolean, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawBitmap</a></strong>(int[]&nbsp;colors,
           int&nbsp;offset,
           int&nbsp;stride,
           double&nbsp;x,
           double&nbsp;y,
           int&nbsp;width,
           int&nbsp;height,
-          boolean&nbsp;hasalpha,
-          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">treat the specified array of colors as a bitmap, and draw it.</div>
+          boolean&nbsp;hasAlpha,
+          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Treat the specified array of colors as a bitmap, and draw it.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawbitmap(int[], int, int, int, int, int, int, boolean, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawbitmap</a></strong>(int[]&nbsp;colors,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawbitmap(int[], int, int, int, int, int, int, boolean, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawBitmap</a></strong>(int[]&nbsp;colors,
           int&nbsp;offset,
           int&nbsp;stride,
           int&nbsp;x,
           int&nbsp;y,
           int&nbsp;width,
           int&nbsp;height,
-          boolean&nbsp;hasalpha,
-          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">legacy version of drawbitmap(int[] colors, ...) that took ints for x,y</div>
+          boolean&nbsp;hasAlpha,
+          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Legacy version of drawBitmap(int[] colors, ...) that took ints for x,y</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawbitmapmesh(android.graphics.bitmap, int, int, double[], int, int[], int, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawbitmapmesh</a></strong>(android.graphics.bitmap&nbsp;bitmap,
-              int&nbsp;meshwidth,
-              int&nbsp;meshheight,
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawbitmapmesh(android.graphics.bitmap, int, int, double[], int, int[], int, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawBitmapMesh</a></strong>(android.graphics.Bitmap&nbsp;bitmap,
+              int&nbsp;meshWidth,
+              int&nbsp;meshHeight,
               double[]&nbsp;verts,
-              int&nbsp;vertoffset,
+              int&nbsp;vertOffset,
               int[]&nbsp;colors,
-              int&nbsp;coloroffset,
-              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the bitmap through the mesh, where mesh vertices are evenly distributed across the
+              int&nbsp;colorOffset,
+              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the bitmap through the mesh, where mesh vertices are evenly distributed across the
  bitmap.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawcircle(double, double, float, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawcircle</a></strong>(double&nbsp;cx,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawcircle(double, double, float, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawCircle</a></strong>(double&nbsp;cx,
           double&nbsp;cy,
           float&nbsp;radius,
-          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the specified circle using the specified paint.</div>
+          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the specified circle using the specified paint.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawcolor(int)">drawcolor</a></strong>(int&nbsp;color)</code>
-<div class="block">fill the entire canvas' bitmap (restricted to the current clip) with the specified color,
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawcolor(int)">drawColor</a></strong>(int&nbsp;color)</code>
+<div class="block">Fill the entire canvas' bitmap (restricted to the current clip) with the specified color,
  using srcover porterduff mode.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawcolor(int, android.graphics.porterduff.mode)">drawcolor</a></strong>(int&nbsp;color,
-         android.graphics.porterduff.mode&nbsp;mode)</code>
-<div class="block">fill the entire canvas' bitmap (restricted to the current clip) with the specified color and
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawcolor(int, android.graphics.porterduff.mode)">drawColor</a></strong>(int&nbsp;color,
+         android.graphics.PorterDuff.Mode&nbsp;mode)</code>
+<div class="block">Fill the entire canvas' bitmap (restricted to the current clip) with the specified color and
  porter-duff xfermode.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawline(double, double, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawline</a></strong>(double&nbsp;startx,
-        double&nbsp;starty,
-        double&nbsp;stopx,
-        double&nbsp;stopy,
-        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw a line segment with the specified start and stop x,y coordinates, using the specified
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawline(double, double, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawLine</a></strong>(double&nbsp;startX,
+        double&nbsp;startY,
+        double&nbsp;stopX,
+        double&nbsp;stopY,
+        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw a line segment with the specified start and stop x,y coordinates, using the specified
  paint.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawlines(double[], int, int, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawlines</a></strong>(double[]&nbsp;pts,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawlines(double[], int, int, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawLines</a></strong>(double[]&nbsp;pts,
          int&nbsp;offset,
          int&nbsp;count,
-         <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw a series of lines.</div>
+         <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw a series of lines.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawlines(double[], com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawlines</a></strong>(double[]&nbsp;pts,
-         <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawlines(double[], com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawLines</a></strong>(double[]&nbsp;pts,
+         <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawoval(android.graphics.rect, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawoval</a></strong>(android.graphics.rect&nbsp;oval,
-        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the specified oval using the specified paint.</div>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawoval(android.graphics.rect, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawOval</a></strong>(android.graphics.Rect&nbsp;oval,
+        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the specified oval using the specified paint.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">fill the entire canvas' bitmap (restricted to the current clip) with the specified paint.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Fill the entire canvas' bitmap (restricted to the current clip) with the specified paint.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedpath</a>&nbsp;path,
-        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the specified path using the specified paint.</div>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedPath</a>&nbsp;path,
+        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the specified path using the specified paint.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpicture(android.graphics.picture)">drawpicture</a></strong>(android.graphics.picture&nbsp;picture)</code>
-<div class="block">save the canvas state, draw the picture, and restore the canvas state.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpicture(android.graphics.picture)">drawPicture</a></strong>(android.graphics.Picture&nbsp;picture)</code>
+<div class="block">Save the canvas state, draw the picture, and restore the canvas state.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpicture(android.graphics.picture, android.graphics.rect)">drawpicture</a></strong>(android.graphics.picture&nbsp;picture,
-           android.graphics.rect&nbsp;dst)</code>
-<div class="block">draw the picture, stretched to fit into the dst rectangle.</div>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpicture(android.graphics.picture, android.graphics.rect)">drawPicture</a></strong>(android.graphics.Picture&nbsp;picture,
+           android.graphics.Rect&nbsp;dst)</code>
+<div class="block">Draw the picture, stretched to fit into the dst rectangle.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpoint(double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawpoint</a></strong>(double&nbsp;x,
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpoint(double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawPoint</a></strong>(double&nbsp;x,
          double&nbsp;y,
-         <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">helper for drawpoints() for drawing a single point.</div>
+         <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Helper for drawPoints() for drawing a single point.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpoints(double[], int, int, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawpoints</a></strong>(double[]&nbsp;pts,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpoints(double[], int, int, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawPoints</a></strong>(double[]&nbsp;pts,
           int&nbsp;offset,
           int&nbsp;count,
-          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw a series of points.</div>
+          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw a series of points.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpoints(double[], com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawpoints</a></strong>(double[]&nbsp;pts,
-          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">helper for drawpoints() that assumes you want to draw the entire array</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpoints(double[], com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawPoints</a></strong>(double[]&nbsp;pts,
+          <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Helper for drawPoints() that assumes you want to draw the entire array</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpostext(char[], int, int, double[], com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawpostext</a></strong>(char[]&nbsp;text,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpostext(char[], int, int, double[], com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawPosText</a></strong>(char[]&nbsp;text,
            int&nbsp;index,
            int&nbsp;count,
            double[]&nbsp;pos,
-           <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the text in the array, with each character's origin specified by the pos array.</div>
+           <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the text in the array, with each character's origin specified by the pos array.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpostext(java.lang.string, double[], com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawpostext</a></strong>(java.lang.string&nbsp;text,
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawpostext(java.lang.string, double[], com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawPosText</a></strong>(java.lang.String&nbsp;text,
            double[]&nbsp;pos,
-           <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the text in the array, with each character's origin specified by the pos array.</div>
+           <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the text in the array, with each character's origin specified by the pos array.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawrect(double, double, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawrect</a></strong>(double&nbsp;left,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawrect(double, double, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawRect</a></strong>(double&nbsp;left,
         double&nbsp;top,
         double&nbsp;right,
         double&nbsp;bottom,
-        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the specified rect using the specified paint.</div>
+        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the specified Rect using the specified paint.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawrect(android.graphics.rect, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawrect</a></strong>(android.graphics.rect&nbsp;r,
-        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the specified rect using the specified paint.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawrect(android.graphics.rect, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawRect</a></strong>(android.graphics.Rect&nbsp;r,
+        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the specified Rect using the specified Paint.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawrgb(int, int, int)">drawrgb</a></strong>(int&nbsp;r,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawrgb(int, int, int)">drawRGB</a></strong>(int&nbsp;r,
        int&nbsp;g,
        int&nbsp;b)</code>
-<div class="block">fill the entire canvas' bitmap (restricted to the current clip) with the specified rgb
+<div class="block">Fill the entire canvas' bitmap (restricted to the current clip) with the specified RGB
  color,
  using srcover porterduff mode.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawroundrect(android.graphics.rect, float, float, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawroundrect</a></strong>(android.graphics.rect&nbsp;rect,
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawroundrect(android.graphics.rect, float, float, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawRoundRect</a></strong>(android.graphics.Rect&nbsp;rect,
              float&nbsp;rx,
              float&nbsp;ry,
-             <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the specified round-rect using the specified paint.</div>
+             <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the specified round-rect using the specified paint.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawtext(char[], int, int, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawtext</a></strong>(char[]&nbsp;text,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawtext(char[], int, int, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawText</a></strong>(char[]&nbsp;text,
         int&nbsp;index,
         int&nbsp;count,
         double&nbsp;x,
         double&nbsp;y,
-        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the text, with origin at (x,y), using the specified paint.</div>
+        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the text, with origin at (x,y), using the specified paint.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawtext(java.lang.charsequence, int, int, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawtext</a></strong>(java.lang.charsequence&nbsp;text,
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawtext(java.lang.charsequence, int, int, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawText</a></strong>(java.lang.CharSequence&nbsp;text,
         int&nbsp;start,
         int&nbsp;end,
         double&nbsp;x,
         double&nbsp;y,
-        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the specified range of text, specified by start/end, with its origin at (x,y), in the
- specified paint.</div>
+        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the specified range of text, specified by start/end, with its origin at (x,y), in the
+ specified Paint.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawtext(java.lang.string, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawtext</a></strong>(java.lang.string&nbsp;text,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawtext(java.lang.string, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawText</a></strong>(java.lang.String&nbsp;text,
         double&nbsp;x,
         double&nbsp;y,
-        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the text, with origin at (x,y), using the specified paint.</div>
+        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the text, with origin at (x,y), using the specified paint.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawtext(java.lang.string, int, int, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawtext</a></strong>(java.lang.string&nbsp;text,
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawtext(java.lang.string, int, int, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawText</a></strong>(java.lang.String&nbsp;text,
         int&nbsp;start,
         int&nbsp;end,
         double&nbsp;x,
         double&nbsp;y,
-        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the text, with origin at (x,y), using the specified paint.</div>
+        <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the text, with origin at (x,y), using the specified paint.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawtextonpath(char[], int, int, com.mapbox.mapboxsdk.views.safecanvas.safetranslatedpath, float, float, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawtextonpath</a></strong>(char[]&nbsp;text,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawtextonpath(char[], int, int, com.mapbox.mapboxsdk.views.safecanvas.safetranslatedpath, float, float, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawTextOnPath</a></strong>(char[]&nbsp;text,
               int&nbsp;index,
               int&nbsp;count,
-              <a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedpath</a>&nbsp;path,
-              float&nbsp;hoffset,
-              float&nbsp;voffset,
-              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the text, with origin at (x,y), using the specified paint, along the specified path.</div>
+              <a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedPath</a>&nbsp;path,
+              float&nbsp;hOffset,
+              float&nbsp;vOffset,
+              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the text, with origin at (x,y), using the specified paint, along the specified path.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawtextonpath(java.lang.string, com.mapbox.mapboxsdk.views.safecanvas.safetranslatedpath, float, float, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawtextonpath</a></strong>(java.lang.string&nbsp;text,
-              <a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedpath</a>&nbsp;path,
-              float&nbsp;hoffset,
-              float&nbsp;voffset,
-              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the text, with origin at (x,y), using the specified paint, along the specified path.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawtextonpath(java.lang.string, com.mapbox.mapboxsdk.views.safecanvas.safetranslatedpath, float, float, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawTextOnPath</a></strong>(java.lang.String&nbsp;text,
+              <a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedPath</a>&nbsp;path,
+              float&nbsp;hOffset,
+              float&nbsp;vOffset,
+              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the text, with origin at (x,y), using the specified paint, along the specified path.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawvertices(android.graphics.canvas.vertexmode, int, double[], int, float[], int, int[], int, short[], int, int, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawvertices</a></strong>(android.graphics.canvas.vertexmode&nbsp;mode,
-            int&nbsp;vertexcount,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#drawvertices(android.graphics.canvas.vertexmode, int, double[], int, float[], int, int[], int, short[], int, int, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">drawVertices</a></strong>(android.graphics.Canvas.VertexMode&nbsp;mode,
+            int&nbsp;vertexCount,
             double[]&nbsp;verts,
-            int&nbsp;vertoffset,
+            int&nbsp;vertOffset,
             float[]&nbsp;texs,
-            int&nbsp;texoffset,
+            int&nbsp;texOffset,
             int[]&nbsp;colors,
-            int&nbsp;coloroffset,
+            int&nbsp;colorOffset,
             short[]&nbsp;indices,
-            int&nbsp;indexoffset,
-            int&nbsp;indexcount,
-            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</code>
-<div class="block">draw the array of vertices, interpreted as triangles (based on mode).</div>
+            int&nbsp;indexOffset,
+            int&nbsp;indexCount,
+            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</code>
+<div class="block">Draw the array of vertices, interpreted as triangles (based on mode).</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>android.graphics.rect</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getclipbounds()">getclipbounds</a></strong>()</code>
-<div class="block">retrieve the clip bounds.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>android.graphics.Rect</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getclipbounds()">getClipBounds</a></strong>()</code>
+<div class="block">Retrieve the clip bounds.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getclipbounds(android.graphics.rect)">getclipbounds</a></strong>(android.graphics.rect&nbsp;bounds)</code>
-<div class="block">retrieve the clip bounds, returning true if they are non-empty.</div>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getclipbounds(android.graphics.rect)">getClipBounds</a></strong>(android.graphics.Rect&nbsp;bounds)</code>
+<div class="block">Retrieve the clip bounds, returning true if they are non-empty.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getdensity()">getdensity</a></strong>()</code>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getdensity()">getDensity</a></strong>()</code>
 <div class="block">
- returns the target density of the canvas.</div>
+ Returns the target density of the canvas.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>android.graphics.drawfilter</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getdrawfilter()">getdrawfilter</a></strong>()</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.DrawFilter</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getdrawfilter()">getDrawFilter</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getheight()">getheight</a></strong>()</code>
-<div class="block">returns the height of the current drawing layer</div>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getheight()">getHeight</a></strong>()</code>
+<div class="block">Returns the height of the current drawing layer</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>android.graphics.matrix</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getmatrix()">getmatrix</a></strong>()</code>
-<div class="block">return a new matrix with a copy of the canvas' current transformation matrix.</div>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.Matrix</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getmatrix()">getMatrix</a></strong>()</code>
+<div class="block">Return a new matrix with a copy of the canvas' current transformation matrix.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getmatrix(android.graphics.matrix)">getmatrix</a></strong>(android.graphics.matrix&nbsp;ctm)</code>
-<div class="block">return, in ctm, the current transformation matrix.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getmatrix(android.graphics.matrix)">getMatrix</a></strong>(android.graphics.Matrix&nbsp;ctm)</code>
+<div class="block">Return, in ctm, the current transformation matrix.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>android.graphics.canvas</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getsafecanvas()">getsafecanvas</a></strong>()</code>
-<div class="block">gets this safe canvas as an android <code>native</code> class.</div>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.Canvas</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getsafecanvas()">getSafeCanvas</a></strong>()</code>
+<div class="block">Gets this safe canvas as an Android <code>Native</code> class.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getsavecount()">getsavecount</a></strong>()</code>
-<div class="block">returns the number of matrix/clip states on the canvas' private stack.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getsavecount()">getSaveCount</a></strong>()</code>
+<div class="block">Returns the number of matrix/clip states on the Canvas' private stack.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas.unsafecanvashandler" title="interface in com.mapbox.mapboxsdk.views.safecanvas">isafecanvas.unsafecanvashandler</a>&nbsp;handler)</code>
-<div class="block">allows access to the original unsafe canvas through an <a href="{{site.baseurl}}/api/isafecanvas.unsafecanvashandler" title="interface in com.mapbox.mapboxsdk.views.safecanvas"><code>isafecanvas.unsafecanvashandler</code></a>.</div>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas.unsafecanvashandler" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas.UnsafeCanvasHandler</a>&nbsp;handler)</code>
+<div class="block">Allows access to the original unsafe canvas through an <a href="{{site.baseurl}}/api/isafecanvas.unsafecanvashandler" title="interface in com.mapbox.mapboxsdk.views.safecanvas"><code>ISafeCanvas.UnsafeCanvasHandler</code></a>.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getwidth()">getwidth</a></strong>()</code>
-<div class="block">returns the width of the current drawing layer</div>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getwidth()">getWidth</a></strong>()</code>
+<div class="block">Returns the width of the current drawing layer</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>android.graphics.canvas</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getwrappedcanvas()">getwrappedcanvas</a></strong>()</code>
-<div class="block">gets the wrapped canvas.</div>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.Canvas</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getwrappedcanvas()">getWrappedCanvas</a></strong>()</code>
+<div class="block">Gets the wrapped canvas.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getxoffset()">getxoffset</a></strong>()</code>
-<div class="block">gets the x-offset that will be used to adjust all drawing values.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getxoffset()">getXOffset</a></strong>()</code>
+<div class="block">Gets the x-offset that will be used to adjust all drawing values.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getyoffset()">getyoffset</a></strong>()</code>
-<div class="block">gets the y-offset that will be used to adjust all drawing values.</div>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#getyoffset()">getYOffset</a></strong>()</code>
+<div class="block">Gets the y-offset that will be used to adjust all drawing values.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#isopaque()">isopaque</a></strong>()</code>
-<div class="block">return true if the device that the current layer draws into is opaque (i.e.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#isopaque()">isOpaque</a></strong>()</code>
+<div class="block">Return true if the device that the current layer draws into is opaque (i.e.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#quickreject(double, double, double, double, android.graphics.canvas.edgetype)">quickreject</a></strong>(double&nbsp;left,
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#quickreject(double, double, double, double, android.graphics.canvas.edgetype)">quickReject</a></strong>(double&nbsp;left,
            double&nbsp;top,
            double&nbsp;right,
            double&nbsp;bottom,
-           android.graphics.canvas.edgetype&nbsp;type)</code>
-<div class="block">return true if the specified rectangle, after being transformed by the current matrix, would
+           android.graphics.Canvas.EdgeType&nbsp;type)</code>
+<div class="block">Return true if the specified rectangle, after being transformed by the current matrix, would
  lie completely outside of the current clip.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#quickreject(android.graphics.rect, android.graphics.canvas.edgetype)">quickreject</a></strong>(android.graphics.rect&nbsp;rect,
-           android.graphics.canvas.edgetype&nbsp;type)</code>
-<div class="block">return true if the specified rectangle, after being transformed by the current matrix, would
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#quickreject(android.graphics.rect, android.graphics.canvas.edgetype)">quickReject</a></strong>(android.graphics.Rect&nbsp;rect,
+           android.graphics.Canvas.EdgeType&nbsp;type)</code>
+<div class="block">Return true if the specified rectangle, after being transformed by the current matrix, would
  lie completely outside of the current clip.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedpath</a>&nbsp;path,
-           android.graphics.canvas.edgetype&nbsp;type)</code>
-<div class="block">return true if the specified path, after being transformed by the current matrix, would lie
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedPath</a>&nbsp;path,
+           android.graphics.Canvas.EdgeType&nbsp;type)</code>
+<div class="block">Return true if the specified path, after being transformed by the current matrix, would lie
  completely outside of the current clip.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#restore()">restore</a></strong>()</code>
-<div class="block">this call balances a previous call to save(), and is used to remove all modifications to the
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#restore()">restore</a></strong>()</code>
+<div class="block">This call balances a previous call to save(), and is used to remove all modifications to the
  matrix/clip state since the last save call.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#restoretocount(int)">restoretocount</a></strong>(int&nbsp;savecount)</code>
-<div class="block">efficient way to pop any calls to save() that happened after the save count reached
- savecount.</div>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#restoretocount(int)">restoreToCount</a></strong>(int&nbsp;saveCount)</code>
+<div class="block">Efficient way to pop any calls to save() that happened after the save count reached
+ saveCount.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#rotate(float)">rotate</a></strong>(float&nbsp;degrees)</code>
-<div class="block">preconcat the current matrix with the specified rotation.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#rotate(float)">rotate</a></strong>(float&nbsp;degrees)</code>
+<div class="block">Preconcat the current matrix with the specified rotation.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#rotate(float, double, double)">rotate</a></strong>(float&nbsp;degrees,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#rotate(float, double, double)">rotate</a></strong>(float&nbsp;degrees,
       double&nbsp;px,
       double&nbsp;py)</code>
-<div class="block">preconcat the current matrix with the specified rotation.</div>
+<div class="block">Preconcat the current matrix with the specified rotation.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#save()">save</a></strong>()</code>
-<div class="block">saves the current matrix and clip onto a private stack.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#save()">save</a></strong>()</code>
+<div class="block">Saves the current matrix and clip onto a private stack.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#save(int)">save</a></strong>(int&nbsp;saveflags)</code>
-<div class="block">based on saveflags, can save the current matrix and clip onto a private stack.</div>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#save(int)">save</a></strong>(int&nbsp;saveFlags)</code>
+<div class="block">Based on saveFlags, can save the current matrix and clip onto a private stack.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#savelayer(double, double, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint, int)">savelayer</a></strong>(double&nbsp;left,
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#savelayer(double, double, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint, int)">saveLayer</a></strong>(double&nbsp;left,
          double&nbsp;top,
          double&nbsp;right,
          double&nbsp;bottom,
-         <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint,
-         int&nbsp;saveflags)</code>
-<div class="block">helper version of savelayer() that takes 4 values rather than a rectf.</div>
+         <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint,
+         int&nbsp;saveFlags)</code>
+<div class="block">Helper version of saveLayer() that takes 4 values rather than a RectF.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#savelayer(android.graphics.rect, com.mapbox.mapboxsdk.views.safecanvas.safepaint, int)">savelayer</a></strong>(android.graphics.rect&nbsp;bounds,
-         <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint,
-         int&nbsp;saveflags)</code>
-<div class="block">this behaves the same as save(), but in addition it allocates an offscreen bitmap.</div>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#savelayer(android.graphics.rect, com.mapbox.mapboxsdk.views.safecanvas.safepaint, int)">saveLayer</a></strong>(android.graphics.Rect&nbsp;bounds,
+         <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint,
+         int&nbsp;saveFlags)</code>
+<div class="block">This behaves the same as save(), but in addition it allocates an offscreen bitmap.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#savelayeralpha(double, double, double, double, int, int)">savelayeralpha</a></strong>(double&nbsp;left,
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#savelayeralpha(double, double, double, double, int, int)">saveLayerAlpha</a></strong>(double&nbsp;left,
               double&nbsp;top,
               double&nbsp;right,
               double&nbsp;bottom,
               int&nbsp;alpha,
-              int&nbsp;saveflags)</code>
-<div class="block">helper for savelayeralpha() that takes 4 values instead of a rectf.</div>
+              int&nbsp;saveFlags)</code>
+<div class="block">Helper for saveLayerAlpha() that takes 4 values instead of a RectF.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#savelayeralpha(android.graphics.rect, int, int)">savelayeralpha</a></strong>(android.graphics.rect&nbsp;bounds,
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#savelayeralpha(android.graphics.rect, int, int)">saveLayerAlpha</a></strong>(android.graphics.Rect&nbsp;bounds,
               int&nbsp;alpha,
-              int&nbsp;saveflags)</code>
-<div class="block">this behaves the same as save(), but in addition it allocates an offscreen bitmap.</div>
+              int&nbsp;saveFlags)</code>
+<div class="block">This behaves the same as save(), but in addition it allocates an offscreen bitmap.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#scale(float, float)">scale</a></strong>(float&nbsp;sx,
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#scale(float, float)">scale</a></strong>(float&nbsp;sx,
      float&nbsp;sy)</code>
-<div class="block">preconcat the current matrix with the specified scale.</div>
+<div class="block">Preconcat the current matrix with the specified scale.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#scale(float, float, double, double)">scale</a></strong>(float&nbsp;sx,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#scale(float, float, double, double)">scale</a></strong>(float&nbsp;sx,
      float&nbsp;sy,
      double&nbsp;px,
      double&nbsp;py)</code>
-<div class="block">preconcat the current matrix with the specified scale.</div>
+<div class="block">Preconcat the current matrix with the specified scale.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#setbitmap(android.graphics.bitmap)">setbitmap</a></strong>(android.graphics.bitmap&nbsp;bitmap)</code>
-<div class="block">specify a bitmap for the canvas to draw into.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#setbitmap(android.graphics.bitmap)">setBitmap</a></strong>(android.graphics.Bitmap&nbsp;bitmap)</code>
+<div class="block">Specify a bitmap for the canvas to draw into.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)">setdensity</a></strong>(int&nbsp;density)</code>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)">setDensity</a></strong>(int&nbsp;density)</code>
 <div class="block"><p/>
- specifies the density for this canvas' backing bitmap.</div>
+ Specifies the density for this Canvas' backing bitmap.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#setdrawfilter(android.graphics.drawfilter)">setdrawfilter</a></strong>(android.graphics.drawfilter&nbsp;filter)</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#setdrawfilter(android.graphics.drawfilter)">setDrawFilter</a></strong>(android.graphics.DrawFilter&nbsp;filter)</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#setmatrix(android.graphics.matrix)">setmatrix</a></strong>(android.graphics.matrix&nbsp;matrix)</code>
-<div class="block">completely replace the current matrix with the specified matrix.</div>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#setmatrix(android.graphics.matrix)">setMatrix</a></strong>(android.graphics.Matrix&nbsp;matrix)</code>
+<div class="block">Completely replace the current matrix with the specified matrix.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#skew(float, float)">skew</a></strong>(float&nbsp;sx,
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#skew(float, float)">skew</a></strong>(float&nbsp;sx,
     float&nbsp;sy)</code>
-<div class="block">preconcat the current matrix with the specified skew.</div>
+<div class="block">Preconcat the current matrix with the specified skew.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>void</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#translate(float, float)">translate</a></strong>(float&nbsp;dx,
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas#translate(float, float)">translate</a></strong>(float&nbsp;dx,
          float&nbsp;dy)</code>
-<div class="block">preconcat the current matrix with the specified translation</div>
+<div class="block">Preconcat the current matrix with the specified translation</div>
 </td>
 </tr>
 </table>
@@ -738,145 +738,145 @@ tags: views
 <div class="details">
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="getxoffset()">
+<h3>Method Detail</h3>
+<a name="getXOffset()">
 <!--   -->
 </a>
 
 
-<h4>getxoffset</h4>
-<pre>int&nbsp;getxoffset()</pre>
-<div class="block">gets the x-offset that will be used to adjust all drawing values.</div>
+<h4>getXOffset</h4>
+<pre>int&nbsp;getXOffset()</pre>
+<div class="block">Gets the x-offset that will be used to adjust all drawing values.</div>
 
 
-<a name="getyoffset()">
+<a name="getYOffset()">
 <!--   -->
 </a>
 
 
-<h4>getyoffset</h4>
-<pre>int&nbsp;getyoffset()</pre>
-<div class="block">gets the y-offset that will be used to adjust all drawing values.</div>
+<h4>getYOffset</h4>
+<pre>int&nbsp;getYOffset()</pre>
+<div class="block">Gets the y-offset that will be used to adjust all drawing values.</div>
 
 
-<a name="getunsafecanvas(com.mapbox.mapboxsdk.views.safecanvas.isafecanvas.unsafecanvashandler)">
+<a name="getUnsafeCanvas(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas.UnsafeCanvasHandler)">
 <!--   -->
 </a>
 
 
-<h4>getunsafecanvas</h4>
-<pre>void&nbsp;getunsafecanvas(<a href="{{site.baseurl}}/api/isafecanvas.unsafecanvashandler" title="interface in com.mapbox.mapboxsdk.views.safecanvas">isafecanvas.unsafecanvashandler</a>&nbsp;handler)</pre>
-<div class="block">allows access to the original unsafe canvas through an <a href="{{site.baseurl}}/api/isafecanvas.unsafecanvashandler" title="interface in com.mapbox.mapboxsdk.views.safecanvas"><code>isafecanvas.unsafecanvashandler</code></a>.</div>
+<h4>getUnsafeCanvas</h4>
+<pre>void&nbsp;getUnsafeCanvas(<a href="{{site.baseurl}}/api/isafecanvas.unsafecanvashandler" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas.UnsafeCanvasHandler</a>&nbsp;handler)</pre>
+<div class="block">Allows access to the original unsafe canvas through an <a href="{{site.baseurl}}/api/isafecanvas.unsafecanvashandler" title="interface in com.mapbox.mapboxsdk.views.safecanvas"><code>ISafeCanvas.UnsafeCanvasHandler</code></a>.</div>
 
 
-<a name="getwrappedcanvas()">
+<a name="getWrappedCanvas()">
 <!--   -->
 </a>
 
 
-<h4>getwrappedcanvas</h4>
-<pre>android.graphics.canvas&nbsp;getwrappedcanvas()</pre>
-<div class="block">gets the wrapped canvas. this canvas will have a coordinate system where the origin is at
+<h4>getWrappedCanvas</h4>
+<pre>android.graphics.Canvas&nbsp;getWrappedCanvas()</pre>
+<div class="block">Gets the wrapped canvas. This canvas will have a coordinate system where the origin is at
  the
  center of the screen, but will not automatically adjust values passed to its drawing
  methods.</div>
 
 
-<a name="getsafecanvas()">
+<a name="getSafeCanvas()">
 <!--   -->
 </a>
 
 
-<h4>getsafecanvas</h4>
-<pre>android.graphics.canvas&nbsp;getsafecanvas()</pre>
-<div class="block">gets this safe canvas as an android <code>native</code> class. this canvas will have a coordinate
+<h4>getSafeCanvas</h4>
+<pre>android.graphics.Canvas&nbsp;getSafeCanvas()</pre>
+<div class="block">Gets this safe canvas as an Android <code>Native</code> class. This canvas will have a coordinate
  system where the origin is at the center of the screen, and will automatically adjust values
- passed to its drawing methods by <a href="{{site.baseurl}}/api/isafecanvas#getyoffset()"><code>getyoffset()</code></a>.</div>
+ passed to its drawing methods by <a href="{{site.baseurl}}/api/isafecanvas#getyoffset()"><code>getYOffset()</code></a>.</div>
 
 
-<a name="setbitmap(android.graphics.bitmap)">
+<a name="setBitmap(android.graphics.Bitmap)">
 <!--   -->
 </a>
 
 
-<h4>setbitmap</h4>
-<pre>void&nbsp;setbitmap(android.graphics.bitmap&nbsp;bitmap)</pre>
-<div class="block">specify a bitmap for the canvas to draw into. as a side-effect, also updates the canvas's
+<h4>setBitmap</h4>
+<pre>void&nbsp;setBitmap(android.graphics.Bitmap&nbsp;bitmap)</pre>
+<div class="block">Specify a bitmap for the canvas to draw into. As a side-effect, also updates the canvas's
  target density to match that of the bitmap.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>bitmap</code> - specifies a mutable bitmap for the canvas to draw into.</dd><dt><span class="strong">see also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)"><code>setdensity(int)</code></a>, 
-<a href="{{site.baseurl}}/api/isafecanvas#getdensity()"><code>getdensity()</code></a></dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>bitmap</code> - Specifies a mutable bitmap for the canvas to draw into.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)"><code>setDensity(int)</code></a>, 
+<a href="{{site.baseurl}}/api/isafecanvas#getdensity()"><code>getDensity()</code></a></dd></dl>
 
 
-<a name="isopaque()">
+<a name="isOpaque()">
 <!--   -->
 </a>
 
 
-<h4>isopaque</h4>
-<pre>boolean&nbsp;isopaque()</pre>
-<div class="block">return true if the device that the current layer draws into is opaque (i.e. does not support
+<h4>isOpaque</h4>
+<pre>boolean&nbsp;isOpaque()</pre>
+<div class="block">Return true if the device that the current layer draws into is opaque (i.e. does not support
  per-pixel alpha).</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>true if the device that the current layer draws into is opaque</dd></dl>
+<dl><dt><span class="strong">Returns:</span></dt><dd>true if the device that the current layer draws into is opaque</dd></dl>
 
 
-<a name="getwidth()">
+<a name="getWidth()">
 <!--   -->
 </a>
 
 
-<h4>getwidth</h4>
-<pre>int&nbsp;getwidth()</pre>
-<div class="block">returns the width of the current drawing layer</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the width of the current drawing layer</dd></dl>
+<h4>getWidth</h4>
+<pre>int&nbsp;getWidth()</pre>
+<div class="block">Returns the width of the current drawing layer</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the width of the current drawing layer</dd></dl>
 
 
-<a name="getheight()">
+<a name="getHeight()">
 <!--   -->
 </a>
 
 
-<h4>getheight</h4>
-<pre>int&nbsp;getheight()</pre>
-<div class="block">returns the height of the current drawing layer</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the height of the current drawing layer</dd></dl>
+<h4>getHeight</h4>
+<pre>int&nbsp;getHeight()</pre>
+<div class="block">Returns the height of the current drawing layer</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the height of the current drawing layer</dd></dl>
 
 
-<a name="getdensity()">
+<a name="getDensity()">
 <!--   -->
 </a>
 
 
-<h4>getdensity</h4>
-<pre>int&nbsp;getdensity()</pre>
+<h4>getDensity</h4>
+<pre>int&nbsp;getDensity()</pre>
 <div class="block"><p>
- returns the target density of the canvas. the default density is derived from the density of
- its backing bitmap, or <code>bitmap.density_none</code> if there is not one.
+ Returns the target density of the canvas. The default density is derived from the density of
+ its backing bitmap, or <code>Bitmap.DENSITY_NONE</code> if there is not one.
  </p></div>
-<dl><dt><span class="strong">returns:</span></dt><dd>returns the current target density of the canvas, which is used to determine the
- scaling factor when drawing a bitmap into it.</dd><dt><span class="strong">see also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)"><code>setdensity(int)</code></a>, 
-<code>bitmap.getdensity()</code></dd></dl>
+<dl><dt><span class="strong">Returns:</span></dt><dd>Returns the current target density of the canvas, which is used to determine the
+ scaling factor when drawing a bitmap into it.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)"><code>setDensity(int)</code></a>, 
+<code>Bitmap.getDensity()</code></dd></dl>
 
 
-<a name="setdensity(int)">
+<a name="setDensity(int)">
 <!--   -->
 </a>
 
 
-<h4>setdensity</h4>
-<pre>void&nbsp;setdensity(int&nbsp;density)</pre>
+<h4>setDensity</h4>
+<pre>void&nbsp;setDensity(int&nbsp;density)</pre>
 <div class="block"><p/>
- specifies the density for this canvas' backing bitmap. this modifies the target density of
+ Specifies the density for this Canvas' backing bitmap. This modifies the target density of
  the canvas itself, as well as the density of its backing bitmap via
- <code>bitmap.setdensity(int)</code>.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>density</code> - the new target density of the canvas, which is used to determine the scaling
- factor when drawing a bitmap into it. use <code>bitmap.density_none</code> to disable
- bitmap scaling.</dd><dt><span class="strong">see also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#getdensity()"><code>getdensity()</code></a>, 
-<code>bitmap.setdensity(int)</code></dd></dl>
+ <code>Bitmap.setDensity(int)</code>.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>density</code> - The new target density of the canvas, which is used to determine the scaling
+ factor when drawing a bitmap into it. Use <code>Bitmap.DENSITY_NONE</code> to disable
+ bitmap scaling.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#getdensity()"><code>getDensity()</code></a>, 
+<code>Bitmap.setDensity(int)</code></dd></dl>
 
 
 <a name="save()">
@@ -886,12 +886,12 @@ tags: views
 
 <h4>save</h4>
 <pre>int&nbsp;save()</pre>
-<div class="block">saves the current matrix and clip onto a private stack. subsequent calls to
- translate,scale,rotate,skew,concat or cliprect,clippath will all operate as usual, but when
+<div class="block">Saves the current matrix and clip onto a private stack. Subsequent calls to
+ translate,scale,rotate,skew,concat or clipRect,clipPath will all operate as usual, but when
  the balancing call to restore() is made, those calls will be forgotten, and the settings
  that
  existed before the save() will be reinstated.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the value to pass to restoretocount() to balance this save()</dd></dl>
+<dl><dt><span class="strong">Returns:</span></dt><dd>The value to pass to restoreToCount() to balance this save()</dd></dl>
 
 
 <a name="save(int)">
@@ -900,82 +900,82 @@ tags: views
 
 
 <h4>save</h4>
-<pre>int&nbsp;save(int&nbsp;saveflags)</pre>
-<div class="block">based on saveflags, can save the current matrix and clip onto a private stack. subsequent
- calls to translate,scale,rotate,skew,concat or cliprect,clippath will all operate as usual,
+<pre>int&nbsp;save(int&nbsp;saveFlags)</pre>
+<div class="block">Based on saveFlags, can save the current matrix and clip onto a private stack. Subsequent
+ calls to translate,scale,rotate,skew,concat or clipRect,clipPath will all operate as usual,
  but when the balancing call to restore() is made, those calls will be forgotten, and the
  settings that existed before the save() will be reinstated.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>saveflags</code> - flag bits that specify which parts of the canvas state to save/restore</dd>
-<dt><span class="strong">returns:</span></dt><dd>the value to pass to restoretocount() to balance this save()</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>saveFlags</code> - flag bits that specify which parts of the Canvas state to save/restore</dd>
+<dt><span class="strong">Returns:</span></dt><dd>The value to pass to restoreToCount() to balance this save()</dd></dl>
 
 
-<a name="savelayer(android.graphics.rect, com.mapbox.mapboxsdk.views.safecanvas.safepaint, int)">
+<a name="saveLayer(android.graphics.Rect, com.mapbox.mapboxsdk.views.safecanvas.SafePaint, int)">
 <!--   -->
 </a>
 
 
-<h4>savelayer</h4>
-<pre>int&nbsp;savelayer(android.graphics.rect&nbsp;bounds,
-            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint,
-            int&nbsp;saveflags)</pre>
-<div class="block">this behaves the same as save(), but in addition it allocates an offscreen bitmap. all
+<h4>saveLayer</h4>
+<pre>int&nbsp;saveLayer(android.graphics.Rect&nbsp;bounds,
+            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint,
+            int&nbsp;saveFlags)</pre>
+<div class="block">This behaves the same as save(), but in addition it allocates an offscreen bitmap. All
  drawing calls are directed there, and only when the balancing call to restore() is made is
- that offscreen transfered to the canvas (or the previous layer). subsequent calls to
- translate, scale, rotate, skew, concat or cliprect, clippath all operate on this copy. when
+ that offscreen transfered to the canvas (or the previous layer). Subsequent calls to
+ translate, scale, rotate, skew, concat or clipRect, clipPath all operate on this copy. When
  the balancing call to restore() is made, this copy is deleted and the previous matrix/clip
  state is restored.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>bounds</code> - may be null. the maximum size the offscreen bitmap needs to be (in local
- coordinates)</dd><dd><code>paint</code> - this is copied, and is applied to the offscreen when restore() is called.</dd><dd><code>saveflags</code> - see _save_flag constants</dd>
-<dt><span class="strong">returns:</span></dt><dd>value to pass to restoretocount() to balance this save()</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>bounds</code> - May be null. The maximum size the offscreen bitmap needs to be (in local
+ coordinates)</dd><dd><code>paint</code> - This is copied, and is applied to the offscreen when restore() is called.</dd><dd><code>saveFlags</code> - see _SAVE_FLAG constants</dd>
+<dt><span class="strong">Returns:</span></dt><dd>value to pass to restoreToCount() to balance this save()</dd></dl>
 
 
-<a name="savelayer(double, double, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint, int)">
+<a name="saveLayer(double, double, double, double, com.mapbox.mapboxsdk.views.safecanvas.SafePaint, int)">
 <!--   -->
 </a>
 
 
-<h4>savelayer</h4>
-<pre>int&nbsp;savelayer(double&nbsp;left,
+<h4>saveLayer</h4>
+<pre>int&nbsp;saveLayer(double&nbsp;left,
             double&nbsp;top,
             double&nbsp;right,
             double&nbsp;bottom,
-            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint,
-            int&nbsp;saveflags)</pre>
-<div class="block">helper version of savelayer() that takes 4 values rather than a rectf.</div>
+            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint,
+            int&nbsp;saveFlags)</pre>
+<div class="block">Helper version of saveLayer() that takes 4 values rather than a RectF.</div>
 
 
-<a name="savelayeralpha(android.graphics.rect, int, int)">
+<a name="saveLayerAlpha(android.graphics.Rect, int, int)">
 <!--   -->
 </a>
 
 
-<h4>savelayeralpha</h4>
-<pre>int&nbsp;savelayeralpha(android.graphics.rect&nbsp;bounds,
+<h4>saveLayerAlpha</h4>
+<pre>int&nbsp;saveLayerAlpha(android.graphics.Rect&nbsp;bounds,
                  int&nbsp;alpha,
-                 int&nbsp;saveflags)</pre>
-<div class="block">this behaves the same as save(), but in addition it allocates an offscreen bitmap. all
+                 int&nbsp;saveFlags)</pre>
+<div class="block">This behaves the same as save(), but in addition it allocates an offscreen bitmap. All
  drawing calls are directed there, and only when the balancing call to restore() is made is
- that offscreen transfered to the canvas (or the previous layer). subsequent calls to
- translate, scale, rotate, skew, concat or cliprect, clippath all operate on this copy. when
+ that offscreen transfered to the canvas (or the previous layer). Subsequent calls to
+ translate, scale, rotate, skew, concat or clipRect, clipPath all operate on this copy. When
  the balancing call to restore() is made, this copy is deleted and the previous matrix/clip
  state is restored.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>bounds</code> - the maximum size the offscreen bitmap needs to be (in local coordinates)</dd><dd><code>alpha</code> - the alpha to apply to the offscreen when when it is drawn during restore()</dd><dd><code>saveflags</code> - see _save_flag constants</dd>
-<dt><span class="strong">returns:</span></dt><dd>value to pass to restoretocount() to balance this call</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>bounds</code> - The maximum size the offscreen bitmap needs to be (in local coordinates)</dd><dd><code>alpha</code> - The alpha to apply to the offscreen when when it is drawn during restore()</dd><dd><code>saveFlags</code> - see _SAVE_FLAG constants</dd>
+<dt><span class="strong">Returns:</span></dt><dd>value to pass to restoreToCount() to balance this call</dd></dl>
 
 
-<a name="savelayeralpha(double, double, double, double, int, int)">
+<a name="saveLayerAlpha(double, double, double, double, int, int)">
 <!--   -->
 </a>
 
 
-<h4>savelayeralpha</h4>
-<pre>int&nbsp;savelayeralpha(double&nbsp;left,
+<h4>saveLayerAlpha</h4>
+<pre>int&nbsp;saveLayerAlpha(double&nbsp;left,
                  double&nbsp;top,
                  double&nbsp;right,
                  double&nbsp;bottom,
                  int&nbsp;alpha,
-                 int&nbsp;saveflags)</pre>
-<div class="block">helper for savelayeralpha() that takes 4 values instead of a rectf.</div>
+                 int&nbsp;saveFlags)</pre>
+<div class="block">Helper for saveLayerAlpha() that takes 4 values instead of a RectF.</div>
 
 
 <a name="restore()">
@@ -985,36 +985,36 @@ tags: views
 
 <h4>restore</h4>
 <pre>void&nbsp;restore()</pre>
-<div class="block">this call balances a previous call to save(), and is used to remove all modifications to the
- matrix/clip state since the last save call. it is an error to call restore() more times than
+<div class="block">This call balances a previous call to save(), and is used to remove all modifications to the
+ matrix/clip state since the last save call. It is an error to call restore() more times than
  save() was called.</div>
 
 
-<a name="getsavecount()">
+<a name="getSaveCount()">
 <!--   -->
 </a>
 
 
-<h4>getsavecount</h4>
-<pre>int&nbsp;getsavecount()</pre>
-<div class="block">returns the number of matrix/clip states on the canvas' private stack. this will equal #
+<h4>getSaveCount</h4>
+<pre>int&nbsp;getSaveCount()</pre>
+<div class="block">Returns the number of matrix/clip states on the Canvas' private stack. This will equal #
  save() calls - # restore() calls.</div>
 
 
-<a name="restoretocount(int)">
+<a name="restoreToCount(int)">
 <!--   -->
 </a>
 
 
-<h4>restoretocount</h4>
-<pre>void&nbsp;restoretocount(int&nbsp;savecount)</pre>
-<div class="block">efficient way to pop any calls to save() that happened after the save count reached
- savecount. it is an error for savecount to be less than 1.
+<h4>restoreToCount</h4>
+<pre>void&nbsp;restoreToCount(int&nbsp;saveCount)</pre>
+<div class="block">Efficient way to pop any calls to save() that happened after the save count reached
+ saveCount. It is an error for saveCount to be less than 1.
  <p/>
- example: int count = canvas.save(); ... // more calls potentially to save()
- canvas.restoretocount(count); // now the canvas is back in the same state it was before the
+ Example: int count = canvas.save(); ... // more calls potentially to save()
+ canvas.restoreToCount(count); // now the canvas is back in the same state it was before the
  initial // call to save().</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>savecount</code> - the save level to restore to.</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>saveCount</code> - The save level to restore to.</dd></dl>
 
 
 <a name="translate(float, float)">
@@ -1025,8 +1025,8 @@ tags: views
 <h4>translate</h4>
 <pre>void&nbsp;translate(float&nbsp;dx,
              float&nbsp;dy)</pre>
-<div class="block">preconcat the current matrix with the specified translation</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>dx</code> - the distance to translate in x</dd><dd><code>dy</code> - the distance to translate in y</dd></dl>
+<div class="block">Preconcat the current matrix with the specified translation</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>dx</code> - The distance to translate in X</dd><dd><code>dy</code> - The distance to translate in Y</dd></dl>
 
 
 <a name="scale(float, float)">
@@ -1037,8 +1037,8 @@ tags: views
 <h4>scale</h4>
 <pre>void&nbsp;scale(float&nbsp;sx,
          float&nbsp;sy)</pre>
-<div class="block">preconcat the current matrix with the specified scale.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>sx</code> - the amount to scale in x</dd><dd><code>sy</code> - the amount to scale in y</dd></dl>
+<div class="block">Preconcat the current matrix with the specified scale.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>sx</code> - The amount to scale in X</dd><dd><code>sy</code> - The amount to scale in Y</dd></dl>
 
 
 <a name="scale(float, float, double, double)">
@@ -1051,8 +1051,8 @@ tags: views
          float&nbsp;sy,
          double&nbsp;px,
          double&nbsp;py)</pre>
-<div class="block">preconcat the current matrix with the specified scale.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>sx</code> - the amount to scale in x</dd><dd><code>sy</code> - the amount to scale in y</dd><dd><code>px</code> - the x-coord for the pivot point (unchanged by the scale)</dd><dd><code>py</code> - the y-coord for the pivot point (unchanged by the scale)</dd></dl>
+<div class="block">Preconcat the current matrix with the specified scale.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>sx</code> - The amount to scale in X</dd><dd><code>sy</code> - The amount to scale in Y</dd><dd><code>px</code> - The x-coord for the pivot point (unchanged by the scale)</dd><dd><code>py</code> - The y-coord for the pivot point (unchanged by the scale)</dd></dl>
 
 
 <a name="rotate(float)">
@@ -1062,8 +1062,8 @@ tags: views
 
 <h4>rotate</h4>
 <pre>void&nbsp;rotate(float&nbsp;degrees)</pre>
-<div class="block">preconcat the current matrix with the specified rotation.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>degrees</code> - the amount to rotate, in degrees</dd></dl>
+<div class="block">Preconcat the current matrix with the specified rotation.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>degrees</code> - The amount to rotate, in degrees</dd></dl>
 
 
 <a name="rotate(float, double, double)">
@@ -1075,8 +1075,8 @@ tags: views
 <pre>void&nbsp;rotate(float&nbsp;degrees,
           double&nbsp;px,
           double&nbsp;py)</pre>
-<div class="block">preconcat the current matrix with the specified rotation.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>degrees</code> - the amount to rotate, in degrees</dd><dd><code>px</code> - the x-coord for the pivot point (unchanged by the rotation)</dd><dd><code>py</code> - the y-coord for the pivot point (unchanged by the rotation)</dd></dl>
+<div class="block">Preconcat the current matrix with the specified rotation.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>degrees</code> - The amount to rotate, in degrees</dd><dd><code>px</code> - The x-coord for the pivot point (unchanged by the rotation)</dd><dd><code>py</code> - The y-coord for the pivot point (unchanged by the rotation)</dd></dl>
 
 
 <a name="skew(float, float)">
@@ -1087,895 +1087,895 @@ tags: views
 <h4>skew</h4>
 <pre>void&nbsp;skew(float&nbsp;sx,
         float&nbsp;sy)</pre>
-<div class="block">preconcat the current matrix with the specified skew.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>sx</code> - the amount to skew in x</dd><dd><code>sy</code> - the amount to skew in y</dd></dl>
+<div class="block">Preconcat the current matrix with the specified skew.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>sx</code> - The amount to skew in X</dd><dd><code>sy</code> - The amount to skew in Y</dd></dl>
 
 
-<a name="concat(android.graphics.matrix)">
+<a name="concat(android.graphics.Matrix)">
 <!--   -->
 </a>
 
 
 <h4>concat</h4>
-<pre>void&nbsp;concat(android.graphics.matrix&nbsp;matrix)</pre>
-<div class="block">preconcat the current matrix with the specified matrix.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>matrix</code> - the matrix to preconcatenate with the current matrix</dd></dl>
+<pre>void&nbsp;concat(android.graphics.Matrix&nbsp;matrix)</pre>
+<div class="block">Preconcat the current matrix with the specified matrix.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>matrix</code> - The matrix to preconcatenate with the current matrix</dd></dl>
 
 
-<a name="setmatrix(android.graphics.matrix)">
+<a name="setMatrix(android.graphics.Matrix)">
 <!--   -->
 </a>
 
 
-<h4>setmatrix</h4>
-<pre>void&nbsp;setmatrix(android.graphics.matrix&nbsp;matrix)</pre>
-<div class="block">completely replace the current matrix with the specified matrix. if the matrix parameter is
+<h4>setMatrix</h4>
+<pre>void&nbsp;setMatrix(android.graphics.Matrix&nbsp;matrix)</pre>
+<div class="block">Completely replace the current matrix with the specified matrix. If the matrix parameter is
  null, then the current matrix is reset to identity.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>matrix</code> - the matrix to replace the current matrix with. if it is null, set the current
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>matrix</code> - The matrix to replace the current matrix with. If it is null, set the current
  matrix to identity.</dd></dl>
 
 
-<a name="getmatrix(android.graphics.matrix)">
+<a name="getMatrix(android.graphics.Matrix)">
 <!--   -->
 </a>
 
 
-<h4>getmatrix</h4>
-<pre>void&nbsp;getmatrix(android.graphics.matrix&nbsp;ctm)</pre>
-<div class="block">return, in ctm, the current transformation matrix. this does not alter the matrix in the
+<h4>getMatrix</h4>
+<pre>void&nbsp;getMatrix(android.graphics.Matrix&nbsp;ctm)</pre>
+<div class="block">Return, in ctm, the current transformation matrix. This does not alter the matrix in the
  canvas, but just returns a copy of it.</div>
 
 
-<a name="getmatrix()">
+<a name="getMatrix()">
 <!--   -->
 </a>
 
 
-<h4>getmatrix</h4>
-<pre>android.graphics.matrix&nbsp;getmatrix()</pre>
-<div class="block">return a new matrix with a copy of the canvas' current transformation matrix.</div>
+<h4>getMatrix</h4>
+<pre>android.graphics.Matrix&nbsp;getMatrix()</pre>
+<div class="block">Return a new matrix with a copy of the canvas' current transformation matrix.</div>
 
 
-<a name="cliprect(android.graphics.rect, android.graphics.region.op)">
+<a name="clipRect(android.graphics.Rect, android.graphics.Region.Op)">
 <!--   -->
 </a>
 
 
-<h4>cliprect</h4>
-<pre>boolean&nbsp;cliprect(android.graphics.rect&nbsp;rect,
-               android.graphics.region.op&nbsp;op)</pre>
-<div class="block">modify the current clip with the specified rectangle, which is expressed in local
+<h4>clipRect</h4>
+<pre>boolean&nbsp;clipRect(android.graphics.Rect&nbsp;rect,
+               android.graphics.Region.Op&nbsp;op)</pre>
+<div class="block">Modify the current clip with the specified rectangle, which is expressed in local
  coordinates.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>rect</code> - the rectangle to intersect with the current clip.</dd><dd><code>op</code> - how the clip is modified</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the resulting clip is non-empty</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>rect</code> - The rectangle to intersect with the current clip.</dd><dd><code>op</code> - How the clip is modified</dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if the resulting clip is non-empty</dd></dl>
 
 
-<a name="cliprect(android.graphics.rect)">
+<a name="clipRect(android.graphics.Rect)">
 <!--   -->
 </a>
 
 
-<h4>cliprect</h4>
-<pre>boolean&nbsp;cliprect(android.graphics.rect&nbsp;rect)</pre>
-<div class="block">intersect the current clip with the specified rectangle, which is expressed in local
+<h4>clipRect</h4>
+<pre>boolean&nbsp;clipRect(android.graphics.Rect&nbsp;rect)</pre>
+<div class="block">Intersect the current clip with the specified rectangle, which is expressed in local
  coordinates.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>rect</code> - the rectangle to intersect with the current clip.</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the resulting clip is non-empty</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>rect</code> - The rectangle to intersect with the current clip.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if the resulting clip is non-empty</dd></dl>
 
 
-<a name="cliprect(double, double, double, double, android.graphics.region.op)">
+<a name="clipRect(double, double, double, double, android.graphics.Region.Op)">
 <!--   -->
 </a>
 
 
-<h4>cliprect</h4>
-<pre>boolean&nbsp;cliprect(double&nbsp;left,
+<h4>clipRect</h4>
+<pre>boolean&nbsp;clipRect(double&nbsp;left,
                double&nbsp;top,
                double&nbsp;right,
                double&nbsp;bottom,
-               android.graphics.region.op&nbsp;op)</pre>
-<div class="block">modify the current clip with the specified rectangle, which is expressed in local
+               android.graphics.Region.Op&nbsp;op)</pre>
+<div class="block">Modify the current clip with the specified rectangle, which is expressed in local
  coordinates.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>left</code> - the left side of the rectangle to intersect with the current clip</dd><dd><code>top</code> - the top of the rectangle to intersect with the current clip</dd><dd><code>right</code> - the right side of the rectangle to intersect with the current clip</dd><dd><code>bottom</code> - the bottom of the rectangle to intersect with the current clip</dd><dd><code>op</code> - how the clip is modified</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the resulting clip is non-empty</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>left</code> - The left side of the rectangle to intersect with the current clip</dd><dd><code>top</code> - The top of the rectangle to intersect with the current clip</dd><dd><code>right</code> - The right side of the rectangle to intersect with the current clip</dd><dd><code>bottom</code> - The bottom of the rectangle to intersect with the current clip</dd><dd><code>op</code> - How the clip is modified</dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if the resulting clip is non-empty</dd></dl>
 
 
-<a name="cliprect(double, double, double, double)">
+<a name="clipRect(double, double, double, double)">
 <!--   -->
 </a>
 
 
-<h4>cliprect</h4>
-<pre>boolean&nbsp;cliprect(double&nbsp;left,
+<h4>clipRect</h4>
+<pre>boolean&nbsp;clipRect(double&nbsp;left,
                double&nbsp;top,
                double&nbsp;right,
                double&nbsp;bottom)</pre>
-<div class="block">intersect the current clip with the specified rectangle, which is expressed in local
+<div class="block">Intersect the current clip with the specified rectangle, which is expressed in local
  coordinates.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>left</code> - the left side of the rectangle to intersect with the current clip</dd><dd><code>top</code> - the top of the rectangle to intersect with the current clip</dd><dd><code>right</code> - the right side of the rectangle to intersect with the current clip</dd><dd><code>bottom</code> - the bottom of the rectangle to intersect with the current clip</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the resulting clip is non-empty</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>left</code> - The left side of the rectangle to intersect with the current clip</dd><dd><code>top</code> - The top of the rectangle to intersect with the current clip</dd><dd><code>right</code> - The right side of the rectangle to intersect with the current clip</dd><dd><code>bottom</code> - The bottom of the rectangle to intersect with the current clip</dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if the resulting clip is non-empty</dd></dl>
 
 
-<a name="cliprect(int, int, int, int)">
+<a name="clipRect(int, int, int, int)">
 <!--   -->
 </a>
 
 
-<h4>cliprect</h4>
-<pre>boolean&nbsp;cliprect(int&nbsp;left,
+<h4>clipRect</h4>
+<pre>boolean&nbsp;clipRect(int&nbsp;left,
                int&nbsp;top,
                int&nbsp;right,
                int&nbsp;bottom)</pre>
-<div class="block">intersect the current clip with the specified rectangle, which is expressed in local
+<div class="block">Intersect the current clip with the specified rectangle, which is expressed in local
  coordinates.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>left</code> - the left side of the rectangle to intersect with the current clip</dd><dd><code>top</code> - the top of the rectangle to intersect with the current clip</dd><dd><code>right</code> - the right side of the rectangle to intersect with the current clip</dd><dd><code>bottom</code> - the bottom of the rectangle to intersect with the current clip</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the resulting clip is non-empty</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>left</code> - The left side of the rectangle to intersect with the current clip</dd><dd><code>top</code> - The top of the rectangle to intersect with the current clip</dd><dd><code>right</code> - The right side of the rectangle to intersect with the current clip</dd><dd><code>bottom</code> - The bottom of the rectangle to intersect with the current clip</dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if the resulting clip is non-empty</dd></dl>
 
 
-<a name="clippath(com.mapbox.mapboxsdk.views.safecanvas.safetranslatedpath, android.graphics.region.op)">
+<a name="clipPath(com.mapbox.mapboxsdk.views.safecanvas.SafeTranslatedPath, android.graphics.Region.Op)">
 <!--   -->
 </a>
 
 
-<h4>clippath</h4>
-<pre>boolean&nbsp;clippath(<a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedpath</a>&nbsp;path,
-               android.graphics.region.op&nbsp;op)</pre>
-<div class="block">modify the current clip with the specified path.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>path</code> - the path to operate on the current clip</dd><dd><code>op</code> - how the clip is modified</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the resulting is non-empty</dd></dl>
+<h4>clipPath</h4>
+<pre>boolean&nbsp;clipPath(<a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedPath</a>&nbsp;path,
+               android.graphics.Region.Op&nbsp;op)</pre>
+<div class="block">Modify the current clip with the specified path.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>path</code> - The path to operate on the current clip</dd><dd><code>op</code> - How the clip is modified</dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if the resulting is non-empty</dd></dl>
 
 
-<a name="clippath(com.mapbox.mapboxsdk.views.safecanvas.safetranslatedpath)">
+<a name="clipPath(com.mapbox.mapboxsdk.views.safecanvas.SafeTranslatedPath)">
 <!--   -->
 </a>
 
 
-<h4>clippath</h4>
-<pre>boolean&nbsp;clippath(<a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedpath</a>&nbsp;path)</pre>
-<div class="block">intersect the current clip with the specified path.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>path</code> - the path to intersect with the current clip</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the resulting is non-empty</dd></dl>
+<h4>clipPath</h4>
+<pre>boolean&nbsp;clipPath(<a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedPath</a>&nbsp;path)</pre>
+<div class="block">Intersect the current clip with the specified path.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>path</code> - The path to intersect with the current clip</dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if the resulting is non-empty</dd></dl>
 
 
-<a name="clipregion(android.graphics.region, android.graphics.region.op)">
+<a name="clipRegion(android.graphics.Region, android.graphics.Region.Op)">
 <!--   -->
 </a>
 
 
-<h4>clipregion</h4>
-<pre>boolean&nbsp;clipregion(android.graphics.region&nbsp;region,
-                 android.graphics.region.op&nbsp;op)</pre>
-<div class="block">modify the current clip with the specified region. note that unlike cliprect() and
- clippath()
- which transform their arguments by the current matrix, clipregion() assumes its argument is
+<h4>clipRegion</h4>
+<pre>boolean&nbsp;clipRegion(android.graphics.Region&nbsp;region,
+                 android.graphics.Region.Op&nbsp;op)</pre>
+<div class="block">Modify the current clip with the specified region. Note that unlike clipRect() and
+ clipPath()
+ which transform their arguments by the current matrix, clipRegion() assumes its argument is
  already in the coordinate system of the current layer's bitmap, and so not transformation is
  performed.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>region</code> - the region to operate on the current clip, based on op</dd><dd><code>op</code> - how the clip is modified</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the resulting is non-empty</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>region</code> - The region to operate on the current clip, based on op</dd><dd><code>op</code> - How the clip is modified</dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if the resulting is non-empty</dd></dl>
 
 
-<a name="clipregion(android.graphics.region)">
+<a name="clipRegion(android.graphics.Region)">
 <!--   -->
 </a>
 
 
-<h4>clipregion</h4>
-<pre>boolean&nbsp;clipregion(android.graphics.region&nbsp;region)</pre>
-<div class="block">intersect the current clip with the specified region. note that unlike cliprect() and
- clippath() which transform their arguments by the current matrix, clipregion() assumes its
+<h4>clipRegion</h4>
+<pre>boolean&nbsp;clipRegion(android.graphics.Region&nbsp;region)</pre>
+<div class="block">Intersect the current clip with the specified region. Note that unlike clipRect() and
+ clipPath() which transform their arguments by the current matrix, clipRegion() assumes its
  argument is already in the coordinate system of the current layer's bitmap, and so not
  transformation is performed.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>region</code> - the region to operate on the current clip, based on op</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the resulting is non-empty</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>region</code> - The region to operate on the current clip, based on op</dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if the resulting is non-empty</dd></dl>
 
 
-<a name="getdrawfilter()">
+<a name="getDrawFilter()">
 <!--   -->
 </a>
 
 
-<h4>getdrawfilter</h4>
-<pre>android.graphics.drawfilter&nbsp;getdrawfilter()</pre>
+<h4>getDrawFilter</h4>
+<pre>android.graphics.DrawFilter&nbsp;getDrawFilter()</pre>
 
 
-<a name="setdrawfilter(android.graphics.drawfilter)">
+<a name="setDrawFilter(android.graphics.DrawFilter)">
 <!--   -->
 </a>
 
 
-<h4>setdrawfilter</h4>
-<pre>void&nbsp;setdrawfilter(android.graphics.drawfilter&nbsp;filter)</pre>
+<h4>setDrawFilter</h4>
+<pre>void&nbsp;setDrawFilter(android.graphics.DrawFilter&nbsp;filter)</pre>
 
 
-<a name="quickreject(android.graphics.rect, android.graphics.canvas.edgetype)">
+<a name="quickReject(android.graphics.Rect, android.graphics.Canvas.EdgeType)">
 <!--   -->
 </a>
 
 
-<h4>quickreject</h4>
-<pre>boolean&nbsp;quickreject(android.graphics.rect&nbsp;rect,
-                  android.graphics.canvas.edgetype&nbsp;type)</pre>
-<div class="block">return true if the specified rectangle, after being transformed by the current matrix, would
- lie completely outside of the current clip. call this to check if an area you intend to draw
+<h4>quickReject</h4>
+<pre>boolean&nbsp;quickReject(android.graphics.Rect&nbsp;rect,
+                  android.graphics.Canvas.EdgeType&nbsp;type)</pre>
+<div class="block">Return true if the specified rectangle, after being transformed by the current matrix, would
+ lie completely outside of the current clip. Call this to check if an area you intend to draw
  into is clipped out (and therefore you can skip making the draw calls).</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>rect</code> - the rect to compare with the current clip</dd><dd><code>type</code> - specifies how to treat the edges (bw or antialiased)</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the rect (transformed by the canvas' matrix) does not intersect with the
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>rect</code> - the rect to compare with the current clip</dd><dd><code>type</code> - specifies how to treat the edges (BW or antialiased)</dd>
+<dt><span class="strong">Returns:</span></dt><dd>true if the rect (transformed by the canvas' matrix) does not intersect with the
  canvas' clip</dd></dl>
 
 
-<a name="quickreject(com.mapbox.mapboxsdk.views.safecanvas.safetranslatedpath, android.graphics.canvas.edgetype)">
+<a name="quickReject(com.mapbox.mapboxsdk.views.safecanvas.SafeTranslatedPath, android.graphics.Canvas.EdgeType)">
 <!--   -->
 </a>
 
 
-<h4>quickreject</h4>
-<pre>boolean&nbsp;quickreject(<a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedpath</a>&nbsp;path,
-                  android.graphics.canvas.edgetype&nbsp;type)</pre>
-<div class="block">return true if the specified path, after being transformed by the current matrix, would lie
- completely outside of the current clip. call this to check if an area you intend to draw
+<h4>quickReject</h4>
+<pre>boolean&nbsp;quickReject(<a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedPath</a>&nbsp;path,
+                  android.graphics.Canvas.EdgeType&nbsp;type)</pre>
+<div class="block">Return true if the specified path, after being transformed by the current matrix, would lie
+ completely outside of the current clip. Call this to check if an area you intend to draw
  into
- is clipped out (and therefore you can skip making the draw calls). note: for speed it may
+ is clipped out (and therefore you can skip making the draw calls). Note: for speed it may
  return false even if the path itself might not intersect the clip (i.e. the bounds of the
  path intersects, but the path does not).</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>path</code> - the path to compare with the current clip</dd><dd><code>type</code> - true if the path should be considered antialiased, since that means it may
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>path</code> - The path to compare with the current clip</dd><dd><code>type</code> - true if the path should be considered antialiased, since that means it may
  affect
  a larger area (more pixels) than non-antialiased.</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the path (transformed by the canvas' matrix) does not intersect with the
+<dt><span class="strong">Returns:</span></dt><dd>true if the path (transformed by the canvas' matrix) does not intersect with the
  canvas' clip</dd></dl>
 
 
-<a name="quickreject(double, double, double, double, android.graphics.canvas.edgetype)">
+<a name="quickReject(double, double, double, double, android.graphics.Canvas.EdgeType)">
 <!--   -->
 </a>
 
 
-<h4>quickreject</h4>
-<pre>boolean&nbsp;quickreject(double&nbsp;left,
+<h4>quickReject</h4>
+<pre>boolean&nbsp;quickReject(double&nbsp;left,
                   double&nbsp;top,
                   double&nbsp;right,
                   double&nbsp;bottom,
-                  android.graphics.canvas.edgetype&nbsp;type)</pre>
-<div class="block">return true if the specified rectangle, after being transformed by the current matrix, would
- lie completely outside of the current clip. call this to check if an area you intend to draw
+                  android.graphics.Canvas.EdgeType&nbsp;type)</pre>
+<div class="block">Return true if the specified rectangle, after being transformed by the current matrix, would
+ lie completely outside of the current clip. Call this to check if an area you intend to draw
  into is clipped out (and therefore you can skip making the draw calls).</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>left</code> - the left side of the rectangle to compare with the current clip</dd><dd><code>top</code> - the top of the rectangle to compare with the current clip</dd><dd><code>right</code> - the right side of the rectangle to compare with the current clip</dd><dd><code>bottom</code> - the bottom of the rectangle to compare with the current clip</dd><dd><code>type</code> - true if the rect should be considered antialiased, since that means it may
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>left</code> - The left side of the rectangle to compare with the current clip</dd><dd><code>top</code> - The top of the rectangle to compare with the current clip</dd><dd><code>right</code> - The right side of the rectangle to compare with the current clip</dd><dd><code>bottom</code> - The bottom of the rectangle to compare with the current clip</dd><dd><code>type</code> - true if the rect should be considered antialiased, since that means it may
  affect
  a larger area (more pixels) than non-antialiased.</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the rect (transformed by the canvas' matrix) does not intersect with the
+<dt><span class="strong">Returns:</span></dt><dd>true if the rect (transformed by the canvas' matrix) does not intersect with the
  canvas' clip</dd></dl>
 
 
-<a name="getclipbounds(android.graphics.rect)">
+<a name="getClipBounds(android.graphics.Rect)">
 <!--   -->
 </a>
 
 
-<h4>getclipbounds</h4>
-<pre>boolean&nbsp;getclipbounds(android.graphics.rect&nbsp;bounds)</pre>
-<div class="block">retrieve the clip bounds, returning true if they are non-empty.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>bounds</code> - return the clip bounds here. if it is null, ignore it but still return true if
+<h4>getClipBounds</h4>
+<pre>boolean&nbsp;getClipBounds(android.graphics.Rect&nbsp;bounds)</pre>
+<div class="block">Retrieve the clip bounds, returning true if they are non-empty.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>bounds</code> - Return the clip bounds here. If it is null, ignore it but still return true if
  the
  current clip is non-empty.</dd>
-<dt><span class="strong">returns:</span></dt><dd>true if the current clip is non-empty.</dd></dl>
+<dt><span class="strong">Returns:</span></dt><dd>true if the current clip is non-empty.</dd></dl>
 
 
-<a name="getclipbounds()">
+<a name="getClipBounds()">
 <!--   -->
 </a>
 
 
-<h4>getclipbounds</h4>
-<pre>android.graphics.rect&nbsp;getclipbounds()</pre>
-<div class="block">retrieve the clip bounds.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the clip bounds, or [0, 0, 0, 0] if the clip is empty.</dd></dl>
+<h4>getClipBounds</h4>
+<pre>android.graphics.Rect&nbsp;getClipBounds()</pre>
+<div class="block">Retrieve the clip bounds.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the clip bounds, or [0, 0, 0, 0] if the clip is empty.</dd></dl>
 
 
-<a name="drawrgb(int, int, int)">
+<a name="drawRGB(int, int, int)">
 <!--   -->
 </a>
 
 
-<h4>drawrgb</h4>
-<pre>void&nbsp;drawrgb(int&nbsp;r,
+<h4>drawRGB</h4>
+<pre>void&nbsp;drawRGB(int&nbsp;r,
            int&nbsp;g,
            int&nbsp;b)</pre>
-<div class="block">fill the entire canvas' bitmap (restricted to the current clip) with the specified rgb
+<div class="block">Fill the entire canvas' bitmap (restricted to the current clip) with the specified RGB
  color,
  using srcover porterduff mode.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>r</code> - red component (0..255) of the color to draw onto the canvas</dd><dd><code>g</code> - green component (0..255) of the color to draw onto the canvas</dd><dd><code>b</code> - blue component (0..255) of the color to draw onto the canvas</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>r</code> - red component (0..255) of the color to draw onto the canvas</dd><dd><code>g</code> - green component (0..255) of the color to draw onto the canvas</dd><dd><code>b</code> - blue component (0..255) of the color to draw onto the canvas</dd></dl>
 
 
-<a name="drawargb(int, int, int, int)">
+<a name="drawARGB(int, int, int, int)">
 <!--   -->
 </a>
 
 
-<h4>drawargb</h4>
-<pre>void&nbsp;drawargb(int&nbsp;a,
+<h4>drawARGB</h4>
+<pre>void&nbsp;drawARGB(int&nbsp;a,
             int&nbsp;r,
             int&nbsp;g,
             int&nbsp;b)</pre>
-<div class="block">fill the entire canvas' bitmap (restricted to the current clip) with the specified argb
+<div class="block">Fill the entire canvas' bitmap (restricted to the current clip) with the specified ARGB
  color, using srcover porterduff mode.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>a</code> - alpha component (0..255) of the color to draw onto the canvas</dd><dd><code>r</code> - red component (0..255) of the color to draw onto the canvas</dd><dd><code>g</code> - green component (0..255) of the color to draw onto the canvas</dd><dd><code>b</code> - blue component (0..255) of the color to draw onto the canvas</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>a</code> - alpha component (0..255) of the color to draw onto the canvas</dd><dd><code>r</code> - red component (0..255) of the color to draw onto the canvas</dd><dd><code>g</code> - green component (0..255) of the color to draw onto the canvas</dd><dd><code>b</code> - blue component (0..255) of the color to draw onto the canvas</dd></dl>
 
 
-<a name="drawcolor(int)">
+<a name="drawColor(int)">
 <!--   -->
 </a>
 
 
-<h4>drawcolor</h4>
-<pre>void&nbsp;drawcolor(int&nbsp;color)</pre>
-<div class="block">fill the entire canvas' bitmap (restricted to the current clip) with the specified color,
+<h4>drawColor</h4>
+<pre>void&nbsp;drawColor(int&nbsp;color)</pre>
+<div class="block">Fill the entire canvas' bitmap (restricted to the current clip) with the specified color,
  using srcover porterduff mode.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>color</code> - the color to draw onto the canvas</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>color</code> - the color to draw onto the canvas</dd></dl>
 
 
-<a name="drawcolor(int, android.graphics.porterduff.mode)">
+<a name="drawColor(int, android.graphics.PorterDuff.Mode)">
 <!--   -->
 </a>
 
 
-<h4>drawcolor</h4>
-<pre>void&nbsp;drawcolor(int&nbsp;color,
-             android.graphics.porterduff.mode&nbsp;mode)</pre>
-<div class="block">fill the entire canvas' bitmap (restricted to the current clip) with the specified color and
+<h4>drawColor</h4>
+<pre>void&nbsp;drawColor(int&nbsp;color,
+             android.graphics.PorterDuff.Mode&nbsp;mode)</pre>
+<div class="block">Fill the entire canvas' bitmap (restricted to the current clip) with the specified color and
  porter-duff xfermode.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>color</code> - the color to draw with</dd><dd><code>mode</code> - the porter-duff mode to apply to the color</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>color</code> - the color to draw with</dd><dd><code>mode</code> - the porter-duff mode to apply to the color</dd></dl>
 
 
-<a name="drawpaint(com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawPaint(com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawpaint</h4>
-<pre>void&nbsp;drawpaint(<a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">fill the entire canvas' bitmap (restricted to the current clip) with the specified paint.
- this is equivalent (but faster) to drawing an infinitely large rectangle with the specified
+<h4>drawPaint</h4>
+<pre>void&nbsp;drawPaint(<a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Fill the entire canvas' bitmap (restricted to the current clip) with the specified paint.
+ This is equivalent (but faster) to drawing an infinitely large rectangle with the specified
  paint.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>paint</code> - the paint used to draw onto the canvas</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>paint</code> - The paint used to draw onto the canvas</dd></dl>
 
 
-<a name="drawpoints(double[], int, int, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawPoints(double[], int, int, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawpoints</h4>
-<pre>void&nbsp;drawpoints(double[]&nbsp;pts,
+<h4>drawPoints</h4>
+<pre>void&nbsp;drawPoints(double[]&nbsp;pts,
               int&nbsp;offset,
               int&nbsp;count,
-              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw a series of points. each point is centered at the coordinate specified by pts[], and
+              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw a series of points. Each point is centered at the coordinate specified by pts[], and
  its
- diameter is specified by the paint's stroke width (as transformed by the canvas' ctm), with
+ diameter is specified by the paint's stroke width (as transformed by the canvas' CTM), with
  special treatment for a stroke width of 0, which always draws exactly 1 pixel (or at most 4
- if antialiasing is enabled). the shape of the point is controlled by the paint's cap type.
- the shape is a square, unless the cap type is round, in which case the shape is a circle.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>pts</code> - array of points to draw [x0 y0 x1 y1 x2 y2 ...]</dd><dd><code>offset</code> - number of values to skip before starting to draw.</dd><dd><code>count</code> - the number of values to process, after skipping offset of them. since one point
- uses two values, the number of "points" that are drawn is really (count >> 1).</dd><dd><code>paint</code> - the paint used to draw the points</dd></dl>
+ if antialiasing is enabled). The shape of the point is controlled by the paint's Cap type.
+ The shape is a square, unless the cap type is Round, in which case the shape is a circle.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>pts</code> - Array of points to draw [x0 y0 x1 y1 x2 y2 ...]</dd><dd><code>offset</code> - Number of values to skip before starting to draw.</dd><dd><code>count</code> - The number of values to process, after skipping offset of them. Since one point
+ uses two values, the number of "points" that are drawn is really (count >> 1).</dd><dd><code>paint</code> - The paint used to draw the points</dd></dl>
 
 
-<a name="drawpoints(double[], com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawPoints(double[], com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawpoints</h4>
-<pre>void&nbsp;drawpoints(double[]&nbsp;pts,
-              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">helper for drawpoints() that assumes you want to draw the entire array</div>
+<h4>drawPoints</h4>
+<pre>void&nbsp;drawPoints(double[]&nbsp;pts,
+              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Helper for drawPoints() that assumes you want to draw the entire array</div>
 
 
-<a name="drawpoint(double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawPoint(double, double, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawpoint</h4>
-<pre>void&nbsp;drawpoint(double&nbsp;x,
+<h4>drawPoint</h4>
+<pre>void&nbsp;drawPoint(double&nbsp;x,
              double&nbsp;y,
-             <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">helper for drawpoints() for drawing a single point.</div>
+             <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Helper for drawPoints() for drawing a single point.</div>
 
 
-<a name="drawline(double, double, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawLine(double, double, double, double, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawline</h4>
-<pre>void&nbsp;drawline(double&nbsp;startx,
-            double&nbsp;starty,
-            double&nbsp;stopx,
-            double&nbsp;stopy,
-            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw a line segment with the specified start and stop x,y coordinates, using the specified
- paint. note: since a line is always "framed", the style is ignored in the paint.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>startx</code> - the x-coordinate of the start point of the line</dd><dd><code>starty</code> - the y-coordinate of the start point of the line</dd><dd><code>paint</code> - the paint used to draw the line</dd></dl>
+<h4>drawLine</h4>
+<pre>void&nbsp;drawLine(double&nbsp;startX,
+            double&nbsp;startY,
+            double&nbsp;stopX,
+            double&nbsp;stopY,
+            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw a line segment with the specified start and stop x,y coordinates, using the specified
+ paint. NOTE: since a line is always "framed", the Style is ignored in the paint.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>startX</code> - The x-coordinate of the start point of the line</dd><dd><code>startY</code> - The y-coordinate of the start point of the line</dd><dd><code>paint</code> - The paint used to draw the line</dd></dl>
 
 
-<a name="drawlines(double[], int, int, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawLines(double[], int, int, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawlines</h4>
-<pre>void&nbsp;drawlines(double[]&nbsp;pts,
+<h4>drawLines</h4>
+<pre>void&nbsp;drawLines(double[]&nbsp;pts,
              int&nbsp;offset,
              int&nbsp;count,
-             <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw a series of lines. each line is taken from 4 consecutive values in the pts array. thus
- to draw 1 line, the array must contain at least 4 values. this is logically the same as
- drawing the array as follows: drawline(pts[0], pts[1], pts[2], pts[3]) followed by
- drawline(pts[4], pts[5], pts[6], pts[7]) and so on.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>pts</code> - array of points to draw [x0 y0 x1 y1 x2 y2 ...]</dd><dd><code>offset</code> - number of values in the array to skip before drawing.</dd><dd><code>count</code> - the number of values in the array to process, after skipping "offset" of them.
- since each line uses 4 values, the number of "lines" that are drawn is really
- (count >> 2).</dd><dd><code>paint</code> - the paint used to draw the points</dd></dl>
+             <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw a series of lines. Each line is taken from 4 consecutive values in the pts array. Thus
+ to draw 1 line, the array must contain at least 4 values. This is logically the same as
+ drawing the array as follows: drawLine(pts[0], pts[1], pts[2], pts[3]) followed by
+ drawLine(pts[4], pts[5], pts[6], pts[7]) and so on.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>pts</code> - Array of points to draw [x0 y0 x1 y1 x2 y2 ...]</dd><dd><code>offset</code> - Number of values in the array to skip before drawing.</dd><dd><code>count</code> - The number of values in the array to process, after skipping "offset" of them.
+ Since each line uses 4 values, the number of "lines" that are drawn is really
+ (count >> 2).</dd><dd><code>paint</code> - The paint used to draw the points</dd></dl>
 
 
-<a name="drawlines(double[], com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawLines(double[], com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawlines</h4>
-<pre>void&nbsp;drawlines(double[]&nbsp;pts,
-             <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
+<h4>drawLines</h4>
+<pre>void&nbsp;drawLines(double[]&nbsp;pts,
+             <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
 
 
-<a name="drawrect(android.graphics.rect, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawRect(android.graphics.Rect, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawrect</h4>
-<pre>void&nbsp;drawrect(android.graphics.rect&nbsp;r,
-            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the specified rect using the specified paint. the rectangle will be filled or framed
- based on the style in the paint.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>r</code> - the rectangle to be drawn.</dd><dd><code>paint</code> - the paint used to draw the rectangle</dd></dl>
+<h4>drawRect</h4>
+<pre>void&nbsp;drawRect(android.graphics.Rect&nbsp;r,
+            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the specified Rect using the specified Paint. The rectangle will be filled or framed
+ based on the Style in the paint.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>r</code> - The rectangle to be drawn.</dd><dd><code>paint</code> - The paint used to draw the rectangle</dd></dl>
 
 
-<a name="drawrect(double, double, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawRect(double, double, double, double, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawrect</h4>
-<pre>void&nbsp;drawrect(double&nbsp;left,
+<h4>drawRect</h4>
+<pre>void&nbsp;drawRect(double&nbsp;left,
             double&nbsp;top,
             double&nbsp;right,
             double&nbsp;bottom,
-            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the specified rect using the specified paint. the rectangle will be filled or framed
- based on the style in the paint.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>left</code> - the left side of the rectangle to be drawn</dd><dd><code>top</code> - the top side of the rectangle to be drawn</dd><dd><code>right</code> - the right side of the rectangle to be drawn</dd><dd><code>bottom</code> - the bottom side of the rectangle to be drawn</dd><dd><code>paint</code> - the paint used to draw the rect</dd></dl>
+            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the specified Rect using the specified paint. The rectangle will be filled or framed
+ based on the Style in the paint.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>left</code> - The left side of the rectangle to be drawn</dd><dd><code>top</code> - The top side of the rectangle to be drawn</dd><dd><code>right</code> - The right side of the rectangle to be drawn</dd><dd><code>bottom</code> - The bottom side of the rectangle to be drawn</dd><dd><code>paint</code> - The paint used to draw the rect</dd></dl>
 
 
-<a name="drawoval(android.graphics.rect, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawOval(android.graphics.Rect, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawoval</h4>
-<pre>void&nbsp;drawoval(android.graphics.rect&nbsp;oval,
-            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the specified oval using the specified paint. the oval will be filled or framed based
+<h4>drawOval</h4>
+<pre>void&nbsp;drawOval(android.graphics.Rect&nbsp;oval,
+            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the specified oval using the specified paint. The oval will be filled or framed based
  on
- the style in the paint.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>oval</code> - the rectangle bounds of the oval to be drawn</dd></dl>
+ the Style in the paint.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>oval</code> - The rectangle bounds of the oval to be drawn</dd></dl>
 
 
-<a name="drawcircle(double, double, float, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawCircle(double, double, float, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawcircle</h4>
-<pre>void&nbsp;drawcircle(double&nbsp;cx,
+<h4>drawCircle</h4>
+<pre>void&nbsp;drawCircle(double&nbsp;cx,
               double&nbsp;cy,
               float&nbsp;radius,
-              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the specified circle using the specified paint. if radius is <= 0, then nothing will be
- drawn. the circle will be filled or framed based on the style in the paint.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>cx</code> - the x-coordinate of the center of the cirle to be drawn</dd><dd><code>cy</code> - the y-coordinate of the center of the cirle to be drawn</dd><dd><code>radius</code> - the radius of the cirle to be drawn</dd><dd><code>paint</code> - the paint used to draw the circle</dd></dl>
+              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the specified circle using the specified paint. If radius is <= 0, then nothing will be
+ drawn. The circle will be filled or framed based on the Style in the paint.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>cx</code> - The x-coordinate of the center of the cirle to be drawn</dd><dd><code>cy</code> - The y-coordinate of the center of the cirle to be drawn</dd><dd><code>radius</code> - The radius of the cirle to be drawn</dd><dd><code>paint</code> - The paint used to draw the circle</dd></dl>
 
 
-<a name="drawarc(android.graphics.rect, float, float, boolean, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawArc(android.graphics.Rect, float, float, boolean, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawarc</h4>
-<pre>void&nbsp;drawarc(android.graphics.rect&nbsp;oval,
-           float&nbsp;startangle,
-           float&nbsp;sweepangle,
-           boolean&nbsp;usecenter,
-           <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
+<h4>drawArc</h4>
+<pre>void&nbsp;drawArc(android.graphics.Rect&nbsp;oval,
+           float&nbsp;startAngle,
+           float&nbsp;sweepAngle,
+           boolean&nbsp;useCenter,
+           <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
 <div class="block"><p>
- draw the specified arc, which will be scaled to fit inside the specified oval.
+ Draw the specified arc, which will be scaled to fit inside the specified oval.
  </p>
  <p/>
  <p>
- if the start angle is negative or >= 360, the start angle is treated as start angle modulo
+ If the start angle is negative or >= 360, the start angle is treated as start angle modulo
  360.
  </p>
  <p/>
  <p>
- if the sweep angle is >= 360, then the oval is drawn completely. note that this differs
- slightly from skpath::arcto, which treats the sweep angle modulo 360. if the sweep angle is
+ If the sweep angle is >= 360, then the oval is drawn completely. Note that this differs
+ slightly from SkPath::arcTo, which treats the sweep angle modulo 360. If the sweep angle is
  negative, the sweep angle is treated as sweep angle modulo 360
  </p>
  <p/>
  <p>
- the arc is drawn clockwise. an angle of 0 degrees correspond to the geometric angle of 0
+ The arc is drawn clockwise. An angle of 0 degrees correspond to the geometric angle of 0
  degrees (3 o'clock on a watch.)
  </p></div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>oval</code> - the bounds of oval used to define the shape and size of the arc</dd><dd><code>startangle</code> - starting angle (in degrees) where the arc begins</dd><dd><code>sweepangle</code> - sweep angle (in degrees) measured clockwise</dd><dd><code>usecenter</code> - if true, include the center of the oval in the arc, and close it if it is
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>oval</code> - The bounds of oval used to define the shape and size of the arc</dd><dd><code>startAngle</code> - Starting angle (in degrees) where the arc begins</dd><dd><code>sweepAngle</code> - Sweep angle (in degrees) measured clockwise</dd><dd><code>useCenter</code> - If true, include the center of the oval in the arc, and close it if it is
  being
- stroked. this will draw a wedge</dd><dd><code>paint</code> - the paint used to draw the arc</dd></dl>
+ stroked. This will draw a wedge</dd><dd><code>paint</code> - The paint used to draw the arc</dd></dl>
 
 
-<a name="drawroundrect(android.graphics.rect, float, float, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawRoundRect(android.graphics.Rect, float, float, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawroundrect</h4>
-<pre>void&nbsp;drawroundrect(android.graphics.rect&nbsp;rect,
+<h4>drawRoundRect</h4>
+<pre>void&nbsp;drawRoundRect(android.graphics.Rect&nbsp;rect,
                  float&nbsp;rx,
                  float&nbsp;ry,
-                 <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the specified round-rect using the specified paint. the roundrect will be filled or
- framed based on the style in the paint.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>rect</code> - the rectangular bounds of the roundrect to be drawn</dd><dd><code>rx</code> - the x-radius of the oval used to round the corners</dd><dd><code>ry</code> - the y-radius of the oval used to round the corners</dd><dd><code>paint</code> - the paint used to draw the roundrect</dd></dl>
+                 <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the specified round-rect using the specified paint. The roundrect will be filled or
+ framed based on the Style in the paint.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>rect</code> - The rectangular bounds of the roundRect to be drawn</dd><dd><code>rx</code> - The x-radius of the oval used to round the corners</dd><dd><code>ry</code> - The y-radius of the oval used to round the corners</dd><dd><code>paint</code> - The paint used to draw the roundRect</dd></dl>
 
 
-<a name="drawpath(com.mapbox.mapboxsdk.views.safecanvas.safetranslatedpath, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawPath(com.mapbox.mapboxsdk.views.safecanvas.SafeTranslatedPath, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawpath</h4>
-<pre>void&nbsp;drawpath(<a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedpath</a>&nbsp;path,
-            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the specified path using the specified paint. the path will be filled or framed based
+<h4>drawPath</h4>
+<pre>void&nbsp;drawPath(<a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedPath</a>&nbsp;path,
+            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the specified path using the specified paint. The path will be filled or framed based
  on
- the style in the paint.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>path</code> - the path to be drawn</dd><dd><code>paint</code> - the paint used to draw the path</dd></dl>
+ the Style in the paint.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>path</code> - The path to be drawn</dd><dd><code>paint</code> - The paint used to draw the path</dd></dl>
 
 
-<a name="drawbitmap(android.graphics.bitmap, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawBitmap(android.graphics.Bitmap, double, double, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawbitmap</h4>
-<pre>void&nbsp;drawbitmap(android.graphics.bitmap&nbsp;bitmap,
+<h4>drawBitmap</h4>
+<pre>void&nbsp;drawBitmap(android.graphics.Bitmap&nbsp;bitmap,
               double&nbsp;left,
               double&nbsp;top,
-              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the specified bitmap, with its top/left corner at (x,y), using the specified paint,
+              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the specified bitmap, with its top/left corner at (x,y), using the specified paint,
  transformed by the current matrix.
  <p/>
  <p/>
- note: if the paint contains a maskfilter that generates a mask which extends beyond the
- bitmap's original width/height (e.g. blurmaskfilter), then the bitmap will be drawn as if it
- were in a shader with clamp mode. thus the color outside of the original width/height will
+ Note: if the paint contains a maskfilter that generates a mask which extends beyond the
+ bitmap's original width/height (e.g. BlurMaskFilter), then the bitmap will be drawn as if it
+ were in a Shader with CLAMP mode. Thus the color outside of the original width/height will
  be
  the edge color replicated.
  <p/>
  <p/>
- if the bitmap and canvas have different densities, this function will take care of
+ If the bitmap and canvas have different densities, this function will take care of
  automatically scaling the bitmap to draw at the same density as the canvas.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>bitmap</code> - the bitmap to be drawn</dd><dd><code>left</code> - the position of the left side of the bitmap being drawn</dd><dd><code>top</code> - the position of the top side of the bitmap being drawn</dd><dd><code>paint</code> - the paint used to draw the bitmap (may be null)</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>bitmap</code> - The bitmap to be drawn</dd><dd><code>left</code> - The position of the left side of the bitmap being drawn</dd><dd><code>top</code> - The position of the top side of the bitmap being drawn</dd><dd><code>paint</code> - The paint used to draw the bitmap (may be null)</dd></dl>
 
 
-<a name="drawbitmap(android.graphics.bitmap, android.graphics.rect, android.graphics.rect, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawBitmap(android.graphics.Bitmap, android.graphics.Rect, android.graphics.Rect, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawbitmap</h4>
-<pre>void&nbsp;drawbitmap(android.graphics.bitmap&nbsp;bitmap,
-              android.graphics.rect&nbsp;src,
-              android.graphics.rect&nbsp;dst,
-              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the specified bitmap, scaling/translating automatically to fill the destination
- rectangle. if the source rectangle is not null, it specifies the subset of the bitmap to
+<h4>drawBitmap</h4>
+<pre>void&nbsp;drawBitmap(android.graphics.Bitmap&nbsp;bitmap,
+              android.graphics.Rect&nbsp;src,
+              android.graphics.Rect&nbsp;dst,
+              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the specified bitmap, scaling/translating automatically to fill the destination
+ rectangle. If the source rectangle is not null, it specifies the subset of the bitmap to
  draw.
  <p/>
  <p/>
- note: if the paint contains a maskfilter that generates a mask which extends beyond the
- bitmap's original width/height (e.g. blurmaskfilter), then the bitmap will be drawn as if it
- were in a shader with clamp mode. thus the color outside of the original width/height will
+ Note: if the paint contains a maskfilter that generates a mask which extends beyond the
+ bitmap's original width/height (e.g. BlurMaskFilter), then the bitmap will be drawn as if it
+ were in a Shader with CLAMP mode. Thus the color outside of the original width/height will
  be
  the edge color replicated.
  <p/>
  <p/>
- this function <em>ignores the density associated with the bitmap</em>. this is because the
+ This function <em>ignores the density associated with the bitmap</em>. This is because the
  source and destination rectangle coordinate spaces are in their respective densities, so
  must
  already have the appropriate scaling factor applied.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>bitmap</code> - the bitmap to be drawn</dd><dd><code>src</code> - may be null. the subset of the bitmap to be drawn</dd><dd><code>dst</code> - the rectangle that the bitmap will be scaled/translated to fit into</dd><dd><code>paint</code> - may be null. the paint used to draw the bitmap</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>bitmap</code> - The bitmap to be drawn</dd><dd><code>src</code> - May be null. The subset of the bitmap to be drawn</dd><dd><code>dst</code> - The rectangle that the bitmap will be scaled/translated to fit into</dd><dd><code>paint</code> - May be null. The paint used to draw the bitmap</dd></dl>
 
 
-<a name="drawbitmap(int[], int, int, double, double, int, int, boolean, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawBitmap(int[], int, int, double, double, int, int, boolean, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawbitmap</h4>
-<pre>void&nbsp;drawbitmap(int[]&nbsp;colors,
+<h4>drawBitmap</h4>
+<pre>void&nbsp;drawBitmap(int[]&nbsp;colors,
               int&nbsp;offset,
               int&nbsp;stride,
               double&nbsp;x,
               double&nbsp;y,
               int&nbsp;width,
               int&nbsp;height,
-              boolean&nbsp;hasalpha,
-              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">treat the specified array of colors as a bitmap, and draw it. this gives the same result as
+              boolean&nbsp;hasAlpha,
+              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Treat the specified array of colors as a bitmap, and draw it. This gives the same result as
  first creating a bitmap from the array, and then drawing it, but this method avoids
  explicitly creating a bitmap object which can be more efficient if the colors are changing
  often.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>colors</code> - array of colors representing the pixels of the bitmap</dd><dd><code>offset</code> - offset into the array of colors for the first pixel</dd><dd><code>stride</code> - the number of colors in the array between rows (must be >= width or <=
- -width).</dd><dd><code>x</code> - the x coordinate for where to draw the bitmap</dd><dd><code>y</code> - the y coordinate for where to draw the bitmap</dd><dd><code>width</code> - the width of the bitmap</dd><dd><code>height</code> - the height of the bitmap</dd><dd><code>hasalpha</code> - true if the alpha channel of the colors contains valid values. if false, the
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>colors</code> - Array of colors representing the pixels of the bitmap</dd><dd><code>offset</code> - Offset into the array of colors for the first pixel</dd><dd><code>stride</code> - The number of colors in the array between rows (must be >= width or <=
+ -width).</dd><dd><code>x</code> - The X coordinate for where to draw the bitmap</dd><dd><code>y</code> - The Y coordinate for where to draw the bitmap</dd><dd><code>width</code> - The width of the bitmap</dd><dd><code>height</code> - The height of the bitmap</dd><dd><code>hasAlpha</code> - True if the alpha channel of the colors contains valid values. If false, the
  alpha
- byte is ignored (assumed to be 0xff for every pixel).</dd><dd><code>paint</code> - may be null. the paint used to draw the bitmap</dd></dl>
+ byte is ignored (assumed to be 0xFF for every pixel).</dd><dd><code>paint</code> - May be null. The paint used to draw the bitmap</dd></dl>
 
 
-<a name="drawbitmap(int[], int, int, int, int, int, int, boolean, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawBitmap(int[], int, int, int, int, int, int, boolean, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawbitmap</h4>
-<pre>void&nbsp;drawbitmap(int[]&nbsp;colors,
+<h4>drawBitmap</h4>
+<pre>void&nbsp;drawBitmap(int[]&nbsp;colors,
               int&nbsp;offset,
               int&nbsp;stride,
               int&nbsp;x,
               int&nbsp;y,
               int&nbsp;width,
               int&nbsp;height,
-              boolean&nbsp;hasalpha,
-              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">legacy version of drawbitmap(int[] colors, ...) that took ints for x,y</div>
+              boolean&nbsp;hasAlpha,
+              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Legacy version of drawBitmap(int[] colors, ...) that took ints for x,y</div>
 
 
-<a name="drawbitmap(android.graphics.bitmap, android.graphics.matrix, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawBitmap(android.graphics.Bitmap, android.graphics.Matrix, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawbitmap</h4>
-<pre>void&nbsp;drawbitmap(android.graphics.bitmap&nbsp;bitmap,
-              android.graphics.matrix&nbsp;matrix,
-              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the bitmap using the specified matrix.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>bitmap</code> - the bitmap to draw</dd><dd><code>matrix</code> - the matrix used to transform the bitmap when it is drawn</dd><dd><code>paint</code> - may be null. the paint used to draw the bitmap</dd></dl>
+<h4>drawBitmap</h4>
+<pre>void&nbsp;drawBitmap(android.graphics.Bitmap&nbsp;bitmap,
+              android.graphics.Matrix&nbsp;matrix,
+              <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the bitmap using the specified matrix.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>bitmap</code> - The bitmap to draw</dd><dd><code>matrix</code> - The matrix used to transform the bitmap when it is drawn</dd><dd><code>paint</code> - May be null. The paint used to draw the bitmap</dd></dl>
 
 
-<a name="drawbitmapmesh(android.graphics.bitmap, int, int, double[], int, int[], int, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawBitmapMesh(android.graphics.Bitmap, int, int, double[], int, int[], int, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawbitmapmesh</h4>
-<pre>void&nbsp;drawbitmapmesh(android.graphics.bitmap&nbsp;bitmap,
-                  int&nbsp;meshwidth,
-                  int&nbsp;meshheight,
+<h4>drawBitmapMesh</h4>
+<pre>void&nbsp;drawBitmapMesh(android.graphics.Bitmap&nbsp;bitmap,
+                  int&nbsp;meshWidth,
+                  int&nbsp;meshHeight,
                   double[]&nbsp;verts,
-                  int&nbsp;vertoffset,
+                  int&nbsp;vertOffset,
                   int[]&nbsp;colors,
-                  int&nbsp;coloroffset,
-                  <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the bitmap through the mesh, where mesh vertices are evenly distributed across the
- bitmap. there are meshwidth+1 vertices across, and meshheight+1 vertices down. the verts
- array is accessed in row-major order, so that the first meshwidth+1 vertices are distributed
- across the top of the bitmap from left to right. a more general version of this methid is
- drawvertices().</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>bitmap</code> - the bitmap to draw using the mesh</dd><dd><code>meshwidth</code> - the number of columns in the mesh. nothing is drawn if this is 0</dd><dd><code>meshheight</code> - the number of rows in the mesh. nothing is drawn if this is 0</dd><dd><code>verts</code> - array of x,y pairs, specifying where the mesh should be drawn. there must be at
- least (meshwidth+1) * (meshheight+1) * 2 + meshoffset values in the array</dd><dd><code>vertoffset</code> - number of verts elements to skip before drawing</dd><dd><code>colors</code> - may be null. specifies a color at each vertex, which is interpolated across
+                  int&nbsp;colorOffset,
+                  <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the bitmap through the mesh, where mesh vertices are evenly distributed across the
+ bitmap. There are meshWidth+1 vertices across, and meshHeight+1 vertices down. The verts
+ array is accessed in row-major order, so that the first meshWidth+1 vertices are distributed
+ across the top of the bitmap from left to right. A more general version of this methid is
+ drawVertices().</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>bitmap</code> - The bitmap to draw using the mesh</dd><dd><code>meshWidth</code> - The number of columns in the mesh. Nothing is drawn if this is 0</dd><dd><code>meshHeight</code> - The number of rows in the mesh. Nothing is drawn if this is 0</dd><dd><code>verts</code> - Array of x,y pairs, specifying where the mesh should be drawn. There must be at
+ least (meshWidth+1) * (meshHeight+1) * 2 + meshOffset values in the array</dd><dd><code>vertOffset</code> - Number of verts elements to skip before drawing</dd><dd><code>colors</code> - May be null. Specifies a color at each vertex, which is interpolated across
  the
- cell, and whose values are multiplied by the corresponding bitmap colors. if not
- null, there must be at least (meshwidth+1) * (meshheight+1) + coloroffset values
- in the array.</dd><dd><code>coloroffset</code> - number of color elements to skip before drawing</dd><dd><code>paint</code> - may be null. the paint used to draw the bitmap</dd></dl>
+ cell, and whose values are multiplied by the corresponding bitmap colors. If not
+ null, there must be at least (meshWidth+1) * (meshHeight+1) + colorOffset values
+ in the array.</dd><dd><code>colorOffset</code> - Number of color elements to skip before drawing</dd><dd><code>paint</code> - May be null. The paint used to draw the bitmap</dd></dl>
 
 
-<a name="drawvertices(android.graphics.canvas.vertexmode, int, double[], int, float[], int, int[], int, short[], int, int, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawVertices(android.graphics.Canvas.VertexMode, int, double[], int, float[], int, int[], int, short[], int, int, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawvertices</h4>
-<pre>void&nbsp;drawvertices(android.graphics.canvas.vertexmode&nbsp;mode,
-                int&nbsp;vertexcount,
+<h4>drawVertices</h4>
+<pre>void&nbsp;drawVertices(android.graphics.Canvas.VertexMode&nbsp;mode,
+                int&nbsp;vertexCount,
                 double[]&nbsp;verts,
-                int&nbsp;vertoffset,
+                int&nbsp;vertOffset,
                 float[]&nbsp;texs,
-                int&nbsp;texoffset,
+                int&nbsp;texOffset,
                 int[]&nbsp;colors,
-                int&nbsp;coloroffset,
+                int&nbsp;colorOffset,
                 short[]&nbsp;indices,
-                int&nbsp;indexoffset,
-                int&nbsp;indexcount,
-                <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the array of vertices, interpreted as triangles (based on mode). the verts array is
- required, and specifies the x,y pairs for each vertex. if texs is non-null, then it is used
+                int&nbsp;indexOffset,
+                int&nbsp;indexCount,
+                <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the array of vertices, interpreted as triangles (based on mode). The verts array is
+ required, and specifies the x,y pairs for each vertex. If texs is non-null, then it is used
  to specify the coordinate in shader coordinates to use at each vertex (the paint must have a
- shader in this case). if there is no texs array, but there is a color array, then each color
- is interpolated across its corresponding triangle in a gradient. if both texs and colors
+ shader in this case). If there is no texs array, but there is a color array, then each color
+ is interpolated across its corresponding triangle in a gradient. If both texs and colors
  arrays are present, then they behave as before, but the resulting color at each pixels is
  the
- result of multiplying the colors from the shader and the color-gradient together. the
+ result of multiplying the colors from the shader and the color-gradient together. The
  indices
  array is optional, but if it is present, then it is used to specify the index of each
  triangle, rather than just walking through the arrays in order.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>mode</code> - how to interpret the array of vertices</dd><dd><code>vertexcount</code> - the number of values in the vertices array (and corresponding texs and
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>mode</code> - How to interpret the array of vertices</dd><dd><code>vertexCount</code> - The number of values in the vertices array (and corresponding texs and
  colors
- arrays if non-null). each logical vertex is two values (x, y), vertexcount must be
- a multiple of 2.</dd><dd><code>verts</code> - array of vertices for the mesh</dd><dd><code>vertoffset</code> - number of values in the verts to skip before drawing.</dd><dd><code>texs</code> - may be null. if not null, specifies the coordinates to sample into the current
- shader (e.g. bitmap tile or gradient)</dd><dd><code>texoffset</code> - number of values in texs to skip before drawing.</dd><dd><code>colors</code> - may be null. if not null, specifies a color for each vertex, to be
+ arrays if non-null). Each logical vertex is two values (x, y), vertexCount must be
+ a multiple of 2.</dd><dd><code>verts</code> - Array of vertices for the mesh</dd><dd><code>vertOffset</code> - Number of values in the verts to skip before drawing.</dd><dd><code>texs</code> - May be null. If not null, specifies the coordinates to sample into the current
+ shader (e.g. bitmap tile or gradient)</dd><dd><code>texOffset</code> - Number of values in texs to skip before drawing.</dd><dd><code>colors</code> - May be null. If not null, specifies a color for each vertex, to be
  interpolated
- across the triangle.</dd><dd><code>coloroffset</code> - number of values in colors to skip before drawing.</dd><dd><code>indices</code> - if not null, array of indices to reference into the vertex (texs, colors)
- array.</dd><dd><code>indexcount</code> - number of entries in the indices array (if not null).</dd><dd><code>paint</code> - specifies the shader to use if the texs array is non-null.</dd></dl>
+ across the triangle.</dd><dd><code>colorOffset</code> - Number of values in colors to skip before drawing.</dd><dd><code>indices</code> - If not null, array of indices to reference into the vertex (texs, colors)
+ array.</dd><dd><code>indexCount</code> - number of entries in the indices array (if not null).</dd><dd><code>paint</code> - Specifies the shader to use if the texs array is non-null.</dd></dl>
 
 
-<a name="drawtext(char[], int, int, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawText(char[], int, int, double, double, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawtext</h4>
-<pre>void&nbsp;drawtext(char[]&nbsp;text,
+<h4>drawText</h4>
+<pre>void&nbsp;drawText(char[]&nbsp;text,
             int&nbsp;index,
             int&nbsp;count,
             double&nbsp;x,
             double&nbsp;y,
-            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the text, with origin at (x,y), using the specified paint. the origin is interpreted
- based on the align setting in the paint.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>text</code> - the text to be drawn</dd><dd><code>x</code> - the x-coordinate of the origin of the text being drawn</dd><dd><code>paint</code> - the paint used for the text (e.g. color, size, style)</dd></dl>
+            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the text, with origin at (x,y), using the specified paint. The origin is interpreted
+ based on the Align setting in the paint.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>text</code> - The text to be drawn</dd><dd><code>x</code> - The x-coordinate of the origin of the text being drawn</dd><dd><code>paint</code> - The paint used for the text (e.g. color, size, style)</dd></dl>
 
 
-<a name="drawtext(java.lang.string, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawText(java.lang.String, double, double, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawtext</h4>
-<pre>void&nbsp;drawtext(java.lang.string&nbsp;text,
+<h4>drawText</h4>
+<pre>void&nbsp;drawText(java.lang.String&nbsp;text,
             double&nbsp;x,
             double&nbsp;y,
-            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the text, with origin at (x,y), using the specified paint. the origin is interpreted
- based on the align setting in the paint.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>text</code> - the text to be drawn</dd><dd><code>x</code> - the x-coordinate of the origin of the text being drawn</dd><dd><code>y</code> - the y-coordinate of the origin of the text being drawn</dd><dd><code>paint</code> - the paint used for the text (e.g. color, size, style)</dd></dl>
+            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the text, with origin at (x,y), using the specified paint. The origin is interpreted
+ based on the Align setting in the paint.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>text</code> - The text to be drawn</dd><dd><code>x</code> - The x-coordinate of the origin of the text being drawn</dd><dd><code>y</code> - The y-coordinate of the origin of the text being drawn</dd><dd><code>paint</code> - The paint used for the text (e.g. color, size, style)</dd></dl>
 
 
-<a name="drawtext(java.lang.string, int, int, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawText(java.lang.String, int, int, double, double, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawtext</h4>
-<pre>void&nbsp;drawtext(java.lang.string&nbsp;text,
+<h4>drawText</h4>
+<pre>void&nbsp;drawText(java.lang.String&nbsp;text,
             int&nbsp;start,
             int&nbsp;end,
             double&nbsp;x,
             double&nbsp;y,
-            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the text, with origin at (x,y), using the specified paint. the origin is interpreted
- based on the align setting in the paint.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>text</code> - the text to be drawn</dd><dd><code>start</code> - the index of the first character in text to draw</dd><dd><code>end</code> - (end - 1) is the index of the last character in text to draw</dd><dd><code>x</code> - the x-coordinate of the origin of the text being drawn</dd><dd><code>y</code> - the y-coordinate of the origin of the text being drawn</dd><dd><code>paint</code> - the paint used for the text (e.g. color, size, style)</dd></dl>
+            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the text, with origin at (x,y), using the specified paint. The origin is interpreted
+ based on the Align setting in the paint.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>text</code> - The text to be drawn</dd><dd><code>start</code> - The index of the first character in text to draw</dd><dd><code>end</code> - (end - 1) is the index of the last character in text to draw</dd><dd><code>x</code> - The x-coordinate of the origin of the text being drawn</dd><dd><code>y</code> - The y-coordinate of the origin of the text being drawn</dd><dd><code>paint</code> - The paint used for the text (e.g. color, size, style)</dd></dl>
 
 
-<a name="drawtext(java.lang.charsequence, int, int, double, double, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawText(java.lang.CharSequence, int, int, double, double, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawtext</h4>
-<pre>void&nbsp;drawtext(java.lang.charsequence&nbsp;text,
+<h4>drawText</h4>
+<pre>void&nbsp;drawText(java.lang.CharSequence&nbsp;text,
             int&nbsp;start,
             int&nbsp;end,
             double&nbsp;x,
             double&nbsp;y,
-            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the specified range of text, specified by start/end, with its origin at (x,y), in the
- specified paint. the origin is interpreted based on the align setting in the paint.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>text</code> - the text to be drawn</dd><dd><code>start</code> - the index of the first character in text to draw</dd><dd><code>end</code> - (end - 1) is the index of the last character in text to draw</dd><dd><code>x</code> - the x-coordinate of origin for where to draw the text</dd><dd><code>y</code> - the y-coordinate of origin for where to draw the text</dd><dd><code>paint</code> - the paint used for the text (e.g. color, size, style)</dd></dl>
+            <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the specified range of text, specified by start/end, with its origin at (x,y), in the
+ specified Paint. The origin is interpreted based on the Align setting in the Paint.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>text</code> - The text to be drawn</dd><dd><code>start</code> - The index of the first character in text to draw</dd><dd><code>end</code> - (end - 1) is the index of the last character in text to draw</dd><dd><code>x</code> - The x-coordinate of origin for where to draw the text</dd><dd><code>y</code> - The y-coordinate of origin for where to draw the text</dd><dd><code>paint</code> - The paint used for the text (e.g. color, size, style)</dd></dl>
 
 
-<a name="drawpostext(char[], int, int, double[], com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawPosText(char[], int, int, double[], com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawpostext</h4>
-<pre>void&nbsp;drawpostext(char[]&nbsp;text,
+<h4>drawPosText</h4>
+<pre>void&nbsp;drawPosText(char[]&nbsp;text,
                int&nbsp;index,
                int&nbsp;count,
                double[]&nbsp;pos,
-               <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the text in the array, with each character's origin specified by the pos array.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>text</code> - the text to be drawn</dd><dd><code>index</code> - the index of the first character to draw</dd><dd><code>count</code> - the number of characters to draw, starting from index.</dd><dd><code>pos</code> - array of [x,y] positions, used to position each character</dd><dd><code>paint</code> - the paint used for the text (e.g. color, size, style)</dd></dl>
+               <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the text in the array, with each character's origin specified by the pos array.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>text</code> - The text to be drawn</dd><dd><code>index</code> - The index of the first character to draw</dd><dd><code>count</code> - The number of characters to draw, starting from index.</dd><dd><code>pos</code> - Array of [x,y] positions, used to position each character</dd><dd><code>paint</code> - The paint used for the text (e.g. color, size, style)</dd></dl>
 
 
-<a name="drawpostext(java.lang.string, double[], com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawPosText(java.lang.String, double[], com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawpostext</h4>
-<pre>void&nbsp;drawpostext(java.lang.string&nbsp;text,
+<h4>drawPosText</h4>
+<pre>void&nbsp;drawPosText(java.lang.String&nbsp;text,
                double[]&nbsp;pos,
-               <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the text in the array, with each character's origin specified by the pos array.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>text</code> - the text to be drawn</dd><dd><code>pos</code> - array of [x,y] positions, used to position each character</dd><dd><code>paint</code> - the paint used for the text (e.g. color, size, style)</dd></dl>
+               <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the text in the array, with each character's origin specified by the pos array.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>text</code> - The text to be drawn</dd><dd><code>pos</code> - Array of [x,y] positions, used to position each character</dd><dd><code>paint</code> - The paint used for the text (e.g. color, size, style)</dd></dl>
 
 
-<a name="drawtextonpath(char[], int, int, com.mapbox.mapboxsdk.views.safecanvas.safetranslatedpath, float, float, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawTextOnPath(char[], int, int, com.mapbox.mapboxsdk.views.safecanvas.SafeTranslatedPath, float, float, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawtextonpath</h4>
-<pre>void&nbsp;drawtextonpath(char[]&nbsp;text,
+<h4>drawTextOnPath</h4>
+<pre>void&nbsp;drawTextOnPath(char[]&nbsp;text,
                   int&nbsp;index,
                   int&nbsp;count,
-                  <a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedpath</a>&nbsp;path,
-                  float&nbsp;hoffset,
-                  float&nbsp;voffset,
-                  <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the text, with origin at (x,y), using the specified paint, along the specified path.
- the
- paint's align setting determins where along the path to start the text.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>text</code> - the text to be drawn</dd><dd><code>path</code> - the path the text should follow for its baseline</dd><dd><code>hoffset</code> - the distance along the path to add to the text's starting position</dd><dd><code>voffset</code> - the distance above(-) or below(+) the path to position the text</dd><dd><code>paint</code> - the paint used for the text (e.g. color, size, style)</dd></dl>
+                  <a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedPath</a>&nbsp;path,
+                  float&nbsp;hOffset,
+                  float&nbsp;vOffset,
+                  <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the text, with origin at (x,y), using the specified paint, along the specified path.
+ The
+ paint's Align setting determins where along the path to start the text.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>text</code> - The text to be drawn</dd><dd><code>path</code> - The path the text should follow for its baseline</dd><dd><code>hOffset</code> - The distance along the path to add to the text's starting position</dd><dd><code>vOffset</code> - The distance above(-) or below(+) the path to position the text</dd><dd><code>paint</code> - The paint used for the text (e.g. color, size, style)</dd></dl>
 
 
-<a name="drawtextonpath(java.lang.string, com.mapbox.mapboxsdk.views.safecanvas.safetranslatedpath, float, float, com.mapbox.mapboxsdk.views.safecanvas.safepaint)">
+<a name="drawTextOnPath(java.lang.String, com.mapbox.mapboxsdk.views.safecanvas.SafeTranslatedPath, float, float, com.mapbox.mapboxsdk.views.safecanvas.SafePaint)">
 <!--   -->
 </a>
 
 
-<h4>drawtextonpath</h4>
-<pre>void&nbsp;drawtextonpath(java.lang.string&nbsp;text,
-                  <a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">safetranslatedpath</a>&nbsp;path,
-                  float&nbsp;hoffset,
-                  float&nbsp;voffset,
-                  <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">safepaint</a>&nbsp;paint)</pre>
-<div class="block">draw the text, with origin at (x,y), using the specified paint, along the specified path.
- the
- paint's align setting determins where along the path to start the text.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>text</code> - the text to be drawn</dd><dd><code>path</code> - the path the text should follow for its baseline</dd><dd><code>hoffset</code> - the distance along the path to add to the text's starting position</dd><dd><code>voffset</code> - the distance above(-) or below(+) the path to position the text</dd><dd><code>paint</code> - the paint used for the text (e.g. color, size, style)</dd></dl>
+<h4>drawTextOnPath</h4>
+<pre>void&nbsp;drawTextOnPath(java.lang.String&nbsp;text,
+                  <a href="{{site.baseurl}}/api/safetranslatedpath" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafeTranslatedPath</a>&nbsp;path,
+                  float&nbsp;hOffset,
+                  float&nbsp;vOffset,
+                  <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;paint)</pre>
+<div class="block">Draw the text, with origin at (x,y), using the specified paint, along the specified path.
+ The
+ paint's Align setting determins where along the path to start the text.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>text</code> - The text to be drawn</dd><dd><code>path</code> - The path the text should follow for its baseline</dd><dd><code>hOffset</code> - The distance along the path to add to the text's starting position</dd><dd><code>vOffset</code> - The distance above(-) or below(+) the path to position the text</dd><dd><code>paint</code> - The paint used for the text (e.g. color, size, style)</dd></dl>
 
 
-<a name="drawpicture(android.graphics.picture)">
+<a name="drawPicture(android.graphics.Picture)">
 <!--   -->
 </a>
 
 
-<h4>drawpicture</h4>
-<pre>void&nbsp;drawpicture(android.graphics.picture&nbsp;picture)</pre>
-<div class="block">save the canvas state, draw the picture, and restore the canvas state. this differs from
+<h4>drawPicture</h4>
+<pre>void&nbsp;drawPicture(android.graphics.Picture&nbsp;picture)</pre>
+<div class="block">Save the canvas state, draw the picture, and restore the canvas state. This differs from
  picture.draw(canvas), which does not perform any save/restore.</div>
-<dl><dt><span class="strong">parameters:</span></dt><dd><code>picture</code> - the picture to be drawn</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>picture</code> - The picture to be drawn</dd></dl>
 
 
-<a name="drawpicture(android.graphics.picture, android.graphics.rect)">
+<a name="drawPicture(android.graphics.Picture, android.graphics.Rect)">
 <!--   -->
 </a>
 
 
-<h4>drawpicture</h4>
-<pre>void&nbsp;drawpicture(android.graphics.picture&nbsp;picture,
-               android.graphics.rect&nbsp;dst)</pre>
-<div class="block">draw the picture, stretched to fit into the dst rectangle.</div>
+<h4>drawPicture</h4>
+<pre>void&nbsp;drawPicture(android.graphics.Picture&nbsp;picture,
+               android.graphics.Rect&nbsp;dst)</pre>
+<div class="block">Draw the picture, stretched to fit into the dst rectangle.</div>
 
 
 
@@ -1984,5 +1984,5 @@ tags: views
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

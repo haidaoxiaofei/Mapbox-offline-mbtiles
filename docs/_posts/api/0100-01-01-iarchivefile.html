@@ -4,40 +4,40 @@ title: IArchiveFile
 category: api
 tags: tileprovider
 ---
-<div class="contentcontainer">
+<div class="contentContainer">
 <div class="description">
 
 
 <dl>
-<dt>all known implementing classes:</dt>
-<dd><a href="{{site.baseurl}}/api/mbtilesfilearchive" title="class in com.mapbox.mapboxsdk.tileprovider.modules">mbtilesfilearchive</a></dd>
+<dt>All Known Implementing Classes:</dt>
+<dd><a href="{{site.baseurl}}/api/mbtilesfilearchive" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MBTilesFileArchive</a></dd>
 </dl>
 
 
-<pre>public interface <span class="strong">iarchivefile</span></pre>
+<pre>public interface <span class="strong">IArchiveFile</span></pre>
 
 
 </div>
 <div class="summary">
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>java.io.inputstream</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a>&nbsp;tilesource,
-              <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;tile)</code>
-<div class="block">get the input stream for the requested tile.</div>
+<tr class="altColor">
+<td class="colFirst"><code>java.io.InputStream</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;tileSource,
+              <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;tile)</code>
+<div class="block">Get the input stream for the requested tile.</div>
 </td>
 </tr>
 </table>
@@ -49,22 +49,22 @@ tags: tileprovider
 <div class="details">
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="getinputstream(com.mapbox.mapboxsdk.tileprovider.tilesource.itilelayer, com.mapbox.mapboxsdk.tileprovider.maptile)">
+<h3>Method Detail</h3>
+<a name="getInputStream(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, com.mapbox.mapboxsdk.tileprovider.MapTile)">
 <!--   -->
 </a>
 
 
-<h4>getinputstream</h4>
-<pre>java.io.inputstream&nbsp;getinputstream(<a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">itilelayer</a>&nbsp;tilesource,
-                                 <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">maptile</a>&nbsp;tile)</pre>
-<div class="block">get the input stream for the requested tile.</div>
-<dl><dt><span class="strong">returns:</span></dt><dd>the input stream, or null if the archive doesn't contain an entry for the requested
+<h4>getInputStream</h4>
+<pre>java.io.InputStream&nbsp;getInputStream(<a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;tileSource,
+                                 <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;tile)</pre>
+<div class="block">Get the input stream for the requested tile.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the input stream, or null if the archive doesn't contain an entry for the requested
  tile</dd></dl>
 
 
@@ -74,5 +74,5 @@ tags: tileprovider
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

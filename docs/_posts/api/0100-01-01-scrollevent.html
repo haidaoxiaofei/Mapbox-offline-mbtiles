@@ -4,28 +4,28 @@ title: ScrollEvent
 category: api
 tags: events
 ---
-<div class="contentcontainer">
-<ul class="inheritance">
-<li>java.lang.object</li>
-<li>
-<ul class="inheritance">
-<li>com.mapbox.mapboxsdk.events.scrollevent</li>
-</ul>
-</li>
-</ul>
+<div class="contentContainer">
+
+java.lang.Object
+
+
+com.mapbox.mapboxsdk.events.ScrollEvent
+
+
+
 <div class="description">
 
 
 <dl>
-<dt>all implemented interfaces:</dt>
-<dd><a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbox.mapboxsdk.events">mapevent</a></dd>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbox.mapboxsdk.events">MapEvent</a></dd>
 </dl>
 
 
-<pre>public class <span class="strong">scrollevent</span>
-extends java.lang.object
-implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbox.mapboxsdk.events">mapevent</a></pre>
-<div class="block">the event generated when a map has finished scrolling to the coordinates
+<pre>public class <span class="strong">ScrollEvent</span>
+extends java.lang.Object
+implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbox.mapboxsdk.events">MapEvent</a></pre>
+<div class="block">The event generated when a map has finished scrolling to the coordinates
  (<code>x</code>,<code>y</code>).</div>
 
 
@@ -33,102 +33,102 @@ implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbo
 <div class="summary">
 
 
-<!-- =========== field summary =========== -->
+<!-- =========== FIELD SUMMARY =========== -->
 
 <a name="field_summary">
 <!--   -->
 </a>
-<h3>field summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="field summary table, listing fields, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>fields</span><span class="tabend">&nbsp;</span></caption>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">field and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#source">source</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#source">source</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#useraction">useraction</a></strong></code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>protected boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#useraction">userAction</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>protected int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#x">x</a></strong></code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>protected int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#x">x</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>protected int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#y">y</a></strong></code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>protected int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#y">y</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
 
-<!-- ======== constructor summary ======== -->
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <a name="constructor_summary">
 <!--   -->
 </a>
-<h3>constructor summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="constructor summary table, listing constructors, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>constructors</span><span class="tabend">&nbsp;</span></caption>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colone" scope="col">constructor and description</th>
+<th class="colOne" scope="col">Constructor and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colone"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;asource,
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;aSource,
            int&nbsp;ax,
            int&nbsp;ay,
-           boolean&nbsp;useraction)</code>&nbsp;</td>
+           boolean&nbsp;userAction)</code>&nbsp;</td>
 </tr>
 </table>
 
 
-<!-- ========== method summary =========== -->
+<!-- ========== METHOD SUMMARY =========== -->
 
 <a name="method_summary">
 <!--   -->
 </a>
-<h3>method summary</h3>
-<table class="overviewsummary" border="0" cellpadding="3" cellspacing="0" summary="method summary table, listing methods, and an explanation">
-<caption class="small dark strong round-top pad1 fill-darken3"><span>methods</span><span class="tabend">&nbsp;</span></caption>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colfirst" scope="col">modifier and type</th>
-<th class="collast" scope="col">method and description</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a></code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#getsource()">getsource</a></strong>()</code>
-<div class="block">return the map which generated this event.</div>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#getsource()">getSource</a></strong>()</code>
+<div class="block">Return the map which generated this event.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>boolean</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#getuseraction()">getuseraction</a></strong>()</code>&nbsp;</td>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#getuseraction()">getUserAction</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#getx()">getx</a></strong>()</code>
-<div class="block">return the x-coordinate scrolled to.</div>
+<tr class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#getx()">getX</a></strong>()</code>
+<div class="block">Return the x-coordinate scrolled to.</div>
 </td>
 </tr>
-<tr class="rowcolor">
-<td class="colfirst"><code>int</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#gety()">gety</a></strong>()</code>
-<div class="block">return the y-coordinate scrolled to.</div>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#gety()">getY</a></strong>()</code>
+<div class="block">Return the y-coordinate scrolled to.</div>
 </td>
 </tr>
-<tr class="altcolor">
-<td class="colfirst"><code>java.lang.string</code></td>
-<td class="collast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#tostring()">tostring</a></strong>()</code>&nbsp;</td>
+<tr class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/scrollevent#tostring()">toString</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
 
-<a name="methods_inherited_from_class_java.lang.object">
+<a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>methods inherited from class&nbsp;java.lang.object</h3>
-<code>clone, equals, finalize, getclass, hashcode, notify, notifyall, wait, wait, wait</code>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</code>
 
 
 
@@ -138,19 +138,19 @@ implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbo
 <div class="details">
 
 
-<!-- ============ field detail =========== -->
+<!-- ============ FIELD DETAIL =========== -->
 
 <a name="field_detail">
 <!--   -->
 </a>
-<h3>field detail</h3>
+<h3>Field Detail</h3>
 <a name="source">
 <!--   -->
 </a>
 
 
 <h4>source</h4>
-<pre>protected&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a> source</pre>
+<pre>protected&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a> source</pre>
 
 
 <a name="x">
@@ -171,93 +171,93 @@ implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbo
 <pre>protected&nbsp;int y</pre>
 
 
-<a name="useraction">
+<a name="userAction">
 <!--   -->
 </a>
 
 
-<h4>useraction</h4>
-<pre>protected&nbsp;boolean useraction</pre>
+<h4>userAction</h4>
+<pre>protected&nbsp;boolean userAction</pre>
 
 
 
 
-<!-- ========= constructor detail ======== -->
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <a name="constructor_detail">
 <!--   -->
 </a>
-<h3>constructor detail</h3>
-<a name="scrollevent(com.mapbox.mapboxsdk.views.mapview, int, int, boolean)">
+<h3>Constructor Detail</h3>
+<a name="ScrollEvent(com.mapbox.mapboxsdk.views.MapView, int, int, boolean)">
 <!--   -->
 </a>
 
 
-<h4>scrollevent</h4>
-<pre>public&nbsp;scrollevent(<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;asource,
+<h4>ScrollEvent</h4>
+<pre>public&nbsp;ScrollEvent(<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;aSource,
            int&nbsp;ax,
            int&nbsp;ay,
-           boolean&nbsp;useraction)</pre>
+           boolean&nbsp;userAction)</pre>
 
 
 
 
-<!-- ============ method detail ========== -->
+<!-- ============ METHOD DETAIL ========== -->
 
 <a name="method_detail">
 <!--   -->
 </a>
-<h3>method detail</h3>
-<a name="getsource()">
+<h3>Method Detail</h3>
+<a name="getSource()">
 <!--   -->
 </a>
 
 
-<h4>getsource</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">mapview</a>&nbsp;getsource()</pre>
-<div class="block">return the map which generated this event.</div>
+<h4>getSource</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;getSource()</pre>
+<div class="block">Return the map which generated this event.</div>
 
 
-<a name="getx()">
+<a name="getX()">
 <!--   -->
 </a>
 
 
-<h4>getx</h4>
-<pre>public&nbsp;int&nbsp;getx()</pre>
-<div class="block">return the x-coordinate scrolled to.</div>
+<h4>getX</h4>
+<pre>public&nbsp;int&nbsp;getX()</pre>
+<div class="block">Return the x-coordinate scrolled to.</div>
 
 
-<a name="gety()">
+<a name="getY()">
 <!--   -->
 </a>
 
 
-<h4>gety</h4>
-<pre>public&nbsp;int&nbsp;gety()</pre>
-<div class="block">return the y-coordinate scrolled to.</div>
+<h4>getY</h4>
+<pre>public&nbsp;int&nbsp;getY()</pre>
+<div class="block">Return the y-coordinate scrolled to.</div>
 
 
-<a name="getuseraction()">
+<a name="getUserAction()">
 <!--   -->
 </a>
 
 
-<h4>getuseraction</h4>
-<pre>public&nbsp;boolean&nbsp;getuseraction()</pre>
-<dl><dt><span class="strong">returns:</span></dt><dd>true if it was a user action (touch action).</dd></dl>
+<h4>getUserAction</h4>
+<pre>public&nbsp;boolean&nbsp;getUserAction()</pre>
+<dl><dt><span class="strong">Returns:</span></dt><dd>true if it was a user action (touch action).</dd></dl>
 
 
-<a name="tostring()">
+<a name="toString()">
 <!--   -->
 </a>
 
 
-<h4>tostring</h4>
-<pre>public&nbsp;java.lang.string&nbsp;tostring()</pre>
+<h4>toString</h4>
+<pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
 <dl>
-<dt><strong>overrides:</strong></dt>
-<dd><code>tostring</code>&nbsp;in class&nbsp;<code>java.lang.object</code></dd>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
 </dl>
 
 
@@ -267,5 +267,5 @@ implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbo
 
 </div>
 </div>
-<!-- ========= end of class data ========= -->
-<!-- ======= start of bottom navbar ====== -->
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

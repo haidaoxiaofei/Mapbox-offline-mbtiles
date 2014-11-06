@@ -8,7 +8,7 @@ if [ -z $VERSION ]; then
 fi
 
 mkdir $VERSION
-curl "http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/$VERSION/mapbox-android-sdk-$VERSION-javadoc.jar" > $VERSION/mapbox-android-sdk-$VERSION.jar
+#curl "http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/$VERSION/mapbox-android-sdk-$VERSION-javadoc.jar" > $VERSION/mapbox-android-sdk-$VERSION.jar
 
 cd $VERSION && unzip mapbox-android-sdk-$VERSION.jar
 
@@ -25,19 +25,18 @@ scrape() {
   TO=`grep -n "$HTMLEND" $1 | grep -o [0-9]*`
   LINES=`echo "$TO - $FR" | bc`
   tail -n +$FR $1 | head -n $LINES | \
-    sed -e 's,<br[ /]*>,,g' \
-    -e 's,<hr>,,g' \
-    -e 's,<caption>,<caption class="small dark strong round-top pad1 fill-darken3">,g' \
-    -e '1,/^\<div class="description">$/b' \
-    -e 's,<ul class="inheritance">,,g' \
-    -e 's,<ul class="blockList">,,g' \
-    -e 's,<ul class="blockListLast">,,g' \
-    -e 's,</ul>,,g' \
-    -e 's,<li class="blockList">,,g' \
-    -e 's,<li>,,g' \
-    -e 's,</li>,,g' | \
-    sed -e 's,<a href="[./]*com/mapbox/mapboxsdk/.*/\([^"]*\).html\(#*[^"]*\)",<a href="{{site.baseurl}}/api/\1\2",g' | \
-    awk '{print tolower($0)}'
+    sed -e 's,<a href="[./]*com/mapbox/mapboxsdk/.*/\([^"]*\).html\(#*[^"]*\)",<a href="{{site.baseurl}}/api/\L\1\2",g' | \
+    sed -e 's,<br[ /]*>,,g' | \
+    sed -e 's,<hr>,,g' | \
+    sed -e 's,<caption>,<caption class="small dark strong round-top pad1 fill-darken3">,g' | \
+    sed -e '1,/^\<div class="description">$/b' | \
+    sed -e 's,<ul class="inheritance">,,g' | \
+    sed -e 's,<ul class="blockList">,,g' | \
+    sed -e 's,<ul class="blockListLast">,,g' | \
+    sed -e 's,</ul>,,g' | \
+    sed -e 's,<li class="blockList">,,g' | \
+    sed -e 's,<li>,,g' | \
+    sed -e 's,</li>,,g'
 }
 
 for file in `find com/mapbox/mapboxsdk -name "*.html" | grep -v package-`; do
