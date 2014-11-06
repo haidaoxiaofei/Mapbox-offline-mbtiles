@@ -160,9 +160,13 @@ public class MapTileLayerArray extends MapTileLayerBase {
                 }
             }
             return tileDrawable;
-        } else {
+        }
+/*
+        else
+        {
 //            Log.w(TAG, "Tile not found in memory, and not allowed to load from remote source.");
         }
+*/
         return null;
     }
 
