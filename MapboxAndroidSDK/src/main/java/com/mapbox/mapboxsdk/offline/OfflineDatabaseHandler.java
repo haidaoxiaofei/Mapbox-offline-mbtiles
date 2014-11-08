@@ -8,6 +8,8 @@ import android.util.Log;
 
 public class OfflineDatabaseHandler  extends SQLiteOpenHelper
 {
+    private static OfflineDatabaseHandler offlineDatabaseHandler;
+
     private static final String TAG = "OfflineDatabaseHandler";
 
     // All Static variables
@@ -37,9 +39,16 @@ public class OfflineDatabaseHandler  extends SQLiteOpenHelper
      * Constructor
      * @param context Context
      */
-    public OfflineDatabaseHandler(Context context)
+    private OfflineDatabaseHandler(Context context)
     {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    public static OfflineDatabaseHandler getInstance(Context context) {
+        if (offlineDatabaseHandler == null) {
+            offlineDatabaseHandler = new OfflineDatabaseHandler(context);
+        }
+        return offlineDatabaseHandler;
     }
 
     @Override
