@@ -1,6 +1,8 @@
 package com.mapbox.mapboxsdk.offline;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
@@ -97,6 +99,25 @@ public class OfflineMapDownloader implements MapboxConstants {
             offlineMapDownloader = new OfflineMapDownloader(context);
         }
         return offlineMapDownloader;
+    }
+
+    public boolean sqliteQueryWrittenAndExpectedCountsWithError()
+    {
+        // NOTE: Unlike most of the sqlite code, this method is written with the expectation that it can and will be called on the main
+        //       thread as part of init. This is also meant to be used in other contexts throught the normal serial operation queue.
+
+        // Calculate how many files need to be written in total and how many of them have been written already
+        //
+        String query = "SELECT COUNT(url) AS totalFilesExpectedToWrite, (SELECT COUNT(url) FROM resources WHERE status IS NOT NULL) AS totalFilesWritten FROM resources;";
+
+//        boolean success = false;
+        SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        this.totalFilesExpectedToWrite = cursor.getInt(0);
+        this.totalFilesWritten = cursor.getInt(1);
+//        success = true;
+
+        return true;
     }
 
 /*
