@@ -77,10 +77,90 @@ public class OfflineMapDownloader implements MapboxConstants {
     }
 
 
+/*
+    API: Control an in-progress offline map download
+*/
+
+    public void cancel()
+    {
+        if (state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateCanceling && state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable)
+        {
+            // TODO
+/*
+            // Stop a download job and discard the associated files
+            //
+            [_backgroundWorkQueue addOperationWithBlock:^{
+            _state = MBXOfflineMapDownloaderStateCanceling;
+            [self notifyDelegateOfStateChange];
+
+            [_dataSession invalidateAndCancel];
+            [_sqliteQueue cancelAllOperations];
+
+            [_sqliteQueue addOperationWithBlock:^{
+                [self setUpNewDataSession];
+                _totalFilesWritten = 0;
+                _totalFilesExpectedToWrite = 0;
+                [[NSFileManager defaultManager] removeItemAtPath:_partialDatabasePath error:nil];
+
+                if([_delegate respondsToSelector:@selector(offlineMapDownloader:didCompleteOfflineMapDatabase:withError:)])
+                {
+                    NSError *canceled = [NSError mbx_errorWithCode:MBXMapKitErrorCodeDownloadingCanceled reason:@"The download job was canceled" description:@"Download canceled"];
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                            [_delegate offlineMapDownloader:self didCompleteOfflineMapDatabase:nil withError:canceled];
+                    });
+                }
+
+                _state = MBXOfflineMapDownloaderStateAvailable;
+                [self notifyDelegateOfStateChange];
+            }];
+
+            }
+*/
+        }
+    }
+
+    public void resume()
+    {
+        if (state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateSuspended) {
+            return;
+        }
+
+        // TODO
+/*
+        // Resume a previously suspended download job
+        //
+        [_backgroundWorkQueue addOperationWithBlock:^{
+            _state = MBXOfflineMapDownloaderStateRunning;
+            [self startDownloading];
+            [self notifyDelegateOfStateChange];
+        }];
+*/
+    }
+
+
+    public void suspend()
+    {
+        if (state == MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning)
+        {
+            // TODO
+/*
+            // Stop a download job, preserving the necessary state to resume later
+            //
+            [_backgroundWorkQueue addOperationWithBlock:^{
+                [_sqliteQueue cancelAllOperations];
+                _state = MBXOfflineMapDownloaderStateSuspended;
+                _activeDataSessionTasks = 0;
+                [self notifyDelegateOfStateChange];
+            }];
+*/
+        }
+    }
+
 
 /*
     API: Access or delete completed offline map databases on disk
 */
+
     public ArrayList<OfflineMapDatabase> getMutableOfflineMapDatabases() {
         // Return an array with offline map database objects representing each of the *complete* map databases on disk
         return mutableOfflineMapDatabases;
