@@ -77,6 +77,38 @@ public class OfflineMapDownloader implements MapboxConstants {
     }
 
 
+    public void cancelImmediatelyWithError(String error)
+    {
+        // TODO
+/*
+        // Creating the database failed for some reason, so clean up and change the state back to available
+        //
+        state = MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateCanceling;
+        [self notifyDelegateOfStateChange];
+
+        if([_delegate respondsToSelector:@selector(offlineMapDownloader:didCompleteOfflineMapDatabase:withError:)])
+        {
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [_delegate offlineMapDownloader:self didCompleteOfflineMapDatabase:nil withError:error];
+            });
+        }
+
+        [_dataSession invalidateAndCancel];
+        [_sqliteQueue cancelAllOperations];
+
+        [_sqliteQueue addOperationWithBlock:^{
+        [self setUpNewDataSession];
+        _totalFilesWritten = 0;
+        _totalFilesExpectedToWrite = 0;
+
+        [[NSFileManager defaultManager] removeItemAtPath:_partialDatabasePath error:nil];
+
+        state = MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable;
+        [self notifyDelegateOfStateChange];
+    }];
+*/
+    }
+
 /*
     API: Control an in-progress offline map download
 */
