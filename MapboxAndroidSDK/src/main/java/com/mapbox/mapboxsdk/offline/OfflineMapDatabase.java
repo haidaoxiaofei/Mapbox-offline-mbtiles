@@ -10,6 +10,8 @@ import com.mapbox.mapboxsdk.exceptions.OfflineDatabaseException;
 import com.mapbox.mapboxsdk.geometry.CoordinateRegion;
 import com.mapbox.mapboxsdk.geometry.CoordinateSpan;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+
+import java.sql.Blob;
 import java.util.Date;
 
 public class OfflineMapDatabase implements MapboxConstants {
@@ -113,7 +115,10 @@ public class OfflineMapDatabase implements MapboxConstants {
         String query = "SELECT " + OfflineDatabaseHandler.FIELD_METADATA_VALUE + " FROM " + OfflineDatabaseHandler.TABLE_METADATA +  " WHERE " + OfflineDatabaseHandler.FIELD_METADATA_NAME + "='" + name + "';";
         SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        return cursor.getString(cursor.getColumnIndex(OfflineDatabaseHandler.FIELD_METADATA_VALUE));
+        cursor.moveToFirst();
+        String res = cursor.getString(cursor.getColumnIndex(OfflineDatabaseHandler.FIELD_METADATA_VALUE));
+        cursor.close();
+        return res;
     }
 
     public byte[] sqliteDataForURL(String url)
@@ -121,6 +126,9 @@ public class OfflineMapDatabase implements MapboxConstants {
         SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
         String query = "SELECT " + OfflineDatabaseHandler.FIELD_DATA_VALUE + " FROM " + OfflineDatabaseHandler.TABLE_DATA +  " WHERE " + OfflineDatabaseHandler.FIELD_DATA_ID + "= (SELECT " + OfflineDatabaseHandler.FIELD_RESOURCES_ID + " from " + OfflineDatabaseHandler.TABLE_RESOURCES + " where " + OfflineDatabaseHandler.FIELD_RESOURCES_URL + " = '" + url + "');";
         Cursor cursor = db.rawQuery(query, null);
-        return cursor.getBlob(cursor.getColumnIndex(OfflineDatabaseHandler.FIELD_DATA_VALUE));
+        cursor.moveToFirst();
+        byte[] blob = cursor.getBlob(cursor.getColumnIndex(OfflineDatabaseHandler.FIELD_DATA_VALUE));
+        cursor.close();
+        return blob;
     }
 }

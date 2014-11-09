@@ -5,15 +5,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.Log;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.constants.MathConstants;
 import com.mapbox.mapboxsdk.geometry.CoordinateRegion;
+import com.mapbox.mapboxsdk.util.AppUtils;
 import com.mapbox.mapboxsdk.util.DataLoadingUtils;
 import com.mapbox.mapboxsdk.util.MapboxUtils;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Comment;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -101,6 +105,31 @@ public class OfflineMapDownloader implements MapboxConstants {
         return offlineMapDownloader;
     }
 
+    public ArrayList<String> sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(int limit)
+    {
+        ArrayList<String> results = new ArrayList<String>();
+        if (AppUtils.runningOnMainThread()) {
+            Log.w(TAG, "Attempting to run sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit() on main thread.  Returning.");
+            return results;
+        }
+
+        // Read up to limit undownloaded urls from the offline map database
+        //
+        String query = String.format("SELECT url FROM resources WHERE status IS NULL LIMIT %d;", (long)limit);
+
+        // Open the database
+        SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            results.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return results;
+    }
+
     public boolean sqliteQueryWrittenAndExpectedCountsWithError()
     {
         // NOTE: Unlike most of the sqlite code, this method is written with the expectation that it can and will be called on the main
@@ -113,8 +142,10 @@ public class OfflineMapDownloader implements MapboxConstants {
 //        boolean success = false;
         SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
         this.totalFilesExpectedToWrite = cursor.getInt(0);
         this.totalFilesWritten = cursor.getInt(1);
+        cursor.close();
 //        success = true;
 
         return true;
