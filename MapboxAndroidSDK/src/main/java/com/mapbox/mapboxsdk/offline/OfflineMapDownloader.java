@@ -1,8 +1,15 @@
 package com.mapbox.mapboxsdk.offline;
 
+import android.text.TextUtils;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.geometry.CoordinateRegion;
+import com.mapbox.mapboxsdk.util.MapboxUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class OfflineMapDownloader implements MapboxConstants {
 
@@ -76,6 +83,56 @@ public class OfflineMapDownloader implements MapboxConstants {
         return offlineMapDownloader;
     }
 
+    public Set<String> parseMarkerIconURLStringsFromGeojsonData(byte[] data)
+    {
+        HashSet<String> iconURLStrings = new HashSet<String>();
+
+        JSONObject simplestyleJSONDictionary = null;
+        try {
+            simplestyleJSONDictionary = new JSONObject(new String(data));
+
+            // Find point features in the markers dictionary (if there are any) and add them to the map.
+            //
+            Object markers = simplestyleJSONDictionary.get("features");
+
+            if (markers != null && markers instanceof JSONArray)
+            {
+                JSONArray array = (JSONArray)markers;
+
+                for (int lc = 0; lc < array.length(); lc++)
+                {
+                    Object value = array.get(lc);
+                    if (value instanceof JSONObject)
+                    {
+                        JSONObject feature = (JSONObject)value;
+                        String type = feature.getJSONObject("geometry").getString("type");
+
+                        if ("Point".equals(type))
+                        {
+                            String size        = feature.getJSONObject("properties").getString("marker-size");
+                            String color       = feature.getJSONObject("properties").getString("marker-color");
+                            String symbol      = feature.getJSONObject("properties").getString("marker-symbol");
+                            if (!TextUtils.isEmpty(size) && !TextUtils.isEmpty(color) && !TextUtils.isEmpty(symbol))
+                            {
+                                String markerURL = MapboxUtils.markerIconURL(size, symbol, color);
+                                if(!TextUtils.isEmpty(markerURL))
+                                {
+                                    iconURLStrings.add(markerURL);;
+                                }
+                            }
+                        }
+                    }
+                    // This is the last line of the loop
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Return only the unique icon urls
+        //
+        return iconURLStrings;
+    }
 
     public void cancelImmediatelyWithError(String error)
     {
