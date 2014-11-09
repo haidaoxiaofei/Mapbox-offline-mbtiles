@@ -17,7 +17,6 @@ import com.mapbox.mapboxsdk.util.NetworkUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -106,6 +105,127 @@ public class OfflineMapDownloader implements MapboxConstants {
         return offlineMapDownloader;
     }
 
+/*
+    Delegate Notifications
+*/
+
+    public void notifyDelegateOfStateChange()
+    {
+        // TODO
+/*
+        assert(![NSThread isMainThread]);
+
+        if([_delegate respondsToSelector:@selector(offlineMapDownloader:stateChangedTo:)])
+        {
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [_delegate offlineMapDownloader:self stateChangedTo:_state];
+            });
+        }
+*/
+    }
+
+
+    public void notifyDelegateOfInitialCount()
+    {
+        // TODO
+/*
+        if([_delegate respondsToSelector:@selector(offlineMapDownloader:totalFilesExpectedToWrite:)])
+        {
+            // Update the delegate with the file count so it can display a progress indicator
+            //
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [_delegate offlineMapDownloader:self totalFilesExpectedToWrite:_totalFilesExpectedToWrite];
+            });
+        }
+*/
+    }
+
+
+    public void notifyDelegateOfProgress()
+    {
+        // TODO
+/*
+        assert(![NSThread isMainThread]);
+
+        if([_delegate respondsToSelector:@selector(offlineMapDownloader:totalFilesWritten:totalFilesExpectedToWrite:)])
+        {
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [_delegate offlineMapDownloader:self totalFilesWritten:_totalFilesWritten totalFilesExpectedToWrite:_totalFilesExpectedToWrite];
+            });
+        }
+*/
+    }
+
+
+    public void notifyDelegateOfNetworkConnectivityError(String error)
+    {
+        // TODO
+/*
+        assert(![NSThread isMainThread]);
+
+        if([_delegate respondsToSelector:@selector(offlineMapDownloader:didEncounterRecoverableError:)])
+        {
+            NSError *networkError = [NSError mbx_errorWithCode:MBXMapKitErrorCodeURLSessionConnectivity reason:[error localizedFailureReason] description:[error localizedDescription]];
+
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [_delegate offlineMapDownloader:self didEncounterRecoverableError:networkError];
+            });
+        }
+*/
+    }
+
+
+    public void notifyDelegateOfSqliteError(String error)
+    {
+        // TODO
+/*
+        assert(![NSThread isMainThread]);
+
+        if([_delegate respondsToSelector:@selector(offlineMapDownloader:didEncounterRecoverableError:)])
+        {
+            NSError *networkError = [NSError mbx_errorWithCode:MBXMapKitErrorCodeOfflineMapSqlite reason:[error localizedFailureReason] description:[error localizedDescription]];
+
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [_delegate offlineMapDownloader:self didEncounterRecoverableError:networkError];
+            });
+        }
+*/
+    }
+
+
+    public void notifyDelegateOfHTTPStatusError(int status, String url)
+    {
+        // TODO
+/*
+        assert(![NSThread isMainThread]);
+
+        if([_delegate respondsToSelector:@selector(offlineMapDownloader:didEncounterRecoverableError:)])
+        {
+            NSString *reason = [NSString stringWithFormat:@"HTTP status %li was received for %@", (long)status,[url absoluteString]];
+            NSError *statusError = [NSError mbx_errorWithCode:MBXMapKitErrorCodeHTTPStatus reason:reason description:@"HTTP status error"];
+
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [_delegate offlineMapDownloader:self didEncounterRecoverableError:statusError];
+            });
+        }
+*/
+    }
+
+
+    public void notifyDelegateOfCompletionWithOfflineMapDatabase(OfflineMapDatabase offlineMap, String error)
+    {
+        // TODO
+/*
+        assert(![NSThread isMainThread]);
+
+        if([_delegate respondsToSelector:@selector(offlineMapDownloader:didCompleteOfflineMapDatabase:withError:)])
+        {
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [_delegate offlineMapDownloader:self didCompleteOfflineMapDatabase:offlineMap withError:error];
+            });
+        }
+*/
+    }
 /*
     Implementation: download urls
 */
