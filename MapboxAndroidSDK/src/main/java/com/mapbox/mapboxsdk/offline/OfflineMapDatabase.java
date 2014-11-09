@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import android.util.Log;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
+import com.mapbox.mapboxsdk.exceptions.OfflineDatabaseException;
 import com.mapbox.mapboxsdk.geometry.CoordinateRegion;
 import com.mapbox.mapboxsdk.geometry.CoordinateSpan;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -86,6 +87,17 @@ public class OfflineMapDatabase implements MapboxConstants {
             Log.w(TAG, "Invalid offline map database.  Can't be used.");
         }
         return initializedProperly;
+    }
+
+    public byte[] dataForURL(String url) throws OfflineDatabaseException
+    {
+        byte[] data = sqliteDataForURL(url);
+        if (data == null || data.length == 0)
+        {
+            String reason = String.format("The offline database has no data for %s", url);
+            throw new OfflineDatabaseException(reason);
+        }
+        return data;
     }
 
     public void invalidate() {
