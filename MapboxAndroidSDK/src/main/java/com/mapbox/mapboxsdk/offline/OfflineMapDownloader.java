@@ -1,5 +1,6 @@
 package com.mapbox.mapboxsdk.offline;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,8 +17,6 @@ import com.mapbox.mapboxsdk.util.NetworkUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Comment;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -105,6 +104,100 @@ public class OfflineMapDownloader implements MapboxConstants {
         return offlineMapDownloader;
     }
 
+/*
+    Implementation: sqlite stuff
+*/
+
+    public void sqliteSaveDownloadedData(byte[] data, String url)
+    {
+        if (AppUtils.runningOnMainThread()) {
+            Log.w(TAG, "trying to run sqliteSaveDownloadedData() on main thread. Return.");
+            return;
+        }
+//        assert(_activeDataSessionTasks > 0);
+
+//        [_sqliteQueue addOperationWithBlock:^{
+
+        // Bail out if the state has changed to canceling, suspended, or available
+        //
+        if(this.state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning)
+        {
+            return;
+        }
+
+        // Open the database read-write and multi-threaded. The slightly obscure c-style variable names here and below are
+        // used to stay consistent with the sqlite documentaion.
+                // Continue by inserting an image blob into the data table
+                //
+        SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getWritableDatabase();
+        db.beginTransaction();
+
+//      String query2 = "INSERT INTO data(value) VALUES(?);";
+        ContentValues values = new ContentValues();
+        values.put(OfflineDatabaseHandler.FIELD_DATA_VALUE, data);
+        db.insert(OfflineDatabaseHandler.TABLE_DATA, null, values);
+
+//      [query appendFormat:@"UPDATE resources SET status=200,id=last_insert_rowid() WHERE url='%@';\n",[url absoluteString]];
+        db.execSQL(String.format("UPDATE resources SET status=200,id=last_insert_rowid() WHERE url='%s';", url));
+        db.setTransactionSuccessful();
+        db.close();
+
+
+/*
+        if(error)
+        {
+            // Oops, that didn't work. Notify the delegate.
+            //
+            [self notifyDelegateOfSqliteError:error];
+        }
+        else
+        {
+*/
+            // Update the progress
+            //
+            this.totalFilesWritten += 1;
+//            [self notifyDelegateOfProgress];
+
+            // If all the downloads are done, clean up and notify the delegate
+            //
+            if(this.totalFilesWritten >= this.totalFilesExpectedToWrite)
+            {
+                if(this.state == MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning)
+                {
+                    // This is what to do when we've downloaded all the files
+                    //
+                        // TODO - Populate OfflineMapDatabase object and persist it
+/*
+                    OfflineMapDatabase offlineMap = completeDatabaseAndInstantiateOfflineMapWithError();
+                    if(offlineMap != null) {
+                        this.mutableOfflineMapDatabases.add(offlineMap);
+                    }
+                    [self notifyDelegateOfCompletionWithOfflineMapDatabase:offlineMap withError:error];
+
+                    this.state = MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable;
+                    [self notifyDelegateOfStateChange];
+*/
+                }
+            }
+/*
+        }
+*/
+
+        // If this was the last of a batch of urls in the data session's download queue, and there are more urls
+        // to be downloaded, get another batch of urls from the database and keep working.
+        //
+/*
+        if(activeDataSessionTasks > 0)
+        {
+            _activeDataSessionTasks -= 1;
+        }
+        if(_activeDataSessionTasks == 0 && _totalFilesWritten < _totalFilesExpectedToWrite)
+        {
+            [self startDownloading];
+        }
+*/
+    }
+
     public ArrayList<String> sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(int limit)
     {
         ArrayList<String> results = new ArrayList<String>();
@@ -120,10 +213,10 @@ public class OfflineMapDownloader implements MapboxConstants {
         // Open the database
         SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            results.add(cursor.getString(0));
-            cursor.moveToNext();
+        if (cursor.moveToFirst()) {
+            do {
+                results.add(cursor.getString(0));
+            } while (cursor.moveToNext());
         }
         cursor.close();
 
