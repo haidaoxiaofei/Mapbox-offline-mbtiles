@@ -39,6 +39,10 @@ public class OfflineMapDatabase implements MapboxConstants {
         this.context = context;
     }
 
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
     public boolean initializeDatabase() {
 
         String uniqueID = sqliteMetadataForName("uniqueID");

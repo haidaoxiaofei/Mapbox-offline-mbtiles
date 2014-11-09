@@ -2,6 +2,7 @@ package com.mapbox.mapboxsdk.offline;
 
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.geometry.CoordinateRegion;
+import java.util.ArrayList;
 
 public class OfflineMapDownloader implements MapboxConstants {
 
@@ -44,9 +45,10 @@ public class OfflineMapDownloader implements MapboxConstants {
     private int totalFilesExpectedToWrite;
 
 
+    private ArrayList<OfflineMapDatabase> mutableOfflineMapDatabases;
+
 /*
     // Don't appear to be needed as there's one database per app for offline maps
-    @property (nonatomic) NSMutableArray *mutableOfflineMapDatabases;
     @property (nonatomic) NSString *partialDatabasePath;
     @property (nonatomic) NSURL *offlineMapDirectory;
 
@@ -61,6 +63,9 @@ public class OfflineMapDownloader implements MapboxConstants {
     private OfflineMapDownloader()
     {
         super();
+
+        mutableOfflineMapDatabases = new ArrayList<OfflineMapDatabase>();
+
     }
 
     public static OfflineMapDownloader getOfflineMapDownloader() {
@@ -71,4 +76,37 @@ public class OfflineMapDownloader implements MapboxConstants {
         return offlineMapDownloader;
     }
 
+
+
+/*
+    API: Access or delete completed offline map databases on disk
+*/
+    public ArrayList<OfflineMapDatabase> getMutableOfflineMapDatabases() {
+        // Return an array with offline map database objects representing each of the *complete* map databases on disk
+        return mutableOfflineMapDatabases;
+    }
+
+    public void removeOfflineMapDatabase(OfflineMapDatabase offlineMapDatabase)
+    {
+        // Mark the offline map object as invalid in case there are any references to it still floating around
+        //
+        offlineMapDatabase.invalidate();
+
+
+        // Remove the offline map object from the array and delete it's backing database
+        //
+        mutableOfflineMapDatabases.remove(offlineMapDatabase);
+    }
+
+    public void removeOfflineMapDatabaseWithID(String uniqueID)
+    {
+        for (OfflineMapDatabase database : getMutableOfflineMapDatabases())
+        {
+            if (database.getUniqueID().equals(uniqueID))
+            {
+                removeOfflineMapDatabase(database);
+                return;
+            }
+        }
+    }
 }
