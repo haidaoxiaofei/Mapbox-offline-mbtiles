@@ -3,7 +3,41 @@ package com.mapbox.mapboxsdk.util;
 import android.text.TextUtils;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 
-public class MapboxUtils {
+public class MapboxUtils implements MapboxConstants {
+
+    public static String qualityExtensionForImageQuality(RasterImageQuality imageQuality)
+    {
+        String qualityExtension;
+        switch (imageQuality)
+        {
+            case MBXRasterImageQualityPNG32:
+                qualityExtension = "png32";
+                break;
+            case MBXRasterImageQualityPNG64:
+                qualityExtension = "png64";;
+                break;
+            case MBXRasterImageQualityPNG128:
+                qualityExtension = "png128";
+                break;
+            case MBXRasterImageQualityPNG256:
+                qualityExtension = "png256";
+                break;
+            case MBXRasterImageQualityJPEG70:
+                qualityExtension = "jpg70";
+                break;
+            case MBXRasterImageQualityJPEG80:
+                qualityExtension = "jpg80";
+                break;
+            case MBXRasterImageQualityJPEG90:
+                qualityExtension = "jpg90";
+                break;
+            case MBXRasterImageQualityFull:
+            default:
+                qualityExtension = "png";
+                break;
+        }
+        return qualityExtension;
+    }
 
     public static String markerIconURL(String size, String symbol, String color)
     {

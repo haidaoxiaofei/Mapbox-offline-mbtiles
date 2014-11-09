@@ -94,7 +94,7 @@ public class DataLoadingUtils {
         return parsed;
     }
 
-    private static String readAll(Reader rd) throws IOException {
+    public static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
         while ((cp = rd.read()) != -1) {
