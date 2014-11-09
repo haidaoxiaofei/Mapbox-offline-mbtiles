@@ -17,6 +17,8 @@ import com.mapbox.mapboxsdk.util.NetworkUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -102,6 +104,95 @@ public class OfflineMapDownloader implements MapboxConstants {
             offlineMapDownloader = new OfflineMapDownloader(context);
         }
         return offlineMapDownloader;
+    }
+
+/*
+    Implementation: download urls
+*/
+
+    public OfflineMapDatabase completeDatabaseAndInstantiateOfflineMapWithError()
+    {
+        if (AppUtils.runningOnMainThread()) {
+            Log.w(TAG, "completeDatabaseAndInstantiateOfflineMapWithError() running on main thread.  Returning null.");
+            return null;
+        }
+
+        // TODO - Create new OfflineMapDatabase and load with recently downloaded data
+/*
+        // Rename the file using a unique prefix
+        //
+        CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+        CFStringRef uuidString = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+        NSString *newFilename = [NSString stringWithFormat:@"%@.complete",uuidString];
+        NSString *newPath = [[_offlineMapDirectory URLByAppendingPathComponent:newFilename] path];
+        CFRelease(uuidString);
+        CFRelease(uuid);
+        [[NSFileManager defaultManager] moveItemAtPath:_partialDatabasePath toPath:newPath error:error];
+
+        // If the move worked, instantiate and return offline map database
+        //
+        if(error && *error)
+        {
+            return nil;
+        }
+        else
+        {
+            return [[MBXOfflineMapDatabase alloc] initWithContentsOfFile:newPath];
+        }
+*/
+        return new OfflineMapDatabase(context);
+    }
+
+
+    public void startDownloading() {
+        if (AppUtils.runningOnMainThread()) {
+            Log.w(TAG, "startDownloading() running on main thread.  Returning.");
+            return;
+        }
+
+//        [_sqliteQueue addOperationWithBlock:^{
+        ArrayList<String> urls = sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(30);
+
+            for (final String url : urls) {
+                if (!NetworkUtils.isNetworkAvailable(context)) {
+                    Log.w(TAG, "Network is no longer available.");
+//                    [self notifyDelegateOfNetworkConnectivityError:error];
+                }
+
+                AsyncTask foo = new AsyncTask<String, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(String... params) {
+                        try {
+                            HttpURLConnection conn = NetworkUtils.getHttpURLConnection(new URL(params[0]));
+                            conn.setConnectTimeout(60000);
+                            conn.connect();
+                            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                                throw new IOException();
+                            }
+
+                            BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
+                            byte[] data = new byte[conn.getContentLength()];
+                            int bytesRead = 0;
+                            int offset = 0;
+                            while (offset < conn.getContentLength()) {
+                                bytesRead = in.read(data, offset, data.length - offset);
+                                if (bytesRead == -1)
+                                    break;
+                                offset += bytesRead;
+                            }
+                            in.close();
+                            sqliteSaveDownloadedData(data, url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+//                            [self notifyDelegateOfHTTPStatusError:((NSHTTPURLResponse *) response).statusCode url:response.URL];
+                        }
+
+                        return null;
+                    }
+                };
+                foo.execute();
+                // This is the last line of the for loop
+            }
     }
 
 /*
