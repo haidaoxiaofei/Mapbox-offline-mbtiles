@@ -37,7 +37,7 @@ public class MainTestFragment extends Fragment {
     private String street = "examples.map-i87786ca";
     private String terrain = "examples.map-zgrqqx0w";
     //private final String mbTile = "test.MBTiles";
-    private final String mbTile = "ww-9-11.mbtiles";
+    private final String mbTile = "haiquanwan.mbtiles";
 
     private String currentLayer = "";
 
@@ -67,11 +67,11 @@ public class MainTestFragment extends Fragment {
         mv.addMarker(m);
 
 
-        Point displayLatlon = gpsPointMappingToScreen(new Point(113.98096,22.54063));
+        Point displayLatlon = gpsPointMappingToScreen(new Point(113.12164,22.070553));
 
         Log.i("testLocation", displayLatlon.getString());
 
-        m = new Marker(mv, "Ball", "Shenzhen", new LatLng(displayLatlon.y, displayLatlon.x));
+        m = new Marker(mv, "Spring", "Zhuhai", new LatLng(displayLatlon.y, displayLatlon.x));
         m.setIcon(new Icon(getActivity(), Icon.Size.SMALL, "marker-stroked", "FF0F00"));
         mv.addMarker(m);
 
@@ -319,18 +319,21 @@ public class MainTestFragment extends Fragment {
         /*
 
         Axis Converter for WW
-        Baidu GPS : 113.98037D, 22.539246D
-        OCN result: 645537.3D, 143025.36D
+        Baidu GPS : 113.122886D, 22.07374D
+        OCN result: 239620.1D, 95084.18D
         */
 
-        double x = originGpsPoint.getX() - 113.98037D;
-        double y = originGpsPoint.getY() - 22.539246D;
+
+        double x = originGpsPoint.getX() - 113.122886D;
+        double y = originGpsPoint.getY() - 22.07374D;
+
+        double tmp = originGpsPoint.getX();
 
         m.postRotate(45.0F);
         m.postScale(1.0F, (float)Math.sin(0.7853982D));
         m.postScale(2.8452876F, 2.8452876F);
         float[] ret = new float[2];
-        m.mapPoints(ret, new float[] { (float)(645537.3D + x * 214293.74333333335D), (float)(143025.36D + y * -232736.01333333334D) });
+        m.mapPoints(ret, new float[] { (float)(239620.1D + x * 214293.74333333335D), (float)(95084.18D + y * -232736.01333333334D) });
 
         return ocnPointToScreen(ret[0], ret[1]);
 
@@ -341,22 +344,32 @@ public class MainTestFragment extends Fragment {
 
         /*
         OCN:
-        left_bottom(x,y) = (1009132, 1123244)
-        right_top(x,y) = (1013760, 1118720)
+        left_bottom(x,y) = (286208, 478696)
+        right_top(x,y) = (293828, 473552)
 
         Target LatLon:
-        left_bottom(x,y) = (-1,-1)
-        right_top(x,y) = (1,1)
+        left_bottom(x,y) = (-1,-0.67849723)
+        right_top(x,y) = (1,0.67849723)
          */
+        double left_bottom_x = 286208;
+        double left_bottom_y = 478696;
+        double right_top_x = 293828;
+        double right_top_y = 473552;
 
-        double ocn_h = 1123244 - 1118720;
-        double ocn_w = 1013760 - 1009132;
+        double ocn_h = left_bottom_y - right_top_y;
+        double ocn_w = right_top_x - left_bottom_x;
 
-        double latlon_h = 1 - (-1);
-        double latlon_w = 1 - (-1);
+        double left_bottom_latlon_x = -1;
+        double left_bottom_latlon_y = -0.67849723;
+        double right_top_latlon_x = 1;
+        double right_top_latlon_y = 0.67849723;
 
-        double latlon_x = (x - 1009132)/ocn_w * latlon_w + -1;
-        double latlon_y = -((y - 1123244)/ocn_h * latlon_h + 1);
+
+        double latlon_h = right_top_latlon_y - left_bottom_latlon_y;
+        double latlon_w = right_top_latlon_x - left_bottom_latlon_x;
+
+        double latlon_x = (x - left_bottom_x)/ocn_w * latlon_w + left_bottom_latlon_x;
+        double latlon_y = -((y - left_bottom_y)/ocn_h * latlon_h - left_bottom_latlon_y);
 
 
         return new Point(latlon_x, latlon_y);
