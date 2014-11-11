@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -35,7 +36,9 @@ public class MainTestFragment extends Fragment {
     private String satellite = "brunosan.map-cyglrrfu";
     private String street = "examples.map-i87786ca";
     private String terrain = "examples.map-zgrqqx0w";
-    private final String mbTile = "test.MBTiles";
+    //private final String mbTile = "test.MBTiles";
+    private final String mbTile = "ww-9-11.mbtiles";
+
     private String currentLayer = "";
 
     @Override
@@ -58,6 +61,52 @@ public class MainTestFragment extends Fragment {
         Marker m = new Marker(mv, "Edinburgh", "Scotland", new LatLng(55.94629, -3.20777));
         m.setIcon(new Icon(getActivity(), Icon.Size.SMALL, "marker-stroked", "FF0000"));
         mv.addMarker(m);
+
+        m = new Marker(mv, "Beijing", "China", new LatLng(39.927109, 116.403694));
+        m.setIcon(new Icon(getActivity(), Icon.Size.SMALL, "marker-stroked", "FF0F00"));
+        mv.addMarker(m);
+
+
+        Point displayLatlon = gpsPointMappingToScreen(new Point(113.98096,22.54063));
+
+        Log.i("testLocation", displayLatlon.getString());
+
+        m = new Marker(mv, "Ball", "Shenzhen", new LatLng(displayLatlon.y, displayLatlon.x));
+        m.setIcon(new Icon(getActivity(), Icon.Size.SMALL, "marker-stroked", "FF0F00"));
+        mv.addMarker(m);
+
+//        for (int i = 0; i < 85; i++){
+//            m = new Marker(mv, "Test" + i, "test" + i, new LatLng(85 - i, 170 - i * 2));
+//            m.setIcon(new Icon(getActivity(), Icon.Size.SMALL, "marker-stroked", "FF0F00"));
+//            mv.addMarker(m);
+//        }
+//
+//        for (int i = 0; i < 85; i++){
+//            m = new Marker(mv, "Test" + i, "test" + i, new LatLng(85 - i, -170 + i * 2));
+//            m.setIcon(new Icon(getActivity(), Icon.Size.SMALL, "marker-stroked", "FF0F00"));
+//            mv.addMarker(m);
+//        }
+
+//        for (int i = 0; i < 10; i++){
+//            m = new Marker(mv, "Test" + i, "test" + i, new LatLng(1 - i*0.1, 1 - i * 0.1));
+//            m.setIcon(new Icon(getActivity(), Icon.Size.SMALL, "marker-stroked", "FF0F00"));
+//            mv.addMarker(m);
+//        }
+
+
+//        m = new Marker(mv, "Test", "test", new LatLng(1, 1));
+//        m.setIcon(new Icon(getActivity(), Icon.Size.MEDIUM, "city", "FFFF00"));
+//        mv.addMarker(m);
+//
+//
+//        m = new Marker(mv, "Test", "test", new LatLng(0.99, 0.99));
+//        m.setIcon(new Icon(getActivity(), Icon.Size.MEDIUM, "city", "FFFF00"));
+//        mv.addMarker(m);
+//
+//        m = new Marker(mv, "Test", "test", new LatLng(0.9, 0.9));
+//        m.setIcon(new Icon(getActivity(), Icon.Size.MEDIUM, "city", "FFFF00"));
+//        mv.addMarker(m);
+
 
         m = new Marker(mv, "Stockholm", "Sweden", new LatLng(59.32995, 18.06461));
         m.setIcon(new Icon(getActivity(), Icon.Size.MEDIUM, "city", "FFFF00"));
@@ -260,6 +309,57 @@ public class MainTestFragment extends Fragment {
 
         // Adds line and marker to the overlay
         mv.getOverlays().add(po);
+    }
+
+
+    public static Point gpsPointMappingToScreen(Point originGpsPoint)
+    {
+        Matrix m = new Matrix();
+
+        /*
+
+        Axis Converter for WW
+        Baidu GPS : 113.98037D, 22.539246D
+        OCN result: 645537.3D, 143025.36D
+        */
+
+        double x = originGpsPoint.getX() - 113.98037D;
+        double y = originGpsPoint.getY() - 22.539246D;
+
+        m.postRotate(45.0F);
+        m.postScale(1.0F, (float)Math.sin(0.7853982D));
+        m.postScale(2.8452876F, 2.8452876F);
+        float[] ret = new float[2];
+        m.mapPoints(ret, new float[] { (float)(645537.3D + x * 214293.74333333335D), (float)(143025.36D + y * -232736.01333333334D) });
+
+        return ocnPointToScreen(ret[0], ret[1]);
+
+    }
+
+    public static Point ocnPointToScreen(float x, float y){
+        // convert OCN to display LatLon
+
+        /*
+        OCN:
+        left_bottom(x,y) = (1009132, 1123244)
+        right_top(x,y) = (1013760, 1118720)
+
+        Target LatLon:
+        left_bottom(x,y) = (-1,-1)
+        right_top(x,y) = (1,1)
+         */
+
+        double ocn_h = 1123244 - 1118720;
+        double ocn_w = 1013760 - 1009132;
+
+        double latlon_h = 1 - (-1);
+        double latlon_w = 1 - (-1);
+
+        double latlon_x = (x - 1009132)/ocn_w * latlon_w + -1;
+        double latlon_y = -((y - 1123244)/ocn_h * latlon_h + 1);
+
+
+        return new Point(latlon_x, latlon_y);
     }
 
     private Button changeButtonTypeface(Button button) {
