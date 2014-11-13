@@ -1,13 +1,9 @@
 package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
-import android.util.Log;
-
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -84,8 +80,9 @@ public class BingTileLayer extends WebSourceTileLayer {
     private void getMetadata() {
         try {
             synchronized (this) {
-                if (mHasMetadata)
+                if (mHasMetadata) {
                     return;
+                }
                 String url = String.format(BASE_URL_PATTERN, mStyle, mBingMapKey);
 
                 HttpURLConnection connection = NetworkUtils.getHttpURLConnection(new URL(url));
@@ -100,43 +97,43 @@ public class BingTileLayer extends WebSourceTileLayer {
 
                 mHasMetadata = true;
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private String getInstanceFromJSON(final String jsonContent) throws Exception
     {
-        if(jsonContent==null) {
+        if (jsonContent == null) {
             throw new Exception("JSON to parse is null");
         }
 
         final JSONObject json = new JSONObject(jsonContent);
         final int statusCode = json.getInt("statusCode");
-        if(statusCode != 200) {
+        if (statusCode != 200) {
             throw new Exception("Status code = " + statusCode);
         }
 
-        if("ValidCredentials".compareToIgnoreCase(json.getString("authenticationResultCode")) != 0) {
+        if ("ValidCredentials".compareToIgnoreCase(json.getString("authenticationResultCode")) != 0) {
             throw new Exception("authentication result code = " + json.getString("authenticationResultCode"));
         }
 
         final JSONArray resultsSet = json.getJSONArray("resourceSets");
-        if(resultsSet==null || resultsSet.length() < 1) {
+        if (resultsSet == null || resultsSet.length() < 1) {
             throw new Exception("No results set found in json response");
         }
 
-        if(resultsSet.getJSONObject(0).getInt("estimatedTotal") <= 0) {
+        if (resultsSet.getJSONObject(0).getInt("estimatedTotal") <= 0) {
             throw new Exception("No resource found in json response");
         }
 
         final JSONObject resource = resultsSet.getJSONObject(0).getJSONArray("resources").getJSONObject(0);
 
-        if(resource.has("ZoomMin")) {
-            super.mMinimumZoomLevel = (float)resource.getInt("ZoomMin");
+        if (resource.has("ZoomMin")) {
+            super.mMinimumZoomLevel = (float) resource.getInt("ZoomMin");
         }
-        if(resource.has("ZoomMax")) {
-            super.mMaximumZoomLevel = (float)resource.getInt("ZoomMax");
+        if (resource.has("ZoomMax")) {
+            super.mMaximumZoomLevel = (float) resource.getInt("ZoomMax");
         }
 
         String imageBaseUrl = resource.getString("imageUrl");
@@ -159,10 +156,12 @@ public class BingTileLayer extends WebSourceTileLayer {
         for (int i = tile.getZ(); i > 0; i--) {
             int digit = 0;
             final int mask = 1 << (i - 1);
-            if ((tile.getX() & mask) != 0)
+            if ((tile.getX() & mask) != 0) {
                 digit += 1;
-            if ((tile.getY() & mask) != 0)
+            }
+            if ((tile.getY() & mask) != 0) {
                 digit += 2;
+            }
             quadKey.append("" + digit);
         }
         return quadKey.toString();
