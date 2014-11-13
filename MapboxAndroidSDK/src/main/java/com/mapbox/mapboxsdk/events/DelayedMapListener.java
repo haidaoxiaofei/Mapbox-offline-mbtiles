@@ -59,6 +59,11 @@ public class DelayedMapListener implements MapListener {
         dispatch(event);
     }
 
+    @Override
+    public void onRotate(RotateEvent event) {
+        dispatch(event);
+    }
+
     /*
      * Process an incoming MapEvent.
      */
@@ -88,6 +93,8 @@ public class DelayedMapListener implements MapListener {
                 wrappedListener.onScroll((ScrollEvent) event);
             } else if (event instanceof ZoomEvent) {
                 wrappedListener.onZoom((ZoomEvent) event);
+            } else if (event instanceof RotateEvent) {
+                wrappedListener.onRotate((RotateEvent) event);
             } else {
                 // unknown event; discard
                 Log.i(TAG, "Unknown event received: " + event);

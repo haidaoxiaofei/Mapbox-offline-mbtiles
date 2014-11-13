@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.events.MapListener;
+import com.mapbox.mapboxsdk.events.RotateEvent;
 import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
@@ -545,6 +546,13 @@ public class UserLocationOverlay extends SafeDrawOverlay implements Snappable, M
 
     @Override
     public void onZoom(ZoomEvent event) {
+        if (event.getUserAction()) {
+            disableFollowLocation();
+        }
+    }
+
+    @Override
+    public void onRotate(RotateEvent event) {
         if (event.getUserAction()) {
             disableFollowLocation();
         }
