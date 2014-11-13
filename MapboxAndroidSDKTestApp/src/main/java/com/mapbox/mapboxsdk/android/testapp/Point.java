@@ -3,8 +3,8 @@ package com.mapbox.mapboxsdk.android.testapp;
 
 public class Point implements Comparable<Point> {
 
-	public float x;
-	public float y;
+	public double x;
+	public double y;
 	private double weight = Double.MAX_VALUE;
 	public static final int RADIUS = 16;
 	private static int GREATER = 1;
@@ -31,14 +31,14 @@ public class Point implements Comparable<Point> {
 		this.y = y;
 	}
     public Point(double x, double y) {
-        this.x = (float)x;
-        this.y = (float)y;
+        this.x = x;
+        this.y = y;
     }
 
 
 	public Point(String x, String y) {
-		this.x = Float.valueOf(x);
-		this.y = Float.valueOf(y);
+		this.x = Double.valueOf(x);
+		this.y = Double.valueOf(y);
 	}
 
 	public void setWeight(double weigth) {

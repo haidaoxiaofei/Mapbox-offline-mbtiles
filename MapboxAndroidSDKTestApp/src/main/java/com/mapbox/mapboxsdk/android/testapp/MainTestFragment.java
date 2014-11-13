@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -67,7 +66,7 @@ public class MainTestFragment extends Fragment {
         mv.addMarker(m);
 
 
-        Point displayLatlon = gpsPointMappingToScreen(new Point(113.98096,22.54063));
+        Point displayLatlon = gpsPointMappingToScreen(new Point(113.98096, 22.54063));
 
         Log.i("testLocation", displayLatlon.getString());
 
@@ -312,10 +311,32 @@ public class MainTestFragment extends Fragment {
     }
 
 
+//    public static Point gpsPointMappingToScreen(Point originGpsPoint)
+//    {
+//        Matrix m = new Matrix();
+//
+//        /*
+//
+//        Axis Converter for WW
+//        Baidu GPS : 113.98037D, 22.539246D
+//        OCN result: 645537.3D, 143025.36D
+//        */
+//
+//        double x = originGpsPoint.getX() - 113.98037D;
+//        double y = originGpsPoint.getY() - 22.539246D;
+//
+//        m.postRotate(45.0F);
+//        m.postScale(1.0F, (float)Math.sin(0.7853982D));
+//        m.postScale(2.8452876F, 2.8452876F);
+//        float[] ret = new float[2];
+//        m.mapPoints(ret, new float[] { (float)(645537.3D + x * 214293.74333333335D), (float)(143025.36D + y * -232736.01333333334D) });
+//
+//        return ocnPointToScreen(ret[0], ret[1]);
+//
+//    }
+
     public static Point gpsPointMappingToScreen(Point originGpsPoint)
     {
-        Matrix m = new Matrix();
-
         /*
 
         Axis Converter for WW
@@ -323,17 +344,33 @@ public class MainTestFragment extends Fragment {
         OCN result: 645537.3D, 143025.36D
         */
 
-        double x = originGpsPoint.getX() - 113.98037D;
-        double y = originGpsPoint.getY() - 22.539246D;
+        originGpsPoint.x = originGpsPoint.getX() - 113.98037D;
+        originGpsPoint.x = 645537.3D + originGpsPoint.x * 214293.74333333335D;
+        originGpsPoint.y = originGpsPoint.getY() - 22.539246D;
+        originGpsPoint.y = 143025.36D + originGpsPoint.y * -232736.01333333334D;
 
-        m.postRotate(45.0F);
-        m.postScale(1.0F, (float)Math.sin(0.7853982D));
-        m.postScale(2.8452876F, 2.8452876F);
-        float[] ret = new float[2];
-        m.mapPoints(ret, new float[] { (float)(645537.3D + x * 214293.74333333335D), (float)(143025.36D + y * -232736.01333333334D) });
 
-        return ocnPointToScreen(ret[0], ret[1]);
+        originGpsPoint = rotate(originGpsPoint, Math.PI/4);
+        originGpsPoint = scalePoint(originGpsPoint, 1.0F, (float)Math.sin(0.7853982D));
+        originGpsPoint = scalePoint(originGpsPoint, 2.8452876F, 2.8452876F);
 
+        return ocnPointToScreen((float)originGpsPoint.x, (float)originGpsPoint.y);
+
+    }
+
+    public static Point rotate(Point p, double n)
+    {
+        double rx = (p.x * Math.cos(n)) - (p.y * Math.sin(n));
+        double ry = (p.x * Math.sin(n)) + (p.y * Math.cos(n));
+        p.x = (float)rx;
+        p.y = (float)ry;
+        return p;
+    }
+
+    public static Point scalePoint(Point p, float xScale, float yScale){
+        p.x = p.x * xScale;
+        p.y = p.y * yScale;
+        return p;
     }
 
     public static Point ocnPointToScreen(float x, float y){
