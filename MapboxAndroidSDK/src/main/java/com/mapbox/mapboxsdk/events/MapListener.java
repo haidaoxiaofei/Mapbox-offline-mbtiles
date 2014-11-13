@@ -17,4 +17,10 @@ public interface MapListener {
      * Called when a map is zoomed.
      */
     public void onZoom(ZoomEvent event);
+
+    /**
+     * Called when a map is rotated.
+     */
+    public void onRotate(RotateEvent event);
+
 }

@@ -2,13 +2,7 @@ package com.mapbox.mapboxsdk.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Point;
-import android.graphics.PointF;
-import android.graphics.Rect;
-import android.graphics.RectF;
+import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -17,13 +11,9 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.Scroller;
+import com.almeros.android.multitouch.RotateGestureDetector;
 import com.cocoahero.android.geojson.FeatureCollection;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.api.ILatLng;
@@ -33,17 +23,7 @@ import com.mapbox.mapboxsdk.events.ScrollEvent;
 import com.mapbox.mapboxsdk.events.ZoomEvent;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.GeoJSONPainter;
-import com.mapbox.mapboxsdk.overlay.GpsLocationProvider;
-import com.mapbox.mapboxsdk.overlay.ItemizedIconOverlay;
-import com.mapbox.mapboxsdk.overlay.ItemizedOverlay;
-import com.mapbox.mapboxsdk.overlay.MapEventsOverlay;
-import com.mapbox.mapboxsdk.overlay.MapEventsReceiver;
-import com.mapbox.mapboxsdk.overlay.Marker;
-import com.mapbox.mapboxsdk.overlay.Overlay;
-import com.mapbox.mapboxsdk.overlay.OverlayManager;
-import com.mapbox.mapboxsdk.overlay.TilesOverlay;
-import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
+import com.mapbox.mapboxsdk.overlay.*;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBasic;
 import com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants;
@@ -55,12 +35,14 @@ import com.mapbox.mapboxsdk.util.DataLoadingUtils;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
+import com.mapbox.mapboxsdk.views.util.OnMapOrientationChangeListener;
 import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewConstants;
 import com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts;
 import org.json.JSONException;
+
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -133,6 +115,10 @@ public class MapView extends ViewGroup
     private final MapController mController;
 
     protected ScaleGestureDetector mScaleGestureDetector;
+    protected RotateGestureDetector mRotateGestureDetector;
+    protected boolean mMapRotationEnabled;
+    protected OnMapOrientationChangeListener mOnMapOrientationChangeListener;
+
     protected float mMultiTouchScale = 1.0f;
     protected PointF mMultiTouchScalePoint = new PointF();
     protected Matrix mInvTransformMatrix = new Matrix();
@@ -204,9 +190,10 @@ public class MapView extends ViewGroup
         this.mGestureDetector =
                 new GestureDetector(aContext, new MapViewGestureDetectorListener(this));
 
-        mScaleGestureDetector =
+        this.mScaleGestureDetector =
                 new ScaleGestureDetector(aContext, new MapViewScaleGestureDetectorListener(this));
-
+        this.mRotateGestureDetector =
+                new RotateGestureDetector(aContext, new MapViewRotateGestureDetectorListener(this));
         this.context = aContext;
         eventsOverlay = new MapEventsOverlay(aContext, this);
         this.getOverlays().add(eventsOverlay);
@@ -1072,6 +1059,38 @@ public class MapView extends ViewGroup
     }
 
     /**
+     * Gets whether the current map rotation feature is enabled or not
+     * default: disabled
+     */
+    public boolean istMapRotationEnabled() {
+        return mMapRotationEnabled;
+    }
+
+    /**
+     * Sets whether to enable or disable the map rotation features
+     * default: disabled
+     */
+    public void setMapRotationEnabled(boolean enable) {
+        mMapRotationEnabled = enable;
+    }
+
+    /**
+     * Gets the mapView onMapOrientationChangeListener
+     * @return the onMapOrientationChangeListener
+     */
+    public OnMapOrientationChangeListener getOnMapOrientationChangeListener() {
+        return mOnMapOrientationChangeListener;
+    }
+
+    /**
+     * Gets the mapView onMapOrientationChangeListener
+     * @Param l the onMapOrientationChangeListener
+     */
+    public void setOnMapOrientationChangeListener(OnMapOrientationChangeListener l) {
+        this.mOnMapOrientationChangeListener = l;
+    }
+
+    /**
      * Whether to use the network connection if it's available.
      */
     public boolean useDataConnection() {
@@ -1500,6 +1519,10 @@ public class MapView extends ViewGroup
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        // If map rotation is enabled, propagate onTouchEvent to the rotate gesture detector
+        if(mMapRotationEnabled) {
+            mRotateGestureDetector.onTouchEvent(event);
+        }
         // Get rotated event for some touch listeners.
         MotionEvent rotatedEvent = rotateTouchEvent(event);
 
