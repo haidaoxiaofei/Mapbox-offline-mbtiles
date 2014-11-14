@@ -37,7 +37,7 @@ public class MapViewRotateGestureDetectorListener
 
         // If a listener has been set, callback
         OnMapOrientationChangeListener l = mapView.getOnMapOrientationChangeListener();
-        if(l != null) {
+        if (l != null) {
             l.onMapOrientationChange(newAngle);
         }
         return true;
