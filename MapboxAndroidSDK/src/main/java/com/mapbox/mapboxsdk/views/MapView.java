@@ -24,6 +24,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
+import com.almeros.android.multitouch.RotateGestureDetector;
 import com.cocoahero.android.geojson.FeatureCollection;
 import com.mapbox.mapboxsdk.R;
 import com.mapbox.mapboxsdk.api.ILatLng;
@@ -55,6 +56,7 @@ import com.mapbox.mapboxsdk.util.DataLoadingUtils;
 import com.mapbox.mapboxsdk.util.GeometryMath;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import com.mapbox.mapboxsdk.util.constants.UtilConstants;
+import com.mapbox.mapboxsdk.views.util.OnMapOrientationChangeListener;
 import com.mapbox.mapboxsdk.views.util.Projection;
 import com.mapbox.mapboxsdk.views.util.TileLoadedListener;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
@@ -73,8 +75,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * state of a single map, including layers, markers,
  * and interaction code.
  */
-public class MapView extends ViewGroup
-        implements MapViewConstants, MapEventsReceiver, MapboxConstants {
+public class MapView extends ViewGroup implements MapViewConstants, MapEventsReceiver, MapboxConstants {
     /**
      * The default marker Overlay, automatically added to the view to add markers directly.
      */
@@ -133,6 +134,10 @@ public class MapView extends ViewGroup
     private final MapController mController;
 
     protected ScaleGestureDetector mScaleGestureDetector;
+    protected RotateGestureDetector mRotateGestureDetector;
+    protected boolean mMapRotationEnabled;
+    protected OnMapOrientationChangeListener mOnMapOrientationChangeListener;
+
     protected float mMultiTouchScale = 1.0f;
     protected PointF mMultiTouchScalePoint = new PointF();
     protected Matrix mInvTransformMatrix = new Matrix();
@@ -204,9 +209,10 @@ public class MapView extends ViewGroup
         this.mGestureDetector =
                 new GestureDetector(aContext, new MapViewGestureDetectorListener(this));
 
-        mScaleGestureDetector =
+        this.mScaleGestureDetector =
                 new ScaleGestureDetector(aContext, new MapViewScaleGestureDetectorListener(this));
-
+        this.mRotateGestureDetector =
+                new RotateGestureDetector(aContext, new MapViewRotateGestureDetectorListener(this));
         this.context = aContext;
         eventsOverlay = new MapEventsOverlay(aContext, this);
         this.getOverlays().add(eventsOverlay);
@@ -1072,6 +1078,38 @@ public class MapView extends ViewGroup
     }
 
     /**
+     * Gets whether the current map rotation feature is enabled or not
+     * default: disabled
+     */
+    public boolean istMapRotationEnabled() {
+        return mMapRotationEnabled;
+    }
+
+    /**
+     * Sets whether to enable or disable the map rotation features
+     * default: disabled
+     */
+    public void setMapRotationEnabled(boolean enable) {
+        mMapRotationEnabled = enable;
+    }
+
+    /**
+     * Gets the mapView onMapOrientationChangeListener
+     * @return the onMapOrientationChangeListener
+     */
+    public OnMapOrientationChangeListener getOnMapOrientationChangeListener() {
+        return mOnMapOrientationChangeListener;
+    }
+
+    /**
+     * Gets the mapView onMapOrientationChangeListener
+     * @Param l the onMapOrientationChangeListener
+     */
+    public void setOnMapOrientationChangeListener(OnMapOrientationChangeListener l) {
+        this.mOnMapOrientationChangeListener = l;
+    }
+
+    /**
      * Whether to use the network connection if it's available.
      */
     public boolean useDataConnection() {
@@ -1500,6 +1538,10 @@ public class MapView extends ViewGroup
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        // If map rotation is enabled, propagate onTouchEvent to the rotate gesture detector
+        if (mMapRotationEnabled) {
+            mRotateGestureDetector.onTouchEvent(event);
+        }
         // Get rotated event for some touch listeners.
         MotionEvent rotatedEvent = rotateTouchEvent(event);
 
