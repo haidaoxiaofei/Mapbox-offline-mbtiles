@@ -516,17 +516,18 @@ public class OfflineMapDownloader implements MapboxConstants {
         int maxY;
         int tilesPerSide;
         for (int zoom = minimumZ; zoom <= maximumZ; zoom++) {
-            tilesPerSide = new Double(Math.pow(2.0, zoom)).intValue();
-            minX = new Double(Math.floor(((minLon + 180.0) / 360.0) * tilesPerSide)).intValue();
-            maxX = new Double(Math.floor(((maxLon + 180.0) / 360.0) * tilesPerSide)).intValue();
-            minY = new Double(Math.floor((1.0 - (Math.log(Math.tan(maxLat * MathConstants.PI / 180.0) + 1.0 / Math.cos(maxLat * MathConstants.PI / 180.0)) / MathConstants.PI)) / 2.0 * tilesPerSide)).intValue();
-            maxY = new Double(Math.floor((1.0 - (Math.log(Math.tan(minLat * MathConstants.PI / 180.0) + 1.0 / Math.cos(minLat * MathConstants.PI / 180.0)) / MathConstants.PI)) / 2.0 * tilesPerSide)).intValue();
+            tilesPerSide = Double.valueOf(Math.pow(2.0, zoom)).intValue();
+            minX = Double.valueOf(Math.floor(((minLon + 180.0) / 360.0) * tilesPerSide)).intValue();
+            maxX = Double.valueOf(Math.floor(((maxLon + 180.0) / 360.0) * tilesPerSide)).intValue();
+            minY = Double.valueOf(Math.floor((1.0 - (Math.log(Math.tan(maxLat * MathConstants.PI / 180.0) + 1.0 / Math.cos(maxLat * MathConstants.PI / 180.0)) / MathConstants.PI)) / 2.0 * tilesPerSide)).intValue();
+            maxY = Double.valueOf(Math.floor((1.0 - (Math.log(Math.tan(minLat * MathConstants.PI / 180.0) + 1.0 / Math.cos(minLat * MathConstants.PI / 180.0)) / MathConstants.PI)) / 2.0 * tilesPerSide)).intValue();
             for (int x = minX; x <= maxX; x++) {
                 for (int y = minY; y <= maxY; y++) {
                     urls.add(String.format(MAPBOX_BASE_URL + "%s/%d/%d/%d%s.%s%s", this.mapID, zoom, x, y, "@2x", MapboxUtils.qualityExtensionForImageQuality(this.imageQuality), ""));
                 }
             }
         }
+        Log.i(TAG, "Number of URLs so far: " + urls.size());
 
         // Determine if we need to add marker icon urls (i.e. parse markers.geojson/features.json), and if so, add them
         //
@@ -547,7 +548,7 @@ public class OfflineMapDownloader implements MapboxConstants {
 */
             }
 
-            AsyncTask foo = new AsyncTask<Void, Void, Void>() {
+            AsyncTask<Void, Void, Void> foo = new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(Void... params) {
                     try {
@@ -566,6 +567,7 @@ public class OfflineMapDownloader implements MapboxConstants {
                         // up the count of urls to be downloaded!
                         //
                         Set<String> markerIconURLStrings = parseMarkerIconURLStringsFromGeojsonData(jsonText);
+                        Log.i(TAG, "Number of markerIconURLs = " + markerIconURLStrings.size());
                         if (markerIconURLStrings != null && markerIconURLStrings.size() > 0) {
                             urls.addAll(markerIconURLStrings);
                         }
@@ -587,6 +589,7 @@ public class OfflineMapDownloader implements MapboxConstants {
                 @Override
                 protected void onPostExecute(Void aVoid) {
                     super.onPostExecute(aVoid);
+                    Log.i(TAG, "Done figuring out marker icons, so now start downloading everything.");
 
                     // ==========================================================================================================
                     // == WARNING! WARNING! WARNING!                                                                           ==
@@ -615,6 +618,7 @@ public class OfflineMapDownloader implements MapboxConstants {
             };
             foo.execute();
         } else {
+            Log.i(TAG, "No marker icons to worry about, so just start downloading.");
             // There aren't any marker icons to worry about, so just create database and start downloading
             //
             // TODO
