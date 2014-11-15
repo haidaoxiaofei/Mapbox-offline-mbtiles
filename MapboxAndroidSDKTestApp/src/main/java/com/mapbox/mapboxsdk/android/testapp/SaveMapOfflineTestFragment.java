@@ -7,7 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import com.mapbox.mapboxsdk.geometry.BoundingBox;
+import com.mapbox.mapboxsdk.geometry.CoordinateRegion;
+import com.mapbox.mapboxsdk.geometry.CoordinateSpan;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.offline.OfflineMapDownloader;
 import com.mapbox.mapboxsdk.views.MapView;
 
 public class SaveMapOfflineTestFragment extends Fragment {
@@ -38,5 +42,11 @@ public class SaveMapOfflineTestFragment extends Fragment {
 
     public void handleSaveMapButton(View view) {
         Log.i(TAG, "handleSaveMapButton() called");
+        OfflineMapDownloader offlineMapDownloader = OfflineMapDownloader.getOfflineMapDownloader(getActivity());
+
+        BoundingBox boundingBox = mapView.getBoundingBox();
+        CoordinateSpan span = new CoordinateSpan(boundingBox.getLatitudeSpan(), boundingBox.getLongitudeSpan());
+        CoordinateRegion coordinateRegion = new CoordinateRegion(mapView.getCenter(), span);
+        offlineMapDownloader.beginDownloadingMapID("neworleans", coordinateRegion, (int) mapView.getMinZoomLevel(), (int) mapView.getMaxZoomLevel());
     }
 }
