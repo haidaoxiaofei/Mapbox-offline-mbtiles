@@ -89,8 +89,7 @@ public class OfflineMapDownloader implements MapboxConstants {
 */
 
 
-    private OfflineMapDownloader(Context context)
-    {
+    private OfflineMapDownloader(Context context) {
         super();
         this.context = context;
 
@@ -98,8 +97,7 @@ public class OfflineMapDownloader implements MapboxConstants {
     }
 
     public static OfflineMapDownloader getOfflineMapDownloader(Context context) {
-        if (offlineMapDownloader == null)
-        {
+        if (offlineMapDownloader == null) {
             offlineMapDownloader = new OfflineMapDownloader(context);
         }
         return offlineMapDownloader;
@@ -109,8 +107,7 @@ public class OfflineMapDownloader implements MapboxConstants {
     Delegate Notifications
 */
 
-    public void notifyDelegateOfStateChange()
-    {
+    public void notifyDelegateOfStateChange() {
         // TODO
 /*
         assert(![NSThread isMainThread]);
@@ -125,8 +122,7 @@ public class OfflineMapDownloader implements MapboxConstants {
     }
 
 
-    public void notifyDelegateOfInitialCount()
-    {
+    public void notifyDelegateOfInitialCount() {
         // TODO
 /*
         if([_delegate respondsToSelector:@selector(offlineMapDownloader:totalFilesExpectedToWrite:)])
@@ -141,8 +137,7 @@ public class OfflineMapDownloader implements MapboxConstants {
     }
 
 
-    public void notifyDelegateOfProgress()
-    {
+    public void notifyDelegateOfProgress() {
         // TODO
 /*
         assert(![NSThread isMainThread]);
@@ -157,8 +152,7 @@ public class OfflineMapDownloader implements MapboxConstants {
     }
 
 
-    public void notifyDelegateOfNetworkConnectivityError(String error)
-    {
+    public void notifyDelegateOfNetworkConnectivityError(String error) {
         // TODO
 /*
         assert(![NSThread isMainThread]);
@@ -175,8 +169,7 @@ public class OfflineMapDownloader implements MapboxConstants {
     }
 
 
-    public void notifyDelegateOfSqliteError(String error)
-    {
+    public void notifyDelegateOfSqliteError(String error) {
         // TODO
 /*
         assert(![NSThread isMainThread]);
@@ -193,8 +186,7 @@ public class OfflineMapDownloader implements MapboxConstants {
     }
 
 
-    public void notifyDelegateOfHTTPStatusError(int status, String url)
-    {
+    public void notifyDelegateOfHTTPStatusError(int status, String url) {
         // TODO
 /*
         assert(![NSThread isMainThread]);
@@ -212,8 +204,7 @@ public class OfflineMapDownloader implements MapboxConstants {
     }
 
 
-    public void notifyDelegateOfCompletionWithOfflineMapDatabase(OfflineMapDatabase offlineMap, String error)
-    {
+    public void notifyDelegateOfCompletionWithOfflineMapDatabase(OfflineMapDatabase offlineMap, String error) {
         // TODO
 /*
         assert(![NSThread isMainThread]);
@@ -230,8 +221,7 @@ public class OfflineMapDownloader implements MapboxConstants {
     Implementation: download urls
 */
 
-    public OfflineMapDatabase completeDatabaseAndInstantiateOfflineMapWithError()
-    {
+    public OfflineMapDatabase completeDatabaseAndInstantiateOfflineMapWithError() {
         if (AppUtils.runningOnMainThread()) {
             Log.w(TAG, "completeDatabaseAndInstantiateOfflineMapWithError() running on main thread.  Returning null.");
             return null;
@@ -273,54 +263,53 @@ public class OfflineMapDownloader implements MapboxConstants {
 //        [_sqliteQueue addOperationWithBlock:^{
         ArrayList<String> urls = sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(30);
 
-            for (final String url : urls) {
-                if (!NetworkUtils.isNetworkAvailable(context)) {
-                    Log.w(TAG, "Network is no longer available.");
+        for (final String url : urls) {
+            if (!NetworkUtils.isNetworkAvailable(context)) {
+                Log.w(TAG, "Network is no longer available.");
 //                    [self notifyDelegateOfNetworkConnectivityError:error];
-                }
+            }
 
-                AsyncTask foo = new AsyncTask<String, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(String... params) {
-                        try {
-                            HttpURLConnection conn = NetworkUtils.getHttpURLConnection(new URL(params[0]));
-                            conn.setConnectTimeout(60000);
-                            conn.connect();
-                            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                                throw new IOException();
-                            }
-
-                            BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
-                            byte[] data = new byte[conn.getContentLength()];
-                            int bytesRead = 0;
-                            int offset = 0;
-                            while (offset < conn.getContentLength()) {
-                                bytesRead = in.read(data, offset, data.length - offset);
-                                if (bytesRead == -1)
-                                    break;
-                                offset += bytesRead;
-                            }
-                            in.close();
-                            sqliteSaveDownloadedData(data, url);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-//                            [self notifyDelegateOfHTTPStatusError:((NSHTTPURLResponse *) response).statusCode url:response.URL];
+            AsyncTask foo = new AsyncTask<String, Void, Void>() {
+                @Override
+                protected Void doInBackground(String... params) {
+                    try {
+                        HttpURLConnection conn = NetworkUtils.getHttpURLConnection(new URL(params[0]));
+                        conn.setConnectTimeout(60000);
+                        conn.connect();
+                        if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                            throw new IOException();
                         }
 
-                        return null;
+                        BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
+                        byte[] data = new byte[conn.getContentLength()];
+                        int bytesRead = 0;
+                        int offset = 0;
+                        while (offset < conn.getContentLength()) {
+                            bytesRead = in.read(data, offset, data.length - offset);
+                            if (bytesRead == -1)
+                                break;
+                            offset += bytesRead;
+                        }
+                        in.close();
+                        sqliteSaveDownloadedData(data, url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+//                            [self notifyDelegateOfHTTPStatusError:((NSHTTPURLResponse *) response).statusCode url:response.URL];
                     }
-                };
-                foo.execute();
-                // This is the last line of the for loop
-            }
+
+                    return null;
+                }
+            };
+            foo.execute();
+            // This is the last line of the for loop
+        }
     }
 
 /*
     Implementation: sqlite stuff
 */
 
-    public void sqliteSaveDownloadedData(byte[] data, String url)
-    {
+    public void sqliteSaveDownloadedData(byte[] data, String url) {
         if (AppUtils.runningOnMainThread()) {
             Log.w(TAG, "trying to run sqliteSaveDownloadedData() on main thread. Return.");
             return;
@@ -331,15 +320,14 @@ public class OfflineMapDownloader implements MapboxConstants {
 
         // Bail out if the state has changed to canceling, suspended, or available
         //
-        if(this.state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning)
-        {
+        if (this.state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning) {
             return;
         }
 
         // Open the database read-write and multi-threaded. The slightly obscure c-style variable names here and below are
         // used to stay consistent with the sqlite documentaion.
-                // Continue by inserting an image blob into the data table
-                //
+        // Continue by inserting an image blob into the data table
+        //
         SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getWritableDatabase();
         db.beginTransaction();
 
@@ -364,20 +352,18 @@ public class OfflineMapDownloader implements MapboxConstants {
         else
         {
 */
-            // Update the progress
-            //
-            this.totalFilesWritten += 1;
+        // Update the progress
+        //
+        this.totalFilesWritten += 1;
 //            [self notifyDelegateOfProgress];
 
-            // If all the downloads are done, clean up and notify the delegate
-            //
-            if(this.totalFilesWritten >= this.totalFilesExpectedToWrite)
-            {
-                if(this.state == MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning)
-                {
-                    // This is what to do when we've downloaded all the files
-                    //
-                        // TODO - Populate OfflineMapDatabase object and persist it
+        // If all the downloads are done, clean up and notify the delegate
+        //
+        if (this.totalFilesWritten >= this.totalFilesExpectedToWrite) {
+            if (this.state == MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning) {
+                // This is what to do when we've downloaded all the files
+                //
+                // TODO - Populate OfflineMapDatabase object and persist it
 /*
                     OfflineMapDatabase offlineMap = completeDatabaseAndInstantiateOfflineMapWithError();
                     if(offlineMap != null) {
@@ -388,8 +374,8 @@ public class OfflineMapDownloader implements MapboxConstants {
                     this.state = MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable;
                     [self notifyDelegateOfStateChange];
 */
-                }
             }
+        }
 /*
         }
 */
@@ -409,8 +395,7 @@ public class OfflineMapDownloader implements MapboxConstants {
 */
     }
 
-    public ArrayList<String> sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(int limit)
-    {
+    public ArrayList<String> sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(int limit) {
         ArrayList<String> results = new ArrayList<String>();
         if (AppUtils.runningOnMainThread()) {
             Log.w(TAG, "Attempting to run sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit() on main thread.  Returning.");
@@ -419,7 +404,7 @@ public class OfflineMapDownloader implements MapboxConstants {
 
         // Read up to limit undownloaded urls from the offline map database
         //
-        String query = String.format("SELECT url FROM resources WHERE status IS NULL LIMIT %d;", (long)limit);
+        String query = String.format("SELECT url FROM resources WHERE status IS NULL LIMIT %d;", (long) limit);
 
         // Open the database
         SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
@@ -434,8 +419,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         return results;
     }
 
-    public boolean sqliteQueryWrittenAndExpectedCountsWithError()
-    {
+    public boolean sqliteQueryWrittenAndExpectedCountsWithError() {
         // NOTE: Unlike most of the sqlite code, this method is written with the expectation that it can and will be called on the main
         //       thread as part of init. This is also meant to be used in other contexts throught the normal serial operation queue.
 
@@ -459,18 +443,15 @@ public class OfflineMapDownloader implements MapboxConstants {
     API: Begin an offline map download
 */
 
-    public void beginDownloadingMapID(String mapID, CoordinateRegion mapRegion, Integer minimumZ, Integer maximumZ)
-    {
+    public void beginDownloadingMapID(String mapID, CoordinateRegion mapRegion, Integer minimumZ, Integer maximumZ) {
         beginDownloadingMapID(mapID, mapRegion, minimumZ, maximumZ, true, true, RasterImageQuality.MBXRasterImageQualityFull);
     }
 
-    public void beginDownloadingMapID(String mapID, CoordinateRegion mapRegion, Integer minimumZ, Integer maximumZ, boolean includeMetadata, boolean includeMarkers)
-    {
+    public void beginDownloadingMapID(String mapID, CoordinateRegion mapRegion, Integer minimumZ, Integer maximumZ, boolean includeMetadata, boolean includeMarkers) {
         beginDownloadingMapID(mapID, mapRegion, minimumZ, maximumZ, includeMetadata, includeMarkers, RasterImageQuality.MBXRasterImageQualityFull);
     }
 
-    public void beginDownloadingMapID(String mapID, CoordinateRegion mapRegion, Integer minimumZ, Integer maximumZ, boolean includeMetadata, boolean includeMarkers, RasterImageQuality imageQuality)
-    {
+    public void beginDownloadingMapID(String mapID, CoordinateRegion mapRegion, Integer minimumZ, Integer maximumZ, boolean includeMetadata, boolean includeMarkers, RasterImageQuality imageQuality) {
         if (state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable) {
             Log.w(TAG, "state doesn't equal MBXOfflineMapDownloaderStateAvailable so return.  state = " + state);
             return;
@@ -496,7 +477,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         Hashtable<String, String> metadataDictionary = new Hashtable<String, String>();
         metadataDictionary.put("uniqueID", this.uniqueID);
         metadataDictionary.put("mapID", this.mapID);
-        metadataDictionary.put("includesMetadata",  this.includesMetadata ? "YES" : "NO");
+        metadataDictionary.put("includesMetadata", this.includesMetadata ? "YES" : "NO");
         metadataDictionary.put("includesMarkers", this.includesMarkers ? "YES" : "NO");
         metadataDictionary.put("imageQuality", String.format("%d", this.imageQuality.getValue()));
         metadataDictionary.put("region_latitude", String.format("%.8f", this.mapRegion.getCenter().getLatitude()));
@@ -515,12 +496,10 @@ public class OfflineMapDownloader implements MapboxConstants {
 
         // Include URLs for the metadata and markers json if applicable
         //
-        if(includeMetadata)
-        {
+        if (includeMetadata) {
             urls.add(String.format(MAPBOX_BASE_URL + "%s.json?secure%s", this.mapID, ""));
         }
-        if(includeMarkers)
-        {
+        if (includeMarkers) {
             urls.add(String.format(MAPBOX_BASE_URL + "%s/%s%s", this.mapID, dataName, ""));
         }
 
@@ -535,17 +514,14 @@ public class OfflineMapDownloader implements MapboxConstants {
         int minY;
         int maxY;
         int tilesPerSide;
-        for(int zoom = minimumZ; zoom <= maximumZ; zoom++)
-        {
+        for (int zoom = minimumZ; zoom <= maximumZ; zoom++) {
             tilesPerSide = new Double(Math.pow(2.0, zoom)).intValue();
             minX = new Double(Math.floor(((minLon + 180.0) / 360.0) * tilesPerSide)).intValue();
             maxX = new Double(Math.floor(((maxLon + 180.0) / 360.0) * tilesPerSide)).intValue();
             minY = new Double(Math.floor((1.0 - (Math.log(Math.tan(maxLat * MathConstants.PI / 180.0) + 1.0 / Math.cos(maxLat * MathConstants.PI / 180.0)) / MathConstants.PI)) / 2.0 * tilesPerSide)).intValue();
             maxY = new Double(Math.floor((1.0 - (Math.log(Math.tan(minLat * MathConstants.PI / 180.0) + 1.0 / Math.cos(minLat * MathConstants.PI / 180.0)) / MathConstants.PI)) / 2.0 * tilesPerSide)).intValue();
-            for (int x = minX; x <= maxX; x++)
-            {
-                for (int y = minY; y <= maxY; y++)
-                {
+            for (int x = minX; x <= maxX; x++) {
+                for (int y = minY; y <= maxY; y++) {
                     urls.add(String.format(MAPBOX_BASE_URL + "%s/%d/%d/%d%s.%s%s", this.mapID, zoom, x, y, "@2x", MapboxUtils.qualityExtensionForImageQuality(this.imageQuality), ""));
                 }
             }
@@ -553,8 +529,7 @@ public class OfflineMapDownloader implements MapboxConstants {
 
         // Determine if we need to add marker icon urls (i.e. parse markers.geojson/features.json), and if so, add them
         //
-        if(includeMarkers)
-        {
+        if (includeMarkers) {
             String dName = "markers.geojson";
             final String geojson = String.format(MAPBOX_BASE_URL + "%s/%s", this.mapID, dName);
 
@@ -590,8 +565,7 @@ public class OfflineMapDownloader implements MapboxConstants {
                         // up the count of urls to be downloaded!
                         //
                         Set<String> markerIconURLStrings = parseMarkerIconURLStringsFromGeojsonData(jsonText);
-                        if(markerIconURLStrings != null && markerIconURLStrings.size() > 0)
-                        {
+                        if (markerIconURLStrings != null && markerIconURLStrings.size() > 0) {
                             urls.addAll(markerIconURLStrings);
                         }
                     } catch (MalformedURLException e) {
@@ -639,9 +613,7 @@ public class OfflineMapDownloader implements MapboxConstants {
                 }
             };
             foo.execute();
-        }
-        else
-        {
+        } else {
             // There aren't any marker icons to worry about, so just create database and start downloading
             //
             // TODO
@@ -661,8 +633,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         }
     }
 
-    public Set<String> parseMarkerIconURLStringsFromGeojsonData(String data)
-    {
+    public Set<String> parseMarkerIconURLStringsFromGeojsonData(String data) {
         HashSet<String> iconURLStrings = new HashSet<String>();
 
         JSONObject simplestyleJSONDictionary = null;
@@ -673,29 +644,24 @@ public class OfflineMapDownloader implements MapboxConstants {
             //
             Object markers = simplestyleJSONDictionary.get("features");
 
-            if (markers != null && markers instanceof JSONArray)
-            {
-                JSONArray array = (JSONArray)markers;
+            if (markers != null && markers instanceof JSONArray) {
+                JSONArray array = (JSONArray) markers;
 
-                for (int lc = 0; lc < array.length(); lc++)
-                {
+                for (int lc = 0; lc < array.length(); lc++) {
                     Object value = array.get(lc);
-                    if (value instanceof JSONObject)
-                    {
-                        JSONObject feature = (JSONObject)value;
+                    if (value instanceof JSONObject) {
+                        JSONObject feature = (JSONObject) value;
                         String type = feature.getJSONObject("geometry").getString("type");
 
-                        if ("Point".equals(type))
-                        {
-                            String size        = feature.getJSONObject("properties").getString("marker-size");
-                            String color       = feature.getJSONObject("properties").getString("marker-color");
-                            String symbol      = feature.getJSONObject("properties").getString("marker-symbol");
-                            if (!TextUtils.isEmpty(size) && !TextUtils.isEmpty(color) && !TextUtils.isEmpty(symbol))
-                            {
+                        if ("Point".equals(type)) {
+                            String size = feature.getJSONObject("properties").getString("marker-size");
+                            String color = feature.getJSONObject("properties").getString("marker-color");
+                            String symbol = feature.getJSONObject("properties").getString("marker-symbol");
+                            if (!TextUtils.isEmpty(size) && !TextUtils.isEmpty(color) && !TextUtils.isEmpty(symbol)) {
                                 String markerURL = MapboxUtils.markerIconURL(size, symbol, color);
-                                if(!TextUtils.isEmpty(markerURL))
-                                {
-                                    iconURLStrings.add(markerURL);;
+                                if (!TextUtils.isEmpty(markerURL)) {
+                                    iconURLStrings.add(markerURL);
+
                                 }
                             }
                         }
@@ -712,8 +678,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         return iconURLStrings;
     }
 
-    public void cancelImmediatelyWithError(String error)
-    {
+    public void cancelImmediatelyWithError(String error) {
         // TODO
 /*
         // Creating the database failed for some reason, so clean up and change the state back to available
@@ -748,10 +713,8 @@ public class OfflineMapDownloader implements MapboxConstants {
     API: Control an in-progress offline map download
 */
 
-    public void cancel()
-    {
-        if (state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateCanceling && state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable)
-        {
+    public void cancel() {
+        if (state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateCanceling && state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable) {
             // TODO
 /*
             // Stop a download job and discard the associated files
@@ -786,8 +749,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         }
     }
 
-    public void resume()
-    {
+    public void resume() {
         if (state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateSuspended) {
             return;
         }
@@ -805,10 +767,8 @@ public class OfflineMapDownloader implements MapboxConstants {
     }
 
 
-    public void suspend()
-    {
-        if (state == MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning)
-        {
+    public void suspend() {
+        if (state == MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning) {
             // TODO
 /*
             // Stop a download job, preserving the necessary state to resume later
@@ -833,8 +793,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         return mutableOfflineMapDatabases;
     }
 
-    public void removeOfflineMapDatabase(OfflineMapDatabase offlineMapDatabase)
-    {
+    public void removeOfflineMapDatabase(OfflineMapDatabase offlineMapDatabase) {
         // Mark the offline map object as invalid in case there are any references to it still floating around
         //
         offlineMapDatabase.invalidate();
@@ -845,12 +804,9 @@ public class OfflineMapDownloader implements MapboxConstants {
         mutableOfflineMapDatabases.remove(offlineMapDatabase);
     }
 
-    public void removeOfflineMapDatabaseWithID(String uniqueID)
-    {
-        for (OfflineMapDatabase database : getMutableOfflineMapDatabases())
-        {
-            if (database.getUniqueID().equals(uniqueID))
-            {
+    public void removeOfflineMapDatabaseWithID(String uniqueID) {
+        for (OfflineMapDatabase database : getMutableOfflineMapDatabases()) {
+            if (database.getUniqueID().equals(uniqueID)) {
                 removeOfflineMapDatabase(database);
                 return;
             }
