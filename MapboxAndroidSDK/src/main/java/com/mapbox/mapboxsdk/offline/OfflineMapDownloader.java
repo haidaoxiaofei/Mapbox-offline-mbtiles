@@ -94,6 +94,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         this.context = context;
 
         mutableOfflineMapDatabases = new ArrayList<OfflineMapDatabase>();
+        this.state = MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable;
     }
 
     public static OfflineMapDownloader getOfflineMapDownloader(Context context) {
@@ -256,7 +257,7 @@ public class OfflineMapDownloader implements MapboxConstants {
 
     public void startDownloading() {
         if (AppUtils.runningOnMainThread()) {
-            Log.w(TAG, "startDownloading() running on main thread.  Returning.");
+            Log.w(TAG, "startDownloading() is running on main thread.  Returning.");
             return;
         }
 
