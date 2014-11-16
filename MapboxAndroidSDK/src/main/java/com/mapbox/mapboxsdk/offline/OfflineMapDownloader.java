@@ -28,6 +28,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -439,6 +440,80 @@ public class OfflineMapDownloader implements MapboxConstants {
 //        success = true;
 
         return true;
+    }
+
+    public boolean sqliteCreateDatabaseUsingMetadata(Hashtable<String, String> metadata, List<String> urlStrings)
+    {
+        if (AppUtils.runningOnMainThread()) {
+            Log.w(TAG, "sqliteCreateDatabaseUsingMetadata() running on main thread.  Returning.");
+            return false;
+        }
+
+        boolean success = false;
+
+        // Build a query to populate the database (map metadata and list of map resource urls)
+        //
+/*
+        NSMutableString *query = [[NSMutableString alloc] init];
+        [query appendString:@"PRAGMA foreign_keys=ON;\n"];
+        [query appendString:@"BEGIN TRANSACTION;\n"];
+        [query appendString:@"CREATE TABLE metadata (name TEXT UNIQUE, value TEXT);\n"];
+        [query appendString:@"CREATE TABLE data (id INTEGER PRIMARY KEY, value BLOB);\n"];
+        [query appendString:@"CREATE TABLE resources (url TEXT UNIQUE, status TEXT, id INTEGER REFERENCES data);\n"];
+*/
+        SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getWritableDatabase();
+        db.beginTransaction();
+        for (String key : metadata.keySet()) {
+            ContentValues cv = new ContentValues();
+            cv.put(OfflineDatabaseHandler.FIELD_METADATA_NAME, key);
+            cv.put(OfflineDatabaseHandler.FIELD_METADATA_VALUE, metadata.get(key));
+            db.insert(OfflineDatabaseHandler.TABLE_METADATA, null, cv);
+        }
+        for (String url : urlStrings) {
+            ContentValues cv = new ContentValues();
+            cv.put(OfflineDatabaseHandler.FIELD_RESOURCES_URL, url);
+            db.insert(OfflineDatabaseHandler.TABLE_RESOURCES, null, cv);
+        }
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+        this.totalFilesExpectedToWrite = urlStrings.size();
+        this.totalFilesWritten = 0;
+        success = true;
+/*
+        // Open the database read-write and multi-threaded. The slightly obscure c-style variable names here and below are
+        // used to stay consistent with the sqlite documentaion.
+        sqlite3 *db;
+        int rc;
+        const char *filename = [_partialDatabasePath cStringUsingEncoding:NSUTF8StringEncoding];
+        rc = sqlite3_open_v2(filename, &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL);
+        if (rc)
+        {
+            // Opening the database failed... something is very wrong.
+            //
+            if(error != NULL)
+            {
+                *error = [NSError mbx_errorCannotOpenOfflineMapDatabase:_partialDatabasePath sqliteError:sqlite3_errmsg(db)];
+            }
+            sqlite3_close(db);
+        }
+        else
+        {
+            // Success! Creating the database file worked, so now populate the tables we'll need to hold the offline map
+            //
+            const char *zSql = [query cStringUsingEncoding:NSUTF8StringEncoding];
+            char *errmsg;
+            sqlite3_exec(db, zSql, NULL, NULL, &errmsg);
+            if(error && errmsg != NULL)
+            {
+                *error = [NSError mbx_errorQueryFailedForOfflineMapDatabase:_partialDatabasePath sqliteError:errmsg];
+                sqlite3_free(errmsg);
+            }
+            sqlite3_close(db);
+            success = YES;
+        }
+*/
+        return success;
     }
 
 /*
