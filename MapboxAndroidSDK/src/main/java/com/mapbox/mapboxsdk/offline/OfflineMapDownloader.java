@@ -270,7 +270,7 @@ public class OfflineMapDownloader implements MapboxConstants {
 //                    [self notifyDelegateOfNetworkConnectivityError:error];
             }
 
-            AsyncTask foo = new AsyncTask<String, Void, Void>() {
+            AsyncTask<String, Void, Void> foo = new AsyncTask<String, Void, Void>() {
                 @Override
                 protected Void doInBackground(String... params) {
                     try {
@@ -287,8 +287,9 @@ public class OfflineMapDownloader implements MapboxConstants {
                         int offset = 0;
                         while (offset < conn.getContentLength()) {
                             bytesRead = in.read(data, offset, data.length - offset);
-                            if (bytesRead == -1)
+                            if (bytesRead == -1) {
                                 break;
+                            }
                             offset += bytesRead;
                         }
                         in.close();
