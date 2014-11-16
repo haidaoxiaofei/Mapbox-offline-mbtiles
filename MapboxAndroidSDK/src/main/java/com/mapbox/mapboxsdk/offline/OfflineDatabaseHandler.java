@@ -6,8 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class OfflineDatabaseHandler  extends SQLiteOpenHelper
-{
+public class OfflineDatabaseHandler extends SQLiteOpenHelper {
     private static OfflineDatabaseHandler offlineDatabaseHandler;
 
     private static final String TAG = "OfflineDatabaseHandler";
@@ -37,10 +36,10 @@ public class OfflineDatabaseHandler  extends SQLiteOpenHelper
 
     /**
      * Constructor
+     *
      * @param context Context
      */
-    private OfflineDatabaseHandler(Context context)
-    {
+    private OfflineDatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -52,13 +51,12 @@ public class OfflineDatabaseHandler  extends SQLiteOpenHelper
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db)
-    {
+    public void onCreate(SQLiteDatabase db) {
         Log.w(TAG, "onCreate() called... Setting up application's database.");
         // Create The table(s)
-        String metadata = "CREATE TABLE " + TABLE_METADATA + " (" + FIELD_METADATA_NAME  +" TEXT UNIQUE, " + FIELD_METADATA_VALUE +  " TEXT);";
-        String data = "CREATE TABLE " + TABLE_DATA + " (" + FIELD_DATA_ID  +" INTEGER PRIMARY KEY, " + FIELD_DATA_VALUE +  " BLOB);";
-        String resources = "CREATE TABLE " + TABLE_RESOURCES + " (" + FIELD_RESOURCES_URL  +" TEXT UNIQUE, " + FIELD_RESOURCES_STATUS +  " TEXT, " + FIELD_RESOURCES_ID + " INTEGER REFERENCES data);";
+        String metadata = "CREATE TABLE " + TABLE_METADATA + " (" + FIELD_METADATA_NAME + " TEXT UNIQUE, " + FIELD_METADATA_VALUE + " TEXT);";
+        String data = "CREATE TABLE " + TABLE_DATA + " (" + FIELD_DATA_ID + " INTEGER PRIMARY KEY, " + FIELD_DATA_VALUE + " BLOB);";
+        String resources = "CREATE TABLE " + TABLE_RESOURCES + " (" + FIELD_RESOURCES_URL + " TEXT UNIQUE, " + FIELD_RESOURCES_STATUS + " TEXT, " + FIELD_RESOURCES_ID + " INTEGER REFERENCES data);";
 
         db.execSQL("PRAGMA foreign_keys=ON;");
         db.beginTransaction();
@@ -77,9 +75,8 @@ public class OfflineDatabaseHandler  extends SQLiteOpenHelper
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-    {
-        Log.w(TAG,"Upgrading database from version " + oldVersion + " to "+ newVersion + ", which will destroy all old data");
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
         db.execSQL("drop table if exists " + TABLE_METADATA);
         db.execSQL("drop table if exists " + TABLE_DATA);
         db.execSQL("drop table if exists " + TABLE_RESOURCES);
