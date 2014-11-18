@@ -1,6 +1,6 @@
 ---
 layout: api
-title: Mapbox Android SDK 0.4.0
+title: Mapbox Android SDK 0.5.0
 category: api
 --- 
  <h2>ILatLng</h2>
@@ -509,11 +509,17 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotateevent" title="class in com.mapbox.mapboxsdk.events">RotateEvent</a>&nbsp;event)</code>
+<div class="block">Called when a map is rotated.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/scrollevent" title="class in com.mapbox.mapboxsdk.events">ScrollEvent</a>&nbsp;event)</code>
 <div class="block">Called when a map is scrolled.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/zoomevent" title="class in com.mapbox.mapboxsdk.events">ZoomEvent</a>&nbsp;event)</code>
 <div class="block">Called when a map is zoomed.</div>
@@ -648,6 +654,21 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
 </dl>
 
 
+<a name="onRotate(com.mapbox.mapboxsdk.events.RotateEvent)">
+<!--   -->
+</a>
+
+
+<h4>onRotate</h4>
+<pre>public&nbsp;void&nbsp;onRotate(<a href="{{site.baseurl}}/api/rotateevent" title="class in com.mapbox.mapboxsdk.events">RotateEvent</a>&nbsp;event)</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/maplistener#onrotate(com.mapbox.mapboxsdk.events.rotateevent)">MapListener</a></code></strong></div>
+<div class="block">Called when a map is rotated.</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/maplistener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a></code></dd>
+</dl>
+
+
 <a name="dispatch(com.mapbox.mapboxsdk.events.MapEvent)">
 <!--   -->
 </a>
@@ -719,11 +740,17 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotateevent" title="class in com.mapbox.mapboxsdk.events">RotateEvent</a>&nbsp;event)</code>
+<div class="block">Called when a map is rotated.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/scrollevent" title="class in com.mapbox.mapboxsdk.events">ScrollEvent</a>&nbsp;event)</code>
 <div class="block">Called when a map is scrolled.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/zoomevent" title="class in com.mapbox.mapboxsdk.events">ZoomEvent</a>&nbsp;event)</code>
 <div class="block">Called when a map is zoomed.</div>
@@ -762,6 +789,250 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
 <h4>onZoom</h4>
 <pre>void&nbsp;onZoom(<a href="{{site.baseurl}}/api/zoomevent" title="class in com.mapbox.mapboxsdk.events">ZoomEvent</a>&nbsp;event)</pre>
 <div class="block">Called when a map is zoomed.</div>
+
+
+<a name="onRotate(com.mapbox.mapboxsdk.events.RotateEvent)">
+<!--   -->
+</a>
+
+
+<h4>onRotate</h4>
+<pre>void&nbsp;onRotate(<a href="{{site.baseurl}}/api/rotateevent" title="class in com.mapbox.mapboxsdk.events">RotateEvent</a>&nbsp;event)</pre>
+<div class="block">Called when a map is rotated.</div>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+ <h2>RotateEvent</h2>
+ <div class="contentContainer">
+
+java.lang.Object
+
+
+com.mapbox.mapboxsdk.events.RotateEvent
+
+
+
+<div class="description">
+
+
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbox.mapboxsdk.events">MapEvent</a></dd>
+</dl>
+
+
+<pre>public class <span class="strong">RotateEvent</span>
+extends java.lang.Object
+implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbox.mapboxsdk.events">MapEvent</a></pre>
+<div class="block">The event generated when a map has finished rotating</div>
+
+
+</div>
+<div class="summary">
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotateevent#angle">angle</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotateevent#source">source</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotateevent#useraction">userAction</a></strong></code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;aSource,
+           float&nbsp;aAngle,
+           boolean&nbsp;userAction)</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotateevent#getangle()">getAngle</a></strong>()</code>
+<div class="block">Return the map angle.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotateevent#getsource()">getSource</a></strong>()</code>
+<div class="block">Return the map which generated this event.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotateevent#getuseraction()">getUserAction</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotateevent#tostring()">toString</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="source">
+<!--   -->
+</a>
+
+
+<h4>source</h4>
+<pre>protected&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a> source</pre>
+
+
+<a name="angle">
+<!--   -->
+</a>
+
+
+<h4>angle</h4>
+<pre>protected&nbsp;float angle</pre>
+
+
+<a name="userAction">
+<!--   -->
+</a>
+
+
+<h4>userAction</h4>
+<pre>protected&nbsp;boolean userAction</pre>
+
+
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="RotateEvent(com.mapbox.mapboxsdk.views.MapView, float, boolean)">
+<!--   -->
+</a>
+
+
+<h4>RotateEvent</h4>
+<pre>public&nbsp;RotateEvent(<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;aSource,
+           float&nbsp;aAngle,
+           boolean&nbsp;userAction)</pre>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getSource()">
+<!--   -->
+</a>
+
+
+<h4>getSource</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;getSource()</pre>
+<div class="block">Return the map which generated this event.</div>
+
+
+<a name="getAngle()">
+<!--   -->
+</a>
+
+
+<h4>getAngle</h4>
+<pre>public&nbsp;float&nbsp;getAngle()</pre>
+<div class="block">Return the map angle.</div>
+
+
+<a name="getUserAction()">
+<!--   -->
+</a>
+
+
+<h4>getUserAction</h4>
+<pre>public&nbsp;boolean&nbsp;getUserAction()</pre>
+<dl><dt><span class="strong">Returns:</span></dt><dd>true if it was a user action (touch action).</dd></dl>
+
+
+<a name="toString()">
+<!--   -->
+</a>
+
+
+<h4>toString</h4>
+<pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
+</dl>
 
 
 
@@ -1531,7 +1802,7 @@ implements android.os.Parcelable, java.io.Serializable, <a href="{{site.baseurl}
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static <a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&gt;&nbsp;latLngs)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&gt;&nbsp;latLngs)</code>
 <div class="block">Constructs a bounding box that contains all of a list of LatLng
  objects.</div>
 </td>
@@ -1811,13 +2082,13 @@ implements android.os.Parcelable, java.io.Serializable, <a href="{{site.baseurl}
 </dl>
 
 
-<a name="fromLatLngs(java.util.ArrayList)">
+<a name="fromLatLngs(java.util.List)">
 <!--   -->
 </a>
 
 
 <h4>fromLatLngs</h4>
-<pre>public static&nbsp;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&gt;&nbsp;latLngs)</pre>
+<pre>public static&nbsp;<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&gt;&nbsp;latLngs)</pre>
 <div class="block">Constructs a bounding box that contains all of a list of LatLng
  objects. Empty lists will yield invalid bounding boxes.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>latLngs</code> - List of LatLng objects</dd>
@@ -3584,31 +3855,35 @@ extends <a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbo
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#getdrawnitemslimit()">getDrawnItemsLimit</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#onlongpress(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onLongPress</a></strong>(android.view.MotionEvent&nbsp;event,
            <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
 <div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>protected boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#onlongpresshelper(int, com.mapbox.mapboxsdk.overlay.marker)">onLongPressHelper</a></strong>(int&nbsp;index,
                  <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#onsingletapconfirmed(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onSingleTapConfirmed</a></strong>(android.view.MotionEvent&nbsp;event,
                     <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
 <div class="block">Each of these methods performs a item sensitive check.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>protected boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#onsingletapuphelper(int, com.mapbox.mapboxsdk.overlay.marker, com.mapbox.mapboxsdk.views.mapview)">onSingleTapUpHelper</a></strong>(int&nbsp;index,
                    <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item,
                    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#onsnaptoitem(int, int, android.graphics.point, com.mapbox.mapboxsdk.views.mapview)">onSnapToItem</a></strong>(int&nbsp;pX,
             int&nbsp;pY,
@@ -3618,31 +3893,31 @@ extends <a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbo
  current action (e.g.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#removeallitems()">removeAllItems</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#removeallitems(boolean)">removeAllItems</a></strong>(boolean&nbsp;withPopulate)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#removeitem(int)">removeItem</a></strong>(int&nbsp;position)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#removeitems(java.util.list)">removeItems</a></strong>(java.util.List&nbsp;items)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#setdrawnitemslimit(int)">setDrawnItemsLimit</a></strong>(int&nbsp;aLimit)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#size()">size</a></strong>()</code>
 <div class="block">The number of items in this overlay.</div>
@@ -3835,6 +4110,15 @@ extends <a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbo
 
 <h4>removeAllItems</h4>
 <pre>public&nbsp;void&nbsp;removeAllItems(boolean&nbsp;withPopulate)</pre>
+
+
+<a name="onItemRemoved(com.mapbox.mapboxsdk.overlay.Marker)">
+<!--   -->
+</a>
+
+
+<h4>onItemRemoved</h4>
+<pre>protected&nbsp;void&nbsp;onItemRemoved(<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item)</pre>
 
 
 <a name="removeItem(com.mapbox.mapboxsdk.overlay.Marker)">
@@ -8159,28 +8443,32 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>static <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#getdebugpaint()">getDebugPaint</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#getloadingbackgroundcolor()">getLoadingBackgroundColor</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#getloadinglinecolor()">getLoadingLineColor</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>float</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#getmaximumzoomlevel()">getMaximumZoomLevel</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>float</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#getminimumzoomlevel()">getMinimumZoomLevel</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</code>
 <div class="block">Override to perform clean up of resources before shutdown.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#rescalecache(float, float, com.mapbox.mapboxsdk.views.util.projection)">rescaleCache</a></strong>(float&nbsp;pNewZoomLevel,
             float&nbsp;pOldZoomLevel,
@@ -8188,23 +8476,23 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 <div class="block">Recreate the cache using scaled versions of the tiles currently in it</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#setloadingbackgroundcolor(int)">setLoadingBackgroundColor</a></strong>(int&nbsp;pLoadingBackgroundColor)</code>
 <div class="block">Set the color to use to draw the background while we're waiting for the tile to load.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#setloadinglinecolor(int)">setLoadingLineColor</a></strong>(int&nbsp;pLoadingLineColor)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#setusedataconnection(boolean)">setUseDataConnection</a></strong>(boolean&nbsp;aMode)</code>
 <div class="block">Set whether to use the network connection if it's available.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#usedataconnection()">useDataConnection</a></strong>()</code>
 <div class="block">Whether to use the network connection if it's available.</div>
@@ -8326,6 +8614,15 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="getDebugPaint()">
+<!--   -->
+</a>
+
+
+<h4>getDebugPaint</h4>
+<pre>public static&nbsp;<a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;getDebugPaint()</pre>
+
+
 <a name="onDetach(com.mapbox.mapboxsdk.views.MapView)">
 <!--   -->
 </a>
@@ -8747,11 +9044,17 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotateevent" title="class in com.mapbox.mapboxsdk.events">RotateEvent</a>&nbsp;event)</code>
+<div class="block">Called when a map is rotated.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/scrollevent" title="class in com.mapbox.mapboxsdk.events">ScrollEvent</a>&nbsp;event)</code>
 <div class="block">Called when a map is scrolled.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay#onsnaptoitem(int, int, android.graphics.point, com.mapbox.mapboxsdk.views.mapview)">onSnapToItem</a></strong>(int&nbsp;x,
             int&nbsp;y,
@@ -8761,7 +9064,7 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
  current action (e.g.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay#ontouchevent(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onTouchEvent</a></strong>(android.view.MotionEvent&nbsp;event,
             <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
@@ -8769,33 +9072,37 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
  By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/zoomevent" title="class in com.mapbox.mapboxsdk.events">ZoomEvent</a>&nbsp;event)</code>
 <div class="block">Called when a map is zoomed.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay#runonfirstfix(java.lang.runnable)">runOnFirstFix</a></strong>(java.lang.Runnable&nbsp;runnable)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay#setdirectionarrowbitmap(android.graphics.bitmap)">setDirectionArrowBitmap</a></strong>(android.graphics.Bitmap&nbsp;bitmap)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay#setdirectionarrowhotspot(android.graphics.pointf)">setDirectionArrowHotspot</a></strong>(android.graphics.PointF&nbsp;point)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay#setdrawaccuracyenabled(boolean)">setDrawAccuracyEnabled</a></strong>(boolean&nbsp;drawAccuracyEnabled)</code>
 <div class="block">If enabled, an accuracy circle will be drawn around your current position.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider" title="class in com.mapbox.mapboxsdk.overlay">GpsLocationProvider</a>&nbsp;myLocationProvider)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay#setoverlaycirclecolor(int)">setOverlayCircleColor</a></strong>(int&nbsp;newColor)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
@@ -8948,6 +9255,15 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
 
 <h4>setPersonHotspot</h4>
 <pre>public&nbsp;void&nbsp;setPersonHotspot(android.graphics.PointF&nbsp;point)</pre>
+
+
+<a name="setOverlayCircleColor(int)">
+<!--   -->
+</a>
+
+
+<h4>setOverlayCircleColor</h4>
+<pre>public&nbsp;void&nbsp;setOverlayCircleColor(int&nbsp;newColor)</pre>
 
 
 <a name="onDetach(com.mapbox.mapboxsdk.views.MapView)">
@@ -9305,6 +9621,21 @@ implements <a href="{{site.baseurl}}/api/maplistener" title="interface in com.ma
 <pre>public&nbsp;void&nbsp;onZoom(<a href="{{site.baseurl}}/api/zoomevent" title="class in com.mapbox.mapboxsdk.events">ZoomEvent</a>&nbsp;event)</pre>
 <div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/maplistener#onzoom(com.mapbox.mapboxsdk.events.zoomevent)">MapListener</a></code></strong></div>
 <div class="block">Called when a map is zoomed.</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/maplistener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a></code></dd>
+</dl>
+
+
+<a name="onRotate(com.mapbox.mapboxsdk.events.RotateEvent)">
+<!--   -->
+</a>
+
+
+<h4>onRotate</h4>
+<pre>public&nbsp;void&nbsp;onRotate(<a href="{{site.baseurl}}/api/rotateevent" title="class in com.mapbox.mapboxsdk.events">RotateEvent</a>&nbsp;event)</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/maplistener#onrotate(com.mapbox.mapboxsdk.events.rotateevent)">MapListener</a></code></strong></div>
+<div class="block">Called when a map is rotated.</div>
 <dl>
 <dt><strong>Specified by:</strong></dt>
 <dd><code><a href="{{site.baseurl}}/api/maplistener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a></code></dd>
@@ -14628,6 +14959,325 @@ extends java.lang.Object</pre>
 </div>
 <!-- ========= END OF CLASS DATA ========= -->
 <!-- ======= START OF BOTTOM NAVBAR ====== -->
+ <h2>BingTileLayer</h2>
+ <div class="contentContainer">
+
+java.lang.Object
+
+
+<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer</a>
+
+
+<a href="{{site.baseurl}}/api/websourcetilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">com.mapbox.mapboxsdk.tileprovider.tilesource.WebSourceTileLayer</a>
+
+
+com.mapbox.mapboxsdk.tileprovider.tilesource.BingTileLayer
+
+
+
+
+
+
+
+<div class="description">
+
+
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/mapviewconstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewConstants</a></dd>
+</dl>
+
+
+<pre>public class <span class="strong">BingTileLayer</span>
+extends <a href="{{site.baseurl}}/api/websourcetilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">WebSourceTileLayer</a></pre>
+
+
+</div>
+<div class="summary">
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/bingtilelayer#imageryset_aerial">IMAGERYSET_AERIAL</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/bingtilelayer#imageryset_aerialwithlabels">IMAGERYSET_AERIALWITHLABELS</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/bingtilelayer#imageryset_road">IMAGERYSET_ROAD</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/bingtilelayer#tag">TAG</a></strong></code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.tilesource.WebSourceTileLayer">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.tilesource.<a href="{{site.baseurl}}/api/websourcetilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">WebSourceTileLayer</a></h3>
+<code><a href="{{site.baseurl}}/api/websourcetilelayer#menablessl">mEnableSSL</a></code>
+
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.tilesource.<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a></h3>
+<code><a href="{{site.baseurl}}/api/tilelayer#murl">mUrl</a></code>
+
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.constants.<a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/tilelayerconstants#world_bounding_box">WORLD_BOUNDING_BOX</a></code>
+
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.views.util.constants.MapViewConstants">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.views.util.constants.<a href="{{site.baseurl}}/api/mapviewconstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/mapviewconstants#default_pin_anchor">DEFAULT_PIN_ANCHOR</a></code>
+
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/bingtilelayer#bingtilelayer(java.lang.string)">BingTileLayer</a></strong>(java.lang.String&nbsp;key)</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/bingtilelayer#getbingmapkey()">getBingMapKey</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/bingtilelayer#getcachekey()">getCacheKey</a></strong>()</code>
+<div class="block">Get the cache key used for the disk cache</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/bingtilelayer#getstyle()">getStyle</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;aTile,
+          boolean&nbsp;hdpi)</code>
+<div class="block">Get a single Tile URL for a single tile.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/bingtilelayer#setstyle(java.lang.string)">setStyle</a></strong>(java.lang.String&nbsp;style)</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.tilesource.WebSourceTileLayer">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.tilesource.<a href="{{site.baseurl}}/api/websourcetilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">WebSourceTileLayer</a></h3>
+<code><a href="{{site.baseurl}}/api/websourcetilelayer#seturl(java.lang.string)">setURL</a></code>
+
+
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.tilesource.<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a></h3>
+<code><a href="{{site.baseurl}}/api/tilelayer#setname(java.lang.string)">setName</a></code>
+
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="TAG">
+<!--   -->
+</a>
+
+
+<h4>TAG</h4>
+<pre>public static&nbsp;java.lang.String TAG</pre>
+
+
+<a name="IMAGERYSET_AERIAL">
+<!--   -->
+</a>
+
+
+<h4>IMAGERYSET_AERIAL</h4>
+<pre>public static final&nbsp;java.lang.String IMAGERYSET_AERIAL</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.tilesource.BingTileLayer.IMAGERYSET_AERIAL">Constant Field Values</a></dd></dl>
+
+
+<a name="IMAGERYSET_AERIALWITHLABELS">
+<!--   -->
+</a>
+
+
+<h4>IMAGERYSET_AERIALWITHLABELS</h4>
+<pre>public static final&nbsp;java.lang.String IMAGERYSET_AERIALWITHLABELS</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.tilesource.BingTileLayer.IMAGERYSET_AERIALWITHLABELS">Constant Field Values</a></dd></dl>
+
+
+<a name="IMAGERYSET_ROAD">
+<!--   -->
+</a>
+
+
+<h4>IMAGERYSET_ROAD</h4>
+<pre>public static final&nbsp;java.lang.String IMAGERYSET_ROAD</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../constant-values.html#com.mapbox.mapboxsdk.tileprovider.tilesource.BingTileLayer.IMAGERYSET_ROAD">Constant Field Values</a></dd></dl>
+
+
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="BingTileLayer(java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>BingTileLayer</h4>
+<pre>public&nbsp;BingTileLayer(java.lang.String&nbsp;key)</pre>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getTileURL(com.mapbox.mapboxsdk.tileprovider.MapTile, boolean)">
+<!--   -->
+</a>
+
+
+<h4>getTileURL</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getTileURL(<a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;aTile,
+                          boolean&nbsp;hdpi)</pre>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/websourcetilelayer#gettileurl(com.mapbox.mapboxsdk.tileprovider.maptile, boolean)">WebSourceTileLayer</a></code></strong></div>
+<div class="block">Get a single Tile URL for a single tile.</div>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/websourcetilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">WebSourceTileLayer</a></code></dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>aTile</code> - a map tile</dd><dd><code>hdpi</code> - a boolean that indicates whether the tile should be at 2x or retina size</dd>
+<dt><span class="strong">Returns:</span></dt><dd>a list of tile URLs</dd></dl>
+
+
+<a name="getCacheKey()">
+<!--   -->
+</a>
+
+
+<h4>getCacheKey</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getCacheKey()</pre>
+<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="{{site.baseurl}}/api/itilelayer#getcachekey()">ITileLayer</a></code></strong></div>
+<div class="block">Get the cache key used for the disk cache</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a></code></dd>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the cache key</dd></dl>
+
+
+<a name="getBingMapKey()">
+<!--   -->
+</a>
+
+
+<h4>getBingMapKey</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getBingMapKey()</pre>
+
+
+<a name="getStyle()">
+<!--   -->
+</a>
+
+
+<h4>getStyle</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getStyle()</pre>
+
+
+<a name="setStyle(java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>setStyle</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">TileLayer</a>&nbsp;setStyle(java.lang.String&nbsp;style)</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
  <h2>ITileLayer</h2>
  <div class="contentContainer">
 <div class="description">
@@ -18056,9 +18706,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static android.graphics.Rect</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/geometrymath#getboundingboxforrotatedrectangle(android.graphics.rect, int, int, float, android.graphics.rect)">getBoundingBoxForRotatedRectangle</a></strong>(android.graphics.Rect&nbsp;rect,
-                                 int&nbsp;centerX,
-                                 int&nbsp;centerY,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/geometrymath#getboundingboxforrotatedrectangle(android.graphics.rect, float, float, float, android.graphics.rect)">getBoundingBoxForRotatedRectangle</a></strong>(android.graphics.Rect&nbsp;rect,
+                                 float&nbsp;centerX,
+                                 float&nbsp;centerY,
                                  float&nbsp;angle,
                                  android.graphics.Rect&nbsp;reuse)</code>&nbsp;</td>
 </tr>
@@ -18200,15 +18850,15 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="getBoundingBoxForRotatedRectangle(android.graphics.Rect, int, int, float, android.graphics.Rect)">
+<a name="getBoundingBoxForRotatedRectangle(android.graphics.Rect, float, float, float, android.graphics.Rect)">
 <!--   -->
 </a>
 
 
 <h4>getBoundingBoxForRotatedRectangle</h4>
 <pre>public static final&nbsp;android.graphics.Rect&nbsp;getBoundingBoxForRotatedRectangle(android.graphics.Rect&nbsp;rect,
-                                                      int&nbsp;centerX,
-                                                      int&nbsp;centerY,
+                                                      float&nbsp;centerX,
+                                                      float&nbsp;centerY,
                                                       float&nbsp;angle,
                                                       android.graphics.Rect&nbsp;reuse)</pre>
 
@@ -18359,6 +19009,125 @@ extends java.lang.Object</pre>
 <h4>viewPortRectForTileDrawing</h4>
 <pre>public static&nbsp;android.graphics.Rect&nbsp;viewPortRectForTileDrawing(<a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection,
                                                android.graphics.Rect&nbsp;reuse)</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+ <h2>GeoUtils</h2>
+ <div class="contentContainer">
+
+java.lang.Object
+
+
+com.mapbox.mapboxsdk.util.GeoUtils
+
+
+
+<div class="description">
+
+
+
+
+<pre>public class <span class="strong">GeoUtils</span>
+extends java.lang.Object</pre>
+
+
+</div>
+<div class="summary">
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/geoutils#geoutils()">GeoUtils</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&gt;&nbsp;coordinates,
+                                java.lang.Double&nbsp;padding)</code>
+<div class="block">Build a BoundingBox for a List of LatLng</div>
+</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="GeoUtils()">
+<!--   -->
+</a>
+
+
+<h4>GeoUtils</h4>
+<pre>public&nbsp;GeoUtils()</pre>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="findBoundingBoxForGivenLocations(java.util.List, java.lang.Double)">
+<!--   -->
+</a>
+
+
+<h4>findBoundingBoxForGivenLocations</h4>
+<pre>public static&nbsp;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&gt;&nbsp;coordinates,
+                                           java.lang.Double&nbsp;padding)</pre>
+<div class="block">Build a BoundingBox for a List of LatLng</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>coordinates</code> - List of coordinates</dd><dd><code>padding</code> - Option padding.  Recommended 0.01.  Send in null to have no padding applied</dd>
+<dt><span class="strong">Returns:</span></dt><dd>BoundingBox containing the given List of LatLng</dd></dl>
 
 
 
@@ -18544,24 +19313,24 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>static Cache</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#getcache(java.io.file, int)">getCache</a></strong>(java.io.File&nbsp;cacheDir,
+        int&nbsp;maxSize)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>static java.net.HttpURLConnection</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#gethttpurlconnection(java.net.url)">getHttpURLConnection</a></strong>(java.net.URL&nbsp;url)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<td class="colFirst"><code>static java.net.HttpURLConnection</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#gethttpurlconnection(java.net.url, java.net.responsecache)">getHttpURLConnection</a></strong>(java.net.URL&nbsp;url,
-                    java.net.ResponseCache&nbsp;cache)</code>&nbsp;</td>
-</tr>
 <tr class="altColor">
 <td class="colFirst"><code>static java.net.HttpURLConnection</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#gethttpurlconnection(java.net.url, java.net.responsecache, javax.net.ssl.sslsocketfactory)">getHttpURLConnection</a></strong>(java.net.URL&nbsp;url,
-                    java.net.ResponseCache&nbsp;cache,
-                    javax.net.ssl.SSLSocketFactory&nbsp;sslSocketFactory)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#gethttpurlconnection(java.net.url, cache)">getHttpURLConnection</a></strong>(java.net.URL&nbsp;url,
+                    Cache&nbsp;cache)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>static java.net.ResponseCache</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#getresponsecache(java.io.file, int)">getResponseCache</a></strong>(java.io.File&nbsp;cacheDir,
-                int&nbsp;maxSize)</code>&nbsp;</td>
+<td class="colFirst"><code>static java.net.HttpURLConnection</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#gethttpurlconnection(java.net.url, cache, javax.net.ssl.sslsocketfactory)">getHttpURLConnection</a></strong>(java.net.URL&nbsp;url,
+                    Cache&nbsp;cache,
+                    javax.net.ssl.SSLSocketFactory&nbsp;sslSocketFactory)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
@@ -18624,36 +19393,36 @@ extends java.lang.Object</pre>
 <pre>public static&nbsp;java.net.HttpURLConnection&nbsp;getHttpURLConnection(java.net.URL&nbsp;url)</pre>
 
 
-<a name="getHttpURLConnection(java.net.URL, java.net.ResponseCache)">
+<a name="getHttpURLConnection(java.net.URL, Cache)">
 <!--   -->
 </a>
 
 
 <h4>getHttpURLConnection</h4>
 <pre>public static&nbsp;java.net.HttpURLConnection&nbsp;getHttpURLConnection(java.net.URL&nbsp;url,
-                                              java.net.ResponseCache&nbsp;cache)</pre>
+                                              Cache&nbsp;cache)</pre>
 
 
-<a name="getHttpURLConnection(java.net.URL, java.net.ResponseCache, javax.net.ssl.SSLSocketFactory)">
+<a name="getHttpURLConnection(java.net.URL, Cache, javax.net.ssl.SSLSocketFactory)">
 <!--   -->
 </a>
 
 
 <h4>getHttpURLConnection</h4>
 <pre>public static&nbsp;java.net.HttpURLConnection&nbsp;getHttpURLConnection(java.net.URL&nbsp;url,
-                                              java.net.ResponseCache&nbsp;cache,
+                                              Cache&nbsp;cache,
                                               javax.net.ssl.SSLSocketFactory&nbsp;sslSocketFactory)</pre>
 
 
-<a name="getResponseCache(java.io.File, int)">
+<a name="getCache(java.io.File, int)">
 <!--   -->
 </a>
 
 
-<h4>getResponseCache</h4>
-<pre>public static&nbsp;java.net.ResponseCache&nbsp;getResponseCache(java.io.File&nbsp;cacheDir,
-                                      int&nbsp;maxSize)
-                                               throws java.io.IOException</pre>
+<h4>getCache</h4>
+<pre>public static&nbsp;Cache&nbsp;getCache(java.io.File&nbsp;cacheDir,
+             int&nbsp;maxSize)
+                      throws java.io.IOException</pre>
 <dl><dt><span class="strong">Throws:</span></dt>
 <dd><code>java.io.IOException</code></dd></dl>
 
@@ -20037,8 +20806,8 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected java.util.concurrent.atomic.AtomicBoolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#misanimating">mIsAnimating</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>protected android.graphics.Matrix</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#minvtransformmatrix">mInvTransformMatrix</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected boolean</code></td>
@@ -20049,38 +20818,46 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mlisteners">mListeners</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>protected boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mmaprotationenabled">mMapRotationEnabled</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>protected float</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mmultitouchscale">mMultiTouchScale</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>protected android.graphics.PointF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mmultitouchscalepoint">mMultiTouchScalePoint</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/onmaporientationchangelistener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#monmaporientationchangelistener">mOnMapOrientationChangeListener</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected float</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mrequestedminimumzoomlevel">mRequestedMinimumZoomLevel</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.html" title="class in com.almeros.android.multitouch">RotateGestureDetector</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mrotategesturedetector">mRotateGestureDetector</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>protected android.view.ScaleGestureDetector</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mscalegesturedetector">mScaleGestureDetector</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mscrollableareaboundingbox">mScrollableAreaBoundingBox</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>protected android.graphics.RectF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mscrollablearealimit">mScrollableAreaLimit</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>protected android.widget.Scroller</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mscroller">mScroller</a></strong></code>
 <div class="block">Handles map scrolling</div>
 </td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>protected java.util.concurrent.atomic.AtomicInteger</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mtargetzoomlevel">mTargetZoomLevel</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected android.graphics.RectF</code></td>
@@ -20103,7 +20880,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <!--   -->
 </a>
 <h3>Fields inherited from class&nbsp;android.view.View</h3>
-<code>ACCESSIBILITY_LIVE_REGION_ASSERTIVE, ACCESSIBILITY_LIVE_REGION_NONE, ACCESSIBILITY_LIVE_REGION_POLITE, ALPHA, DRAWING_CACHE_QUALITY_AUTO, DRAWING_CACHE_QUALITY_HIGH, DRAWING_CACHE_QUALITY_LOW, EMPTY_STATE_SET, ENABLED_FOCUSED_SELECTED_STATE_SET, ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, ENABLED_FOCUSED_STATE_SET, ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET, ENABLED_SELECTED_STATE_SET, ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET, ENABLED_STATE_SET, ENABLED_WINDOW_FOCUSED_STATE_SET, FIND_VIEWS_WITH_CONTENT_DESCRIPTION, FIND_VIEWS_WITH_TEXT, FOCUS_BACKWARD, FOCUS_DOWN, FOCUS_FORWARD, FOCUS_LEFT, FOCUS_RIGHT, FOCUS_UP, FOCUSABLES_ALL, FOCUSABLES_TOUCH_MODE, FOCUSED_SELECTED_STATE_SET, FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, FOCUSED_STATE_SET, FOCUSED_WINDOW_FOCUSED_STATE_SET, GONE, HAPTIC_FEEDBACK_ENABLED, IMPORTANT_FOR_ACCESSIBILITY_AUTO, IMPORTANT_FOR_ACCESSIBILITY_NO, IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS, IMPORTANT_FOR_ACCESSIBILITY_YES, INVISIBLE, KEEP_SCREEN_ON, LAYER_TYPE_HARDWARE, LAYER_TYPE_NONE, LAYER_TYPE_SOFTWARE, LAYOUT_DIRECTION_INHERIT, LAYOUT_DIRECTION_LOCALE, LAYOUT_DIRECTION_LTR, LAYOUT_DIRECTION_RTL, MEASURED_HEIGHT_STATE_SHIFT, MEASURED_SIZE_MASK, MEASURED_STATE_MASK, MEASURED_STATE_TOO_SMALL, NO_ID, OVER_SCROLL_ALWAYS, OVER_SCROLL_IF_CONTENT_SCROLLS, OVER_SCROLL_NEVER, PRESSED_ENABLED_FOCUSED_SELECTED_STATE_SET, PRESSED_ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_ENABLED_FOCUSED_STATE_SET, PRESSED_ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET, PRESSED_ENABLED_SELECTED_STATE_SET, PRESSED_ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_ENABLED_STATE_SET, PRESSED_ENABLED_WINDOW_FOCUSED_STATE_SET, PRESSED_FOCUSED_SELECTED_STATE_SET, PRESSED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_FOCUSED_STATE_SET, PRESSED_FOCUSED_WINDOW_FOCUSED_STATE_SET, PRESSED_SELECTED_STATE_SET, PRESSED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_STATE_SET, PRESSED_WINDOW_FOCUSED_STATE_SET, ROTATION, ROTATION_X, ROTATION_Y, SCALE_X, SCALE_Y, SCREEN_STATE_OFF, SCREEN_STATE_ON, SCROLLBAR_POSITION_DEFAULT, SCROLLBAR_POSITION_LEFT, SCROLLBAR_POSITION_RIGHT, SCROLLBARS_INSIDE_INSET, SCROLLBARS_INSIDE_OVERLAY, SCROLLBARS_OUTSIDE_INSET, SCROLLBARS_OUTSIDE_OVERLAY, SELECTED_STATE_SET, SELECTED_WINDOW_FOCUSED_STATE_SET, SOUND_EFFECTS_ENABLED, STATUS_BAR_HIDDEN, STATUS_BAR_VISIBLE, SYSTEM_UI_FLAG_FULLSCREEN, SYSTEM_UI_FLAG_HIDE_NAVIGATION, SYSTEM_UI_FLAG_IMMERSIVE, SYSTEM_UI_FLAG_IMMERSIVE_STICKY, SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN, SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION, SYSTEM_UI_FLAG_LAYOUT_STABLE, SYSTEM_UI_FLAG_LOW_PROFILE, SYSTEM_UI_FLAG_VISIBLE, SYSTEM_UI_LAYOUT_FLAGS, TEXT_ALIGNMENT_CENTER, TEXT_ALIGNMENT_GRAVITY, TEXT_ALIGNMENT_INHERIT, TEXT_ALIGNMENT_TEXT_END, TEXT_ALIGNMENT_TEXT_START, TEXT_ALIGNMENT_VIEW_END, TEXT_ALIGNMENT_VIEW_START, TEXT_DIRECTION_ANY_RTL, TEXT_DIRECTION_FIRST_STRONG, TEXT_DIRECTION_INHERIT, TEXT_DIRECTION_LOCALE, TEXT_DIRECTION_LTR, TEXT_DIRECTION_RTL, TRANSLATION_X, TRANSLATION_Y, VIEW_LOG_TAG, VISIBLE, WINDOW_FOCUSED_STATE_SET, X, Y</code>
+<code>ACCESSIBILITY_LIVE_REGION_ASSERTIVE, ACCESSIBILITY_LIVE_REGION_NONE, ACCESSIBILITY_LIVE_REGION_POLITE, ALPHA, DRAWING_CACHE_QUALITY_AUTO, DRAWING_CACHE_QUALITY_HIGH, DRAWING_CACHE_QUALITY_LOW, EMPTY_STATE_SET, ENABLED_FOCUSED_SELECTED_STATE_SET, ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, ENABLED_FOCUSED_STATE_SET, ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET, ENABLED_SELECTED_STATE_SET, ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET, ENABLED_STATE_SET, ENABLED_WINDOW_FOCUSED_STATE_SET, FIND_VIEWS_WITH_CONTENT_DESCRIPTION, FIND_VIEWS_WITH_TEXT, FOCUS_BACKWARD, FOCUS_DOWN, FOCUS_FORWARD, FOCUS_LEFT, FOCUS_RIGHT, FOCUS_UP, FOCUSABLES_ALL, FOCUSABLES_TOUCH_MODE, FOCUSED_SELECTED_STATE_SET, FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, FOCUSED_STATE_SET, FOCUSED_WINDOW_FOCUSED_STATE_SET, GONE, HAPTIC_FEEDBACK_ENABLED, IMPORTANT_FOR_ACCESSIBILITY_AUTO, IMPORTANT_FOR_ACCESSIBILITY_NO, IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS, IMPORTANT_FOR_ACCESSIBILITY_YES, INVISIBLE, KEEP_SCREEN_ON, LAYER_TYPE_HARDWARE, LAYER_TYPE_NONE, LAYER_TYPE_SOFTWARE, LAYOUT_DIRECTION_INHERIT, LAYOUT_DIRECTION_LOCALE, LAYOUT_DIRECTION_LTR, LAYOUT_DIRECTION_RTL, MEASURED_HEIGHT_STATE_SHIFT, MEASURED_SIZE_MASK, MEASURED_STATE_MASK, MEASURED_STATE_TOO_SMALL, NO_ID, OVER_SCROLL_ALWAYS, OVER_SCROLL_IF_CONTENT_SCROLLS, OVER_SCROLL_NEVER, PRESSED_ENABLED_FOCUSED_SELECTED_STATE_SET, PRESSED_ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_ENABLED_FOCUSED_STATE_SET, PRESSED_ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET, PRESSED_ENABLED_SELECTED_STATE_SET, PRESSED_ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_ENABLED_STATE_SET, PRESSED_ENABLED_WINDOW_FOCUSED_STATE_SET, PRESSED_FOCUSED_SELECTED_STATE_SET, PRESSED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_FOCUSED_STATE_SET, PRESSED_FOCUSED_WINDOW_FOCUSED_STATE_SET, PRESSED_SELECTED_STATE_SET, PRESSED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_STATE_SET, PRESSED_WINDOW_FOCUSED_STATE_SET, ROTATION, ROTATION_X, ROTATION_Y, SCALE_X, SCALE_Y, SCREEN_STATE_OFF, SCREEN_STATE_ON, SCROLL_AXIS_HORIZONTAL, SCROLL_AXIS_NONE, SCROLL_AXIS_VERTICAL, SCROLLBAR_POSITION_DEFAULT, SCROLLBAR_POSITION_LEFT, SCROLLBAR_POSITION_RIGHT, SCROLLBARS_INSIDE_INSET, SCROLLBARS_INSIDE_OVERLAY, SCROLLBARS_OUTSIDE_INSET, SCROLLBARS_OUTSIDE_OVERLAY, SELECTED_STATE_SET, SELECTED_WINDOW_FOCUSED_STATE_SET, SOUND_EFFECTS_ENABLED, STATUS_BAR_HIDDEN, STATUS_BAR_VISIBLE, SYSTEM_UI_FLAG_FULLSCREEN, SYSTEM_UI_FLAG_HIDE_NAVIGATION, SYSTEM_UI_FLAG_IMMERSIVE, SYSTEM_UI_FLAG_IMMERSIVE_STICKY, SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN, SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION, SYSTEM_UI_FLAG_LAYOUT_STABLE, SYSTEM_UI_FLAG_LOW_PROFILE, SYSTEM_UI_FLAG_VISIBLE, SYSTEM_UI_LAYOUT_FLAGS, TEXT_ALIGNMENT_CENTER, TEXT_ALIGNMENT_GRAVITY, TEXT_ALIGNMENT_INHERIT, TEXT_ALIGNMENT_TEXT_END, TEXT_ALIGNMENT_TEXT_START, TEXT_ALIGNMENT_VIEW_END, TEXT_ALIGNMENT_VIEW_START, TEXT_DIRECTION_ANY_RTL, TEXT_DIRECTION_FIRST_STRONG, TEXT_DIRECTION_INHERIT, TEXT_DIRECTION_LOCALE, TEXT_DIRECTION_LTR, TEXT_DIRECTION_RTL, TRANSLATION_X, TRANSLATION_Y, TRANSLATION_Z, VIEW_LOG_TAG, VISIBLE, WINDOW_FOCUSED_STATE_SET, X, Y, Z</code>
 
 
 <a name="fields_inherited_from_class_com.mapbox.mapboxsdk.views.util.constants.MapViewConstants">
@@ -20237,6 +21014,16 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#clear()">clear</a></strong>()</code>
+<div class="block">Remove all markers from the map's display.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#clearanimatedzoom(float)">clearAnimatedZoom</a></strong>(float&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#closecurrenttooltip()">closeCurrentTooltip</a></strong>()</code>
 <div class="block">Close the currently-displayed tooltip, if any.</div>
 </td>
@@ -20263,48 +21050,56 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#generatelayoutparams(android.view.viewgroup.layoutparams)">generateLayoutParams</a></strong>(android.view.ViewGroup.LayoutParams&nbsp;p)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected float</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getanimatedzoom()">getAnimatedZoom</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getboundingbox()">getBoundingBox</a></strong>()</code>
 <div class="block">Returns the current bounding box of the map.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getboundingboxinternal()">getBoundingBoxInternal</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getcenter()">getCenter</a></strong>()</code>
 <div class="block">Get centerpoint of the phone as latitude and longitude.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>float</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getclampedzoomlevel(float)">getClampedZoomLevel</a></strong>(float&nbsp;zoom)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/mapcontroller" title="class in com.mapbox.mapboxsdk.views">MapController</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getcontroller()">getController</a></strong>()</code>
 <div class="block">Returns the map's controller</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/infowindow" title="class in com.mapbox.mapboxsdk.views">InfoWindow</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getcurrenttooltip()">getCurrentTooltip</a></strong>()</code>
 <div class="block">Get the current tooltip of this map if there is one being displayed.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>android.graphics.PointF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getdefaultpinanchor()">getDefaultPinAnchor</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>android.graphics.drawable.Drawable</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getdefaultpindrawable()">getDefaultPinDrawable</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>android.graphics.Rect</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getintrinsicscreenrect(android.graphics.rect)">getIntrinsicScreenRect</a></strong>(android.graphics.Rect&nbsp;reuse)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>android.graphics.Matrix</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getinversedtransformmatrix()">getInversedTransformMatrix</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>java.util.ArrayList&lt;<a href="{{site.baseurl}}/api/itemizediconoverlay" title="class in com.mapbox.mapboxsdk.overlay">ItemizedIconOverlay</a>&gt;</code></td>
@@ -20337,35 +21132,35 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/onmaporientationchangelistener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getonmaporientationchangelistener()">getOnMapOrientationChangeListener</a></strong>()</code>
+<div class="block">Gets the mapView onMapOrientationChangeListener</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/overlaymanager" title="class in com.mapbox.mapboxsdk.overlay">OverlayManager</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getoverlaymanager()">getOverlayManager</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getoverlays()">getOverlays</a></strong>()</code>
 <div class="block">You can add/remove/reorder your Overlays using the List of <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay"><code>Overlay</code></a>.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getprojection()">getProjection</a></strong>()</code>
 <div class="block">Get a projection for converting between screen-pixel coordinates and latitude/longitude
  coordinates.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>float</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getscale()">getScale</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>android.graphics.PointF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getscalepoint()">getScalePoint</a></strong>()</code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>android.graphics.Rect</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getscreenrect(android.graphics.rect)">getScreenRect</a></strong>(android.graphics.Rect&nbsp;reuse)</code>
-<div class="block">Gets the current bounds of the screen in <I>screen coordinates</I>.</div>
-</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
@@ -20456,15 +21251,26 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#invalidatemapcoordinates(android.graphics.rectf)">invalidateMapCoordinates</a></strong>(android.graphics.RectF&nbsp;dirty)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>protected boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#isanimatedzoomset()">isAnimatedZoomSet</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#isanimating()">isAnimating</a></strong>()</code>
 <div class="block">Determines if maps are animating a zoom operation.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#islayedout()">isLayedOut</a></strong>()</code>
 <div class="block">Returns true if the view has been layed out</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#istmaprotationenabled()">istMapRotationEnabled</a></strong>()</code>
+<div class="block">Gets whether the current map rotation feature is enabled or not
+ default: disabled</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -20607,22 +21413,26 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setanimatedzoom(float)">setAnimatedZoom</a></strong>(float&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setbackgroundcolor(int)">setBackgroundColor</a></strong>(int&nbsp;pColor)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aCenter)</code>
 <div class="block">Set the centerpoint of the map view, given a latitude and
  longitude position.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aCenter,
          boolean&nbsp;userAction)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setconstraintregionfit(boolean)">setConstraintRegionFit</a></strong>(boolean&nbsp;value)</code>
 <div class="block">Sets whether the scrollable area limit should take the view
@@ -20631,27 +21441,31 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
  whatever the screen ratio.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setdebugmode(boolean)">setDebugMode</a></strong>(boolean&nbsp;value)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setdefaultpinanchor(android.graphics.pointf)">setDefaultPinAnchor</a></strong>(android.graphics.PointF&nbsp;point)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setdefaultpindrawable(android.graphics.drawable.drawable)">setDefaultPinDrawable</a></strong>(android.graphics.drawable.Drawable&nbsp;drawable)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setdefaultpinres(int)">setDefaultPinRes</a></strong>(int&nbsp;res)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setdiskcacheenabled(boolean)">setDiskCacheEnabled</a></strong>(boolean&nbsp;enabled)</code>
 <div class="block">Enable or disable the diskCache</div>
 </td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setisanimating(boolean)">setIsAnimating</a></strong>(boolean&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
@@ -20661,20 +21475,33 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapviewlistener" title="interface in com.mapbox.mapboxsdk.views">MapViewListener</a>&nbsp;listener)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setmaprotationenabled(boolean)">setMapRotationEnabled</a></strong>(boolean&nbsp;enable)</code>
+<div class="block">Sets whether to enable or disable the map rotation features
+ default: disabled</div>
+</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapviewlistener" title="interface in com.mapbox.mapboxsdk.views">MapViewListener</a>&nbsp;listener)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setmaxzoomlevel(float)">setMaxZoomLevel</a></strong>(float&nbsp;zoomLevel)</code>
 <div class="block">Set the maximum allowed zoom level, or pass null to use the maximum zoom level from the tile
  provider.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setminzoomlevel(float)">setMinZoomLevel</a></strong>(float&nbsp;zoomLevel)</code>
 <div class="block">Set the minimum allowed zoom level, or pass null to use the minimum zoom level from the tile
  provider.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/onmaporientationchangelistener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a>&nbsp;l)</code>
+<div class="block">Gets the mapView onMapOrientationChangeListener</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -20867,14 +21694,14 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;android.view.ViewGroup</h3>
-<code>addChildrenForAccessibility, addFocusables, addStatesFromChildren, addTouchables, addView, addView, addView, addView, addView, addViewInLayout, addViewInLayout, attachLayoutAnimationParameters, attachViewToParent, bringChildToFront, canAnimate, childDrawableStateChanged, childHasTransientStateChanged, cleanupLayoutState, clearChildFocus, clearDisappearingChildren, clearFocus, debug, detachAllViewsFromParent, detachViewFromParent, detachViewFromParent, detachViewsFromParent, dispatchApplyWindowInsets, dispatchConfigurationChanged, dispatchDisplayHint, dispatchDragEvent, dispatchDraw, dispatchFreezeSelfOnly, dispatchGenericFocusedEvent, dispatchGenericPointerEvent, dispatchHoverEvent, dispatchKeyEvent, dispatchKeyEventPreIme, dispatchKeyShortcutEvent, dispatchRestoreInstanceState, dispatchSaveInstanceState, dispatchSetActivated, dispatchSetPressed, dispatchSetSelected, dispatchSystemUiVisibilityChanged, dispatchThawSelfOnly, dispatchTouchEvent, dispatchTrackballEvent, dispatchUnhandledMove, dispatchVisibilityChanged, dispatchWindowFocusChanged, dispatchWindowSystemUiVisiblityChanged, dispatchWindowVisibilityChanged, drawableStateChanged, drawChild, endViewTransition, findFocus, findViewsWithText, focusableViewAvailable, focusSearch, gatherTransparentRegion, getChildAt, getChildCount, getChildDrawingOrder, getChildMeasureSpec, getChildStaticTransformation, getChildVisibleRect, getClipChildren, getDescendantFocusability, getFocusedChild, getLayoutAnimation, getLayoutAnimationListener, getLayoutMode, getLayoutTransition, getOverlay, getPersistentDrawingCache, hasFocus, hasFocusable, hasTransientState, indexOfChild, invalidateChild, invalidateChildInParent, isAlwaysDrawnWithCacheEnabled, isAnimationCacheEnabled, isChildrenDrawingOrderEnabled, isChildrenDrawnWithCacheEnabled, isMotionEventSplittingEnabled, jumpDrawablesToCurrentState, layout, measureChild, measureChildren, measureChildWithMargins, notifySubtreeAccessibilityStateChanged, offsetDescendantRectToMyCoords, offsetRectIntoDescendantCoords, onAnimationEnd, onAnimationStart, onAttachedToWindow, onCreateDrawableState, onInterceptHoverEvent, onInterceptTouchEvent, onRequestFocusInDescendants, onRequestSendAccessibilityEvent, recomputeViewAttributes, removeAllViews, removeAllViewsInLayout, removeDetachedView, removeView, removeViewAt, removeViewInLayout, removeViews, removeViewsInLayout, requestChildFocus, requestChildRectangleOnScreen, requestDisallowInterceptTouchEvent, requestFocus, requestSendAccessibilityEvent, requestTransparentRegion, scheduleLayoutAnimation, setAddStatesFromChildren, setAlwaysDrawnWithCacheEnabled, setAnimationCacheEnabled, setChildrenDrawingCacheEnabled, setChildrenDrawingOrderEnabled, setChildrenDrawnWithCacheEnabled, setClipChildren, setClipToPadding, setDescendantFocusability, setLayoutAnimation, setLayoutAnimationListener, setLayoutMode, setLayoutTransition, setMotionEventSplittingEnabled, setOnHierarchyChangeListener, setPersistentDrawingCache, setStaticTransformationsEnabled, shouldDelayChildPressedState, showContextMenuForChild, startActionModeForChild, startLayoutAnimation, startViewTransition, updateViewLayout</code>
+<code>addChildrenForAccessibility, addFocusables, addStatesFromChildren, addTouchables, addView, addView, addView, addView, addView, addViewInLayout, addViewInLayout, attachLayoutAnimationParameters, attachViewToParent, bringChildToFront, canAnimate, childDrawableStateChanged, childHasTransientStateChanged, cleanupLayoutState, clearChildFocus, clearDisappearingChildren, clearFocus, debug, detachAllViewsFromParent, detachViewFromParent, detachViewFromParent, detachViewsFromParent, dispatchApplyWindowInsets, dispatchConfigurationChanged, dispatchDisplayHint, dispatchDragEvent, dispatchDraw, dispatchFreezeSelfOnly, dispatchGenericFocusedEvent, dispatchGenericPointerEvent, dispatchHoverEvent, dispatchKeyEvent, dispatchKeyEventPreIme, dispatchKeyShortcutEvent, dispatchRestoreInstanceState, dispatchSaveInstanceState, dispatchSetActivated, dispatchSetPressed, dispatchSetSelected, dispatchSystemUiVisibilityChanged, dispatchThawSelfOnly, dispatchTouchEvent, dispatchTrackballEvent, dispatchUnhandledMove, dispatchVisibilityChanged, dispatchWindowFocusChanged, dispatchWindowSystemUiVisiblityChanged, dispatchWindowVisibilityChanged, drawableHotspotChanged, drawableStateChanged, drawChild, endViewTransition, findFocus, findViewsWithText, focusableViewAvailable, focusSearch, gatherTransparentRegion, getChildAt, getChildCount, getChildDrawingOrder, getChildMeasureSpec, getChildStaticTransformation, getChildVisibleRect, getClipChildren, getClipToPadding, getDescendantFocusability, getFocusedChild, getLayoutAnimation, getLayoutAnimationListener, getLayoutMode, getLayoutTransition, getNestedScrollAxes, getOverlay, getPersistentDrawingCache, getTouchscreenBlocksFocus, hasFocus, hasFocusable, hasTransientState, indexOfChild, invalidateChild, invalidateChildInParent, isAlwaysDrawnWithCacheEnabled, isAnimationCacheEnabled, isChildrenDrawingOrderEnabled, isChildrenDrawnWithCacheEnabled, isMotionEventSplittingEnabled, isTransitionGroup, jumpDrawablesToCurrentState, layout, measureChild, measureChildren, measureChildWithMargins, notifySubtreeAccessibilityStateChanged, offsetDescendantRectToMyCoords, offsetRectIntoDescendantCoords, onAnimationEnd, onAnimationStart, onAttachedToWindow, onCreateDrawableState, onInterceptHoverEvent, onInterceptTouchEvent, onNestedFling, onNestedPreFling, onNestedPreScroll, onNestedScroll, onNestedScrollAccepted, onRequestFocusInDescendants, onRequestSendAccessibilityEvent, onStartNestedScroll, onStopNestedScroll, recomputeViewAttributes, removeAllViews, removeAllViewsInLayout, removeDetachedView, removeView, removeViewAt, removeViewInLayout, removeViews, removeViewsInLayout, requestChildFocus, requestChildRectangleOnScreen, requestDisallowInterceptTouchEvent, requestFocus, requestSendAccessibilityEvent, requestTransparentRegion, scheduleLayoutAnimation, setAddStatesFromChildren, setAlwaysDrawnWithCacheEnabled, setAnimationCacheEnabled, setChildrenDrawingCacheEnabled, setChildrenDrawingOrderEnabled, setChildrenDrawnWithCacheEnabled, setClipChildren, setClipToPadding, setDescendantFocusability, setLayoutAnimation, setLayoutAnimationListener, setLayoutMode, setLayoutTransition, setMotionEventSplittingEnabled, setOnHierarchyChangeListener, setPersistentDrawingCache, setStaticTransformationsEnabled, setTouchscreenBlocksFocus, setTransitionGroup, shouldDelayChildPressedState, showContextMenuForChild, startActionModeForChild, startLayoutAnimation, startViewTransition, updateViewLayout</code>
 
 
 <a name="methods_inherited_from_class_android.view.View">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;android.view.View</h3>
-<code>addFocusables, addOnAttachStateChangeListener, addOnLayoutChangeListener, animate, announceForAccessibility, awakenScrollBars, awakenScrollBars, awakenScrollBars, bringToFront, buildDrawingCache, buildDrawingCache, buildLayer, callOnClick, cancelLongPress, cancelPendingInputEvents, canResolveLayoutDirection, canResolveTextAlignment, canResolveTextDirection, canScrollHorizontally, canScrollVertically, checkInputConnectionProxy, clearAnimation, combineMeasuredStates, computeHorizontalScrollExtent, computeHorizontalScrollOffset, computeHorizontalScrollRange, computeVerticalScrollExtent, computeVerticalScrollOffset, computeVerticalScrollRange, createAccessibilityNodeInfo, createContextMenu, destroyDrawingCache, dispatchGenericMotionEvent, dispatchPopulateAccessibilityEvent, draw, findViewById, findViewWithTag, fitSystemWindows, focusSearch, forceLayout, generateViewId, getAccessibilityLiveRegion, getAccessibilityNodeProvider, getAlpha, getAnimation, getApplicationWindowToken, getBackground, getBaseline, getBottom, getBottomFadingEdgeStrength, getBottomPaddingOffset, getCameraDistance, getClipBounds, getContentDescription, getContext, getContextMenuInfo, getDefaultSize, getDisplay, getDrawableState, getDrawingCache, getDrawingCache, getDrawingCacheBackgroundColor, getDrawingCacheQuality, getDrawingRect, getDrawingTime, getFilterTouchesWhenObscured, getFitsSystemWindows, getFocusables, getFocusedRect, getGlobalVisibleRect, getGlobalVisibleRect, getHandler, getHeight, getHitRect, getHorizontalFadingEdgeLength, getHorizontalScrollbarHeight, getId, getImportantForAccessibility, getKeepScreenOn, getKeyDispatcherState, getLabelFor, getLayerType, getLayoutDirection, getLayoutParams, getLeft, getLeftFadingEdgeStrength, getLeftPaddingOffset, getLocalVisibleRect, getLocationInWindow, getLocationOnScreen, getMatrix, getMeasuredHeight, getMeasuredHeightAndState, getMeasuredState, getMeasuredWidth, getMeasuredWidthAndState, getMinimumHeight, getMinimumWidth, getNextFocusDownId, getNextFocusForwardId, getNextFocusLeftId, getNextFocusRightId, getNextFocusUpId, getOnFocusChangeListener, getOverScrollMode, getPaddingBottom, getPaddingEnd, getPaddingLeft, getPaddingRight, getPaddingStart, getPaddingTop, getParent, getParentForAccessibility, getPivotX, getPivotY, getResources, getRight, getRightFadingEdgeStrength, getRightPaddingOffset, getRootView, getRotation, getRotationX, getRotationY, getScaleX, getScaleY, getScrollBarDefaultDelayBeforeFade, getScrollBarFadeDuration, getScrollBarSize, getScrollBarStyle, getScrollX, getScrollY, getSolidColor, getSuggestedMinimumHeight, getSuggestedMinimumWidth, getSystemUiVisibility, getTag, getTag, getTextAlignment, getTextDirection, getTop, getTopFadingEdgeStrength, getTopPaddingOffset, getTouchables, getTouchDelegate, getTranslationX, getTranslationY, getVerticalFadingEdgeLength, getVerticalScrollbarPosition, getVerticalScrollbarWidth, getViewTreeObserver, getVisibility, getWidth, getWindowAttachCount, getWindowId, getWindowSystemUiVisibility, getWindowToken, getWindowVisibility, getWindowVisibleDisplayFrame, getX, getY, hasOnClickListeners, hasOverlappingRendering, hasWindowFocus, inflate, initializeFadingEdge, initializeScrollbars, invalidate, invalidate, invalidate, invalidateDrawable, isActivated, isAttachedToWindow, isClickable, isDirty, isDrawingCacheEnabled, isDuplicateParentStateEnabled, isEnabled, isFocusable, isFocusableInTouchMode, isFocused, isHapticFeedbackEnabled, isHardwareAccelerated, isHorizontalFadingEdgeEnabled, isHorizontalScrollBarEnabled, isHovered, isInEditMode, isInLayout, isInTouchMode, isLaidOut, isLayoutDirectionResolved, isLayoutRequested, isLongClickable, isOpaque, isPaddingOffsetRequired, isPaddingRelative, isPressed, isSaveEnabled, isSaveFromParentEnabled, isScrollbarFadingEnabled, isScrollContainer, isSelected, isShown, isSoundEffectsEnabled, isTextAlignmentResolved, isTextDirectionResolved, isVerticalFadingEdgeEnabled, isVerticalScrollBarEnabled, measure, mergeDrawableStates, offsetLeftAndRight, offsetTopAndBottom, onApplyWindowInsets, onCancelPendingInputEvents, onCheckIsTextEditor, onConfigurationChanged, onCreateContextMenu, onCreateInputConnection, onDisplayHint, onDragEvent, onDrawScrollBars, onFilterTouchEventForSecurity, onFinishInflate, onFinishTemporaryDetach, onFocusChanged, onGenericMotionEvent, onHoverChanged, onHoverEvent, onInitializeAccessibilityEvent, onInitializeAccessibilityNodeInfo, onKeyLongPress, onKeyMultiple, onKeyPreIme, onKeyShortcut, onOverScrolled, onPopulateAccessibilityEvent, onRestoreInstanceState, onRtlPropertiesChanged, onSaveInstanceState, onScreenStateChanged, onScrollChanged, onSetAlpha, onStartTemporaryDetach, onVisibilityChanged, onWindowFocusChanged, onWindowSystemUiVisibilityChanged, onWindowVisibilityChanged, overScrollBy, performAccessibilityAction, performClick, performHapticFeedback, performHapticFeedback, performLongClick, playSoundEffect, post, postDelayed, postInvalidate, postInvalidate, postInvalidateDelayed, postInvalidateDelayed, postInvalidateOnAnimation, postInvalidateOnAnimation, postOnAnimation, postOnAnimationDelayed, refreshDrawableState, removeCallbacks, removeOnAttachStateChangeListener, removeOnLayoutChangeListener, requestApplyInsets, requestFitSystemWindows, requestFocus, requestFocus, requestFocusFromTouch, requestLayout, requestRectangleOnScreen, requestRectangleOnScreen, resolveSize, resolveSizeAndState, restoreHierarchyState, saveHierarchyState, scheduleDrawable, scrollBy, sendAccessibilityEvent, sendAccessibilityEventUnchecked, setAccessibilityDelegate, setAccessibilityLiveRegion, setActivated, setAlpha, setAnimation, setBackground, setBackgroundDrawable, setBackgroundResource, setBottom, setCameraDistance, setClickable, setClipBounds, setContentDescription, setDrawingCacheBackgroundColor, setDrawingCacheEnabled, setDrawingCacheQuality, setDuplicateParentStateEnabled, setEnabled, setFadingEdgeLength, setFilterTouchesWhenObscured, setFitsSystemWindows, setFocusable, setFocusableInTouchMode, setHapticFeedbackEnabled, setHasTransientState, setHorizontalFadingEdgeEnabled, setHorizontalScrollBarEnabled, setHovered, setId, setImportantForAccessibility, setKeepScreenOn, setLabelFor, setLayerPaint, setLayerType, setLayoutDirection, setLayoutParams, setLeft, setLongClickable, setMeasuredDimension, setMinimumHeight, setMinimumWidth, setNextFocusDownId, setNextFocusForwardId, setNextFocusLeftId, setNextFocusRightId, setNextFocusUpId, setOnApplyWindowInsetsListener, setOnClickListener, setOnCreateContextMenuListener, setOnDragListener, setOnFocusChangeListener, setOnGenericMotionListener, setOnHoverListener, setOnKeyListener, setOnLongClickListener, setOnSystemUiVisibilityChangeListener, setOnTouchListener, setOverScrollMode, setPadding, setPaddingRelative, setPivotX, setPivotY, setPressed, setRight, setRotation, setRotationX, setRotationY, setSaveEnabled, setSaveFromParentEnabled, setScaleX, setScaleY, setScrollBarDefaultDelayBeforeFade, setScrollBarFadeDuration, setScrollbarFadingEnabled, setScrollBarSize, setScrollBarStyle, setScrollContainer, setScrollX, setScrollY, setSelected, setSoundEffectsEnabled, setSystemUiVisibility, setTag, setTag, setTextAlignment, setTextDirection, setTop, setTouchDelegate, setTranslationX, setTranslationY, setVerticalFadingEdgeEnabled, setVerticalScrollBarEnabled, setVerticalScrollbarPosition, setVisibility, setWillNotCacheDrawing, setWillNotDraw, setX, setY, showContextMenu, startActionMode, startAnimation, startDrag, unscheduleDrawable, unscheduleDrawable, verifyDrawable, willNotCacheDrawing, willNotDraw</code>
+<code>addFocusables, addOnAttachStateChangeListener, addOnLayoutChangeListener, animate, announceForAccessibility, awakenScrollBars, awakenScrollBars, awakenScrollBars, bringToFront, buildDrawingCache, buildDrawingCache, buildLayer, callOnClick, cancelLongPress, cancelPendingInputEvents, canResolveLayoutDirection, canResolveTextAlignment, canResolveTextDirection, canScrollHorizontally, canScrollVertically, checkInputConnectionProxy, clearAnimation, combineMeasuredStates, computeHorizontalScrollExtent, computeHorizontalScrollOffset, computeHorizontalScrollRange, computeSystemWindowInsets, computeVerticalScrollExtent, computeVerticalScrollOffset, computeVerticalScrollRange, createAccessibilityNodeInfo, createContextMenu, destroyDrawingCache, dispatchGenericMotionEvent, dispatchNestedFling, dispatchNestedPreFling, dispatchNestedPreScroll, dispatchNestedScroll, dispatchPopulateAccessibilityEvent, draw, findViewById, findViewWithTag, fitSystemWindows, focusSearch, forceLayout, generateViewId, getAccessibilityLiveRegion, getAccessibilityNodeProvider, getAlpha, getAnimation, getApplicationWindowToken, getBackground, getBackgroundTintList, getBackgroundTintMode, getBaseline, getBottom, getBottomFadingEdgeStrength, getBottomPaddingOffset, getCameraDistance, getClipBounds, getClipToOutline, getContentDescription, getContext, getContextMenuInfo, getDefaultSize, getDisplay, getDrawableState, getDrawingCache, getDrawingCache, getDrawingCacheBackgroundColor, getDrawingCacheQuality, getDrawingRect, getDrawingTime, getElevation, getFilterTouchesWhenObscured, getFitsSystemWindows, getFocusables, getFocusedRect, getGlobalVisibleRect, getGlobalVisibleRect, getHandler, getHeight, getHitRect, getHorizontalFadingEdgeLength, getHorizontalScrollbarHeight, getId, getImportantForAccessibility, getKeepScreenOn, getKeyDispatcherState, getLabelFor, getLayerType, getLayoutDirection, getLayoutParams, getLeft, getLeftFadingEdgeStrength, getLeftPaddingOffset, getLocalVisibleRect, getLocationInWindow, getLocationOnScreen, getMatrix, getMeasuredHeight, getMeasuredHeightAndState, getMeasuredState, getMeasuredWidth, getMeasuredWidthAndState, getMinimumHeight, getMinimumWidth, getNextFocusDownId, getNextFocusForwardId, getNextFocusLeftId, getNextFocusRightId, getNextFocusUpId, getOnFocusChangeListener, getOutlineProvider, getOverScrollMode, getPaddingBottom, getPaddingEnd, getPaddingLeft, getPaddingRight, getPaddingStart, getPaddingTop, getParent, getParentForAccessibility, getPivotX, getPivotY, getResources, getRight, getRightFadingEdgeStrength, getRightPaddingOffset, getRootView, getRotation, getRotationX, getRotationY, getScaleX, getScaleY, getScrollBarDefaultDelayBeforeFade, getScrollBarFadeDuration, getScrollBarSize, getScrollBarStyle, getScrollX, getScrollY, getSolidColor, getStateListAnimator, getSuggestedMinimumHeight, getSuggestedMinimumWidth, getSystemUiVisibility, getTag, getTag, getTextAlignment, getTextDirection, getTop, getTopFadingEdgeStrength, getTopPaddingOffset, getTouchables, getTouchDelegate, getTransitionName, getTranslationX, getTranslationY, getTranslationZ, getVerticalFadingEdgeLength, getVerticalScrollbarPosition, getVerticalScrollbarWidth, getViewTreeObserver, getVisibility, getWidth, getWindowAttachCount, getWindowId, getWindowSystemUiVisibility, getWindowToken, getWindowVisibility, getWindowVisibleDisplayFrame, getX, getY, getZ, hasNestedScrollingParent, hasOnClickListeners, hasOverlappingRendering, hasWindowFocus, inflate, invalidate, invalidate, invalidate, invalidateDrawable, invalidateOutline, isAccessibilityFocused, isActivated, isAttachedToWindow, isClickable, isDirty, isDrawingCacheEnabled, isDuplicateParentStateEnabled, isEnabled, isFocusable, isFocusableInTouchMode, isFocused, isHapticFeedbackEnabled, isHardwareAccelerated, isHorizontalFadingEdgeEnabled, isHorizontalScrollBarEnabled, isHovered, isImportantForAccessibility, isInEditMode, isInLayout, isInTouchMode, isLaidOut, isLayoutDirectionResolved, isLayoutRequested, isLongClickable, isNestedScrollingEnabled, isOpaque, isPaddingOffsetRequired, isPaddingRelative, isPressed, isSaveEnabled, isSaveFromParentEnabled, isScrollbarFadingEnabled, isScrollContainer, isSelected, isShown, isSoundEffectsEnabled, isTextAlignmentResolved, isTextDirectionResolved, isVerticalFadingEdgeEnabled, isVerticalScrollBarEnabled, measure, mergeDrawableStates, offsetLeftAndRight, offsetTopAndBottom, onApplyWindowInsets, onCancelPendingInputEvents, onCheckIsTextEditor, onConfigurationChanged, onCreateContextMenu, onCreateInputConnection, onDisplayHint, onDragEvent, onDrawScrollBars, onFilterTouchEventForSecurity, onFinishInflate, onFinishTemporaryDetach, onFocusChanged, onGenericMotionEvent, onHoverChanged, onHoverEvent, onInitializeAccessibilityEvent, onInitializeAccessibilityNodeInfo, onKeyLongPress, onKeyMultiple, onKeyPreIme, onKeyShortcut, onOverScrolled, onPopulateAccessibilityEvent, onRestoreInstanceState, onRtlPropertiesChanged, onSaveInstanceState, onScreenStateChanged, onScrollChanged, onSetAlpha, onStartTemporaryDetach, onVisibilityChanged, onWindowFocusChanged, onWindowSystemUiVisibilityChanged, onWindowVisibilityChanged, overScrollBy, performAccessibilityAction, performClick, performHapticFeedback, performHapticFeedback, performLongClick, playSoundEffect, post, postDelayed, postInvalidate, postInvalidate, postInvalidateDelayed, postInvalidateDelayed, postInvalidateOnAnimation, postInvalidateOnAnimation, postOnAnimation, postOnAnimationDelayed, refreshDrawableState, removeCallbacks, removeOnAttachStateChangeListener, removeOnLayoutChangeListener, requestApplyInsets, requestFitSystemWindows, requestFocus, requestFocus, requestFocusFromTouch, requestLayout, requestRectangleOnScreen, requestRectangleOnScreen, requestUnbufferedDispatch, resolveSize, resolveSizeAndState, restoreHierarchyState, saveHierarchyState, scheduleDrawable, scrollBy, sendAccessibilityEvent, sendAccessibilityEventUnchecked, setAccessibilityDelegate, setAccessibilityLiveRegion, setActivated, setAlpha, setAnimation, setBackground, setBackgroundDrawable, setBackgroundResource, setBackgroundTintList, setBackgroundTintMode, setBottom, setCameraDistance, setClickable, setClipBounds, setClipToOutline, setContentDescription, setDrawingCacheBackgroundColor, setDrawingCacheEnabled, setDrawingCacheQuality, setDuplicateParentStateEnabled, setElevation, setEnabled, setFadingEdgeLength, setFilterTouchesWhenObscured, setFitsSystemWindows, setFocusable, setFocusableInTouchMode, setHapticFeedbackEnabled, setHasTransientState, setHorizontalFadingEdgeEnabled, setHorizontalScrollBarEnabled, setHovered, setId, setImportantForAccessibility, setKeepScreenOn, setLabelFor, setLayerPaint, setLayerType, setLayoutDirection, setLayoutParams, setLeft, setLongClickable, setMeasuredDimension, setMinimumHeight, setMinimumWidth, setNestedScrollingEnabled, setNextFocusDownId, setNextFocusForwardId, setNextFocusLeftId, setNextFocusRightId, setNextFocusUpId, setOnApplyWindowInsetsListener, setOnClickListener, setOnCreateContextMenuListener, setOnDragListener, setOnFocusChangeListener, setOnGenericMotionListener, setOnHoverListener, setOnKeyListener, setOnLongClickListener, setOnSystemUiVisibilityChangeListener, setOnTouchListener, setOutlineProvider, setOverScrollMode, setPadding, setPaddingRelative, setPivotX, setPivotY, setPressed, setRight, setRotation, setRotationX, setRotationY, setSaveEnabled, setSaveFromParentEnabled, setScaleX, setScaleY, setScrollBarDefaultDelayBeforeFade, setScrollBarFadeDuration, setScrollbarFadingEnabled, setScrollBarSize, setScrollBarStyle, setScrollContainer, setScrollX, setScrollY, setSelected, setSoundEffectsEnabled, setStateListAnimator, setSystemUiVisibility, setTag, setTag, setTextAlignment, setTextDirection, setTop, setTouchDelegate, setTransitionName, setTranslationX, setTranslationY, setTranslationZ, setVerticalFadingEdgeEnabled, setVerticalScrollBarEnabled, setVerticalScrollbarPosition, setVisibility, setWillNotCacheDrawing, setWillNotDraw, setX, setY, setZ, showContextMenu, startActionMode, startAnimation, startDrag, startNestedScroll, stopNestedScroll, unscheduleDrawable, unscheduleDrawable, verifyDrawable, willNotCacheDrawing, willNotDraw</code>
 
 
 <a name="methods_inherited_from_class_java.lang.Object">
@@ -20932,24 +21759,6 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <pre>protected&nbsp;boolean mIsFlinging</pre>
 
 
-<a name="mTargetZoomLevel">
-<!--   -->
-</a>
-
-
-<h4>mTargetZoomLevel</h4>
-<pre>protected final&nbsp;java.util.concurrent.atomic.AtomicInteger mTargetZoomLevel</pre>
-
-
-<a name="mIsAnimating">
-<!--   -->
-</a>
-
-
-<h4>mIsAnimating</h4>
-<pre>protected final&nbsp;java.util.concurrent.atomic.AtomicBoolean mIsAnimating</pre>
-
-
 <a name="mScaleGestureDetector">
 <!--   -->
 </a>
@@ -20957,6 +21766,33 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 <h4>mScaleGestureDetector</h4>
 <pre>protected&nbsp;android.view.ScaleGestureDetector mScaleGestureDetector</pre>
+
+
+<a name="mRotateGestureDetector">
+<!--   -->
+</a>
+
+
+<h4>mRotateGestureDetector</h4>
+<pre>protected&nbsp;<a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.html" title="class in com.almeros.android.multitouch">RotateGestureDetector</a> mRotateGestureDetector</pre>
+
+
+<a name="mMapRotationEnabled">
+<!--   -->
+</a>
+
+
+<h4>mMapRotationEnabled</h4>
+<pre>protected&nbsp;boolean mMapRotationEnabled</pre>
+
+
+<a name="mOnMapOrientationChangeListener">
+<!--   -->
+</a>
+
+
+<h4>mOnMapOrientationChangeListener</h4>
+<pre>protected&nbsp;<a href="{{site.baseurl}}/api/onmaporientationchangelistener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a> mOnMapOrientationChangeListener</pre>
 
 
 <a name="mMultiTouchScale">
@@ -20975,6 +21811,15 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 <h4>mMultiTouchScalePoint</h4>
 <pre>protected&nbsp;android.graphics.PointF mMultiTouchScalePoint</pre>
+
+
+<a name="mInvTransformMatrix">
+<!--   -->
+</a>
+
+
+<h4>mInvTransformMatrix</h4>
+<pre>protected&nbsp;android.graphics.Matrix mInvTransformMatrix</pre>
 
 
 <a name="mListeners">
@@ -21215,6 +22060,16 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <div class="block">Remove a marker from the map's display.</div>
 
 
+<a name="clear()">
+<!--   -->
+</a>
+
+
+<h4>clear</h4>
+<pre>public&nbsp;void&nbsp;clear()</pre>
+<div class="block">Remove all markers from the map's display.</div>
+
+
 <a name="selectMarker(com.mapbox.mapboxsdk.overlay.Marker)">
 <!--   -->
 </a>
@@ -21440,16 +22295,6 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <dl><dt><span class="strong">Returns:</span></dt><dd>centerpoint</dd></dl>
 
 
-<a name="getScreenRect(android.graphics.Rect)">
-<!--   -->
-</a>
-
-
-<h4>getScreenRect</h4>
-<pre>public&nbsp;android.graphics.Rect&nbsp;getScreenRect(android.graphics.Rect&nbsp;reuse)</pre>
-<div class="block">Gets the current bounds of the screen in <I>screen coordinates</I>.</div>
-
-
 <a name="getIntrinsicScreenRect(android.graphics.Rect)">
 <!--   -->
 </a>
@@ -21522,6 +22367,15 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 <h4>getScale</h4>
 <pre>public&nbsp;float&nbsp;getScale()</pre>
+
+
+<a name="getInversedTransformMatrix()">
+<!--   -->
+</a>
+
+
+<h4>getInversedTransformMatrix</h4>
+<pre>public final&nbsp;android.graphics.Matrix&nbsp;getInversedTransformMatrix()</pre>
 
 
 <a name="setZoom(float)">
@@ -21651,6 +22505,42 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <div class="block">Get the current ZoomLevel for the map tiles.</div>
 <dl><dt><span class="strong">Returns:</span></dt><dd>the current ZoomLevel between 0 (equator) and 18/19(closest), depending on the tile
  source chosen.</dd></dl>
+
+
+<a name="getAnimatedZoom()">
+<!--   -->
+</a>
+
+
+<h4>getAnimatedZoom</h4>
+<pre>protected&nbsp;float&nbsp;getAnimatedZoom()</pre>
+
+
+<a name="setAnimatedZoom(float)">
+<!--   -->
+</a>
+
+
+<h4>setAnimatedZoom</h4>
+<pre>protected&nbsp;void&nbsp;setAnimatedZoom(float&nbsp;value)</pre>
+
+
+<a name="clearAnimatedZoom(float)">
+<!--   -->
+</a>
+
+
+<h4>clearAnimatedZoom</h4>
+<pre>protected&nbsp;void&nbsp;clearAnimatedZoom(float&nbsp;value)</pre>
+
+
+<a name="isAnimatedZoomSet()">
+<!--   -->
+</a>
+
+
+<h4>isAnimatedZoomSet</h4>
+<pre>protected&nbsp;boolean&nbsp;isAnimatedZoomSet()</pre>
 
 
 <a name="getZoomLevel(boolean)">
@@ -21808,6 +22698,49 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <pre>public&nbsp;float&nbsp;getMapOrientation()</pre>
 <div class="block">Gets the current angle of rotation of the map</div>
 <dl><dt><span class="strong">Returns:</span></dt><dd>the current angle in degrees.</dd></dl>
+
+
+<a name="istMapRotationEnabled()">
+<!--   -->
+</a>
+
+
+<h4>istMapRotationEnabled</h4>
+<pre>public&nbsp;boolean&nbsp;istMapRotationEnabled()</pre>
+<div class="block">Gets whether the current map rotation feature is enabled or not
+ default: disabled</div>
+
+
+<a name="setMapRotationEnabled(boolean)">
+<!--   -->
+</a>
+
+
+<h4>setMapRotationEnabled</h4>
+<pre>public&nbsp;void&nbsp;setMapRotationEnabled(boolean&nbsp;enable)</pre>
+<div class="block">Sets whether to enable or disable the map rotation features
+ default: disabled</div>
+
+
+<a name="getOnMapOrientationChangeListener()">
+<!--   -->
+</a>
+
+
+<h4>getOnMapOrientationChangeListener</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/onmaporientationchangelistener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a>&nbsp;getOnMapOrientationChangeListener()</pre>
+<div class="block">Gets the mapView onMapOrientationChangeListener</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the onMapOrientationChangeListener</dd></dl>
+
+
+<a name="setOnMapOrientationChangeListener(com.mapbox.mapboxsdk.views.util.OnMapOrientationChangeListener)">
+<!--   -->
+</a>
+
+
+<h4>setOnMapOrientationChangeListener</h4>
+<pre>public&nbsp;void&nbsp;setOnMapOrientationChangeListener(<a href="{{site.baseurl}}/api/onmaporientationchangelistener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a>&nbsp;l)</pre>
+<div class="block">Gets the mapView onMapOrientationChangeListener</div>
 
 
 <a name="useDataConnection()">
@@ -22373,6 +23306,15 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
  recalculating
  during an animation sequence.</div>
 <dl><dt><span class="strong">Returns:</span></dt><dd>boolean indicating whether view is animating.</dd></dl>
+
+
+<a name="setIsAnimating(boolean)">
+<!--   -->
+</a>
+
+
+<h4>setIsAnimating</h4>
+<pre>protected&nbsp;void&nbsp;setIsAnimating(boolean&nbsp;value)</pre>
 
 
 <a name="getTileLoadedListener()">
@@ -23118,13 +24060,13 @@ extends android.view.GestureDetector.SimpleOnGestureListener</pre>
                 <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;pMarker)</pre>
 
 
-<a name="onHidemarker(com.mapbox.mapboxsdk.views.MapView, com.mapbox.mapboxsdk.overlay.Marker)">
+<a name="onHideMarker(com.mapbox.mapboxsdk.views.MapView, com.mapbox.mapboxsdk.overlay.Marker)">
 <!--   -->
 </a>
 
 
-<h4>onHidemarker</h4>
-<pre>void&nbsp;onHidemarker(<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView,
+<h4>onHideMarker</h4>
+<pre>void&nbsp;onHideMarker(<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView,
                 <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;pMarker)</pre>
 
 
@@ -23166,6 +24108,167 @@ extends android.view.GestureDetector.SimpleOnGestureListener</pre>
 <h4>onLongPressMap</h4>
 <pre>void&nbsp;onLongPressMap(<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView,
                   <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;pPosition)</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+ <h2>MapViewRotateGestureDetectorListener</h2>
+ <div class="contentContainer">
+
+java.lang.Object
+
+
+com.mapbox.mapboxsdk.views.MapViewRotateGestureDetectorListener
+
+
+
+<div class="description">
+
+
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.OnRotateGestureListener.html" title="interface in com.almeros.android.multitouch">RotateGestureDetector.OnRotateGestureListener</a></dd>
+</dl>
+
+
+<pre>public class <span class="strong">MapViewRotateGestureDetectorListener</span>
+extends java.lang.Object
+implements <a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.OnRotateGestureListener.html" title="interface in com.almeros.android.multitouch">RotateGestureDetector.OnRotateGestureListener</a></pre>
+<div class="block">A custom rotate gesture detector that processes gesture events and dispatches them
+ to the map's overlay system.</div>
+
+
+</div>
+<div class="summary">
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</code>
+<div class="block">Bind a new gesture detector to a map</div>
+</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotategesturedetector" title="class in com.almeros.android.multitouch">RotateGestureDetector</a>&nbsp;detector)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotategesturedetector" title="class in com.almeros.android.multitouch">RotateGestureDetector</a>&nbsp;detector)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/rotategesturedetector" title="class in com.almeros.android.multitouch">RotateGestureDetector</a>&nbsp;detector)</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="MapViewRotateGestureDetectorListener(com.mapbox.mapboxsdk.views.MapView)">
+<!--   -->
+</a>
+
+
+<h4>MapViewRotateGestureDetectorListener</h4>
+<pre>public&nbsp;MapViewRotateGestureDetectorListener(<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</pre>
+<div class="block">Bind a new gesture detector to a map</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>mv</code> - a map view</dd></dl>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="onRotate(com.almeros.android.multitouch.RotateGestureDetector)">
+<!--   -->
+</a>
+
+
+<h4>onRotate</h4>
+<pre>public&nbsp;boolean&nbsp;onRotate(<a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.html" title="class in com.almeros.android.multitouch">RotateGestureDetector</a>&nbsp;detector)</pre>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.OnRotateGestureListener.html#onRotate(com.almeros.android.multitouch.RotateGestureDetector)">onRotate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.OnRotateGestureListener.html" title="interface in com.almeros.android.multitouch">RotateGestureDetector.OnRotateGestureListener</a></code></dd>
+</dl>
+
+
+<a name="onRotateBegin(com.almeros.android.multitouch.RotateGestureDetector)">
+<!--   -->
+</a>
+
+
+<h4>onRotateBegin</h4>
+<pre>public&nbsp;boolean&nbsp;onRotateBegin(<a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.html" title="class in com.almeros.android.multitouch">RotateGestureDetector</a>&nbsp;detector)</pre>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.OnRotateGestureListener.html#onRotateBegin(com.almeros.android.multitouch.RotateGestureDetector)">onRotateBegin</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.OnRotateGestureListener.html" title="interface in com.almeros.android.multitouch">RotateGestureDetector.OnRotateGestureListener</a></code></dd>
+</dl>
+
+
+<a name="onRotateEnd(com.almeros.android.multitouch.RotateGestureDetector)">
+<!--   -->
+</a>
+
+
+<h4>onRotateEnd</h4>
+<pre>public&nbsp;void&nbsp;onRotateEnd(<a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.html" title="class in com.almeros.android.multitouch">RotateGestureDetector</a>&nbsp;detector)</pre>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.OnRotateGestureListener.html#onRotateEnd(com.almeros.android.multitouch.RotateGestureDetector)">onRotateEnd</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.OnRotateGestureListener.html" title="interface in com.almeros.android.multitouch">RotateGestureDetector.OnRotateGestureListener</a></code></dd>
+</dl>
 
 
 
@@ -25805,7 +26908,7 @@ extends android.graphics.Paint</pre>
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;android.graphics.Paint</h3>
-<code>ascent, breakText, breakText, breakText, clearShadowLayer, descent, finalize, getAlpha, getColor, getColorFilter, getFillPath, getFlags, getFontMetrics, getFontMetrics, getFontMetricsInt, getFontMetricsInt, getFontSpacing, getHinting, getMaskFilter, getPathEffect, getRasterizer, getShader, getStrokeCap, getStrokeJoin, getStrokeMiter, getStrokeWidth, getStyle, getTextAlign, getTextBounds, getTextBounds, getTextLocale, getTextPath, getTextPath, getTextScaleX, getTextSize, getTextSkewX, getTextWidths, getTextWidths, getTextWidths, getTextWidths, getTypeface, getXfermode, isAntiAlias, isDither, isFakeBoldText, isFilterBitmap, isLinearText, isStrikeThruText, isSubpixelText, isUnderlineText, measureText, measureText, measureText, measureText, reset, set, setAlpha, setAntiAlias, setARGB, setColor, setColorFilter, setDither, setFakeBoldText, setFilterBitmap, setFlags, setHinting, setLinearText, setMaskFilter, setRasterizer, setShader, setShadowLayer, setStrikeThruText, setStrokeCap, setStrokeJoin, setStrokeMiter, setStrokeWidth, setStyle, setSubpixelText, setTextAlign, setTextLocale, setTextScaleX, setTextSize, setTextSkewX, setTypeface, setUnderlineText, setXfermode</code>
+<code>ascent, breakText, breakText, breakText, clearShadowLayer, descent, finalize, getAlpha, getColor, getColorFilter, getFillPath, getFlags, getFontFeatureSettings, getFontMetrics, getFontMetrics, getFontMetricsInt, getFontMetricsInt, getFontSpacing, getHinting, getLetterSpacing, getMaskFilter, getPathEffect, getRasterizer, getShader, getStrokeCap, getStrokeJoin, getStrokeMiter, getStrokeWidth, getStyle, getTextAlign, getTextBounds, getTextBounds, getTextLocale, getTextPath, getTextPath, getTextScaleX, getTextSize, getTextSkewX, getTextWidths, getTextWidths, getTextWidths, getTextWidths, getTypeface, getXfermode, isAntiAlias, isDither, isElegantTextHeight, isFakeBoldText, isFilterBitmap, isLinearText, isStrikeThruText, isSubpixelText, isUnderlineText, measureText, measureText, measureText, measureText, reset, set, setAlpha, setAntiAlias, setARGB, setColor, setColorFilter, setDither, setElegantTextHeight, setFakeBoldText, setFilterBitmap, setFlags, setFontFeatureSettings, setHinting, setLetterSpacing, setLinearText, setMaskFilter, setRasterizer, setShader, setShadowLayer, setStrikeThruText, setStrokeCap, setStrokeJoin, setStrokeMiter, setStrokeWidth, setStyle, setSubpixelText, setTextAlign, setTextLocale, setTextScaleX, setTextSize, setTextSkewX, setTypeface, setUnderlineText, setXfermode</code>
 
 
 <a name="methods_inherited_from_class_java.lang.Object">
@@ -26682,7 +27785,7 @@ implements <a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.ma
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;android.graphics.Canvas</h3>
-<code>clipPath, clipPath, clipRect, clipRect, clipRect, clipRect, drawArc, drawBitmap, drawBitmap, drawBitmap, drawBitmap, drawBitmap, drawBitmapMesh, drawCircle, drawLine, drawLines, drawLines, drawOval, drawPaint, drawPath, drawPicture, drawPoint, drawPoints, drawPoints, drawPosText, drawPosText, drawRect, drawRect, drawRect, drawRoundRect, drawText, drawText, drawText, drawText, drawTextOnPath, drawTextOnPath, drawVertices, getClipBounds, getMatrix, getMaximumBitmapHeight, getMaximumBitmapWidth, isHardwareAccelerated, quickReject, quickReject, quickReject, rotate, saveLayer, saveLayer, saveLayerAlpha, saveLayerAlpha, scale</code>
+<code>clipPath, clipPath, clipRect, clipRect, clipRect, clipRect, drawArc, drawArc, drawBitmap, drawBitmap, drawBitmap, drawBitmap, drawBitmap, drawBitmapMesh, drawCircle, drawLine, drawLines, drawLines, drawOval, drawOval, drawPaint, drawPath, drawPicture, drawPoint, drawPoints, drawPoints, drawPosText, drawPosText, drawRect, drawRect, drawRect, drawRoundRect, drawRoundRect, drawText, drawText, drawText, drawText, drawTextOnPath, drawTextOnPath, drawVertices, getClipBounds, getMatrix, getMaximumBitmapHeight, getMaximumBitmapWidth, isHardwareAccelerated, quickReject, quickReject, quickReject, rotate, saveLayer, saveLayer, saveLayer, saveLayer, saveLayerAlpha, saveLayerAlpha, saveLayerAlpha, saveLayerAlpha, scale</code>
 
 
 <a name="methods_inherited_from_class_java.lang.Object">
@@ -28802,7 +29905,7 @@ extends android.graphics.Path</pre>
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;android.graphics.Path</h3>
-<code>addArc, addCircle, addOval, addRect, addRect, addRoundRect, addRoundRect, arcTo, arcTo, computeBounds, cubicTo, isRect, lineTo, moveTo, op, op, quadTo, setLastPoint</code>
+<code>addArc, addArc, addCircle, addOval, addOval, addRect, addRect, addRoundRect, addRoundRect, addRoundRect, addRoundRect, arcTo, arcTo, arcTo, computeBounds, cubicTo, isConvex, isRect, lineTo, moveTo, op, op, quadTo, setLastPoint</code>
 
 
 <a name="methods_inherited_from_class_java.lang.Object">
@@ -29457,7 +30560,7 @@ extends android.view.View</pre>
 <!--   -->
 </a>
 <h3>Fields inherited from class&nbsp;android.view.View</h3>
-<code>ACCESSIBILITY_LIVE_REGION_ASSERTIVE, ACCESSIBILITY_LIVE_REGION_NONE, ACCESSIBILITY_LIVE_REGION_POLITE, ALPHA, DRAWING_CACHE_QUALITY_AUTO, DRAWING_CACHE_QUALITY_HIGH, DRAWING_CACHE_QUALITY_LOW, EMPTY_STATE_SET, ENABLED_FOCUSED_SELECTED_STATE_SET, ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, ENABLED_FOCUSED_STATE_SET, ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET, ENABLED_SELECTED_STATE_SET, ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET, ENABLED_STATE_SET, ENABLED_WINDOW_FOCUSED_STATE_SET, FIND_VIEWS_WITH_CONTENT_DESCRIPTION, FIND_VIEWS_WITH_TEXT, FOCUS_BACKWARD, FOCUS_DOWN, FOCUS_FORWARD, FOCUS_LEFT, FOCUS_RIGHT, FOCUS_UP, FOCUSABLES_ALL, FOCUSABLES_TOUCH_MODE, FOCUSED_SELECTED_STATE_SET, FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, FOCUSED_STATE_SET, FOCUSED_WINDOW_FOCUSED_STATE_SET, GONE, HAPTIC_FEEDBACK_ENABLED, IMPORTANT_FOR_ACCESSIBILITY_AUTO, IMPORTANT_FOR_ACCESSIBILITY_NO, IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS, IMPORTANT_FOR_ACCESSIBILITY_YES, INVISIBLE, KEEP_SCREEN_ON, LAYER_TYPE_HARDWARE, LAYER_TYPE_NONE, LAYER_TYPE_SOFTWARE, LAYOUT_DIRECTION_INHERIT, LAYOUT_DIRECTION_LOCALE, LAYOUT_DIRECTION_LTR, LAYOUT_DIRECTION_RTL, MEASURED_HEIGHT_STATE_SHIFT, MEASURED_SIZE_MASK, MEASURED_STATE_MASK, MEASURED_STATE_TOO_SMALL, NO_ID, OVER_SCROLL_ALWAYS, OVER_SCROLL_IF_CONTENT_SCROLLS, OVER_SCROLL_NEVER, PRESSED_ENABLED_FOCUSED_SELECTED_STATE_SET, PRESSED_ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_ENABLED_FOCUSED_STATE_SET, PRESSED_ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET, PRESSED_ENABLED_SELECTED_STATE_SET, PRESSED_ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_ENABLED_STATE_SET, PRESSED_ENABLED_WINDOW_FOCUSED_STATE_SET, PRESSED_FOCUSED_SELECTED_STATE_SET, PRESSED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_FOCUSED_STATE_SET, PRESSED_FOCUSED_WINDOW_FOCUSED_STATE_SET, PRESSED_SELECTED_STATE_SET, PRESSED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_STATE_SET, PRESSED_WINDOW_FOCUSED_STATE_SET, ROTATION, ROTATION_X, ROTATION_Y, SCALE_X, SCALE_Y, SCREEN_STATE_OFF, SCREEN_STATE_ON, SCROLLBAR_POSITION_DEFAULT, SCROLLBAR_POSITION_LEFT, SCROLLBAR_POSITION_RIGHT, SCROLLBARS_INSIDE_INSET, SCROLLBARS_INSIDE_OVERLAY, SCROLLBARS_OUTSIDE_INSET, SCROLLBARS_OUTSIDE_OVERLAY, SELECTED_STATE_SET, SELECTED_WINDOW_FOCUSED_STATE_SET, SOUND_EFFECTS_ENABLED, STATUS_BAR_HIDDEN, STATUS_BAR_VISIBLE, SYSTEM_UI_FLAG_FULLSCREEN, SYSTEM_UI_FLAG_HIDE_NAVIGATION, SYSTEM_UI_FLAG_IMMERSIVE, SYSTEM_UI_FLAG_IMMERSIVE_STICKY, SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN, SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION, SYSTEM_UI_FLAG_LAYOUT_STABLE, SYSTEM_UI_FLAG_LOW_PROFILE, SYSTEM_UI_FLAG_VISIBLE, SYSTEM_UI_LAYOUT_FLAGS, TEXT_ALIGNMENT_CENTER, TEXT_ALIGNMENT_GRAVITY, TEXT_ALIGNMENT_INHERIT, TEXT_ALIGNMENT_TEXT_END, TEXT_ALIGNMENT_TEXT_START, TEXT_ALIGNMENT_VIEW_END, TEXT_ALIGNMENT_VIEW_START, TEXT_DIRECTION_ANY_RTL, TEXT_DIRECTION_FIRST_STRONG, TEXT_DIRECTION_INHERIT, TEXT_DIRECTION_LOCALE, TEXT_DIRECTION_LTR, TEXT_DIRECTION_RTL, TRANSLATION_X, TRANSLATION_Y, VIEW_LOG_TAG, VISIBLE, WINDOW_FOCUSED_STATE_SET, X, Y</code>
+<code>ACCESSIBILITY_LIVE_REGION_ASSERTIVE, ACCESSIBILITY_LIVE_REGION_NONE, ACCESSIBILITY_LIVE_REGION_POLITE, ALPHA, DRAWING_CACHE_QUALITY_AUTO, DRAWING_CACHE_QUALITY_HIGH, DRAWING_CACHE_QUALITY_LOW, EMPTY_STATE_SET, ENABLED_FOCUSED_SELECTED_STATE_SET, ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, ENABLED_FOCUSED_STATE_SET, ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET, ENABLED_SELECTED_STATE_SET, ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET, ENABLED_STATE_SET, ENABLED_WINDOW_FOCUSED_STATE_SET, FIND_VIEWS_WITH_CONTENT_DESCRIPTION, FIND_VIEWS_WITH_TEXT, FOCUS_BACKWARD, FOCUS_DOWN, FOCUS_FORWARD, FOCUS_LEFT, FOCUS_RIGHT, FOCUS_UP, FOCUSABLES_ALL, FOCUSABLES_TOUCH_MODE, FOCUSED_SELECTED_STATE_SET, FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, FOCUSED_STATE_SET, FOCUSED_WINDOW_FOCUSED_STATE_SET, GONE, HAPTIC_FEEDBACK_ENABLED, IMPORTANT_FOR_ACCESSIBILITY_AUTO, IMPORTANT_FOR_ACCESSIBILITY_NO, IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS, IMPORTANT_FOR_ACCESSIBILITY_YES, INVISIBLE, KEEP_SCREEN_ON, LAYER_TYPE_HARDWARE, LAYER_TYPE_NONE, LAYER_TYPE_SOFTWARE, LAYOUT_DIRECTION_INHERIT, LAYOUT_DIRECTION_LOCALE, LAYOUT_DIRECTION_LTR, LAYOUT_DIRECTION_RTL, MEASURED_HEIGHT_STATE_SHIFT, MEASURED_SIZE_MASK, MEASURED_STATE_MASK, MEASURED_STATE_TOO_SMALL, NO_ID, OVER_SCROLL_ALWAYS, OVER_SCROLL_IF_CONTENT_SCROLLS, OVER_SCROLL_NEVER, PRESSED_ENABLED_FOCUSED_SELECTED_STATE_SET, PRESSED_ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_ENABLED_FOCUSED_STATE_SET, PRESSED_ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET, PRESSED_ENABLED_SELECTED_STATE_SET, PRESSED_ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_ENABLED_STATE_SET, PRESSED_ENABLED_WINDOW_FOCUSED_STATE_SET, PRESSED_FOCUSED_SELECTED_STATE_SET, PRESSED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_FOCUSED_STATE_SET, PRESSED_FOCUSED_WINDOW_FOCUSED_STATE_SET, PRESSED_SELECTED_STATE_SET, PRESSED_SELECTED_WINDOW_FOCUSED_STATE_SET, PRESSED_STATE_SET, PRESSED_WINDOW_FOCUSED_STATE_SET, ROTATION, ROTATION_X, ROTATION_Y, SCALE_X, SCALE_Y, SCREEN_STATE_OFF, SCREEN_STATE_ON, SCROLL_AXIS_HORIZONTAL, SCROLL_AXIS_NONE, SCROLL_AXIS_VERTICAL, SCROLLBAR_POSITION_DEFAULT, SCROLLBAR_POSITION_LEFT, SCROLLBAR_POSITION_RIGHT, SCROLLBARS_INSIDE_INSET, SCROLLBARS_INSIDE_OVERLAY, SCROLLBARS_OUTSIDE_INSET, SCROLLBARS_OUTSIDE_OVERLAY, SELECTED_STATE_SET, SELECTED_WINDOW_FOCUSED_STATE_SET, SOUND_EFFECTS_ENABLED, STATUS_BAR_HIDDEN, STATUS_BAR_VISIBLE, SYSTEM_UI_FLAG_FULLSCREEN, SYSTEM_UI_FLAG_HIDE_NAVIGATION, SYSTEM_UI_FLAG_IMMERSIVE, SYSTEM_UI_FLAG_IMMERSIVE_STICKY, SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN, SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION, SYSTEM_UI_FLAG_LAYOUT_STABLE, SYSTEM_UI_FLAG_LOW_PROFILE, SYSTEM_UI_FLAG_VISIBLE, SYSTEM_UI_LAYOUT_FLAGS, TEXT_ALIGNMENT_CENTER, TEXT_ALIGNMENT_GRAVITY, TEXT_ALIGNMENT_INHERIT, TEXT_ALIGNMENT_TEXT_END, TEXT_ALIGNMENT_TEXT_START, TEXT_ALIGNMENT_VIEW_END, TEXT_ALIGNMENT_VIEW_START, TEXT_DIRECTION_ANY_RTL, TEXT_DIRECTION_FIRST_STRONG, TEXT_DIRECTION_INHERIT, TEXT_DIRECTION_LOCALE, TEXT_DIRECTION_LTR, TEXT_DIRECTION_RTL, TRANSLATION_X, TRANSLATION_Y, TRANSLATION_Z, VIEW_LOG_TAG, VISIBLE, WINDOW_FOCUSED_STATE_SET, X, Y, Z</code>
 
 
 
@@ -29501,7 +30604,7 @@ extends android.view.View</pre>
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;android.view.View</h3>
-<code>addChildrenForAccessibility, addFocusables, addFocusables, addOnAttachStateChangeListener, addOnLayoutChangeListener, addTouchables, animate, announceForAccessibility, awakenScrollBars, awakenScrollBars, awakenScrollBars, bringToFront, buildDrawingCache, buildDrawingCache, buildLayer, callOnClick, cancelLongPress, cancelPendingInputEvents, canResolveLayoutDirection, canResolveTextAlignment, canResolveTextDirection, canScrollHorizontally, canScrollVertically, checkInputConnectionProxy, clearAnimation, clearFocus, combineMeasuredStates, computeHorizontalScrollExtent, computeHorizontalScrollOffset, computeHorizontalScrollRange, computeScroll, computeVerticalScrollExtent, computeVerticalScrollOffset, computeVerticalScrollRange, createAccessibilityNodeInfo, createContextMenu, destroyDrawingCache, dispatchApplyWindowInsets, dispatchConfigurationChanged, dispatchDisplayHint, dispatchDragEvent, dispatchDraw, dispatchGenericFocusedEvent, dispatchGenericMotionEvent, dispatchGenericPointerEvent, dispatchHoverEvent, dispatchKeyEvent, dispatchKeyEventPreIme, dispatchKeyShortcutEvent, dispatchPopulateAccessibilityEvent, dispatchRestoreInstanceState, dispatchSaveInstanceState, dispatchSetActivated, dispatchSetPressed, dispatchSetSelected, dispatchSystemUiVisibilityChanged, dispatchTouchEvent, dispatchTrackballEvent, dispatchUnhandledMove, dispatchVisibilityChanged, dispatchWindowFocusChanged, dispatchWindowSystemUiVisiblityChanged, dispatchWindowVisibilityChanged, draw, drawableStateChanged, findFocus, findViewById, findViewsWithText, findViewWithTag, fitSystemWindows, focusSearch, forceLayout, generateViewId, getAccessibilityLiveRegion, getAccessibilityNodeProvider, getAlpha, getAnimation, getApplicationWindowToken, getBackground, getBaseline, getBottom, getBottomFadingEdgeStrength, getBottomPaddingOffset, getCameraDistance, getClipBounds, getContentDescription, getContext, getContextMenuInfo, getDefaultSize, getDisplay, getDrawableState, getDrawingCache, getDrawingCache, getDrawingCacheBackgroundColor, getDrawingCacheQuality, getDrawingRect, getDrawingTime, getFilterTouchesWhenObscured, getFitsSystemWindows, getFocusables, getFocusedRect, getGlobalVisibleRect, getGlobalVisibleRect, getHandler, getHeight, getHitRect, getHorizontalFadingEdgeLength, getHorizontalScrollbarHeight, getId, getImportantForAccessibility, getKeepScreenOn, getKeyDispatcherState, getLabelFor, getLayerType, getLayoutDirection, getLayoutParams, getLeft, getLeftFadingEdgeStrength, getLeftPaddingOffset, getLocalVisibleRect, getLocationInWindow, getLocationOnScreen, getMatrix, getMeasuredHeight, getMeasuredHeightAndState, getMeasuredState, getMeasuredWidth, getMeasuredWidthAndState, getMinimumHeight, getMinimumWidth, getNextFocusDownId, getNextFocusForwardId, getNextFocusLeftId, getNextFocusRightId, getNextFocusUpId, getOnFocusChangeListener, getOverlay, getOverScrollMode, getPaddingBottom, getPaddingEnd, getPaddingLeft, getPaddingRight, getPaddingStart, getPaddingTop, getParent, getParentForAccessibility, getPivotX, getPivotY, getResources, getRight, getRightFadingEdgeStrength, getRightPaddingOffset, getRootView, getRotation, getRotationX, getRotationY, getScaleX, getScaleY, getScrollBarDefaultDelayBeforeFade, getScrollBarFadeDuration, getScrollBarSize, getScrollBarStyle, getScrollX, getScrollY, getSolidColor, getSuggestedMinimumHeight, getSuggestedMinimumWidth, getSystemUiVisibility, getTag, getTag, getTextAlignment, getTextDirection, getTop, getTopFadingEdgeStrength, getTopPaddingOffset, getTouchables, getTouchDelegate, getTranslationX, getTranslationY, getVerticalFadingEdgeLength, getVerticalScrollbarPosition, getVerticalScrollbarWidth, getViewTreeObserver, getVisibility, getWidth, getWindowAttachCount, getWindowId, getWindowSystemUiVisibility, getWindowToken, getWindowVisibility, getWindowVisibleDisplayFrame, getX, getY, hasFocus, hasFocusable, hasOnClickListeners, hasOverlappingRendering, hasTransientState, hasWindowFocus, inflate, initializeFadingEdge, initializeScrollbars, invalidate, invalidate, invalidate, invalidateDrawable, isActivated, isAttachedToWindow, isClickable, isDirty, isDrawingCacheEnabled, isDuplicateParentStateEnabled, isEnabled, isFocusable, isFocusableInTouchMode, isFocused, isHapticFeedbackEnabled, isHardwareAccelerated, isHorizontalFadingEdgeEnabled, isHorizontalScrollBarEnabled, isHovered, isInEditMode, isInLayout, isInTouchMode, isLaidOut, isLayoutDirectionResolved, isLayoutRequested, isLongClickable, isOpaque, isPaddingOffsetRequired, isPaddingRelative, isPressed, isSaveEnabled, isSaveFromParentEnabled, isScrollbarFadingEnabled, isScrollContainer, isSelected, isShown, isSoundEffectsEnabled, isTextAlignmentResolved, isTextDirectionResolved, isVerticalFadingEdgeEnabled, isVerticalScrollBarEnabled, jumpDrawablesToCurrentState, layout, measure, mergeDrawableStates, offsetLeftAndRight, offsetTopAndBottom, onAnimationEnd, onAnimationStart, onApplyWindowInsets, onAttachedToWindow, onCancelPendingInputEvents, onCheckIsTextEditor, onConfigurationChanged, onCreateContextMenu, onCreateDrawableState, onCreateInputConnection, onDetachedFromWindow, onDisplayHint, onDragEvent, onDrawScrollBars, onFilterTouchEventForSecurity, onFinishInflate, onFinishTemporaryDetach, onFocusChanged, onGenericMotionEvent, onHoverChanged, onHoverEvent, onInitializeAccessibilityEvent, onInitializeAccessibilityNodeInfo, onKeyDown, onKeyLongPress, onKeyMultiple, onKeyPreIme, onKeyShortcut, onKeyUp, onLayout, onMeasure, onOverScrolled, onPopulateAccessibilityEvent, onRestoreInstanceState, onRtlPropertiesChanged, onSaveInstanceState, onScreenStateChanged, onScrollChanged, onSetAlpha, onSizeChanged, onStartTemporaryDetach, onTouchEvent, onTrackballEvent, onVisibilityChanged, onWindowFocusChanged, onWindowSystemUiVisibilityChanged, onWindowVisibilityChanged, overScrollBy, performAccessibilityAction, performClick, performHapticFeedback, performHapticFeedback, performLongClick, playSoundEffect, post, postDelayed, postInvalidate, postInvalidate, postInvalidateDelayed, postInvalidateDelayed, postInvalidateOnAnimation, postInvalidateOnAnimation, postOnAnimation, postOnAnimationDelayed, refreshDrawableState, removeCallbacks, removeOnAttachStateChangeListener, removeOnLayoutChangeListener, requestApplyInsets, requestFitSystemWindows, requestFocus, requestFocus, requestFocus, requestFocusFromTouch, requestLayout, requestRectangleOnScreen, requestRectangleOnScreen, resolveSize, resolveSizeAndState, restoreHierarchyState, saveHierarchyState, scheduleDrawable, scrollBy, scrollTo, sendAccessibilityEvent, sendAccessibilityEventUnchecked, setAccessibilityDelegate, setAccessibilityLiveRegion, setActivated, setAlpha, setAnimation, setBackground, setBackgroundColor, setBackgroundDrawable, setBackgroundResource, setBottom, setCameraDistance, setClickable, setClipBounds, setContentDescription, setDrawingCacheBackgroundColor, setDrawingCacheEnabled, setDrawingCacheQuality, setDuplicateParentStateEnabled, setEnabled, setFadingEdgeLength, setFilterTouchesWhenObscured, setFitsSystemWindows, setFocusable, setFocusableInTouchMode, setHapticFeedbackEnabled, setHasTransientState, setHorizontalFadingEdgeEnabled, setHorizontalScrollBarEnabled, setHovered, setId, setImportantForAccessibility, setKeepScreenOn, setLabelFor, setLayerPaint, setLayerType, setLayoutDirection, setLayoutParams, setLeft, setLongClickable, setMeasuredDimension, setMinimumHeight, setMinimumWidth, setNextFocusDownId, setNextFocusForwardId, setNextFocusLeftId, setNextFocusRightId, setNextFocusUpId, setOnApplyWindowInsetsListener, setOnClickListener, setOnCreateContextMenuListener, setOnDragListener, setOnFocusChangeListener, setOnGenericMotionListener, setOnHoverListener, setOnKeyListener, setOnLongClickListener, setOnSystemUiVisibilityChangeListener, setOnTouchListener, setOverScrollMode, setPadding, setPaddingRelative, setPivotX, setPivotY, setPressed, setRight, setRotation, setRotationX, setRotationY, setSaveEnabled, setSaveFromParentEnabled, setScaleX, setScaleY, setScrollBarDefaultDelayBeforeFade, setScrollBarFadeDuration, setScrollbarFadingEnabled, setScrollBarSize, setScrollBarStyle, setScrollContainer, setScrollX, setScrollY, setSelected, setSoundEffectsEnabled, setSystemUiVisibility, setTag, setTag, setTextAlignment, setTextDirection, setTop, setTouchDelegate, setTranslationX, setTranslationY, setVerticalFadingEdgeEnabled, setVerticalScrollBarEnabled, setVerticalScrollbarPosition, setVisibility, setWillNotCacheDrawing, setWillNotDraw, setX, setY, showContextMenu, startActionMode, startAnimation, startDrag, toString, unscheduleDrawable, unscheduleDrawable, verifyDrawable, willNotCacheDrawing, willNotDraw</code>
+<code>addChildrenForAccessibility, addFocusables, addFocusables, addOnAttachStateChangeListener, addOnLayoutChangeListener, addTouchables, animate, announceForAccessibility, awakenScrollBars, awakenScrollBars, awakenScrollBars, bringToFront, buildDrawingCache, buildDrawingCache, buildLayer, callOnClick, cancelLongPress, cancelPendingInputEvents, canResolveLayoutDirection, canResolveTextAlignment, canResolveTextDirection, canScrollHorizontally, canScrollVertically, checkInputConnectionProxy, clearAnimation, clearFocus, combineMeasuredStates, computeHorizontalScrollExtent, computeHorizontalScrollOffset, computeHorizontalScrollRange, computeScroll, computeSystemWindowInsets, computeVerticalScrollExtent, computeVerticalScrollOffset, computeVerticalScrollRange, createAccessibilityNodeInfo, createContextMenu, destroyDrawingCache, dispatchApplyWindowInsets, dispatchConfigurationChanged, dispatchDisplayHint, dispatchDragEvent, dispatchDraw, dispatchGenericFocusedEvent, dispatchGenericMotionEvent, dispatchGenericPointerEvent, dispatchHoverEvent, dispatchKeyEvent, dispatchKeyEventPreIme, dispatchKeyShortcutEvent, dispatchNestedFling, dispatchNestedPreFling, dispatchNestedPreScroll, dispatchNestedScroll, dispatchPopulateAccessibilityEvent, dispatchRestoreInstanceState, dispatchSaveInstanceState, dispatchSetActivated, dispatchSetPressed, dispatchSetSelected, dispatchSystemUiVisibilityChanged, dispatchTouchEvent, dispatchTrackballEvent, dispatchUnhandledMove, dispatchVisibilityChanged, dispatchWindowFocusChanged, dispatchWindowSystemUiVisiblityChanged, dispatchWindowVisibilityChanged, draw, drawableHotspotChanged, drawableStateChanged, findFocus, findViewById, findViewsWithText, findViewWithTag, fitSystemWindows, focusSearch, forceLayout, generateViewId, getAccessibilityLiveRegion, getAccessibilityNodeProvider, getAlpha, getAnimation, getApplicationWindowToken, getBackground, getBackgroundTintList, getBackgroundTintMode, getBaseline, getBottom, getBottomFadingEdgeStrength, getBottomPaddingOffset, getCameraDistance, getClipBounds, getClipToOutline, getContentDescription, getContext, getContextMenuInfo, getDefaultSize, getDisplay, getDrawableState, getDrawingCache, getDrawingCache, getDrawingCacheBackgroundColor, getDrawingCacheQuality, getDrawingRect, getDrawingTime, getElevation, getFilterTouchesWhenObscured, getFitsSystemWindows, getFocusables, getFocusedRect, getGlobalVisibleRect, getGlobalVisibleRect, getHandler, getHeight, getHitRect, getHorizontalFadingEdgeLength, getHorizontalScrollbarHeight, getId, getImportantForAccessibility, getKeepScreenOn, getKeyDispatcherState, getLabelFor, getLayerType, getLayoutDirection, getLayoutParams, getLeft, getLeftFadingEdgeStrength, getLeftPaddingOffset, getLocalVisibleRect, getLocationInWindow, getLocationOnScreen, getMatrix, getMeasuredHeight, getMeasuredHeightAndState, getMeasuredState, getMeasuredWidth, getMeasuredWidthAndState, getMinimumHeight, getMinimumWidth, getNextFocusDownId, getNextFocusForwardId, getNextFocusLeftId, getNextFocusRightId, getNextFocusUpId, getOnFocusChangeListener, getOutlineProvider, getOverlay, getOverScrollMode, getPaddingBottom, getPaddingEnd, getPaddingLeft, getPaddingRight, getPaddingStart, getPaddingTop, getParent, getParentForAccessibility, getPivotX, getPivotY, getResources, getRight, getRightFadingEdgeStrength, getRightPaddingOffset, getRootView, getRotation, getRotationX, getRotationY, getScaleX, getScaleY, getScrollBarDefaultDelayBeforeFade, getScrollBarFadeDuration, getScrollBarSize, getScrollBarStyle, getScrollX, getScrollY, getSolidColor, getStateListAnimator, getSuggestedMinimumHeight, getSuggestedMinimumWidth, getSystemUiVisibility, getTag, getTag, getTextAlignment, getTextDirection, getTop, getTopFadingEdgeStrength, getTopPaddingOffset, getTouchables, getTouchDelegate, getTransitionName, getTranslationX, getTranslationY, getTranslationZ, getVerticalFadingEdgeLength, getVerticalScrollbarPosition, getVerticalScrollbarWidth, getViewTreeObserver, getVisibility, getWidth, getWindowAttachCount, getWindowId, getWindowSystemUiVisibility, getWindowToken, getWindowVisibility, getWindowVisibleDisplayFrame, getX, getY, getZ, hasFocus, hasFocusable, hasNestedScrollingParent, hasOnClickListeners, hasOverlappingRendering, hasTransientState, hasWindowFocus, inflate, invalidate, invalidate, invalidate, invalidateDrawable, invalidateOutline, isAccessibilityFocused, isActivated, isAttachedToWindow, isClickable, isDirty, isDrawingCacheEnabled, isDuplicateParentStateEnabled, isEnabled, isFocusable, isFocusableInTouchMode, isFocused, isHapticFeedbackEnabled, isHardwareAccelerated, isHorizontalFadingEdgeEnabled, isHorizontalScrollBarEnabled, isHovered, isImportantForAccessibility, isInEditMode, isInLayout, isInTouchMode, isLaidOut, isLayoutDirectionResolved, isLayoutRequested, isLongClickable, isNestedScrollingEnabled, isOpaque, isPaddingOffsetRequired, isPaddingRelative, isPressed, isSaveEnabled, isSaveFromParentEnabled, isScrollbarFadingEnabled, isScrollContainer, isSelected, isShown, isSoundEffectsEnabled, isTextAlignmentResolved, isTextDirectionResolved, isVerticalFadingEdgeEnabled, isVerticalScrollBarEnabled, jumpDrawablesToCurrentState, layout, measure, mergeDrawableStates, offsetLeftAndRight, offsetTopAndBottom, onAnimationEnd, onAnimationStart, onApplyWindowInsets, onAttachedToWindow, onCancelPendingInputEvents, onCheckIsTextEditor, onConfigurationChanged, onCreateContextMenu, onCreateDrawableState, onCreateInputConnection, onDetachedFromWindow, onDisplayHint, onDragEvent, onDrawScrollBars, onFilterTouchEventForSecurity, onFinishInflate, onFinishTemporaryDetach, onFocusChanged, onGenericMotionEvent, onHoverChanged, onHoverEvent, onInitializeAccessibilityEvent, onInitializeAccessibilityNodeInfo, onKeyDown, onKeyLongPress, onKeyMultiple, onKeyPreIme, onKeyShortcut, onKeyUp, onLayout, onMeasure, onOverScrolled, onPopulateAccessibilityEvent, onRestoreInstanceState, onRtlPropertiesChanged, onSaveInstanceState, onScreenStateChanged, onScrollChanged, onSetAlpha, onSizeChanged, onStartTemporaryDetach, onTouchEvent, onTrackballEvent, onVisibilityChanged, onWindowFocusChanged, onWindowSystemUiVisibilityChanged, onWindowVisibilityChanged, overScrollBy, performAccessibilityAction, performClick, performHapticFeedback, performHapticFeedback, performLongClick, playSoundEffect, post, postDelayed, postInvalidate, postInvalidate, postInvalidateDelayed, postInvalidateDelayed, postInvalidateOnAnimation, postInvalidateOnAnimation, postOnAnimation, postOnAnimationDelayed, refreshDrawableState, removeCallbacks, removeOnAttachStateChangeListener, removeOnLayoutChangeListener, requestApplyInsets, requestFitSystemWindows, requestFocus, requestFocus, requestFocus, requestFocusFromTouch, requestLayout, requestRectangleOnScreen, requestRectangleOnScreen, requestUnbufferedDispatch, resolveSize, resolveSizeAndState, restoreHierarchyState, saveHierarchyState, scheduleDrawable, scrollBy, scrollTo, sendAccessibilityEvent, sendAccessibilityEventUnchecked, setAccessibilityDelegate, setAccessibilityLiveRegion, setActivated, setAlpha, setAnimation, setBackground, setBackgroundColor, setBackgroundDrawable, setBackgroundResource, setBackgroundTintList, setBackgroundTintMode, setBottom, setCameraDistance, setClickable, setClipBounds, setClipToOutline, setContentDescription, setDrawingCacheBackgroundColor, setDrawingCacheEnabled, setDrawingCacheQuality, setDuplicateParentStateEnabled, setElevation, setEnabled, setFadingEdgeLength, setFilterTouchesWhenObscured, setFitsSystemWindows, setFocusable, setFocusableInTouchMode, setHapticFeedbackEnabled, setHasTransientState, setHorizontalFadingEdgeEnabled, setHorizontalScrollBarEnabled, setHovered, setId, setImportantForAccessibility, setKeepScreenOn, setLabelFor, setLayerPaint, setLayerType, setLayoutDirection, setLayoutParams, setLeft, setLongClickable, setMeasuredDimension, setMinimumHeight, setMinimumWidth, setNestedScrollingEnabled, setNextFocusDownId, setNextFocusForwardId, setNextFocusLeftId, setNextFocusRightId, setNextFocusUpId, setOnApplyWindowInsetsListener, setOnClickListener, setOnCreateContextMenuListener, setOnDragListener, setOnFocusChangeListener, setOnGenericMotionListener, setOnHoverListener, setOnKeyListener, setOnLongClickListener, setOnSystemUiVisibilityChangeListener, setOnTouchListener, setOutlineProvider, setOverScrollMode, setPadding, setPaddingRelative, setPivotX, setPivotY, setPressed, setRight, setRotation, setRotationX, setRotationY, setSaveEnabled, setSaveFromParentEnabled, setScaleX, setScaleY, setScrollBarDefaultDelayBeforeFade, setScrollBarFadeDuration, setScrollbarFadingEnabled, setScrollBarSize, setScrollBarStyle, setScrollContainer, setScrollX, setScrollY, setSelected, setSoundEffectsEnabled, setStateListAnimator, setSystemUiVisibility, setTag, setTag, setTextAlignment, setTextDirection, setTop, setTouchDelegate, setTransitionName, setTranslationX, setTranslationY, setTranslationZ, setVerticalFadingEdgeEnabled, setVerticalScrollBarEnabled, setVerticalScrollbarPosition, setVisibility, setWillNotCacheDrawing, setWillNotDraw, setX, setY, setZ, showContextMenu, startActionMode, startAnimation, startDrag, startNestedScroll, stopNestedScroll, toString, unscheduleDrawable, unscheduleDrawable, verifyDrawable, willNotCacheDrawing, willNotDraw</code>
 
 
 <a name="methods_inherited_from_class_java.lang.Object">
@@ -29965,6 +31068,69 @@ extends android.view.View</pre>
 </div>
 <!-- ========= END OF CLASS DATA ========= -->
 <!-- ======= START OF BOTTOM NAVBAR ====== -->
+ <h2>OnMapOrientationChangeListener</h2>
+ <div class="contentContainer">
+<div class="description">
+
+
+
+
+<pre>public interface <span class="strong">OnMapOrientationChangeListener</span></pre>
+
+
+</div>
+<div class="summary">
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/onmaporientationchangelistener#onmaporientationchange(float)">onMapOrientationChange</a></strong>(float&nbsp;angle)</code>&nbsp;</td>
+</tr>
+</table>
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="onMapOrientationChange(float)">
+<!--   -->
+</a>
+
+
+<h4>onMapOrientationChange</h4>
+<pre>void&nbsp;onMapOrientationChange(float&nbsp;angle)</pre>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>angle</code> - the new map orientation angle</dd></dl>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
  <h2>Projection</h2>
  <div class="contentContainer">
 
@@ -30113,17 +31279,21 @@ implements <a href="{{site.baseurl}}/api/geoconstants" title="interface in com.m
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#gettilesize()">getTileSize</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>android.graphics.RectF</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#gettransformscreenrect()">getTransformScreenRect</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>float</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#getzoomlevel()">getZoomLevel</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>double</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#groundresolution(double)">groundResolution</a></strong>(double&nbsp;latitude)</code>
 <div class="block">Determines the ground resolution (in meters per pixel) at a specified latitude and level of
  detail.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static double</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#groundresolution(double, float)">groundResolution</a></strong>(double&nbsp;latitude,
                 float&nbsp;levelOfDetail)</code>
@@ -30131,7 +31301,7 @@ implements <a href="{{site.baseurl}}/api/geoconstants" title="interface in com.m
  detail.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static android.graphics.PointF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#latlongtopixelxy(double, double, float, android.graphics.pointf)">latLongToPixelXY</a></strong>(double&nbsp;latitude,
                 double&nbsp;longitude,
@@ -30141,7 +31311,7 @@ implements <a href="{{site.baseurl}}/api/geoconstants" title="interface in com.m
  coordinates at a specified level of detail.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static double</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#mapscale(double, int, int)">mapScale</a></strong>(double&nbsp;latitude,
         int&nbsp;levelOfDetail,
@@ -30149,13 +31319,13 @@ implements <a href="{{site.baseurl}}/api/geoconstants" title="interface in com.m
 <div class="block">Determines the map scale at a specified latitude, level of detail, and screen resolution.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static int</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#mapsize(float)">mapSize</a></strong>(float&nbsp;levelOfDetail)</code>
 <div class="block">Determines the map width and height (in pixels) at a specified level of detail.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#pixelxytolatlong(double, double)">pixelXYToLatLong</a></strong>(double&nbsp;pixelX,
                 double&nbsp;pixelY)</code>
@@ -30163,7 +31333,7 @@ implements <a href="{{site.baseurl}}/api/geoconstants" title="interface in com.m
  latitude/longitude WGS-84 coordinates (in degrees).</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#pixelxytolatlong(double, double, float)">pixelXYToLatLong</a></strong>(double&nbsp;pixelX,
                 double&nbsp;pixelY,
@@ -30172,7 +31342,7 @@ implements <a href="{{site.baseurl}}/api/geoconstants" title="interface in com.m
  latitude/longitude WGS-84 coordinates (in degrees).</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static android.graphics.Point</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#pixelxytotilexy(int, int, android.graphics.point)">pixelXYToTileXY</a></strong>(int&nbsp;pixelX,
                int&nbsp;pixelY,
@@ -30181,19 +31351,19 @@ implements <a href="{{site.baseurl}}/api/geoconstants" title="interface in com.m
  pixel.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#rotatepoints(float[])">rotatePoints</a></strong>(float[]&nbsp;pRotatePoints)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#rotaterect(android.graphics.rectf)">rotateRect</a></strong>(android.graphics.RectF&nbsp;rect)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#settilesize(int)">setTileSize</a></strong>(int&nbsp;tileSize)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static android.graphics.Point</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#tilexytopixelxy(int, int, android.graphics.point)">tileXYToPixelXY</a></strong>(int&nbsp;tileX,
                int&nbsp;tileY,
@@ -30202,13 +31372,13 @@ implements <a href="{{site.baseurl}}/api/geoconstants" title="interface in com.m
  specified tile.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static android.graphics.RectF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;box,
            float&nbsp;zoom,
            android.graphics.RectF&nbsp;reuse)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static android.graphics.PointF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#tomappixels(double, double, float, double, double, android.graphics.pointf)">toMapPixels</a></strong>(double&nbsp;latitude,
            double&nbsp;longitude,
@@ -30217,20 +31387,20 @@ implements <a href="{{site.baseurl}}/api/geoconstants" title="interface in com.m
            double&nbsp;centerY,
            android.graphics.PointF&nbsp;reuse)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>android.graphics.PointF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#tomappixels(double, double, android.graphics.pointf)">toMapPixels</a></strong>(double&nbsp;latitude,
            double&nbsp;longitude,
            android.graphics.PointF&nbsp;reuse)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>android.graphics.PointF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;in,
            android.graphics.PointF&nbsp;reuse)</code>
 <div class="block">Converts a LatLng to its <I>Map coordinates</I> in pixels for the current zoom.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static android.graphics.PointF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#tomappixelsprojected(double, double, android.graphics.pointf)">toMapPixelsProjected</a></strong>(double&nbsp;latitude,
                     double&nbsp;longitude,
@@ -30238,21 +31408,21 @@ implements <a href="{{site.baseurl}}/api/geoconstants" title="interface in com.m
 <div class="block">Performs only the first computationally heavy part of the projection.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>android.graphics.PointF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#tomappixelstranslated(android.graphics.pointf, android.graphics.pointf)">toMapPixelsTranslated</a></strong>(android.graphics.PointF&nbsp;in,
                      android.graphics.PointF&nbsp;reuse)</code>
 <div class="block">Performs the second computationally light part of the projection.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>android.graphics.PointF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;in,
         android.graphics.PointF&nbsp;reuse)</code>
 <div class="block">Converts a LatLng to its <I>screen coordinates</I>.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>android.graphics.PointF</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/projection#topixels(android.graphics.pointf, android.graphics.pointf)">toPixels</a></strong>(android.graphics.PointF&nbsp;mapPos,
         android.graphics.PointF&nbsp;reuse)</code>
@@ -30349,6 +31519,15 @@ implements <a href="{{site.baseurl}}/api/geoconstants" title="interface in com.m
 
 <h4>getScreenRect</h4>
 <pre>public&nbsp;android.graphics.Rect&nbsp;getScreenRect()</pre>
+
+
+<a name="getTransformScreenRect()">
+<!--   -->
+</a>
+
+
+<h4>getTransformScreenRect</h4>
+<pre>public&nbsp;android.graphics.RectF&nbsp;getTransformScreenRect()</pre>
 
 
 <a name="getIntrinsicScreenRect()">

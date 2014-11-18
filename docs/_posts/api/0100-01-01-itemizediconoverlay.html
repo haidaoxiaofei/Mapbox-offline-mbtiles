@@ -177,31 +177,35 @@ extends <a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbo
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#getdrawnitemslimit()">getDrawnItemsLimit</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#onlongpress(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onLongPress</a></strong>(android.view.MotionEvent&nbsp;event,
            <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
 <div class="block">By default does nothing (<code>return false</code>).</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>protected boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#onlongpresshelper(int, com.mapbox.mapboxsdk.overlay.marker)">onLongPressHelper</a></strong>(int&nbsp;index,
                  <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#onsingletapconfirmed(android.view.motionevent, com.mapbox.mapboxsdk.views.mapview)">onSingleTapConfirmed</a></strong>(android.view.MotionEvent&nbsp;event,
                     <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>
 <div class="block">Each of these methods performs a item sensitive check.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>protected boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#onsingletapuphelper(int, com.mapbox.mapboxsdk.overlay.marker, com.mapbox.mapboxsdk.views.mapview)">onSingleTapUpHelper</a></strong>(int&nbsp;index,
                    <a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item,
                    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#onsnaptoitem(int, int, android.graphics.point, com.mapbox.mapboxsdk.views.mapview)">onSnapToItem</a></strong>(int&nbsp;pX,
             int&nbsp;pY,
@@ -211,31 +215,31 @@ extends <a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbo
  current action (e.g.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#removeallitems()">removeAllItems</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#removeallitems(boolean)">removeAllItems</a></strong>(boolean&nbsp;withPopulate)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a></code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#removeitem(int)">removeItem</a></strong>(int&nbsp;position)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#removeitems(java.util.list)">removeItems</a></strong>(java.util.List&nbsp;items)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#setdrawnitemslimit(int)">setDrawnItemsLimit</a></strong>(int&nbsp;aLimit)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizediconoverlay#size()">size</a></strong>()</code>
 <div class="block">The number of items in this overlay.</div>
@@ -428,6 +432,15 @@ extends <a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbo
 
 <h4>removeAllItems</h4>
 <pre>public&nbsp;void&nbsp;removeAllItems(boolean&nbsp;withPopulate)</pre>
+
+
+<a name="onItemRemoved(com.mapbox.mapboxsdk.overlay.Marker)">
+<!--   -->
+</a>
+
+
+<h4>onItemRemoved</h4>
+<pre>protected&nbsp;void&nbsp;onItemRemoved(<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;item)</pre>
 
 
 <a name="removeItem(com.mapbox.mapboxsdk.overlay.Marker)">

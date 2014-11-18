@@ -56,24 +56,24 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>static Cache</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#getcache(java.io.file, int)">getCache</a></strong>(java.io.File&nbsp;cacheDir,
+        int&nbsp;maxSize)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>static java.net.HttpURLConnection</code></td>
 <td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#gethttpurlconnection(java.net.url)">getHttpURLConnection</a></strong>(java.net.URL&nbsp;url)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<td class="colFirst"><code>static java.net.HttpURLConnection</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#gethttpurlconnection(java.net.url, java.net.responsecache)">getHttpURLConnection</a></strong>(java.net.URL&nbsp;url,
-                    java.net.ResponseCache&nbsp;cache)</code>&nbsp;</td>
-</tr>
 <tr class="altColor">
 <td class="colFirst"><code>static java.net.HttpURLConnection</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#gethttpurlconnection(java.net.url, java.net.responsecache, javax.net.ssl.sslsocketfactory)">getHttpURLConnection</a></strong>(java.net.URL&nbsp;url,
-                    java.net.ResponseCache&nbsp;cache,
-                    javax.net.ssl.SSLSocketFactory&nbsp;sslSocketFactory)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#gethttpurlconnection(java.net.url, cache)">getHttpURLConnection</a></strong>(java.net.URL&nbsp;url,
+                    Cache&nbsp;cache)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>static java.net.ResponseCache</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#getresponsecache(java.io.file, int)">getResponseCache</a></strong>(java.io.File&nbsp;cacheDir,
-                int&nbsp;maxSize)</code>&nbsp;</td>
+<td class="colFirst"><code>static java.net.HttpURLConnection</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/networkutils#gethttpurlconnection(java.net.url, cache, javax.net.ssl.sslsocketfactory)">getHttpURLConnection</a></strong>(java.net.URL&nbsp;url,
+                    Cache&nbsp;cache,
+                    javax.net.ssl.SSLSocketFactory&nbsp;sslSocketFactory)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
@@ -136,36 +136,36 @@ extends java.lang.Object</pre>
 <pre>public static&nbsp;java.net.HttpURLConnection&nbsp;getHttpURLConnection(java.net.URL&nbsp;url)</pre>
 
 
-<a name="getHttpURLConnection(java.net.URL, java.net.ResponseCache)">
+<a name="getHttpURLConnection(java.net.URL, Cache)">
 <!--   -->
 </a>
 
 
 <h4>getHttpURLConnection</h4>
 <pre>public static&nbsp;java.net.HttpURLConnection&nbsp;getHttpURLConnection(java.net.URL&nbsp;url,
-                                              java.net.ResponseCache&nbsp;cache)</pre>
+                                              Cache&nbsp;cache)</pre>
 
 
-<a name="getHttpURLConnection(java.net.URL, java.net.ResponseCache, javax.net.ssl.SSLSocketFactory)">
+<a name="getHttpURLConnection(java.net.URL, Cache, javax.net.ssl.SSLSocketFactory)">
 <!--   -->
 </a>
 
 
 <h4>getHttpURLConnection</h4>
 <pre>public static&nbsp;java.net.HttpURLConnection&nbsp;getHttpURLConnection(java.net.URL&nbsp;url,
-                                              java.net.ResponseCache&nbsp;cache,
+                                              Cache&nbsp;cache,
                                               javax.net.ssl.SSLSocketFactory&nbsp;sslSocketFactory)</pre>
 
 
-<a name="getResponseCache(java.io.File, int)">
+<a name="getCache(java.io.File, int)">
 <!--   -->
 </a>
 
 
-<h4>getResponseCache</h4>
-<pre>public static&nbsp;java.net.ResponseCache&nbsp;getResponseCache(java.io.File&nbsp;cacheDir,
-                                      int&nbsp;maxSize)
-                                               throws java.io.IOException</pre>
+<h4>getCache</h4>
+<pre>public static&nbsp;Cache&nbsp;getCache(java.io.File&nbsp;cacheDir,
+             int&nbsp;maxSize)
+                      throws java.io.IOException</pre>
 <dl><dt><span class="strong">Throws:</span></dt>
 <dd><code>java.io.IOException</code></dd></dl>
 
