@@ -2,7 +2,7 @@
 layout: api
 title: Mapbox Android SDK 0.5.0
 category: api
---- 
+---
  <h2>ILatLng</h2>
  <div class="contentContainer">
 <div class="description">
@@ -3457,7 +3457,7 @@ the order they are declared</dd></dl>
 <pre>public static&nbsp;<a href="{{site.baseurl}}/api/icon.size" title="enum in com.mapbox.mapboxsdk.overlay">Icon.Size</a>&nbsp;valueOf(java.lang.String&nbsp;name)</pre>
 <div class="block">Returns the enum constant of this type with the specified name.
 The string must match <i>exactly</i> an identifier used to declare an
-enum constant in this type.  (Extraneous whitespace characters are 
+enum constant in this type.  (Extraneous whitespace characters are
 not permitted.)</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>name</code> - the name of the enum constant to be returned.</dd>
 <dt><span class="strong">Returns:</span></dt><dd>the enum constant with the specified name</dd>
@@ -4645,17 +4645,17 @@ implements <a href="{{site.baseurl}}/api/overlay.snappable" title="interface in 
             <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
             boolean&nbsp;shadow)</pre>
 <div class="block">Draw a marker on each of our items. populate() must have been called first.
- 
+
  The marker will be drawn twice for each Item in the Overlay--once in the shadow phase,
  skewed
  and darkened, then again in the non-shadow phase. The bottom-center of the marker will be
  aligned with the geographical coordinates of the Item.
- 
+
  The order of drawing may be changed by overriding the getIndexToDraw(int) method. An item
  may
  provide an alternate marker via its Marker.getMarker(int) method. If that method returns
  null, the default marker is used.
- 
+
  The focused item is always drawn last, which puts it visually on top of the other
  items.</div>
 <dl>
@@ -5458,7 +5458,7 @@ the order they are declared</dd></dl>
 <pre>public static&nbsp;<a href="{{site.baseurl}}/api/marker.hotspotplace" title="enum in com.mapbox.mapboxsdk.overlay">Marker.HotspotPlace</a>&nbsp;valueOf(java.lang.String&nbsp;name)</pre>
 <div class="block">Returns the enum constant of this type with the specified name.
 The string must match <i>exactly</i> an identifier used to declare an
-enum constant in this type.  (Extraneous whitespace characters are 
+enum constant in this type.  (Extraneous whitespace characters are
 not permitted.)</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>name</code> - the name of the enum constant to be returned.</dd>
 <dt><span class="strong">Returns:</span></dt><dd>the enum constant with the specified name</dd>
@@ -5808,7 +5808,7 @@ extends java.lang.Object</pre>
           <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;aMapView,
           boolean&nbsp;panIntoView)</code>
 <div class="block">Populates this tooltip with all item info:
- title and description in any case, 
+ title and description in any case,
  image and sub-description if any.
  and centers the map view on the item if panIntoView is true.</div>
 </td>
@@ -6328,7 +6328,7 @@ extends java.lang.Object</pre>
               <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;aMapView,
               boolean&nbsp;panIntoView)</pre>
 <div class="block">Populates this tooltip with all item info:
- <ul>title and description in any case, 
+ <ul>title and description in any case,
  <ul>image and sub-description if any.
  and centers the map view on the item if panIntoView is true. </div>
 
@@ -9825,7 +9825,7 @@ the order they are declared</dd></dl>
 <pre>public static&nbsp;<a href="{{site.baseurl}}/api/userlocationoverlay.trackingmode" title="enum in com.mapbox.mapboxsdk.overlay">UserLocationOverlay.TrackingMode</a>&nbsp;valueOf(java.lang.String&nbsp;name)</pre>
 <div class="block">Returns the enum constant of this type with the specified name.
 The string must match <i>exactly</i> an identifier used to declare an
-enum constant in this type.  (Extraneous whitespace characters are 
+enum constant in this type.  (Extraneous whitespace characters are
 not permitted.)</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>name</code> - the name of the enum constant to be returned.</dd>
 <dt><span class="strong">Returns:</span></dt><dd>the enum constant with the specified name</dd>
@@ -11669,7 +11669,7 @@ implements <a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in
  <ul>
  determining if a map tile is available,
  notifying the client, via a callback handler
- 
+
  see <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTile</code></a> for an overview of how tiles are served by this provider.</div>
 
 
@@ -21268,7 +21268,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#istmaprotationenabled()">istMapRotationEnabled</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#ismaprotationenabled()">isMapRotationEnabled</a></strong>()</code>
 <div class="block">Gets whether the current map rotation feature is enabled or not
  default: disabled</div>
 </td>
@@ -22700,13 +22700,13 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <dl><dt><span class="strong">Returns:</span></dt><dd>the current angle in degrees.</dd></dl>
 
 
-<a name="istMapRotationEnabled()">
+<a name="isMapRotationEnabled()">
 <!--   -->
 </a>
 
 
-<h4>istMapRotationEnabled</h4>
-<pre>public&nbsp;boolean&nbsp;istMapRotationEnabled()</pre>
+<h4>isMapRotationEnabled</h4>
+<pre>public&nbsp;boolean&nbsp;isMapRotationEnabled()</pre>
 <div class="block">Gets whether the current map rotation feature is enabled or not
  default: disabled</div>
 
@@ -24454,7 +24454,7 @@ implements android.view.ScaleGestureDetector.OnScaleGestureListener</pre>
 
 <pre>public interface <span class="strong">ISafeCanvas</span></pre>
 <div class="block">The ISafeCanvas interface is designed to work Android's issues with large canvases.
- 
+
  The internal representation of canvas coordinates in the Skia graphics library is float. Canvas
  sizes are specified as integers. At high zoom levels, the canvas sizes get to the high end of
  the
@@ -24463,7 +24463,7 @@ implements android.view.ScaleGestureDetector.OnScaleGestureListener</pre>
  as
  the zoom level increases. The issue becomes visibly noticeable around zoom level 18 which is
  commonly available amongst most online map tile providers.
- 
+
  To prevent this issue we can't pass large values to the native Android methods. To accomplish
  that, we must intercept all values being passed to the canvas draw methods and translate them to
  a coordinate system where the origin (0,0) is the center of the screen. We then draw them to a
@@ -25246,7 +25246,7 @@ implements android.view.ScaleGestureDetector.OnScaleGestureListener</pre>
 <pre>void&nbsp;setBitmap(android.graphics.Bitmap&nbsp;bitmap)</pre>
 <div class="block">Specify a bitmap for the canvas to draw into. As a side-effect, also updates the canvas's
  target density to match that of the bitmap.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>bitmap</code> - Specifies a mutable bitmap for the canvas to draw into.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)"><code>setDensity(int)</code></a>, 
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>bitmap</code> - Specifies a mutable bitmap for the canvas to draw into.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)"><code>setDensity(int)</code></a>,
 <a href="{{site.baseurl}}/api/isafecanvas#getdensity()"><code>getDensity()</code></a></dd></dl>
 
 
@@ -25296,7 +25296,7 @@ implements android.view.ScaleGestureDetector.OnScaleGestureListener</pre>
  its backing bitmap, or <code>Bitmap.DENSITY_NONE</code> if there is not one.
  </p></div>
 <dl><dt><span class="strong">Returns:</span></dt><dd>Returns the current target density of the canvas, which is used to determine the
- scaling factor when drawing a bitmap into it.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)"><code>setDensity(int)</code></a>, 
+ scaling factor when drawing a bitmap into it.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)"><code>setDensity(int)</code></a>,
 <code>Bitmap.getDensity()</code></dd></dl>
 
 
@@ -25313,7 +25313,7 @@ implements android.view.ScaleGestureDetector.OnScaleGestureListener</pre>
  <code>Bitmap.setDensity(int)</code>.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>density</code> - The new target density of the canvas, which is used to determine the scaling
  factor when drawing a bitmap into it. Use <code>Bitmap.DENSITY_NONE</code> to disable
- bitmap scaling.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#getdensity()"><code>getDensity()</code></a>, 
+ bitmap scaling.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#getdensity()"><code>getDensity()</code></a>,
 <code>Bitmap.setDensity(int)</code></dd></dl>
 
 
@@ -27000,7 +27000,7 @@ implements <a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.ma
  to
  the wrapped Canvas so that they are relative to an origin that is always at the center of the
  screen.
- 
+
  See <a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas"><code>ISafeCanvas</code></a> for details</div>
 
 
@@ -28979,7 +28979,7 @@ implements <a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.ma
 <dt><strong>Overrides:</strong></dt>
 <dd><code>getDensity</code>&nbsp;in class&nbsp;<code>android.graphics.Canvas</code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>Returns the current target density of the canvas, which is used to determine the
- scaling factor when drawing a bitmap into it.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)"><code>ISafeCanvas.setDensity(int)</code></a>, 
+ scaling factor when drawing a bitmap into it.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)"><code>ISafeCanvas.setDensity(int)</code></a>,
 <code>Bitmap.getDensity()</code></dd></dl>
 
 
@@ -29411,7 +29411,7 @@ implements <a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.ma
 <dd><code><a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a></code></dd>
 <dt><strong>Overrides:</strong></dt>
 <dd><code>setBitmap</code>&nbsp;in class&nbsp;<code>android.graphics.Canvas</code></dd>
-<dt><span class="strong">Parameters:</span></dt><dd><code>bitmap</code> - Specifies a mutable bitmap for the canvas to draw into.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)"><code>ISafeCanvas.setDensity(int)</code></a>, 
+<dt><span class="strong">Parameters:</span></dt><dd><code>bitmap</code> - Specifies a mutable bitmap for the canvas to draw into.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#setdensity(int)"><code>ISafeCanvas.setDensity(int)</code></a>,
 <a href="{{site.baseurl}}/api/isafecanvas#getdensity()"><code>ISafeCanvas.getDensity()</code></a></dd></dl>
 
 
@@ -29434,7 +29434,7 @@ implements <a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.ma
 <dd><code>setDensity</code>&nbsp;in class&nbsp;<code>android.graphics.Canvas</code></dd>
 <dt><span class="strong">Parameters:</span></dt><dd><code>density</code> - The new target density of the canvas, which is used to determine the scaling
  factor when drawing a bitmap into it. Use <code>Bitmap.DENSITY_NONE</code> to disable
- bitmap scaling.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#getdensity()"><code>ISafeCanvas.getDensity()</code></a>, 
+ bitmap scaling.</dd><dt><span class="strong">See Also:</span></dt><dd><a href="{{site.baseurl}}/api/isafecanvas#getdensity()"><code>ISafeCanvas.getDensity()</code></a>,
 <code>Bitmap.setDensity(int)</code></dd></dl>
 
 
