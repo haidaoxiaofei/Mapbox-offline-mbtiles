@@ -68,4 +68,5 @@ public interface MapboxConstants {
             }
         }
     }
+    public static final String USER_AGENT = "Mapbox Android SDK/0.5.0";
 }

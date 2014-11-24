@@ -8,7 +8,7 @@ if [ -z $VERSION ]; then
 fi
 
 mkdir $VERSION
-curl "http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/$VERSION/mapbox-android-sdk-$VERSION-javadoc.jar" > $VERSION/mapbox-android-sdk-$VERSION.jar
+curl --get -L  "http://search.maven.org/remotecontent?filepath=com/mapbox/mapboxsdk/mapbox-android-sdk/$VERSION/mapbox-android-sdk-$VERSION-javadoc.jar" > $VERSION/mapbox-android-sdk-$VERSION.jar
 
 cd $VERSION && unzip mapbox-android-sdk-$VERSION.jar
 
@@ -64,7 +64,7 @@ title: Mapbox Android SDK $VERSION
 category: api
 ---"
 
-echo -e "$ALLYAML $ALL" > '../../api/index.html' 
+echo -e "$ALLYAML $ALL" > '../../api/index.html'
 
 echo "Complete!"
 exit

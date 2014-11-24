@@ -1081,7 +1081,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
      * Gets whether the current map rotation feature is enabled or not
      * default: disabled
      */
-    public boolean istMapRotationEnabled() {
+    public boolean isMapRotationEnabled() {
         return mMapRotationEnabled;
     }
 

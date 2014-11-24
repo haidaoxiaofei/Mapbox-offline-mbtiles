@@ -5,8 +5,8 @@ source: docs
 permalink: /:categories/:title
 baseurl: /mapbox-android-sdk
 highlighter: pygments
-version: 0.4.0
-snapshot: 0.5.0-SNAPSHOT
+version: 0.5.0
+snapshot: 0.5.1-SNAPSHOT
 defaultid: 'examples.map-i86nkdio'
 rdiscount:
   extensions: [smart]

@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.4.0@aar'){
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.5.0@aar'){
         transitive=true
     }
     compile ('com.cocoahero.android:geojson:1.0.0@aar'){
@@ -43,7 +43,7 @@ repositories {
 }
 
 dependencies {
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.5.0-SNAPSHOT@aar'){
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.5.1-SNAPSHOT@aar'){
         transitive=true
     }
     compile ('com.cocoahero.android:geojson:1.0.0@aar'){
@@ -61,9 +61,9 @@ For a full example Android project incorporating the SDK in this manner, please 
 At any given time there will be 3 different versions of the SDK to use.  You're welcome to use whichever one makes the most sense for your project, just be aware that each comes with a different level of **stability**.
 
 1. Stable / Supported
- * Currently `0.4.0`
+ * Currently `0.5.0`
 2. SNAPSHOT
- * Currently `0.5.0-SNAPSHOT`
+ * Currently `0.5.1-SNAPSHOT`
 3. Source
 
 ### Manually / Hardcoding In Project
@@ -81,7 +81,7 @@ The Mapbox Android SDK is also packaged as a `.apk` file.  This allows integrati
 <dependency>
     <groupId>com.mapbox.mapboxsdk</groupId>
     <artifactId>mapbox-android-sdk</artifactId>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
     <type>apklib</type>
 </dependency>
 ```
