@@ -75,7 +75,7 @@ These **will** change over time so please check back regularly.
 
 ### Legacy Support (Eclipse) - Experimental
 
-The Mapbox Android SDK is also packaged as a `.apk` file.  This allows integration with older tools (Eclipse) that don't support the `.aar` format yet.  It's also available from Maven Central via:
+The Mapbox Android SDK is also packaged as a `.apklib` file.  This allows integration with older tools (Eclipse) that don't support the `.aar` format yet.  In order to make this work the project will need to make use of [Maven](http://maven.apache.org), and it the case of Eclipse the [M2Eclipse](http://eclipse.org/m2e/) Maven plugin.  From there configure the Maven `pom.xml` to include the following dependency:
 
 ```xml
 <dependency>
@@ -85,6 +85,8 @@ The Mapbox Android SDK is also packaged as a `.apk` file.  This allows integrati
     <type>apklib</type>
 </dependency>
 ```
+
+For more information on how to use Maven and Eclipse together please see Sonatype's [Developing with Eclipse and Maven](http://books.sonatype.com/m2eclipse-book/reference/) tutorial.
 
 ### Building From Source
 
