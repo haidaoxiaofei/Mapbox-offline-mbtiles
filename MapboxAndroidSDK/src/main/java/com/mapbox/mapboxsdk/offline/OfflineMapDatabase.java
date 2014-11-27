@@ -10,8 +10,6 @@ import com.mapbox.mapboxsdk.exceptions.OfflineDatabaseException;
 import com.mapbox.mapboxsdk.geometry.CoordinateRegion;
 import com.mapbox.mapboxsdk.geometry.CoordinateSpan;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-
-import java.sql.Blob;
 import java.util.Date;
 
 public class OfflineMapDatabase implements MapboxConstants {
@@ -34,6 +32,7 @@ public class OfflineMapDatabase implements MapboxConstants {
 
     /**
      * Default Constructor
+     *
      * @param context Context of Android app
      */
     public OfflineMapDatabase(Context context) {
@@ -86,20 +85,16 @@ public class OfflineMapDatabase implements MapboxConstants {
             this.maximumZ = Integer.getInteger(maximumZ);
 
             this.initializedProperly = true;
-        }
-        else
-        {
+        } else {
             // Reaching this point means the file at path isn't a valid offline map database, so we can't use it.
             Log.w(TAG, "Invalid offline map database.  Can't be used.");
         }
         return initializedProperly;
     }
 
-    public byte[] dataForURL(String url) throws OfflineDatabaseException
-    {
+    public byte[] dataForURL(String url) throws OfflineDatabaseException {
         byte[] data = sqliteDataForURL(url);
-        if (data == null || data.length == 0)
-        {
+        if (data == null || data.length == 0) {
             String reason = String.format("The offline database has no data for %s", url);
             throw new OfflineDatabaseException(reason);
         }
@@ -110,9 +105,8 @@ public class OfflineMapDatabase implements MapboxConstants {
         this.invalid = false;
     }
 
-    public String sqliteMetadataForName (String name)
-    {
-        String query = "SELECT " + OfflineDatabaseHandler.FIELD_METADATA_VALUE + " FROM " + OfflineDatabaseHandler.TABLE_METADATA +  " WHERE " + OfflineDatabaseHandler.FIELD_METADATA_NAME + "='" + name + "';";
+    public String sqliteMetadataForName(String name) {
+        String query = "SELECT " + OfflineDatabaseHandler.FIELD_METADATA_VALUE + " FROM " + OfflineDatabaseHandler.TABLE_METADATA + " WHERE " + OfflineDatabaseHandler.FIELD_METADATA_NAME + "='" + name + "';";
         SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
@@ -121,10 +115,9 @@ public class OfflineMapDatabase implements MapboxConstants {
         return res;
     }
 
-    public byte[] sqliteDataForURL(String url)
-    {
+    public byte[] sqliteDataForURL(String url) {
         SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
-        String query = "SELECT " + OfflineDatabaseHandler.FIELD_DATA_VALUE + " FROM " + OfflineDatabaseHandler.TABLE_DATA +  " WHERE " + OfflineDatabaseHandler.FIELD_DATA_ID + "= (SELECT " + OfflineDatabaseHandler.FIELD_RESOURCES_ID + " from " + OfflineDatabaseHandler.TABLE_RESOURCES + " where " + OfflineDatabaseHandler.FIELD_RESOURCES_URL + " = '" + url + "');";
+        String query = "SELECT " + OfflineDatabaseHandler.FIELD_DATA_VALUE + " FROM " + OfflineDatabaseHandler.TABLE_DATA + " WHERE " + OfflineDatabaseHandler.FIELD_DATA_ID + "= (SELECT " + OfflineDatabaseHandler.FIELD_RESOURCES_ID + " from " + OfflineDatabaseHandler.TABLE_RESOURCES + " where " + OfflineDatabaseHandler.FIELD_RESOURCES_URL + " = '" + url + "');";
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         byte[] blob = cursor.getBlob(cursor.getColumnIndex(OfflineDatabaseHandler.FIELD_DATA_VALUE));
