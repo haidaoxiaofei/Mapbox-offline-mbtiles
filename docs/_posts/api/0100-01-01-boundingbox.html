@@ -152,7 +152,7 @@ implements android.os.Parcelable, java.io.Serializable, <a href="{{site.baseurl}
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static <a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&gt;&nbsp;latLngs)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&gt;&nbsp;latLngs)</code>
 <div class="block">Constructs a bounding box that contains all of a list of LatLng
  objects.</div>
 </td>
@@ -432,13 +432,13 @@ implements android.os.Parcelable, java.io.Serializable, <a href="{{site.baseurl}
 </dl>
 
 
-<a name="fromLatLngs(java.util.ArrayList)">
+<a name="fromLatLngs(java.util.List)">
 <!--   -->
 </a>
 
 
 <h4>fromLatLngs</h4>
-<pre>public static&nbsp;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&gt;&nbsp;latLngs)</pre>
+<pre>public static&nbsp;<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&gt;&nbsp;latLngs)</pre>
 <div class="block">Constructs a bounding box that contains all of a list of LatLng
  objects. Empty lists will yield invalid bounding boxes.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>latLngs</code> - List of LatLng objects</dd>
