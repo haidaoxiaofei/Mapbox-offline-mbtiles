@@ -17,9 +17,10 @@ import com.mapbox.mapboxsdk.util.NetworkUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -289,20 +290,29 @@ public class OfflineMapDownloader implements MapboxConstants {
                             throw new IOException();
                         }
 
-                        BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
-                        // TODO - Refactor as getContentLength() often is not known (ie, returns -1)
-                        byte[] data = new byte[conn.getContentLength()];
-                        int bytesRead = 0;
-                        int offset = 0;
-                        while (offset < conn.getContentLength()) {
-                            bytesRead = in.read(data, offset, data.length - offset);
-                            if (bytesRead == -1) {
-                                break;
+                        ByteArrayOutputStream bais = new ByteArrayOutputStream();
+                        InputStream is = null;
+                        try {
+                            is = conn.getInputStream();
+                            // Read 4K at a time
+                            byte[] byteChunk = new byte[4096];
+                            int n;
+
+                            while ( (n = is.read(byteChunk)) > 0 ) {
+                                bais.write(byteChunk, 0, n);
                             }
-                            offset += bytesRead;
                         }
-                        in.close();
-                        sqliteSaveDownloadedData(data, url);
+                        catch (IOException e) {
+                            Log.e(TAG, String.format("Failed while reading bytes from %s: %s", conn.getURL().toString(), e.getMessage()));
+                            e.printStackTrace ();
+                        }
+                        finally {
+                            if (is != null) {
+                                is.close();
+                            }
+                            conn.disconnect();
+                        }
+                        sqliteSaveDownloadedData(bais.toByteArray(), url);
                     } catch (IOException e) {
                         e.printStackTrace();
 //                            [self notifyDelegateOfHTTPStatusError:((NSHTTPURLResponse *) response).statusCode url:response.URL];
@@ -427,6 +437,7 @@ public class OfflineMapDownloader implements MapboxConstants {
             } while (cursor.moveToNext());
         }
         cursor.close();
+        db.close();
 
         return results;
     }
@@ -446,6 +457,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         this.totalFilesExpectedToWrite = cursor.getInt(0);
         this.totalFilesWritten = cursor.getInt(1);
         cursor.close();
+        db.close();
 //        success = true;
 
         return true;
