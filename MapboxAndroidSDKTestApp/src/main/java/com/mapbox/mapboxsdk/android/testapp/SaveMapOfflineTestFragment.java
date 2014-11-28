@@ -47,6 +47,6 @@ public class SaveMapOfflineTestFragment extends Fragment {
         BoundingBox boundingBox = mapView.getBoundingBox();
         CoordinateSpan span = new CoordinateSpan(boundingBox.getLatitudeSpan(), boundingBox.getLongitudeSpan());
         CoordinateRegion coordinateRegion = new CoordinateRegion(mapView.getCenter(), span);
-        offlineMapDownloader.beginDownloadingMapID("neworleans", coordinateRegion, (int) mapView.getZoomLevel(), (int) mapView.getZoomLevel());
+        offlineMapDownloader.beginDownloadingMapID(getString(R.string.mapbox_id_street), coordinateRegion, (int) mapView.getZoomLevel(), (int) mapView.getZoomLevel());
     }
 }
