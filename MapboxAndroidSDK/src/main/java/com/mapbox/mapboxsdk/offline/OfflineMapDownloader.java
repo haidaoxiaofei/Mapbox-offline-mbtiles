@@ -675,13 +675,27 @@ public class OfflineMapDownloader implements MapboxConstants {
                     // == block while the other isn't. You will be sad and confused if you try to eliminate the "duplication". ==
                     //===========================================================================================================
 
+                    AsyncTask<Void, Void, Boolean> startDownload = new AsyncTask<Void, Void, Boolean>() {
+                        @Override
+                        protected Boolean doInBackground(Void... params) {
+                            // Do database creation / io on background thread
+                            return sqliteCreateDatabaseUsingMetadata(metadataDictionary, urls);
+                        }
+
+                        @Override
+                        protected void onPostExecute(Boolean dbCreated) {
+
+                            if (!dbCreated) {
+                                cancelImmediatelyWithError("Map Database wasn't created");
+                                return;
+                            }
+                            notifyDelegateOfInitialCount();
+                            startDownloading();
+                        }
+                    };
+
                     // Create the database and start the download
-                    if (!sqliteCreateDatabaseUsingMetadata(metadataDictionary, urls)) {
-                        cancelImmediatelyWithError("Map Database wasn't created");
-                        return;
-                    }
-                    notifyDelegateOfInitialCount();
-                    startDownloading();
+                    startDownload.execute();
                 }
             };
             foo.execute();
@@ -689,12 +703,27 @@ public class OfflineMapDownloader implements MapboxConstants {
             Log.i(TAG, "No marker icons to worry about, so just start downloading.");
             // There aren't any marker icons to worry about, so just create database and start downloading
 
-            if (!sqliteCreateDatabaseUsingMetadata(metadataDictionary, urls)) {
-                cancelImmediatelyWithError("Map Database wasn't created");
-                return;
-            }
-            notifyDelegateOfInitialCount();
-            startDownloading();
+            AsyncTask<Void, Void, Boolean> startDownload = new AsyncTask<Void, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(Void... params) {
+                    // Do database creation / io on background thread
+                    return sqliteCreateDatabaseUsingMetadata(metadataDictionary, urls);
+                }
+
+                @Override
+                protected void onPostExecute(Boolean dbCreated) {
+
+                    if (!dbCreated) {
+                        cancelImmediatelyWithError("Map Database wasn't created");
+                        return;
+                    }
+                    notifyDelegateOfInitialCount();
+                    startDownloading();
+                }
+            };
+
+            // Create the database and start the download
+            startDownload.execute();
         }
     }
 
