@@ -361,8 +361,8 @@ public class OfflineMapDownloader implements MapboxConstants {
 //      [query appendFormat:@"UPDATE resources SET status=200,id=last_insert_rowid() WHERE url='%@';\n",[url absoluteString]];
         db.execSQL(String.format("UPDATE resources SET status=200,id=last_insert_rowid() WHERE url='%s';", url));
         db.setTransactionSuccessful();
+        db.endTransaction();
         db.close();
-
 
 /*
         if(error)

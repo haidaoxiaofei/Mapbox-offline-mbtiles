@@ -43,7 +43,7 @@ public class OfflineDatabaseHandler extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public static OfflineDatabaseHandler getInstance(Context context) {
+    public static synchronized OfflineDatabaseHandler getInstance(Context context) {
         if (offlineDatabaseHandler == null) {
             offlineDatabaseHandler = new OfflineDatabaseHandler(context);
         }
