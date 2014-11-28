@@ -257,32 +257,40 @@ public class OfflineMapDownloader implements MapboxConstants {
 
 
     public void startDownloading() {
+/*
+        // Shouldn't need to check as all downloading will happen in background thread
         if (AppUtils.runningOnMainThread()) {
             Log.w(TAG, "startDownloading() is running on main thread.  Returning.");
             return;
         }
+*/
 
 //        [_sqliteQueue addOperationWithBlock:^{
         ArrayList<String> urls = sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(30);
 
         for (final String url : urls) {
+/*
             if (!NetworkUtils.isNetworkAvailable(context)) {
                 Log.w(TAG, "Network is no longer available.");
 //                    [self notifyDelegateOfNetworkConnectivityError:error];
             }
+*/
 
             AsyncTask<String, Void, Void> foo = new AsyncTask<String, Void, Void>() {
                 @Override
                 protected Void doInBackground(String... params) {
                     try {
                         HttpURLConnection conn = NetworkUtils.getHttpURLConnection(new URL(params[0]));
+                        Log.i(TAG, "URL to download = " + conn.getURL().toString());
                         conn.setConnectTimeout(60000);
                         conn.connect();
                         if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                            Log.w(TAG, "HTTP Error connecting.  Response Code = " + conn.getResponseCode());
                             throw new IOException();
                         }
 
                         BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
+                        // TODO - Refactor as getContentLength() often is not known (ie, returns -1)
                         byte[] data = new byte[conn.getContentLength()];
                         int bytesRead = 0;
                         int offset = 0;
@@ -303,7 +311,7 @@ public class OfflineMapDownloader implements MapboxConstants {
                     return null;
                 }
             };
-            foo.execute();
+            foo.execute(url);
             // This is the last line of the for loop
         }
     }
@@ -324,6 +332,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         // Bail out if the state has changed to canceling, suspended, or available
         //
         if (this.state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning) {
+            Log.w(TAG, "sqliteSaveDownloadedData() is not in a Running state so bailing.  State = " + this.state);
             return;
         }
 
@@ -359,24 +368,24 @@ public class OfflineMapDownloader implements MapboxConstants {
         //
         this.totalFilesWritten += 1;
 //            [self notifyDelegateOfProgress];
+        Log.i(TAG, "totalFilesWritten = " + this.totalFilesWritten + "; totalFilesExpectedToWrite = " + this.totalFilesExpectedToWrite);
 
         // If all the downloads are done, clean up and notify the delegate
         //
         if (this.totalFilesWritten >= this.totalFilesExpectedToWrite) {
             if (this.state == MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning) {
+                Log.i(TAG, "Just finished downloading all materials.  Persist the OfflineMapDatabase, change the state, and call it a day.");
                 // This is what to do when we've downloaded all the files
                 //
-                // TODO - Populate OfflineMapDatabase object and persist it
-/*
-                    OfflineMapDatabase offlineMap = completeDatabaseAndInstantiateOfflineMapWithError();
-                    if(offlineMap != null) {
-                        this.mutableOfflineMapDatabases.add(offlineMap);
-                    }
-                    [self notifyDelegateOfCompletionWithOfflineMapDatabase:offlineMap withError:error];
+                // Populate OfflineMapDatabase object and persist it
+                OfflineMapDatabase offlineMap = completeDatabaseAndInstantiateOfflineMapWithError();
+                if(offlineMap != null) {
+                    this.mutableOfflineMapDatabases.add(offlineMap);
+                }
+//                    [self notifyDelegateOfCompletionWithOfflineMapDatabase:offlineMap withError:error];
 
-                    this.state = MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable;
-                    [self notifyDelegateOfStateChange];
-*/
+                this.state = MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable;
+//                    [self notifyDelegateOfStateChange];
             }
         }
 /*
@@ -407,7 +416,7 @@ public class OfflineMapDownloader implements MapboxConstants {
 
         // Read up to limit undownloaded urls from the offline map database
         //
-        String query = String.format("SELECT url FROM resources WHERE status IS NULL LIMIT %d;", (long) limit);
+        String query = String.format("SELECT %s FROM %s WHERE %s IS NULL LIMIT %d;", OfflineDatabaseHandler.FIELD_RESOURCES_URL, OfflineDatabaseHandler.TABLE_RESOURCES, OfflineDatabaseHandler.FIELD_RESOURCES_STATUS, (long) limit);
 
         // Open the database
         SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
@@ -674,58 +683,42 @@ public class OfflineMapDownloader implements MapboxConstants {
                     // == This stuff is a duplicate of the code immediately below it, but this copy is inside of a completion  ==
                     // == block while the other isn't. You will be sad and confused if you try to eliminate the "duplication". ==
                     //===========================================================================================================
-
-                    AsyncTask<Void, Void, Boolean> startDownload = new AsyncTask<Void, Void, Boolean>() {
-                        @Override
-                        protected Boolean doInBackground(Void... params) {
-                            // Do database creation / io on background thread
-                            return sqliteCreateDatabaseUsingMetadata(metadataDictionary, urls);
-                        }
-
-                        @Override
-                        protected void onPostExecute(Boolean dbCreated) {
-
-                            if (!dbCreated) {
-                                cancelImmediatelyWithError("Map Database wasn't created");
-                                return;
-                            }
-                            notifyDelegateOfInitialCount();
-                            startDownloading();
-                        }
-                    };
-
-                    // Create the database and start the download
-                    startDownload.execute();
+                    startDownloadProcess(metadataDictionary, urls);
                 }
             };
             foo.execute();
         } else {
             Log.i(TAG, "No marker icons to worry about, so just start downloading.");
             // There aren't any marker icons to worry about, so just create database and start downloading
-
-            AsyncTask<Void, Void, Boolean> startDownload = new AsyncTask<Void, Void, Boolean>() {
-                @Override
-                protected Boolean doInBackground(Void... params) {
-                    // Do database creation / io on background thread
-                    return sqliteCreateDatabaseUsingMetadata(metadataDictionary, urls);
-                }
-
-                @Override
-                protected void onPostExecute(Boolean dbCreated) {
-
-                    if (!dbCreated) {
-                        cancelImmediatelyWithError("Map Database wasn't created");
-                        return;
-                    }
-                    notifyDelegateOfInitialCount();
-                    startDownloading();
-                }
-            };
-
-            // Create the database and start the download
-            startDownload.execute();
+            startDownloadProcess(metadataDictionary, urls);
         }
     }
+
+    /**
+     * Private method for Starting the Whole Download Process
+     * @param metadata Metadata
+     * @param urls Map urls
+     */
+    private void startDownloadProcess(final Hashtable<String, String> metadata, final List<String> urls) {
+        AsyncTask<Void, Void, Thread> startDownload = new AsyncTask<Void, Void, Thread>() {
+            @Override
+            protected Thread doInBackground(Void... params) {
+                // Do database creation / io on background thread
+                if (!sqliteCreateDatabaseUsingMetadata(metadata, urls)) {
+                    cancelImmediatelyWithError("Map Database wasn't created");
+                    return null;
+                }
+                notifyDelegateOfInitialCount();
+                startDownloading();
+                return null;
+            }
+
+        };
+
+        // Create the database and start the download
+        startDownload.execute();
+    }
+
 
     public Set<String> parseMarkerIconURLStringsFromGeojsonData(String data) {
         HashSet<String> iconURLStrings = new HashSet<String>();
