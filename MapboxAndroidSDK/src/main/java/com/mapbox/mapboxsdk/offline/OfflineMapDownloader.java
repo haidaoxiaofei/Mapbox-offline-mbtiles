@@ -622,6 +622,7 @@ public class OfflineMapDownloader implements MapboxConstants {
                 [self notifyDelegateOfNetworkConnectivityError:error];
                 [self cancelImmediatelyWithError:error];
 */
+                return;
             }
 
             AsyncTask<Void, Void, Void> foo = new AsyncTask<Void, Void, Void>() {
@@ -642,9 +643,10 @@ public class OfflineMapDownloader implements MapboxConstants {
                         // try to save it here, because it may already be in the download queue and saving it twice will mess
                         // up the count of urls to be downloaded!
                         //
-                        Set<String> markerIconURLStrings = parseMarkerIconURLStringsFromGeojsonData(jsonText);
+                        Set<String> markerIconURLStrings = new HashSet<String>();
+                        markerIconURLStrings.addAll(parseMarkerIconURLStringsFromGeojsonData(jsonText));
                         Log.i(TAG, "Number of markerIconURLs = " + markerIconURLStrings.size());
-                        if (markerIconURLStrings != null && markerIconURLStrings.size() > 0) {
+                        if (markerIconURLStrings.size() > 0) {
                             urls.addAll(markerIconURLStrings);
                         }
                     } catch (MalformedURLException e) {
@@ -723,13 +725,11 @@ public class OfflineMapDownloader implements MapboxConstants {
 
             // Find point features in the markers dictionary (if there are any) and add them to the map.
             //
-            Object markers = simplestyleJSONDictionary.get("features");
+            JSONArray markers = simplestyleJSONDictionary.getJSONArray("features");
 
-            if (markers != null && markers instanceof JSONArray) {
-                JSONArray array = (JSONArray) markers;
-
-                for (int lc = 0; lc < array.length(); lc++) {
-                    Object value = array.get(lc);
+            if (markers != null && markers.length() > 0) {
+                for (int lc = 0; lc < markers.length(); lc++) {
+                    Object value = markers.get(lc);
                     if (value instanceof JSONObject) {
                         JSONObject feature = (JSONObject) value;
                         String type = feature.getJSONObject("geometry").getString("type");
