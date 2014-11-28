@@ -551,7 +551,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         this.state = MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning;
 //        [self notifyDelegateOfStateChange];
 
-        Hashtable<String, String> metadataDictionary = new Hashtable<String, String>();
+        final Hashtable<String, String> metadataDictionary = new Hashtable<String, String>();
         metadataDictionary.put("uniqueID", this.uniqueID);
         metadataDictionary.put("mapID", this.mapID);
         metadataDictionary.put("includesMetadata", this.includesMetadata ? "YES" : "NO");
@@ -676,43 +676,25 @@ public class OfflineMapDownloader implements MapboxConstants {
                     //===========================================================================================================
 
                     // Create the database and start the download
-                    //
-
-                    // TODO
-/*
-                    NSError *error;
-                    [self sqliteCreateDatabaseUsingMetadata:metadataDictionary urlArray:urls withError:&error];
-                    if(error)
-                    {
-                        [self cancelImmediatelyWithError:error];
+                    if (!sqliteCreateDatabaseUsingMetadata(metadataDictionary, urls)) {
+                        cancelImmediatelyWithError("Map Database wasn't created");
+                        return;
                     }
-                    else
-                    {
-                        [self notifyDelegateOfInitialCount];
-                        [self startDownloading];
-                    }
-*/
+                    notifyDelegateOfInitialCount();
+                    startDownloading();
                 }
             };
             foo.execute();
         } else {
             Log.i(TAG, "No marker icons to worry about, so just start downloading.");
             // There aren't any marker icons to worry about, so just create database and start downloading
-            //
-            // TODO
-/*
-            NSError *error;
-            [self sqliteCreateDatabaseUsingMetadata:metadataDictionary urlArray:urls withError:&error];
-            if(error)
-            {
-                [self cancelImmediatelyWithError:error];
+
+            if (!sqliteCreateDatabaseUsingMetadata(metadataDictionary, urls)) {
+                cancelImmediatelyWithError("Map Database wasn't created");
+                return;
             }
-            else
-            {
-                [self notifyDelegateOfInitialCount];
-                [self startDownloading];
-            }
-*/
+            notifyDelegateOfInitialCount();
+            startDownloading();
         }
     }
 
