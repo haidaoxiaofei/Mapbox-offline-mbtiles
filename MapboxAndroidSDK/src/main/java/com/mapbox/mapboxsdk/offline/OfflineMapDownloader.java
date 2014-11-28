@@ -267,6 +267,7 @@ public class OfflineMapDownloader implements MapboxConstants {
 */
 
 //        [_sqliteQueue addOperationWithBlock:^{
+        // TODO - Remove download limit as it artificially stops entire map from being saved to database
         ArrayList<String> urls = sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(30);
 
         for (final String url : urls) {
@@ -380,6 +381,8 @@ public class OfflineMapDownloader implements MapboxConstants {
 //            [self notifyDelegateOfProgress];
         Log.i(TAG, "totalFilesWritten = " + this.totalFilesWritten + "; totalFilesExpectedToWrite = " + this.totalFilesExpectedToWrite);
 
+
+        // TODO - Refactor totalFilesExpectedToWrite / clean up logic so that it is called at germane time.  Currently it is never reached if max number of URLs < total number of files.
         // If all the downloads are done, clean up and notify the delegate
         //
         if (this.totalFilesWritten >= this.totalFilesExpectedToWrite) {
