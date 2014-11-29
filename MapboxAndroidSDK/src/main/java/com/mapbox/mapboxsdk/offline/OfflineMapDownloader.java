@@ -267,8 +267,7 @@ public class OfflineMapDownloader implements MapboxConstants {
 */
 
 //        [_sqliteQueue addOperationWithBlock:^{
-        // TODO - Remove download limit as it artificially stops entire map from being saved to database
-        ArrayList<String> urls = sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(30);
+        ArrayList<String> urls = sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(-1);
 
         for (final String url : urls) {
 /*
@@ -429,7 +428,11 @@ public class OfflineMapDownloader implements MapboxConstants {
 
         // Read up to limit undownloaded urls from the offline map database
         //
-        String query = String.format("SELECT %s FROM %s WHERE %s IS NULL LIMIT %d;", OfflineDatabaseHandler.FIELD_RESOURCES_URL, OfflineDatabaseHandler.TABLE_RESOURCES, OfflineDatabaseHandler.FIELD_RESOURCES_STATUS, (long) limit);
+        String query = String.format("SELECT %s FROM %s WHERE %s IS NULL", OfflineDatabaseHandler.FIELD_RESOURCES_URL, OfflineDatabaseHandler.TABLE_RESOURCES, OfflineDatabaseHandler.FIELD_RESOURCES_STATUS);
+        if (limit > 0) {
+            query = query + String.format(" LIMIT %d", limit);
+        }
+        query = query + ";";
 
         // Open the database
         SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
