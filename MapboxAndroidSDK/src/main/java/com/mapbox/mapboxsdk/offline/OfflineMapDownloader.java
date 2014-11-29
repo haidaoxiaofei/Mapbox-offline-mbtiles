@@ -519,7 +519,7 @@ public class OfflineMapDownloader implements MapboxConstants {
             ContentValues cv = new ContentValues();
             cv.put(OfflineDatabaseHandler.FIELD_METADATA_NAME, key);
             cv.put(OfflineDatabaseHandler.FIELD_METADATA_VALUE, metadata.get(key));
-            db.insert(OfflineDatabaseHandler.TABLE_METADATA, null, cv);
+            db.replace(OfflineDatabaseHandler.TABLE_METADATA, null, cv);
         }
         for (String url : urlStrings) {
             ContentValues cv = new ContentValues();
