@@ -72,17 +72,17 @@ public class OfflineMapDatabase implements MapboxConstants {
             //
             this.uniqueID = uniqueID;
             this.mapID = mapID;
-            this.includesMetadata = Boolean.getBoolean(includesMetadata);
-            this.includesMarkers = Boolean.getBoolean(includesMarkers);
+            this.includesMetadata = "YES".equalsIgnoreCase(includesMetadata);
+            this.includesMarkers = "YES".equalsIgnoreCase(includesMarkers);
 
-            this.imageQuality = RasterImageQuality.getEnumForValue(Integer.getInteger(imageQuality));
+            this.imageQuality = RasterImageQuality.getEnumForValue(Integer.parseInt(imageQuality));
 
             LatLng center = new LatLng(Double.parseDouble(region_latitude), Double.parseDouble(region_longitude));
             CoordinateSpan span = new CoordinateSpan(Double.parseDouble(region_latitude_delta), Double.parseDouble(region_longitude_delta));
             this.mapRegion = new CoordinateRegion(center, span);
 
-            this.minimumZ = Integer.getInteger(minimumZ);
-            this.maximumZ = Integer.getInteger(maximumZ);
+            this.minimumZ = Integer.parseInt(minimumZ);
+            this.maximumZ = Integer.parseInt(maximumZ);
 
             this.initializedProperly = true;
         } else {
@@ -112,6 +112,7 @@ public class OfflineMapDatabase implements MapboxConstants {
         cursor.moveToFirst();
         String res = cursor.getString(cursor.getColumnIndex(OfflineDatabaseHandler.FIELD_METADATA_VALUE));
         cursor.close();
+        db.close();
         return res;
     }
 
@@ -122,6 +123,7 @@ public class OfflineMapDatabase implements MapboxConstants {
         cursor.moveToFirst();
         byte[] blob = cursor.getBlob(cursor.getColumnIndex(OfflineDatabaseHandler.FIELD_DATA_VALUE));
         cursor.close();
+        db.close();
         return blob;
     }
 }

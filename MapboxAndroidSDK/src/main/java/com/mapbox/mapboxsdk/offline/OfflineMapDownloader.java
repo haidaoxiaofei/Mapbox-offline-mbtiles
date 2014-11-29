@@ -225,12 +225,18 @@ public class OfflineMapDownloader implements MapboxConstants {
 */
 
     public OfflineMapDatabase completeDatabaseAndInstantiateOfflineMapWithError() {
+/*
         if (AppUtils.runningOnMainThread()) {
             Log.w(TAG, "completeDatabaseAndInstantiateOfflineMapWithError() running on main thread.  Returning null.");
             return null;
         }
+*/
+        OfflineMapDatabase db = new OfflineMapDatabase(context);
+        // Initialized with data from database
+        db.initializeDatabase();
+        return db;
 
-        // TODO - Create new OfflineMapDatabase and load with recently downloaded data
+        // Create new OfflineMapDatabase and load with recently downloaded data
 /*
         // Rename the file using a unique prefix
         //
@@ -253,7 +259,6 @@ public class OfflineMapDownloader implements MapboxConstants {
             return [[MBXOfflineMapDatabase alloc] initWithContentsOfFile:newPath];
         }
 */
-        return new OfflineMapDatabase(context);
     }
 
 
@@ -398,7 +403,6 @@ public class OfflineMapDownloader implements MapboxConstants {
         Log.i(TAG, "totalFilesWritten = " + this.totalFilesWritten + "; totalFilesExpectedToWrite = " + this.totalFilesExpectedToWrite);
 
 
-        // TODO - Refactor totalFilesExpectedToWrite / clean up logic so that it is called at germane time.  Currently it is never reached if max number of URLs < total number of files.
         // If all the downloads are done, clean up and notify the delegate
         //
         if (this.totalFilesWritten >= this.totalFilesExpectedToWrite) {
