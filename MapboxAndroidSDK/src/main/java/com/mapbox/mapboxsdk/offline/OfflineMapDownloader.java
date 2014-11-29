@@ -280,6 +280,10 @@ public class OfflineMapDownloader implements MapboxConstants {
             // Something is off
             Log.w(TAG, String.format("totalDiff %d does not equal urls size of %d.  This is a problem.  Returning.", totalDiff, urls.size()));
             return;
+        } else if (urls.size() == 0 && totalDiff == 0) {
+            // All files are downloaded, but hasn't been persisted yet.
+            finishUpDownloadProcess();
+            return;
         }
 
         for (final String url : urls) {
@@ -398,20 +402,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         // If all the downloads are done, clean up and notify the delegate
         //
         if (this.totalFilesWritten >= this.totalFilesExpectedToWrite) {
-            if (this.state == MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning) {
-                Log.i(TAG, "Just finished downloading all materials.  Persist the OfflineMapDatabase, change the state, and call it a day.");
-                // This is what to do when we've downloaded all the files
-                //
-                // Populate OfflineMapDatabase object and persist it
-                OfflineMapDatabase offlineMap = completeDatabaseAndInstantiateOfflineMapWithError();
-                if(offlineMap != null) {
-                    this.mutableOfflineMapDatabases.add(offlineMap);
-                }
-//                    [self notifyDelegateOfCompletionWithOfflineMapDatabase:offlineMap withError:error];
-
-                this.state = MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable;
-//                    [self notifyDelegateOfStateChange];
-            }
+            finishUpDownloadProcess();
         }
 /*
         }
@@ -430,6 +421,23 @@ public class OfflineMapDownloader implements MapboxConstants {
             [self startDownloading];
         }
 */
+    }
+
+    private void finishUpDownloadProcess() {
+        if (this.state == MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateRunning) {
+            Log.i(TAG, "Just finished downloading all materials.  Persist the OfflineMapDatabase, change the state, and call it a day.");
+            // This is what to do when we've downloaded all the files
+            //
+            // Populate OfflineMapDatabase object and persist it
+            OfflineMapDatabase offlineMap = completeDatabaseAndInstantiateOfflineMapWithError();
+            if(offlineMap != null) {
+                this.mutableOfflineMapDatabases.add(offlineMap);
+            }
+//                    [self notifyDelegateOfCompletionWithOfflineMapDatabase:offlineMap withError:error];
+
+            this.state = MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable;
+//                    [self notifyDelegateOfStateChange];
+        }
     }
 
     public ArrayList<String> sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(int limit) {
