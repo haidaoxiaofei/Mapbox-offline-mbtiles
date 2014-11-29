@@ -37,6 +37,14 @@ public class SaveMapOfflineTestFragment extends Fragment {
             }
         });
 
+        Button loadMapButton = (Button) view.findViewById(R.id.loadMapButton);
+        loadMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleLoadMapButton(v);
+            }
+        });
+
         return view;
     }
 
@@ -48,5 +56,9 @@ public class SaveMapOfflineTestFragment extends Fragment {
         CoordinateSpan span = new CoordinateSpan(boundingBox.getLatitudeSpan(), boundingBox.getLongitudeSpan());
         CoordinateRegion coordinateRegion = new CoordinateRegion(mapView.getCenter(), span);
         offlineMapDownloader.beginDownloadingMapID(getString(R.string.mapbox_id_street), coordinateRegion, (int) mapView.getZoomLevel(), (int) mapView.getZoomLevel());
+    }
+
+    public void handleLoadMapButton(View view) {
+        Log.i(TAG, "handleLoadMapButton()");
     }
 }
