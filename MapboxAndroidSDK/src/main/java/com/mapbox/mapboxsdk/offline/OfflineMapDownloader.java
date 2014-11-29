@@ -266,8 +266,21 @@ public class OfflineMapDownloader implements MapboxConstants {
         }
 */
 
+        // Update expected files numbers (totalFilesExpectedToWrite and totalFilesWritten)
+        sqliteQueryWrittenAndExpectedCountsWithError();
+        Log.d(TAG, String.format("totalFilesExpectedToWrite = %d, totalFilesWritten = %d", this.totalFilesExpectedToWrite, this.totalFilesWritten));
+
 //        [_sqliteQueue addOperationWithBlock:^{
+        // Get the actual URLs
         ArrayList<String> urls = sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(-1);
+        Log.d(TAG, String.format("number of urls to download = %d", urls.size()));
+
+        int totalDiff = this.totalFilesExpectedToWrite - this.totalFilesWritten;
+        if (urls.size() != totalDiff) {
+            // Something is off
+            Log.w(TAG, String.format("totalDiff %d does not equal urls size of %d.  This is a problem.  Returning.", totalDiff, urls.size()));
+            return;
+        }
 
         for (final String url : urls) {
 /*
@@ -282,7 +295,7 @@ public class OfflineMapDownloader implements MapboxConstants {
                 protected Void doInBackground(String... params) {
                     try {
                         HttpURLConnection conn = NetworkUtils.getHttpURLConnection(new URL(params[0]));
-                        Log.i(TAG, "URL to download = " + conn.getURL().toString());
+                        Log.d(TAG, "URL to download = " + conn.getURL().toString());
                         conn.setConnectTimeout(60000);
                         conn.connect();
                         if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
@@ -456,7 +469,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         //
         String query = "SELECT COUNT(url) AS totalFilesExpectedToWrite, (SELECT COUNT(url) FROM resources WHERE status IS NOT NULL) AS totalFilesWritten FROM resources;";
 
-//        boolean success = false;
+        boolean success = false;
         SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
@@ -464,9 +477,9 @@ public class OfflineMapDownloader implements MapboxConstants {
         this.totalFilesWritten = cursor.getInt(1);
         cursor.close();
         db.close();
-//        success = true;
+        success = true;
 
-        return true;
+        return success;
     }
 
     public boolean sqliteCreateDatabaseUsingMetadata(Hashtable<String, String> metadata, List<String> urlStrings)
