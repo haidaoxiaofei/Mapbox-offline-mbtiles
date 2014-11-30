@@ -34,6 +34,9 @@ public class OfflineDatabaseHandler extends SQLiteOpenHelper {
     public static final String FIELD_RESOURCES_URL = "url";
     public static final String FIELD_RESOURCES_STATUS = "status";
 
+
+    // TODO - Refactor Constructor to require a database name to support 1 database / 1 downloaded map model
+
     /**
      * Constructor
      *
