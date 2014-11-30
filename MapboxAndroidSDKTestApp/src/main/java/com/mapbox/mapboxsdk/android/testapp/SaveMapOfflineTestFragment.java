@@ -1,5 +1,6 @@
 package com.mapbox.mapboxsdk.android.testapp;
 
+import android.content.ContextWrapper;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -60,5 +61,13 @@ public class SaveMapOfflineTestFragment extends Fragment {
 
     public void handleLoadMapButton(View view) {
         Log.i(TAG, "handleLoadMapButton()");
+
+        // Test access to database files for counting purposes
+        ContextWrapper cw = new ContextWrapper(getActivity());
+        String[] dbs = cw.databaseList();
+        Log.i(TAG, "Number of dbs = " + dbs.length);
+        for (String s : dbs) {
+            Log.i(TAG, "db = " + s + "; path = " + cw.getDatabasePath(s).toString());
+        }
     }
 }
