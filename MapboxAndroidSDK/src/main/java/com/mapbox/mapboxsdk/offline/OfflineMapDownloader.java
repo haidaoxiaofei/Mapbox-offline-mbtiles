@@ -236,6 +236,8 @@ public class OfflineMapDownloader implements MapboxConstants {
         db.initializeDatabase();
         return db;
 
+        // TODO - Rename database file (remove -PARTIAL) and update path in db object
+
         // Create new OfflineMapDatabase and load with recently downloaded data
 /*
         // Rename the file using a unique prefix
