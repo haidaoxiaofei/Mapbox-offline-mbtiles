@@ -46,6 +46,7 @@ public class MainActivity extends ActionBarActivity {
         testFragmentNames.add(getString(R.string.webSourceTileTestMap));
         testFragmentNames.add(getString(R.string.locateMeTestMap));
         testFragmentNames.add(getString(R.string.pathTestMap));
+        testFragmentNames.add(getString(R.string.bingTestMap));
         testFragmentNames.add(getString(R.string.saveMapOfflineTestMap));
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, testFragmentNames));
@@ -151,6 +152,9 @@ public class MainActivity extends ActionBarActivity {
                 fragment = new PathTestFragment();
                 break;
             case 11:
+                fragment = new BingTileTestFragment();
+                break;
+            case 12:
                 fragment = new SaveMapOfflineTestFragment();
                 break;
             default:
