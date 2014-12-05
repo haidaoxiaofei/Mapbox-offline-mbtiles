@@ -13,6 +13,7 @@
     <string name="webSourceTileTestMap">WebSourceTile</string>
     <string name="locateMeTestMap">Locate Me</string>
     <string name="pathTestMap">PathOverlay</string>
+    <string name="bingTestMap">Bing Test Map</string>
     <string name="mapbox_id_street">examples.map-i87786ca</string>
     <string name="mapbox_id_satellite">brunosan.map-cyglrrfu</string>
     <string name="mapbox_id_terrain">examples.map-zgrqqx0w</string>

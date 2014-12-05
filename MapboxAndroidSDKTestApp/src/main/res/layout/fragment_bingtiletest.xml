@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <com.mapbox.mapboxsdk.views.MapView
+        android:id="@+id/mapview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+    </com.mapbox.mapboxsdk.views.MapView>
+
+    <LinearLayout
+        android:id="@+id/buttonsrow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="0.75">
+    <Button
+        android:id="@+id/satbut"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Sat"
+        android:layout_weight="0.25" android:layout_margin="-5dp"
+        />
+    <Button
+        android:id="@+id/satlabbut"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Sat Labels"
+        android:layout_weight="0.25" android:layout_margin="-5dp"
+        />
+    <Button
+        android:id="@+id/strbut"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Street"
+        android:layout_weight="0.25"
+        />
+    </LinearLayout>
+
+</RelativeLayout>
