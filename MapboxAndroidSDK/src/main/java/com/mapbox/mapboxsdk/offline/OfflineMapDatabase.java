@@ -95,6 +95,10 @@ public class OfflineMapDatabase implements MapboxConstants {
             this.minimumZ = Integer.parseInt(minimumZ);
             this.maximumZ = Integer.parseInt(maximumZ);
 
+            SQLiteDatabase db = OfflineDatabaseManager.getOfflineDatabaseManager(context).getOfflineDatabaseHandlerForMapId(mapID).getReadableDatabase();
+            this.path = db.getPath();
+            db.close();
+
             this.initializedProperly = true;
         } else {
             // Reaching this point means the file at path isn't a valid offline map database, so we can't use it.
