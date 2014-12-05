@@ -17,6 +17,7 @@ public class OfflineDatabaseHandler extends SQLiteOpenHelper {
 
     // Database Name
     public static final String DATABASE_NAME = "MapboxOfflineDatabase";
+    private String databaseFileName = null;
 
     // Table name(s)
     public static final String TABLE_METADATA = "metadata";
@@ -34,23 +35,14 @@ public class OfflineDatabaseHandler extends SQLiteOpenHelper {
     public static final String FIELD_RESOURCES_URL = "url";
     public static final String FIELD_RESOURCES_STATUS = "status";
 
-
-    // TODO - Refactor Constructor to require a database name to support 1 database / 1 downloaded map model
-
     /**
      * Constructor
      *
      * @param context Context
      */
-    private OfflineDatabaseHandler(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
-    public static synchronized OfflineDatabaseHandler getInstance(Context context) {
-        if (offlineDatabaseHandler == null) {
-            offlineDatabaseHandler = new OfflineDatabaseHandler(context);
-        }
-        return offlineDatabaseHandler;
+    public OfflineDatabaseHandler(Context context, String dbName) {
+        super(context, dbName, null, DATABASE_VERSION);
+        this.databaseFileName = dbName;
     }
 
     @Override

@@ -40,6 +40,17 @@ public class OfflineMapDatabase implements MapboxConstants {
         this.context = context;
     }
 
+    /**
+     * Constructor
+     * @param context Context of Android app
+     * @param mapID MapId
+     */
+    public OfflineMapDatabase(Context context, String mapID) {
+        super();
+        this.context = context;
+        this.mapID = mapID;
+    }
+
     public String getUniqueID() {
         return uniqueID;
     }
@@ -106,8 +117,12 @@ public class OfflineMapDatabase implements MapboxConstants {
     }
 
     public String sqliteMetadataForName(String name) {
+        if (mapID == null) {
+            return null;
+        }
+
         String query = "SELECT " + OfflineDatabaseHandler.FIELD_METADATA_VALUE + " FROM " + OfflineDatabaseHandler.TABLE_METADATA + " WHERE " + OfflineDatabaseHandler.FIELD_METADATA_NAME + "='" + name + "';";
-        SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
+        SQLiteDatabase db = OfflineDatabaseManager.getOfflineDatabaseManager(context).getOfflineDatabaseHandlerForMapId(mapID).getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         String res = cursor.getString(cursor.getColumnIndex(OfflineDatabaseHandler.FIELD_METADATA_VALUE));
@@ -117,7 +132,10 @@ public class OfflineMapDatabase implements MapboxConstants {
     }
 
     public byte[] sqliteDataForURL(String url) {
-        SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
+        if (mapID == null) {
+            return null;
+        }
+        SQLiteDatabase db = OfflineDatabaseManager.getOfflineDatabaseManager(context).getOfflineDatabaseHandlerForMapId(mapID).getReadableDatabase();
         String query = "SELECT " + OfflineDatabaseHandler.FIELD_DATA_VALUE + " FROM " + OfflineDatabaseHandler.TABLE_DATA + " WHERE " + OfflineDatabaseHandler.FIELD_DATA_ID + "= (SELECT " + OfflineDatabaseHandler.FIELD_RESOURCES_ID + " from " + OfflineDatabaseHandler.TABLE_RESOURCES + " where " + OfflineDatabaseHandler.FIELD_RESOURCES_URL + " = '" + url + "');";
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();

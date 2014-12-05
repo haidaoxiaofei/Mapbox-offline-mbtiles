@@ -231,7 +231,7 @@ public class OfflineMapDownloader implements MapboxConstants {
             return null;
         }
 */
-        OfflineMapDatabase db = new OfflineMapDatabase(context);
+        OfflineMapDatabase db = new OfflineMapDatabase(context, mapID);
         // Initialized with data from database
         db.initializeDatabase();
         return db;
@@ -372,7 +372,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         // used to stay consistent with the sqlite documentaion.
         // Continue by inserting an image blob into the data table
         //
-        SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getWritableDatabase();
+        SQLiteDatabase db = OfflineDatabaseManager.getOfflineDatabaseManager(context).getOfflineDatabaseHandlerForMapId(mapID).getWritableDatabase();
         db.beginTransaction();
 
 //      String query2 = "INSERT INTO data(value) VALUES(?);";
@@ -460,7 +460,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         query = query + ";";
 
         // Open the database
-        SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
+        SQLiteDatabase db = OfflineDatabaseManager.getOfflineDatabaseManager(context).getOfflineDatabaseHandlerForMapId(mapID).getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
             do {
@@ -482,7 +482,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         String query = "SELECT COUNT(url) AS totalFilesExpectedToWrite, (SELECT COUNT(url) FROM resources WHERE status IS NOT NULL) AS totalFilesWritten FROM resources;";
 
         boolean success = false;
-        SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getReadableDatabase();
+        SQLiteDatabase db = OfflineDatabaseManager.getOfflineDatabaseManager(context).getOfflineDatabaseHandlerForMapId(mapID).getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         this.totalFilesExpectedToWrite = cursor.getInt(0);
@@ -513,7 +513,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         [query appendString:@"CREATE TABLE data (id INTEGER PRIMARY KEY, value BLOB);\n"];
         [query appendString:@"CREATE TABLE resources (url TEXT UNIQUE, status TEXT, id INTEGER REFERENCES data);\n"];
 */
-        SQLiteDatabase db = OfflineDatabaseHandler.getInstance(context).getWritableDatabase();
+        SQLiteDatabase db = OfflineDatabaseManager.getOfflineDatabaseManager(context).getOfflineDatabaseHandlerForMapId(mapID).getWritableDatabase();
         db.beginTransaction();
         for (String key : metadata.keySet()) {
             ContentValues cv = new ContentValues();
