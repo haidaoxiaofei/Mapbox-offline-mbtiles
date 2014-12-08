@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -231,12 +232,26 @@ public class OfflineMapDownloader implements MapboxConstants {
             return null;
         }
 */
-        OfflineMapDatabase db = new OfflineMapDatabase(context, mapID);
-        // Initialized with data from database
-        db.initializeDatabase();
-        return db;
+        // TODO - Rename database file (remove -PARTIAL) and update path in db object, update path in OfflineMapDatabase, create new Handler
+        SQLiteDatabase db = OfflineDatabaseManager.getOfflineDatabaseManager(context).getOfflineDatabaseHandlerForMapId(mapID).getReadableDatabase();
+        String dbPath = db.getPath();
+        db.close();
 
-        // TODO - Rename database file (remove -PARTIAL) and update path in db object
+        if (dbPath.endsWith("-PARTIAL")) {
+            // Rename SQLlite database file
+            File oldDb = new File(dbPath);
+            String newDb = dbPath.substring(0, dbPath.indexOf("-PARTIAL"));
+            boolean result = oldDb.renameTo(new File(newDb));
+            Log.i(TAG, "Result of rename = " + result + " for oldDb = '" + dbPath + "'; newDB = '" + newDb + "'");
+        }
+
+        // TODO Update Database Handler
+
+        // Create DB object and return
+        OfflineMapDatabase offlineMapDatabase = new OfflineMapDatabase(context, mapID);
+        // Initialized with data from database
+        offlineMapDatabase.initializeDatabase();
+        return offlineMapDatabase;
 
         // Create new OfflineMapDatabase and load with recently downloaded data
 /*
