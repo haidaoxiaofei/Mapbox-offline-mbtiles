@@ -1,6 +1,5 @@
 package com.mapbox.mapboxsdk.android.testapp;
 
-import android.content.ContextWrapper;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,6 +14,8 @@ import com.mapbox.mapboxsdk.geometry.CoordinateSpan;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.offline.OfflineMapDatabase;
 import com.mapbox.mapboxsdk.offline.OfflineMapDownloader;
+import com.mapbox.mapboxsdk.overlay.OfflineMapTileProvider;
+import com.mapbox.mapboxsdk.overlay.TilesOverlay;
 import com.mapbox.mapboxsdk.views.MapView;
 
 import java.util.ArrayList;
@@ -72,6 +73,9 @@ public class SaveMapOfflineTestFragment extends Fragment {
             OfflineMapDatabase db = offlineMapDatabases.get(0);
             Toast.makeText(getActivity(), String.format("Will load MapID = '%s'", db.getMapID()), Toast.LENGTH_SHORT).show();
 
+            OfflineMapTileProvider tp = new OfflineMapTileProvider(getActivity(), db);
+            TilesOverlay to = new TilesOverlay(tp);
+            mapView.addOverlay(to);
         } else {
             Toast.makeText(getActivity(), "No Offline Maps available.", Toast.LENGTH_LONG).show();
         }
