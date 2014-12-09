@@ -1,6 +1,7 @@
 package com.mapbox.mapboxsdk.offline;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import java.util.Hashtable;
 
@@ -26,12 +27,27 @@ public class OfflineDatabaseManager {
     }
 
     public OfflineDatabaseHandler getOfflineDatabaseHandlerForMapId(String mapId) {
-        if (databaseHandlers.containsKey(mapId)) {
+        if (databaseHandlers.containsKey(mapId.toLowerCase())) {
             return databaseHandlers.get(mapId);
         }
 
         OfflineDatabaseHandler dbh = new OfflineDatabaseHandler(context, mapId.toLowerCase() + "-PARTIAL");
         databaseHandlers.put(mapId.toLowerCase(), dbh);
         return dbh;
+    }
+
+    public boolean switchHandlerFromPartialToRegular(String mapId) {
+        if (TextUtils.isEmpty(mapId)) {
+            return false;
+        }
+        String key = mapId.toLowerCase();
+        if (!databaseHandlers.containsKey(key)) {
+            return false;
+        }
+
+        OfflineDatabaseHandler dbh = new OfflineDatabaseHandler(context, key);
+        databaseHandlers.remove(key);
+        databaseHandlers.put(key, dbh);
+        return true;
     }
 }

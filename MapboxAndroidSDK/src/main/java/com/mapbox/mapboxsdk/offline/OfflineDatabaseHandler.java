@@ -15,10 +15,6 @@ public class OfflineDatabaseHandler extends SQLiteOpenHelper {
     // Database Version
     public static final int DATABASE_VERSION = 1;
 
-    // Database Name
-    public static final String DATABASE_NAME = "MapboxOfflineDatabase";
-    private String databaseFileName = null;
-
     // Table name(s)
     public static final String TABLE_METADATA = "metadata";
     public static final String TABLE_DATA = "data";
@@ -42,7 +38,6 @@ public class OfflineDatabaseHandler extends SQLiteOpenHelper {
      */
     public OfflineDatabaseHandler(Context context, String dbName) {
         super(context, dbName, null, DATABASE_VERSION);
-        this.databaseFileName = dbName;
     }
 
     @Override

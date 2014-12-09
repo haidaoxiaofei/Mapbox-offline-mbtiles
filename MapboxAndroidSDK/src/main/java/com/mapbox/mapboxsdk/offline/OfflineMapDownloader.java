@@ -232,7 +232,7 @@ public class OfflineMapDownloader implements MapboxConstants {
             return null;
         }
 */
-        // TODO - Rename database file (remove -PARTIAL) and update path in db object, update path in OfflineMapDatabase, create new Handler
+        // Rename database file (remove -PARTIAL) and update path in db object, update path in OfflineMapDatabase, create new Handler
         SQLiteDatabase db = OfflineDatabaseManager.getOfflineDatabaseManager(context).getOfflineDatabaseHandlerForMapId(mapID).getReadableDatabase();
         String dbPath = db.getPath();
         db.close();
@@ -245,7 +245,8 @@ public class OfflineMapDownloader implements MapboxConstants {
             Log.i(TAG, "Result of rename = " + result + " for oldDb = '" + dbPath + "'; newDB = '" + newDb + "'");
         }
 
-        // TODO Update Database Handler
+        // Update Database Handler
+        OfflineDatabaseManager.getOfflineDatabaseManager(context).switchHandlerFromPartialToRegular(mapID);
 
         // Create DB object and return
         OfflineMapDatabase offlineMapDatabase = new OfflineMapDatabase(context, mapID);
