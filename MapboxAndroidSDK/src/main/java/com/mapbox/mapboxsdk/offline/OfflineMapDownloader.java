@@ -2,6 +2,7 @@ package com.mapbox.mapboxsdk.offline;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -97,6 +98,20 @@ public class OfflineMapDownloader implements MapboxConstants {
         this.context = context;
 
         mutableOfflineMapDatabases = new ArrayList<OfflineMapDatabase>();
+        // Load OfflineMapDatabases from File System
+        ContextWrapper cw = new ContextWrapper(context);
+        for (String s : cw.databaseList()) {
+            if (!s.toLowerCase().contains("partial") && !s.toLowerCase().contains("journal")) {
+                // Setup Database Handler
+                OfflineDatabaseManager.getOfflineDatabaseManager(context).getOfflineDatabaseHandlerForMapId(s, true);
+
+                // Create the Database Object
+                OfflineMapDatabase omd = new OfflineMapDatabase(context, s);
+                omd.initializeDatabase();
+                mutableOfflineMapDatabases.add(omd);
+            }
+        }
+
         this.state = MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable;
     }
 
@@ -604,6 +619,12 @@ public class OfflineMapDownloader implements MapboxConstants {
             return;
         }
 
+        // Make sure this completed map doesn't exist already
+        if (isMapIdAlreadyAnOfflineMapDatabase(mapID)) {
+            Log.w(TAG, String.format("MapId '%s' has already been downloaded.  Please delete it before trying to download again.", mapID));
+            return;
+        }
+
 //        [self setUpNewDataSession];
 
 //        [_backgroundWorkQueue addOperationWithBlock:^{
@@ -937,6 +958,15 @@ public class OfflineMapDownloader implements MapboxConstants {
     public ArrayList<OfflineMapDatabase> getMutableOfflineMapDatabases() {
         // Return an array with offline map database objects representing each of the *complete* map databases on disk
         return mutableOfflineMapDatabases;
+    }
+
+    public boolean isMapIdAlreadyAnOfflineMapDatabase(String mapId) {
+        for (OfflineMapDatabase db : getMutableOfflineMapDatabases()) {
+            if (db.getMapID().equals(mapId)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void removeOfflineMapDatabase(OfflineMapDatabase offlineMapDatabase) {

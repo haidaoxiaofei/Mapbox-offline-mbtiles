@@ -36,6 +36,21 @@ public class OfflineDatabaseManager {
         return dbh;
     }
 
+    public OfflineDatabaseHandler getOfflineDatabaseHandlerForMapId(String mapId, boolean fromFileSystem) {
+        if (!fromFileSystem) {
+            return getOfflineDatabaseHandlerForMapId(mapId);
+        }
+
+        String key = mapId.toLowerCase();
+        if (databaseHandlers.containsKey(key)) {
+            return databaseHandlers.get(key);
+        }
+
+        OfflineDatabaseHandler dbh = new OfflineDatabaseHandler(context, key);
+        databaseHandlers.put(key, dbh);
+        return dbh;
+    }
+
     public boolean switchHandlerFromPartialToRegular(String mapId) {
         if (TextUtils.isEmpty(mapId)) {
             return false;
