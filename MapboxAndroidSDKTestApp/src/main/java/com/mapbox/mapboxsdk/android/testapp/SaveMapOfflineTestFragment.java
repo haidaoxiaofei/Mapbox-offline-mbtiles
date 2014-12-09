@@ -8,12 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.CoordinateRegion;
 import com.mapbox.mapboxsdk.geometry.CoordinateSpan;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.offline.OfflineMapDatabase;
 import com.mapbox.mapboxsdk.offline.OfflineMapDownloader;
 import com.mapbox.mapboxsdk.views.MapView;
+
+import java.util.ArrayList;
 
 public class SaveMapOfflineTestFragment extends Fragment {
 
@@ -61,13 +65,15 @@ public class SaveMapOfflineTestFragment extends Fragment {
 
     public void handleLoadMapButton(View view) {
         Log.i(TAG, "handleLoadMapButton()");
+        OfflineMapDownloader offlineMapDownloader = OfflineMapDownloader.getOfflineMapDownloader(getActivity());
 
-        // Test access to database files for counting purposes
-        ContextWrapper cw = new ContextWrapper(getActivity());
-        String[] dbs = cw.databaseList();
-        Log.i(TAG, "Number of dbs = " + dbs.length);
-        for (String s : dbs) {
-            Log.i(TAG, "db = " + s + "; path = " + cw.getDatabasePath(s).toString());
+        ArrayList<OfflineMapDatabase> offlineMapDatabases = offlineMapDownloader.getMutableOfflineMapDatabases();
+        if (offlineMapDatabases != null && offlineMapDatabases.size() > 0) {
+            OfflineMapDatabase db = offlineMapDatabases.get(0);
+            Toast.makeText(getActivity(), String.format("Will load MapID = '%s'", db.getMapID()), Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(getActivity(), "No Offline Maps available.", Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -11,19 +11,30 @@
         android:layout_height="fill_parent"
         mapbox:mapid="@string/mapbox_id_street"/>
 
-    <Button
-        android:id="@+id/saveMapButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/saveMapButtonText"
-        android:layout_gravity="right|bottom"
-        />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/buttonsrow"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Load Map"
-        android:id="@+id/loadMapButton"
-        android:layout_gravity="center_horizontal|bottom" />
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:weightSum="0.66">
+        <Button
+            android:id="@+id/loadMapButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="-5dp"
+            android:layout_weight="0.33"
+            android:text="@string/loadMapButtonText"
+            />
+        <Button
+            android:id="@+id/saveMapButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="-5dp"
+            android:layout_weight="0.33"
+            android:text="@string/saveMapButtonText"
+            />
+    </LinearLayout>
 
 </FrameLayout>

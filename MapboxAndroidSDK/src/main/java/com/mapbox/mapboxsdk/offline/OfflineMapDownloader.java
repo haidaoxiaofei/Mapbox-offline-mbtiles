@@ -433,8 +433,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         //
         this.totalFilesWritten += 1;
 //            [self notifyDelegateOfProgress];
-        Log.i(TAG, "totalFilesWritten = " + this.totalFilesWritten + "; totalFilesExpectedToWrite = " + this.totalFilesExpectedToWrite);
-
+        Log.d(TAG, "totalFilesWritten = " + this.totalFilesWritten + "; totalFilesExpectedToWrite = " + this.totalFilesExpectedToWrite);
 
         // If all the downloads are done, clean up and notify the delegate
         //
