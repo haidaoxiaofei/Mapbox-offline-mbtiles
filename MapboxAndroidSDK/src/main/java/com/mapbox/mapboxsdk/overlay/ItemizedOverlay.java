@@ -148,8 +148,12 @@ public abstract class ItemizedOverlay extends SafeDrawOverlay implements Overlay
     /**
      * Draws an item located at the provided screen coordinates to the canvas.
      *
-     * @param canvas what the item is drawn upon
-     * @param item the item to be drawn
+     * @param canvas what the item is drawn upon.
+     * @param item the item to be drawn.
+     * @param projection the projection to use.
+     * @param aMapOrientation
+     * @param mapBounds
+     * @param mapScale
      */
     protected void onDrawItem(ISafeCanvas canvas, final Marker item, final Projection projection,
             final float aMapOrientation, final RectF mapBounds, final float mapScale) {
