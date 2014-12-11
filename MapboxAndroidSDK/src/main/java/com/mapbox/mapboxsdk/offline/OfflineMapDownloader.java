@@ -689,7 +689,7 @@ public class OfflineMapDownloader implements MapboxConstants {
             maxY = Double.valueOf(Math.floor((1.0 - (Math.log(Math.tan(minLat * MathConstants.PI / 180.0) + 1.0 / Math.cos(minLat * MathConstants.PI / 180.0)) / MathConstants.PI)) / 2.0 * tilesPerSide)).intValue();
             for (int x = minX; x <= maxX; x++) {
                 for (int y = minY; y <= maxY; y++) {
-                    urls.add(String.format(MAPBOX_BASE_URL + "%s/%d/%d/%d%s.%s%s", this.mapID, zoom, x, y, "@2x", MapboxUtils.qualityExtensionForImageQuality(this.imageQuality), ""));
+                    urls.add(MapboxUtils.getMapTileURL(this.mapID, zoom, x, y, this.imageQuality));
                 }
             }
         }

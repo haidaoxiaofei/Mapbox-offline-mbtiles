@@ -63,6 +63,10 @@ public class OfflineMapDatabase implements MapboxConstants {
         return path;
     }
 
+    public RasterImageQuality getImageQuality() {
+        return imageQuality;
+    }
+
     public boolean initializeDatabase() {
 
         String uniqueID = sqliteMetadataForName("uniqueID");

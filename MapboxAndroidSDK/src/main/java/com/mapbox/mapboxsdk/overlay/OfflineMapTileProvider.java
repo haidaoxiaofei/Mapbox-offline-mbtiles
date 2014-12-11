@@ -8,6 +8,8 @@ import com.mapbox.mapboxsdk.exceptions.OfflineDatabaseException;
 import com.mapbox.mapboxsdk.offline.OfflineMapDatabase;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
+import com.mapbox.mapboxsdk.util.MapboxUtils;
+
 import java.io.ByteArrayInputStream;
 
 public class OfflineMapTileProvider extends MapTileLayerBase {
@@ -25,12 +27,10 @@ public class OfflineMapTileProvider extends MapTileLayerBase {
     public Drawable getMapTile(MapTile pTile, boolean allowRemote) {
         Log.i(TAG, String.format("getMapTile() with maptile path = '%s'", pTile.getPath()));
         try {
-            // TODO - Build URL to match url in database
-//            String.format(MAPBOX_BASE_URL + "%s/%d/%d/%d%s.%s%s", this.mapID, zoom, x, y, "@2x", MapboxUtils.qualityExtensionForImageQuality(this.imageQuality), "");
-
-            byte[] data = offlineMapDatabase.dataForURL(pTile.getPath());
-            BitmapDrawable bd = new BitmapDrawable(context.getResources(), new ByteArrayInputStream(data));
-            return bd;
+            // Build URL to match url in database
+            String url = MapboxUtils.getMapTileURL(offlineMapDatabase.getMapID(), pTile.getZ(), pTile.getX(), pTile.getY(), offlineMapDatabase.getImageQuality());
+            byte[] data = offlineMapDatabase.dataForURL(url);
+            return new BitmapDrawable(context.getResources(), new ByteArrayInputStream(data));
         } catch (OfflineDatabaseException e) {
             e.printStackTrace();
         }

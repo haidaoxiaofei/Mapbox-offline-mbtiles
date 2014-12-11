@@ -14,7 +14,7 @@ public class MapboxUtils implements MapboxConstants {
                 qualityExtension = "png32";
                 break;
             case MBXRasterImageQualityPNG64:
-                qualityExtension = "png64";;
+                qualityExtension = "png64";
                 break;
             case MBXRasterImageQualityPNG128:
                 qualityExtension = "png128";
@@ -75,5 +75,9 @@ public class MapboxUtils implements MapboxConstants {
 
         // Using API 3 for now
         return String.format(MapboxConstants.MAPBOX_BASE_URL + "/marker/%s", marker);
+    }
+
+    public static String getMapTileURL(String mapID, int zoom, int x, int y, RasterImageQuality imageQuality) {
+        return String.format(MAPBOX_BASE_URL + "%s/%d/%d/%d%s.%s%s", mapID, zoom, x, y, "@2x", MapboxUtils.qualityExtensionForImageQuality(imageQuality), "");
     }
 }
