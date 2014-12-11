@@ -9,7 +9,6 @@ import com.mapbox.mapboxsdk.offline.OfflineMapDatabase;
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase;
 import com.mapbox.mapboxsdk.util.MapboxUtils;
-
 import java.io.ByteArrayInputStream;
 
 public class OfflineMapTileProvider extends MapTileLayerBase {
@@ -40,6 +39,8 @@ public class OfflineMapTileProvider extends MapTileLayerBase {
 
     @Override
     public void detach() {
-
+        if (getTileSource() != null) {
+            getTileSource().detach();
+        }
     }
 }
