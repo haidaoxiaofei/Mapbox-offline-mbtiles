@@ -14,13 +14,13 @@ import com.mapbox.mapboxsdk.geometry.CoordinateSpan;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.offline.OfflineMapDatabase;
 import com.mapbox.mapboxsdk.offline.OfflineMapDownloader;
+import com.mapbox.mapboxsdk.offline.OfflineMapDownloaderListener;
 import com.mapbox.mapboxsdk.overlay.OfflineMapTileProvider;
 import com.mapbox.mapboxsdk.overlay.TilesOverlay;
 import com.mapbox.mapboxsdk.views.MapView;
-
 import java.util.ArrayList;
 
-public class SaveMapOfflineTestFragment extends Fragment {
+public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDownloaderListener {
 
     private static final String TAG = "SaveMapOfflineTestFragment";
 
@@ -67,6 +67,7 @@ public class SaveMapOfflineTestFragment extends Fragment {
     public void handleLoadMapButton(View view) {
         Log.i(TAG, "handleLoadMapButton()");
         OfflineMapDownloader offlineMapDownloader = OfflineMapDownloader.getOfflineMapDownloader(getActivity());
+        offlineMapDownloader.addOfflineMapDownloaderListener(this);
 
         ArrayList<OfflineMapDatabase> offlineMapDatabases = offlineMapDownloader.getMutableOfflineMapDatabases();
         if (offlineMapDatabases != null && offlineMapDatabases.size() > 0) {
@@ -79,5 +80,40 @@ public class SaveMapOfflineTestFragment extends Fragment {
         } else {
             Toast.makeText(getActivity(), "No Offline Maps available.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void stateChanged(OfflineMapDownloader.MBXOfflineMapDownloaderState newState) {
+        Log.i(TAG, "stateChanged");
+    }
+
+    @Override
+    public void initialCountOfFiles(Integer numberOfFiles) {
+        Log.i(TAG, "stateChanged");
+    }
+
+    @Override
+    public void progressUpdate(Integer numberOfFilesWritten, Integer numberOfFilesExcepted) {
+        Log.i(TAG, "progressUpdate");
+    }
+
+    @Override
+    public void networkConnectivityError(Throwable error) {
+        Log.i(TAG, "networkConnectivityError");
+    }
+
+    @Override
+    public void sqlLiteError(Throwable error) {
+        Log.i(TAG, "sqlLiteError");
+    }
+
+    @Override
+    public void httpStatusError(Throwable error) {
+        Log.i(TAG, "httpStatusError");
+    }
+
+    @Override
+    public void completionOfOfflineDatabaseMap(OfflineMapDatabase offlineMapDatabase) {
+        Log.i(TAG, "completionOfOfflineDatabaseMap");
     }
 }
