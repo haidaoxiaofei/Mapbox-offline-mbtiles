@@ -278,14 +278,18 @@ public class OfflineMapDownloader implements MapboxConstants {
             AsyncTask<String, Void, Void> foo = new AsyncTask<String, Void, Void>() {
                 @Override
                 protected Void doInBackground(String... params) {
+                    HttpURLConnection conn = null;
                     try {
-                        HttpURLConnection conn = NetworkUtils.getHttpURLConnection(new URL(params[0]));
+                        conn = NetworkUtils.getHttpURLConnection(new URL(params[0]));
                         Log.d(TAG, "URL to download = " + conn.getURL().toString());
                         conn.setConnectTimeout(60000);
                         conn.connect();
-                        if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                            Log.w(TAG, "HTTP Error connecting.  Response Code = " + conn.getResponseCode());
-                            throw new IOException();
+                        int rc = conn.getResponseCode();
+                        if (rc != HttpURLConnection.HTTP_OK) {
+                            String msg = String.format("HTTP Error connection.  Response Code = %d", rc);
+                            Log.w(TAG, msg);
+                            notifyDelegateOfHTTPStatusError(rc, params[0]);
+                            throw new IOException(msg);
                         }
 
                         ByteArrayOutputStream bais = new ByteArrayOutputStream();
@@ -312,8 +316,12 @@ public class OfflineMapDownloader implements MapboxConstants {
                         }
                         sqliteSaveDownloadedData(bais.toByteArray(), url);
                     } catch (IOException e) {
+                        Log.e(TAG, e.getMessage());
                         e.printStackTrace();
-//                            [self notifyDelegateOfHTTPStatusError:((NSHTTPURLResponse *) response).statusCode url:response.URL];
+                    } finally {
+                        if (conn != null) {
+                            conn.disconnect();
+                        }
                     }
 
                     return null;
