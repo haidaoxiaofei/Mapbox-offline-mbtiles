@@ -41,12 +41,14 @@ public class OfflineMapDownloader implements MapboxConstants {
 
     private static OfflineMapDownloader offlineMapDownloader;
 
+    private ArrayList<OfflineMapDownloaderListener> listeners;
+
     private Context context;
 
     /**
      * The possible states of the offline map downloader.
      */
-    enum MBXOfflineMapDownloaderState {
+    public enum MBXOfflineMapDownloaderState {
         /**
          * An offline map download job is in progress.
          */
@@ -97,6 +99,8 @@ public class OfflineMapDownloader implements MapboxConstants {
         super();
         this.context = context;
 
+        listeners = new ArrayList<OfflineMapDownloaderListener>();
+
         mutableOfflineMapDatabases = new ArrayList<OfflineMapDatabase>();
         // Load OfflineMapDatabases from File System
         ContextWrapper cw = new ContextWrapper(context);
@@ -120,6 +124,14 @@ public class OfflineMapDownloader implements MapboxConstants {
             offlineMapDownloader = new OfflineMapDownloader(context);
         }
         return offlineMapDownloader;
+    }
+
+    public boolean addOfflineMapDownloaderListener(OfflineMapDownloaderListener listener) {
+        return listeners.add(listener);
+    }
+
+    public boolean removeOfflineMapDownloaderListener(OfflineMapDownloaderListener listener) {
+        return listeners.remove(listener);
     }
 
 /*
