@@ -383,7 +383,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         // Update the progress
         //
         this.totalFilesWritten += 1;
-//            [self notifyDelegateOfProgress];
+        notifyDelegateOfProgress();
         Log.d(TAG, "totalFilesWritten = " + this.totalFilesWritten + "; totalFilesExpectedToWrite = " + this.totalFilesExpectedToWrite);
 
         // If all the downloads are done, clean up and notify the delegate
@@ -420,10 +420,10 @@ public class OfflineMapDownloader implements MapboxConstants {
             if(offlineMap != null) {
                 this.mutableOfflineMapDatabases.add(offlineMap);
             }
-//                    [self notifyDelegateOfCompletionWithOfflineMapDatabase:offlineMap withError:error];
+            notifyDelegateOfCompletionWithOfflineMapDatabase(offlineMap);
 
             this.state = MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable;
-//                    [self notifyDelegateOfStateChange];
+            notifyDelegateOfStateChange();
         }
     }
 
