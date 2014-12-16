@@ -133,6 +133,6 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
     @Override
     public void completionOfOfflineDatabaseMap(OfflineMapDatabase offlineMapDatabase) {
         Log.i(TAG, "completionOfOfflineDatabaseMap");
-        Toast.makeText(getActivity(), "Finished Saving Database", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getActivity(), "Finished Saving Database", Toast.LENGTH_LONG).show();
     }
 }

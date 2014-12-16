@@ -29,6 +29,12 @@ public class OfflineMapTileProvider extends MapTileLayerBase {
             // Build URL to match url in database
             String url = MapboxUtils.getMapTileURL(offlineMapDatabase.getMapID(), pTile.getZ(), pTile.getX(), pTile.getY(), offlineMapDatabase.getImageQuality());
             byte[] data = offlineMapDatabase.dataForURL(url);
+
+            if (data == null || data.length == 0) {
+                // No data found, just return null so that default gray screen is displayed.
+                return null;
+            }
+            // Return the tile image
             return new BitmapDrawable(context.getResources(), new ByteArrayInputStream(data));
         } catch (OfflineDatabaseException e) {
             e.printStackTrace();

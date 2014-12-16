@@ -121,10 +121,12 @@ public class OfflineMapDatabase implements MapboxConstants {
 
     public byte[] dataForURL(String url) throws OfflineDatabaseException {
         byte[] data = sqliteDataForURL(url);
+/*
         if (data == null || data.length == 0) {
             String reason = String.format("The offline database has no data for %s", url);
             throw new OfflineDatabaseException(reason);
         }
+*/
         return data;
     }
 
