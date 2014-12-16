@@ -84,7 +84,7 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
 
     @Override
     public void stateChanged(OfflineMapDownloader.MBXOfflineMapDownloaderState newState) {
-        Log.i(TAG, "stateChanged");
+        Log.i(TAG, String.format("stateChanged to %s", newState));
     }
 
     @Override
@@ -115,5 +115,6 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
     @Override
     public void completionOfOfflineDatabaseMap(OfflineMapDatabase offlineMapDatabase) {
         Log.i(TAG, "completionOfOfflineDatabaseMap");
+        Toast.makeText(getActivity(), "Finished Saving Database", Toast.LENGTH_LONG).show();
     }
 }
