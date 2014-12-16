@@ -25,6 +25,7 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
     private static final String TAG = "SaveMapOfflineTestFragment";
 
     private MapView mapView;
+    private TilesOverlay offlineMapOverlay;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +60,14 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
             }
         });
 
+        Button resetButton = (Button) view.findViewById(R.id.resetButton);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleResetButton(v);
+            }
+        });
+
         return view;
     }
 
@@ -83,8 +92,8 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
             Toast.makeText(getActivity(), String.format("Will load MapID = '%s'", db.getMapID()), Toast.LENGTH_SHORT).show();
 
             OfflineMapTileProvider tp = new OfflineMapTileProvider(getActivity(), db);
-            TilesOverlay to = new TilesOverlay(tp);
-            mapView.addOverlay(to);
+            offlineMapOverlay = new TilesOverlay(tp);
+            mapView.addOverlay(offlineMapOverlay);
         } else {
             Toast.makeText(getActivity(), "No Offline Maps available.", Toast.LENGTH_LONG).show();
         }
@@ -98,6 +107,14 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
         } else {
             Toast.makeText(getActivity(), "It's not an offline database yet.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void handleResetButton(View view) {
+        Log.i(TAG, "handleResetButton()");
+
+        mapView.removeOverlay(offlineMapOverlay);
+        mapView.setCenter(new LatLng(29.94423, -90.09201));
+        mapView.setZoom(12);
     }
 
     @Override

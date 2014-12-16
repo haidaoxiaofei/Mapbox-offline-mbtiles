@@ -20,11 +20,20 @@
         android:orientation="horizontal"
         android:weightSum="1.0">
         <Button
+            android:id="@+id/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="-5dp"
+            android:layout_weight="0.25"
+            android:text="@string/resetMapButtonText"
+            />
+
+        <Button
             android:id="@+id/deleteMapsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="-5dp"
-            android:layout_weight="0.33"
+            android:layout_weight="0.25"
             android:text="@string/deleteMapsButtonText"
             />
         <Button
@@ -32,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="-5dp"
-            android:layout_weight="0.33"
+            android:layout_weight="0.25"
             android:text="@string/loadMapButtonText"
             />
         <Button
@@ -40,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="-5dp"
-            android:layout_weight="0.33"
+            android:layout_weight="0.25"
             android:text="@string/saveMapButtonText"
             />
     </LinearLayout>

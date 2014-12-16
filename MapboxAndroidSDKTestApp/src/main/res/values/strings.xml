@@ -26,5 +26,6 @@
     <string name="saveMapButtonText">Save Map</string>
     <string name="loadMapButtonText">Load Map</string>
     <string name="deleteMapsButtonText">Delete Map</string>
+    <string name="resetMapButtonText">Reset</string>
 
 </resources>
