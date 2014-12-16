@@ -197,6 +197,10 @@ public class MapController implements MapViewConstants {
     }
 
     public boolean setZoomAnimated(final float zoomlevel, final ILatLng latlong, final boolean move, final boolean userAction) {
+        return setZoomAnimated(zoomlevel, latlong, move, userAction, null);
+    }
+
+    public boolean setZoomAnimated(final float zoomlevel, final ILatLng latlong, final boolean move, final boolean userAction, Animator.AnimatorListener listener) {
         if (userAction && mMapView.isAnimating()) {
             return false;
         }
@@ -271,6 +275,9 @@ public class MapController implements MapViewConstants {
                     super.onAnimationEnd(animation);
                 }
             });
+            if (listener != null) {
+                anim.addListener(listener);
+            }
             mCurrentAnimation = anim;
             anim.start();
             return true;

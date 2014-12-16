@@ -1,5 +1,7 @@
 package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
+import android.os.AsyncTask;
+
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import org.json.JSONArray;
@@ -83,22 +85,52 @@ public class BingTileLayer extends WebSourceTileLayer {
                 if (mHasMetadata) {
                     return;
                 }
-                String url = String.format(BASE_URL_PATTERN, mStyle, mBingMapKey);
-
-                HttpURLConnection connection = NetworkUtils.getHttpURLConnection(new URL(url));
-                BufferedReader rd = new BufferedReader(
-                        new InputStreamReader(connection.getInputStream(), Charset.forName("UTF-8")));
-
-                String content = readAll(rd);
-
-                String metadataUrl = getInstanceFromJSON(content).replace("{culture}", "en");
-
-                mUrl = metadataUrl;
-
-                mHasMetadata = true;
+                new RetrieveMetadata(mBingMapKey, mStyle) {
+                    @Override
+                    protected void onPostExecute(Boolean success) {
+                        mHasMetadata = success == Boolean.TRUE;
+                    }
+                }.execute();
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private class RetrieveMetadata extends AsyncTask<Void, Void, Boolean> {
+        String mKey;
+        String mStyle;
+
+        public RetrieveMetadata(String key, String style) {
+            mKey = key;
+            mStyle = style;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            try {
+                synchronized (BingTileLayer.this) {
+                    if (mHasMetadata) {
+                        return null;
+                    }
+                    String url = String.format(BASE_URL_PATTERN, mStyle, mKey);
+
+                    HttpURLConnection connection = NetworkUtils.getHttpURLConnection(new URL(url));
+                    BufferedReader rd = new BufferedReader(
+                            new InputStreamReader(connection.getInputStream(), Charset.forName("UTF-8")));
+
+                    String content = readAll(rd);
+
+                    String metadataUrl = getInstanceFromJSON(content).replace("{culture}", "en");
+
+                    mUrl = metadataUrl;
+
+                    return Boolean.TRUE;
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+                return Boolean.FALSE;
+            }
         }
     }
 

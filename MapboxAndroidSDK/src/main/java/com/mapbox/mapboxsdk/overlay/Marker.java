@@ -49,6 +49,9 @@ public class Marker {
 
     /**
      * Construct a new Marker, given title, description, and place
+     * @param title Marker title
+     * @param description Marker description
+     * @param latLng Marker position
      */
     public Marker(String title, String description, LatLng latLng) {
         this(null, title, description, latLng);
@@ -225,6 +228,11 @@ public class Marker {
         mParentHolder = o;
     }
 
+    /**
+     * Gets the drawable for the marker
+     * @param stateBitset
+     * @return marker drawable corresponding to stateBitset
+     */
     public Drawable getMarker(final int stateBitset) {
         // marker not specified
         if (mMarker == null) {
@@ -244,6 +252,10 @@ public class Marker {
         invalidate();
     }
 
+    /**
+     * Sets the marker hotspot
+     * @param place
+     */
     public void setHotspot(HotspotPlace place) {
         if (place == null) {
             place = HotspotPlace.BOTTOM_CENTER; //use same default than in osmdroid.
@@ -332,6 +344,8 @@ public class Marker {
 
     /**
      * Get the current position of the marker in pixels
+     * @param projection
+     * @param reuse
      */
     public PointF getPositionOnScreen(final Projection projection, final PointF reuse) {
         return projection.toPixels(mCurMapCoords, reuse);
