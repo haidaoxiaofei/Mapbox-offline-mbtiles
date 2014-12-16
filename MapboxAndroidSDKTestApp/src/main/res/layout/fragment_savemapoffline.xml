@@ -18,7 +18,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
-        android:weightSum="0.66">
+        android:weightSum="1.0">
+        <Button
+            android:id="@+id/deleteMapsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="-5dp"
+            android:layout_weight="0.33"
+            android:text="@string/deleteMapsButtonText"
+            />
         <Button
             android:id="@+id/loadMapButton"
             android:layout_width="wrap_content"

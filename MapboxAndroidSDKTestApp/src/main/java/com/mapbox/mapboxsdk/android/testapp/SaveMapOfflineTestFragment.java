@@ -51,6 +51,14 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
             }
         });
 
+        Button deleteMapButton = (Button) view.findViewById(R.id.deleteMapsButton);
+        deleteMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleDeleteMapButton(v);
+            }
+        });
+
         return view;
     }
 
@@ -79,6 +87,16 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
             mapView.addOverlay(to);
         } else {
             Toast.makeText(getActivity(), "No Offline Maps available.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void handleDeleteMapButton(View view) {
+        Log.i(TAG, "handleDeleteMapButton()");
+        OfflineMapDownloader offlineMapDownloader = OfflineMapDownloader.getOfflineMapDownloader(getActivity());
+        if (offlineMapDownloader.isMapIdAlreadyAnOfflineMapDatabase(getString(R.string.mapbox_id_street))) {
+            offlineMapDownloader.removeOfflineMapDatabaseWithID(getString(R.string.mapbox_id_street));
+        } else {
+            Toast.makeText(getActivity(), "It's not an offline database yet.", Toast.LENGTH_LONG).show();
         }
     }
 

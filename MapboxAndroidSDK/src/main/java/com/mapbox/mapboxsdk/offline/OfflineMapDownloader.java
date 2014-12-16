@@ -924,15 +924,23 @@ public class OfflineMapDownloader implements MapboxConstants {
         //
         offlineMapDatabase.invalidate();
 
-
         // Remove the offline map object from the array and delete it's backing database
         //
         mutableOfflineMapDatabases.remove(offlineMapDatabase);
+
+        // Remove Offline Database SQLite file
+        SQLiteDatabase db = OfflineDatabaseManager.getOfflineDatabaseManager(context).getOfflineDatabaseHandlerForMapId(offlineMapDatabase.getMapID()).getReadableDatabase();
+        String dbPath = db.getPath();
+        db.close();
+
+        File dbFile = new File(dbPath);
+        boolean result = dbFile.delete();
+        Log.i(TAG, String.format("Result of removing database file: %s", result));
     }
 
-    public void removeOfflineMapDatabaseWithID(String uniqueID) {
+    public void removeOfflineMapDatabaseWithID(String mid) {
         for (OfflineMapDatabase database : getMutableOfflineMapDatabases()) {
-            if (database.getUniqueID().equals(uniqueID)) {
+            if (database.getMapID().equals(mid)) {
                 removeOfflineMapDatabase(database);
                 return;
             }
