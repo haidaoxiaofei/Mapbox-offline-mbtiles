@@ -21,6 +21,8 @@ public final class LatLng implements ILatLng, GeoConstants, MathConstants, Parce
 
     /**
      * Construct a new latitude, longitude point given float arguments
+     * @param aLatitude
+     * @param aLongitude
      */
     public LatLng(final double aLatitude, final double aLongitude) {
         this.latitude = aLatitude;
@@ -29,6 +31,9 @@ public final class LatLng implements ILatLng, GeoConstants, MathConstants, Parce
 
     /**
      * Construct a new latitude, longitude, altitude point given float arguments
+     * @param aLatitude
+     * @param aLongitude
+     * @param aAltitude
      */
     public LatLng(final double aLatitude, final double aLongitude, final double aAltitude) {
         this.latitude = aLatitude;
@@ -38,6 +43,7 @@ public final class LatLng implements ILatLng, GeoConstants, MathConstants, Parce
 
     /**
      * Transform a Location into a LatLng point
+     * @param aLocation
      */
     public LatLng(final Location aLocation) {
         this(aLocation.getLatitude(), aLocation.getLongitude(), aLocation.getAltitude());
@@ -45,6 +51,7 @@ public final class LatLng implements ILatLng, GeoConstants, MathConstants, Parce
 
     /**
      * Clone an existing latitude longitude point
+     * @param aLatLng
      */
     public LatLng(final LatLng aLatLng) {
         this.latitude = aLatLng.latitude;
