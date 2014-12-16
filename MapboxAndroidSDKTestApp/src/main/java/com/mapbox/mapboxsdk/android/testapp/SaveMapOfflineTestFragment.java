@@ -103,7 +103,8 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
         Log.i(TAG, "handleDeleteMapButton()");
         OfflineMapDownloader offlineMapDownloader = OfflineMapDownloader.getOfflineMapDownloader(getActivity());
         if (offlineMapDownloader.isMapIdAlreadyAnOfflineMapDatabase(getString(R.string.mapbox_id_street))) {
-            offlineMapDownloader.removeOfflineMapDatabaseWithID(getString(R.string.mapbox_id_street));
+            boolean result = offlineMapDownloader.removeOfflineMapDatabaseWithID(getString(R.string.mapbox_id_street));
+            Toast.makeText(getActivity(), String.format("Result of deletion attempt: '%s'", result), Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getActivity(), "It's not an offline database yet.", Toast.LENGTH_LONG).show();
         }

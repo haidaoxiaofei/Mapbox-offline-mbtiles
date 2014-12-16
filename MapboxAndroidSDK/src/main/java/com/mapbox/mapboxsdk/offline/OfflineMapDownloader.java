@@ -919,7 +919,7 @@ public class OfflineMapDownloader implements MapboxConstants {
         return false;
     }
 
-    public void removeOfflineMapDatabase(OfflineMapDatabase offlineMapDatabase) {
+    public boolean removeOfflineMapDatabase(OfflineMapDatabase offlineMapDatabase) {
         // Mark the offline map object as invalid in case there are any references to it still floating around
         //
         offlineMapDatabase.invalidate();
@@ -936,14 +936,15 @@ public class OfflineMapDownloader implements MapboxConstants {
         File dbFile = new File(dbPath);
         boolean result = dbFile.delete();
         Log.i(TAG, String.format("Result of removing database file: %s", result));
+        return result;
     }
 
-    public void removeOfflineMapDatabaseWithID(String mid) {
+    public boolean removeOfflineMapDatabaseWithID(String mid) {
         for (OfflineMapDatabase database : getMutableOfflineMapDatabases()) {
             if (database.getMapID().equals(mid)) {
-                removeOfflineMapDatabase(database);
-                return;
+                return removeOfflineMapDatabase(database);
             }
         }
+        return false;
     }
 }
