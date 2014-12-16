@@ -24,7 +24,7 @@ public class OfflineMapTileProvider extends MapTileLayerBase {
 
     @Override
     public Drawable getMapTile(MapTile pTile, boolean allowRemote) {
-        Log.i(TAG, String.format("getMapTile() with maptile path = '%s'", pTile.getPath()));
+        Log.d(TAG, String.format("getMapTile() with maptile path = '%s'", pTile.getPath()));
         try {
             // Build URL to match url in database
             String url = MapboxUtils.getMapTileURL(offlineMapDatabase.getMapID(), pTile.getZ(), pTile.getX(), pTile.getY(), offlineMapDatabase.getImageQuality());
