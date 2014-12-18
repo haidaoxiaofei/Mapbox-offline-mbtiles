@@ -84,12 +84,13 @@ public class BingTileLayer extends WebSourceTileLayer {
                 if (mHasMetadata) {
                     return;
                 }
-                new RetrieveMetadata(mBingMapKey, mStyle) {
+                RetrieveMetadata rm = new RetrieveMetadata(mBingMapKey, mStyle) {
                     @Override
                     protected void onPostExecute(Boolean success) {
                         mHasMetadata = success == Boolean.TRUE;
                     }
-                }.execute();
+                };
+                rm.execute();
             }
         } catch (Exception e) {
             e.printStackTrace();
