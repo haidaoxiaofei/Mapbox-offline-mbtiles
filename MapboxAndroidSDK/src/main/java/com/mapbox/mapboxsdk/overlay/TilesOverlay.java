@@ -131,10 +131,6 @@ public class TilesOverlay extends SafeDrawOverlay {
         // Calculate the half-world size
         final Projection pj = mapView.getProjection();
 
-//        if (mNuberOfTiles == 0) {
-//            mNuberOfTiles = pj.getNumberOfTiles();
-//        }
-
         c.getClipBounds(mClipRect);
         float zoomDelta = (float) (Math.log(mapView.getScale()) / Math.log(2d));
         final float zoomLevel = pj.getZoomLevel();
