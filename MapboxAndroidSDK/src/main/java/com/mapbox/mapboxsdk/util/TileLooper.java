@@ -21,7 +21,7 @@ public abstract class TileLooper {
     protected List<CacheableBitmapDrawable> mBeingUsedDrawables =
             new ArrayList<CacheableBitmapDrawable>();
 
-    public final void loop(final Canvas pCanvas, final String pCacheKey, final float pZoomLevel,
+    public final int loop(final Canvas pCanvas, final String pCacheKey, final float pZoomLevel,
             final int pTileSizePx, final Rect pViewPort, final Rect pClipRect) {
         // Calculate the amount of tiles needed for each side around the center one.
         Projection.pixelXYToTileXY(pViewPort.left, pViewPort.top, mUpperLeft);
@@ -47,6 +47,9 @@ public abstract class TileLooper {
             }
         }
         finalizeLoop();
+
+        /* return number of tiles looped */
+        return  (mLowerRight.y - mUpperLeft.y) * (mLowerRight.x - mUpperLeft.x);
     }
 
     public abstract void initializeLoop(float pZoomLevel, int pTileSizePx);

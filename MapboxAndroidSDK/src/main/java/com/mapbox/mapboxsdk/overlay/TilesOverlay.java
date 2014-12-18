@@ -33,6 +33,7 @@ import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 public class TilesOverlay extends SafeDrawOverlay {
 
     public static final int MENU_OFFLINE = getSafeMenuId();
+    private int mNuberOfTiles;
 
     /**
      * Current tile source
@@ -71,6 +72,7 @@ public class TilesOverlay extends SafeDrawOverlay {
         mLoadingPaint.setFilterBitmap(true);
         mLoadingPaint.setColor(mLoadingLineColor);
         mLoadingPaint.setStrokeWidth(0);
+        mNuberOfTiles = 0;
     }
 
     public static SafePaint getDebugPaint() {
@@ -128,6 +130,7 @@ public class TilesOverlay extends SafeDrawOverlay {
 
         // Calculate the half-world size
         final Projection pj = mapView.getProjection();
+
         c.getClipBounds(mClipRect);
         float zoomDelta = (float) (Math.log(mapView.getScale()) / Math.log(2d));
         final float zoomLevel = pj.getZoomLevel();
@@ -182,7 +185,7 @@ public class TilesOverlay extends SafeDrawOverlay {
                           final Rect viewPort, final Rect pClipRect) {
 
 //        Log.d(TAG, "drawTiles() start.");
-        mTileLooper.loop(c, mTileProvider.getCacheKey(), zoomLevel, tileSizePx, viewPort, pClipRect);
+        mNuberOfTiles = mTileLooper.loop(c, mTileProvider.getCacheKey(), zoomLevel, tileSizePx, viewPort, pClipRect);
 
         // draw a cross at center in debug mode
         if (UtilConstants.DEBUGMODE) {
@@ -232,12 +235,11 @@ public class TilesOverlay extends SafeDrawOverlay {
                 drawable.setBounds(mTileRect);
                 drawable.draw(pCanvas);
             }
-/*
-            else
-            {
-//                Log.w(TAG, "tile should have been drawn to canvas, but it was null.  tile = '" + pTile + "'");
+
+            else {
+                mTileProvider.memoryCacheNeedsMoreMemory(mNuberOfTiles);
+                //Log.w(TAG, "tile should have been drawn to canvas, but it was null.  tile = '" + pTile + "'");
             }
-*/
 
             if (UtilConstants.DEBUGMODE) {
                 ISafeCanvas canvas = (ISafeCanvas) pCanvas;
