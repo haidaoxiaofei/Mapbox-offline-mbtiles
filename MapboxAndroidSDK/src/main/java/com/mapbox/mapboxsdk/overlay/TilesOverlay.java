@@ -101,6 +101,7 @@ public class TilesOverlay extends SafeDrawOverlay {
 
     /**
      * Whether to use the network connection if it's available.
+     *
      * @return true if this uses a data connection
      */
     public boolean useDataConnection() {
@@ -162,6 +163,7 @@ public class TilesOverlay extends SafeDrawOverlay {
 
     /**
      * Draw a loading tile image to make in-progress tiles easier to deal with.
+     *
      * @param c
      * @param mapView
      * @param zoomLevel
@@ -234,9 +236,7 @@ public class TilesOverlay extends SafeDrawOverlay {
                 }
                 drawable.setBounds(mTileRect);
                 drawable.draw(pCanvas);
-            }
-
-            else {
+            } else {
                 mTileProvider.memoryCacheNeedsMoreMemory(mNuberOfTiles);
                 //Log.w(TAG, "tile should have been drawn to canvas, but it was null.  tile = '" + pTile + "'");
             }
