@@ -266,6 +266,10 @@ public abstract class MapTileLayerBase implements IMapTileProviderCallback, Tile
         mTileCache.purgeMemoryCache();
     }
 
+    public void memoryCacheNeedsMoreMemory(int numberOfTiles) {
+        mTileCache.getCache().resizeMemoryForTiles(numberOfTiles);
+    }
+
     public void clearTileDiskCache() {
         mTileCache.purgeDiskCache();
     }

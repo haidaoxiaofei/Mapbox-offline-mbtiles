@@ -18,6 +18,7 @@ package uk.co.senab.bitmapcache;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v4.util.LruCache;
+import android.util.Log;
 
 import java.lang.ref.SoftReference;
 import java.util.Collections;
@@ -28,8 +29,10 @@ import java.util.Set;
 
 final class BitmapMemoryLruCache extends LruCache<String, CacheableBitmapDrawable> {
 
+    public static final String TAG = BitmapMemoryLruCache.class.getSimpleName();
     private final Set<SoftReference<CacheableBitmapDrawable>> mRemovedEntries;
     private final BitmapLruCache.RecyclePolicy mRecyclePolicy;
+    private int largestValueSeenBytes;
 
     BitmapMemoryLruCache(int maxSize, BitmapLruCache.RecyclePolicy policy) {
         super(maxSize);
@@ -38,11 +41,13 @@ final class BitmapMemoryLruCache extends LruCache<String, CacheableBitmapDrawabl
         mRemovedEntries = policy.canInBitmap()
                 ? Collections.synchronizedSet(new HashSet<SoftReference<CacheableBitmapDrawable>>())
                 : null;
+        largestValueSeenBytes = 0;
     }
 
     CacheableBitmapDrawable put(CacheableBitmapDrawable value) {
         if (null != value) {
             value.setCached(true);
+            largestValueSeenBytes = Math.max(value.getMemorySize(), largestValueSeenBytes);
             return put(value.getUrl(), value);
         }
 
@@ -51,6 +56,17 @@ final class BitmapMemoryLruCache extends LruCache<String, CacheableBitmapDrawabl
 
     BitmapLruCache.RecyclePolicy getRecyclePolicy() {
         return mRecyclePolicy;
+    }
+
+    public void resizeMemoryForTiles(int numberOfTiles) {
+        if (largestValueSeenBytes > 0 && numberOfTiles > 0) {
+            float factor = numberOfTiles * 1.05f; //increase by 5%
+            int newSize = (int) (factor * largestValueSeenBytes);
+            if (newSize > maxSize()) {
+                Log.d(TAG, "resizing for " + numberOfTiles + " tiles - to " + newSize / (1024 * 1024) + "MB");
+                resize(newSize);
+            }
+        }
     }
 
     @Override

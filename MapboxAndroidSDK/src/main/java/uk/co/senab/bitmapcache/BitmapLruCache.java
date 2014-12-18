@@ -535,7 +535,7 @@ public class BitmapLruCache {
      * @param decodeOpts  - Options used for decoding. This does not affect what is cached in the
      *                    disk cache (if enabled).
      * @return CacheableBitmapDrawable which can be used to display the bitmap.
-     */
+     */ //todo
     public CacheableBitmapDrawable put(final String url, final InputStream inputStream,
             final BitmapFactory.Options decodeOpts) {
         if (inputStream == null) return null;
@@ -640,6 +640,10 @@ public class BitmapLruCache {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void resizeMemoryForTiles(int numberOfTiles) {
+        mMemoryCache.resizeMemoryForTiles(numberOfTiles);
     }
 
     /**
