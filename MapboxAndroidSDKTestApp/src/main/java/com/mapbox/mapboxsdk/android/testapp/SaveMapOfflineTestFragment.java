@@ -68,6 +68,9 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
             }
         });
 
+        OfflineMapDownloader offlineMapDownloader = OfflineMapDownloader.getOfflineMapDownloader(getActivity());
+        offlineMapDownloader.addOfflineMapDownloaderListener(this);
+
         return view;
     }
 
@@ -84,7 +87,6 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
     public void handleLoadMapButton(View view) {
         Log.i(TAG, "handleLoadMapButton()");
         OfflineMapDownloader offlineMapDownloader = OfflineMapDownloader.getOfflineMapDownloader(getActivity());
-        offlineMapDownloader.addOfflineMapDownloaderListener(this);
 
         ArrayList<OfflineMapDatabase> offlineMapDatabases = offlineMapDownloader.getMutableOfflineMapDatabases();
         if (offlineMapDatabases != null && offlineMapDatabases.size() > 0) {
@@ -151,6 +153,12 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
     @Override
     public void completionOfOfflineDatabaseMap(OfflineMapDatabase offlineMapDatabase) {
         Log.i(TAG, "completionOfOfflineDatabaseMap");
-//        Toast.makeText(getActivity(), "Finished Saving Database", Toast.LENGTH_LONG).show();
+        // Need to run on UI Thread if going to display on UI
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getActivity(), "Finished Saving Database", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
