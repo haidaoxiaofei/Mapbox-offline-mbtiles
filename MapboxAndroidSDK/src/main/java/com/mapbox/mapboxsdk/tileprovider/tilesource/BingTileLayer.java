@@ -1,7 +1,6 @@
 package com.mapbox.mapboxsdk.tileprovider.tilesource;
 
 import android.os.AsyncTask;
-
 import com.mapbox.mapboxsdk.tileprovider.MapTile;
 import com.mapbox.mapboxsdk.util.NetworkUtils;
 import org.json.JSONArray;
@@ -85,12 +84,13 @@ public class BingTileLayer extends WebSourceTileLayer {
                 if (mHasMetadata) {
                     return;
                 }
-                new RetrieveMetadata(mBingMapKey, mStyle) {
+                RetrieveMetadata rm = new RetrieveMetadata(mBingMapKey, mStyle) {
                     @Override
                     protected void onPostExecute(Boolean success) {
                         mHasMetadata = success == Boolean.TRUE;
                     }
-                }.execute();
+                };
+                rm.execute();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,15 +127,14 @@ public class BingTileLayer extends WebSourceTileLayer {
 
                     return Boolean.TRUE;
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 return Boolean.FALSE;
             }
         }
     }
 
-    private String getInstanceFromJSON(final String jsonContent) throws Exception
-    {
+    private String getInstanceFromJSON(final String jsonContent) throws Exception {
         if (jsonContent == null) {
             throw new Exception("JSON to parse is null");
         }
