@@ -11,6 +11,15 @@
         android:layout_height="fill_parent"
         mapbox:mapid="@string/mapbox_id_street"/>
 
+    <ProgressBar
+        android:id="@+id/downloadProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/black"
+        android:visibility="gone"
+        />
 
     <LinearLayout
         android:id="@+id/buttonsrow"

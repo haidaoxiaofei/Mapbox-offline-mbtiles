@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.CoordinateRegion;
@@ -26,6 +27,7 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
 
     private MapView mapView;
     private TilesOverlay offlineMapOverlay;
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,6 +72,8 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
 
         OfflineMapDownloader offlineMapDownloader = OfflineMapDownloader.getOfflineMapDownloader(getActivity());
         offlineMapDownloader.addOfflineMapDownloaderListener(this);
+
+        progressBar = (ProgressBar)view.findViewById(R.id.downloadProgress);
 
         return view;
     }
@@ -131,8 +135,22 @@ public class SaveMapOfflineTestFragment extends Fragment implements OfflineMapDo
     }
 
     @Override
-    public void progressUpdate(Integer numberOfFilesWritten, Integer numberOfFilesExcepted) {
-        Log.i(TAG, "progressUpdate");
+    public void progressUpdate(final Integer numberOfFilesWritten, final Integer numberOfFilesExpected) {
+        Log.i(TAG, String.format("progressUpdate: files written = %d, files expected = %d", numberOfFilesWritten, numberOfFilesExpected));
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (progressBar.getVisibility() == View.GONE) {
+                    progressBar.setVisibility(View.VISIBLE);
+                }
+                progressBar.setMax(numberOfFilesExpected);
+                progressBar.setProgress(numberOfFilesWritten);
+
+                if (numberOfFilesExpected == numberOfFilesWritten) {
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override
