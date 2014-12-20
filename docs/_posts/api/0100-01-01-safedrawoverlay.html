@@ -9,7 +9,7 @@ tags: overlay
 java.lang.Object
 
 
-<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.Overlay</a>
+<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.Overlay</a>
 
 
 com.mapbox.mapboxsdk.overlay.SafeDrawOverlay
@@ -23,12 +23,12 @@ com.mapbox.mapboxsdk.overlay.SafeDrawOverlay
 
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="{{site.baseurl}}/api/userlocationoverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a></dd>
+<dd><a href="{{site.baseurl}}/api/LUserLocationOverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a></dd>
 </dl>
 
 
 <pre>public abstract class <span class="strong">SafeDrawOverlay</span>
-extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></pre>
+extends <a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></pre>
 <div class="block">An overlay class that uses the safe drawing canvas to draw itself and can be zoomed in to high
  levels without drawing issues.</div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><code>ISafeCanvas}</code></dd></dl>
@@ -48,8 +48,8 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 <a name="nested_classes_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
 <!--   -->
 </a>
-<h3>Nested classes/interfaces inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></code>
+<h3>Nested classes/interfaces inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/LOverlay.Snappable" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></code>
 
 
 
@@ -63,8 +63,8 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 <a name="fields_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
 <!--   -->
 </a>
-<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay#mscale">mScale</a></code>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/LOverlay#mScale">mScale</a></code>
 
 
 
@@ -80,7 +80,7 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/safedrawoverlay#safedrawoverlay()">SafeDrawOverlay</a></strong>()</code>&nbsp;</td>
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LSafeDrawOverlay#SafeDrawOverlay()">SafeDrawOverlay</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -99,33 +99,33 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safedrawoverlay#draw(android.graphics.canvas, com.mapbox.mapboxsdk.views.mapview, boolean)">draw</a></strong>(android.graphics.Canvas&nbsp;c,
-    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeDrawOverlay#draw(android.graphics.Canvas, com.mapbox.mapboxsdk.views.MapView, boolean)">draw</a></strong>(android.graphics.Canvas&nbsp;c,
+    <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
     boolean&nbsp;shadow)</code>
 <div class="block">Draw the overlay over the map.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected abstract void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;c,
-        <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;c,
+        <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
         boolean&nbsp;shadow)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safedrawoverlay#isusingsafecanvas()">isUsingSafeCanvas</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeDrawOverlay#isUsingSafeCanvas()">isUsingSafeCanvas</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safedrawoverlay#setusesafecanvas(boolean)">setUseSafeCanvas</a></strong>(boolean&nbsp;useSafeCanvas)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeDrawOverlay#setUseSafeCanvas(boolean)">setUseSafeCanvas</a></strong>(boolean&nbsp;useSafeCanvas)</code>&nbsp;</td>
 </tr>
 </table>
 
 <a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay#setenabled(boolean)">setEnabled</a></code>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/LOverlay#setEnabled(boolean)">setEnabled</a></code>
 
 
 <a name="methods_inherited_from_class_java.lang.Object">
@@ -171,8 +171,8 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 
 
 <h4>drawSafe</h4>
-<pre>protected abstract&nbsp;void&nbsp;drawSafe(<a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;c,
-            <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+<pre>protected abstract&nbsp;void&nbsp;drawSafe(<a href="{{site.baseurl}}/api/LISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;c,
+            <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
             boolean&nbsp;shadow)</pre>
 
 
@@ -183,15 +183,15 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 
 <h4>draw</h4>
 <pre>protected&nbsp;void&nbsp;draw(android.graphics.Canvas&nbsp;c,
-        <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+        <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
         boolean&nbsp;shadow)</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/overlay#draw(android.graphics.canvas, com.mapbox.mapboxsdk.views.mapview, boolean)">Overlay</a></code></strong></div>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LOverlay#draw(android.graphics.Canvas, com.mapbox.mapboxsdk.views.MapView, boolean)">Overlay</a></code></strong></div>
 <div class="block">Draw the overlay over the map. This will be called on all active overlays with shadow=true,
  to lay down the shadow layer, and then again on all overlays with shadow=false. Callers
  should check isEnabled() before calling draw(). By default, draws nothing.</div>
 <dl>
 <dt><strong>Specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></code></dd>
 </dl>
 
 

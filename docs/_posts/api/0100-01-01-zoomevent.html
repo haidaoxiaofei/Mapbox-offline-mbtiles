@@ -18,13 +18,13 @@ com.mapbox.mapboxsdk.events.ZoomEvent
 
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbox.mapboxsdk.events">MapEvent</a></dd>
+<dd><a href="{{site.baseurl}}/api/LMapEvent" title="interface in com.mapbox.mapboxsdk.events">MapEvent</a></dd>
 </dl>
 
 
 <pre>public class <span class="strong">ZoomEvent</span>
 extends java.lang.Object
-implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbox.mapboxsdk.events">MapEvent</a></pre>
+implements <a href="{{site.baseurl}}/api/LMapEvent" title="interface in com.mapbox.mapboxsdk.events">MapEvent</a></pre>
 <div class="block">The event generated when a map has finished zooming to the level zoomLevel</div>
 
 
@@ -45,16 +45,16 @@ implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbo
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/zoomevent#source">source</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LZoomEvent#source">source</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/zoomevent#useraction">userAction</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LZoomEvent#userAction">userAction</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/zoomevent#zoomlevel">zoomLevel</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LZoomEvent#zoomLevel">zoomLevel</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
@@ -71,7 +71,7 @@ implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbo
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;aSource,
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;aSource,
          float&nbsp;aZoomLevel,
          boolean&nbsp;userAction)</code>&nbsp;</td>
 </tr>
@@ -91,24 +91,24 @@ implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbo
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/zoomevent#getsource()">getSource</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LZoomEvent#getSource()">getSource</a></strong>()</code>
 <div class="block">Return the map which generated this event.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/zoomevent#getuseraction()">getUserAction</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LZoomEvent#getUserAction()">getUserAction</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/zoomevent#getzoomlevel()">getZoomLevel</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LZoomEvent#getZoomLevel()">getZoomLevel</a></strong>()</code>
 <div class="block">Return the zoom level zoomed to.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/zoomevent#tostring()">toString</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LZoomEvent#toString()">toString</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -138,7 +138,7 @@ implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbo
 
 
 <h4>source</h4>
-<pre>protected&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a> source</pre>
+<pre>protected&nbsp;<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a> source</pre>
 
 
 <a name="zoomLevel">
@@ -173,7 +173,7 @@ implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbo
 
 
 <h4>ZoomEvent</h4>
-<pre>public&nbsp;ZoomEvent(<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;aSource,
+<pre>public&nbsp;ZoomEvent(<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;aSource,
          float&nbsp;aZoomLevel,
          boolean&nbsp;userAction)</pre>
 
@@ -192,7 +192,7 @@ implements <a href="{{site.baseurl}}/api/mapevent" title="interface in com.mapbo
 
 
 <h4>getSource</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;getSource()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;getSource()</pre>
 <div class="block">Return the map which generated this event.</div>
 
 

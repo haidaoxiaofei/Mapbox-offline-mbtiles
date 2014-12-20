@@ -1,0 +1,337 @@
+---
+layout: api
+title: OfflineDatabaseHandler
+category: api
+tags: offline
+---
+<div class="contentContainer">
+
+java.lang.Object
+
+
+android.database.sqlite.SQLiteOpenHelper
+
+
+com.mapbox.mapboxsdk.offline.OfflineDatabaseHandler
+
+
+
+
+
+<div class="description">
+
+
+
+
+<pre>public class <span class="strong">OfflineDatabaseHandler</span>
+extends android.database.sqlite.SQLiteOpenHelper</pre>
+
+
+</div>
+<div class="summary">
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#DATABASE_VERSION">DATABASE_VERSION</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#FIELD_DATA_ID">FIELD_DATA_ID</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#FIELD_DATA_VALUE">FIELD_DATA_VALUE</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#FIELD_METADATA_NAME">FIELD_METADATA_NAME</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#FIELD_METADATA_VALUE">FIELD_METADATA_VALUE</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#FIELD_RESOURCES_ID">FIELD_RESOURCES_ID</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#FIELD_RESOURCES_STATUS">FIELD_RESOURCES_STATUS</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#FIELD_RESOURCES_URL">FIELD_RESOURCES_URL</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#TABLE_DATA">TABLE_DATA</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#TABLE_METADATA">TABLE_METADATA</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#TABLE_RESOURCES">TABLE_RESOURCES</a></strong></code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#OfflineDatabaseHandler(android.content.Context, java.lang.String)">OfflineDatabaseHandler</a></strong>(android.content.Context&nbsp;context,
+                      java.lang.String&nbsp;dbName)</code>
+<div class="block">Constructor</div>
+</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#onCreate(android.database.sqlite.SQLiteDatabase)">onCreate</a></strong>(android.database.sqlite.SQLiteDatabase&nbsp;db)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineDatabaseHandler#onUpgrade(android.database.sqlite.SQLiteDatabase, int, int)">onUpgrade</a></strong>(android.database.sqlite.SQLiteDatabase&nbsp;db,
+         int&nbsp;oldVersion,
+         int&nbsp;newVersion)</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_android.database.sqlite.SQLiteOpenHelper">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;android.database.sqlite.SQLiteOpenHelper</h3>
+<code>close, getDatabaseName, getReadableDatabase, getWritableDatabase, onConfigure, onDowngrade, onOpen, setWriteAheadLoggingEnabled</code>
+
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="DATABASE_VERSION">
+<!--   -->
+</a>
+
+
+<h4>DATABASE_VERSION</h4>
+<pre>public static final&nbsp;int DATABASE_VERSION</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.offline.OfflineDatabaseHandler.DATABASE_VERSION">Constant Field Values</a></dd></dl>
+
+
+<a name="TABLE_METADATA">
+<!--   -->
+</a>
+
+
+<h4>TABLE_METADATA</h4>
+<pre>public static final&nbsp;java.lang.String TABLE_METADATA</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.offline.OfflineDatabaseHandler.TABLE_METADATA">Constant Field Values</a></dd></dl>
+
+
+<a name="TABLE_DATA">
+<!--   -->
+</a>
+
+
+<h4>TABLE_DATA</h4>
+<pre>public static final&nbsp;java.lang.String TABLE_DATA</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.offline.OfflineDatabaseHandler.TABLE_DATA">Constant Field Values</a></dd></dl>
+
+
+<a name="TABLE_RESOURCES">
+<!--   -->
+</a>
+
+
+<h4>TABLE_RESOURCES</h4>
+<pre>public static final&nbsp;java.lang.String TABLE_RESOURCES</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.offline.OfflineDatabaseHandler.TABLE_RESOURCES">Constant Field Values</a></dd></dl>
+
+
+<a name="FIELD_METADATA_NAME">
+<!--   -->
+</a>
+
+
+<h4>FIELD_METADATA_NAME</h4>
+<pre>public static final&nbsp;java.lang.String FIELD_METADATA_NAME</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.offline.OfflineDatabaseHandler.FIELD_METADATA_NAME">Constant Field Values</a></dd></dl>
+
+
+<a name="FIELD_METADATA_VALUE">
+<!--   -->
+</a>
+
+
+<h4>FIELD_METADATA_VALUE</h4>
+<pre>public static final&nbsp;java.lang.String FIELD_METADATA_VALUE</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.offline.OfflineDatabaseHandler.FIELD_METADATA_VALUE">Constant Field Values</a></dd></dl>
+
+
+<a name="FIELD_DATA_ID">
+<!--   -->
+</a>
+
+
+<h4>FIELD_DATA_ID</h4>
+<pre>public static final&nbsp;java.lang.String FIELD_DATA_ID</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.offline.OfflineDatabaseHandler.FIELD_DATA_ID">Constant Field Values</a></dd></dl>
+
+
+<a name="FIELD_DATA_VALUE">
+<!--   -->
+</a>
+
+
+<h4>FIELD_DATA_VALUE</h4>
+<pre>public static final&nbsp;java.lang.String FIELD_DATA_VALUE</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.offline.OfflineDatabaseHandler.FIELD_DATA_VALUE">Constant Field Values</a></dd></dl>
+
+
+<a name="FIELD_RESOURCES_ID">
+<!--   -->
+</a>
+
+
+<h4>FIELD_RESOURCES_ID</h4>
+<pre>public static final&nbsp;java.lang.String FIELD_RESOURCES_ID</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.offline.OfflineDatabaseHandler.FIELD_RESOURCES_ID">Constant Field Values</a></dd></dl>
+
+
+<a name="FIELD_RESOURCES_URL">
+<!--   -->
+</a>
+
+
+<h4>FIELD_RESOURCES_URL</h4>
+<pre>public static final&nbsp;java.lang.String FIELD_RESOURCES_URL</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.offline.OfflineDatabaseHandler.FIELD_RESOURCES_URL">Constant Field Values</a></dd></dl>
+
+
+<a name="FIELD_RESOURCES_STATUS">
+<!--   -->
+</a>
+
+
+<h4>FIELD_RESOURCES_STATUS</h4>
+<pre>public static final&nbsp;java.lang.String FIELD_RESOURCES_STATUS</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../constant-values.html#com.mapbox.mapboxsdk.offline.OfflineDatabaseHandler.FIELD_RESOURCES_STATUS">Constant Field Values</a></dd></dl>
+
+
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="OfflineDatabaseHandler(android.content.Context, java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>OfflineDatabaseHandler</h4>
+<pre>public&nbsp;OfflineDatabaseHandler(android.content.Context&nbsp;context,
+                      java.lang.String&nbsp;dbName)</pre>
+<div class="block">Constructor</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>context</code> - Context</dd></dl>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="onCreate(android.database.sqlite.SQLiteDatabase)">
+<!--   -->
+</a>
+
+
+<h4>onCreate</h4>
+<pre>public&nbsp;void&nbsp;onCreate(android.database.sqlite.SQLiteDatabase&nbsp;db)</pre>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>onCreate</code>&nbsp;in class&nbsp;<code>android.database.sqlite.SQLiteOpenHelper</code></dd>
+</dl>
+
+
+<a name="onUpgrade(android.database.sqlite.SQLiteDatabase, int, int)">
+<!--   -->
+</a>
+
+
+<h4>onUpgrade</h4>
+<pre>public&nbsp;void&nbsp;onUpgrade(android.database.sqlite.SQLiteDatabase&nbsp;db,
+             int&nbsp;oldVersion,
+             int&nbsp;newVersion)</pre>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>onUpgrade</code>&nbsp;in class&nbsp;<code>android.database.sqlite.SQLiteOpenHelper</code></dd>
+</dl>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

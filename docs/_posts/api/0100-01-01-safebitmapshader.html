@@ -30,9 +30,9 @@ com.mapbox.mapboxsdk.views.safecanvas.SafeBitmapShader
 
 <pre>public class <span class="strong">SafeBitmapShader</span>
 extends android.graphics.BitmapShader</pre>
-<div class="block">The SafeBitmapShader class is designed to work in conjunction with <a href="{{site.baseurl}}/api/safetranslatedcanvas" title="class in com.mapbox.mapboxsdk.views.safecanvas"><code>SafeTranslatedCanvas</code></a>
+<div class="block">The SafeBitmapShader class is designed to work in conjunction with <a href="{{site.baseurl}}/api/LSafeTranslatedCanvas" title="class in com.mapbox.mapboxsdk.views.safecanvas"><code>SafeTranslatedCanvas</code></a>
  to work around various Android issues with large canvases. For the two classes to work together,
- call <a href="{{site.baseurl}}/api/safebitmapshader#ondrawcyclestart(com.mapbox.mapboxsdk.views.safecanvas.isafecanvas)"><code>onDrawCycleStart(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas)</code></a> at the start of the
+ call <a href="{{site.baseurl}}/api/LSafeBitmapShader#onDrawCycleStart(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas)"><code>onDrawCycleStart(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas)</code></a> at the start of the
  <code>com.mapbox.mapboxsdk.overlay.OverlayOverlay#drawSafe</code>
  method of your <code>com.mapbox.mapboxsdk.overlay.OverlayOverlay</code>. This will set the adjustment
  needed to draw your BitmapShader safely on the canvas without any drawing distortion at high
@@ -72,7 +72,7 @@ extends android.graphics.BitmapShader</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/safebitmapshader#safebitmapshader(android.graphics.bitmap, android.graphics.shader.tilemode, android.graphics.shader.tilemode)">SafeBitmapShader</a></strong>(android.graphics.Bitmap&nbsp;bitmap,
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LSafeBitmapShader#SafeBitmapShader(android.graphics.Bitmap, android.graphics.Shader.TileMode, android.graphics.Shader.TileMode)">SafeBitmapShader</a></strong>(android.graphics.Bitmap&nbsp;bitmap,
                 android.graphics.Shader.TileMode&nbsp;tileX,
                 android.graphics.Shader.TileMode&nbsp;tileY)</code>&nbsp;</td>
 </tr>
@@ -93,7 +93,7 @@ extends android.graphics.BitmapShader</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas)</code>
 <div class="block">This method <b>must</b> be called at the start of the <code>Overlay#drawSafe</code> draw cycle
  method.</div>
 </td>
@@ -152,9 +152,9 @@ extends android.graphics.BitmapShader</pre>
 
 
 <h4>onDrawCycleStart</h4>
-<pre>public&nbsp;void&nbsp;onDrawCycleStart(<a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas)</pre>
+<pre>public&nbsp;void&nbsp;onDrawCycleStart(<a href="{{site.baseurl}}/api/LISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas)</pre>
 <div class="block">This method <b>must</b> be called at the start of the <code>Overlay#drawSafe</code> draw cycle
- method. This will adjust the BitmapShader to the current state of the <a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas"><code>ISafeCanvas</code></a>
+ method. This will adjust the BitmapShader to the current state of the <a href="{{site.baseurl}}/api/LISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas"><code>ISafeCanvas</code></a>
  passed to it.</div>
 
 

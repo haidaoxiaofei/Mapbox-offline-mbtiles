@@ -41,19 +41,19 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected android.graphics.Point</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelooper#center">center</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLooper#center">center</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected java.util.List&lt;<a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a>&gt;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelooper#mbeinguseddrawables">mBeingUsedDrawables</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLooper#mBeingUsedDrawables">mBeingUsedDrawables</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected android.graphics.Point</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelooper#mlowerright">mLowerRight</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLooper#mLowerRight">mLowerRight</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected android.graphics.Point</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelooper#mupperleft">mUpperLeft</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLooper#mUpperLeft">mUpperLeft</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
@@ -70,7 +70,7 @@ extends java.lang.Object</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/tilelooper#tilelooper()">TileLooper</a></strong>()</code>&nbsp;</td>
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LTileLooper#TileLooper()">TileLooper</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -89,26 +89,26 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelooper#finalizeloop()">finalizeLoop</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLooper#finalizeLoop()">finalizeLoop</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>abstract void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelooper#handletile(android.graphics.canvas, java.lang.string, int, com.mapbox.mapboxsdk.tileprovider.maptile, int, int, android.graphics.rect)">handleTile</a></strong>(android.graphics.Canvas&nbsp;pCanvas,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLooper#handleTile(android.graphics.Canvas, java.lang.String, int, com.mapbox.mapboxsdk.tileprovider.MapTile, int, int, android.graphics.Rect)">handleTile</a></strong>(android.graphics.Canvas&nbsp;pCanvas,
           java.lang.String&nbsp;pCacheKey,
           int&nbsp;pTileSizePx,
-          <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
+          <a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
           int&nbsp;pX,
           int&nbsp;pY,
           android.graphics.Rect&nbsp;pClipRect)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>abstract void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelooper#initializeloop(float, int)">initializeLoop</a></strong>(float&nbsp;pZoomLevel,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLooper#initializeLoop(float, int)">initializeLoop</a></strong>(float&nbsp;pZoomLevel,
               int&nbsp;pTileSizePx)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelooper#loop(android.graphics.canvas, java.lang.string, float, int, android.graphics.rect, android.graphics.rect)">loop</a></strong>(android.graphics.Canvas&nbsp;pCanvas,
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLooper#loop(android.graphics.Canvas, java.lang.String, float, int, android.graphics.Rect, android.graphics.Rect)">loop</a></strong>(android.graphics.Canvas&nbsp;pCanvas,
     java.lang.String&nbsp;pCacheKey,
     float&nbsp;pZoomLevel,
     int&nbsp;pTileSizePx,
@@ -204,12 +204,12 @@ extends java.lang.Object</pre>
 
 
 <h4>loop</h4>
-<pre>public final&nbsp;void&nbsp;loop(android.graphics.Canvas&nbsp;pCanvas,
-        java.lang.String&nbsp;pCacheKey,
-        float&nbsp;pZoomLevel,
-        int&nbsp;pTileSizePx,
-        android.graphics.Rect&nbsp;pViewPort,
-        android.graphics.Rect&nbsp;pClipRect)</pre>
+<pre>public final&nbsp;int&nbsp;loop(android.graphics.Canvas&nbsp;pCanvas,
+       java.lang.String&nbsp;pCacheKey,
+       float&nbsp;pZoomLevel,
+       int&nbsp;pTileSizePx,
+       android.graphics.Rect&nbsp;pViewPort,
+       android.graphics.Rect&nbsp;pClipRect)</pre>
 
 
 <a name="initializeLoop(float, int)">
@@ -231,7 +231,7 @@ extends java.lang.Object</pre>
 <pre>public abstract&nbsp;void&nbsp;handleTile(android.graphics.Canvas&nbsp;pCanvas,
               java.lang.String&nbsp;pCacheKey,
               int&nbsp;pTileSizePx,
-              <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
+              <a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
               int&nbsp;pX,
               int&nbsp;pY,
               android.graphics.Rect&nbsp;pClipRect)</pre>

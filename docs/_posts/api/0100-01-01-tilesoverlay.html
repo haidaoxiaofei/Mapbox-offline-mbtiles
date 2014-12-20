@@ -9,10 +9,10 @@ tags: overlay
 java.lang.Object
 
 
-<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.Overlay</a>
+<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.Overlay</a>
 
 
-<a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.SafeDrawOverlay</a>
+<a href="{{site.baseurl}}/api/LSafeDrawOverlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.SafeDrawOverlay</a>
 
 
 com.mapbox.mapboxsdk.overlay.TilesOverlay
@@ -29,10 +29,10 @@ com.mapbox.mapboxsdk.overlay.TilesOverlay
 
 
 <pre>public class <span class="strong">TilesOverlay</span>
-extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a></pre>
+extends <a href="{{site.baseurl}}/api/LSafeDrawOverlay" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a></pre>
 <div class="block">These objects are the principle consumer of map tiles.
  <p/>
- see <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTile</code></a> for an overview of how tiles are acquired by this overlay.</div>
+ see <a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTile</code></a> for an overview of how tiles are acquired by this overlay.</div>
 
 
 </div>
@@ -49,8 +49,8 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 <a name="nested_classes_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
 <!--   -->
 </a>
-<h3>Nested classes/interfaces inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></code>
+<h3>Nested classes/interfaces inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/LOverlay.Snappable" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></code>
 
 
 
@@ -67,28 +67,28 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected static <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#mdebugpaint">mDebugPaint</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>protected static <a href="{{site.baseurl}}/api/LSafePaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#mDebugPaint">mDebugPaint</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#menu_offline">MENU_OFFLINE</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#MENU_OFFLINE">MENU_OFFLINE</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected android.graphics.Paint</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#mloadingpaint">mLoadingPaint</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#mLoadingPaint">mLoadingPaint</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected static android.graphics.Bitmap</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#mloadingtilebitmap">mLoadingTileBitmap</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#mLoadingTileBitmap">mLoadingTileBitmap</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected static <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#mloadingtilepaint">mLoadingTilePaint</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>protected static <a href="{{site.baseurl}}/api/LSafePaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#mLoadingTilePaint">mLoadingTilePaint</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#mtileprovider">mTileProvider</a></strong></code>
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#mTileProvider">mTileProvider</a></strong></code>
 <div class="block">Current tile source</div>
 </td>
 </tr>
@@ -97,8 +97,8 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 <a name="fields_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
 <!--   -->
 </a>
-<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay#mscale">mScale</a></code>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/LOverlay#mScale">mScale</a></code>
 
 
 
@@ -114,7 +114,7 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;aTileProvider)</code>&nbsp;</td>
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;aTileProvider)</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -133,8 +133,8 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#drawloadingtile(android.graphics.canvas, com.mapbox.mapboxsdk.views.mapview, float, android.graphics.rect)">drawLoadingTile</a></strong>(android.graphics.Canvas&nbsp;c,
-               <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#drawLoadingTile(android.graphics.Canvas, com.mapbox.mapboxsdk.views.MapView, float, android.graphics.Rect)">drawLoadingTile</a></strong>(android.graphics.Canvas&nbsp;c,
+               <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
                float&nbsp;zoomLevel,
                android.graphics.Rect&nbsp;viewPort)</code>
 <div class="block">Draw a loading tile image to make in-progress tiles easier to deal with.</div>
@@ -142,13 +142,13 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;c,
-        <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;c,
+        <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
         boolean&nbsp;shadow)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#drawtiles(android.graphics.canvas, float, int, android.graphics.rect, android.graphics.rect)">drawTiles</a></strong>(android.graphics.Canvas&nbsp;c,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#drawTiles(android.graphics.Canvas, float, int, android.graphics.Rect, android.graphics.Rect)">drawTiles</a></strong>(android.graphics.Canvas&nbsp;c,
          float&nbsp;zoomLevel,
          int&nbsp;tileSizePx,
          android.graphics.Rect&nbsp;viewPort,
@@ -159,58 +159,58 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>static <a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#getdebugpaint()">getDebugPaint</a></strong>()</code>&nbsp;</td>
+<td class="colFirst"><code>static <a href="{{site.baseurl}}/api/LSafePaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#getDebugPaint()">getDebugPaint</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#getloadingbackgroundcolor()">getLoadingBackgroundColor</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#getLoadingBackgroundColor()">getLoadingBackgroundColor</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#getloadinglinecolor()">getLoadingLineColor</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#getLoadingLineColor()">getLoadingLineColor</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#getmaximumzoomlevel()">getMaximumZoomLevel</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#getMaximumZoomLevel()">getMaximumZoomLevel</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#getminimumzoomlevel()">getMinimumZoomLevel</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#getMinimumZoomLevel()">getMinimumZoomLevel</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</code>
 <div class="block">Override to perform clean up of resources before shutdown.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#rescalecache(float, float, com.mapbox.mapboxsdk.views.util.projection)">rescaleCache</a></strong>(float&nbsp;pNewZoomLevel,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#rescaleCache(float, float, com.mapbox.mapboxsdk.views.util.Projection)">rescaleCache</a></strong>(float&nbsp;pNewZoomLevel,
             float&nbsp;pOldZoomLevel,
-            <a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection)</code>
+            <a href="{{site.baseurl}}/api/LProjection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection)</code>
 <div class="block">Recreate the cache using scaled versions of the tiles currently in it</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#setloadingbackgroundcolor(int)">setLoadingBackgroundColor</a></strong>(int&nbsp;pLoadingBackgroundColor)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#setLoadingBackgroundColor(int)">setLoadingBackgroundColor</a></strong>(int&nbsp;pLoadingBackgroundColor)</code>
 <div class="block">Set the color to use to draw the background while we're waiting for the tile to load.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#setloadinglinecolor(int)">setLoadingLineColor</a></strong>(int&nbsp;pLoadingLineColor)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#setLoadingLineColor(int)">setLoadingLineColor</a></strong>(int&nbsp;pLoadingLineColor)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#setusedataconnection(boolean)">setUseDataConnection</a></strong>(boolean&nbsp;aMode)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#setUseDataConnection(boolean)">setUseDataConnection</a></strong>(boolean&nbsp;aMode)</code>
 <div class="block">Set whether to use the network connection if it's available.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesoverlay#usedataconnection()">useDataConnection</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesOverlay#useDataConnection()">useDataConnection</a></strong>()</code>
 <div class="block">Whether to use the network connection if it's available.</div>
 </td>
 </tr>
@@ -219,15 +219,15 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 <a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.SafeDrawOverlay">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a></h3>
-<code><a href="{{site.baseurl}}/api/safedrawoverlay#setusesafecanvas(boolean)">setUseSafeCanvas</a></code>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/LSafeDrawOverlay" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a></h3>
+<code><a href="{{site.baseurl}}/api/LSafeDrawOverlay#setUseSafeCanvas(boolean)">setUseSafeCanvas</a></code>
 
 
 <a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay#setenabled(boolean)">setEnabled</a></code>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/LOverlay#setEnabled(boolean)">setEnabled</a></code>
 
 
 <a name="methods_inherited_from_class_java.lang.Object">
@@ -265,7 +265,7 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 
 
 <h4>mTileProvider</h4>
-<pre>protected final&nbsp;<a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a> mTileProvider</pre>
+<pre>protected final&nbsp;<a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a> mTileProvider</pre>
 <div class="block">Current tile source</div>
 
 
@@ -275,7 +275,7 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 
 
 <h4>mDebugPaint</h4>
-<pre>protected static&nbsp;<a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a> mDebugPaint</pre>
+<pre>protected static&nbsp;<a href="{{site.baseurl}}/api/LSafePaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a> mDebugPaint</pre>
 
 
 <a name="mLoadingTilePaint">
@@ -284,7 +284,7 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 
 
 <h4>mLoadingTilePaint</h4>
-<pre>protected static&nbsp;<a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a> mLoadingTilePaint</pre>
+<pre>protected static&nbsp;<a href="{{site.baseurl}}/api/LSafePaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a> mLoadingTilePaint</pre>
 
 
 <a name="mLoadingTileBitmap">
@@ -319,7 +319,7 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 
 
 <h4>TilesOverlay</h4>
-<pre>public&nbsp;TilesOverlay(<a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;aTileProvider)</pre>
+<pre>public&nbsp;TilesOverlay(<a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;aTileProvider)</pre>
 
 
 
@@ -336,7 +336,7 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 
 
 <h4>getDebugPaint</h4>
-<pre>public static&nbsp;<a href="{{site.baseurl}}/api/safepaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;getDebugPaint()</pre>
+<pre>public static&nbsp;<a href="{{site.baseurl}}/api/LSafePaint" title="class in com.mapbox.mapboxsdk.views.safecanvas">SafePaint</a>&nbsp;getDebugPaint()</pre>
 
 
 <a name="onDetach(com.mapbox.mapboxsdk.views.MapView)">
@@ -345,12 +345,12 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 
 
 <h4>onDetach</h4>
-<pre>public&nbsp;void&nbsp;onDetach(<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/overlay#ondetach(com.mapbox.mapboxsdk.views.mapview)">Overlay</a></code></strong></div>
+<pre>public&nbsp;void&nbsp;onDetach(<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;pMapView)</pre>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LOverlay#onDetach(com.mapbox.mapboxsdk.views.MapView)">Overlay</a></code></strong></div>
 <div class="block">Override to perform clean up of resources before shutdown. By default does nothing.</div>
 <dl>
 <dt><strong>Overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></code></dd>
 </dl>
 
 
@@ -401,12 +401,12 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 
 
 <h4>drawSafe</h4>
-<pre>protected&nbsp;void&nbsp;drawSafe(<a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;c,
-            <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+<pre>protected&nbsp;void&nbsp;drawSafe(<a href="{{site.baseurl}}/api/LISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;c,
+            <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
             boolean&nbsp;shadow)</pre>
 <dl>
 <dt><strong>Specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LSafeDrawOverlay" title="class in com.mapbox.mapboxsdk.overlay">SafeDrawOverlay</a></code></dd>
 </dl>
 
 
@@ -417,7 +417,7 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 
 <h4>drawLoadingTile</h4>
 <pre>public&nbsp;void&nbsp;drawLoadingTile(android.graphics.Canvas&nbsp;c,
-                   <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+                   <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
                    float&nbsp;zoomLevel,
                    android.graphics.Rect&nbsp;viewPort)</pre>
 <div class="block">Draw a loading tile image to make in-progress tiles easier to deal with.</div>
@@ -489,7 +489,7 @@ extends <a href="{{site.baseurl}}/api/safedrawoverlay" title="class in com.mapbo
 <h4>rescaleCache</h4>
 <pre>public&nbsp;void&nbsp;rescaleCache(float&nbsp;pNewZoomLevel,
                 float&nbsp;pOldZoomLevel,
-                <a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection)</pre>
+                <a href="{{site.baseurl}}/api/LProjection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;projection)</pre>
 <div class="block">Recreate the cache using scaled versions of the tiles currently in it</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>pNewZoomLevel</code> - the zoom level that we need now</dd><dd><code>pOldZoomLevel</code> - the previous zoom level that we should get the tiles to rescale</dd><dd><code>projection</code> - the projection to compute view port</dd></dl>
 

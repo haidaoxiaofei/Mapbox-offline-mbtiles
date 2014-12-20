@@ -1,0 +1,147 @@
+---
+layout: api
+title: OfflineMapDownloaderListener
+category: api
+tags: offline
+---
+<div class="contentContainer">
+<div class="description">
+
+
+
+
+<pre>public interface <span class="strong">OfflineMapDownloaderListener</span></pre>
+
+
+</div>
+<div class="summary">
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDatabase</a>&nbsp;offlineMapDatabase)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloaderListener#httpStatusError(java.lang.Throwable)">httpStatusError</a></strong>(java.lang.Throwable&nbsp;error)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloaderListener#initialCountOfFiles(java.lang.Integer)">initialCountOfFiles</a></strong>(java.lang.Integer&nbsp;numberOfFiles)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloaderListener#networkConnectivityError(java.lang.Throwable)">networkConnectivityError</a></strong>(java.lang.Throwable&nbsp;error)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloaderListener#progressUpdate(java.lang.Integer, java.lang.Integer)">progressUpdate</a></strong>(java.lang.Integer&nbsp;numberOfFilesWritten,
+              java.lang.Integer&nbsp;numberOfFilesExcepted)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloaderListener#sqlLiteError(java.lang.Throwable)">sqlLiteError</a></strong>(java.lang.Throwable&nbsp;error)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader.MBXOfflineMapDownloaderState" title="enum in com.mapbox.mapboxsdk.offline">OfflineMapDownloader.MBXOfflineMapDownloaderState</a>&nbsp;newState)</code>&nbsp;</td>
+</tr>
+</table>
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="stateChanged(com.mapbox.mapboxsdk.offline.OfflineMapDownloader.MBXOfflineMapDownloaderState)">
+<!--   -->
+</a>
+
+
+<h4>stateChanged</h4>
+<pre>void&nbsp;stateChanged(<a href="{{site.baseurl}}/api/LOfflineMapDownloader.MBXOfflineMapDownloaderState" title="enum in com.mapbox.mapboxsdk.offline">OfflineMapDownloader.MBXOfflineMapDownloaderState</a>&nbsp;newState)</pre>
+
+
+<a name="initialCountOfFiles(java.lang.Integer)">
+<!--   -->
+</a>
+
+
+<h4>initialCountOfFiles</h4>
+<pre>void&nbsp;initialCountOfFiles(java.lang.Integer&nbsp;numberOfFiles)</pre>
+
+
+<a name="progressUpdate(java.lang.Integer, java.lang.Integer)">
+<!--   -->
+</a>
+
+
+<h4>progressUpdate</h4>
+<pre>void&nbsp;progressUpdate(java.lang.Integer&nbsp;numberOfFilesWritten,
+                  java.lang.Integer&nbsp;numberOfFilesExcepted)</pre>
+
+
+<a name="networkConnectivityError(java.lang.Throwable)">
+<!--   -->
+</a>
+
+
+<h4>networkConnectivityError</h4>
+<pre>void&nbsp;networkConnectivityError(java.lang.Throwable&nbsp;error)</pre>
+
+
+<a name="sqlLiteError(java.lang.Throwable)">
+<!--   -->
+</a>
+
+
+<h4>sqlLiteError</h4>
+<pre>void&nbsp;sqlLiteError(java.lang.Throwable&nbsp;error)</pre>
+
+
+<a name="httpStatusError(java.lang.Throwable)">
+<!--   -->
+</a>
+
+
+<h4>httpStatusError</h4>
+<pre>void&nbsp;httpStatusError(java.lang.Throwable&nbsp;error)</pre>
+
+
+<a name="completionOfOfflineDatabaseMap(com.mapbox.mapboxsdk.offline.OfflineMapDatabase)">
+<!--   -->
+</a>
+
+
+<h4>completionOfOfflineDatabaseMap</h4>
+<pre>void&nbsp;completionOfOfflineDatabaseMap(<a href="{{site.baseurl}}/api/LOfflineMapDatabase" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDatabase</a>&nbsp;offlineMapDatabase)</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

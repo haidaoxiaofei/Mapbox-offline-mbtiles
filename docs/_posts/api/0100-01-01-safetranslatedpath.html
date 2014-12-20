@@ -25,9 +25,9 @@ com.mapbox.mapboxsdk.views.safecanvas.SafeTranslatedPath
 
 <pre>public class <span class="strong">SafeTranslatedPath</span>
 extends android.graphics.Path</pre>
-<div class="block">The SafeTranslatedPath class is designed to work in conjunction with <a href="{{site.baseurl}}/api/safetranslatedcanvas" title="class in com.mapbox.mapboxsdk.views.safecanvas"><code>SafeTranslatedCanvas</code></a>
+<div class="block">The SafeTranslatedPath class is designed to work in conjunction with <a href="{{site.baseurl}}/api/LSafeTranslatedCanvas" title="class in com.mapbox.mapboxsdk.views.safecanvas"><code>SafeTranslatedCanvas</code></a>
  to work around various Android issues with large canvases. For the two classes to work together,
- call <a href="{{site.baseurl}}/api/safetranslatedpath#ondrawcyclestart(com.mapbox.mapboxsdk.views.safecanvas.isafecanvas)"><code>onDrawCycleStart(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas)</code></a> at the start of the
+ call <a href="{{site.baseurl}}/api/LSafeTranslatedPath#onDrawCycleStart(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas)"><code>onDrawCycleStart(com.mapbox.mapboxsdk.views.safecanvas.ISafeCanvas)</code></a> at the start of the
  <code>com.mapbox.mapboxsdk.overlay.Overlay.Overlay#drawSafe</code>
  method of your
  <code>com.mapbox.mapboxsdk.overlay.Overlay.Overlay</code>. This will set the adjustment needed to
@@ -71,11 +71,11 @@ extends android.graphics.Path</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#xoffset">xOffset</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#xOffset">xOffset</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#yoffset">yOffset</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#yOffset">yOffset</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
@@ -92,7 +92,7 @@ extends android.graphics.Path</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#safetranslatedpath()">SafeTranslatedPath</a></strong>()</code>&nbsp;</td>
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#SafeTranslatedPath()">SafeTranslatedPath</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -111,40 +111,40 @@ extends android.graphics.Path</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#addarc(android.graphics.rect, float, float)">addArc</a></strong>(android.graphics.Rect&nbsp;oval,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#addArc(android.graphics.Rect, float, float)">addArc</a></strong>(android.graphics.Rect&nbsp;oval,
       float&nbsp;startAngle,
       float&nbsp;sweepAngle)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#addcircle(double, double, float, android.graphics.path.direction)">addCircle</a></strong>(double&nbsp;x,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#addCircle(double, double, float, android.graphics.Path.Direction)">addCircle</a></strong>(double&nbsp;x,
          double&nbsp;y,
          float&nbsp;radius,
          android.graphics.Path.Direction&nbsp;dir)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#addoval(android.graphics.rect, android.graphics.path.direction)">addOval</a></strong>(android.graphics.Rect&nbsp;oval,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#addOval(android.graphics.Rect, android.graphics.Path.Direction)">addOval</a></strong>(android.graphics.Rect&nbsp;oval,
        android.graphics.Path.Direction&nbsp;dir)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#addpath(android.graphics.path)">addPath</a></strong>(android.graphics.Path&nbsp;src)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#addPath(android.graphics.Path)">addPath</a></strong>(android.graphics.Path&nbsp;src)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#addpath(android.graphics.path, float, float)">addPath</a></strong>(android.graphics.Path&nbsp;src,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#addPath(android.graphics.Path, float, float)">addPath</a></strong>(android.graphics.Path&nbsp;src,
        float&nbsp;dx,
        float&nbsp;dy)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#addpath(android.graphics.path, android.graphics.matrix)">addPath</a></strong>(android.graphics.Path&nbsp;src,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#addPath(android.graphics.Path, android.graphics.Matrix)">addPath</a></strong>(android.graphics.Path&nbsp;src,
        android.graphics.Matrix&nbsp;matrix)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#addrect(double, double, double, double, android.graphics.path.direction)">addRect</a></strong>(double&nbsp;left,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#addRect(double, double, double, double, android.graphics.Path.Direction)">addRect</a></strong>(double&nbsp;left,
        double&nbsp;top,
        double&nbsp;right,
        double&nbsp;bottom,
@@ -152,47 +152,47 @@ extends android.graphics.Path</pre>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#addrect(android.graphics.rect, android.graphics.path.direction)">addRect</a></strong>(android.graphics.Rect&nbsp;rect,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#addRect(android.graphics.Rect, android.graphics.Path.Direction)">addRect</a></strong>(android.graphics.Rect&nbsp;rect,
        android.graphics.Path.Direction&nbsp;dir)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#addroundrect(android.graphics.rect, float[], android.graphics.path.direction)">addRoundRect</a></strong>(android.graphics.Rect&nbsp;rect,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#addRoundRect(android.graphics.Rect, float[], android.graphics.Path.Direction)">addRoundRect</a></strong>(android.graphics.Rect&nbsp;rect,
             float[]&nbsp;radii,
             android.graphics.Path.Direction&nbsp;dir)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#addroundrect(android.graphics.rect, float, float, android.graphics.path.direction)">addRoundRect</a></strong>(android.graphics.Rect&nbsp;rect,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#addRoundRect(android.graphics.Rect, float, float, android.graphics.Path.Direction)">addRoundRect</a></strong>(android.graphics.Rect&nbsp;rect,
             float&nbsp;rx,
             float&nbsp;ry,
             android.graphics.Path.Direction&nbsp;dir)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#arcto(android.graphics.rect, float, float)">arcTo</a></strong>(android.graphics.Rect&nbsp;oval,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#arcTo(android.graphics.Rect, float, float)">arcTo</a></strong>(android.graphics.Rect&nbsp;oval,
      float&nbsp;startAngle,
      float&nbsp;sweepAngle)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#arcto(android.graphics.rect, float, float, boolean)">arcTo</a></strong>(android.graphics.Rect&nbsp;oval,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#arcTo(android.graphics.Rect, float, float, boolean)">arcTo</a></strong>(android.graphics.Rect&nbsp;oval,
      float&nbsp;startAngle,
      float&nbsp;sweepAngle,
      boolean&nbsp;forceMoveTo)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#close()">close</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#close()">close</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#computebounds(android.graphics.rect, boolean)">computeBounds</a></strong>(android.graphics.Rect&nbsp;bounds,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#computeBounds(android.graphics.Rect, boolean)">computeBounds</a></strong>(android.graphics.Rect&nbsp;bounds,
              boolean&nbsp;exact)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#cubicto(double, double, double, double, double, double)">cubicTo</a></strong>(double&nbsp;x1,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#cubicTo(double, double, double, double, double, double)">cubicTo</a></strong>(double&nbsp;x1,
        double&nbsp;y1,
        double&nbsp;x2,
        double&nbsp;y2,
@@ -201,66 +201,66 @@ extends android.graphics.Path</pre>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#finalize()">finalize</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#finalize()">finalize</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>android.graphics.Path.FillType</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#getfilltype()">getFillType</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#getFillType()">getFillType</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#increserve(int)">incReserve</a></strong>(int&nbsp;extraPtCount)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#incReserve(int)">incReserve</a></strong>(int&nbsp;extraPtCount)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#isempty()">isEmpty</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#isEmpty()">isEmpty</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#isinversefilltype()">isInverseFillType</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#isInverseFillType()">isInverseFillType</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#isrect(android.graphics.rect)">isRect</a></strong>(android.graphics.Rect&nbsp;rect)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#isRect(android.graphics.Rect)">isRect</a></strong>(android.graphics.Rect&nbsp;rect)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#lineto(double, double)">lineTo</a></strong>(double&nbsp;x,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#lineTo(double, double)">lineTo</a></strong>(double&nbsp;x,
       double&nbsp;y)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#moveto(double, double)">moveTo</a></strong>(double&nbsp;x,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#moveTo(double, double)">moveTo</a></strong>(double&nbsp;x,
       double&nbsp;y)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#offset(float, float)">offset</a></strong>(float&nbsp;dx,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#offset(float, float)">offset</a></strong>(float&nbsp;dx,
       float&nbsp;dy)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#offset(float, float, android.graphics.path)">offset</a></strong>(float&nbsp;dx,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#offset(float, float, android.graphics.Path)">offset</a></strong>(float&nbsp;dx,
       float&nbsp;dy,
       android.graphics.Path&nbsp;dst)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas)</code>
 <div class="block">This method <b>must</b> be called at the start of the <code>Overlay#drawSafe</code> draw cycle
  method.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#quadto(double, double, double, double)">quadTo</a></strong>(double&nbsp;x1,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#quadTo(double, double, double, double)">quadTo</a></strong>(double&nbsp;x1,
       double&nbsp;y1,
       double&nbsp;x2,
       double&nbsp;y2)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#rcubicto(float, float, float, float, float, float)">rCubicTo</a></strong>(float&nbsp;x1,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#rCubicTo(float, float, float, float, float, float)">rCubicTo</a></strong>(float&nbsp;x1,
         float&nbsp;y1,
         float&nbsp;x2,
         float&nbsp;y2,
@@ -269,60 +269,60 @@ extends android.graphics.Path</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#reset()">reset</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#reset()">reset</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#rewind()">rewind</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#rewind()">rewind</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#rlineto(float, float)">rLineTo</a></strong>(float&nbsp;dx,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#rLineTo(float, float)">rLineTo</a></strong>(float&nbsp;dx,
        float&nbsp;dy)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#rmoveto(float, float)">rMoveTo</a></strong>(float&nbsp;dx,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#rMoveTo(float, float)">rMoveTo</a></strong>(float&nbsp;dx,
        float&nbsp;dy)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#rquadto(float, float, float, float)">rQuadTo</a></strong>(float&nbsp;dx1,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#rQuadTo(float, float, float, float)">rQuadTo</a></strong>(float&nbsp;dx1,
        float&nbsp;dy1,
        float&nbsp;dx2,
        float&nbsp;dy2)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#set(android.graphics.path)">set</a></strong>(android.graphics.Path&nbsp;src)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#set(android.graphics.Path)">set</a></strong>(android.graphics.Path&nbsp;src)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#setfilltype(android.graphics.path.filltype)">setFillType</a></strong>(android.graphics.Path.FillType&nbsp;ft)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#setFillType(android.graphics.Path.FillType)">setFillType</a></strong>(android.graphics.Path.FillType&nbsp;ft)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#setlastpoint(double, double)">setLastPoint</a></strong>(double&nbsp;dx,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#setLastPoint(double, double)">setLastPoint</a></strong>(double&nbsp;dx,
             double&nbsp;dy)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#toggleinversefilltype()">toggleInverseFillType</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#toggleInverseFillType()">toggleInverseFillType</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected android.graphics.RectF</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#tooffsetrectf(android.graphics.rect, android.graphics.rectf)">toOffsetRectF</a></strong>(android.graphics.Rect&nbsp;rect,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#toOffsetRectF(android.graphics.Rect, android.graphics.RectF)">toOffsetRectF</a></strong>(android.graphics.Rect&nbsp;rect,
              android.graphics.RectF&nbsp;reuse)</code>
 <div class="block">Helper function to convert a Rect to RectF and adjust the values of the Rect by the offsets.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#transform(android.graphics.matrix)">transform</a></strong>(android.graphics.Matrix&nbsp;matrix)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#transform(android.graphics.Matrix)">transform</a></strong>(android.graphics.Matrix&nbsp;matrix)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/safetranslatedpath#transform(android.graphics.matrix, android.graphics.path)">transform</a></strong>(android.graphics.Matrix&nbsp;matrix,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LSafeTranslatedPath#transform(android.graphics.Matrix, android.graphics.Path)">transform</a></strong>(android.graphics.Matrix&nbsp;matrix,
          android.graphics.Path&nbsp;dst)</code>&nbsp;</td>
 </tr>
 </table>
@@ -403,9 +403,9 @@ extends android.graphics.Path</pre>
 
 
 <h4>onDrawCycleStart</h4>
-<pre>public&nbsp;void&nbsp;onDrawCycleStart(<a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas)</pre>
+<pre>public&nbsp;void&nbsp;onDrawCycleStart(<a href="{{site.baseurl}}/api/LISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas">ISafeCanvas</a>&nbsp;canvas)</pre>
 <div class="block">This method <b>must</b> be called at the start of the <code>Overlay#drawSafe</code> draw cycle
- method. This will adjust the Path to the current state of the <a href="{{site.baseurl}}/api/isafecanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas"><code>ISafeCanvas</code></a> passed to
+ method. This will adjust the Path to the current state of the <a href="{{site.baseurl}}/api/LISafeCanvas" title="interface in com.mapbox.mapboxsdk.views.safecanvas"><code>ISafeCanvas</code></a> passed to
  it.</div>
 
 

@@ -1,0 +1,516 @@
+---
+layout: api
+title: OfflineMapDownloader
+category: api
+tags: offline
+---
+<div class="contentContainer">
+
+java.lang.Object
+
+
+com.mapbox.mapboxsdk.offline.OfflineMapDownloader
+
+
+
+<div class="description">
+
+
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/LMapboxConstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></dd>
+</dl>
+
+
+<pre>public class <span class="strong">OfflineMapDownloader</span>
+extends java.lang.Object
+implements <a href="{{site.baseurl}}/api/LMapboxConstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></pre>
+
+
+</div>
+<div class="summary">
+
+
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<a name="nested_class_summary">
+<!--   -->
+</a>
+<h3>Nested Class Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Nested Class Summary table, listing nested classes, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Class and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader.MBXOfflineMapDownloaderState" title="enum in com.mapbox.mapboxsdk.offline">OfflineMapDownloader.MBXOfflineMapDownloaderState</a></strong></code>
+<div class="block">The possible states of the offline map downloader.</div>
+</td>
+</tr>
+</table>
+
+<a name="nested_classes_inherited_from_class_com.mapbox.mapboxsdk.constants.MapboxConstants">
+<!--   -->
+</a>
+<h3>Nested classes/interfaces inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/LMapboxConstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/LMapboxConstants.RasterImageQuality" title="enum in com.mapbox.mapboxsdk.constants">MapboxConstants.RasterImageQuality</a></code>
+
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.constants.MapboxConstants">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/LMapboxConstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/LMapboxConstants#USER_AGENT">USER_AGENT</a></code>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloaderListener" title="interface in com.mapbox.mapboxsdk.offline">OfflineMapDownloaderListener</a>&nbsp;listener)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#beginDownloadingMapID(java.lang.String, com.mapbox.mapboxsdk.geometry.CoordinateRegion, java.lang.Integer, java.lang.Integer)">beginDownloadingMapID</a></strong>(java.lang.String&nbsp;mapID,
+                     <a href="{{site.baseurl}}/api/LCoordinateRegion" title="class in com.mapbox.mapboxsdk.geometry">CoordinateRegion</a>&nbsp;mapRegion,
+                     java.lang.Integer&nbsp;minimumZ,
+                     java.lang.Integer&nbsp;maximumZ)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#beginDownloadingMapID(java.lang.String, com.mapbox.mapboxsdk.geometry.CoordinateRegion, java.lang.Integer, java.lang.Integer, boolean, boolean)">beginDownloadingMapID</a></strong>(java.lang.String&nbsp;mapID,
+                     <a href="{{site.baseurl}}/api/LCoordinateRegion" title="class in com.mapbox.mapboxsdk.geometry">CoordinateRegion</a>&nbsp;mapRegion,
+                     java.lang.Integer&nbsp;minimumZ,
+                     java.lang.Integer&nbsp;maximumZ,
+                     boolean&nbsp;includeMetadata,
+                     boolean&nbsp;includeMarkers)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#beginDownloadingMapID(java.lang.String, com.mapbox.mapboxsdk.geometry.CoordinateRegion, java.lang.Integer, java.lang.Integer, boolean, boolean, com.mapbox.mapboxsdk.constants.MapboxConstants.RasterImageQuality)">beginDownloadingMapID</a></strong>(java.lang.String&nbsp;mapID,
+                     <a href="{{site.baseurl}}/api/LCoordinateRegion" title="class in com.mapbox.mapboxsdk.geometry">CoordinateRegion</a>&nbsp;mapRegion,
+                     java.lang.Integer&nbsp;minimumZ,
+                     java.lang.Integer&nbsp;maximumZ,
+                     boolean&nbsp;includeMetadata,
+                     boolean&nbsp;includeMarkers,
+                     <a href="{{site.baseurl}}/api/LMapboxConstants.RasterImageQuality" title="enum in com.mapbox.mapboxsdk.constants">MapboxConstants.RasterImageQuality</a>&nbsp;imageQuality)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#cancel()">cancel</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#cancelImmediatelyWithError(java.lang.String)">cancelImmediatelyWithError</a></strong>(java.lang.String&nbsp;error)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LOfflineMapDatabase" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDatabase</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#completeDatabaseAndInstantiateOfflineMapWithError()">completeDatabaseAndInstantiateOfflineMapWithError</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="{{site.baseurl}}/api/LOfflineMapDatabase" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDatabase</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#getMutableOfflineMapDatabases()">getMutableOfflineMapDatabases</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="{{site.baseurl}}/api/LOfflineMapDownloader" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDownloader</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#getOfflineMapDownloader(android.content.Context)">getOfflineMapDownloader</a></strong>(android.content.Context&nbsp;context)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#isMapIdAlreadyAnOfflineMapDatabase(java.lang.String)">isMapIdAlreadyAnOfflineMapDatabase</a></strong>(java.lang.String&nbsp;mapId)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDatabase</a>&nbsp;offlineMap)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#notifyDelegateOfHTTPStatusError(int, java.lang.String)">notifyDelegateOfHTTPStatusError</a></strong>(int&nbsp;status,
+                               java.lang.String&nbsp;url)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#notifyDelegateOfInitialCount()">notifyDelegateOfInitialCount</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#notifyDelegateOfNetworkConnectivityError(java.lang.Throwable)">notifyDelegateOfNetworkConnectivityError</a></strong>(java.lang.Throwable&nbsp;error)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#notifyDelegateOfProgress()">notifyDelegateOfProgress</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#notifyDelegateOfSqliteError(java.lang.Throwable)">notifyDelegateOfSqliteError</a></strong>(java.lang.Throwable&nbsp;error)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#notifyDelegateOfStateChange()">notifyDelegateOfStateChange</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>java.util.Set&lt;java.lang.String&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#parseMarkerIconURLStringsFromGeojsonData(java.lang.String)">parseMarkerIconURLStringsFromGeojsonData</a></strong>(java.lang.String&nbsp;data)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDatabase</a>&nbsp;offlineMapDatabase)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#removeOfflineMapDatabaseWithID(java.lang.String)">removeOfflineMapDatabaseWithID</a></strong>(java.lang.String&nbsp;mid)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloaderListener" title="interface in com.mapbox.mapboxsdk.offline">OfflineMapDownloaderListener</a>&nbsp;listener)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#resume()">resume</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#sqliteCreateDatabaseUsingMetadata(java.util.Hashtable, java.util.List)">sqliteCreateDatabaseUsingMetadata</a></strong>(java.util.Hashtable&lt;java.lang.String,java.lang.String&gt;&nbsp;metadata,
+                                 java.util.List&lt;java.lang.String&gt;&nbsp;urlStrings)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#sqliteQueryWrittenAndExpectedCountsWithError()">sqliteQueryWrittenAndExpectedCountsWithError</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>java.util.ArrayList&lt;java.lang.String&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(int)">sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit</a></strong>(int&nbsp;limit)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#sqliteSaveDownloadedData(byte[], java.lang.String)">sqliteSaveDownloadedData</a></strong>(byte[]&nbsp;data,
+                        java.lang.String&nbsp;url)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#startDownloading()">startDownloading</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDownloader#suspend()">suspend</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getOfflineMapDownloader(android.content.Context)">
+<!--   -->
+</a>
+
+
+<h4>getOfflineMapDownloader</h4>
+<pre>public static&nbsp;<a href="{{site.baseurl}}/api/LOfflineMapDownloader" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDownloader</a>&nbsp;getOfflineMapDownloader(android.content.Context&nbsp;context)</pre>
+
+
+<a name="addOfflineMapDownloaderListener(com.mapbox.mapboxsdk.offline.OfflineMapDownloaderListener)">
+<!--   -->
+</a>
+
+
+<h4>addOfflineMapDownloaderListener</h4>
+<pre>public&nbsp;boolean&nbsp;addOfflineMapDownloaderListener(<a href="{{site.baseurl}}/api/LOfflineMapDownloaderListener" title="interface in com.mapbox.mapboxsdk.offline">OfflineMapDownloaderListener</a>&nbsp;listener)</pre>
+
+
+<a name="removeOfflineMapDownloaderListener(com.mapbox.mapboxsdk.offline.OfflineMapDownloaderListener)">
+<!--   -->
+</a>
+
+
+<h4>removeOfflineMapDownloaderListener</h4>
+<pre>public&nbsp;boolean&nbsp;removeOfflineMapDownloaderListener(<a href="{{site.baseurl}}/api/LOfflineMapDownloaderListener" title="interface in com.mapbox.mapboxsdk.offline">OfflineMapDownloaderListener</a>&nbsp;listener)</pre>
+
+
+<a name="notifyDelegateOfStateChange()">
+<!--   -->
+</a>
+
+
+<h4>notifyDelegateOfStateChange</h4>
+<pre>public&nbsp;void&nbsp;notifyDelegateOfStateChange()</pre>
+
+
+<a name="notifyDelegateOfInitialCount()">
+<!--   -->
+</a>
+
+
+<h4>notifyDelegateOfInitialCount</h4>
+<pre>public&nbsp;void&nbsp;notifyDelegateOfInitialCount()</pre>
+
+
+<a name="notifyDelegateOfProgress()">
+<!--   -->
+</a>
+
+
+<h4>notifyDelegateOfProgress</h4>
+<pre>public&nbsp;void&nbsp;notifyDelegateOfProgress()</pre>
+
+
+<a name="notifyDelegateOfNetworkConnectivityError(java.lang.Throwable)">
+<!--   -->
+</a>
+
+
+<h4>notifyDelegateOfNetworkConnectivityError</h4>
+<pre>public&nbsp;void&nbsp;notifyDelegateOfNetworkConnectivityError(java.lang.Throwable&nbsp;error)</pre>
+
+
+<a name="notifyDelegateOfSqliteError(java.lang.Throwable)">
+<!--   -->
+</a>
+
+
+<h4>notifyDelegateOfSqliteError</h4>
+<pre>public&nbsp;void&nbsp;notifyDelegateOfSqliteError(java.lang.Throwable&nbsp;error)</pre>
+
+
+<a name="notifyDelegateOfHTTPStatusError(int, java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>notifyDelegateOfHTTPStatusError</h4>
+<pre>public&nbsp;void&nbsp;notifyDelegateOfHTTPStatusError(int&nbsp;status,
+                                   java.lang.String&nbsp;url)</pre>
+
+
+<a name="notifyDelegateOfCompletionWithOfflineMapDatabase(com.mapbox.mapboxsdk.offline.OfflineMapDatabase)">
+<!--   -->
+</a>
+
+
+<h4>notifyDelegateOfCompletionWithOfflineMapDatabase</h4>
+<pre>public&nbsp;void&nbsp;notifyDelegateOfCompletionWithOfflineMapDatabase(<a href="{{site.baseurl}}/api/LOfflineMapDatabase" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDatabase</a>&nbsp;offlineMap)</pre>
+
+
+<a name="completeDatabaseAndInstantiateOfflineMapWithError()">
+<!--   -->
+</a>
+
+
+<h4>completeDatabaseAndInstantiateOfflineMapWithError</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LOfflineMapDatabase" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDatabase</a>&nbsp;completeDatabaseAndInstantiateOfflineMapWithError()</pre>
+
+
+<a name="startDownloading()">
+<!--   -->
+</a>
+
+
+<h4>startDownloading</h4>
+<pre>public&nbsp;void&nbsp;startDownloading()</pre>
+
+
+<a name="sqliteSaveDownloadedData(byte[], java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>sqliteSaveDownloadedData</h4>
+<pre>public&nbsp;void&nbsp;sqliteSaveDownloadedData(byte[]&nbsp;data,
+                            java.lang.String&nbsp;url)</pre>
+
+
+<a name="sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(int)">
+<!--   -->
+</a>
+
+
+<h4>sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit</h4>
+<pre>public&nbsp;java.util.ArrayList&lt;java.lang.String&gt;&nbsp;sqliteReadArrayOfOfflineMapURLsToBeDownloadLimit(int&nbsp;limit)</pre>
+
+
+<a name="sqliteQueryWrittenAndExpectedCountsWithError()">
+<!--   -->
+</a>
+
+
+<h4>sqliteQueryWrittenAndExpectedCountsWithError</h4>
+<pre>public&nbsp;boolean&nbsp;sqliteQueryWrittenAndExpectedCountsWithError()</pre>
+
+
+<a name="sqliteCreateDatabaseUsingMetadata(java.util.Hashtable, java.util.List)">
+<!--   -->
+</a>
+
+
+<h4>sqliteCreateDatabaseUsingMetadata</h4>
+<pre>public&nbsp;boolean&nbsp;sqliteCreateDatabaseUsingMetadata(java.util.Hashtable&lt;java.lang.String,java.lang.String&gt;&nbsp;metadata,
+                                        java.util.List&lt;java.lang.String&gt;&nbsp;urlStrings)</pre>
+
+
+<a name="beginDownloadingMapID(java.lang.String, com.mapbox.mapboxsdk.geometry.CoordinateRegion, java.lang.Integer, java.lang.Integer)">
+<!--   -->
+</a>
+
+
+<h4>beginDownloadingMapID</h4>
+<pre>public&nbsp;void&nbsp;beginDownloadingMapID(java.lang.String&nbsp;mapID,
+                         <a href="{{site.baseurl}}/api/LCoordinateRegion" title="class in com.mapbox.mapboxsdk.geometry">CoordinateRegion</a>&nbsp;mapRegion,
+                         java.lang.Integer&nbsp;minimumZ,
+                         java.lang.Integer&nbsp;maximumZ)</pre>
+
+
+<a name="beginDownloadingMapID(java.lang.String, com.mapbox.mapboxsdk.geometry.CoordinateRegion, java.lang.Integer, java.lang.Integer, boolean, boolean)">
+<!--   -->
+</a>
+
+
+<h4>beginDownloadingMapID</h4>
+<pre>public&nbsp;void&nbsp;beginDownloadingMapID(java.lang.String&nbsp;mapID,
+                         <a href="{{site.baseurl}}/api/LCoordinateRegion" title="class in com.mapbox.mapboxsdk.geometry">CoordinateRegion</a>&nbsp;mapRegion,
+                         java.lang.Integer&nbsp;minimumZ,
+                         java.lang.Integer&nbsp;maximumZ,
+                         boolean&nbsp;includeMetadata,
+                         boolean&nbsp;includeMarkers)</pre>
+
+
+<a name="beginDownloadingMapID(java.lang.String, com.mapbox.mapboxsdk.geometry.CoordinateRegion, java.lang.Integer, java.lang.Integer, boolean, boolean, com.mapbox.mapboxsdk.constants.MapboxConstants.RasterImageQuality)">
+<!--   -->
+</a>
+
+
+<h4>beginDownloadingMapID</h4>
+<pre>public&nbsp;void&nbsp;beginDownloadingMapID(java.lang.String&nbsp;mapID,
+                         <a href="{{site.baseurl}}/api/LCoordinateRegion" title="class in com.mapbox.mapboxsdk.geometry">CoordinateRegion</a>&nbsp;mapRegion,
+                         java.lang.Integer&nbsp;minimumZ,
+                         java.lang.Integer&nbsp;maximumZ,
+                         boolean&nbsp;includeMetadata,
+                         boolean&nbsp;includeMarkers,
+                         <a href="{{site.baseurl}}/api/LMapboxConstants.RasterImageQuality" title="enum in com.mapbox.mapboxsdk.constants">MapboxConstants.RasterImageQuality</a>&nbsp;imageQuality)</pre>
+
+
+<a name="parseMarkerIconURLStringsFromGeojsonData(java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>parseMarkerIconURLStringsFromGeojsonData</h4>
+<pre>public&nbsp;java.util.Set&lt;java.lang.String&gt;&nbsp;parseMarkerIconURLStringsFromGeojsonData(java.lang.String&nbsp;data)</pre>
+
+
+<a name="cancelImmediatelyWithError(java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>cancelImmediatelyWithError</h4>
+<pre>public&nbsp;void&nbsp;cancelImmediatelyWithError(java.lang.String&nbsp;error)</pre>
+
+
+<a name="cancel()">
+<!--   -->
+</a>
+
+
+<h4>cancel</h4>
+<pre>public&nbsp;void&nbsp;cancel()</pre>
+
+
+<a name="resume()">
+<!--   -->
+</a>
+
+
+<h4>resume</h4>
+<pre>public&nbsp;void&nbsp;resume()</pre>
+
+
+<a name="suspend()">
+<!--   -->
+</a>
+
+
+<h4>suspend</h4>
+<pre>public&nbsp;void&nbsp;suspend()</pre>
+
+
+<a name="getMutableOfflineMapDatabases()">
+<!--   -->
+</a>
+
+
+<h4>getMutableOfflineMapDatabases</h4>
+<pre>public&nbsp;java.util.ArrayList&lt;<a href="{{site.baseurl}}/api/LOfflineMapDatabase" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDatabase</a>&gt;&nbsp;getMutableOfflineMapDatabases()</pre>
+
+
+<a name="isMapIdAlreadyAnOfflineMapDatabase(java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>isMapIdAlreadyAnOfflineMapDatabase</h4>
+<pre>public&nbsp;boolean&nbsp;isMapIdAlreadyAnOfflineMapDatabase(java.lang.String&nbsp;mapId)</pre>
+
+
+<a name="removeOfflineMapDatabase(com.mapbox.mapboxsdk.offline.OfflineMapDatabase)">
+<!--   -->
+</a>
+
+
+<h4>removeOfflineMapDatabase</h4>
+<pre>public&nbsp;boolean&nbsp;removeOfflineMapDatabase(<a href="{{site.baseurl}}/api/LOfflineMapDatabase" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDatabase</a>&nbsp;offlineMapDatabase)</pre>
+
+
+<a name="removeOfflineMapDatabaseWithID(java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>removeOfflineMapDatabaseWithID</h4>
+<pre>public&nbsp;boolean&nbsp;removeOfflineMapDatabaseWithID(java.lang.String&nbsp;mid)</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

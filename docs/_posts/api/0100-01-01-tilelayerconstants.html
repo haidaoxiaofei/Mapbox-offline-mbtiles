@@ -10,7 +10,7 @@ tags: tileprovider
 
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="{{site.baseurl}}/api/websourcetilelayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">WebSourceTileLayer</a></dd>
+<dd><a href="{{site.baseurl}}/api/LWebSourceTileLayer" title="class in com.mapbox.mapboxsdk.tileprovider.tilesource">WebSourceTileLayer</a></dd>
 </dl>
 
 
@@ -36,49 +36,49 @@ tags: tileprovider
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#cache_maptilecount_default">CACHE_MAPTILECOUNT_DEFAULT</a></strong></code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLayerConstants#CACHE_MAPTILECOUNT_DEFAULT">CACHE_MAPTILECOUNT_DEFAULT</a></strong></code>
 <div class="block">Initial tile cache size.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#cache_maptiledisksize_default">CACHE_MAPTILEDISKSIZE_DEFAULT</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLayerConstants#CACHE_MAPTILEDISKSIZE_DEFAULT">CACHE_MAPTILEDISKSIZE_DEFAULT</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#debug_tile_providers">DEBUG_TILE_PROVIDERS</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLayerConstants#DEBUG_TILE_PROVIDERS">DEBUG_TILE_PROVIDERS</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#default_tile_size">DEFAULT_TILE_SIZE</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLayerConstants#DEFAULT_TILE_SIZE">DEFAULT_TILE_SIZE</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#maximum_zoomlevel">MAXIMUM_ZOOMLEVEL</a></strong></code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLayerConstants#MAXIMUM_ZOOMLEVEL">MAXIMUM_ZOOMLEVEL</a></strong></code>
 <div class="block">Maximum Zoom Level - we use Integers to store zoom levels so overflow happens at 2^32 - 1,
  but we also have a tile size that is typically 2^8, so (32-1)-8-1 = 22</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#minimum_zoomlevel">MINIMUM_ZOOMLEVEL</a></strong></code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLayerConstants#MINIMUM_ZOOMLEVEL">MINIMUM_ZOOMLEVEL</a></strong></code>
 <div class="block">Minimum Zoom Level</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#number_of_tile_download_threads">NUMBER_OF_TILE_DOWNLOAD_THREADS</a></strong></code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLayerConstants#NUMBER_OF_TILE_DOWNLOAD_THREADS">NUMBER_OF_TILE_DOWNLOAD_THREADS</a></strong></code>
 <div class="block">number of tile download threads, conforming to OSM policy:
  http://wiki.openstreetmap.org/wiki/Tile_usage_policy</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#tile_download_maximum_queue_size">TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLayerConstants#TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE">TILE_DOWNLOAD_MAXIMUM_QUEUE_SIZE</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>static <a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilelayerconstants#world_bounding_box">WORLD_BOUNDING_BOX</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>static <a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLayerConstants#WORLD_BOUNDING_BOX">WORLD_BOUNDING_BOX</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
@@ -111,7 +111,7 @@ tags: tileprovider
 
 
 <h4>WORLD_BOUNDING_BOX</h4>
-<pre>static final&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a> WORLD_BOUNDING_BOX</pre>
+<pre>static final&nbsp;<a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a> WORLD_BOUNDING_BOX</pre>
 
 
 <a name="MINIMUM_ZOOMLEVEL">

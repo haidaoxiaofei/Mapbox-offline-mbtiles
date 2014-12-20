@@ -28,13 +28,13 @@ com.mapbox.mapboxsdk.views.MapView
 
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd>android.graphics.drawable.Drawable.Callback, android.view.accessibility.AccessibilityEventSource, android.view.KeyEvent.Callback, android.view.ViewManager, android.view.ViewParent, <a href="{{site.baseurl}}/api/mapviewconstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewConstants</a></dd>
+<dd>android.graphics.drawable.Drawable.Callback, android.view.accessibility.AccessibilityEventSource, android.view.KeyEvent.Callback, android.view.ViewManager, android.view.ViewParent, <a href="{{site.baseurl}}/api/LMapViewConstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewConstants</a></dd>
 </dl>
 
 
 <pre>public class <span class="strong">MapView</span>
 extends android.view.ViewGroup
-implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></pre>
+implements <a href="{{site.baseurl}}/api/LMapboxConstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></pre>
 <div class="block">The MapView class manages all of the content and
  state of a single map, including layers, markers,
  and interaction code.</div>
@@ -58,7 +58,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static class&nbsp;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview.layoutparams" title="class in com.mapbox.mapboxsdk.views">MapView.LayoutParams</a></strong></code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView.LayoutParams" title="class in com.mapbox.mapboxsdk.views">MapView.LayoutParams</a></strong></code>
 <div class="block">Per-child layout information associated with OpenStreetMapView.</div>
 </td>
 </tr>
@@ -78,6 +78,13 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <code>android.view.View.AccessibilityDelegate, android.view.View.BaseSavedState, android.view.View.DragShadowBuilder, android.view.View.MeasureSpec, android.view.View.OnApplyWindowInsetsListener, android.view.View.OnAttachStateChangeListener, android.view.View.OnClickListener, android.view.View.OnCreateContextMenuListener, android.view.View.OnDragListener, android.view.View.OnFocusChangeListener, android.view.View.OnGenericMotionListener, android.view.View.OnHoverListener, android.view.View.OnKeyListener, android.view.View.OnLayoutChangeListener, android.view.View.OnLongClickListener, android.view.View.OnSystemUiVisibilityChangeListener, android.view.View.OnTouchListener</code>
 
 
+<a name="nested_classes_inherited_from_class_com.mapbox.mapboxsdk.constants.MapboxConstants">
+<!--   -->
+</a>
+<h3>Nested classes/interfaces inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/LMapboxConstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/LMapboxConstants.RasterImageQuality" title="enum in com.mapbox.mapboxsdk.constants">MapboxConstants.RasterImageQuality</a></code>
+
+
 
 <!-- =========== FIELD SUMMARY =========== -->
 
@@ -93,65 +100,65 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected android.graphics.Matrix</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#minvtransformmatrix">mInvTransformMatrix</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mInvTransformMatrix">mInvTransformMatrix</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#misflinging">mIsFlinging</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mIsFlinging">mIsFlinging</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected java.util.List&lt;<a href="{{site.baseurl}}/api/maplistener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>&gt;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mlisteners">mListeners</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>protected java.util.List&lt;<a href="{{site.baseurl}}/api/LMapListener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mListeners">mListeners</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mmaprotationenabled">mMapRotationEnabled</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mMapRotationEnabled">mMapRotationEnabled</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mmultitouchscale">mMultiTouchScale</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mMultiTouchScale">mMultiTouchScale</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected android.graphics.PointF</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mmultitouchscalepoint">mMultiTouchScalePoint</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mMultiTouchScalePoint">mMultiTouchScalePoint</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/onmaporientationchangelistener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#monmaporientationchangelistener">mOnMapOrientationChangeListener</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/LOnMapOrientationChangeListener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mOnMapOrientationChangeListener">mOnMapOrientationChangeListener</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mrequestedminimumzoomlevel">mRequestedMinimumZoomLevel</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mRequestedMinimumZoomLevel">mRequestedMinimumZoomLevel</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../com/almeros/android/multitouch/RotateGestureDetector.html" title="class in com.almeros.android.multitouch">RotateGestureDetector</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mrotategesturedetector">mRotateGestureDetector</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mRotateGestureDetector">mRotateGestureDetector</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected android.view.ScaleGestureDetector</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mscalegesturedetector">mScaleGestureDetector</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mScaleGestureDetector">mScaleGestureDetector</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mscrollableareaboundingbox">mScrollableAreaBoundingBox</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mScrollableAreaBoundingBox">mScrollableAreaBoundingBox</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected android.graphics.RectF</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mscrollablearealimit">mScrollableAreaLimit</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mScrollableAreaLimit">mScrollableAreaLimit</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected android.widget.Scroller</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mscroller">mScroller</a></strong></code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mScroller">mScroller</a></strong></code>
 <div class="block">Handles map scrolling</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected android.graphics.RectF</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mtemprect">mTempRect</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mTempRect">mTempRect</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mtileprovider">mTileProvider</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#mTileProvider">mTileProvider</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
@@ -172,15 +179,15 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <a name="fields_inherited_from_class_com.mapbox.mapboxsdk.views.util.constants.MapViewConstants">
 <!--   -->
 </a>
-<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.views.util.constants.<a href="{{site.baseurl}}/api/mapviewconstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewConstants</a></h3>
-<code><a href="{{site.baseurl}}/api/mapviewconstants#default_pin_anchor">DEFAULT_PIN_ANCHOR</a></code>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.views.util.constants.<a href="{{site.baseurl}}/api/LMapViewConstants" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/LMapViewConstants#DEFAULT_PIN_ANCHOR">DEFAULT_PIN_ANCHOR</a></code>
 
 
 <a name="fields_inherited_from_class_com.mapbox.mapboxsdk.constants.MapboxConstants">
 <!--   -->
 </a>
-<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/mapboxconstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></h3>
-<code><a href="{{site.baseurl}}/api/mapboxconstants#user_agent">USER_AGENT</a></code>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/LMapboxConstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/LMapboxConstants#USER_AGENT">USER_AGENT</a></code>
 
 
 
@@ -198,24 +205,24 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>&nbsp;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mapview(android.content.context)">MapView</a></strong>(android.content.Context&nbsp;aContext)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#MapView(android.content.Context)">MapView</a></strong>(android.content.Context&nbsp;aContext)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>&nbsp;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mapview(android.content.context, android.util.attributeset)">MapView</a></strong>(android.content.Context&nbsp;aContext,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#MapView(android.content.Context, android.util.AttributeSet)">MapView</a></strong>(android.content.Context&nbsp;aContext,
        android.util.AttributeSet&nbsp;attrs)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mapview(android.content.context, int, com.mapbox.mapboxsdk.tileprovider.maptilelayerbase)">MapView</a></strong>(android.content.Context&nbsp;aContext,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#MapView(android.content.Context, int, com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase)">MapView</a></strong>(android.content.Context&nbsp;aContext,
        int&nbsp;tileSizePixels,
-       <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;aTileProvider)</code>&nbsp;</td>
+       <a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;aTileProvider)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#mapview(android.content.context, int, com.mapbox.mapboxsdk.tileprovider.maptilelayerbase, android.os.handler, android.util.attributeset)">MapView</a></strong>(android.content.Context&nbsp;aContext,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#MapView(android.content.Context, int, com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase, android.os.Handler, android.util.AttributeSet)">MapView</a></strong>(android.content.Context&nbsp;aContext,
        int&nbsp;tileSizePixels,
-       <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;tileProvider,
+       <a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;tileProvider,
        android.os.Handler&nbsp;tileRequestCompleteHandler,
        android.util.AttributeSet&nbsp;attrs)</code>
 <div class="block">Constructor for XML layout calls.</div>
@@ -238,372 +245,372 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbox.mapboxsdk.overlay">ItemizedOverlay</a>&nbsp;itemizedOverlay)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LItemizedOverlay" title="class in com.mapbox.mapboxsdk.overlay">ItemizedOverlay</a>&nbsp;itemizedOverlay)</code>
 <div class="block">Adds a new ItemizedOverlay to the MapView</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maplistener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>&nbsp;listener)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapListener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>&nbsp;listener)</code>
 <div class="block">Add a new MapListener that observes changes in this map.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;marker)</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMarker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMarker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;marker)</code>
 <div class="block">Adds a marker to the default marker overlay.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&nbsp;overlay)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&nbsp;overlay)</code>
 <div class="block">Add an overlay to this map.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource,
              int&nbsp;index)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#cangoto(float, float)">canGoTo</a></strong>(float&nbsp;x,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#canGoTo(float, float)">canGoTo</a></strong>(float&nbsp;x,
        float&nbsp;y)</code>
 <div class="block">Returns if the map can go to a specified point (in map coordinates)</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point)</code>
 <div class="block">Returns if the map can go to a specified geo point</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#canzoomin()">canZoomIn</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#canZoomIn()">canZoomIn</a></strong>()</code>
 <div class="block">Determine whether the map is at its maximum zoom</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#canzoomout()">canZoomOut</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#canZoomOut()">canZoomOut</a></strong>()</code>
 <div class="block">Determine whether the map is at its minimum zoom</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#checklayoutparams(android.view.viewgroup.layoutparams)">checkLayoutParams</a></strong>(android.view.ViewGroup.LayoutParams&nbsp;p)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#checkLayoutParams(android.view.ViewGroup.LayoutParams)">checkLayoutParams</a></strong>(android.view.ViewGroup.LayoutParams&nbsp;p)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#clear()">clear</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#clear()">clear</a></strong>()</code>
 <div class="block">Remove all markers from the map's display.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#clearanimatedzoom(float)">clearAnimatedZoom</a></strong>(float&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#clearAnimatedZoom(float)">clearAnimatedZoom</a></strong>(float&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#closecurrenttooltip()">closeCurrentTooltip</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#closeCurrentTooltip()">closeCurrentTooltip</a></strong>()</code>
 <div class="block">Close the currently-displayed tooltip, if any.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#computescroll()">computeScroll</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#computeScroll()">computeScroll</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected android.view.ViewGroup.LayoutParams</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#generatedefaultlayoutparams()">generateDefaultLayoutParams</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#generateDefaultLayoutParams()">generateDefaultLayoutParams</a></strong>()</code>
 <div class="block">Returns a set of layout parameters with a width of
  <code>ViewGroup.LayoutParams.WRAP_CONTENT</code>, a height of
- <code>ViewGroup.LayoutParams.WRAP_CONTENT</code> at the <a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry"><code>LatLng</code></a> (0, 0) align
- with <a href="{{site.baseurl}}/api/mapviewlayouts#bottom_center"><code>MapViewLayouts.BOTTOM_CENTER</code></a>.</div>
+ <code>ViewGroup.LayoutParams.WRAP_CONTENT</code> at the <a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry"><code>LatLng</code></a> (0, 0) align
+ with <a href="{{site.baseurl}}/api/LMapViewLayouts#BOTTOM_CENTER"><code>MapViewLayouts.BOTTOM_CENTER</code></a>.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>android.view.ViewGroup.LayoutParams</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#generatelayoutparams(android.util.attributeset)">generateLayoutParams</a></strong>(android.util.AttributeSet&nbsp;attrs)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#generateLayoutParams(android.util.AttributeSet)">generateLayoutParams</a></strong>(android.util.AttributeSet&nbsp;attrs)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected android.view.ViewGroup.LayoutParams</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#generatelayoutparams(android.view.viewgroup.layoutparams)">generateLayoutParams</a></strong>(android.view.ViewGroup.LayoutParams&nbsp;p)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#generateLayoutParams(android.view.ViewGroup.LayoutParams)">generateLayoutParams</a></strong>(android.view.ViewGroup.LayoutParams&nbsp;p)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getanimatedzoom()">getAnimatedZoom</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getAnimatedZoom()">getAnimatedZoom</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getboundingbox()">getBoundingBox</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getBoundingBox()">getBoundingBox</a></strong>()</code>
 <div class="block">Returns the current bounding box of the map.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getboundingboxinternal()">getBoundingBoxInternal</a></strong>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getBoundingBoxInternal()">getBoundingBoxInternal</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getcenter()">getCenter</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getCenter()">getCenter</a></strong>()</code>
 <div class="block">Get centerpoint of the phone as latitude and longitude.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getclampedzoomlevel(float)">getClampedZoomLevel</a></strong>(float&nbsp;zoom)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getClampedZoomLevel(float)">getClampedZoomLevel</a></strong>(float&nbsp;zoom)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapcontroller" title="class in com.mapbox.mapboxsdk.views">MapController</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getcontroller()">getController</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapController" title="class in com.mapbox.mapboxsdk.views">MapController</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getController()">getController</a></strong>()</code>
 <div class="block">Returns the map's controller</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/infowindow" title="class in com.mapbox.mapboxsdk.views">InfoWindow</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getcurrenttooltip()">getCurrentTooltip</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LInfoWindow" title="class in com.mapbox.mapboxsdk.views">InfoWindow</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getCurrentTooltip()">getCurrentTooltip</a></strong>()</code>
 <div class="block">Get the current tooltip of this map if there is one being displayed.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>android.graphics.PointF</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getdefaultpinanchor()">getDefaultPinAnchor</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getDefaultPinAnchor()">getDefaultPinAnchor</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>android.graphics.drawable.Drawable</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getdefaultpindrawable()">getDefaultPinDrawable</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getDefaultPinDrawable()">getDefaultPinDrawable</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>android.graphics.Rect</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getintrinsicscreenrect(android.graphics.rect)">getIntrinsicScreenRect</a></strong>(android.graphics.Rect&nbsp;reuse)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getIntrinsicScreenRect(android.graphics.Rect)">getIntrinsicScreenRect</a></strong>(android.graphics.Rect&nbsp;reuse)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>android.graphics.Matrix</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getinversedtransformmatrix()">getInversedTransformMatrix</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getInversedTransformMatrix()">getInversedTransformMatrix</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="{{site.baseurl}}/api/itemizediconoverlay" title="class in com.mapbox.mapboxsdk.overlay">ItemizedIconOverlay</a>&gt;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getitemizedoverlays()">getItemizedOverlays</a></strong>()</code>
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="{{site.baseurl}}/api/LItemizedIconOverlay" title="class in com.mapbox.mapboxsdk.overlay">ItemizedIconOverlay</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getItemizedOverlays()">getItemizedOverlays</a></strong>()</code>
 <div class="block">Get all itemized overlays on the map as an ArrayList.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getmaporientation()">getMapOrientation</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getMapOrientation()">getMapOrientation</a></strong>()</code>
 <div class="block">Gets the current angle of rotation of the map</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/tilesoverlay" title="class in com.mapbox.mapboxsdk.overlay">TilesOverlay</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getmapoverlay()">getMapOverlay</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LTilesOverlay" title="class in com.mapbox.mapboxsdk.overlay">TilesOverlay</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getMapOverlay()">getMapOverlay</a></strong>()</code>
 <div class="block">Returns the map's overlay</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getmaxzoomlevel()">getMaxZoomLevel</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getMaxZoomLevel()">getMaxZoomLevel</a></strong>()</code>
 <div class="block">Get the maximum allowed zoom level for the maps.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getminzoomlevel()">getMinZoomLevel</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getMinZoomLevel()">getMinZoomLevel</a></strong>()</code>
 <div class="block">Get the minimum allowed zoom level for the maps.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/onmaporientationchangelistener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getonmaporientationchangelistener()">getOnMapOrientationChangeListener</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LOnMapOrientationChangeListener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getOnMapOrientationChangeListener()">getOnMapOrientationChangeListener</a></strong>()</code>
 <div class="block">Gets the mapView onMapOrientationChangeListener</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/overlaymanager" title="class in com.mapbox.mapboxsdk.overlay">OverlayManager</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getoverlaymanager()">getOverlayManager</a></strong>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LOverlayManager" title="class in com.mapbox.mapboxsdk.overlay">OverlayManager</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getOverlayManager()">getOverlayManager</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&gt;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getoverlays()">getOverlays</a></strong>()</code>
-<div class="block">You can add/remove/reorder your Overlays using the List of <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay"><code>Overlay</code></a>.</div>
+<td class="colFirst"><code>java.util.List&lt;<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getOverlays()">getOverlays</a></strong>()</code>
+<div class="block">You can add/remove/reorder your Overlays using the List of <a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay"><code>Overlay</code></a>.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getprojection()">getProjection</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LProjection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getProjection()">getProjection</a></strong>()</code>
 <div class="block">Get a projection for converting between screen-pixel coordinates and latitude/longitude
  coordinates.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getscale()">getScale</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getScale()">getScale</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>android.graphics.PointF</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getscalepoint()">getScalePoint</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getScalePoint()">getScalePoint</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getscrollableareaboundingbox()">getScrollableAreaBoundingBox</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getScrollableAreaBoundingBox()">getScrollableAreaBoundingBox</a></strong>()</code>
 <div class="block">Returns the map current scrollable bounding box</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>android.graphics.RectF</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getscrollablearealimit()">getScrollableAreaLimit</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getScrollableAreaLimit()">getScrollableAreaLimit</a></strong>()</code>
 <div class="block">Returns the map current scrollable bounding limit int map PX</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>android.widget.Scroller</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getscroller()">getScroller</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getScroller()">getScroller</a></strong>()</code>
 <div class="block">Returns the map's scroller</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>android.graphics.PointF</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getscrollpoint()">getScrollPoint</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getScrollPoint()">getScrollPoint</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/tileloadedlistener" title="interface in com.mapbox.mapboxsdk.views.util">TileLoadedListener</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#gettileloadedlistener()">getTileLoadedListener</a></strong>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LTileLoadedListener" title="interface in com.mapbox.mapboxsdk.views.util">TileLoadedListener</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getTileLoadedListener()">getTileLoadedListener</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#gettileprovider()">getTileProvider</a></strong>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getTileProvider()">getTileProvider</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>android.os.Handler</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#gettilerequestcompletehandler()">getTileRequestCompleteHandler</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getTileRequestCompleteHandler()">getTileRequestCompleteHandler</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/tilesloadedlistener" title="interface in com.mapbox.mapboxsdk.views.util">TilesLoadedListener</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#gettilesloadedlistener()">getTilesLoadedListener</a></strong>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LTilesLoadedListener" title="interface in com.mapbox.mapboxsdk.views.util">TilesLoadedListener</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getTilesLoadedListener()">getTilesLoadedListener</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getuserlocation()">getUserLocation</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getUserLocation()">getUserLocation</a></strong>()</code>
 <div class="block">Get the user location overlay if created</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getuserlocationenabled()">getUserLocationEnabled</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getUserLocationEnabled()">getUserLocationEnabled</a></strong>()</code>
 <div class="block">Show or hide the user location overlay</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/userlocationoverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getuserlocationoverlay()">getUserLocationOverlay</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LUserLocationOverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getUserLocationOverlay()">getUserLocationOverlay</a></strong>()</code>
 <div class="block">Get the user location overlay if created</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/userlocationoverlay.trackingmode" title="enum in com.mapbox.mapboxsdk.overlay">UserLocationOverlay.TrackingMode</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getuserlocationtrackingmode()">getUserLocationTrackingMode</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LUserLocationOverlay.TrackingMode" title="enum in com.mapbox.mapboxsdk.overlay">UserLocationOverlay.TrackingMode</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getUserLocationTrackingMode()">getUserLocationTrackingMode</a></strong>()</code>
 <div class="block">get the user location tracking mode</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getzoomlevel()">getZoomLevel</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getZoomLevel()">getZoomLevel</a></strong>()</code>
 <div class="block">Get the current ZoomLevel for the map tiles.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#getzoomlevel(boolean)">getZoomLevel</a></strong>(boolean&nbsp;aPending)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#getZoomLevel(boolean)">getZoomLevel</a></strong>(boolean&nbsp;aPending)</code>
 <div class="block">Get the current ZoomLevel for the map tiles.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#gotouserlocation(boolean)">goToUserLocation</a></strong>(boolean&nbsp;animated)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#goToUserLocation(boolean)">goToUserLocation</a></strong>(boolean&nbsp;animated)</code>
 <div class="block">Go to user location</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#invalidatemapcoordinates(android.graphics.rect)">invalidateMapCoordinates</a></strong>(android.graphics.Rect&nbsp;dirty)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#invalidateMapCoordinates(android.graphics.Rect)">invalidateMapCoordinates</a></strong>(android.graphics.Rect&nbsp;dirty)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#invalidatemapcoordinates(android.graphics.rectf)">invalidateMapCoordinates</a></strong>(android.graphics.RectF&nbsp;dirty)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#invalidateMapCoordinates(android.graphics.RectF)">invalidateMapCoordinates</a></strong>(android.graphics.RectF&nbsp;dirty)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#isanimatedzoomset()">isAnimatedZoomSet</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#isAnimatedZoomSet()">isAnimatedZoomSet</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#isanimating()">isAnimating</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#isAnimating()">isAnimating</a></strong>()</code>
 <div class="block">Determines if maps are animating a zoom operation.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#islayedout()">isLayedOut</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#isLayedOut()">isLayedOut</a></strong>()</code>
 <div class="block">Returns true if the view has been layed out</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#ismaprotationenabled()">isMapRotationEnabled</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#isMapRotationEnabled()">isMapRotationEnabled</a></strong>()</code>
 <div class="block">Gets whether the current map rotation feature is enabled or not
  default: disabled</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#isuserlocationvisible()">isUserLocationVisible</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#isUserLocationVisible()">isUserLocationVisible</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#isusingsafecanvas()">isUsingSafeCanvas</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#isUsingSafeCanvas()">isUsingSafeCanvas</a></strong>()</code>
 <div class="block">Returns true if the safe drawing canvas is being used.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#loadfromgeojsonurl(java.lang.string)">loadFromGeoJSONURL</a></strong>(java.lang.String&nbsp;URL)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#loadFromGeoJSONURL(java.lang.String)">loadFromGeoJSONURL</a></strong>(java.lang.String&nbsp;URL)</code>
 <div class="block">Load and parse a GeoJSON file at a given URL</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#ondetach()">onDetach</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#onDetach()">onDetach</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#ondetachedfromwindow()">onDetachedFromWindow</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#onDetachedFromWindow()">onDetachedFromWindow</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#ondraw(android.graphics.canvas)">onDraw</a></strong>(android.graphics.Canvas&nbsp;c)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#onDraw(android.graphics.Canvas)">onDraw</a></strong>(android.graphics.Canvas&nbsp;c)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#onkeydown(int, android.view.keyevent)">onKeyDown</a></strong>(int&nbsp;keyCode,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#onKeyDown(int, android.view.KeyEvent)">onKeyDown</a></strong>(int&nbsp;keyCode,
          android.view.KeyEvent&nbsp;event)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#onkeyup(int, android.view.keyevent)">onKeyUp</a></strong>(int&nbsp;keyCode,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#onKeyUp(int, android.view.KeyEvent)">onKeyUp</a></strong>(int&nbsp;keyCode,
        android.view.KeyEvent&nbsp;event)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#onlayout(boolean, int, int, int, int)">onLayout</a></strong>(boolean&nbsp;changed,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#onLayout(boolean, int, int, int, int)">onLayout</a></strong>(boolean&nbsp;changed,
         int&nbsp;l,
         int&nbsp;t,
         int&nbsp;r,
@@ -611,116 +618,116 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#onmeasure(int, int)">onMeasure</a></strong>(int&nbsp;widthMeasureSpec,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#onMeasure(int, int)">onMeasure</a></strong>(int&nbsp;widthMeasureSpec,
          int&nbsp;heightMeasureSpec)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#onsizechanged(int, int, int, int)">onSizeChanged</a></strong>(int&nbsp;w,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#onSizeChanged(int, int, int, int)">onSizeChanged</a></strong>(int&nbsp;w,
              int&nbsp;h,
              int&nbsp;oldw,
              int&nbsp;oldh)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#ontouchevent(android.view.motionevent)">onTouchEvent</a></strong>(android.view.MotionEvent&nbsp;event)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#onTouchEvent(android.view.MotionEvent)">onTouchEvent</a></strong>(android.view.MotionEvent&nbsp;event)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#ontrackballevent(android.view.motionevent)">onTrackballEvent</a></strong>(android.view.MotionEvent&nbsp;event)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#onTrackballEvent(android.view.MotionEvent)">onTrackballEvent</a></strong>(android.view.MotionEvent&nbsp;event)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#panby(int, int)">panBy</a></strong>(int&nbsp;x,
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#panBy(int, int)">panBy</a></strong>(int&nbsp;x,
      int&nbsp;y)</code>
 <div class="block">Pan the map by a given number of pixels in the x and y dimensions.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>FeatureCollection</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#parsefromgeojsonurl(java.lang.string)">parseFromGeoJSONURL</a></strong>(java.lang.String&nbsp;url)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#parseFromGeoJSONURL(java.lang.String)">parseFromGeoJSONURL</a></strong>(java.lang.String&nbsp;url)</code>
 <div class="block">Parse a GeoJSON file at a given URL</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maplistener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>&nbsp;listener)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapListener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>&nbsp;listener)</code>
 <div class="block">Remove a listener object that observed changes in this map.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;marker)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMarker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;marker)</code>
 <div class="block">Remove a marker from the map's display.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&nbsp;overlay)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&nbsp;overlay)</code>
 <div class="block">Remove an overlay from displaying in this map and invalidates
  the map to trigger a redraw.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#removetilesource(int)">removeTileSource</a></strong>(int&nbsp;index)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#removeTileSource(int)">removeTileSource</a></strong>(int&nbsp;index)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#scrollby(double, double)">scrollBy</a></strong>(double&nbsp;x,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#scrollBy(double, double)">scrollBy</a></strong>(double&nbsp;x,
         double&nbsp;y)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#scrollto(double, double)">scrollTo</a></strong>(double&nbsp;x,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#scrollTo(double, double)">scrollTo</a></strong>(double&nbsp;x,
         double&nbsp;y)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#scrollto(int, int)">scrollTo</a></strong>(int&nbsp;x,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#scrollTo(int, int)">scrollTo</a></strong>(int&nbsp;x,
         int&nbsp;y)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;marker)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMarker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;marker)</code>
 <div class="block">Select a marker, showing a tooltip if the marker has content that would appear within it.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setanimatedzoom(float)">setAnimatedZoom</a></strong>(float&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setAnimatedZoom(float)">setAnimatedZoom</a></strong>(float&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setbackgroundcolor(int)">setBackgroundColor</a></strong>(int&nbsp;pColor)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setBackgroundColor(int)">setBackgroundColor</a></strong>(int&nbsp;pColor)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aCenter)</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aCenter)</code>
 <div class="block">Set the centerpoint of the map view, given a latitude and
  longitude position.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aCenter,
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aCenter,
          boolean&nbsp;userAction)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setconstraintregionfit(boolean)">setConstraintRegionFit</a></strong>(boolean&nbsp;value)</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setConstraintRegionFit(boolean)">setConstraintRegionFit</a></strong>(boolean&nbsp;value)</code>
 <div class="block">Sets whether the scrollable area limit should take the view
  ratio into account (keeping the same ratio as the screen)
  If yes you will be able to zoom out to see the whole area
@@ -729,224 +736,224 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setdebugmode(boolean)">setDebugMode</a></strong>(boolean&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setDebugMode(boolean)">setDebugMode</a></strong>(boolean&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setdefaultpinanchor(android.graphics.pointf)">setDefaultPinAnchor</a></strong>(android.graphics.PointF&nbsp;point)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setDefaultPinAnchor(android.graphics.PointF)">setDefaultPinAnchor</a></strong>(android.graphics.PointF&nbsp;point)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setdefaultpindrawable(android.graphics.drawable.drawable)">setDefaultPinDrawable</a></strong>(android.graphics.drawable.Drawable&nbsp;drawable)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setDefaultPinDrawable(android.graphics.drawable.Drawable)">setDefaultPinDrawable</a></strong>(android.graphics.drawable.Drawable&nbsp;drawable)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setdefaultpinres(int)">setDefaultPinRes</a></strong>(int&nbsp;res)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setDefaultPinRes(int)">setDefaultPinRes</a></strong>(int&nbsp;res)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setdiskcacheenabled(boolean)">setDiskCacheEnabled</a></strong>(boolean&nbsp;enabled)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setDiskCacheEnabled(boolean)">setDiskCacheEnabled</a></strong>(boolean&nbsp;enabled)</code>
 <div class="block">Enable or disable the diskCache</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setisanimating(boolean)">setIsAnimating</a></strong>(boolean&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setIsAnimating(boolean)">setIsAnimating</a></strong>(boolean&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setmaporientation(float)">setMapOrientation</a></strong>(float&nbsp;degrees)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setMapOrientation(float)">setMapOrientation</a></strong>(float&nbsp;degrees)</code>
 <div class="block">Set the rotation of the map, in degrees.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setmaprotationenabled(boolean)">setMapRotationEnabled</a></strong>(boolean&nbsp;enable)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setMapRotationEnabled(boolean)">setMapRotationEnabled</a></strong>(boolean&nbsp;enable)</code>
 <div class="block">Sets whether to enable or disable the map rotation features
  default: disabled</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapviewlistener" title="interface in com.mapbox.mapboxsdk.views">MapViewListener</a>&nbsp;listener)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapViewListener" title="interface in com.mapbox.mapboxsdk.views">MapViewListener</a>&nbsp;listener)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setmaxzoomlevel(float)">setMaxZoomLevel</a></strong>(float&nbsp;zoomLevel)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setMaxZoomLevel(float)">setMaxZoomLevel</a></strong>(float&nbsp;zoomLevel)</code>
 <div class="block">Set the maximum allowed zoom level, or pass null to use the maximum zoom level from the tile
  provider.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setminzoomlevel(float)">setMinZoomLevel</a></strong>(float&nbsp;zoomLevel)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setMinZoomLevel(float)">setMinZoomLevel</a></strong>(float&nbsp;zoomLevel)</code>
 <div class="block">Set the minimum allowed zoom level, or pass null to use the minimum zoom level from the tile
  provider.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/onmaporientationchangelistener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a>&nbsp;l)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOnMapOrientationChangeListener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a>&nbsp;l)</code>
 <div class="block">Gets the mapView onMapOrientationChangeListener</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tileloadedlistener" title="interface in com.mapbox.mapboxsdk.views.util">TileLoadedListener</a>&nbsp;aTileLoadedListener)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTileLoadedListener" title="interface in com.mapbox.mapboxsdk.views.util">TileLoadedListener</a>&nbsp;aTileLoadedListener)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/tilesloadedlistener" title="interface in com.mapbox.mapboxsdk.views.util">TilesLoadedListener</a>&nbsp;aTilesLoadedListener)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LTilesLoadedListener" title="interface in com.mapbox.mapboxsdk.views.util">TilesLoadedListener</a>&nbsp;aTilesLoadedListener)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setscale(float)">setScale</a></strong>(float&nbsp;scale)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setScale(float)">setScale</a></strong>(float&nbsp;scale)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setscalepoint(android.graphics.pointf)">setScalePoint</a></strong>(android.graphics.PointF&nbsp;point)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setScalePoint(android.graphics.PointF)">setScalePoint</a></strong>(android.graphics.PointF&nbsp;point)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox)</code>
 <div class="block">Set the map to limit it's scrollable view to the specified BoundingBox.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setscrollpoint(android.graphics.pointf)">setScrollPoint</a></strong>(android.graphics.PointF&nbsp;point)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setScrollPoint(android.graphics.PointF)">setScrollPoint</a></strong>(android.graphics.PointF&nbsp;point)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</code>
 <div class="block">Set the tile source of this map as a single source, and trigger
  an update.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>[]&nbsp;value)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>[]&nbsp;value)</code>
 <div class="block">Set the tile source of this map as an array of tile layers,
  which will be presented on top of each other.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setusedataconnection(boolean)">setUseDataConnection</a></strong>(boolean&nbsp;aMode)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setUseDataConnection(boolean)">setUseDataConnection</a></strong>(boolean&nbsp;aMode)</code>
 <div class="block">Set whether to use the network connection if it's available.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setuserlocationenabled(boolean)">setUserLocationEnabled</a></strong>(boolean&nbsp;value)</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setUserLocationEnabled(boolean)">setUserLocationEnabled</a></strong>(boolean&nbsp;value)</code>
 <div class="block">Show or hide the user location overlay</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setuserlocationrequiredzoom(float)">setUserLocationRequiredZoom</a></strong>(float&nbsp;zoomLevel)</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setUserLocationRequiredZoom(float)">setUserLocationRequiredZoom</a></strong>(float&nbsp;zoomLevel)</code>
 <div class="block">Set the user location tracking mode</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay.trackingmode" title="enum in com.mapbox.mapboxsdk.overlay">UserLocationOverlay.TrackingMode</a>&nbsp;mode)</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LUserLocationOverlay.TrackingMode" title="enum in com.mapbox.mapboxsdk.overlay">UserLocationOverlay.TrackingMode</a>&nbsp;mode)</code>
 <div class="block">Set the user location tracking mode</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setusesafecanvas(boolean)">setUseSafeCanvas</a></strong>(boolean&nbsp;useSafeCanvas)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setUseSafeCanvas(boolean)">setUseSafeCanvas</a></strong>(boolean&nbsp;useSafeCanvas)</code>
 <div class="block">Sets whether the safe drawing canvas is being used.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setzoom(float)">setZoom</a></strong>(float&nbsp;aZoomLevel)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setZoom(float)">setZoom</a></strong>(float&nbsp;aZoomLevel)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setzoominternal(float)">setZoomInternal</a></strong>(float&nbsp;aZoomLevel)</code>&nbsp;</td>
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setZoomInternal(float)">setZoomInternal</a></strong>(float&nbsp;aZoomLevel)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#setzoominternal(float, com.mapbox.mapboxsdk.api.ilatlng, android.graphics.pointf)">setZoomInternal</a></strong>(float&nbsp;aZoomLevel,
-               <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;center,
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#setZoomInternal(float, com.mapbox.mapboxsdk.api.ILatLng, android.graphics.PointF)">setZoomInternal</a></strong>(float&nbsp;aZoomLevel,
+               <a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;center,
                android.graphics.PointF&nbsp;decale)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#tostring()">toString</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#toString()">toString</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#updatescrollablearealimit()">updateScrollableAreaLimit</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#updateScrollableAreaLimit()">updateScrollableAreaLimit</a></strong>()</code>
 <div class="block">Everytime we update the zoom or the view size we must re compute the real scrollable area
  limit in pixels</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#updatescrollduringanimation()">updateScrollDuringAnimation</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#updateScrollDuringAnimation()">updateScrollDuringAnimation</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#usedataconnection()">useDataConnection</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#useDataConnection()">useDataConnection</a></strong>()</code>
 <div class="block">Whether to use the network connection if it's available.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#zoomin()">zoomIn</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#zoomIn()">zoomIn</a></strong>()</code>
 <div class="block">Zoom in by one zoom level.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point,
             boolean&nbsp;userAction)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview#zoomout()">zoomOut</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView#zoomOut()">zoomOut</a></strong>()</code>
 <div class="block">Zoom out by one zoom level.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point,
              boolean&nbsp;userAction)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox)</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox)</code>
 <div class="block">Zoom the map to enclose the specified bounding box, as closely as
  possible.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
                  boolean&nbsp;regionFit)</code>
 <div class="block">Zoom the map to enclose the specified bounding box, as closely as
  possible.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
                  boolean&nbsp;regionFit,
                  boolean&nbsp;animated)</code>
 <div class="block">Zoom the map to enclose the specified bounding box, as closely as
@@ -954,8 +961,8 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
                  boolean&nbsp;regionFit,
                  boolean&nbsp;animated,
                  boolean&nbsp;roundedZoom)</code>
@@ -964,8 +971,8 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
                  boolean&nbsp;regionFit,
                  boolean&nbsp;animated,
                  boolean&nbsp;roundedZoom,
@@ -1078,7 +1085,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>mOnMapOrientationChangeListener</h4>
-<pre>protected&nbsp;<a href="{{site.baseurl}}/api/onmaporientationchangelistener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a> mOnMapOrientationChangeListener</pre>
+<pre>protected&nbsp;<a href="{{site.baseurl}}/api/LOnMapOrientationChangeListener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a> mOnMapOrientationChangeListener</pre>
 
 
 <a name="mMultiTouchScale">
@@ -1114,7 +1121,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>mListeners</h4>
-<pre>protected&nbsp;java.util.List&lt;<a href="{{site.baseurl}}/api/maplistener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>&gt; mListeners</pre>
+<pre>protected&nbsp;java.util.List&lt;<a href="{{site.baseurl}}/api/LMapListener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>&gt; mListeners</pre>
 
 
 <a name="mScrollableAreaBoundingBox">
@@ -1123,7 +1130,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>mScrollableAreaBoundingBox</h4>
-<pre>protected&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a> mScrollableAreaBoundingBox</pre>
+<pre>protected&nbsp;<a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a> mScrollableAreaBoundingBox</pre>
 
 
 <a name="mScrollableAreaLimit">
@@ -1150,7 +1157,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>mTileProvider</h4>
-<pre>protected final&nbsp;<a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a> mTileProvider</pre>
+<pre>protected final&nbsp;<a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a> mTileProvider</pre>
 
 
 
@@ -1169,7 +1176,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <h4>MapView</h4>
 <pre>protected&nbsp;MapView(android.content.Context&nbsp;aContext,
        int&nbsp;tileSizePixels,
-       <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;tileProvider,
+       <a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;tileProvider,
        android.os.Handler&nbsp;tileRequestCompleteHandler,
        android.util.AttributeSet&nbsp;attrs)</pre>
 <div class="block">Constructor for XML layout calls. Should not be used programmatically.</div>
@@ -1205,7 +1212,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <h4>MapView</h4>
 <pre>protected&nbsp;MapView(android.content.Context&nbsp;aContext,
        int&nbsp;tileSizePixels,
-       <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;aTileProvider)</pre>
+       <a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;aTileProvider)</pre>
 
 
 
@@ -1222,7 +1229,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>addListener</h4>
-<pre>public&nbsp;void&nbsp;addListener(<a href="{{site.baseurl}}/api/maplistener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>&nbsp;listener)</pre>
+<pre>public&nbsp;void&nbsp;addListener(<a href="{{site.baseurl}}/api/LMapListener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>&nbsp;listener)</pre>
 <div class="block">Add a new MapListener that observes changes in this map.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>listener</code> - </dd></dl>
 
@@ -1233,7 +1240,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>removeListener</h4>
-<pre>public&nbsp;void&nbsp;removeListener(<a href="{{site.baseurl}}/api/maplistener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>&nbsp;listener)</pre>
+<pre>public&nbsp;void&nbsp;removeListener(<a href="{{site.baseurl}}/api/LMapListener" title="interface in com.mapbox.mapboxsdk.events">MapListener</a>&nbsp;listener)</pre>
 <div class="block">Remove a listener object that observed changes in this map.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>listener</code> - </dd></dl>
 
@@ -1244,7 +1251,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>addOverlay</h4>
-<pre>public&nbsp;void&nbsp;addOverlay(<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&nbsp;overlay)</pre>
+<pre>public&nbsp;void&nbsp;addOverlay(<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&nbsp;overlay)</pre>
 <div class="block">Add an overlay to this map. If the overlay is already included,
  does nothing. After adding the overlay, invalidates the map to
  redraw it.</div>
@@ -1257,7 +1264,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>removeOverlay</h4>
-<pre>public&nbsp;void&nbsp;removeOverlay(<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&nbsp;overlay)</pre>
+<pre>public&nbsp;void&nbsp;removeOverlay(<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&nbsp;overlay)</pre>
 <div class="block">Remove an overlay from displaying in this map and invalidates
  the map to trigger a redraw.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>overlay</code> - </dd></dl>
@@ -1269,7 +1276,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setTileSource</h4>
-<pre>public&nbsp;void&nbsp;setTileSource(<a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>[]&nbsp;value)</pre>
+<pre>public&nbsp;void&nbsp;setTileSource(<a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>[]&nbsp;value)</pre>
 <div class="block">Set the tile source of this map as an array of tile layers,
  which will be presented on top of each other.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>value</code> - </dd></dl>
@@ -1281,7 +1288,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setTileSource</h4>
-<pre>public&nbsp;void&nbsp;setTileSource(<a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</pre>
+<pre>public&nbsp;void&nbsp;setTileSource(<a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</pre>
 <div class="block">Set the tile source of this map as a single source, and trigger
  an update.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>aTileSource</code> - </dd></dl>
@@ -1293,7 +1300,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>addTileSource</h4>
-<pre>public&nbsp;void&nbsp;addTileSource(<a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</pre>
+<pre>public&nbsp;void&nbsp;addTileSource(<a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</pre>
 
 
 <a name="addTileSource(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, int)">
@@ -1302,7 +1309,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>addTileSource</h4>
-<pre>public&nbsp;void&nbsp;addTileSource(<a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource,
+<pre>public&nbsp;void&nbsp;addTileSource(<a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource,
                  int&nbsp;index)</pre>
 
 
@@ -1312,7 +1319,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>removeTileSource</h4>
-<pre>public&nbsp;void&nbsp;removeTileSource(<a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</pre>
+<pre>public&nbsp;void&nbsp;removeTileSource(<a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</pre>
 
 
 <a name="removeTileSource(int)">
@@ -1330,7 +1337,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>addMarker</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;marker)</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LMarker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;marker)</pre>
 <div class="block">Adds a marker to the default marker overlay.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>marker</code> - the marker object to be added</dd>
 <dt><span class="strong">Returns:</span></dt><dd>the marker object</dd></dl>
@@ -1342,7 +1349,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>removeMarker</h4>
-<pre>public&nbsp;void&nbsp;removeMarker(<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;marker)</pre>
+<pre>public&nbsp;void&nbsp;removeMarker(<a href="{{site.baseurl}}/api/LMarker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;marker)</pre>
 <div class="block">Remove a marker from the map's display.</div>
 
 
@@ -1362,7 +1369,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>selectMarker</h4>
-<pre>public&nbsp;void&nbsp;selectMarker(<a href="{{site.baseurl}}/api/marker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;marker)</pre>
+<pre>public&nbsp;void&nbsp;selectMarker(<a href="{{site.baseurl}}/api/LMarker" title="class in com.mapbox.mapboxsdk.overlay">Marker</a>&nbsp;marker)</pre>
 <div class="block">Select a marker, showing a tooltip if the marker has content that would appear within it.</div>
 
 
@@ -1372,7 +1379,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>addItemizedOverlay</h4>
-<pre>public&nbsp;void&nbsp;addItemizedOverlay(<a href="{{site.baseurl}}/api/itemizedoverlay" title="class in com.mapbox.mapboxsdk.overlay">ItemizedOverlay</a>&nbsp;itemizedOverlay)</pre>
+<pre>public&nbsp;void&nbsp;addItemizedOverlay(<a href="{{site.baseurl}}/api/LItemizedOverlay" title="class in com.mapbox.mapboxsdk.overlay">ItemizedOverlay</a>&nbsp;itemizedOverlay)</pre>
 <div class="block">Adds a new ItemizedOverlay to the MapView</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>itemizedOverlay</code> - the itemized overlay</dd></dl>
 
@@ -1383,7 +1390,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getItemizedOverlays</h4>
-<pre>public&nbsp;java.util.ArrayList&lt;<a href="{{site.baseurl}}/api/itemizediconoverlay" title="class in com.mapbox.mapboxsdk.overlay">ItemizedIconOverlay</a>&gt;&nbsp;getItemizedOverlays()</pre>
+<pre>public&nbsp;java.util.ArrayList&lt;<a href="{{site.baseurl}}/api/LItemizedIconOverlay" title="class in com.mapbox.mapboxsdk.overlay">ItemizedIconOverlay</a>&gt;&nbsp;getItemizedOverlays()</pre>
 <div class="block">Get all itemized overlays on the map as an ArrayList.</div>
 <dl><dt><span class="strong">Returns:</span></dt><dd></dd></dl>
 
@@ -1432,7 +1439,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getCurrentTooltip</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/infowindow" title="class in com.mapbox.mapboxsdk.views">InfoWindow</a>&nbsp;getCurrentTooltip()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LInfoWindow" title="class in com.mapbox.mapboxsdk.views">InfoWindow</a>&nbsp;getCurrentTooltip()</pre>
 <div class="block">Get the current tooltip of this map if there is one being displayed.</div>
 <dl><dt><span class="strong">Returns:</span></dt><dd></dd></dl>
 
@@ -1443,10 +1450,10 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>singleTapUpHelper</h4>
-<pre>public&nbsp;boolean&nbsp;singleTapUpHelper(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</pre>
+<pre>public&nbsp;boolean&nbsp;singleTapUpHelper(<a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</pre>
 <dl>
 <dt><strong>Specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/mapeventsreceiver" title="interface in com.mapbox.mapboxsdk.overlay">MapEventsReceiver</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapEventsReceiver" title="interface in com.mapbox.mapboxsdk.overlay">MapEventsReceiver</a></code></dd>
 <dt><span class="strong">Parameters:</span></dt><dd><code>p</code> - the position where the event occurred.</dd>
 <dt><span class="strong">Returns:</span></dt><dd>whether the event action is triggered or not</dd></dl>
 
@@ -1457,10 +1464,10 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>longPressHelper</h4>
-<pre>public&nbsp;boolean&nbsp;longPressHelper(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</pre>
+<pre>public&nbsp;boolean&nbsp;longPressHelper(<a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</pre>
 <dl>
 <dt><strong>Specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/mapeventsreceiver" title="interface in com.mapbox.mapboxsdk.overlay">MapEventsReceiver</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapEventsReceiver" title="interface in com.mapbox.mapboxsdk.overlay">MapEventsReceiver</a></code></dd>
 <dt><span class="strong">Parameters:</span></dt><dd><code>p</code> - the position where the event occurred.</dd>
 <dt><span class="strong">Returns:</span></dt><dd>whether the event action is triggered or not</dd></dl>
 
@@ -1471,7 +1478,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>onLongPress</h4>
-<pre>public&nbsp;void&nbsp;onLongPress(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</pre>
+<pre>public&nbsp;void&nbsp;onLongPress(<a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</pre>
 
 
 <a name="onTap(com.mapbox.mapboxsdk.api.ILatLng)">
@@ -1480,7 +1487,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>onTap</h4>
-<pre>public&nbsp;void&nbsp;onTap(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</pre>
+<pre>public&nbsp;void&nbsp;onTap(<a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;p)</pre>
 
 
 <a name="getController()">
@@ -1489,7 +1496,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getController</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/mapcontroller" title="class in com.mapbox.mapboxsdk.views">MapController</a>&nbsp;getController()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LMapController" title="class in com.mapbox.mapboxsdk.views">MapController</a>&nbsp;getController()</pre>
 <div class="block">Returns the map's controller</div>
 
 
@@ -1499,7 +1506,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getMapOverlay</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilesoverlay" title="class in com.mapbox.mapboxsdk.overlay">TilesOverlay</a>&nbsp;getMapOverlay()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LTilesOverlay" title="class in com.mapbox.mapboxsdk.overlay">TilesOverlay</a>&nbsp;getMapOverlay()</pre>
 <div class="block">Returns the map's overlay</div>
 
 
@@ -1509,8 +1516,8 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getOverlays</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&gt;&nbsp;getOverlays()</pre>
-<div class="block">You can add/remove/reorder your Overlays using the List of <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay"><code>Overlay</code></a>. The first (index
+<pre>public&nbsp;java.util.List&lt;<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a>&gt;&nbsp;getOverlays()</pre>
+<div class="block">You can add/remove/reorder your Overlays using the List of <a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay"><code>Overlay</code></a>. The first (index
  0) Overlay gets drawn first, the one with the highest as the last one.</div>
 
 
@@ -1520,7 +1527,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getOverlayManager</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/overlaymanager" title="class in com.mapbox.mapboxsdk.overlay">OverlayManager</a>&nbsp;getOverlayManager()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LOverlayManager" title="class in com.mapbox.mapboxsdk.overlay">OverlayManager</a>&nbsp;getOverlayManager()</pre>
 
 
 <a name="getTileProvider()">
@@ -1529,7 +1536,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getTileProvider</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;getTileProvider()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a>&nbsp;getTileProvider()</pre>
 
 
 <a name="getScroller()">
@@ -1557,7 +1564,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getBoundingBoxInternal</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getBoundingBoxInternal()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getBoundingBoxInternal()</pre>
 
 
 <a name="getBoundingBox()">
@@ -1566,7 +1573,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getBoundingBox</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getBoundingBox()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getBoundingBox()</pre>
 <div class="block">Returns the current bounding box of the map.</div>
 
 
@@ -1576,7 +1583,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getCenter</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;getCenter()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;getCenter()</pre>
 <div class="block">Get centerpoint of the phone as latitude and longitude.</div>
 <dl><dt><span class="strong">Returns:</span></dt><dd>centerpoint</dd></dl>
 
@@ -1596,7 +1603,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getProjection</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/projection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;getProjection()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LProjection" title="class in com.mapbox.mapboxsdk.views.util">Projection</a>&nbsp;getProjection()</pre>
 <div class="block">Get a projection for converting between screen-pixel coordinates and latitude/longitude
  coordinates. You should not hold on to this object for more than one draw, since the
  projection of the map could change.</div>
@@ -1610,7 +1617,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setCenter</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aCenter)</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aCenter)</pre>
 <div class="block">Set the centerpoint of the map view, given a latitude and
  longitude position.</div>
 <dl><dt><span class="strong">Returns:</span></dt><dd>the map view, for chaining</dd></dl>
@@ -1622,7 +1629,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setCenter</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aCenter,
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aCenter,
                 boolean&nbsp;userAction)</pre>
 
 
@@ -1632,7 +1639,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>panBy</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;panBy(int&nbsp;x,
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;panBy(int&nbsp;x,
             int&nbsp;y)</pre>
 <div class="block">Pan the map by a given number of pixels in the x and y dimensions.</div>
 
@@ -1643,7 +1650,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setScale</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setScale(float&nbsp;scale)</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setScale(float&nbsp;scale)</pre>
 
 
 <a name="getScale()">
@@ -1670,7 +1677,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setZoom</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setZoom(float&nbsp;aZoomLevel)</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setZoom(float&nbsp;aZoomLevel)</pre>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>aZoomLevel</code> - the zoom level bound by the tile source</dd>
 <dt><span class="strong">Returns:</span></dt><dd>the map view, for chaining</dd></dl>
 
@@ -1681,7 +1688,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setZoomInternal</h4>
-<pre>protected&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setZoomInternal(float&nbsp;aZoomLevel)</pre>
+<pre>protected&nbsp;<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setZoomInternal(float&nbsp;aZoomLevel)</pre>
 
 
 <a name="setZoomInternal(float, com.mapbox.mapboxsdk.api.ILatLng, android.graphics.PointF)">
@@ -1690,8 +1697,8 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setZoomInternal</h4>
-<pre>protected&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setZoomInternal(float&nbsp;aZoomLevel,
-                      <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;center,
+<pre>protected&nbsp;<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setZoomInternal(float&nbsp;aZoomLevel,
+                      <a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;center,
                       android.graphics.PointF&nbsp;decale)</pre>
 
 
@@ -1701,7 +1708,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>zoomToBoundingBox</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
                         boolean&nbsp;regionFit,
                         boolean&nbsp;animated,
                         boolean&nbsp;roundedZoom,
@@ -1719,7 +1726,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>zoomToBoundingBox</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
                         boolean&nbsp;regionFit,
                         boolean&nbsp;animated,
                         boolean&nbsp;roundedZoom)</pre>
@@ -1736,7 +1743,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>zoomToBoundingBox</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
                         boolean&nbsp;regionFit,
                         boolean&nbsp;animated)</pre>
 <div class="block">Zoom the map to enclose the specified bounding box, as closely as
@@ -1751,7 +1758,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>zoomToBoundingBox</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox,
                         boolean&nbsp;regionFit)</pre>
 <div class="block">Zoom the map to enclose the specified bounding box, as closely as
  possible.</div>
@@ -1765,7 +1772,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>zoomToBoundingBox</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox)</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox)</pre>
 <div class="block">Zoom the map to enclose the specified bounding box, as closely as
  possible.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>boundingBox</code> - the box to compute the zoom for</dd>
@@ -1922,7 +1929,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>zoomInFixing</h4>
-<pre>public&nbsp;boolean&nbsp;zoomInFixing(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point,
+<pre>public&nbsp;boolean&nbsp;zoomInFixing(<a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point,
                    boolean&nbsp;userAction)</pre>
 
 
@@ -1932,7 +1939,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>zoomInFixing</h4>
-<pre>public&nbsp;boolean&nbsp;zoomInFixing(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point)</pre>
+<pre>public&nbsp;boolean&nbsp;zoomInFixing(<a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point)</pre>
 
 
 <a name="zoomOut()">
@@ -1951,7 +1958,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>zoomOutFixing</h4>
-<pre>public&nbsp;boolean&nbsp;zoomOutFixing(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point,
+<pre>public&nbsp;boolean&nbsp;zoomOutFixing(<a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point,
                     boolean&nbsp;userAction)</pre>
 
 
@@ -1961,7 +1968,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>zoomOutFixing</h4>
-<pre>public&nbsp;boolean&nbsp;zoomOutFixing(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point)</pre>
+<pre>public&nbsp;boolean&nbsp;zoomOutFixing(<a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point)</pre>
 
 
 <a name="setMapOrientation(float)">
@@ -2014,7 +2021,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getOnMapOrientationChangeListener</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/onmaporientationchangelistener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a>&nbsp;getOnMapOrientationChangeListener()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LOnMapOrientationChangeListener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a>&nbsp;getOnMapOrientationChangeListener()</pre>
 <div class="block">Gets the mapView onMapOrientationChangeListener</div>
 <dl><dt><span class="strong">Returns:</span></dt><dd>the onMapOrientationChangeListener</dd></dl>
 
@@ -2025,7 +2032,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setOnMapOrientationChangeListener</h4>
-<pre>public&nbsp;void&nbsp;setOnMapOrientationChangeListener(<a href="{{site.baseurl}}/api/onmaporientationchangelistener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a>&nbsp;l)</pre>
+<pre>public&nbsp;void&nbsp;setOnMapOrientationChangeListener(<a href="{{site.baseurl}}/api/LOnMapOrientationChangeListener" title="interface in com.mapbox.mapboxsdk.views.util">OnMapOrientationChangeListener</a>&nbsp;l)</pre>
 <div class="block">Gets the mapView onMapOrientationChangeListener</div>
 
 
@@ -2068,7 +2075,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setScrollableAreaLimit</h4>
-<pre>public&nbsp;void&nbsp;setScrollableAreaLimit(<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox)</pre>
+<pre>public&nbsp;void&nbsp;setScrollableAreaLimit(<a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;boundingBox)</pre>
 <div class="block">Set the map to limit it's scrollable view to the specified BoundingBox. Note this does not
  limit zooming so it will be possible for the user to zoom to an area that is larger than the
  limited area.</div>
@@ -2083,7 +2090,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>canGoTo</h4>
-<pre>public&nbsp;boolean&nbsp;canGoTo(<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point)</pre>
+<pre>public&nbsp;boolean&nbsp;canGoTo(<a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;point)</pre>
 <div class="block">Returns if the map can go to a specified geo point</div>
 
 
@@ -2104,7 +2111,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getScrollableAreaBoundingBox</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getScrollableAreaBoundingBox()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getScrollableAreaBoundingBox()</pre>
 <div class="block">Returns the map current scrollable bounding box</div>
 
 
@@ -2155,8 +2162,8 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 <pre>protected&nbsp;android.view.ViewGroup.LayoutParams&nbsp;generateDefaultLayoutParams()</pre>
 <div class="block">Returns a set of layout parameters with a width of
  <code>ViewGroup.LayoutParams.WRAP_CONTENT</code>, a height of
- <code>ViewGroup.LayoutParams.WRAP_CONTENT</code> at the <a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry"><code>LatLng</code></a> (0, 0) align
- with <a href="{{site.baseurl}}/api/mapviewlayouts#bottom_center"><code>MapViewLayouts.BOTTOM_CENTER</code></a>.</div>
+ <code>ViewGroup.LayoutParams.WRAP_CONTENT</code> at the <a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry"><code>LatLng</code></a> (0, 0) align
+ with <a href="{{site.baseurl}}/api/LMapViewLayouts#BOTTOM_CENTER"><code>MapViewLayouts.BOTTOM_CENTER</code></a>.</div>
 <dl>
 <dt><strong>Overrides:</strong></dt>
 <dd><code>generateDefaultLayoutParams</code>&nbsp;in class&nbsp;<code>android.view.ViewGroup</code></dd>
@@ -2462,7 +2469,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setConstraintRegionFit</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setConstraintRegionFit(boolean&nbsp;value)</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setConstraintRegionFit(boolean&nbsp;value)</pre>
 <div class="block">Sets whether the scrollable area limit should take the view
  ratio into account (keeping the same ratio as the screen)
  If yes you will be able to zoom out to see the whole area
@@ -2475,7 +2482,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setUserLocationEnabled</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setUserLocationEnabled(boolean&nbsp;value)</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setUserLocationEnabled(boolean&nbsp;value)</pre>
 <div class="block">Show or hide the user location overlay</div>
 
 
@@ -2495,7 +2502,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setUserLocationTrackingMode</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/userlocationoverlay.trackingmode" title="enum in com.mapbox.mapboxsdk.overlay">UserLocationOverlay.TrackingMode</a>&nbsp;mode)</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LUserLocationOverlay.TrackingMode" title="enum in com.mapbox.mapboxsdk.overlay">UserLocationOverlay.TrackingMode</a>&nbsp;mode)</pre>
 <div class="block">Set the user location tracking mode</div>
 
 
@@ -2505,7 +2512,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setUserLocationRequiredZoom</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setUserLocationRequiredZoom(float&nbsp;zoomLevel)</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;setUserLocationRequiredZoom(float&nbsp;zoomLevel)</pre>
 <div class="block">Set the user location tracking mode</div>
 
 
@@ -2515,7 +2522,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getUserLocationTrackingMode</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/userlocationoverlay.trackingmode" title="enum in com.mapbox.mapboxsdk.overlay">UserLocationOverlay.TrackingMode</a>&nbsp;getUserLocationTrackingMode()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LUserLocationOverlay.TrackingMode" title="enum in com.mapbox.mapboxsdk.overlay">UserLocationOverlay.TrackingMode</a>&nbsp;getUserLocationTrackingMode()</pre>
 <div class="block">get the user location tracking mode</div>
 
 
@@ -2535,7 +2542,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getUserLocationOverlay</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/userlocationoverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a>&nbsp;getUserLocationOverlay()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LUserLocationOverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a>&nbsp;getUserLocationOverlay()</pre>
 <div class="block">Get the user location overlay if created</div>
 
 
@@ -2545,7 +2552,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getUserLocation</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;getUserLocation()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;getUserLocation()</pre>
 <div class="block">Get the user location overlay if created</div>
 
 
@@ -2609,7 +2616,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getTileLoadedListener</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/tileloadedlistener" title="interface in com.mapbox.mapboxsdk.views.util">TileLoadedListener</a>&nbsp;getTileLoadedListener()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LTileLoadedListener" title="interface in com.mapbox.mapboxsdk.views.util">TileLoadedListener</a>&nbsp;getTileLoadedListener()</pre>
 
 
 <a name="setDebugMode(boolean)">
@@ -2627,7 +2634,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setMapViewListener</h4>
-<pre>public&nbsp;void&nbsp;setMapViewListener(<a href="{{site.baseurl}}/api/mapviewlistener" title="interface in com.mapbox.mapboxsdk.views">MapViewListener</a>&nbsp;listener)</pre>
+<pre>public&nbsp;void&nbsp;setMapViewListener(<a href="{{site.baseurl}}/api/LMapViewListener" title="interface in com.mapbox.mapboxsdk.views">MapViewListener</a>&nbsp;listener)</pre>
 
 
 <a name="setOnTileLoadedListener(com.mapbox.mapboxsdk.views.util.TileLoadedListener)">
@@ -2636,7 +2643,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setOnTileLoadedListener</h4>
-<pre>public&nbsp;void&nbsp;setOnTileLoadedListener(<a href="{{site.baseurl}}/api/tileloadedlistener" title="interface in com.mapbox.mapboxsdk.views.util">TileLoadedListener</a>&nbsp;aTileLoadedListener)</pre>
+<pre>public&nbsp;void&nbsp;setOnTileLoadedListener(<a href="{{site.baseurl}}/api/LTileLoadedListener" title="interface in com.mapbox.mapboxsdk.views.util">TileLoadedListener</a>&nbsp;aTileLoadedListener)</pre>
 
 
 <a name="setOnTilesLoadedListener(com.mapbox.mapboxsdk.views.util.TilesLoadedListener)">
@@ -2645,7 +2652,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>setOnTilesLoadedListener</h4>
-<pre>public&nbsp;void&nbsp;setOnTilesLoadedListener(<a href="{{site.baseurl}}/api/tilesloadedlistener" title="interface in com.mapbox.mapboxsdk.views.util">TilesLoadedListener</a>&nbsp;aTilesLoadedListener)</pre>
+<pre>public&nbsp;void&nbsp;setOnTilesLoadedListener(<a href="{{site.baseurl}}/api/LTilesLoadedListener" title="interface in com.mapbox.mapboxsdk.views.util">TilesLoadedListener</a>&nbsp;aTilesLoadedListener)</pre>
 
 
 <a name="getTilesLoadedListener()">
@@ -2654,7 +2661,7 @@ implements <a href="{{site.baseurl}}/api/mapboxconstants" title="interface in co
 
 
 <h4>getTilesLoadedListener</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/tilesloadedlistener" title="interface in com.mapbox.mapboxsdk.views.util">TilesLoadedListener</a>&nbsp;getTilesLoadedListener()</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LTilesLoadedListener" title="interface in com.mapbox.mapboxsdk.views.util">TilesLoadedListener</a>&nbsp;getTilesLoadedListener()</pre>
 
 
 <a name="toString()">

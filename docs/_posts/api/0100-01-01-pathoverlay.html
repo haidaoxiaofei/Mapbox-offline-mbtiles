@@ -9,7 +9,7 @@ tags: overlay
 java.lang.Object
 
 
-<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.Overlay</a>
+<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">com.mapbox.mapboxsdk.overlay.Overlay</a>
 
 
 com.mapbox.mapboxsdk.overlay.PathOverlay
@@ -24,7 +24,7 @@ com.mapbox.mapboxsdk.overlay.PathOverlay
 
 
 <pre>public class <span class="strong">PathOverlay</span>
-extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></pre>
+extends <a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></pre>
 
 
 </div>
@@ -41,8 +41,8 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 <a name="nested_classes_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
 <!--   -->
 </a>
-<h3>Nested classes/interfaces inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay.snappable" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></code>
+<h3>Nested classes/interfaces inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/LOverlay.Snappable" title="interface in com.mapbox.mapboxsdk.overlay">Overlay.Snappable</a></code>
 
 
 
@@ -60,7 +60,7 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected android.graphics.Paint</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/pathoverlay#mpaint">mPaint</a></strong></code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LPathOverlay#mPaint">mPaint</a></strong></code>
 <div class="block">Paint settings.</div>
 </td>
 </tr>
@@ -69,8 +69,8 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 <a name="fields_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
 <!--   -->
 </a>
-<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay#mscale">mScale</a></code>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/LOverlay#mScale">mScale</a></code>
 
 
 
@@ -86,10 +86,10 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/pathoverlay#pathoverlay()">PathOverlay</a></strong>()</code>&nbsp;</td>
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LPathOverlay#PathOverlay()">PathOverlay</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/pathoverlay#pathoverlay(int, float)">PathOverlay</a></strong>(int&nbsp;color,
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LPathOverlay#PathOverlay(int, float)">PathOverlay</a></strong>(int&nbsp;color,
            float&nbsp;width)</code>&nbsp;</td>
 </tr>
 </table>
@@ -109,62 +109,62 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/pathoverlay#addpoint(double, double)">addPoint</a></strong>(double&nbsp;aLatitude,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LPathOverlay#addPoint(double, double)">addPoint</a></strong>(double&nbsp;aLatitude,
         double&nbsp;aLongitude)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;aPoint)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;aPoint)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>...&nbsp;aPoints)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>...&nbsp;aPoints)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&gt;&nbsp;aPoints)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&gt;&nbsp;aPoints)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/pathoverlay#clearpath()">clearPath</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LPathOverlay#clearPath()">clearPath</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/pathoverlay#draw(android.graphics.canvas, com.mapbox.mapboxsdk.views.mapview, boolean)">draw</a></strong>(android.graphics.Canvas&nbsp;canvas,
-    <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LPathOverlay#draw(android.graphics.Canvas, com.mapbox.mapboxsdk.views.MapView, boolean)">draw</a></strong>(android.graphics.Canvas&nbsp;canvas,
+    <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
     boolean&nbsp;shadow)</code>
 <div class="block">This method draws the line.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/pathoverlay#getnumberofpoints()">getNumberOfPoints</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LPathOverlay#getNumberOfPoints()">getNumberOfPoints</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>android.graphics.Paint</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/pathoverlay#getpaint()">getPaint</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LPathOverlay#getPaint()">getPaint</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/pathoverlay#removeallpoints()">removeAllPoints</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LPathOverlay#removeAllPoints()">removeAllPoints</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/pathoverlay#setoptimizepath(boolean)">setOptimizePath</a></strong>(boolean&nbsp;value)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LPathOverlay#setOptimizePath(boolean)">setOptimizePath</a></strong>(boolean&nbsp;value)</code>
 <div class="block">if true the path will be optimised.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/pathoverlay" title="class in com.mapbox.mapboxsdk.overlay">PathOverlay</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/pathoverlay#setpaint(android.graphics.paint)">setPaint</a></strong>(android.graphics.Paint&nbsp;pPaint)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LPathOverlay" title="class in com.mapbox.mapboxsdk.overlay">PathOverlay</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LPathOverlay#setPaint(android.graphics.Paint)">setPaint</a></strong>(android.graphics.Paint&nbsp;pPaint)</code>&nbsp;</td>
 </tr>
 </table>
 
 <a name="methods_inherited_from_class_com.mapbox.mapboxsdk.overlay.Overlay">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
-<code><a href="{{site.baseurl}}/api/overlay#setenabled(boolean)">setEnabled</a></code>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.overlay.<a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></h3>
+<code><a href="{{site.baseurl}}/api/LOverlay#setEnabled(boolean)">setEnabled</a></code>
 
 
 <a name="methods_inherited_from_class_java.lang.Object">
@@ -247,7 +247,7 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 
 
 <h4>setPaint</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/pathoverlay" title="class in com.mapbox.mapboxsdk.overlay">PathOverlay</a>&nbsp;setPaint(android.graphics.Paint&nbsp;pPaint)</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LPathOverlay" title="class in com.mapbox.mapboxsdk.overlay">PathOverlay</a>&nbsp;setPaint(android.graphics.Paint&nbsp;pPaint)</pre>
 
 
 <a name="clearPath()">
@@ -265,7 +265,7 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 
 
 <h4>addPoint</h4>
-<pre>public&nbsp;void&nbsp;addPoint(<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;aPoint)</pre>
+<pre>public&nbsp;void&nbsp;addPoint(<a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;aPoint)</pre>
 
 
 <a name="addPoint(double, double)">
@@ -284,7 +284,7 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 
 
 <h4>addPoints</h4>
-<pre>public&nbsp;void&nbsp;addPoints(<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>...&nbsp;aPoints)</pre>
+<pre>public&nbsp;void&nbsp;addPoints(<a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>...&nbsp;aPoints)</pre>
 
 
 <a name="addPoints(java.util.List)">
@@ -293,7 +293,7 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 
 
 <h4>addPoints</h4>
-<pre>public&nbsp;void&nbsp;addPoints(java.util.List&lt;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&gt;&nbsp;aPoints)</pre>
+<pre>public&nbsp;void&nbsp;addPoints(java.util.List&lt;<a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&gt;&nbsp;aPoints)</pre>
 
 
 <a name="removeAllPoints()">
@@ -321,13 +321,13 @@ extends <a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapbox
 
 <h4>draw</h4>
 <pre>protected&nbsp;void&nbsp;draw(android.graphics.Canvas&nbsp;canvas,
-        <a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
+        <a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mapView,
         boolean&nbsp;shadow)</pre>
 <div class="block">This method draws the line. Note - highly optimized to handle long paths, proceed with care.
  Should be fine up to 10K points.</div>
 <dl>
 <dt><strong>Specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/overlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LOverlay" title="class in com.mapbox.mapboxsdk.overlay">Overlay</a></code></dd>
 </dl>
 
 

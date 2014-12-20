@@ -1,0 +1,281 @@
+---
+layout: api
+title: OfflineMapDatabase
+category: api
+tags: offline
+---
+<div class="contentContainer">
+
+java.lang.Object
+
+
+com.mapbox.mapboxsdk.offline.OfflineMapDatabase
+
+
+
+<div class="description">
+
+
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/LMapboxConstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></dd>
+</dl>
+
+
+<pre>public class <span class="strong">OfflineMapDatabase</span>
+extends java.lang.Object
+implements <a href="{{site.baseurl}}/api/LMapboxConstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></pre>
+
+
+</div>
+<div class="summary">
+
+
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<a name="nested_class_summary">
+<!--   -->
+</a>
+<h3>Nested Class Summary</h3>
+
+<a name="nested_classes_inherited_from_class_com.mapbox.mapboxsdk.constants.MapboxConstants">
+<!--   -->
+</a>
+<h3>Nested classes/interfaces inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/LMapboxConstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/LMapboxConstants.RasterImageQuality" title="enum in com.mapbox.mapboxsdk.constants">MapboxConstants.RasterImageQuality</a></code>
+
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.constants.MapboxConstants">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.constants.<a href="{{site.baseurl}}/api/LMapboxConstants" title="interface in com.mapbox.mapboxsdk.constants">MapboxConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/LMapboxConstants#USER_AGENT">USER_AGENT</a></code>
+
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase#OfflineMapDatabase(android.content.Context)">OfflineMapDatabase</a></strong>(android.content.Context&nbsp;context)</code>
+<div class="block">Default Constructor</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase#OfflineMapDatabase(android.content.Context, java.lang.String)">OfflineMapDatabase</a></strong>(android.content.Context&nbsp;context,
+                  java.lang.String&nbsp;mapID)</code>
+<div class="block">Constructor</div>
+</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>byte[]</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase#dataForURL(java.lang.String)">dataForURL</a></strong>(java.lang.String&nbsp;url)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LMapboxConstants.RasterImageQuality" title="enum in com.mapbox.mapboxsdk.constants">MapboxConstants.RasterImageQuality</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase#getImageQuality()">getImageQuality</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase#getMapID()">getMapID</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase#getPath()">getPath</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase#getUniqueID()">getUniqueID</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase#initializeDatabase()">initializeDatabase</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase#invalidate()">invalidate</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>byte[]</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase#sqliteDataForURL(java.lang.String)">sqliteDataForURL</a></strong>(java.lang.String&nbsp;url)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapDatabase#sqliteMetadataForName(java.lang.String)">sqliteMetadataForName</a></strong>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="OfflineMapDatabase(android.content.Context)">
+<!--   -->
+</a>
+
+
+<h4>OfflineMapDatabase</h4>
+<pre>public&nbsp;OfflineMapDatabase(android.content.Context&nbsp;context)</pre>
+<div class="block">Default Constructor</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>context</code> - Context of Android app</dd></dl>
+
+
+<a name="OfflineMapDatabase(android.content.Context, java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>OfflineMapDatabase</h4>
+<pre>public&nbsp;OfflineMapDatabase(android.content.Context&nbsp;context,
+                  java.lang.String&nbsp;mapID)</pre>
+<div class="block">Constructor</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>context</code> - Context of Android app</dd><dd><code>mapID</code> - MapId</dd></dl>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getUniqueID()">
+<!--   -->
+</a>
+
+
+<h4>getUniqueID</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getUniqueID()</pre>
+
+
+<a name="getMapID()">
+<!--   -->
+</a>
+
+
+<h4>getMapID</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getMapID()</pre>
+
+
+<a name="getPath()">
+<!--   -->
+</a>
+
+
+<h4>getPath</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getPath()</pre>
+
+
+<a name="getImageQuality()">
+<!--   -->
+</a>
+
+
+<h4>getImageQuality</h4>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LMapboxConstants.RasterImageQuality" title="enum in com.mapbox.mapboxsdk.constants">MapboxConstants.RasterImageQuality</a>&nbsp;getImageQuality()</pre>
+
+
+<a name="initializeDatabase()">
+<!--   -->
+</a>
+
+
+<h4>initializeDatabase</h4>
+<pre>public&nbsp;boolean&nbsp;initializeDatabase()</pre>
+
+
+<a name="dataForURL(java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>dataForURL</h4>
+<pre>public&nbsp;byte[]&nbsp;dataForURL(java.lang.String&nbsp;url)
+                  throws <a href="{{site.baseurl}}/api/LOfflineDatabaseException" title="class in com.mapbox.mapboxsdk.exceptions">OfflineDatabaseException</a></pre>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="{{site.baseurl}}/api/LOfflineDatabaseException" title="class in com.mapbox.mapboxsdk.exceptions">OfflineDatabaseException</a></code></dd></dl>
+
+
+<a name="invalidate()">
+<!--   -->
+</a>
+
+
+<h4>invalidate</h4>
+<pre>public&nbsp;void&nbsp;invalidate()</pre>
+
+
+<a name="sqliteMetadataForName(java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>sqliteMetadataForName</h4>
+<pre>public&nbsp;java.lang.String&nbsp;sqliteMetadataForName(java.lang.String&nbsp;name)</pre>
+
+
+<a name="sqliteDataForURL(java.lang.String)">
+<!--   -->
+</a>
+
+
+<h4>sqliteDataForURL</h4>
+<pre>public&nbsp;byte[]&nbsp;sqliteDataForURL(java.lang.String&nbsp;url)</pre>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->

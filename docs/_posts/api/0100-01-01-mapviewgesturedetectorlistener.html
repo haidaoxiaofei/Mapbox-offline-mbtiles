@@ -49,7 +49,7 @@ extends android.view.GestureDetector.SimpleOnGestureListener</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</code>
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</code>
 <div class="block">Bind a new gesture detector to a map</div>
 </td>
 </tr>
@@ -70,41 +70,41 @@ extends android.view.GestureDetector.SimpleOnGestureListener</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapviewgesturedetectorlistener#ondoubletap(android.view.motionevent)">onDoubleTap</a></strong>(android.view.MotionEvent&nbsp;e)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapViewGestureDetectorListener#onDoubleTap(android.view.MotionEvent)">onDoubleTap</a></strong>(android.view.MotionEvent&nbsp;e)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapviewgesturedetectorlistener#ondown(android.view.motionevent)">onDown</a></strong>(android.view.MotionEvent&nbsp;e)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapViewGestureDetectorListener#onDown(android.view.MotionEvent)">onDown</a></strong>(android.view.MotionEvent&nbsp;e)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapviewgesturedetectorlistener#onfling(android.view.motionevent, android.view.motionevent, float, float)">onFling</a></strong>(android.view.MotionEvent&nbsp;e1,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapViewGestureDetectorListener#onFling(android.view.MotionEvent, android.view.MotionEvent, float, float)">onFling</a></strong>(android.view.MotionEvent&nbsp;e1,
        android.view.MotionEvent&nbsp;e2,
        float&nbsp;velocityX,
        float&nbsp;velocityY)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapviewgesturedetectorlistener#onlongpress(android.view.motionevent)">onLongPress</a></strong>(android.view.MotionEvent&nbsp;e)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapViewGestureDetectorListener#onLongPress(android.view.MotionEvent)">onLongPress</a></strong>(android.view.MotionEvent&nbsp;e)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapviewgesturedetectorlistener#onscroll(android.view.motionevent, android.view.motionevent, float, float)">onScroll</a></strong>(android.view.MotionEvent&nbsp;e1,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapViewGestureDetectorListener#onScroll(android.view.MotionEvent, android.view.MotionEvent, float, float)">onScroll</a></strong>(android.view.MotionEvent&nbsp;e1,
         android.view.MotionEvent&nbsp;e2,
         float&nbsp;distanceX,
         float&nbsp;distanceY)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapviewgesturedetectorlistener#onshowpress(android.view.motionevent)">onShowPress</a></strong>(android.view.MotionEvent&nbsp;e)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapViewGestureDetectorListener#onShowPress(android.view.MotionEvent)">onShowPress</a></strong>(android.view.MotionEvent&nbsp;e)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapviewgesturedetectorlistener#onsingletapconfirmed(android.view.motionevent)">onSingleTapConfirmed</a></strong>(android.view.MotionEvent&nbsp;e)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapViewGestureDetectorListener#onSingleTapConfirmed(android.view.MotionEvent)">onSingleTapConfirmed</a></strong>(android.view.MotionEvent&nbsp;e)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapviewgesturedetectorlistener#onsingletapup(android.view.motionevent)">onSingleTapUp</a></strong>(android.view.MotionEvent&nbsp;e)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapViewGestureDetectorListener#onSingleTapUp(android.view.MotionEvent)">onSingleTapUp</a></strong>(android.view.MotionEvent&nbsp;e)</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -141,7 +141,7 @@ extends android.view.GestureDetector.SimpleOnGestureListener</pre>
 
 
 <h4>MapViewGestureDetectorListener</h4>
-<pre>public&nbsp;MapViewGestureDetectorListener(<a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</pre>
+<pre>public&nbsp;MapViewGestureDetectorListener(<a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a>&nbsp;mv)</pre>
 <div class="block">Bind a new gesture detector to a map</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>mv</code> - a map view</dd></dl>
 

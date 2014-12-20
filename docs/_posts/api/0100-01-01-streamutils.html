@@ -40,7 +40,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/streamutils#io_buffer_size">IO_BUFFER_SIZE</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LStreamUtils#IO_BUFFER_SIZE">IO_BUFFER_SIZE</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
@@ -59,16 +59,16 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/streamutils#closestream(java.io.closeable)">closeStream</a></strong>(java.io.Closeable&nbsp;stream)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LStreamUtils#closeStream(java.io.Closeable)">closeStream</a></strong>(java.io.Closeable&nbsp;stream)</code>
 <div class="block">Closes the specified stream.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static long</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/streamutils#copy(java.io.inputstream, java.io.outputstream)">copy</a></strong>(java.io.InputStream&nbsp;in,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LStreamUtils#copy(java.io.InputStream, java.io.OutputStream)">copy</a></strong>(java.io.InputStream&nbsp;in,
     java.io.OutputStream&nbsp;out)</code>
 <div class="block">Copy the content of the input stream into the output stream, using a temporary byte array
- buffer whose size is defined by <a href="{{site.baseurl}}/api/streamutils#io_buffer_size"><code>IO_BUFFER_SIZE</code></a>.</div>
+ buffer whose size is defined by <a href="{{site.baseurl}}/api/LStreamUtils#IO_BUFFER_SIZE"><code>IO_BUFFER_SIZE</code></a>.</div>
 </td>
 </tr>
 </table>
@@ -121,7 +121,7 @@ extends java.lang.Object</pre>
         java.io.OutputStream&nbsp;out)
                  throws java.io.IOException</pre>
 <div class="block">Copy the content of the input stream into the output stream, using a temporary byte array
- buffer whose size is defined by <a href="{{site.baseurl}}/api/streamutils#io_buffer_size"><code>IO_BUFFER_SIZE</code></a>.</div>
+ buffer whose size is defined by <a href="{{site.baseurl}}/api/LStreamUtils#IO_BUFFER_SIZE"><code>IO_BUFFER_SIZE</code></a>.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>in</code> - The input stream to copy from.</dd><dd><code>out</code> - The output stream to copy to.</dd>
 <dt><span class="strong">Returns:</span></dt><dd>the total length copied</dd>
 <dt><span class="strong">Throws:</span></dt>

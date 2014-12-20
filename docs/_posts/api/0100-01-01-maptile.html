@@ -21,10 +21,10 @@ com.mapbox.mapboxsdk.tileprovider.MapTile
 <pre>public class <span class="strong">MapTile</span>
 extends java.lang.Object</pre>
 <div class="block">A map tile is distributed using the observer pattern. The tile is delivered by a tile provider
- (i.e. a descendant of <a href="{{site.baseurl}}/api/maptilemodulelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider.modules"><code>MapTileModuleLayerBase</code></a>
+ (i.e. a descendant of <a href="{{site.baseurl}}/api/LMapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules"><code>MapTileModuleLayerBase</code></a>
  or
- <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerBase</code></a> to a consumer of tiles (e.g. descendant of
- <a href="{{site.baseurl}}/api/tilesoverlay" title="class in com.mapbox.mapboxsdk.overlay"><code>TilesOverlay</code></a>). Tiles are typically images (e.g. png or
+ <a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerBase</code></a> to a consumer of tiles (e.g. descendant of
+ <a href="{{site.baseurl}}/api/LTilesOverlay" title="class in com.mapbox.mapboxsdk.overlay"><code>TilesOverlay</code></a>). Tiles are typically images (e.g. png or
  jpeg).</div>
 
 
@@ -46,11 +46,11 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile#maptile_fail_id">MAPTILE_FAIL_ID</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile#MAPTILE_FAIL_ID">MAPTILE_FAIL_ID</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile#maptile_success_id">MAPTILE_SUCCESS_ID</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile#MAPTILE_SUCCESS_ID">MAPTILE_SUCCESS_ID</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
@@ -67,12 +67,12 @@ extends java.lang.Object</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/maptile#maptile(int, int, int)">MapTile</a></strong>(int&nbsp;az,
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LMapTile#MapTile(int, int, int)">MapTile</a></strong>(int&nbsp;az,
        int&nbsp;ax,
        int&nbsp;ay)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/maptile#maptile(java.lang.string, int, int, int)">MapTile</a></strong>(java.lang.String&nbsp;aCacheKey,
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LMapTile#MapTile(java.lang.String, int, int, int)">MapTile</a></strong>(java.lang.String&nbsp;aCacheKey,
        int&nbsp;az,
        int&nbsp;ax,
        int&nbsp;ay)</code>&nbsp;</td>
@@ -94,39 +94,43 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile#equals(java.lang.object)">equals</a></strong>(java.lang.Object&nbsp;obj)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile#equals(java.lang.Object)">equals</a></strong>(java.lang.Object&nbsp;obj)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile#getcachekey()">getCacheKey</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile#getCacheKey()">getCacheKey</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile#getPath()">getPath</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>android.graphics.Rect</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile#gettilerect()">getTileRect</a></strong>()</code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile#getx()">getX</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile#getTileRect()">getTileRect</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile#gety()">getY</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile#getX()">getX</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile#getz()">getZ</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile#getY()">getY</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile#hashcode()">hashCode</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile#getZ()">getZ</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile#hashCode()">hashCode</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile#settilerect(android.graphics.rect)">setTileRect</a></strong>(android.graphics.Rect&nbsp;rect)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile#setTileRect(android.graphics.Rect)">setTileRect</a></strong>(android.graphics.Rect&nbsp;rect)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile#tostring()">toString</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile#toString()">toString</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -234,6 +238,15 @@ extends java.lang.Object</pre>
 
 <h4>getY</h4>
 <pre>public&nbsp;int&nbsp;getY()</pre>
+
+
+<a name="getPath()">
+<!--   -->
+</a>
+
+
+<h4>getPath</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getPath()</pre>
 
 
 <a name="getCacheKey()">

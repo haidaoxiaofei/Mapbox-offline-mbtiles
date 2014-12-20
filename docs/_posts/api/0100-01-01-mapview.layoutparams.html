@@ -23,17 +23,17 @@ com.mapbox.mapboxsdk.views.MapView.LayoutParams
 
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="{{site.baseurl}}/api/mapviewlayouts" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewLayouts</a></dd>
+<dd><a href="{{site.baseurl}}/api/LMapViewLayouts" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewLayouts</a></dd>
 </dl>
 <dl>
 <dt>Enclosing class:</dt>
-<dd><a href="{{site.baseurl}}/api/mapview" title="class in com.mapbox.mapboxsdk.views">MapView</a></dd>
+<dd><a href="{{site.baseurl}}/api/LMapView" title="class in com.mapbox.mapboxsdk.views">MapView</a></dd>
 </dl>
 
 
 <pre>public static class <span class="strong">MapView.LayoutParams</span>
 extends android.view.ViewGroup.LayoutParams
-implements <a href="{{site.baseurl}}/api/mapviewlayouts" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewLayouts</a></pre>
+implements <a href="{{site.baseurl}}/api/LMapViewLayouts" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewLayouts</a></pre>
 <div class="block">Per-child layout information associated with OpenStreetMapView.</div>
 
 
@@ -55,23 +55,23 @@ implements <a href="{{site.baseurl}}/api/mapviewlayouts" title="interface in com
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview.layoutparams#alignment">alignment</a></strong></code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView.LayoutParams#alignment">alignment</a></strong></code>
 <div class="block">The alignment the alignment of the view compared to the location.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview.layoutparams#geopoint">geoPoint</a></strong></code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView.LayoutParams#geoPoint">geoPoint</a></strong></code>
 <div class="block">The location of the child within the map view.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview.layoutparams#offsetx">offsetX</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView.LayoutParams#offsetX">offsetX</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/mapview.layoutparams#offsety">offsetY</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapView.LayoutParams#offsetY">offsetY</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
@@ -85,8 +85,8 @@ implements <a href="{{site.baseurl}}/api/mapviewlayouts" title="interface in com
 <a name="fields_inherited_from_class_com.mapbox.mapboxsdk.views.util.constants.MapViewLayouts">
 <!--   -->
 </a>
-<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.views.util.constants.<a href="{{site.baseurl}}/api/mapviewlayouts" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewLayouts</a></h3>
-<code><a href="{{site.baseurl}}/api/mapviewlayouts#top_right">TOP_RIGHT</a></code>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.views.util.constants.<a href="{{site.baseurl}}/api/LMapViewLayouts" title="interface in com.mapbox.mapboxsdk.views.util.constants">MapViewLayouts</a></h3>
+<code><a href="{{site.baseurl}}/api/LMapViewLayouts#TOP_RIGHT">TOP_RIGHT</a></code>
 
 
 
@@ -102,15 +102,15 @@ implements <a href="{{site.baseurl}}/api/mapviewlayouts" title="interface in com
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/mapview.layoutparams#mapview.layoutparams(android.content.context, android.util.attributeset)">MapView.LayoutParams</a></strong>(android.content.Context&nbsp;c,
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LMapView.LayoutParams#MapView.LayoutParams(android.content.Context, android.util.AttributeSet)">MapView.LayoutParams</a></strong>(android.content.Context&nbsp;c,
                     android.util.AttributeSet&nbsp;attrs)</code>
 <div class="block">Since we cannot use XML files in this project this constructor is useless.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/mapview.layoutparams#mapview.layoutparams(int, int, com.mapbox.mapboxsdk.api.ilatlng, int, int, int)">MapView.LayoutParams</a></strong>(int&nbsp;width,
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LMapView.LayoutParams#MapView.LayoutParams(int, int, com.mapbox.mapboxsdk.api.ILatLng, int, int, int)">MapView.LayoutParams</a></strong>(int&nbsp;width,
                     int&nbsp;height,
-                    <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aGeoPoint,
+                    <a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aGeoPoint,
                     int&nbsp;aAlignment,
                     int&nbsp;aOffsetX,
                     int&nbsp;aOffsetY)</code>
@@ -118,7 +118,7 @@ implements <a href="{{site.baseurl}}/api/mapviewlayouts" title="interface in com
 </td>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/mapview.layoutparams#mapview.layoutparams(android.view.viewgroup.layoutparams)">MapView.LayoutParams</a></strong>(android.view.ViewGroup.LayoutParams&nbsp;source)</code>&nbsp;</td>
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LMapView.LayoutParams#MapView.LayoutParams(android.view.ViewGroup.LayoutParams)">MapView.LayoutParams</a></strong>(android.view.ViewGroup.LayoutParams&nbsp;source)</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -163,7 +163,7 @@ implements <a href="{{site.baseurl}}/api/mapviewlayouts" title="interface in com
 
 
 <h4>geoPoint</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a> geoPoint</pre>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a> geoPoint</pre>
 <div class="block">The location of the child within the map view.</div>
 
 
@@ -211,7 +211,7 @@ implements <a href="{{site.baseurl}}/api/mapviewlayouts" title="interface in com
 <h4>MapView.LayoutParams</h4>
 <pre>public&nbsp;MapView.LayoutParams(int&nbsp;width,
                     int&nbsp;height,
-                    <a href="{{site.baseurl}}/api/ilatlng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aGeoPoint,
+                    <a href="{{site.baseurl}}/api/LILatLng" title="interface in com.mapbox.mapboxsdk.api">ILatLng</a>&nbsp;aGeoPoint,
                     int&nbsp;aAlignment,
                     int&nbsp;aOffsetX,
                     int&nbsp;aOffsetY)</pre>
@@ -220,9 +220,9 @@ implements <a href="{{site.baseurl}}/api/mapviewlayouts" title="interface in com
                    size
                    in pixels</dd><dd><code>height</code> - the height, either <code>ViewGroup.LayoutParams.FILL_PARENT</code>, <code>ViewGroup.LayoutParams.WRAP_CONTENT</code> or a fixed
                    size
-                   in pixels</dd><dd><code>aGeoPoint</code> - the location of the child within the map view</dd><dd><code>aAlignment</code> - the alignment of the view compared to the location <a href="{{site.baseurl}}/api/mapviewlayouts#bottom_center"><code>MapViewLayouts.BOTTOM_CENTER</code></a>,
-                   <a href="{{site.baseurl}}/api/mapviewlayouts#top_center"><code>MapViewLayouts.TOP_CENTER</code></a>,
-                   <a href="{{site.baseurl}}/api/mapviewlayouts#top_right"><code>MapViewLayouts.TOP_RIGHT</code></a></dd><dd><code>aOffsetX</code> - the additional X offset from the alignment location to draw the child
+                   in pixels</dd><dd><code>aGeoPoint</code> - the location of the child within the map view</dd><dd><code>aAlignment</code> - the alignment of the view compared to the location <a href="{{site.baseurl}}/api/LMapViewLayouts#BOTTOM_CENTER"><code>MapViewLayouts.BOTTOM_CENTER</code></a>,
+                   <a href="{{site.baseurl}}/api/LMapViewLayouts#TOP_CENTER"><code>MapViewLayouts.TOP_CENTER</code></a>,
+                   <a href="{{site.baseurl}}/api/LMapViewLayouts#TOP_RIGHT"><code>MapViewLayouts.TOP_RIGHT</code></a></dd><dd><code>aOffsetX</code> - the additional X offset from the alignment location to draw the child
                    within
                    the map view</dd><dd><code>aOffsetY</code> - the additional Y offset from the alignment location to draw the child
                    within

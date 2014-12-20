@@ -38,7 +38,7 @@ extends java.lang.Object</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/dataloadingutils#dataloadingutils()">DataLoadingUtils</a></strong>()</code>&nbsp;</td>
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LDataLoadingUtils#DataLoadingUtils()">DataLoadingUtils</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -57,23 +57,27 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static java.util.ArrayList&lt;java.lang.Object&gt;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/dataloadingutils#createuiobjectsfromgeojsonobjects(featurecollection, com.mapbox.mapboxsdk.overlay.icon)">createUIObjectsFromGeoJSONObjects</a></strong>(FeatureCollection&nbsp;featureCollection,
-                                 <a href="{{site.baseurl}}/api/icon" title="class in com.mapbox.mapboxsdk.overlay">Icon</a>&nbsp;markerIcon)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LDataLoadingUtils#createUIObjectsFromGeoJSONObjects(FeatureCollection, com.mapbox.mapboxsdk.overlay.Icon)">createUIObjectsFromGeoJSONObjects</a></strong>(FeatureCollection&nbsp;featureCollection,
+                                 <a href="{{site.baseurl}}/api/LIcon" title="class in com.mapbox.mapboxsdk.overlay">Icon</a>&nbsp;markerIcon)</code>
 <div class="block">Converts GeoJSON objects into Mapbox SDK UI Objects</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static FeatureCollection</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/dataloadingutils#loadgeojsonfromassets(android.content.context, java.lang.string)">loadGeoJSONFromAssets</a></strong>(android.content.Context&nbsp;context,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LDataLoadingUtils#loadGeoJSONFromAssets(android.content.Context, java.lang.String)">loadGeoJSONFromAssets</a></strong>(android.content.Context&nbsp;context,
                      java.lang.String&nbsp;fileName)</code>
 <div class="block">Load GeoJSON from URL (in synchronous manner) and return GeoJSON FeatureCollection</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static FeatureCollection</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/dataloadingutils#loadgeojsonfromurl(java.lang.string)">loadGeoJSONFromUrl</a></strong>(java.lang.String&nbsp;url)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LDataLoadingUtils#loadGeoJSONFromUrl(java.lang.String)">loadGeoJSONFromUrl</a></strong>(java.lang.String&nbsp;url)</code>
 <div class="block">Load GeoJSON from URL (in synchronous manner) and return GeoJSON FeatureCollection</div>
 </td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LDataLoadingUtils#readAll(java.io.Reader)">readAll</a></strong>(java.io.Reader&nbsp;rd)</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -149,6 +153,18 @@ extends java.lang.Object</pre>
 <dd><code>org.json.JSONException</code></dd></dl>
 
 
+<a name="readAll(java.io.Reader)">
+<!--   -->
+</a>
+
+
+<h4>readAll</h4>
+<pre>public static&nbsp;java.lang.String&nbsp;readAll(java.io.Reader&nbsp;rd)
+                                throws java.io.IOException</pre>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code>java.io.IOException</code></dd></dl>
+
+
 <a name="createUIObjectsFromGeoJSONObjects(FeatureCollection, com.mapbox.mapboxsdk.overlay.Icon)">
 <!--   -->
 </a>
@@ -156,7 +172,7 @@ extends java.lang.Object</pre>
 
 <h4>createUIObjectsFromGeoJSONObjects</h4>
 <pre>public static&nbsp;java.util.ArrayList&lt;java.lang.Object&gt;&nbsp;createUIObjectsFromGeoJSONObjects(FeatureCollection&nbsp;featureCollection,
-                                                                      <a href="{{site.baseurl}}/api/icon" title="class in com.mapbox.mapboxsdk.overlay">Icon</a>&nbsp;markerIcon)
+                                                                      <a href="{{site.baseurl}}/api/LIcon" title="class in com.mapbox.mapboxsdk.overlay">Icon</a>&nbsp;markerIcon)
                                                                                throws org.json.JSONException</pre>
 <div class="block">Converts GeoJSON objects into Mapbox SDK UI Objects</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>featureCollection</code> - Parsed GeoJSON Objects</dd><dd><code>markerIcon</code> - Optional Icon to use for markers</dd>

@@ -9,7 +9,7 @@ tags: tileprovider
 java.lang.Object
 
 
-<a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase</a>
+<a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase</a>
 
 
 com.mapbox.mapboxsdk.tileprovider.MapTileLayerArray
@@ -23,27 +23,27 @@ com.mapbox.mapboxsdk.tileprovider.MapTileLayerArray
 
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="{{site.baseurl}}/api/imaptileprovidercallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></dd>
+<dd><a href="{{site.baseurl}}/api/LIMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></dd>
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="{{site.baseurl}}/api/maptilelayerbasic" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBasic</a></dd>
+<dd><a href="{{site.baseurl}}/api/LMapTileLayerBasic" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBasic</a></dd>
 </dl>
 
 
 <pre>public class <span class="strong">MapTileLayerArray</span>
-extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></pre>
+extends <a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></pre>
 <div class="block">This top-level tile provider allows a consumer to provide an array of modular asynchronous tile
  providers to be used to obtain map tiles. When a tile is requested, the
- <a href="{{site.baseurl}}/api/maptilecache" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileCache</code></a> (synchronously) and returns
- the tile if available. If not, then the <a href="{{site.baseurl}}/api/maptilelayerarray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> returns null and sends the
+ <a href="{{site.baseurl}}/api/LMapTileCache" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileCache</code></a> (synchronously) and returns
+ the tile if available. If not, then the <a href="{{site.baseurl}}/api/LMapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> returns null and sends the
  tile request through the asynchronous tile request chain. Each asynchronous tile provider
  returns
- success/failure to the <a href="{{site.baseurl}}/api/maptilelayerarray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a>. If successful, the
- <a href="{{site.baseurl}}/api/maptilelayerarray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> passes the result to the base class. If failed, then the next
+ success/failure to the <a href="{{site.baseurl}}/api/LMapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a>. If successful, the
+ <a href="{{site.baseurl}}/api/LMapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> passes the result to the base class. If failed, then the next
  asynchronous tile provider is called in the chain. If there are no more asynchronous tile
  providers in the chain, then the failure result is passed to the base class. The
- <a href="{{site.baseurl}}/api/maptilelayerarray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> provides a mechanism so that only one unique tile-request can be in
+ <a href="{{site.baseurl}}/api/LMapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> provides a mechanism so that only one unique tile-request can be in
  the map tile request chain at a time.</div>
 
 
@@ -64,35 +64,35 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/networkavailabilitycheck" title="class in com.mapbox.mapboxsdk.tileprovider.modules">NetworkAvailabilityCheck</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#mnetworkavailabilitycheck">mNetworkAvailabilityCheck</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/LNetworkAvailabilityCheck" title="class in com.mapbox.mapboxsdk.tileprovider.modules">NetworkAvailabilityCheck</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#mNetworkAvailabilityCheck">mNetworkAvailabilityCheck</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected java.util.List&lt;<a href="{{site.baseurl}}/api/maptilemodulelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>&gt;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#mtileproviderlist">mTileProviderList</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>protected java.util.List&lt;<a href="{{site.baseurl}}/api/LMapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#mTileProviderList">mTileProviderList</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected java.util.List&lt;<a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&gt;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#munaccessibletiles">mUnaccessibleTiles</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>protected java.util.List&lt;<a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#mUnaccessibleTiles">mUnaccessibleTiles</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected java.util.HashMap&lt;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&gt;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#mworking">mWorking</a></strong></code>&nbsp;</td>
+<td class="colFirst"><code>protected java.util.HashMap&lt;<a href="{{site.baseurl}}/api/LMapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#mWorking">mWorking</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 
 <a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase">
 <!--   -->
 </a>
-<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></h3>
-<code><a href="{{site.baseurl}}/api/maptilelayerbase#mtilecache">mTileCache</a></code>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></h3>
+<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#mTileCache">mTileCache</a></code>
 
 
 <a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants">
 <!--   -->
 </a>
-<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.constants.<a href="{{site.baseurl}}/api/tilelayerconstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></h3>
-<code><a href="{{site.baseurl}}/api/tilelayerconstants#world_bounding_box">WORLD_BOUNDING_BOX</a></code>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.constants.<a href="{{site.baseurl}}/api/LTileLayerConstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/LTileLayerConstants#WORLD_BOUNDING_BOX">WORLD_BOUNDING_BOX</a></code>
 
 
 
@@ -110,19 +110,19 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#maptilelayerarray(android.content.context, com.mapbox.mapboxsdk.tileprovider.tilesource.itilelayer, com.mapbox.mapboxsdk.tileprovider.iregisterreceiver)">MapTileLayerArray</a></strong>(android.content.Context&nbsp;context,
-                 <a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
-                 <a href="{{site.baseurl}}/api/iregisterreceiver" title="interface in com.mapbox.mapboxsdk.tileprovider">IRegisterReceiver</a>&nbsp;pRegisterReceiver)</code>
-<div class="block">Creates an <a href="{{site.baseurl}}/api/maptilelayerarray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> with no tile providers.</div>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#MapTileLayerArray(android.content.Context, com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, com.mapbox.mapboxsdk.tileprovider.IRegisterReceiver)">MapTileLayerArray</a></strong>(android.content.Context&nbsp;context,
+                 <a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
+                 <a href="{{site.baseurl}}/api/LIRegisterReceiver" title="interface in com.mapbox.mapboxsdk.tileprovider">IRegisterReceiver</a>&nbsp;pRegisterReceiver)</code>
+<div class="block">Creates an <a href="{{site.baseurl}}/api/LMapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> with no tile providers.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>&nbsp;</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#maptilelayerarray(android.content.context, com.mapbox.mapboxsdk.tileprovider.tilesource.itilelayer, com.mapbox.mapboxsdk.tileprovider.iregisterreceiver, com.mapbox.mapboxsdk.tileprovider.modules.maptilemodulelayerbase[])">MapTileLayerArray</a></strong>(android.content.Context&nbsp;context,
-                 <a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
-                 <a href="{{site.baseurl}}/api/iregisterreceiver" title="interface in com.mapbox.mapboxsdk.tileprovider">IRegisterReceiver</a>&nbsp;aRegisterReceiver,
-                 <a href="{{site.baseurl}}/api/maptilemodulelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>[]&nbsp;pTileProviderArray)</code>
-<div class="block">Creates an <a href="{{site.baseurl}}/api/maptilelayerarray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> with the specified tile providers.</div>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#MapTileLayerArray(android.content.Context, com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, com.mapbox.mapboxsdk.tileprovider.IRegisterReceiver, com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase[])">MapTileLayerArray</a></strong>(android.content.Context&nbsp;context,
+                 <a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
+                 <a href="{{site.baseurl}}/api/LIRegisterReceiver" title="interface in com.mapbox.mapboxsdk.tileprovider">IRegisterReceiver</a>&nbsp;aRegisterReceiver,
+                 <a href="{{site.baseurl}}/api/LMapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>[]&nbsp;pTileProviderArray)</code>
+<div class="block">Creates an <a href="{{site.baseurl}}/api/LMapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> with the specified tile providers.</div>
 </td>
 </tr>
 </table>
@@ -142,70 +142,70 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#detach()">detach</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#detach()">detach</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/maptilemodulelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState)</code>
+<td class="colFirst"><code>protected <a href="{{site.baseurl}}/api/LMapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState)</code>
 <div class="block">We want to not use a provider that doesn't exist anymore in the chain, and we want to not
  use
  a provider that requires a data connection when one is not available.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#getboundingbox()">getBoundingBox</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#getBoundingBox()">getBoundingBox</a></strong>()</code>
 <div class="block">Get the tile provider bounding box.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#getcentercoordinate()">getCenterCoordinate</a></strong>()</code>
+<td class="colFirst"><code><a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a></code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#getCenterCoordinate()">getCenterCoordinate</a></strong>()</code>
 <div class="block">Get the tile provider center.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#getcenterzoom()">getCenterZoom</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#getCenterZoom()">getCenterZoom</a></strong>()</code>
 <div class="block">Get the tile provider suggested starting zoom.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>android.graphics.drawable.Drawable</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
           boolean&nbsp;allowRemote)</code>
-<div class="block">Attempts to get a Drawable that represents a <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTile</code></a>.</div>
+<div class="block">Attempts to get a Drawable that represents a <a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTile</code></a>.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#getmaximumzoomlevel()">getMaximumZoomLevel</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#getMaximumZoomLevel()">getMaximumZoomLevel</a></strong>()</code>
 <div class="block">Get the maximum zoom level this tile provider can provide.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#getminimumzoomlevel()">getMinimumZoomLevel</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#getMinimumZoomLevel()">getMinimumZoomLevel</a></strong>()</code>
 <div class="block">Gets the minimum zoom level this tile provider can provide</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilemodulelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>&nbsp;provider)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>&nbsp;provider)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#gettilesizepixels()">getTileSizePixels</a></strong>()</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#getTileSizePixels()">getTileSizePixels</a></strong>()</code>
 <div class="block">Get the tile size in pixels this tile provider provides.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilelayerarray#hasnosource()">hasNoSource</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileLayerArray#hasNoSource()">hasNoSource</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState,
                        android.graphics.drawable.Drawable&nbsp;aDrawable)</code>
 <div class="block">Called by implementation class methods indicating that they have completed the request as
  best it can.</div>
@@ -213,7 +213,7 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState,
                          <a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a>&nbsp;aDrawable)</code>
 <div class="block">Called by implementation class methods indicating that they have produced an expired result
  that can be used but better results may be delivered later.</div>
@@ -221,14 +221,14 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState)</code>
 <div class="block">Called by implementation class methods indicating that they have failed to retrieve the
  requested map tile.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</code>
 <div class="block">Sets the tile source for this tile provider.</div>
 </td>
 </tr>
@@ -237,8 +237,8 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 <a name="methods_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></h3>
-<code><a href="{{site.baseurl}}/api/maptilelayerbase#usedataconnection()">useDataConnection</a></code>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></h3>
+<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#useDataConnection()">useDataConnection</a></code>
 
 
 <a name="methods_inherited_from_class_java.lang.Object">
@@ -267,7 +267,7 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>mWorking</h4>
-<pre>protected final&nbsp;java.util.HashMap&lt;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&gt; mWorking</pre>
+<pre>protected final&nbsp;java.util.HashMap&lt;<a href="{{site.baseurl}}/api/LMapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&gt; mWorking</pre>
 
 
 <a name="mTileProviderList">
@@ -276,7 +276,7 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>mTileProviderList</h4>
-<pre>protected final&nbsp;java.util.List&lt;<a href="{{site.baseurl}}/api/maptilemodulelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>&gt; mTileProviderList</pre>
+<pre>protected final&nbsp;java.util.List&lt;<a href="{{site.baseurl}}/api/LMapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>&gt; mTileProviderList</pre>
 
 
 <a name="mUnaccessibleTiles">
@@ -285,7 +285,7 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>mUnaccessibleTiles</h4>
-<pre>protected final&nbsp;java.util.List&lt;<a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&gt; mUnaccessibleTiles</pre>
+<pre>protected final&nbsp;java.util.List&lt;<a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&gt; mUnaccessibleTiles</pre>
 
 
 <a name="mNetworkAvailabilityCheck">
@@ -294,7 +294,7 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>mNetworkAvailabilityCheck</h4>
-<pre>protected final&nbsp;<a href="{{site.baseurl}}/api/networkavailabilitycheck" title="class in com.mapbox.mapboxsdk.tileprovider.modules">NetworkAvailabilityCheck</a> mNetworkAvailabilityCheck</pre>
+<pre>protected final&nbsp;<a href="{{site.baseurl}}/api/LNetworkAvailabilityCheck" title="class in com.mapbox.mapboxsdk.tileprovider.modules">NetworkAvailabilityCheck</a> mNetworkAvailabilityCheck</pre>
 
 
 
@@ -312,10 +312,10 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 <h4>MapTileLayerArray</h4>
 <pre>protected&nbsp;MapTileLayerArray(android.content.Context&nbsp;context,
-                 <a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
-                 <a href="{{site.baseurl}}/api/iregisterreceiver" title="interface in com.mapbox.mapboxsdk.tileprovider">IRegisterReceiver</a>&nbsp;pRegisterReceiver)</pre>
-<div class="block">Creates an <a href="{{site.baseurl}}/api/maptilelayerarray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> with no tile providers.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>pRegisterReceiver</code> - a <a href="{{site.baseurl}}/api/iregisterreceiver" title="interface in com.mapbox.mapboxsdk.tileprovider"><code>IRegisterReceiver</code></a></dd></dl>
+                 <a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
+                 <a href="{{site.baseurl}}/api/LIRegisterReceiver" title="interface in com.mapbox.mapboxsdk.tileprovider">IRegisterReceiver</a>&nbsp;pRegisterReceiver)</pre>
+<div class="block">Creates an <a href="{{site.baseurl}}/api/LMapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> with no tile providers.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>pRegisterReceiver</code> - a <a href="{{site.baseurl}}/api/LIRegisterReceiver" title="interface in com.mapbox.mapboxsdk.tileprovider"><code>IRegisterReceiver</code></a></dd></dl>
 
 
 <a name="MapTileLayerArray(android.content.Context, com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer, com.mapbox.mapboxsdk.tileprovider.IRegisterReceiver, com.mapbox.mapboxsdk.tileprovider.modules.MapTileModuleLayerBase[])">
@@ -325,11 +325,11 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 <h4>MapTileLayerArray</h4>
 <pre>public&nbsp;MapTileLayerArray(android.content.Context&nbsp;context,
-                 <a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
-                 <a href="{{site.baseurl}}/api/iregisterreceiver" title="interface in com.mapbox.mapboxsdk.tileprovider">IRegisterReceiver</a>&nbsp;aRegisterReceiver,
-                 <a href="{{site.baseurl}}/api/maptilemodulelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>[]&nbsp;pTileProviderArray)</pre>
-<div class="block">Creates an <a href="{{site.baseurl}}/api/maptilelayerarray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> with the specified tile providers.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aRegisterReceiver</code> - a <a href="{{site.baseurl}}/api/maptilemodulelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider.modules"><code>MapTileModuleLayerBase</code></a></dd></dl>
+                 <a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;pTileSource,
+                 <a href="{{site.baseurl}}/api/LIRegisterReceiver" title="interface in com.mapbox.mapboxsdk.tileprovider">IRegisterReceiver</a>&nbsp;aRegisterReceiver,
+                 <a href="{{site.baseurl}}/api/LMapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>[]&nbsp;pTileProviderArray)</pre>
+<div class="block">Creates an <a href="{{site.baseurl}}/api/LMapTileLayerArray" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTileLayerArray</code></a> with the specified tile providers.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aRegisterReceiver</code> - a <a href="{{site.baseurl}}/api/LMapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules"><code>MapTileModuleLayerBase</code></a></dd></dl>
 
 
 
@@ -349,7 +349,7 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 <pre>public&nbsp;void&nbsp;detach()</pre>
 <dl>
 <dt><strong>Specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 </dl>
 
 
@@ -359,17 +359,17 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>getMapTile</h4>
-<pre>public&nbsp;android.graphics.drawable.Drawable&nbsp;getMapTile(<a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
+<pre>public&nbsp;android.graphics.drawable.Drawable&nbsp;getMapTile(<a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
                                             boolean&nbsp;allowRemote)</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#getmaptile(com.mapbox.mapboxsdk.tileprovider.maptile, boolean)">MapTileLayerBase</a></code></strong></div>
-<div class="block">Attempts to get a Drawable that represents a <a href="{{site.baseurl}}/api/maptile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTile</code></a>. If the tile is not immediately
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#getMapTile(com.mapbox.mapboxsdk.tileprovider.MapTile, boolean)">MapTileLayerBase</a></code></strong></div>
+<div class="block">Attempts to get a Drawable that represents a <a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTile</code></a>. If the tile is not immediately
  available this will return null and attempt to get the tile from known tile sources for
  subsequent future requests. Note that this may return a <a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache"><code>CacheableBitmapDrawable</code></a> in
  which case you should follow proper handling procedures for using that Drawable or it may
  reused while you are working with it.</div>
 <dl>
 <dt><strong>Specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">See Also:</span></dt><dd><a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache"><code>CacheableBitmapDrawable</code></a></dd></dl>
 
 
@@ -379,16 +379,16 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>mapTileRequestCompleted</h4>
-<pre>public&nbsp;void&nbsp;mapTileRequestCompleted(<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState,
+<pre>public&nbsp;void&nbsp;mapTileRequestCompleted(<a href="{{site.baseurl}}/api/LMapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState,
                            android.graphics.drawable.Drawable&nbsp;aDrawable)</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#maptilerequestcompleted(com.mapbox.mapboxsdk.tileprovider.maptilerequeststate, android.graphics.drawable.drawable)">MapTileLayerBase</a></code></strong></div>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#mapTileRequestCompleted(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, android.graphics.drawable.Drawable)">MapTileLayerBase</a></code></strong></div>
 <div class="block">Called by implementation class methods indicating that they have completed the request as
  best it can. The tile is added to the cache, and a MAPTILE_SUCCESS_ID message is sent.</div>
 <dl>
 <dt><strong>Specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/imaptileprovidercallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LIMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></code></dd>
 <dt><strong>Overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Parameters:</span></dt><dd><code>aState</code> - the map tile request state object</dd><dd><code>aDrawable</code> - the Drawable of the map tile</dd></dl>
 
 
@@ -398,15 +398,15 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>mapTileRequestFailed</h4>
-<pre>public&nbsp;void&nbsp;mapTileRequestFailed(<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState)</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#maptilerequestfailed(com.mapbox.mapboxsdk.tileprovider.maptilerequeststate)">MapTileLayerBase</a></code></strong></div>
+<pre>public&nbsp;void&nbsp;mapTileRequestFailed(<a href="{{site.baseurl}}/api/LMapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState)</pre>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#mapTileRequestFailed(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState)">MapTileLayerBase</a></code></strong></div>
 <div class="block">Called by implementation class methods indicating that they have failed to retrieve the
  requested map tile. a MAPTILE_FAIL_ID message is sent.</div>
 <dl>
 <dt><strong>Specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/imaptileprovidercallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LIMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></code></dd>
 <dt><strong>Overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Parameters:</span></dt><dd><code>aState</code> - the map tile request state object</dd></dl>
 
 
@@ -416,17 +416,17 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>mapTileRequestExpiredTile</h4>
-<pre>public&nbsp;void&nbsp;mapTileRequestExpiredTile(<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState,
+<pre>public&nbsp;void&nbsp;mapTileRequestExpiredTile(<a href="{{site.baseurl}}/api/LMapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState,
                              <a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache">CacheableBitmapDrawable</a>&nbsp;aDrawable)</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#maptilerequestexpiredtile(com.mapbox.mapboxsdk.tileprovider.maptilerequeststate, uk.co.senab.bitmapcache.cacheablebitmapdrawable)">MapTileLayerBase</a></code></strong></div>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#mapTileRequestExpiredTile(com.mapbox.mapboxsdk.tileprovider.MapTileRequestState, uk.co.senab.bitmapcache.CacheableBitmapDrawable)">MapTileLayerBase</a></code></strong></div>
 <div class="block">Called by implementation class methods indicating that they have produced an expired result
  that can be used but better results may be delivered later. The tile is added to the cache,
  and a MAPTILE_SUCCESS_ID message is sent.</div>
 <dl>
 <dt><strong>Specified by:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/imaptileprovidercallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LIMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></code></dd>
 <dt><strong>Overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Parameters:</span></dt><dd><code>aState</code> - the map tile request state object</dd><dd><code>aDrawable</code> - the Drawable of the map tile</dd></dl>
 
 
@@ -436,7 +436,7 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>findNextAppropriateProvider</h4>
-<pre>protected&nbsp;<a href="{{site.baseurl}}/api/maptilerequeststate" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState)</pre>
+<pre>protected&nbsp;<a href="{{site.baseurl}}/api/LMapTileRequestState" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileRequestState</a>&nbsp;aState)</pre>
 <div class="block">We want to not use a provider that doesn't exist anymore in the chain, and we want to not
  use
  a provider that requires a data connection when one is not available.</div>
@@ -448,7 +448,7 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>getProviderExists</h4>
-<pre>public&nbsp;boolean&nbsp;getProviderExists(<a href="{{site.baseurl}}/api/maptilemodulelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>&nbsp;provider)</pre>
+<pre>public&nbsp;boolean&nbsp;getProviderExists(<a href="{{site.baseurl}}/api/LMapTileModuleLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider.modules">MapTileModuleLayerBase</a>&nbsp;provider)</pre>
 
 
 <a name="getMinimumZoomLevel()">
@@ -458,11 +458,11 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 <h4>getMinimumZoomLevel</h4>
 <pre>public&nbsp;float&nbsp;getMinimumZoomLevel()</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#getminimumzoomlevel()">MapTileLayerBase</a></code></strong></div>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#getMinimumZoomLevel()">MapTileLayerBase</a></code></strong></div>
 <div class="block">Gets the minimum zoom level this tile provider can provide</div>
 <dl>
 <dt><strong>Overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>the minimum zoom level</dd></dl>
 
 
@@ -473,11 +473,11 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 <h4>getMaximumZoomLevel</h4>
 <pre>public&nbsp;float&nbsp;getMaximumZoomLevel()</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#getmaximumzoomlevel()">MapTileLayerBase</a></code></strong></div>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#getMaximumZoomLevel()">MapTileLayerBase</a></code></strong></div>
 <div class="block">Get the maximum zoom level this tile provider can provide.</div>
 <dl>
 <dt><strong>Overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>the maximum zoom level</dd></dl>
 
 
@@ -487,12 +487,12 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>setTileSource</h4>
-<pre>public&nbsp;void&nbsp;setTileSource(<a href="{{site.baseurl}}/api/itilelayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#settilesource(com.mapbox.mapboxsdk.tileprovider.tilesource.itilelayer)">MapTileLayerBase</a></code></strong></div>
+<pre>public&nbsp;void&nbsp;setTileSource(<a href="{{site.baseurl}}/api/LITileLayer" title="interface in com.mapbox.mapboxsdk.tileprovider.tilesource">ITileLayer</a>&nbsp;aTileSource)</pre>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#setTileSource(com.mapbox.mapboxsdk.tileprovider.tilesource.ITileLayer)">MapTileLayerBase</a></code></strong></div>
 <div class="block">Sets the tile source for this tile provider.</div>
 <dl>
 <dt><strong>Overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Parameters:</span></dt><dd><code>aTileSource</code> - the tile source</dd></dl>
 
 
@@ -505,7 +505,7 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 <pre>public&nbsp;boolean&nbsp;hasNoSource()</pre>
 <dl>
 <dt><strong>Overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 </dl>
 
 
@@ -515,12 +515,12 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>getBoundingBox</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/boundingbox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getBoundingBox()</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#getboundingbox()">MapTileLayerBase</a></code></strong></div>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LBoundingBox" title="class in com.mapbox.mapboxsdk.geometry">BoundingBox</a>&nbsp;getBoundingBox()</pre>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#getBoundingBox()">MapTileLayerBase</a></code></strong></div>
 <div class="block">Get the tile provider bounding box.</div>
 <dl>
 <dt><strong>Overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>the tile source bounding box</dd></dl>
 
 
@@ -530,12 +530,12 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 
 <h4>getCenterCoordinate</h4>
-<pre>public&nbsp;<a href="{{site.baseurl}}/api/latlng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;getCenterCoordinate()</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#getcentercoordinate()">MapTileLayerBase</a></code></strong></div>
+<pre>public&nbsp;<a href="{{site.baseurl}}/api/LLatLng" title="class in com.mapbox.mapboxsdk.geometry">LatLng</a>&nbsp;getCenterCoordinate()</pre>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#getCenterCoordinate()">MapTileLayerBase</a></code></strong></div>
 <div class="block">Get the tile provider center.</div>
 <dl>
 <dt><strong>Overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>the tile source center</dd></dl>
 
 
@@ -546,11 +546,11 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 <h4>getCenterZoom</h4>
 <pre>public&nbsp;float&nbsp;getCenterZoom()</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#getcenterzoom()">MapTileLayerBase</a></code></strong></div>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#getCenterZoom()">MapTileLayerBase</a></code></strong></div>
 <div class="block">Get the tile provider suggested starting zoom.</div>
 <dl>
 <dt><strong>Overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>the tile suggested starting zoom</dd></dl>
 
 
@@ -561,11 +561,11 @@ extends <a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapb
 
 <h4>getTileSizePixels</h4>
 <pre>public&nbsp;int&nbsp;getTileSizePixels()</pre>
-<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/maptilelayerbase#gettilesizepixels()">MapTileLayerBase</a></code></strong></div>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#getTileSizePixels()">MapTileLayerBase</a></code></strong></div>
 <div class="block">Get the tile size in pixels this tile provider provides.</div>
 <dl>
 <dt><strong>Overrides:</strong></dt>
-<dd><code><a href="{{site.baseurl}}/api/maptilelayerbase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
 <dt><span class="strong">Returns:</span></dt><dd>the tile size in pixels</dd></dl>
 
 

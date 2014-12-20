@@ -43,7 +43,7 @@ implements android.location.LocationListener</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#gpslocationprovider(android.content.context)">GpsLocationProvider</a></strong>(android.content.Context&nbsp;context)</code>&nbsp;</td>
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LGpsLocationProvider#GpsLocationProvider(android.content.Context)">GpsLocationProvider</a></strong>(android.content.Context&nbsp;context)</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -62,55 +62,55 @@ implements android.location.LocationListener</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>android.location.Location</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#getlastknownlocation()">getLastKnownLocation</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LGpsLocationProvider#getLastKnownLocation()">getLastKnownLocation</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#getlocationupdatemindistance()">getLocationUpdateMinDistance</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LGpsLocationProvider#getLocationUpdateMinDistance()">getLocationUpdateMinDistance</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>long</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#getlocationupdatemintime()">getLocationUpdateMinTime</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LGpsLocationProvider#getLocationUpdateMinTime()">getLocationUpdateMinTime</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#onlocationchanged(android.location.location)">onLocationChanged</a></strong>(android.location.Location&nbsp;location)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LGpsLocationProvider#onLocationChanged(android.location.Location)">onLocationChanged</a></strong>(android.location.Location&nbsp;location)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#onproviderdisabled(java.lang.string)">onProviderDisabled</a></strong>(java.lang.String&nbsp;provider)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LGpsLocationProvider#onProviderDisabled(java.lang.String)">onProviderDisabled</a></strong>(java.lang.String&nbsp;provider)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#onproviderenabled(java.lang.string)">onProviderEnabled</a></strong>(java.lang.String&nbsp;provider)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LGpsLocationProvider#onProviderEnabled(java.lang.String)">onProviderEnabled</a></strong>(java.lang.String&nbsp;provider)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#onstatuschanged(java.lang.string, int, android.os.bundle)">onStatusChanged</a></strong>(java.lang.String&nbsp;provider,
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LGpsLocationProvider#onStatusChanged(java.lang.String, int, android.os.Bundle)">onStatusChanged</a></strong>(java.lang.String&nbsp;provider,
                int&nbsp;status,
                android.os.Bundle&nbsp;extras)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#setlocationupdatemindistance(float)">setLocationUpdateMinDistance</a></strong>(float&nbsp;meters)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LGpsLocationProvider#setLocationUpdateMinDistance(float)">setLocationUpdateMinDistance</a></strong>(float&nbsp;meters)</code>
 <div class="block">Set the minimum distance for location updates.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#setlocationupdatemintime(long)">setLocationUpdateMinTime</a></strong>(long&nbsp;milliSeconds)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LGpsLocationProvider#setLocationUpdateMinTime(long)">setLocationUpdateMinTime</a></strong>(long&nbsp;milliSeconds)</code>
 <div class="block">Set the minimum interval for location updates.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/userlocationoverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a>&nbsp;myLocationConsumer)</code>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LUserLocationOverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a>&nbsp;myLocationConsumer)</code>
 <div class="block">Enable location updates and show your current location on the map.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/gpslocationprovider#stoplocationprovider()">stopLocationProvider</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LGpsLocationProvider#stopLocationProvider()">stopLocationProvider</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
 
@@ -200,10 +200,10 @@ implements android.location.LocationListener</pre>
 
 
 <h4>startLocationProvider</h4>
-<pre>public&nbsp;boolean&nbsp;startLocationProvider(<a href="{{site.baseurl}}/api/userlocationoverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a>&nbsp;myLocationConsumer)</pre>
+<pre>public&nbsp;boolean&nbsp;startLocationProvider(<a href="{{site.baseurl}}/api/LUserLocationOverlay" title="class in com.mapbox.mapboxsdk.overlay">UserLocationOverlay</a>&nbsp;myLocationConsumer)</pre>
 <div class="block">Enable location updates and show your current location on the map. By default this will
  request location updates as frequently as possible, but you can change the frequency and/or
- distance by calling <a href="{{site.baseurl}}/api/gpslocationprovider#setlocationupdatemindistance(float)"><code>setLocationUpdateMinDistance(float)</code></a> before calling this method.</div>
+ distance by calling <a href="{{site.baseurl}}/api/LGpsLocationProvider#setLocationUpdateMinDistance(float)"><code>setLocationUpdateMinDistance(float)</code></a> before calling this method.</div>
 
 
 <a name="stopLocationProvider()">

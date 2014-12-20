@@ -1,0 +1,188 @@
+---
+layout: api
+title: OfflineMapTileProvider
+category: api
+tags: overlay
+---
+<div class="contentContainer">
+
+java.lang.Object
+
+
+<a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase</a>
+
+
+com.mapbox.mapboxsdk.overlay.OfflineMapTileProvider
+
+
+
+
+
+<div class="description">
+
+
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="{{site.baseurl}}/api/LIMapTileProviderCallback" title="interface in com.mapbox.mapboxsdk.tileprovider">IMapTileProviderCallback</a></dd>
+</dl>
+
+
+<pre>public class <span class="strong">OfflineMapTileProvider</span>
+extends <a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></pre>
+
+
+</div>
+<div class="summary">
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+<a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></h3>
+<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#mTileCache">mTileCache</a></code>
+
+
+<a name="fields_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.constants.TileLayerConstants">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;com.mapbox.mapboxsdk.tileprovider.constants.<a href="{{site.baseurl}}/api/LTileLayerConstants" title="interface in com.mapbox.mapboxsdk.tileprovider.constants">TileLayerConstants</a></h3>
+<code><a href="{{site.baseurl}}/api/LTileLayerConstants#WORLD_BOUNDING_BOX">WORLD_BOUNDING_BOX</a></code>
+
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapTileProvider#OfflineMapTileProvider(android.content.Context, com.mapbox.mapboxsdk.offline.OfflineMapDatabase)">OfflineMapTileProvider</a></strong>(android.content.Context&nbsp;context,
+                      <a href="{{site.baseurl}}/api/LOfflineMapDatabase" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDatabase</a>&nbsp;offlineMapDatabase)</code>&nbsp;</td>
+</tr>
+</table>
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption class="small dark strong round-top pad1 fill-darken3"><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LOfflineMapTileProvider#detach()">detach</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>android.graphics.drawable.Drawable</code></td>
+<td class="colLast"><code><strong><a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
+          boolean&nbsp;allowRemote)</code>
+<div class="block">Attempts to get a Drawable that represents a <a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTile</code></a>.</div>
+</td>
+</tr>
+</table>
+
+<a name="methods_inherited_from_class_com.mapbox.mapboxsdk.tileprovider.MapTileLayerBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.mapbox.mapboxsdk.tileprovider.<a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></h3>
+<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#useDataConnection()">useDataConnection</a></code>
+
+
+<a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code>
+
+
+
+
+
+</div>
+<div class="details">
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="OfflineMapTileProvider(android.content.Context, com.mapbox.mapboxsdk.offline.OfflineMapDatabase)">
+<!--   -->
+</a>
+
+
+<h4>OfflineMapTileProvider</h4>
+<pre>public&nbsp;OfflineMapTileProvider(android.content.Context&nbsp;context,
+                      <a href="{{site.baseurl}}/api/LOfflineMapDatabase" title="class in com.mapbox.mapboxsdk.offline">OfflineMapDatabase</a>&nbsp;offlineMapDatabase)</pre>
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getMapTile(com.mapbox.mapboxsdk.tileprovider.MapTile, boolean)">
+<!--   -->
+</a>
+
+
+<h4>getMapTile</h4>
+<pre>public&nbsp;android.graphics.drawable.Drawable&nbsp;getMapTile(<a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider">MapTile</a>&nbsp;pTile,
+                                            boolean&nbsp;allowRemote)</pre>
+<div class="block"><strong>Description copied from class:&nbsp;<code><a href="{{site.baseurl}}/api/LMapTileLayerBase#getMapTile(com.mapbox.mapboxsdk.tileprovider.MapTile, boolean)">MapTileLayerBase</a></code></strong></div>
+<div class="block">Attempts to get a Drawable that represents a <a href="{{site.baseurl}}/api/LMapTile" title="class in com.mapbox.mapboxsdk.tileprovider"><code>MapTile</code></a>. If the tile is not immediately
+ available this will return null and attempt to get the tile from known tile sources for
+ subsequent future requests. Note that this may return a <a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache"><code>CacheableBitmapDrawable</code></a> in
+ which case you should follow proper handling procedures for using that Drawable or it may
+ reused while you are working with it.</div>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+<dt><span class="strong">See Also:</span></dt><dd><a href="../../../../uk/co/senab/bitmapcache/CacheableBitmapDrawable.html" title="class in uk.co.senab.bitmapcache"><code>CacheableBitmapDrawable</code></a></dd></dl>
+
+
+<a name="detach()">
+<!--   -->
+</a>
+
+
+<h4>detach</h4>
+<pre>public&nbsp;void&nbsp;detach()</pre>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="{{site.baseurl}}/api/LMapTileLayerBase" title="class in com.mapbox.mapboxsdk.tileprovider">MapTileLayerBase</a></code></dd>
+</dl>
+
+
+
+
+
+
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
