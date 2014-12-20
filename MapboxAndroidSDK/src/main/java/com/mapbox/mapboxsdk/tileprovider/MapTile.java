@@ -52,6 +52,10 @@ public class MapTile {
         return y;
     }
 
+    public String getPath() {
+        return path;
+    }
+
     public String getCacheKey() {
         return cacheKey;
     }

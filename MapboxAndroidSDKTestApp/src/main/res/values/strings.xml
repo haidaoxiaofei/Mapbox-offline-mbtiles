@@ -12,6 +12,7 @@
     <string name="programmaticTestMap">Programmatic</string>
     <string name="webSourceTileTestMap">WebSourceTile</string>
     <string name="locateMeTestMap">Locate Me</string>
+    <string name="saveMapOfflineTestMap">Save Map Offline</string>
     <string name="pathTestMap">PathOverlay</string>
     <string name="bingTestMap">Bing Test Map</string>
     <string name="mapbox_id_street">examples.map-i87786ca</string>
@@ -22,5 +23,9 @@
     <string name="dataOn">Data On</string>
     <string name="dataOff">Data Off</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="saveMapButtonText">Save Map</string>
+    <string name="loadMapButtonText">Load Map</string>
+    <string name="deleteMapsButtonText">Delete Map</string>
+    <string name="resetMapButtonText">Reset</string>
 
 </resources>
