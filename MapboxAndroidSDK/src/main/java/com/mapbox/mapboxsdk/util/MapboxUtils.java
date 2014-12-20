@@ -5,11 +5,9 @@ import com.mapbox.mapboxsdk.constants.MapboxConstants;
 
 public class MapboxUtils implements MapboxConstants {
 
-    public static String qualityExtensionForImageQuality(RasterImageQuality imageQuality)
-    {
+    public static String qualityExtensionForImageQuality(RasterImageQuality imageQuality) {
         String qualityExtension;
-        switch (imageQuality)
-        {
+        switch (imageQuality) {
             case MBXRasterImageQualityPNG32:
                 qualityExtension = "png32";
                 break;
@@ -39,32 +37,23 @@ public class MapboxUtils implements MapboxConstants {
         return qualityExtension;
     }
 
-    public static String markerIconURL(String size, String symbol, String color)
-    {
+    public static String markerIconURL(String size, String symbol, String color) {
         // Make a string which follows the MapBox Core API spec for stand-alone markers. This relies on the MapBox API
         // for error checking.
         //
         StringBuffer marker = new StringBuffer("pin-");
 
-        if (size.toLowerCase(MapboxConstants.MAPBOX_LOCALE).charAt(0) == 'l')
-        {
+        if (size.toLowerCase(MapboxConstants.MAPBOX_LOCALE).charAt(0) == 'l') {
             marker.append("l"); // large
-        }
-        else if (size.toLowerCase(MapboxConstants.MAPBOX_LOCALE).charAt(0) == 's')
-        {
+        } else if (size.toLowerCase(MapboxConstants.MAPBOX_LOCALE).charAt(0) == 's') {
             marker.append("s"); // small
-        }
-        else
-        {
+        } else {
             marker.append("m"); // default to medium
         }
 
-        if (!TextUtils.isEmpty(symbol))
-        {
+        if (!TextUtils.isEmpty(symbol)) {
             marker.append(String.format("-%s+", symbol));
-        }
-        else
-        {
+        } else {
             marker.append("+");
         }
 
