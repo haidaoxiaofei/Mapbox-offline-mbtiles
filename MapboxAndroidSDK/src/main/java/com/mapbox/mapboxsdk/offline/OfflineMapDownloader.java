@@ -561,8 +561,7 @@ public class OfflineMapDownloader implements MapboxConstants {
     }
 
     public void beginDownloadingMapID(String mapID, CoordinateRegion mapRegion, Integer minimumZ, Integer maximumZ,
-                                      boolean includeMetadata, boolean includeMarkers,
-                                      RasterImageQuality imageQuality) {
+                                      boolean includeMetadata, boolean includeMarkers, RasterImageQuality imageQuality) {
         if (state != MBXOfflineMapDownloaderState.MBXOfflineMapDownloaderStateAvailable) {
             Log.w(TAG, "state doesn't equal MBXOfflineMapDownloaderStateAvailable so return.  state = " + state);
             return;
