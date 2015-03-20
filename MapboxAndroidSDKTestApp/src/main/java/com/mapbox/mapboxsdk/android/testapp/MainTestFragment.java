@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -29,13 +30,15 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.WebSourceTileLayer;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 
+import java.util.List;
+
 public class MainTestFragment extends Fragment {
     private LatLng startingPoint = new LatLng(51f, 0f);
     private MapView mv;
     private String satellite = "brunosan.map-cyglrrfu";
     private String street = "examples.map-i87786ca";
     private String terrain = "examples.map-zgrqqx0w";
-    private final String mbTile = "test.MBTiles";
+    private final String mbTile = "zhhqw.mbtiles";
     private String currentLayer = "";
 
     @Override
@@ -198,6 +201,7 @@ public class MainTestFragment extends Fragment {
         if (layer.toLowerCase().endsWith("mbtiles")) {
             TileLayer mbTileLayer = new MBTilesLayer(getActivity(), layer);
             //            mv.setTileSource(mbTileLayer);
+            displayMarkersAndRoutes();
             mv.setTileSource(new ITileLayer[] {
                 mbTileLayer, new WebSourceTileLayer("mapquest",
                     "http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png").setName(
@@ -307,4 +311,185 @@ public class MainTestFragment extends Fragment {
         // Showing Alert Message
         alertDialog.show();
     }
+
+
+    public void displayMarkersAndRoutes(){
+        addAnchorMarkers();
+//        drawRoutes();
+//        matrixMarkers();
+    }
+
+    public void matrixMarkers(){
+        double xStart = 113.11965;
+        double xEnd = 113.127427;
+        double yStart = 22.072323;
+        double yEnd = 22.072744;
+
+        double xSpan = xEnd - xStart;
+        double ySpan = yEnd - yStart;
+
+        int density = 20;
+        double xStep = xSpan / density;
+        double yStep = ySpan / density;
+
+        double currentX = xStart;
+
+
+        while (currentX <= xEnd) {
+            double currentY = yStart;
+            while (currentY <= yEnd){
+                Point testP = new Point(currentX,currentY);
+                Point screenP = gpsPointMappingToScreen(testP);
+                Marker m = new Marker(mv, "cX:"+currentX, "cY:"+currentY, screenP.getLatLng());
+                m.setIcon(new Icon(getActivity(), Icon.Size.SMALL, "marker-stroked", "FF0000"));
+                mv.addMarker(m);
+                currentY += yStep;
+            }
+            currentX += xStep;
+
+        }
+
+    }
+
+    public void addAnchorMarkers(){
+//        Point testP = new Point(113.120449,22.065053);
+//        Point screenP = gpsPointMappingToScreen(testP);
+//        Marker m = new Marker(mv, "左下", "河与路交界", screenP.getLatLng());
+
+        String[] markerInfos = {"113.122001,22.07028,大喷泉,左侧环路中心",
+                "113.122886, 22.07374, 神秘岛, 中心",
+                "113.119647,22.072738,中上,内凹丁字路口",
+                "113.120449,22.065053,左下,河与路交界",
+                "113.122814,22.073299, 神秘岛,下方环路",
+                "113.123852,22.073437,神秘岛,右侧环路",
+                "113.12283,22.07280, anchor, anchor",
+                "113.118026,22.073799, sea, seafront"
+        };
+
+        for(int i = 0; i < markerInfos.length; i++){
+            String[] markerAreas = markerInfos[i].split(",");
+            Point testP = new Point(Double.valueOf(markerAreas[0]),Double.valueOf(markerAreas[1]));
+            Point screenP = gpsPointMappingToScreen(testP);
+            Marker m = new Marker(mv, markerAreas[2], markerAreas[3], screenP.getLatLng());
+            m.setIcon(new Icon(getActivity(), Icon.Size.SMALL, "marker-stroked", "FF0000"));
+            mv.addMarker(m);
+        }
+
+    }
+
+
+    public void drawRoutes(){
+        List<Segment> routesList = RoadRouteRecordManager.getRoutesList();
+
+
+        for (Segment s : routesList){
+            PathOverlay route = new PathOverlay();
+            Point sPoint = ocnPointToScreen(s.getsPoint().x, s.getsPoint().y);
+            Point ePoint = ocnPointToScreen(s.getePoint().x, s.getePoint().y);
+            route.addPoint(sPoint.getLatitude(), sPoint.getLongitude());
+            route.addPoint(ePoint.getLatitude(), ePoint.getLongitude());
+            mv.getOverlays().add(route);
+        }
+
+    }
+
+    /////mapping functions
+
+    public Point gpsPointMappingToScreen(Point originGpsPoint) {
+        Point ocnPoint = gpsPointMappingToOcn(originGpsPoint);
+        return ocnPointToScreen(ocnPoint.x, ocnPoint.y);
+    }
+
+    public Point gpsPointMappingToOcn(Point originGpsPoint) {
+        Matrix m = new Matrix();
+
+        /*
+        Axis Converter for HQW
+        Baidu GPS : 113.119647D, 22.072738D;
+        OCN result: 239068.1D, 95352.18D
+        */
+
+
+        double x = originGpsPoint.getX() - 113.119647D;
+        double y = originGpsPoint.getY() - 22.072738D;
+
+
+        m.postRotate(45.0F);
+        m.postScale(2.8452876F, 2.8452876F * (float)Math.sin(0.7853982D));
+        float[] ret = new float[2];
+        m.mapPoints(ret, new float[] { (float)(239068.1D + x * 186989.8154655078D), (float)(95352.18D + y * -194167.6530986923D) });
+
+
+        return new Point(ret[0], ret[1]);
+    }
+
+    public Point ocnPointToScreen(float x, float y) {
+        // convert OCN to display LatLon
+
+        /*
+        OCN:
+        left_bottom(x,y) = (1009132, 1123244)
+        right_top(x,y) = (1013760, 1118720)
+        Target LatLon:
+        left_bottom(x,y) = (-1,-1)
+        right_top(x,y) = (1,1)
+         */
+
+        double left_bottom_x = 286208;
+        double left_bottom_y = 478696;
+        double right_top_x = 293828;
+        double right_top_y = 473552;
+
+        double ocn_h = left_bottom_y - right_top_y;
+        double ocn_w = right_top_x - left_bottom_x;
+
+        double left_bottom_latlon_x = -1;
+        double left_bottom_latlon_y = -0.67849723;
+        double right_top_latlon_x = 1;
+        double right_top_latlon_y = 0.67849723;
+
+
+        double latlon_h = right_top_latlon_y - left_bottom_latlon_y;
+        double latlon_w = right_top_latlon_x - left_bottom_latlon_x;
+
+        double latlon_x = (x - left_bottom_x)/ocn_w * latlon_w + left_bottom_latlon_x - 0.01;
+        double latlon_y = -((y - left_bottom_y)/ocn_h * latlon_h - left_bottom_latlon_y) + 0.025;
+
+
+        return new Point(latlon_x, latlon_y);
+    }
+
+    public Point ocnPointToScreen(Point op) {
+        return ocnPointToScreen((float)op.getX(), (float)op.getY());
+    }
+    public Point ocnPointMappingToGps(Point op){
+        Matrix m = new Matrix();
+        m.postRotate(45.0F);
+        m.postScale(1.0F, (float)Math.sin(0.7853982D));
+        m.postScale(2.8452876F, 2.8452876F);
+        m.invert(m);
+        float[] ret = new float[2];
+        m.mapPoints(ret, new float[] { (float)op.getX(), (float)op.getY() });
+        double x = (ret[0]-645537.3D)/214293.74333333335D+113.98037D;
+        double y = (ret[1]-143025.36D)/(-232736.01333333334D)+22.539246D;
+        return new Point(x,y);
+    }
+    public Point screenPointToOcn(float x,float y){
+        double ocn_h = 1123575 - 1118469;
+        double ocn_w = 1014264 - 1009155;
+
+        double latlon_h = 1 - (-1);
+        double latlon_w = 1 - (-1);
+
+        double ocn_x = (x-0.006-(-1))/latlon_w*ocn_w+1009155;
+        double ocn_y = (-y-1)/latlon_h*ocn_h+1123575;
+        return new Point(ocn_x,ocn_y);
+    }
+    public Point screenPointToOcn(Point sp){
+        return screenPointToOcn((float) sp.getX(), (float) sp.getY());
+    }
+    public Point screenPointToGps(Point sp){
+        return ocnPointMappingToGps(screenPointToOcn(sp));
+    }
+
 }

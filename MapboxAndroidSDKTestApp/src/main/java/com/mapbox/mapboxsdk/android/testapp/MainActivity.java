@@ -1,5 +1,6 @@
 package com.mapbox.mapboxsdk.android.testapp;
 
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -21,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
     private ListView mDrawerList;
     private ArrayList<String> testFragmentNames;
     private int selectedFragmentIndex = 0;
-
+    public static AssetManager assetManager = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +78,8 @@ public class MainActivity extends ActionBarActivity {
 
         // Set MainTestFragment
         selectItem(0);
+
+        assetManager = getApplication().getAssets();
     }
 
     @Override
